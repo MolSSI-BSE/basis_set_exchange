@@ -16,7 +16,7 @@ def read_json_basis_file(basis_file):
         js = json.loads(f.read())
 
     # change the element keys to integers
-    js['elements'] = {int(k): v for k, v in js['elements'].items()}
+    js['basisSetElements'] = {int(k): v for k, v in js['basisSetElements'].items()}
 
     return js
 
