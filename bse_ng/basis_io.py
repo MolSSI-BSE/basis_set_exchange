@@ -13,11 +13,11 @@ def sort_basis_dict(bsdict):
                 'basisSetDescription',
                 'basisSetRole',
                 'basisSetRegion', 
-                'basisSetComponents',
                 'basisSetElements',
 
                 'elementReference',
                 'elementElectronShells',
+                'elementComponents',
 
                 'shellFunctionType',
                 'shellHarmonicType',

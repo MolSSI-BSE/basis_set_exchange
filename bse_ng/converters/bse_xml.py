@@ -164,7 +164,7 @@ def read_basis_xml(xmlfile):
 
 
 
-def read_agg_xml(xmlfile):
+def read_basis_xml_agg(xmlfile):
     # Path to the directory
     bsdir = os.path.dirname(xmlfile)
 
@@ -202,33 +202,20 @@ def read_agg_xml(xmlfile):
 
     element_intersection = set(all_elements[0]).intersection(*all_elements[1:])
     element_union = set(all_elements[0]).union(*all_elements[1:])
-
-
-    # Output files
-    # 1. "Atomic" basis - only has the intersection
-    # 2. "Periodic Table" basis - simple map for whole table
-
-    atom_basis_path = create_json_path(xmlfile, 'atom')
-    table_basis_path = create_json_path(xmlfile, 'table')
-
-    print("Atom basis: ", atom_basis_path)
-    print("Table basis: ", table_basis_path)
-    
-
-    # Atom basis
     all_json_files = [ os.path.basename(p) for p in all_json_paths ]
-    elements = { k: { 'basisSetComponents': all_json_files } for k in element_intersection }
+
+    # "Atom" basis dictionary
+    elements = { k: { 'elementComponents': all_json_files } for k in element_intersection }
 
     atom_dict = { 'basisSetName': name,
                   'basisSetDescription' : desc,
                   'basisSetElements': elements
                  }
 
-    write_json_basis_file(atom_basis_path, atom_dict)
 
 
-    # Periodic table basis
-    # for each element, include only the components where that atom is defined
+    # Periodic table basis dictionary
+    # For each element, include only the components where that atom is defined
     elements = { }
     for e in element_union:
         v = []
@@ -236,12 +223,58 @@ def read_agg_xml(xmlfile):
             bs = all_json_data[i]
             if e in bs['basisSetElements'].keys():
                 v.append(p)
-        elements[e] = { 'basisSetComponents': v }
+        elements[e] = { 'elementComponents': v }
     
     table_dict = { 'basisSetName': name,
                    'basisSetDescription' : desc,
                    'basisSetElements': elements
                  }
         
+    return (atom_dict, table_dict)
 
+
+
+def convert_xml(xmlfile):
+    bsdict = read_basis_xml(xmlfile)
+    outfile = create_json_path(xmlfile)
+    print("New basis file: ", outfile)
+    write_json_basis_file(outfile, bsdict)
+
+
+def convert_xml_agg(xmlfile):
+    atom_dict, table_dict = read_basis_xml_agg(xmlfile)
+
+    atom_basis_path = create_json_path(xmlfile, 'atom')
+    table_basis_path = create_json_path(xmlfile, 'table')
+
+    print("Atom basis: ", atom_basis_path)
+    print("Table basis: ", table_basis_path)
+    
+    write_json_basis_file(atom_basis_path, atom_dict)
+    write_json_basis_file(table_basis_path, table_dict)
+
+
+def create_xml_agg(xmlfile):
+    # Create from a simple (non-composed) basis
+    atom_basis_path = create_json_path(xmlfile, 'atom')
+    table_basis_path = create_json_path(xmlfile, 'table')
+    json_file = os.path.basename(create_json_path(xmlfile))
+
+    bs = read_basis_xml(xmlfile)
+
+    elementlist = list(bs['basisSetElements'].keys())
+
+    elements = { k: { 'elementComponents': [json_file] } for k in elementlist }
+
+    atom_dict = { 'basisSetName': bs['basisSetName'],
+                  'basisSetDescription': bs['basisSetDescription'],
+                  'basisSetElements': elements
+                 }
+
+    table_dict = { 'basisSetName': bs['basisSetName'],
+                   'basisSetDescription': bs['basisSetDescription'],
+                   'basisSetElements': elements
+                  }
+
+    write_json_basis_file(atom_basis_path, atom_dict)
     write_json_basis_file(table_basis_path, table_dict)
