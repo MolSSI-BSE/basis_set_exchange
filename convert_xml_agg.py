@@ -6,6 +6,7 @@ import os
 import sys
 
 from bse_ng.converters import bse_xml 
+from bse_ng.basis_io import write_json_basis_file
 
 
 parser = argparse.ArgumentParser()
@@ -25,7 +26,5 @@ filebase = os.path.splitext(args.xmlfile)[0]
 outfile = "{}_{}.json".format(filebase, bsdict['basisSetRegion'])
 outfile = os.path.join(bsdir, outfile)
 
-
-with open(outfile, 'w') as f:
-    json.dump(bsdict, f, indent=4)
+write_json_basis_file(outfile, bsdict)
 

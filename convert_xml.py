@@ -6,6 +6,7 @@ import os
 import sys
 
 from bse_ng.converters import bse_xml 
+from bse_ng.basis_io import write_json_basis_file
 
 
 parser = argparse.ArgumentParser()
@@ -20,6 +21,5 @@ bsdict = bse_xml.read_basis_xml(args.xmlfile)
 # Create the new file
 outfile = bse_xml.create_json_path(args.xmlfile)
 
-with open(outfile, 'w') as f:
-    json.dump(bsdict, f, indent=4)
+write_json_basis_file(outfile, bsdict)
 
