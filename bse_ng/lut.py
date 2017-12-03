@@ -1,13 +1,20 @@
+'''
+Lookup tables (lut) for converting to/from element names,
+angular momentum characters, etc
+'''
+
 
 import os
 
 
+# Open some text files to populate the tables
 my_path = os.path.dirname(os.path.abspath(__file__))
 el_data_path = os.path.join(my_path, 'element_map.txt')
 
-element_Z_map = {}
-element_sym_map = {}
-element_name_map = {}
+# Maps Z to element data
+element_Z_map = {}  # Maps Z to element data
+element_sym_map = {}  # Maps element symbols to element data
+element_name_map = {} # Maps element name to element data
 
 with open(el_data_path, 'r') as f:
     for Z, sym, name in [x.split() for x in f.readlines()]:
@@ -22,16 +29,30 @@ with open(el_data_path, 'r') as f:
         element_name_map[name] = el_data
 
 
+# Maps AM characters to integers (the integer is the
+# index of the character in this string)
 amchar_map = 'spdfghiklmnoqrtuvwxyzabce'
 
 
 def element_data_from_Z(Z):
+    '''Obtain elemental data given a Z number
+
+    An exception is thrown if the Z number is not found
+    '''
+
     if Z not in element_Z_map:
         raise RuntimeError('No element data for Z = {}'.format(Z))
     return element_Z_map[Z]
 
 
 def element_data_from_sym(sym):
+    '''Obtain elemental data given an elemental symbol
+
+    The given symbol is not case sensitive
+
+    An exception is thrown if the symbol is not found
+    '''
+
     sym_lower = sym.lower()
     if sym_lower not in element_sym_map:
         raise RuntimeError('No element data for symbol \'{}\''.format(sym))
@@ -39,6 +60,13 @@ def element_data_from_sym(sym):
 
 
 def element_data_from_name(name):
+    '''Obtain elemental data given an elemental name
+
+    The given name is not case sensitive
+
+    An exception is thrown if the name is not found
+    '''
+
     name_lower = name.lower()
     if name_lower not in element_name_map:
         raise RuntimeError('No element data for name \'{}\''.format(name))
@@ -46,6 +74,11 @@ def element_data_from_name(name):
 
 
 def normalize_element_symbol(sym):
+    '''Normalize the capitalization of an element symbol
+
+    For example, converts "he" to "He" and "uUo" to "Uuo"
+    '''
+
     sym = sym.lower()
     sym2 = sym[0].upper()
     sym2 += sym[1:]
@@ -53,6 +86,11 @@ def normalize_element_symbol(sym):
 
 
 def normalize_element_name(name):
+    '''Normalize the capitalization of an element name
+
+    For example, converts "helium" to "Helium" and "aRgOn" to "Argon"
+    '''
+
     name = name.lower()
     name2 = name[0].upper()
     name2 += name[1:]
@@ -60,18 +98,36 @@ def normalize_element_name(name):
 
 
 def amint_to_char(am):
-    if am < 0:
-        raise RuntimeError('Angular momentum must be a positive integer')
-    if am >= len(amchar_map):
-        raise RuntimeError('Angular momentum must be less than {}'.format(len(amchar_map)))
+    '''Convert an angular momentum integer to a character
 
-    return amchar_map[am]
+    The input is a list (to handle sp, spd, ... orbitals). The return
+    value is a string
+
+    For example, converts [0] to 's' and [0,1,2] to 'spd'
+    '''
+
+    amchar = []
+
+    for a in am:
+        if a < 0:
+            raise RuntimeError('Angular momentum must be a positive integer (not {})'.format(a))
+        if a >= len(amchar_map):
+            raise RuntimeError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
+        amchar.append(amchar_map[am])
+
+    return amchar 
 
 
 def amchar_to_int(amchar):
+    '''Convert an angular momentum integer to a character
+
+    The return value is a list of integers (to handle sp, spd, ... orbitals)
+
+    For example, converts 'p' to [1] and 'sp' to [0,1]
+    '''
+
     amchar_lower = amchar.lower()
 
-    # This may be combined angular momentum (sp, spd)
     amint = []
 
     for c in amchar_lower:
