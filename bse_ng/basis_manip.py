@@ -83,46 +83,4 @@ def uncontract_basis_segmented(basis):
 #                if len(g) != n_prim:
 #                    raise RuntimeError('Inconsistent number of primitives for general contraction.\n'
 #                                       'Expected {}, got {}. Coefficients are: {} '.format(n_prim, len(g), g))
-#
-#
-#def get_atom_basis(basis_name):
-#    js = basis_io.read_json_basis(basis_name)
-#
-#    # Do we need to load a parent basis?
-#    for el,data in js['elements'].items():
-#        if 'inherit' in data:
-#            newelement = copy.deepcopy(data)
-#            for p in data['inherit']:
-#                parent = get_atom_basis(p)
-#                parent_el = parent['elements'][el]
-#                newelement = merge_element_dict(parent_el, newelement)
-#
-#            newelement.pop('inherit', None)
-#            js['elements'][el] = newelement
-#
-#    return js
-#
-#
-#def broadcast_metadata(basis):
-#    new_basis = copy.deepcopy(basis)
-#    name = basis['name']
-#    harm = basis['harmonic']
-#
-#    for k in basis['elements'].keys():
-#        new_basis['elements'][k]['name'] = name
-#        new_basis['elements'][k]['harmonic'] = harm
-#
-#    return new_basis
-#
-#
-#def get_full_basis(basis_name):
-#    el_map = basis_io.read_full_basis(basis_name)
-#
-#    full_basis = { "fullBasisName": basis_name,
-#                   "elements" : {} }
-#    for k,v in el_map.items():
-#        js = get_atom_basis(v)
-#        js = broadcast_metadata(js)
-#        full_basis['elements'][k] = js['elements'][k]
-#
-#    return full_basis
+
