@@ -1,5 +1,5 @@
 import os
-from bse_ng import lut
+from bse import lut
 
 skipchars = '!'
 
