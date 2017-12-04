@@ -29,6 +29,7 @@ def sort_basis_dict(bs):
                 'elementReference',
                 'elementElectronShells',
                 'elementComponents',
+                'elementEntry',
 
                 'shellFunctionType',
                 'shellHarmonicType',
