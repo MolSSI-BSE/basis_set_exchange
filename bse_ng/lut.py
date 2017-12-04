@@ -73,6 +73,23 @@ def element_data_from_name(name):
     return element_name_map[name_lower]
 
 
+def element_name_from_Z(Z):
+    '''Obtain an element's name from its Z number
+
+    An exception is thrown if the Z number is not found
+    '''
+    return element_data_from_Z(Z)[2]
+
+
+def element_sym_from_Z(Z):
+    '''Obtain an element's symbol from its Z number
+
+    An exception is thrown if the Z number is not found
+    '''
+    return element_data_from_Z(Z)[1]
+
+
+
 def normalize_element_symbol(sym):
     '''Normalize the capitalization of an element symbol
 
