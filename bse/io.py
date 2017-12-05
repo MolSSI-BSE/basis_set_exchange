@@ -5,13 +5,11 @@ basis set format
 
 import json
 import os
-import copy
 import collections
 
+# Determine the path to the data directory
 my_path = os.path.dirname(os.path.abspath(__file__))
-parent_path = os.path.dirname(my_path)
-bs_data_path = os.path.join(parent_path, 'basis')
-
+data_path = os.path.join(my_path, 'data')
 
 def sort_basis_dict(bs):
     '''Sorts a basis set dictionary into a standard order
@@ -23,16 +21,16 @@ def sort_basis_dict(bs):
     keyorder = ['basisSetName',
                 'basisSetDescription',
                 'basisSetRole',
-                'basisSetRegion', 
                 'basisSetElements',
 
-                'elementReference',
+                'elementReferences',
                 'elementElectronShells',
                 'elementComponents',
                 'elementEntry',
 
                 'shellFunctionType',
                 'shellHarmonicType',
+                'shellRegion',
                 'shellAngularMomentum',
                 'shellExponents',
                 'shellCoefficients'
@@ -54,15 +52,38 @@ def sort_basis_dict(bs):
     return bs_sorted
 
 
-def read_json_basis_file(filepath):
-    '''Read a JSON basis set file from a given path
+def check_compatible_merge(dest, source):
+    '''TODO - check for any incompatibilities between the two elements
     '''
+    pass
 
-    if not os.path.isfile(filepath):
+
+def merge_element_data(dest, sources):
+
+    # return a shallow copy
+    ret = {k:v for k,v in dest.items()}
+
+    if not 'elementElectronShells' in dest:
+        ret['elementElectronShells'] = []
+    if not 'elementReferences' in dest:
+        ret['elementReferences'] = []
+
+    for s in sources:
+        check_compatible_merge(dest, s)
+
+        ret['elementElectronShells'].extend(s['elementElectronShells'])
+        ret['elementReferences'].extend(s['elementReferences'])
+
+    return ret
+
+
+def read_json_by_path(file_path):
+
+    if not os.path.isfile(file_path):
         raise RuntimeError('Basis set file \'{}\' does not exist, is not '
-                           'readable, or is not a file'.format(filepath))
+                           'readable, or is not a file'.format(file_path))
 
-    with open(filepath, 'r') as f:
+    with open(file_path, 'r') as f:
         js = json.loads(f.read())
 
     # change the element keys to integers
@@ -70,25 +91,77 @@ def read_json_basis_file(filepath):
 
     return js
 
+def read_json_by_name(name, filetype=None):
+    if filetype:
+        name += '.' + filetype
+    name += ".json"
 
-def write_json_basis_file(filepath, bs):
+    file_path = os.path.join(data_path, name)
+
+    return read_json_by_path(file_path)
+
+
+def write_basis_file(filepath, bs):
     '''Read a JSON basis set file to a given path
+
+       The keys are first sorted into a standard order
     '''
     with open(filepath, 'w') as f:
         json.dump(sort_basis_dict(bs), f, indent=4)
 
 
-def read_json_basis(name):
-    '''Reads a json basis set file given only the name
+def read_component_by_name(name):
+    return read_json_by_name(name)
 
-    The path to the basis set file is taken to be the 'basis' directory
-    in this project
-    '''
 
-    bs_path = os.path.join(bs_data_path, name + '.json')
+def read_atomic_basis_by_name(name):
+    js = read_json_by_name(name, 'atom')
+    
+    # construct a list of all files to read
+    # TODO - can likely be replaced by memoization
+    component_names = set()
+    for k, v in js['basisSetElements'].items():
+        component_names.update(set(v['elementComponents']))
 
-    if not os.path.isfile(bs_path):
-        raise RuntimeError('Atom basis \'{}\' does not exist'.format(name))
+    component_map = { k: read_json_by_name(k) for k in component_names }
 
-    return read_json_basis_file(bs_path)
+    for k,v in js['basisSetElements'].items():
 
+        components = v['elementComponents']
+
+        v['elementElectronShells'] = []
+
+        # all of the component data for this element
+        el_data = [component_map[c]['basisSetElements'][k] for c in components]
+
+        v = merge_element_data(v, el_data)
+
+        # Remove the 'elementComponents' now that the data has been inserted
+        v.pop('elementComponents')
+
+        # Set it in the actual dict (v was a reference before)
+        js['basisSetElements'][k] = v
+
+    return js
+     
+
+def read_table_basis_by_name(name):
+    js = read_json_by_name(name, 'table')
+    
+    # construct a list of all files to read
+    # TODO - can likely be replaced by memoization
+    component_names = set()
+    for k, v in js['basisSetElements'].items():
+        component_names.add(v['elementEntry'])
+
+    component_map = { k: read_atomic_basis_by_name(k) for k in component_names }
+
+    for k,v in js['basisSetElements'].items():
+        entry = v['elementEntry']
+        data = component_map[entry]
+
+        # Replace the basis set for this element with the one
+        # from the atomic basis
+        js['basisSetElements'][k] = data['basisSetElements'][k]
+
+    return js     
