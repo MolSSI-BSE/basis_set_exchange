@@ -5,7 +5,8 @@ Contains utilities for reading, writing, and converting
 basis set information
 '''
 
-
 from . import converters
-from .basis_manip import *
-from .basis_io import *
+from .manip import *
+from .io import *
+from .api import *
+from .validator import *

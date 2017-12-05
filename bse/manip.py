@@ -5,7 +5,7 @@ Common basis set manipulations (such as uncontracting)
 import json
 import os
 import copy
-from bse import basis_io
+from bse import io
 
 
 def merge_element_dict(parent, child):
