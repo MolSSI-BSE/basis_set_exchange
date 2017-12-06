@@ -174,3 +174,10 @@ def read_table_basis_by_name(name):
         js['basisSetElements'][k] = data['basisSetElements'][k]
 
     return js     
+
+
+def get_available_names():
+    all_files = [ x for x in os.listdir(data_path) if x.endswith('.table.json') ]
+    all_names = [ x.replace('.table.json', '') for x in all_files ]
+    return sorted(all_names)
+
