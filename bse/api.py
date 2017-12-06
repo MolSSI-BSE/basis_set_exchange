@@ -2,7 +2,7 @@
 Main interface to BSE functionality
 '''
 
-from bse import io
+from . import io
 
 def get_basis_set(name):
 

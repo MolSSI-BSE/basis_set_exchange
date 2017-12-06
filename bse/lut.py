@@ -6,7 +6,6 @@ angular momentum characters, etc
 
 import os
 
-
 # Open some text files to populate the tables
 my_path = os.path.dirname(os.path.abspath(__file__))
 el_data_path = os.path.join(my_path, 'element_map.txt')

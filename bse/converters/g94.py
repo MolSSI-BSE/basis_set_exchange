@@ -1,5 +1,5 @@
 import os
-from bse import lut
+from .. import lut
 
 skipchars = '!'
 
