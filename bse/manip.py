@@ -12,7 +12,7 @@ def merge_element_dict(parent, child):
     '''
     '''
     new_dict = copy.deepcopy(parent)
-    for k,v in child.items():
+    for k, v in child.items():
         if not k in new_dict:
             new_dict[k] = v
         elif isinstance(v, list):
@@ -30,8 +30,8 @@ def uncontract_basis_general(basis):
 
     new_basis = copy.deepcopy(basis)
 
-    for k,el in basis['elements'].items():
-        for region_k,region in el['electronShells'].items():
+    for k, el in basis['elements'].items():
+        for region_k, region in el['electronShells'].items():
             newshells = []
             for sh in region['shells']:
                 if len(sh['coefficients']) == 1:
@@ -42,13 +42,12 @@ def uncontract_basis_general(basis):
                         newsh['coefficients'] = [c]
                         newshells.append(newsh)
                 else:
-                    for i,c in enumerate(sh['coefficients']):
+                    for i, c in enumerate(sh['coefficients']):
                         newsh = copy.deepcopy(sh)
                         newsh['angularMomentum'] = [sh['angularMomentum'][i]]
                         newsh['coefficients'] = [c]
                         newshells.append(newsh)
 
-            
             new_basis['elements'][k]['electronShells'][region_k]['shells'] = newshells
     return new_basis
 
@@ -58,7 +57,7 @@ def uncontract_basis_segmented(basis):
     '''
     # TODO
     pass
-            
+
 
 #def validate_basis(basis):
 #    #req_keys = ['name', 'version', 'elements']
@@ -83,4 +82,3 @@ def uncontract_basis_segmented(basis):
 #                if len(g) != n_prim:
 #                    raise RuntimeError('Inconsistent number of primitives for general contraction.\n'
 #                                       'Expected {}, got {}. Coefficients are: {} '.format(n_prim, len(g), g))
-

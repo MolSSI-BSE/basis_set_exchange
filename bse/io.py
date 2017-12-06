@@ -11,6 +11,7 @@ import collections
 my_path = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(my_path, 'data')
 
+
 def sort_basis_dict(bs):
     '''Sorts a basis set dictionary into a standard order
 
@@ -18,24 +19,11 @@ def sort_basis_dict(bs):
     for example, putting the name and description before more detailed fields
     '''
 
-    keyorder = ['basisSetName',
-                'basisSetDescription',
-                'basisSetRole',
-                'basisSetElements',
-
-                'elementReferences',
-                'elementElectronShells',
-                'elementComponents',
-                'elementEntry',
-
-                'shellFunctionType',
-                'shellHarmonicType',
-                'shellRegion',
-                'shellAngularMomentum',
-                'shellExponents',
-                'shellCoefficients'
-                
-                ]
+    keyorder = [
+        'basisSetName', 'basisSetDescription', 'basisSetRole', 'basisSetElements', 'elementReferences',
+        'elementElectronShells', 'elementComponents', 'elementEntry', 'shellFunctionType', 'shellHarmonicType',
+        'shellRegion', 'shellAngularMomentum', 'shellExponents', 'shellCoefficients'
+    ]
 
     # Add integers for the elements
     keyorder.extend(list(range(150)))
@@ -43,11 +31,11 @@ def sort_basis_dict(bs):
     bs_sorted = sorted(bs.items(), key=lambda x: keyorder.index(x[0]))
     bs_sorted = collections.OrderedDict(bs_sorted)
 
-    for k,v in bs_sorted.items():
+    for k, v in bs_sorted.items():
         if isinstance(v, dict):
             bs_sorted[k] = sort_basis_dict(v)
         elif k == 'elementElectronShells':
-            bs_sorted[k] = [ sort_basis_dict(x) for x in v ]
+            bs_sorted[k] = [sort_basis_dict(x) for x in v]
 
     return bs_sorted
 
@@ -61,7 +49,7 @@ def check_compatible_merge(dest, source):
 def merge_element_data(dest, sources):
 
     # return a shallow copy
-    ret = {k:v for k,v in dest.items()}
+    ret = {k: v for k, v in dest.items()}
 
     if not 'elementElectronShells' in dest:
         ret['elementElectronShells'] = []
@@ -94,6 +82,7 @@ def read_json_by_path(file_path):
 
     return js
 
+
 def read_json_by_name(name, filetype=None):
     if filetype:
         name += '.' + filetype
@@ -125,16 +114,16 @@ def read_component_by_name(name):
 
 def read_elemental_basis_by_name(name):
     js = read_json_by_name(name, 'element')
-    
+
     # construct a list of all files to read
     # TODO - can likely be replaced by memoization
     component_names = set()
     for k, v in js['basisSetElements'].items():
         component_names.update(set(v['elementComponents']))
 
-    component_map = { k: read_json_by_name(k) for k in component_names }
+    component_map = {k: read_json_by_name(k) for k in component_names}
 
-    for k,v in js['basisSetElements'].items():
+    for k, v in js['basisSetElements'].items():
 
         components = v['elementComponents']
 
@@ -152,20 +141,20 @@ def read_elemental_basis_by_name(name):
         js['basisSetElements'][k] = v
 
     return js
-     
+
 
 def read_table_basis_by_name(name):
     js = read_json_by_name(name, 'table')
-    
+
     # construct a list of all files to read
     # TODO - can likely be replaced by memoization
     component_names = set()
     for k, v in js['basisSetElements'].items():
         component_names.add(v['elementEntry'])
 
-    component_map = { k: read_elemental_basis_by_name(k) for k in component_names }
+    component_map = {k: read_elemental_basis_by_name(k) for k in component_names}
 
-    for k,v in js['basisSetElements'].items():
+    for k, v in js['basisSetElements'].items():
         entry = v['elementEntry']
         data = component_map[entry]
 
@@ -173,11 +162,10 @@ def read_table_basis_by_name(name):
         # from the elemental basis
         js['basisSetElements'][k] = data['basisSetElements'][k]
 
-    return js     
+    return js
 
 
 def get_available_names():
-    all_files = [ x for x in os.listdir(data_path) if x.endswith('.table.json') ]
-    all_names = [ x.replace('.table.json', '') for x in all_files ]
+    all_files = [x for x in os.listdir(data_path) if x.endswith('.table.json')]
+    all_names = [x.replace('.table.json', '') for x in all_files]
     return sorted(all_names)
-

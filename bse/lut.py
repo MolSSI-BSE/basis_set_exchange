@@ -3,7 +3,6 @@ Lookup tables (lut) for converting to/from element names,
 angular momentum characters, etc
 '''
 
-
 import os
 
 # Open some text files to populate the tables
@@ -13,7 +12,7 @@ el_data_path = os.path.join(my_path, 'element_map.txt')
 # Maps Z to element data
 element_Z_map = {}  # Maps Z to element data
 element_sym_map = {}  # Maps element symbols to element data
-element_name_map = {} # Maps element name to element data
+element_name_map = {}  # Maps element name to element data
 
 with open(el_data_path, 'r') as f:
     for Z, sym, name in [x.split() for x in f.readlines()]:
@@ -26,7 +25,6 @@ with open(el_data_path, 'r') as f:
         element_Z_map[Z] = el_data
         element_sym_map[sym] = el_data
         element_name_map[name] = el_data
-
 
 # Maps AM characters to integers (the integer is the
 # index of the character in this string)
@@ -88,7 +86,6 @@ def element_sym_from_Z(Z):
     return element_data_from_Z(Z)[1]
 
 
-
 def normalize_element_symbol(sym):
     '''Normalize the capitalization of an element symbol
 
@@ -131,7 +128,7 @@ def amint_to_char(am):
             raise RuntimeError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
         amchar.append(amchar_map[am])
 
-    return amchar 
+    return amchar
 
 
 def amchar_to_int(amchar):

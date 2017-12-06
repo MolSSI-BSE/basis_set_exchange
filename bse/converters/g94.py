@@ -3,6 +3,7 @@ from .. import lut
 
 skipchars = '!'
 
+
 def g94_to_json(basis_name, basis_path):
     if not os.path.isfile(basis_path):
         raise RuntimeError('G94 basis set path \'{}\' does not exist'.format(basis_path))
@@ -11,11 +12,7 @@ def g94_to_json(basis_name, basis_path):
         basis_lines = [l.strip() for l in f]
         basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
 
-    js_data = {'name': basis_name,
-               'harmonic': 'cartesian',
-               'elements': {}
-               }
-
+    js_data = {'name': basis_name, 'harmonic': 'cartesian', 'elements': {}}
 
     i = 1  # skip initial ****
     while i < len(basis_lines):
@@ -23,13 +20,7 @@ def g94_to_json(basis_name, basis_path):
         elementsym = line.split()[0]
         element_Z = lut.element_data_from_sym(elementsym)[0]
 
-        element_data = {'electronShells':
-                          { 'valence':
-                              { 'version': "1.0",
-                                'shells': []
-                               }
-                           }
-                        }
+        element_data = {'electronShells': {'valence': {'version': "1.0", 'shells': []}}}
 
         i += 1
         if "ECP" in basis_lines[i]:
@@ -37,7 +28,7 @@ def g94_to_json(basis_name, basis_path):
             n_elec = int(lsplt[2])
 
             i += 1
-            for j in range(maxam+1):
+            for j in range(maxam + 1):
                 shell_am = lut.amchar_to_int(basis_lines[i][0])[0]
                 i += 1
                 n_entries = int(basis_lines[i])

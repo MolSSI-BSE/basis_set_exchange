@@ -4,8 +4,8 @@ Main interface to BSE functionality
 
 from . import io
 
-def get_basis_set(name):
 
+def get_basis_set(name):
     '''Reads a json basis set file given only the name
 
     The path to the basis set file is taken to be the 'data' directory
@@ -34,7 +34,7 @@ def get_metadata(keys=None, key_filter=None):
 
         metadata[common_name] = {
             'mangled_name': n,
-            'elements': defined_elements, 
+            'elements': defined_elements,
             'functiontypes': list(function_types),
         }
 
