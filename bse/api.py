@@ -33,7 +33,7 @@ def get_metadata(keys=None, key_filter=None):
                 function_types.add(s['shellFunctionType'])
 
         metadata[common_name] = {
-            'filename': n,
+            'mangled_name': n,
             'elements': defined_elements, 
             'functiontypes': list(function_types),
         }

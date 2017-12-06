@@ -123,8 +123,8 @@ def read_component_by_name(name):
     return read_json_by_name(name)
 
 
-def read_atomic_basis_by_name(name):
-    js = read_json_by_name(name, 'atom')
+def read_elemental_basis_by_name(name):
+    js = read_json_by_name(name, 'element')
     
     # construct a list of all files to read
     # TODO - can likely be replaced by memoization
@@ -163,14 +163,14 @@ def read_table_basis_by_name(name):
     for k, v in js['basisSetElements'].items():
         component_names.add(v['elementEntry'])
 
-    component_map = { k: read_atomic_basis_by_name(k) for k in component_names }
+    component_map = { k: read_elemental_basis_by_name(k) for k in component_names }
 
     for k,v in js['basisSetElements'].items():
         entry = v['elementEntry']
         data = component_map[entry]
 
         # Replace the basis set for this element with the one
-        # from the atomic basis
+        # from the elemental basis
         js['basisSetElements'][k] = data['basisSetElements'][k]
 
     return js     
