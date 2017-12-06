@@ -74,6 +74,9 @@ def merge_element_data(dest, sources):
         ret['elementElectronShells'].extend(s['elementElectronShells'])
         ret['elementReferences'].extend(s['elementReferences'])
 
+    # Sort the shells
+    ret['elementElectronShells'].sort(key=lambda x: x['shellAngularMomentum'])
+
     return ret
 
 
@@ -99,6 +102,12 @@ def read_json_by_name(name, filetype=None):
     file_path = os.path.join(data_path, name)
 
     return read_json_by_path(file_path)
+
+
+def dump_basis(bs):
+    '''Returns a string with all the basis information (pretty-printed)
+    '''
+    return json.dumps(sort_basis_dict(bs), indent=4)
 
 
 def write_basis_file(filepath, bs):
