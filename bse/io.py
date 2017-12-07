@@ -20,9 +20,12 @@ def sort_basis_dict(bs):
     '''
 
     keyorder = [
-        'basisSetName', 'basisSetDescription', 'basisSetRole', 'basisSetElements', 'elementReferences',
-        'elementElectronShells', 'elementComponents', 'elementEntry', 'shellFunctionType', 'shellHarmonicType',
-        'shellRegion', 'shellAngularMomentum', 'shellExponents', 'shellCoefficients'
+        'basisSetName', 'basisSetDescription',
+        'basisSetRole', 'basisSetElements', 'elementReferences', 'elementECPElectrons',
+        'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
+        'shellFunctionType', 'shellHarmonicType', 'shellRegion', 'shellAngularMomentum',
+        'shellExponents', 'shellCoefficients', 'potentialECPType', 'potentialAngularMomentum',
+        'potentialRExponents', 'potentialGaussianExponents', 'potentialCoefficients'
     ]
 
     # Add integers for the elements
