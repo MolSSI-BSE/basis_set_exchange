@@ -24,32 +24,64 @@ def merge_element_dict(parent, child):
     return new_dict
 
 
-def uncontract_basis_general(basis):
+def prune_zero_coefficients(basis):
+    '''Removes primitives that have a zero coefficient
+    '''
+
+    new_basis = copy.deepcopy(basis)
+
+    for k, el in new_basis['basisSetElements'].items():
+        for sh in el['elementElectronShells']:
+
+            new_exponents = []
+            new_coefficients = []
+
+            # transpose of the coefficient matrix
+            coeff_t = list(map(list, zip(*sh['shellCoefficients'])))
+
+            for i in range(len(sh['shellExponents'])):
+                if not all([ float(x) == 0.0 for x in coeff_t[i] ]):
+                    new_exponents.append(sh['shellExponents'][i])
+                    new_coefficients.append(coeff_t[i])
+
+            # take the transpose again
+            new_coefficients = list(map(list, zip(*new_coefficients)))
+
+            sh['shellExponents'] = new_exponents 
+            sh['shellCoefficients'] = new_coefficients 
+
+    return new_basis
+
+
+def uncontract_basis_general(basis, split_spdf=False):
     '''Removes the general contractions from a basis set
     '''
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in basis['elements'].items():
-        for region_k, region in el['electronShells'].items():
-            newshells = []
-            for sh in region['shells']:
-                if len(sh['coefficients']) == 1:
-                    newshells.append(sh)
-                elif len(sh['angularMomentum']) == 1:
-                    for c in sh['coefficients']:
-                        newsh = {k: v for k, v in sh.items() if k != 'coefficients'}
-                        newsh['coefficients'] = [c]
-                        newshells.append(newsh)
-                else:
-                    for i, c in enumerate(sh['coefficients']):
-                        newsh = copy.deepcopy(sh)
-                        newsh['angularMomentum'] = [sh['angularMomentum'][i]]
-                        newsh['coefficients'] = [c]
-                        newshells.append(newsh)
+    for k, el in basis['basisSetElements'].items():
+        newshells = []
 
-            new_basis['elements'][k]['electronShells'][region_k]['shells'] = newshells
-    return new_basis
+        for sh in el['elementElectronShells']:
+            if len(sh['shellCoefficients']) == 1:
+                newshells.append(sh)
+            elif len(sh['shellAngularMomentum']) == 1:
+                for c in sh['shellCoefficients']:
+                    newsh = {k: v for k, v in sh.items() if k != 'shellCoefficients'}
+                    newsh['shellCoefficients'] = [c]
+                    newshells.append(newsh)
+            elif split_spdf:
+                for i, c in enumerate(sh['coefficients']):
+                    newsh = copy.deepcopy(sh)
+                    newsh['angularMomentum'] = [sh['angularMomentum'][i]]
+                    newsh['shellCoefficients'] = [c]
+                    newshells.append(newsh)
+            else:
+                newshells.append(sh)
+
+            new_basis['basisSetElements'][k]['elementElectronShells'] = newshells
+
+    return prune_zero_coefficients(new_basis)
 
 
 def uncontract_basis_segmented(basis):

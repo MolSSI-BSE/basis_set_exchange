@@ -126,9 +126,9 @@ def amint_to_char(am):
             raise RuntimeError('Angular momentum must be a positive integer (not {})'.format(a))
         if a >= len(amchar_map):
             raise RuntimeError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
-        amchar.append(amchar_map[am])
+        amchar.append(amchar_map[a])
 
-    return amchar
+    return ''.join(amchar)
 
 
 def amchar_to_int(amchar):
