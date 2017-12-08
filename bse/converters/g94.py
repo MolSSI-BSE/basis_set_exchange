@@ -194,4 +194,4 @@ def write_g94(basis):
                     line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
 
-    print(s)
+    return s
