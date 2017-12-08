@@ -20,6 +20,7 @@ def sort_basis_dict(bs):
     '''
 
     keyorder = [
+        'molssi_bse_magic',
         'basisSetName', 'basisSetDescription',
         'basisSetRole', 'basisSetElements', 'elementReferences', 'elementECPElectrons',
         'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
@@ -54,16 +55,22 @@ def merge_element_data(dest, sources):
     # return a shallow copy
     ret = {k: v for k, v in dest.items()}
 
-    if not 'elementElectronShells' in dest:
-        ret['elementElectronShells'] = []
-    if not 'elementReferences' in dest:
-        ret['elementReferences'] = []
-
     for s in sources:
         check_compatible_merge(dest, s)
 
-        ret['elementElectronShells'].extend(s['elementElectronShells'])
-        ret['elementReferences'].extend(s['elementReferences'])
+        if 'elementElectronShells' in s:
+            if not 'elementElectronShells' in ret:
+                ret['elementElectronShells'] = []
+            ret['elementElectronShells'].extend(s['elementElectronShells'])
+        if 'elementECP' in s:
+            if 'elementECP' in ret:
+                raise RuntimeError('Cannot overwrite existing ECP')
+            ret['elementECP'] = s['elementECP']
+            ret['elementECPElectrons'] = s['elementECPElectrons']
+        if 'elementReferences' in s:
+            if not 'elementReferences' in ret:
+                ret['elementReferences'] = []
+            ret['elementReferences'].extend(s['elementReferences'])
 
     # Sort the shells
     ret['elementElectronShells'].sort(key=lambda x: x['shellAngularMomentum'])
@@ -79,6 +86,10 @@ def read_json_by_path(file_path):
 
     with open(file_path, 'r') as f:
         js = json.loads(f.read())
+
+    # Check for magic key/number
+    if not 'molssi_bse_magic' in js:
+        raise RuntimeError('This file does not appear to be a BSE JSON file')
 
     # change the element keys to integers
     js['basisSetElements'] = {int(k): v for k, v in js['basisSetElements'].items()}
