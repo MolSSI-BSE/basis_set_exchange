@@ -24,7 +24,7 @@ def get_metadata(keys=None, key_filter=None):
     metadata = {}
     for n in avail_names:
         bs = io.read_table_basis_by_name(n)
-        common_name = bs['basisSetName']
+        displayname = bs['basisSetName']
         defined_elements = list(bs['basisSetElements'].keys())
 
         function_types = set()
@@ -32,8 +32,8 @@ def get_metadata(keys=None, key_filter=None):
             for s in e['elementElectronShells']:
                 function_types.add(s['shellFunctionType'])
 
-        metadata[common_name] = {
-            'mangled_name': n,
+        metadata[n] = {
+            'displayname': displayname,
             'elements': defined_elements,
             'functiontypes': list(function_types),
         }
