@@ -93,7 +93,7 @@ def g94_to_json(basis_name, basis_path):
 def write_g94(basis):
     s = "! G94 Basis set: " + basis['basisSetName'] + '\n'
 
-    unc_basis = manip.uncontract_basis_general(basis)
+    unc_basis = manip.uncontract_general(basis)
 
     # Elements for which we have electron unc_basis
     electron_elements = [ k for k, v in unc_basis['basisSetElements'].items() if 'elementElectronShells' in v ]

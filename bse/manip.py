@@ -53,8 +53,8 @@ def prune_zero_coefficients(basis):
     return new_basis
 
 
-def uncontract_basis_general(basis, split_spdf=False):
-    '''Removes the general contractions from a basis set
+def uncontract_spdf(basis):
+    '''Removes sp, spd, spdf, etc, contractions from a basis set
     '''
 
     new_basis = copy.deepcopy(basis)
@@ -63,17 +63,10 @@ def uncontract_basis_general(basis, split_spdf=False):
         newshells = []
 
         for sh in el['elementElectronShells']:
-            if len(sh['shellCoefficients']) == 1:
-                newshells.append(sh)
-            elif len(sh['shellAngularMomentum']) == 1:
-                for c in sh['shellCoefficients']:
-                    newsh = {k: v for k, v in sh.items() if k != 'shellCoefficients'}
-                    newsh['shellCoefficients'] = [c]
-                    newshells.append(newsh)
-            elif split_spdf:
-                for i, c in enumerate(sh['coefficients']):
+            if len(sh['shellAngularMomentum']) > 1:
+                for i, c in enumerate(sh['shellCoefficients']):
                     newsh = copy.deepcopy(sh)
-                    newsh['angularMomentum'] = [sh['angularMomentum'][i]]
+                    newsh['shellAngularMomentum'] = [sh['shellAngularMomentum'][i]]
                     newsh['shellCoefficients'] = [c]
                     newshells.append(newsh)
             else:
@@ -84,11 +77,52 @@ def uncontract_basis_general(basis, split_spdf=False):
     return prune_zero_coefficients(new_basis)
 
 
-def uncontract_basis_segmented(basis):
+def uncontract_general(basis):
+    '''Removes the general contractions from a basis set
+    '''
+
+    new_basis = copy.deepcopy(basis)
+
+    for k, el in basis['basisSetElements'].items():
+        newshells = []
+
+        for sh in el['elementElectronShells']:
+            if len(sh['shellAngularMomentum']) == 1:
+                for c in sh['shellCoefficients']:
+                    newsh = {k: v for k, v in sh.items() if k != 'shellCoefficients'}
+                    newsh['shellCoefficients'] = [c]
+                    newshells.append(newsh)
+            else:
+                newshells.append(sh)
+
+            new_basis['basisSetElements'][k]['elementElectronShells'] = newshells
+
+    return prune_zero_coefficients(new_basis)
+
+
+def uncontract_segmented(basis):
     '''Removes the segmented contractions from a basis set
     '''
-    # TODO
-    pass
+
+    new_basis = copy.deepcopy(basis)
+
+    for k, el in basis['basisSetElements'].items():
+        newshells = []
+
+        for sh in el['elementElectronShells']:
+            for i in range(len(sh['shellExponents'])):
+                newsh = {k: v for k, v in sh.items()}
+
+                newsh['shellExponents'] = [sh['shellExponents'][i]]
+                newsh['shellCoefficients'] = []
+
+                for c in range(len(sh['shellCoefficients'])):
+                    newsh['shellCoefficients'].append([sh['shellCoefficients'][c][i]])
+                newshells.append(newsh)
+
+            new_basis['basisSetElements'][k]['elementElectronShells'] = newshells
+
+    return new_basis 
 
 
 #def validate_basis(basis):
