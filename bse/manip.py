@@ -8,8 +8,12 @@ import copy
 from . import io
 
 
-def prune_zero_coefficients(basis):
-    '''Removes primitives that have a zero coefficient
+def prune_basis(basis):
+    '''Removes primitives that have a zero coefficient, and
+       removes duplicate shells
+        
+       This only finds EXACT duplicates, and is meant to be used
+       after uncontracting
     '''
 
     new_basis = copy.deepcopy(basis)
@@ -35,8 +39,17 @@ def prune_zero_coefficients(basis):
             # as the slowest index
             new_coefficients = list(map(list, zip(*new_coefficients)))
 
+            # only add if there isn't a duplicate
             sh['shellExponents'] = new_exponents 
             sh['shellCoefficients'] = new_coefficients 
+
+        # Remove any duplicates
+        shells = el['elementElectronShells']
+        el['elementElectronShells'] = []
+
+        for sh in shells:
+            if not sh in el['elementElectronShells']:
+                el['elementElectronShells'].append(sh)
 
     return new_basis
 
@@ -67,7 +80,7 @@ def uncontract_spdf(basis):
 
         el['elementElectronShells'] = newshells
 
-    return prune_zero_coefficients(new_basis)
+    return prune_basis(new_basis)
 
 
 def uncontract_general(basis):
@@ -93,13 +106,15 @@ def uncontract_general(basis):
 
         el['elementElectronShells'] = newshells
 
-    return prune_zero_coefficients(new_basis)
+    return prune_basis(new_basis)
 
 
 def uncontract_segmented(basis):
     '''Removes the segmented contractions from a basis set
     '''
 
+    # This implicitly removes general contractions as well
+    # But will leave sp, spd, orbitals alone
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basisSetElements'].items():
@@ -108,11 +123,12 @@ def uncontract_segmented(basis):
         for sh in el['elementElectronShells']:
             exponents = sh['shellExponents']
             coefficients = sh['shellCoefficients']
+            nam = len(sh['shellAngularMomentum'])
 
             for i in range(len(sh['shellExponents'])):
                 newsh = sh.copy()
                 newsh['shellExponents'] = [exponents[i]]
-                newsh['shellCoefficients'] = [ [c[i] for c in coefficients] ]
+                newsh['shellCoefficients'] = [ [ "1.00000000" ]*nam  ]
 
                 # Remember to transpose the coefficients
                 newsh['shellCoefficients'] = list(map(list, zip(*newsh['shellCoefficients']))) 
