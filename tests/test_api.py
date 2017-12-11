@@ -26,7 +26,6 @@ def test_get_basis_set(basis_name, elements):
     formats = bse.get_formats()
     for f in formats:
         for unc in unc_comb:
-            print(f, unc)
             bse.get_basis_set(basis_name, elements=elements, format=f,
                               uncontract_general=unc[0],
                               uncontract_segmented=unc[0],
