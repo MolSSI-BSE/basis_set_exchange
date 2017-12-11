@@ -22,6 +22,8 @@ def write_nwchem(basis):
         sym = lut.element_sym_from_Z(z)
         sym = lut.normalize_element_symbol(sym)
 
+        s += '# BASIS SET: {}\n'.format(manip.contraction_string(data))
+
         for shell in data['elementElectronShells']:
             am = shell['shellAngularMomentum']
             amchar = lut.amint_to_char(am)

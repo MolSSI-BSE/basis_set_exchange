@@ -6,6 +6,44 @@ import json
 import os
 import copy
 from . import io
+from . import lut
+
+
+def contraction_string(element):
+    """Forms a string specifying the contractions for an element
+
+       ie, (16s,10p) -> [4s,3p]
+    """
+
+    if not 'elementElectronShells' in element:
+        return ""
+
+    cont_map = dict()
+    for sh in element['elementElectronShells']:
+        nprim = len(sh['shellExponents'])
+
+        for am in sh['shellAngularMomentum']:
+            if not am in cont_map:
+                cont_map[am] = (nprim, 1)
+            else:
+                cont_map[am] = (cont_map[am][0]+nprim, cont_map[am][1]+1)
+
+    primstr = ""
+    contstr = ""
+    for am in sorted(cont_map.keys()):
+        nprim,ncont = cont_map[am]
+
+        if am != 0:
+            primstr += ','
+            contstr += ','
+        primstr += str(nprim) + lut.amint_to_char([am])
+        contstr += str(ncont) + lut.amint_to_char([am])
+
+    return "({}) -> [{}]".format(primstr, contstr)
+        
+        
+         
+
 
 
 def prune_basis(basis):
