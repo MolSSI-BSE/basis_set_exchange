@@ -5,6 +5,7 @@ basis set format
 
 import json
 import os
+import copy
 import collections
 
 # Determine the path to the data directory
@@ -53,7 +54,7 @@ def check_compatible_merge(dest, source):
 def merge_element_data(dest, sources):
 
     # return a shallow copy
-    ret = {k: v for k, v in dest.items()}
+    ret = dest.copy()
 
     for s in sources:
         check_compatible_merge(dest, s)

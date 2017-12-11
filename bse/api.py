@@ -22,7 +22,7 @@ def get_basis_set(name,
     bs = io.read_table_basis_by_name(name)
 
     # Handle optional arguments
-    if elements != None:
+    if elements is not None:
         bs_elements = bs['basisSetElements']
 
         # Are elements part of this basis set?
