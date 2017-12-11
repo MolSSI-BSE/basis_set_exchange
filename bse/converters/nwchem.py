@@ -3,34 +3,31 @@ from .. import lut
 from .. import manip
 from .common import *
 
-def write_g94(basis):
-    s = "! G94 Basis set: " + basis['basisSetName'] + '\n'
+def write_nwchem(basis):
+    s = "# NWChem Basis set: " + basis['basisSetName'] + '\n'
 
-    unc_basis = manip.uncontract_general(basis)
-
-    # Elements for which we have electron unc_basis
-    electron_elements = [ k for k, v in unc_basis['basisSetElements'].items() if 'elementElectronShells' in v ]
+    # Elements for which we have electron basis
+    electron_elements = [ k for k, v in basis['basisSetElements'].items() if 'elementElectronShells' in v ]
 
     # Elements for which we have ECP
-    ecp_elements = [ k for k, v in unc_basis['basisSetElements'].items() if 'elementECP' in v ]
+    ecp_elements = [ k for k, v in basis['basisSetElements'].items() if 'elementECP' in v ]
 
-    # basis set starts with ****
-    # then we will put **** after each element
-    s += '****'
+    # basis set starts with a string
+    s += 'BASIS "ao basis" PRINT\n'
 
     # Electron Basis
     for z in electron_elements:
-        data = unc_basis['basisSetElements'][z]
+        data = basis['basisSetElements'][z]
 
-        s += '\n'
         sym = lut.element_sym_from_Z(z)
         sym = lut.normalize_element_symbol(sym)
-        s += '{}     0\n'.format(sym)
 
         for shell in data['elementElectronShells']:
             am = shell['shellAngularMomentum']
             amchar = lut.amint_to_char(am)
             amchar = amchar.upper()
+
+            s += '{}    {}\n'.format(sym, amchar)
 
             exponents = shell['shellExponents']
             coefficients = shell['shellCoefficients']
@@ -40,10 +37,6 @@ def write_g94(basis):
             # padding for exponents
             exponent_pad = determine_leftpad(exponents, 8)
 
-            # Split apart general contractions, except for SP, SPD, etc orbitals
-            # (basis was already uncontracted above)
-            s += '{}   {}   1.00\n'.format(amchar, nprim)
-
             for p in range(nprim):
                 line = ' '*exponent_pad[p] + exponents[p]
                 for c in range(ngen):
@@ -51,24 +44,23 @@ def write_g94(basis):
                     coeff_pad = determine_leftpad(coefficients[c], desired_point)
                     line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
-
-        s += '****'
+    s += "END\n"
 
 
     # Write out ECP
+    if len(ecp_elements):
+        s += "\n\nECP\n"
+
     for z in ecp_elements:
-        data = unc_basis['basisSetElements'][z]
+        data = basis['basisSetElements'][z]
 
-        s += '\n'
         sym = lut.element_sym_from_Z(z)
-        sym = sym.upper()
-
+        sym = lut.normalize_element_symbol(sym)
 
         max_ecp_am = max([ x['potentialAngularMomentum'][0] for x in data['elementECP'] ])
         max_ecp_amchar = lut.amint_to_char([max_ecp_am])
 
-        s += '{}     0\n'.format(sym)
-        s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['elementECPElectrons'])
+        s += '{} nelec {}\n'.format(sym, data['elementECPElectrons'])
 
         # Sort lowest->highest, then put the highest at the beginning
         ecp_list = sorted(data['elementECP'], key=lambda x: x['potentialAngularMomentum'])
@@ -88,12 +80,9 @@ def write_g94(basis):
 
             # Title line
             if am[0] == max_ecp_am:
-                s += '{} potential\n'.format(amchar)
+                s += '{} {} potential\n'.format(sym, amchar)
             else:
-                s += '{}-{} potential\n'.format(amchar, max_ecp_amchar)
-
-            # Number of entries
-            s += '  ' + str(nprim) + '\n'
+                s += '{} {}-{} potential\n'.format(sym, amchar, max_ecp_amchar)
 
             # padding for exponents
             gexponent_pad = determine_leftpad(gexponents, 9)
@@ -106,5 +95,8 @@ def write_g94(basis):
                     coeff_pad = determine_leftpad(coefficients[c], desired_point)
                     line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
+
+    if len(ecp_elements):
+        s += "END\n"
 
     return s
