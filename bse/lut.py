@@ -5,26 +5,60 @@ angular momentum characters, etc
 
 import os
 
-# Open some text files to populate the tables
-my_path = os.path.dirname(os.path.abspath(__file__))
-el_data_path = os.path.join(my_path, 'element_map.txt')
+data_table = [
+    ("h", 1, "hydrogen"), ("he",2, "helium"), ("li",3, "lithium"),
+    ("be",4, "beryllium"), ("b", 5, "boron"), ("c", 6, "carbon"),
+    ("n", 7, "nitrogen"), ("o", 8, "oxygen"), ("f", 9, "fluorine"),
+    ("ne", 10, "neon"), ("na", 11, "sodium"), ("mg", 12, "magnesium"),
+    ("al", 13, "aluminum"), ("si", 14, "silicon"), ("p",15, "phosphorus"),
+    ("s",16, "sulfur"), ("cl", 17, "chlorine"), ("ar", 18, "argon"),
+    ("k",19, "potassium"), ("ca", 20, "calcium"), ("sc", 21, "scandium"),
+    ("ti", 22, "titanium"), ("v",23, "vanadium"), ("cr", 24, "chromium"),
+    ("mn", 25, "manganese"), ("fe", 26, "iron"), ("co", 27, "cobalt"),
+    ("ni", 28, "nickel"), ("cu", 29, "copper"), ("zn", 30, "zinc"),
+    ("ga", 31, "gallium"), ("ge", 32, "germanium"), ("as", 33, "arsenic"),
+    ("se", 34, "selenium"), ("br", 35, "bromine"), ("kr", 36, "krypton"),
+    ("rb", 37, "rubidium"), ("sr", 38, "strontium"), ("y",39, "yttrium"),
+    ("zr", 40, "zirconium"), ("nb", 41, "niobium"), ("mo", 42, "molybdenum"),
+    ("tc", 43, "technetium"), ("ru", 44, "ruthenium"), ("rh", 45, "rhodium"),
+    ("pd", 46, "palladium"), ("ag", 47, "silver"), ("cd", 48, "cadmium"),
+    ("in", 49, "indium"), ("sn", 50, "tin"), ("sb", 51, "antimony"),
+    ("te", 52, "tellurium"), ("i",53, "iodine"), ("xe", 54, "xenon"),
+    ("cs", 55, "cesium"), ("ba", 56, "barium"), ("la", 57, "lanthanum"),
+    ("ce", 58, "cerium"), ("pr", 59, "praseodymium"), ("nd", 60, "neodymium"),
+    ("pm", 61, "promethium"), ("sm", 62, "samarium"), ("eu", 63, "europium"),
+    ("gd", 64, "gadolinium"), ("tb", 65, "terbium"), ("dy", 66, "dysprosium"),
+    ("ho", 67, "holmium"), ("er", 68, "erbium"), ("tm", 69, "thulium"),
+    ("yb", 70, "ytterbium"), ("lu", 71, "lutetium"), ("hf", 72, "hafnium"),
+    ("ta", 73, "tantalum"), ("w",74, "tungsten"), ("re", 75, "rhenium"),
+    ("os", 76, "osmium"), ("ir", 77, "iridium"), ("pt", 78, "platinum"),
+    ("au", 79, "gold"), ("hg", 80, "mercury"), ("tl", 81, "thallium"),
+    ("pb", 82, "lead"), ("bi", 83, "bismuth"), ("po", 84, "polonium"),
+    ("at", 85, "astatine"), ("rn", 86, "radon"), ("fr", 87, "francium"),
+    ("ra", 88, "radium"), ("ac", 89, "actinium"), ("th", 90, "thorium"),
+    ("pa", 91, "protactinium"), ("u",92, "uranium"), ("np", 93, "neptunium"),
+    ("pu", 94, "plutonium"), ("am", 95, "americium"), ("cm", 96, "curium"),
+    ("bk", 97, "berkelium"), ("cf", 98, "californium"), ("es", 99, "einsteinium"),
+    ("fm",100, "fermium"), ("md",101, "mendelevium"), ("no",102, "nobelium"),
+    ("lr",103, "lawrencium"), ("rf",104, "rutherfordium"), ("db",105, "dubnium"),
+    ("sg",106, "seaborgium"), ("bh",107, "bohrium"), ("hs",108, "hassium"),
+    ("mt",109, "meitnerium"), ("uun", 110, "ununnilium"), ("ds",110, "darmstadtium"),
+    ("uuu", 111, "unununium"), ("rg",111, "roentgenium"), ("uub", 112, "ununbium"),
+    ("cn",112, "copernicium"), ("uut", 113, "ununtrium"), ("uuq", 113, "ununquadium"),
+    ("fl",114, "flerovium"), ("uup", 115, "ununpentium"), ("uuh", 116, "ununhexium"),
+    ("lv",116, "livermorium"), ("uus", 117, "ununseptium"), ("uuo", 118, "ununoctium")
+]
+
+
 
 # Maps Z to element data
-element_Z_map = {}  # Maps Z to element data
-element_sym_map = {}  # Maps element symbols to element data
-element_name_map = {}  # Maps element name to element data
+element_Z_map = { x[1]: x for x in data_table }
 
-with open(el_data_path, 'r') as f:
-    for Z, sym, name in [x.split() for x in f.readlines()]:
-        Z = int(Z)
-        sym = sym.lower()
-        name = name.lower()
+# Maps element symbol to element data
+element_sym_map = { x[0]: x for x in data_table }
 
-        el_data = (Z, sym, name)
-
-        element_Z_map[Z] = el_data
-        element_sym_map[sym] = el_data
-        element_name_map[name] = el_data
+# Maps element name to element data
+element_name_map = { x[2]: x for x in data_table }
 
 # Maps AM characters to integers (the integer is the
 # index of the character in this string)
@@ -83,7 +117,7 @@ def element_sym_from_Z(Z):
 
     An exception is thrown if the Z number is not found
     '''
-    return element_data_from_Z(Z)[1]
+    return element_data_from_Z(Z)[0]
 
 
 def normalize_element_symbol(sym):

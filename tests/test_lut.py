@@ -7,20 +7,20 @@ import pytest
 
 def test_lut():
 
-    for Z in range(100):
+    for Z in range(1, 100):
         data = lut.element_data_from_Z(Z)
-        assert data[0] == Z
+        assert data[1] == Z
 
-        assert data == lut.element_data_from_sym(data[1])
+        assert data == lut.element_data_from_sym(data[0])
         assert data == lut.element_data_from_name(data[2])
 
-        assert data[1] == lut.element_sym_from_Z(Z)
+        assert data[0] == lut.element_sym_from_Z(Z)
         assert data[2] == lut.element_name_from_Z(Z)
 
-        nsym = lut.normalize_element_symbol(data[1])
+        nsym = lut.normalize_element_symbol(data[0])
         nname = lut.normalize_element_name(data[2])
 
-        assert nsym[0] == data[1][0].upper()
+        assert nsym[0] == data[0][0].upper()
         assert nname[0] == data[2][0].upper()
 
 
