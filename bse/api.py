@@ -4,11 +4,12 @@ Main interface to BSE functionality
 
 from . import io
 from . import manip
+from . import converters
 
 
 def get_basis_set(name,
                   elements=None,
-                  format='json',
+                  format='dict',
                   uncontract_general=False,
                   uncontract_spdf=False,
                   uncontract_segmented=False):
@@ -38,6 +39,11 @@ def get_basis_set(name,
     if uncontract_segmented:
         bs = manip.uncontract_segmented(bs)
 
+    if not format in converters.converter_map:
+        raise RuntimeError('Unknown format {}'.format(format))
+    else:
+        return converters.converter_map[format](bs)
+
     return bs
 
 
@@ -65,3 +71,7 @@ def get_metadata(keys=None, key_filter=None):
         }
 
     return metadata
+
+
+def get_formats():
+    return list(converters.converter_map.keys())
