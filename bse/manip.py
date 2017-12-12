@@ -5,7 +5,6 @@ Common basis set manipulations (such as uncontracting)
 import json
 import os
 import copy
-from . import io
 from . import lut
 
 
@@ -40,16 +39,50 @@ def contraction_string(element):
         contstr += str(ncont) + lut.amint_to_char([am])
 
     return "({}) -> [{}]".format(primstr, contstr)
-        
-        
-         
+
+
+
+def check_compatible_merge(dest, source):
+    '''TODO - check for any incompatibilities between the two elements
+    '''
+    pass
+
+
+def merge_element_data(dest, sources):
+
+    # return a shallow copy
+    ret = dest.copy()
+
+    for s in sources:
+        check_compatible_merge(dest, s)
+
+        if 'elementElectronShells' in s:
+            if not 'elementElectronShells' in ret:
+                ret['elementElectronShells'] = []
+            ret['elementElectronShells'].extend(s['elementElectronShells'])
+        if 'elementECP' in s:
+            if 'elementECP' in ret:
+                raise RuntimeError('Cannot overwrite existing ECP')
+            ret['elementECP'] = s['elementECP']
+            ret['elementECPElectrons'] = s['elementECPElectrons']
+        if 'elementReferences' in s:
+            if not 'elementReferences' in ret:
+                ret['elementReferences'] = []
+            ret['elementReferences'].extend(s['elementReferences'])
+
+    # Sort the shells by angular momentum
+    ret['elementElectronShells'].sort(key=lambda x: x['shellAngularMomentum'])
+
+    return ret
+
+
 
 
 
 def prune_basis(basis):
     '''Removes primitives that have a zero coefficient, and
        removes duplicate shells
-        
+
        This only finds EXACT duplicates, and is meant to be used
        after uncontracting
     '''
@@ -78,8 +111,8 @@ def prune_basis(basis):
             new_coefficients = list(map(list, zip(*new_coefficients)))
 
             # only add if there isn't a duplicate
-            sh['shellExponents'] = new_exponents 
-            sh['shellCoefficients'] = new_coefficients 
+            sh['shellExponents'] = new_exponents
+            sh['shellCoefficients'] = new_coefficients
 
         # Remove any duplicates
         shells = el['elementElectronShells']
@@ -169,10 +202,10 @@ def uncontract_segmented(basis):
                 newsh['shellCoefficients'] = [ [ "1.00000000" ]*nam  ]
 
                 # Remember to transpose the coefficients
-                newsh['shellCoefficients'] = list(map(list, zip(*newsh['shellCoefficients']))) 
+                newsh['shellCoefficients'] = list(map(list, zip(*newsh['shellCoefficients'])))
 
                 newshells.append(newsh)
 
         el['elementElectronShells'] = newshells
 
-    return new_basis 
+    return new_basis

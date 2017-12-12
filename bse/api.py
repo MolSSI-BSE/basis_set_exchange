@@ -2,12 +2,21 @@
 Main interface to BSE functionality
 '''
 
+import os
+import json
 from . import io
 from . import manip
+from . import compose
 from . import converters
+
+# Determine the path to the data directory
+my_dir = os.path.dirname(os.path.abspath(__file__))
+default_data_dir = os.path.join(my_dir, 'data')
+default_schema_dir = os.path.join(my_dir, 'schema')
 
 
 def get_basis_set(name,
+                  data_dir=default_data_dir,
                   elements=None,
                   fmt='dict',
                   uncontract_general=False,
@@ -19,7 +28,8 @@ def get_basis_set(name,
     in this project
     '''
 
-    bs = io.read_table_basis_by_name(name)
+    table_basis_path = os.path.join(data_dir, name + '.table.json')
+    bs = compose.compose_table_basis(table_basis_path)
 
     # Handle optional arguments
     if elements is not None:
@@ -44,18 +54,16 @@ def get_basis_set(name,
     else:
         return converters.converter_map[fmt](bs)
 
-    return bs
 
-
-def get_metadata(keys=None, key_filter=None):
+def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
     if key_filter:
         raise RuntimeError("key_filter not implemented")
 
-    avail_names = io.get_available_names()
+    basis_filelist = io.get_basis_filelist(data_dir)
 
     metadata = {}
-    for n in avail_names:
-        bs = io.read_table_basis_by_name(n)
+    for n in basis_filelist:
+        bs = compose.compose_table_basis(n)
         displayname = bs['basisSetName']
         defined_elements = list(bs['basisSetElements'].keys())
 
@@ -75,3 +83,19 @@ def get_metadata(keys=None, key_filter=None):
 
 def get_formats():
     return list(converters.converter_map.keys())
+
+
+def get_schema(schema_type):
+    schema_file = "{}-schema.json".format(schema_type)
+    file_path = os.path.join(default_schema_dir, schema_file)
+
+    if not os.path.isfile(file_path):
+        raise RuntimeError('Schema file \'{}\' does not exist, is not '
+                           'readable, or is not a file'.format(file_path))
+
+    with open(file_path, 'r') as f:
+        js = json.loads(f.read())
+
+    return js
+
+
