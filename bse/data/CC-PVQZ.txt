@@ -1,0 +1,376 @@
+Correlation Consistent Polarized Valence Quadruple Zeta (cc-pVQZ) Basis
+ ----------------------------------------------------------------------
+Elements        Contraction                             References
+ H     : (6s,3p,2d,1f)          -> [4s,3p,2d,1f]        T.H. Dunning, Jr. J. Chem.
+                                                        Phys. 90, 1007 (1989).
+ He    : (7s,3p,2d,1f)          -> [4s,3p,2d,1f]        D.E. Woon and T.H. Dunning, Jr.
+                                                        J. Chem. Phys. 100, 2975 (1994)
+Li - Be: (12s,6p,3d,2f,1g)      -> [5s,4p,3d,2f,1g]     K.A. Peterson, D.E. Woon, and T.H. 
+                                                        Dunning, Jr., to be published
+B  - Ne: (12s,6p,3d,2f,1g)      -> [5s,4p,3d,2f,1g]     T.H. Dunning, Jr. J. Chem.
+                                                        Phys. 90, 1007 (1989).
+Na     : (19s,12p,3d,2f,1g)     -> [6s,5p,3d,2f,1g]     D. Woon and T.H. Dunning, Jr.
+Mg     : (16s,12p,3d,2f,1g)     -> [6s,5p,3d,2f,1g]     (to be published)
+Al - Ar: (16s,11p,3d,2f,1g)     -> [6s,5p,3d,2f,1g]     D.E. Woon and T.H. Dunning, Jr.
+                                                        J. Chem. Phys. 98, 1358 (1993).
+Ca     : (22s,16p,7d,2f,1g)     -> [7s,6p,4d,2f,1g]     J. Koput and K.A. Peterson, J.
+                                                        Phys. Chem. A, 106, 9595 (2002)
+Sc - Zn: (22s,18p,11d,3f,2g,1h) -> [8s,7p,5d,3f,2g,1h]  N.B. Balabanov and K.A. Peterson, 
+                                                        J. Chem. Phys, 123, 064107 (2005)
+Ga - Kr: (21s,16p,12d,2f,1g)    -> [7s,6p,4d,2f,1g]     A.K. Wilson, D.E. Woon, K.A.
+                                                        Peterson, T.H. Dunning, Jr.,
+                                                        J. Chem. Phys., 110, 7667 (1999)
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+Note that the Ga - Kr basis sets are intended for use with a 14 orbital
+frozen core, i.e. (1s,2s,2px,2py,2pz,3s,3px,3py,3pz,3d(z2),3d(x2-y2),3dxy,
+3dxz,3dyz) atomic orbitals. This is not the default in Gaussian, which
+keeps the 3d space active.
+                        cc-pVQZ Atomic Energies
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.499946    -0.499946    -0.499946     -0.50000
+He  1-S    -2.861514    -2.861514    -2.861514     -2.86168
+Li  2-S    -7.432695    -7.432695    -7.432695     -7.43273
+Be  1-S   -14.572968   -14.572968   -14.572968    -14.57302
+B   2-P   -24.532967   -24.528965   -24.528898    -24.52906
+C   3-P   -37.693307   -37.688298   -37.688234    -37.68862
+N   4-S   -54.403718   -54.400176   -54.400176    -54.40094
+O   3-P   -74.817295   -74.810843   -74.807975    -74.80940
+F   2-P   -99.413770   -99.408952   -99.406980    -99.40935
+Ne  1-S  -128.543470  -128.543470  -128.543470   -128.54710
+Na  2-S  -161.858718  -161.858676  -161.858676   -161.85891
+Mg  1-S  -199.614232  -199.614232  -199.614233   -199.61463
+Al  2-P  -241.880741  -241.876477  -241.876367   -241.87671
+Si  3-P  -288.858417  -288.854107  -288.853976   -288.85436
+P   4-S  -340.718721  -340.718335  -340.718335   -340.71878
+S   3-P  -397.512581  -397.506631  -397.504350   -397.50490
+Cl  2-P  -459.489094  -459.483237  -459.481431   -459.48207
+Ar  1-S  -526.816780  -526.816780  -526.816780   -526.81751
+Br  2-P -2572.448020
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(T)(noneq)
+            UHF          UHF          UHF           UHF
+   State  No core      Froz. core   Froz. core   Froz. core
+   -----  ----------   ----------   ----------  --------------
+H   2-S    -0.499946    -0.499946    -0.499946     -0.499946
+He  1-S
+Li  2-S                 -7.432695    -7.432695     -7.432695
+Be  1-S                -14.602384   -14.614647
+B   2-P                -24.5799861
+C   3-P   -37.789790   -37.765363   -37.783820
+N   4-S                -54.507596   -54.523863
+O   3-P                -74.974887   -74.992612
+F   2-P   -99.665948   -99.635206   -99.649922
+Ne  1-S
+Na  2-S               -161.858717  -161.858717
+Mg  1-S               -199.638552  -199.646189
+Al  2-P               -241.919784
+Si  3-P  -288.960443  -288.918147  -288.935737
+P   4-S               -340.807586  -340.827274
+S   3-P  -397.697985  -397.639860  -397.665742
+Cl  2-P               -459.663974  -459.692271
+Ar  1-S
+          CCSD(noneq) CCSD(T)(noneq)   CCSDT
+            UHF          UHF            UHF
+   State  Froz. core   Froz. core    Froz. core
+   -----  ----------   -----------   ----------
+H   2-S    -0.499946    -0.499946    -0.499946
+He  1-S
+Li  2-S    -7.432695    -7.432695    -7.432695
+Be  1-S   -14.618951   -14.618951   -14.618951
+B   2-P   -24.599384   -24.600836   -24.6012483
+C   3-P   -37.784181   -37.786540   -37.7870045
+N   4-S   -54.522014   -54.524824   -54.5251580
+O   3-P   -74.989878   -74.993566   -74.9938835
+F   2-P   -99.645626   -99.650258   -99.6504488
+Ne  1-S  -128.838152  -128.843690
+Na  2-S  -161.858717  -161.858717
+Mg  1-S  -199.648153  -199.648153
+Al  2-P
+Si  3-P  -288.934778  -288.937603  -288.9383200
+P   4-S  -340.823390  -340.827921  -340.8286632
+S   3-P  -397.661374  -397.667115  -397.6679242
+Cl  2-P
+Br  2-P -2572.616182 -2572.621952
+            MOLPRO 99 and earlier       MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq)
+            ROHF         ROHF          ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   -----------   ----------   -----------
+H   2-S    -0.499946    -0.499946    -0.499946    -0.499946
+He  1-S
+Li  2-S    -7.432695    -7.432695    -7.432695    -7.432695
+Be  1-S   -14.618951   -14.618951   -14.618951   -14.618951
+B   2-P   -24.599155   -24.600747   -24.599165   -24.600758
+C   3-P   -37.783781   -37.786272   -37.783811   -37.786303
+N   4-S   -54.521483   -54.524376   -54.521520   -54.524415
+O   3-P   -74.989358   -74.993163   -74.989434   -74.993244
+F   2-P   -99.645519   -99.650202
+Ne  1-S  -128.838152  -128.843690  -128.838152  -128.843690
+Na  2-S
+Mg  1-S
+Al  2-P  -241.932098  -241.933580
+Si  3-P  -288.934247  -288.937310
+P   4-S  -340.822798  -340.827447
+S   3-P  -397.660594  -397.666657  -397.660643  -397.666711
+Cl  2-P  -459.685609  -459.692999
+          CISD(noneq)  CISD+Q(noneq) Full CI (noneq)   CCSDT        CCSDTQ
+            ROHF         ROHF           ROHF            ROHF         ROHF
+   State  Froz. core   Froz. core     Froz. core     Froz. core   Froz. core
+   -----  ----------   -----------    ----------     ----------   ----------
+H   2-S    -0.499946    -0.499946     -0.499946       -0.499946   -0.499946
+He  1-S
+Li  2-S    -7.432695
+Be  1-S   -14.618951
+B   2-P                             -24.6012150                  -24.601215
+C   3-P   -37.783196   -37.788336   -37.7869478                  -37.786948
+N   4-S                             -54.5250122                  -54.525012
+O   3-P   -74.985922                -74.9938134
+F   2-P   -99.641741
+Ne  1-S  -128.831057                                -128.843676 -128.
+P   4-S  -340.821493  -340.828182
+S   3-P  -397.655884
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.499946    -0.499946     -0.499946    -0.499946
+B   2-P
+C   3-P   -37.783796   -37.786298    -37.783956   -37.786434
+N   4-S   -54.521520   -54.524415    -54.521761   -54.524613
+O   3-P
+F   2-P
+Ne  1-S
+Si  3-P
+P   4-S
+S   3-P  -397.660627  -397.666657   -397.661004  -397.666944
+Cl  2-P
+Ar  1-S
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+*******************************************************  Created: July 1988
+The Hydrogen Atom        pVQZ Correlation Consistent Set
+Basis Set: (6s3p2d1f)/[4s3p2d1f]
+Hydrogen Atom
+State: s(1), (2)S
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-0.49994557         -0.99989056        0.49994499         -2.000001
+Molecular Hydrogen
+State: sigmag(2), (1)Sigmag(+)
+R(HH) = 1.401535 a(0)
+Total HF Energy     Total CI Energy      HF Coefficient
+-1.13345049         -1.17379644          0.99094697
+Exponents for the (s)-functions taken from the calculations of Duijneveldt,
+IBM Research Report RJ 945 (1971).  The polarization set was obtained by
+optimizing the (p,d,f)-exponents in HF+1+2 calculations on the (1)Sigmag(+)
+state of molecular hydrogen: first the p-exponents were optimized in the 
+absence of the d-function;then the d-functions were added to the set and
+their exponents optimized; finally, the f-function was added to the set and
+its exponent optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+*******************************************************  Created: July 1988
+The Helium Atom        pVQZ Correlation Consistent Set
+Basis Set: (7s3p2d1f)/[4s3p2d1f]
+State: s(2), (1)S
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-2.86151423         -5.72302695        2.86151272         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-2.90241088          0.99597379
+The atomic set was obtained by optimizing the (s)-exponents in Hartree-Fock 
+calculations on the ground, (1)S, state of helium,  The polarization set was
+obtained by optimizing the (p,d,f)-exponents in HF+1+2 calculations on the 
+(1)S state: first the p-exponents were optimized in the absence of the d and
+f-functions; then the d-functions were added to the set and their exponents
+optimized; finally, the f-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+***************************************************  Certified: December 1988
+The Boron Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(1), (2)P
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-24.52889761        -49.05777390       24.52887629         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-24.60087699          0.96234616
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (2)P, state of boron.  The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(2)P state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+******************************************************  Certified: April 1988
+The Carbon Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(2), (3)P
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-37.68823435        -75.37640314       37.68816879         -2.000002
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-37.78518787          0.97221640
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (3)P, state of carbon.  The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(3)P state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+******************************************************  Certified: April 1988
+The Nitrogen Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(3), (4)S
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-54.40017592       -108.80029421       54.40011829         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-54.52140233          0.98088580
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (4)S, state of nitrogen. The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(4)S state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+******************************************************  Certified: April 1988
+The Oxygen Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(4), (3)P
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-74.80797539       -149.61590959       74.80793420         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-74.98706927          0.97942644
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (3)P, state of oxygen.  The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(3)P state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+******************************************************  Certified: April 1988
+The Fluorine Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(5), (2)P
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-99.40698000       -198.81378830       99.40680829         -2.000002
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-99.64053726          0.98146701
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (2)P, state of fluorine. The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(2)P state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+******************************************************  Certified: April 1988
+The Neon Atom        pVQZ Correlation Consistent Set
+Basis Set: (12s6p3d2f1g)/[5s4p3d2f1g]
+State: s(2)p(6), (1)S
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-128.54346968       -257.08688631      128.54341663         -2.000000
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-128.83105657          0.98357795
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (1)S, state of neon.  The polarization set was 
+obtained by optimizing the (d,f,g)-exponents in HF+1+2 calculations on the 
+(1)S state: first the d-exponents were optimized in the absence of the f- and
+g-functions; then the f-functions were added to the set and their exponents
+optimized; finally, the g-function was added to the set and its exponent
+optimized.
+The HF+1+1 calculations were carried out in D(2h) symmetry.
+******************************************************  Certified: April 1988
+Sodium:
+------
+Na2 Energies at 2.9090 bohr.
+E(RHF)         E(SD-CI)
+-323.71634294   -323.74370228
+*****************************************************
+The basic idea behind the correlation consistent basis sets is that
+functions which contribute approximately the same amount of correlation
+energy should be grouped together.
+The SD-CI energies quoted below are for valence CI's. 
+All-electron, Nonrelativistic Transition Metal cc-pVQZ-NR Basis Sets
+  --------------------------------------------------------------------
+Elements           Contraction                         References
+Sc - Zn: (22s,18p,11d,3f,2g,1h) -> [8s,7p,5d,3f,2g,1h] N.B. Balabanov and K.A.
+                                                       Peterson, J. Chem. Phys.,
+                                                       123, 064107 (2005)
+                      cc-pVQZ-NR Atomic Energies
+                                                                  Numerical
+        State           UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit(equiv)
+   --------------------  ----------  -----------   -----------   --------------
+Sc ...4s2 3d1      2-D                             -759.735684    -795.735718
+   ...4s1 3d2      4-F                             -759.698739    -759.698786
+Ti ...4s2 3d2      3-F                             -848.405958    -848.405997
+   ...4s1 3d3      5-F                             -848.386103    -848.386154
+V  ...4s2 3d3      4-F                             -942.884293    -942.884338
+   ...4s1 3d4      6-D                             -942.879728    -942.879783
+Cr ...4s2 3d4      5-D                            -1043.356320   -1043.30982
+   ...4s1 3d5      7-S                            -1043.309751   -1043.35638
+Mn ...4s2 3d5      6-S                            -1149.866189   -1149.86625
+   ...4s1 3d6      6-D                            -1149.743884   -1149.74396
+Fe ...4s2 3d6      5-D                            -1262.443594   -1262.44367
+   ...4s1 3d7      5-F                            -1262.377529   -1262.37762
+Co ...4s2 3d7      4-F                            -1381.414471   -1381.41455
+   ...4s1 3d8      4-F                            -1381.358282   -1381.35838
+Ni ...4s2 3d8      3-F                            -1506.870812   -1506.87091
+   ...4s1 3d9      3-D                            -1506.823908   -1506.82403
+Cu ...4s2 3d9      2-D                            -1638.949992   -1638.95008
+   ...4s1 3d10     2-S                            -1638.963614   -1506.96374
+Zn ...4s2 3d10     1-S                            -1777.848025   -1777.84812
+   ...4s1 3d10 4p1 3-P                            -1777.750848   -1777.75100
+Numerical HF energies are taken from H. Tatewaki and T. Koga, Chem. Phys. Lett.
+228, 562 (1994).
+                           CCSD(T)(noneq)   CCSD(T)(eq)     CCSD(T)(eq)
+                              UHF              ROHF             R/U
+     State/# Val. El.        Froz. Core       Froz. Core      Froz. Core
+   ----------------------  --------------   ------------    ------------
+Sc ...4s2 3d1      2-D  3                                    -759.778407
+   ...4s1 3d2      4-F  3                                    -759.719473
+Ti ...4s2 3d2      3-F  4                                    -848.463361
+   ...4s1 3d3      5-F  4                                    -848.429510
+V  ...4s2 3d3      4-F  5                                    -942.965620
+   ...4s1 3d4      6-D  5                                    -942.954817
+Cr ...4s2 3d4      5-D  6                                   -1043.465202
+   ...4s1 3d5      7-S  6                                   -1043.424202
+Mn ...4s2 3d5      6-S  7                                   -1150.014853
+   ...4s1 3d6      6-D  7                                   -1149.929519
+Fe ...4s2 3d6      5-D  8                                   -1262.663451
+   ...4s1 3d7      5-F  8                                   -1262.629875
+Co ...4s2 3d7      4-F  9                                   -1381.699698
+   ...4s1 3d8      4-F  9                                   -1381.686292
+Ni ...4s2 3d8      3-F 10                                   -1507.230189
+   ...4s1 3d9      3-D 10                                   -1507.236310
+Cu ...4s2 3d9      2-D 11                                   -1639.393391
+   ...4s1 3d10     2-S 11                                   -1639.459257
+Zn ...4s2 3d10     1-S 12                                   -1778.373418
+   ...4s1 3d10 4p1 3-P 12                                   -1778.232745
+Note: these calculations correlated the outermost 3d4s valence electrons only.
