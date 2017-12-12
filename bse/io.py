@@ -11,6 +11,7 @@ import collections
 # Determine the path to the data directory
 my_path = os.path.dirname(os.path.abspath(__file__))
 data_path = os.path.join(my_path, 'data')
+schema_path = os.path.join(my_path, 'schema')
 
 
 def sort_basis_dict(bs):
@@ -94,6 +95,20 @@ def read_json_by_path(file_path):
 
     # change the element keys to integers
     js['basisSetElements'] = {int(k): v for k, v in js['basisSetElements'].items()}
+
+    return js
+
+
+def read_schema(schematype):
+    schemafile = "{}-schema.json".format(schematype)
+    file_path = os.path.join(schema_path, schemafile)
+
+    if not os.path.isfile(file_path):
+        raise RuntimeError('Schema file \'{}\' does not exist, is not '
+                           'readable, or is not a file'.format(file_path))
+
+    with open(file_path, 'r') as f:
+        js = json.loads(f.read())
 
     return js
 
