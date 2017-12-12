@@ -9,7 +9,7 @@ from . import converters
 
 def get_basis_set(name,
                   elements=None,
-                  format='dict',
+                  fmt='dict',
                   uncontract_general=False,
                   uncontract_spdf=False,
                   uncontract_segmented=False):
@@ -39,10 +39,10 @@ def get_basis_set(name,
     if uncontract_segmented:
         bs = manip.uncontract_segmented(bs)
 
-    if not format in converters.converter_map:
-        raise RuntimeError('Unknown format {}'.format(format))
+    if not fmt in converters.converter_map:
+        raise RuntimeError('Unknown format {}'.format(fmt))
     else:
-        return converters.converter_map[format](bs)
+        return converters.converter_map[fmt](bs)
 
     return bs
 
