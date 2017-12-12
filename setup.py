@@ -12,6 +12,7 @@ if __name__ == "__main__":
         packages=setuptools.find_packages(),
         install_requires=[
             'numpy>=1.7',
+            'jsonschema',
         ],
         extras_require={
             'docs': [
