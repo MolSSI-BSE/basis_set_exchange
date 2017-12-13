@@ -12,7 +12,12 @@ data_dir = os.path.join(bse_path, 'data')
 
 def test_valid():
     filelist = glob.glob(data_dir + "/*.json")
-    component_list = [ f for f in filelist if not 'element' in f and not 'table' in f ]
 
-    for f in component_list:
-        bse.validate('component', f)
+    for f in filelist:
+        #print("validating ", f)
+        if f.endswith('.table.json'):
+            bse.validate('table', f)
+        elif f.endswith('.element.json'):
+            bse.validate('element', f)
+        else:
+            bse.validate('component', f)

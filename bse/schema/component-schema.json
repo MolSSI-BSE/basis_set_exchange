@@ -7,7 +7,6 @@
         "molssi_bse_magic",
         "basisSetName",
         "basisSetDescription",
-        "basisSetRole",
         "basisSetElements"
     ],
     "properties":
@@ -24,11 +23,6 @@
         "basisSetDescription": {
             "description": "Brief description of the basis set",
             "type": "string"
-        },
-        "basisSetRole": {
-            "description": "The role of this component in a calculation",
-            "type": "string",
-            "enum": [ "orbital", "ri", "ecp" ]
         },
         "basisSetElements": {
             "description": "Data for the elements of the basis set",

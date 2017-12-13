@@ -1,0 +1,62 @@
+{
+    "title": "ElementalBasisSetFile",
+    "description": "A component of a basis set",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "molssi_bse_magic",
+        "basisSetName",
+        "basisSetDescription",
+        "basisSetRole",
+        "basisSetElements"
+    ],
+    "properties":
+    {
+        "molssi_bse_magic": {
+            "description": "Magic number for BSE project",
+            "type": "integer",
+            "enum": [ 1 ]
+        },
+        "basisSetName": {
+            "description": "Common name for the basis set",
+            "type": "string"
+        },
+        "basisSetDescription": {
+            "description": "Brief description of the basis set",
+            "type": "string"
+        },
+        "basisSetRole": {
+            "description": "Role that this basis plays in a calculation",
+            "type": "string",
+            "enum": [ "orbital", "ri" ]
+        },
+        "basisSetElements": {
+            "description": "Data for the elements of the basis set",
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties":   {
+                "\\d+" : {
+                    "description": "Data for a single element in the basis set",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [ "elementEntry" ],
+                    "properties": {
+                        "elementReferences": {
+                            "description": "Citation/Reference information for this element",
+                            "type": "array",
+                            "minItems": 1,
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "elementEntry": {
+                            "description": "Elemental basis set for this element",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
