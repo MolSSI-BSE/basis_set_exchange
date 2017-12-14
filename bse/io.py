@@ -72,6 +72,17 @@ def read_schema(file_path):
     return js
 
 
+def read_references(file_path):
+    if not os.path.isfile(file_path):
+        raise RuntimeError('References file \'{}\' does not exist, is not '
+                           'readable, or is not a file'.format(file_path))
+
+    with open(file_path, 'r') as f:
+        js = json.loads(f.read())
+
+    return js
+
+
 def dump_basis(bs):
     '''Returns a string with all the basis information (pretty-printed)
     '''

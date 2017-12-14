@@ -6,6 +6,7 @@ basis set information
 '''
 
 from . import converters
+from . import curate
 from .manip import *
 from .io import *
 from .api import *
