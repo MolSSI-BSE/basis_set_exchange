@@ -78,7 +78,7 @@ def dump_basis(bs):
     return json.dumps(sort_basis_dict(bs), indent=4)
 
 
-def write_basis_file(filepath, bs):
+def write_json_basis(filepath, bs):
     '''Read a JSON basis set file to a given path
 
        The keys are first sorted into a standard order
