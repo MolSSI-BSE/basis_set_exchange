@@ -2,6 +2,7 @@ from .. import lut
 from .. import manip
 from ..converters.common import *
 
+
 def print_shell(shell, shellidx=None):
     am = shell['shellAngularMomentum']
     amchar = lut.amint_to_char(am)
@@ -21,11 +22,11 @@ def print_shell(shell, shellidx=None):
     exponent_pad = determine_leftpad(exponents, 8)
 
     for p in range(nprim):
-        line = ' '*exponent_pad[p] + exponents[p]
+        line = ' ' * exponent_pad[p] + exponents[p]
         for c in range(ngen):
-            desired_point = 8 + (c+1)*23  # determined from PNNL BSE
+            desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
             coeff_pad = determine_leftpad(coefficients[c], desired_point)
-            line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
+            line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
         print(line)
 
 
@@ -39,7 +40,6 @@ def print_ecp_pot(pot):
     nprim = len(rexponents)
     ngen = len(coefficients)
 
-
     # Title line
     print('Potential: {} potential'.format(amchar))
 
@@ -48,11 +48,11 @@ def print_ecp_pot(pot):
 
     # General contractions?
     for p in range(nprim):
-        line = str(rexponents[p]) + ' '*(gexponent_pad[p]-1) + gexponents[p]
+        line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
         for c in range(ngen):
-            desired_point = 9 + (c+1)*23  # determined from PNNL BSE
+            desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
             coeff_pad = determine_leftpad(coefficients[c], desired_point)
-            line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
+            line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
         print(line)
 
 
@@ -68,11 +68,11 @@ def print_element(z, eldata):
         print('References: NONE')
 
     if 'elementElectronShells' in eldata:
-        for shellidx,shell in enumerate(eldata['elementElectronShells']):
+        for shellidx, shell in enumerate(eldata['elementElectronShells']):
             print_shell(shell, shellidx)
 
     if 'elementECP' in eldata:
-        max_ecp_am = max([ x['potentialAngularMomentum'][0] for x in eldata['elementECP'] ])
+        max_ecp_am = max([x['potentialAngularMomentum'][0] for x in eldata['elementECP']])
         max_ecp_amchar = lut.amint_to_char([max_ecp_am])
 
         print('ECP: Element: {}   Number of electrons: {}'.format(sym, eldata['elementECPElectrons']))
@@ -92,7 +92,7 @@ def print_component_basis(basis, elements=None):
 
     # Filter to the given elements
     if elements is not None:
-        elements = [ k for k, v in eldata.items() if k in elements ]
+        elements = [k for k, v in eldata.items() if k in elements]
 
     # Electron Basis
     for z in elements:
@@ -106,25 +106,25 @@ def print_element_basis(basis, elements=None):
     eldata = basis['basisSetElements']
 
     if elements is not None:
-        elements = [ k for k, v in eldata.items() if k in elements ]
+        elements = [k for k, v in eldata.items() if k in elements]
 
     # strings
-    complist = { z: ' '.join(eldata[z]['elementComponents']) for z in elements }
-    reflist = { z: ' '.join(eldata[z]['elementReferences']) for z in elements if 'elementReferences' in eldata[z]}
+    complist = {z: ' '.join(eldata[z]['elementComponents']) for z in elements}
+    reflist = {z: ' '.join(eldata[z]['elementReferences']) for z in elements if 'elementReferences' in eldata[z]}
 
-    max_comp = max( [ len(x) for k,x in complist.items() ] )
+    max_comp = max([len(x) for k, x in complist.items()])
     max_comp = max(max_comp, len("Components"))
 
     # Header line
-    print('{:4} {:{}} {:20}'.format("El", "Components", max_comp+1, "References"))
-    print('-'*80)
+    print('{:4} {:{}} {:20}'.format("El", "Components", max_comp + 1, "References"))
+    print('-' * 80)
     for z in elements:
         data = basis['basisSetElements'][z]
 
         sym = lut.element_sym_from_Z(z)
         sym = lut.normalize_element_symbol(sym)
 
-        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp+1, reflist[z] if z in reflist else 'None'))
+        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp + 1, reflist[z] if z in reflist else 'None'))
 
     print()
 
@@ -138,25 +138,25 @@ def print_table_basis(basis, elements=None):
     eldata = basis['basisSetElements']
 
     if elements is not None:
-        elements = [ k for k, v in eldata.items() if k in elements ]
+        elements = [k for k, v in eldata.items() if k in elements]
 
     # strings
-    complist = { z: eldata[z]['elementEntry'] for z in elements }
-    reflist = { z: eldata[z]['elementReferences'] for z in elements if 'elementReferences' in eldata[z]}
+    complist = {z: eldata[z]['elementEntry'] for z in elements}
+    reflist = {z: eldata[z]['elementReferences'] for z in elements if 'elementReferences' in eldata[z]}
 
-    max_comp = max( [ len(x) for k,x in complist.items() ] )
+    max_comp = max([len(x) for k, x in complist.items()])
     max_comp = max(max_comp, len("Components"))
 
     # Header line
-    print('{:4} {:{}} {:20}'.format("El", "Entry", max_comp+1, "References"))
-    print('-'*80)
+    print('{:4} {:{}} {:20}'.format("El", "Entry", max_comp + 1, "References"))
+    print('-' * 80)
     for z in elements:
         data = basis['basisSetElements'][z]
 
         sym = lut.element_sym_from_Z(z)
         sym = lut.normalize_element_symbol(sym)
 
-        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp+1, reflist[z] if z in reflist else 'None'))
+        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp + 1, reflist[z] if z in reflist else 'None'))
 
     print()
 
@@ -169,7 +169,7 @@ def print_citation(citkey, cit):
 
     titlestr = cit['title'] if 'title' in cit else 'MISSING'
     print("    Title: {}".format(titlestr))
-    
+
     if 'authors' in cit and len(cit['authors']) > 0:
         print("    Authors: {}".format(cit['authors'][0]))
         for a in cit['authors'][1:]:
@@ -177,11 +177,9 @@ def print_citation(citkey, cit):
     else:
         print("    Authors: NONE")
 
-    
     journalstr = cit['journal'] if 'journal' in cit else "MISSING"
     volumestr = cit['volume'] if 'volume' in cit else "MISSING"
     pagestr = cit['page'] if 'page' in cit else "MISSING"
     yearstr = cit['year'] if 'year' in cit else "MISSING"
 
     print("    {} v{} pp {} ({})".format(journalstr, volumestr, pagestr, yearstr))
-

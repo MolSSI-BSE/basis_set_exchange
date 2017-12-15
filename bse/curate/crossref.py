@@ -3,12 +3,12 @@ import json
 
 
 def convert_message(msg):
-    ret = { }
+    ret = {}
     if 'title' in msg:
         ret['title'] = msg['title']
 
     if 'author' in msg:
-        ret['authors'] = [ '{} {}'.format(a['given'], a['family']) for a in msg['author'] ]
+        ret['authors'] = ['{} {}'.format(a['given'], a['family']) for a in msg['author']]
 
     if 'container-title' in msg:
         ret['journal'] = msg['container-title'][0]
@@ -27,9 +27,7 @@ def convert_message(msg):
 
 def query_crossref(query, raw=False):
     # Requested by crossref API
-    headers = {
-        'User-Agent': 'BSECuration 1.0 (mailto:bpp4@vt.edu)'
-    }
+    headers = {'User-Agent': 'BSECuration 1.0 (mailto:bpp4@vt.edu)'}
 
     r = requests.get('https://api.crossref.org/works', params={'query': query}, headers=headers)
     if r.status_code != 200:
@@ -44,9 +42,7 @@ def query_crossref(query, raw=False):
 
 def query_crossref_doi(doi, raw=False):
     # Requested by crossref API
-    headers = {
-        'User-Agent': 'BSECuration 1.0 (mailto:bpp4@vt.edu)'
-    }
+    headers = {'User-Agent': 'BSECuration 1.0 (mailto:bpp4@vt.edu)'}
 
     r = requests.get('https://api.crossref.org/works/' + doi, headers=headers)
     if r.status_code != 200:
