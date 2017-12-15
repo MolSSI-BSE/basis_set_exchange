@@ -9,7 +9,7 @@ import glob
 import collections
 
 
-def sort_basis_dict(bs):
+def _sort_basis_dict(bs):
     '''Sorts a basis set dictionary into a standard order
 
     This allows the written file to be more easily read by humans by,
@@ -34,11 +34,19 @@ def sort_basis_dict(bs):
 
     for k, v in bs_sorted.items():
         if isinstance(v, dict):
-            bs_sorted[k] = sort_basis_dict(v)
+            bs_sorted[k] = _sort_basis_dict(v)
         elif k == 'elementElectronShells':
-            bs_sorted[k] = [sort_basis_dict(x) for x in v]
+            bs_sorted[k] = [_sort_basis_dict(x) for x in v]
 
     return bs_sorted
+
+
+def _sort_references_dict(refs):
+
+    # TODO - sort keys
+    refs_sorted = sorted(refs.items())
+    refs_sorted = collections.OrderedDict(refs_sorted)
+    return refs_sorted
 
 
 def read_json_basis(file_path):
@@ -86,7 +94,7 @@ def read_references(file_path):
 def dump_basis(bs):
     '''Returns a string with all the basis information (pretty-printed)
     '''
-    return json.dumps(sort_basis_dict(bs), indent=4)
+    return json.dumps(_sort_basis_dict(bs), indent=4)
 
 
 def write_json_basis(filepath, bs):
@@ -95,7 +103,12 @@ def write_json_basis(filepath, bs):
        The keys are first sorted into a standard order
     '''
     with open(filepath, 'w') as f:
-        json.dump(sort_basis_dict(bs), f, indent=4)
+        json.dump(_sort_basis_dict(bs), f, indent=4)
+
+
+def write_references(file_path, refs):
+    with open(filepath, 'w') as f:
+        json.dump(_sort_references_dict(refs), f, indent=4)
 
 
 def get_basis_filelist(data_dir):
