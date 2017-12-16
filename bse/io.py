@@ -57,7 +57,7 @@ def read_json_basis(file_path):
 
     #print("Reading ", file_path)
     with open(file_path, 'r') as f:
-        js = json.loads(f.read())
+        js = json.load(f)
 
     # Check for magic key/number
     if not 'molssi_bse_magic' in js:
@@ -75,7 +75,7 @@ def read_schema(file_path):
                            'readable, or is not a file'.format(file_path))
 
     with open(file_path, 'r') as f:
-        js = json.loads(f.read())
+        js = json.load(f)
 
     return js
 
@@ -86,7 +86,7 @@ def read_references(file_path):
                            'readable, or is not a file'.format(file_path))
 
     with open(file_path, 'r') as f:
-        js = json.loads(f.read())
+        js = json.load(f)
 
     return js
 
@@ -97,17 +97,17 @@ def dump_basis(bs):
     return json.dumps(_sort_basis_dict(bs), indent=4)
 
 
-def write_json_basis(filepath, bs):
+def write_json_basis(file_path, bs):
     '''Read a JSON basis set file to a given path
 
        The keys are first sorted into a standard order
     '''
-    with open(filepath, 'w') as f:
+    with open(file_path, 'w') as f:
         json.dump(_sort_basis_dict(bs), f, indent=4)
 
 
 def write_references(file_path, refs):
-    with open(filepath, 'w') as f:
+    with open(file_path, 'w') as f:
         json.dump(_sort_references_dict(refs), f, indent=4)
 
 

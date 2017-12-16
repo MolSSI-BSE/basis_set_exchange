@@ -5,7 +5,7 @@ import json
 def convert_message(msg):
     ret = {}
     if 'title' in msg:
-        ret['title'] = msg['title']
+        ret['title'] = msg['title'][0]
 
     if 'author' in msg:
         ret['authors'] = ['{} {}'.format(a['given'], a['family']) for a in msg['author']]
@@ -21,6 +21,9 @@ def convert_message(msg):
 
     if 'published-print' in msg:
         ret['year'] = msg["published-print"]["date-parts"][0][0]
+
+    if 'DOI' in msg:
+        ret['DOI'] = msg["DOI"]
 
     return ret
 

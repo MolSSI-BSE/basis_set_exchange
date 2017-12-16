@@ -94,7 +94,7 @@ def get_schema(schema_type):
                            'readable, or is not a file'.format(file_path))
 
     with open(file_path, 'r') as f:
-        js = json.loads(f.read())
+        js = json.load(f)
 
     return js
 

@@ -91,8 +91,10 @@ def print_component_basis(basis, elements=None):
     eldata = basis['basisSetElements']
 
     # Filter to the given elements
-    if elements is not None:
-        elements = [k for k, v in eldata.items() if k in elements]
+    if elements is None:
+        elements = list(eldata.keys())
+    else:
+        elements = [k for k in eldata.keys() if k in elements]
 
     # Electron Basis
     for z in elements:
@@ -105,8 +107,10 @@ def print_element_basis(basis, elements=None):
 
     eldata = basis['basisSetElements']
 
-    if elements is not None:
-        elements = [k for k, v in eldata.items() if k in elements]
+    if elements is None:
+        elements = list(eldata.keys())
+    else:
+        elements = [k for k in eldata.keys() if k in elements]
 
     # strings
     complist = {z: ' '.join(eldata[z]['elementComponents']) for z in elements}
@@ -137,8 +141,10 @@ def print_table_basis(basis, elements=None):
 
     eldata = basis['basisSetElements']
 
-    if elements is not None:
-        elements = [k for k, v in eldata.items() if k in elements]
+    if elements is None:
+        elements = list(eldata.keys())
+    else:
+        elements = [k for k in eldata.keys() if k in elements]
 
     # strings
     complist = {z: eldata[z]['elementEntry'] for z in elements}
