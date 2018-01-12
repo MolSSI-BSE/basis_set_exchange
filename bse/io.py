@@ -19,8 +19,8 @@ def _sort_basis_dict(bs):
     keyorder = [
         'molssi_bse_magic',
         'basisSetName', 'basisSetDescription',
-        'basisSetRole', 'basisSetElements', 'elementReferences', 'elementECPElectrons',
-        'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
+        'basisSetRole', 'basisSetReferences', 'basisSetElements', 'elementReferences',
+        'elementECPElectrons', 'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
         'shellFunctionType', 'shellHarmonicType', 'shellRegion', 'shellAngularMomentum',
         'shellExponents', 'shellCoefficients', 'potentialECPType', 'potentialAngularMomentum',
         'potentialRExponents', 'potentialGaussianExponents', 'potentialCoefficients'
