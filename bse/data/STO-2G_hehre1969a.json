@@ -1,0 +1,54 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "STO-2G",
+    "basisSetDescription": "MB      Minimal Basis: 1 Function/AO",
+    "basisSetReferences": [
+        "hehre1969a"
+    ],
+    "basisSetElements": {
+        "1": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "1.309756377",
+                        "0.233135974"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.430128498",
+                            "0.678913531"
+                        ]
+                    ]
+                }
+            ]
+        },
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "2.432879",
+                        "0.433051"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.430128",
+                            "0.678914"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
