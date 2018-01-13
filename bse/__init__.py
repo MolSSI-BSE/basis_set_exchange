@@ -6,9 +6,11 @@ basis set information
 '''
 
 from . import converters
+from . import refconverters
 #from . import curate
 from .manip import *
 from .io import *
 from .api import *
 from .compose import *
+from .references import *
 from .validator import *

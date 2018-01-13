@@ -16,9 +16,15 @@ def compose_elemental_basis(file_path):
 
     component_map = {k: io.read_json_basis(os.path.join(data_dir, k)) for k in component_names}
 
+    # Broadcast the basisSetReferences to each element
+    for k, v in component_map.items():
+        for el, el_data in v['basisSetElements'].items():
+            el_data['elementReferences'] = v['basisSetReferences']
+
     for k, v in js['basisSetElements'].items():
 
-        components = v['elementComponents']
+        # Also removes 'elementComponents' from the dict
+        components = v.pop('elementComponents')
 
         v['elementElectronShells'] = []
 
@@ -26,9 +32,6 @@ def compose_elemental_basis(file_path):
         el_data = [component_map[c]['basisSetElements'][k] for c in components]
 
         v = manip.merge_element_data(v, el_data)
-
-        # Remove the 'elementComponents' now that the data has been inserted
-        v.pop('elementComponents')
 
         # Set it in the actual dict (v was a reference before)
         js['basisSetElements'][k] = v

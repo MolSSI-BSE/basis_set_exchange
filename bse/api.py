@@ -7,7 +7,9 @@ import json
 from . import io
 from . import manip
 from . import compose
+from . import references
 from . import converters
+from . import refconverters
 
 # Determine the path to the data directory
 my_dir = os.path.dirname(os.path.abspath(__file__))
@@ -83,6 +85,29 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
 
 def get_formats():
     return list(converters.converter_map.keys())
+
+
+def get_references(name,
+                   data_dir=default_data_dir,
+                   reffile_name='REFERENCES.json',
+                   elements=None,
+                   fmt='dict'):
+
+    reffile_path = os.path.join(data_dir, reffile_name)
+
+    basis_dict = get_basis_set(name, 
+                               data_dir=data_dir,
+                               elements=elements,
+                               fmt='dict')
+
+    ref_data = references.compact_references(basis_dict, reffile_path)
+
+    if not fmt in refconverters.converter_map:
+        raise RuntimeError('Unknown format {}'.format(fmt))
+    else:
+        return refconverters.converter_map[fmt](ref_data)
+
+    return ref_data 
 
 
 def get_schema(schema_type):
