@@ -15,6 +15,8 @@ def test_valid():
 
     for f in filelist:
         #print("validating ", f)
+        if f.endswith('REFERENCES.json'):
+            continue
         if f.endswith('.table.json'):
             bse.validate('table', f)
         elif f.endswith('.element.json'):
