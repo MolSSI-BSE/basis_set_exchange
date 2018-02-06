@@ -64,8 +64,11 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
     basis_filelist = io.get_basis_filelist(data_dir)
 
     metadata = {}
-    for n in basis_filelist:
-        bs = compose.compose_table_basis(n)
+    for bs_file_path in basis_filelist:
+        # Actually compose the basis set from components
+        bs = compose.compose_table_basis(bs_file_path)
+
+        # Prepare the metadata
         displayname = bs['basisSetName']
         defined_elements = list(bs['basisSetElements'].keys())
 
@@ -74,7 +77,11 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
             for s in e['elementElectronShells']:
                 function_types.add(s['shellFunctionType'])
 
-        metadata[n] = {
+        # convert the file path to the internal identifier for the basis set
+        internal_name = os.path.basename(bs_file_path)
+        internal_name = internal_name.replace(".table.json", "")
+
+        metadata[internal_name] = {
             'displayname': displayname,
             'elements': defined_elements,
             'functiontypes': list(function_types),
