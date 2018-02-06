@@ -1,6 +1,4 @@
 import operator
-import numpy as np
-
 
 def _compare_keys(element1, element2, key, compare_func, *args):
     if key in element1 and key in element2:
@@ -12,6 +10,57 @@ def _compare_keys(element1, element2, key, compare_func, *args):
     return True
 
 
+def _compare_vector(arr1, arr2):
+    """
+    Compares two vectors (python lists) for approximate equality.
+
+    Each array contains floats or strings convertible to floats
+
+    This function returns True if both arrays are of the same length
+    and each value is approximately equal.
+    """
+
+    length = len(arr1)
+    if len(arr2) != length:
+        return False
+
+    for i in range(length):
+        element_1 = float(arr1(i))
+        element_2 = float(arr2(i))
+
+
+        diff = abs(abs(element_1) - abs(element_2))
+        rel = diff / min(abs(element_1), abs(element_2))
+        
+        # For a basis set, a relatively coarse comparison
+        # should be acceptible
+        if rel > 1.0e-10:
+            return False
+
+    return True
+
+
+def _compare_matrix(mat1, mat2):
+    """
+    Compares two matrices (nested python lists) for approximate equality.
+
+    Each matrix contains floats or strings convertible to floats
+
+    This function returns True if both matrices are of the same dimensions
+    and each value is approximately equal.
+    """
+
+    length = len(mat1)
+    if len(mat2) != length:
+        return False
+
+    for i in range(length):
+        if _compare_vector(mat1(i), mat2(i)) == False:
+            return False
+
+    return True
+         
+
 def compare_shells(shell1, shell2, compare_meta=False):
     if shell1['shellAngularMomentum'] != shell2['shellAngularMomentum']:
         return False
@@ -21,18 +70,9 @@ def compare_shells(shell1, shell2, compare_meta=False):
     coefficients1 = shell1['shellCoefficients']
     coefficients2 = shell2['shellCoefficients']
 
-    exponents1 = np.array(exponents1).astype(np.float)
-    exponents2 = np.array(exponents2).astype(np.float)
-    coefficients1 = np.array(coefficients1).astype(np.float)
-    coefficients2 = np.array(coefficients2).astype(np.float)
-
-    if exponents1.shape != exponents2.shape:
+    if not _compare_vector(exponents1, exponents2):
         return False
-    if coefficients1.shape != coefficients2.shape:
-        return False
-    if not np.allclose(exponents1, exponents2, rtol=1e-10):
-        return False
-    if not np.allclose(coefficients1, coefficients2, rtol=1e-10):
+    if not _compare_matrix(coefficients1, coefficients2):
         return False
     if compare_meta:
         if shell1['shellRegion'] != shell2['shellRegion']:
@@ -73,24 +113,12 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False):
     coefficients1 = potential1['potentialCoefficients']
     coefficients2 = potential2['potentialCoefficients']
 
-    rexponents1 = np.array(rexponents1).astype(np.int)
-    rexponents2 = np.array(rexponents2).astype(np.int)
-    gexponents1 = np.array(gexponents1).astype(np.float)
-    gexponents2 = np.array(gexponents2).astype(np.float)
-    coefficients1 = np.array(coefficients1).astype(np.float)
-    coefficients2 = np.array(coefficients2).astype(np.float)
-
-    if rexponents1.shape != rexponents2.shape:
+    # integer comparison
+    if rexponents1 != rexponents2:
         return False
-    if gexponents1.shape != gexponents2.shape:
+    if not _compare_vector(gexponents1, gexponents2):
         return False
-    if coefficients1.shape != coefficients2.shape:
-        return False
-    if not np.alltrue(rexponents1 == rexponents2):
-        return False
-    if not np.allclose(gexponents1, gexponents2, rtol=1e-10):
-        return False
-    if not np.allclose(coefficients1, coefficients2, rtol=1e-10):
+    if not _compare_matrix(coefficients1, coefficients2):
         return False
     if compare_meta:
         if potential1['potentialECPType'] != potential2['potentialECPType']:

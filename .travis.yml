@@ -28,7 +28,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
   - conda info -a
-  - conda create -q -n bse_env python=$TRAVIS_PYTHON_VERSION numpy jsonschema
+  - conda create -q -n bse_env python=$TRAVIS_PYTHON_VERSION jsonschema
   - source activate bse_env
 
     # Install anything not in conda
