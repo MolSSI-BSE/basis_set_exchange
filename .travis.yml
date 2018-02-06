@@ -38,7 +38,6 @@ install:
 
 before_script:
   - python -V
-  - python -c 'import numpy; print(numpy.version.version)'
   - pip install -e .
 
 script:
