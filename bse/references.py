@@ -1,4 +1,9 @@
+"""
+Functions related to handling of references/citations
+"""
+
 from . import io
+
 
 def compact_references(basis_dict, reffile_path):
     ref_data = io.read_references(reffile_path)
@@ -22,4 +27,3 @@ def compact_references(basis_dict, reffile_path):
         item.pop('refkeys')
 
     return element_ref_map
-

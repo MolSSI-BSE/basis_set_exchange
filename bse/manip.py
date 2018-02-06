@@ -1,6 +1,6 @@
-'''
+"""
 Common basis set manipulations (such as uncontracting)
-'''
+"""
 
 import json
 import os
@@ -9,12 +9,13 @@ from . import lut
 
 
 def contraction_string(element):
-    """Forms a string specifying the contractions for an element
+    """
+    Forms a string specifying the contractions for an element
 
-       ie, (16s,10p) -> [4s,3p]
+    ie, (16s,10p) -> [4s,3p]
     """
 
-    if not 'elementElectronShells' in element:
+    if 'elementElectronShells' not in element:
         return ""
 
     cont_map = dict()
@@ -22,7 +23,7 @@ def contraction_string(element):
         nprim = len(sh['shellExponents'])
 
         for am in sh['shellAngularMomentum']:
-            if not am in cont_map:
+            if am not in cont_map:
                 cont_map[am] = (nprim, 1)
             else:
                 cont_map[am] = (cont_map[am][0]+nprim, cont_map[am][1]+1)
@@ -30,7 +31,7 @@ def contraction_string(element):
     primstr = ""
     contstr = ""
     for am in sorted(cont_map.keys()):
-        nprim,ncont = cont_map[am]
+        nprim, ncont = cont_map[am]
 
         if am != 0:
             primstr += ','
@@ -41,14 +42,20 @@ def contraction_string(element):
     return "({}) -> [{}]".format(primstr, contstr)
 
 
-
 def check_compatible_merge(dest, source):
-    '''TODO - check for any incompatibilities between the two elements
-    '''
+    """
+    TODO - check for any incompatibilities between the two elements
+    """
     pass
 
 
 def merge_element_data(dest, sources):
+    """
+    Merges the basis set data for an element from multiple sources
+    into dest.
+
+    The destination is not modified
+    """
 
     # return a shallow copy
     ret = dest.copy()
@@ -57,7 +64,7 @@ def merge_element_data(dest, sources):
         check_compatible_merge(dest, s)
 
         if 'elementElectronShells' in s:
-            if not 'elementElectronShells' in ret:
+            if 'elementElectronShells' not in ret:
                 ret['elementElectronShells'] = []
             ret['elementElectronShells'].extend(s['elementElectronShells'])
         if 'elementECP' in s:
@@ -66,7 +73,7 @@ def merge_element_data(dest, sources):
             ret['elementECP'] = s['elementECP']
             ret['elementECPElectrons'] = s['elementECPElectrons']
         if 'elementReferences' in s:
-            if not 'elementReferences' in ret:
+            if 'elementReferences' not in ret:
                 ret['elementReferences'] = []
             ret['elementReferences'].extend(s['elementReferences'])
 
@@ -76,16 +83,14 @@ def merge_element_data(dest, sources):
     return ret
 
 
-
-
-
 def prune_basis(basis):
-    '''Removes primitives that have a zero coefficient, and
-       removes duplicate shells
+    """
+    Removes primitives that have a zero coefficient, and
+    removes duplicate shells
 
-       This only finds EXACT duplicates, and is meant to be used
-       after uncontracting
-    '''
+    This only finds EXACT duplicates, and is meant to be used
+    after uncontracting
+    """
 
     new_basis = copy.deepcopy(basis)
 
@@ -102,7 +107,7 @@ def prune_basis(basis):
 
             # only add if there is a nonzero contraction coefficient
             for i in range(len(sh['shellExponents'])):
-                if not all([ float(x) == 0.0 for x in coeff_t[i] ]):
+                if not all([float(x) == 0.0 for x in coeff_t[i]]):
                     new_exponents.append(exponents[i])
                     new_coefficients.append(coeff_t[i])
 
@@ -119,15 +124,20 @@ def prune_basis(basis):
         el['elementElectronShells'] = []
 
         for sh in shells:
-            if not sh in el['elementElectronShells']:
+            if sh not in el['elementElectronShells']:
                 el['elementElectronShells'].append(sh)
 
     return new_basis
 
 
 def uncontract_spdf(basis):
-    '''Removes sp, spd, spdf, etc, contractions from a basis set
-    '''
+    """
+    Removes sp, spd, spdf, etc, contractions from a basis set
+
+    The general contractions are replaced by uncontracted versions
+
+    The input basis set is not modified.
+    """
 
     new_basis = copy.deepcopy(basis)
 
@@ -155,8 +165,11 @@ def uncontract_spdf(basis):
 
 
 def uncontract_general(basis):
-    '''Removes the general contractions from a basis set
-    '''
+    """
+    Removes the general contractions from a basis set
+
+    The input basis set is not modified
+    """
 
     new_basis = copy.deepcopy(basis)
 
@@ -181,8 +194,11 @@ def uncontract_general(basis):
 
 
 def uncontract_segmented(basis):
-    '''Removes the segmented contractions from a basis set
-    '''
+    """
+    Removes the segmented contractions from a basis set
+
+    The input basis set is not modified
+    """
 
     # This implicitly removes general contractions as well
     # But will leave sp, spd, orbitals alone
@@ -199,7 +215,7 @@ def uncontract_segmented(basis):
             for i in range(len(sh['shellExponents'])):
                 newsh = sh.copy()
                 newsh['shellExponents'] = [exponents[i]]
-                newsh['shellCoefficients'] = [ [ "1.00000000" ]*nam  ]
+                newsh['shellCoefficients'] = [["1.00000000"]*nam]
 
                 # Remember to transpose the coefficients
                 newsh['shellCoefficients'] = list(map(list, zip(*newsh['shellCoefficients'])))
