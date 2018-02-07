@@ -24,8 +24,7 @@ def write_g94(basis):
         data = unc_basis['basisSetElements'][z]
 
         s += '\n'
-        sym = lut.element_sym_from_Z(z)
-        sym = lut.normalize_element_symbol(sym)
+        sym = lut.element_sym_from_Z(z, True)
         s += '{}     0\n'.format(sym)
 
         for shell in data['elementElectronShells']:

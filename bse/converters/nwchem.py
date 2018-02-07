@@ -20,8 +20,7 @@ def write_nwchem(basis):
     for z in electron_elements:
         data = basis['basisSetElements'][z]
 
-        sym = lut.element_sym_from_Z(z)
-        sym = lut.normalize_element_symbol(sym)
+        sym = lut.element_sym_from_Z(z, True)
 
         s += '# BASIS SET: {}\n'.format(manip.contraction_string(data))
 

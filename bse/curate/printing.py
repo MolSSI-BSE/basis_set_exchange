@@ -58,7 +58,7 @@ def print_ecp_pot(pot):
 
 def print_element(z, eldata):
     sym = lut.element_sym_from_Z(z)
-    sym = lut.normalize_element_symbol(sym)
+    sym = lut.normalize_element_symbol(sym, True)
 
     print()
     print('Element: {}   Contraction: {}'.format(sym, manip.contraction_string(eldata)))
