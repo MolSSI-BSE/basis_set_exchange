@@ -111,6 +111,10 @@ def get_references(name, data_dir=default_data_dir, reffile_name='REFERENCES.jso
     return ref_data
 
 
+def get_reference_formats():
+    return list(refconverters.converter_map.keys())
+
+
 def get_schema(schema_type):
     schema_file = "{}-schema.json".format(schema_type)
     file_path = os.path.join(default_schema_dir, schema_file)
