@@ -1,0 +1,35 @@
+FROM DESCRIPTION:
+----------------
+Hay-Wadt LANL2DZ ECP Basis Sets
+              -------------------------------
+Elements     Contraction                   References
+H      :  (4s)       -> [2s]        T. H. Dunning Jr. and P. J. Hay, in Methods
+Li     :  (10s,4p)   -> [3s,2p]     of Electronic Structure, Theory, Vol. 2,
+Be - Ne:  (10s,5p)   -> [3s,2p]     H. F. Schaefer III, ed., Plenum Press (1977)
+Na - Ar:  (3s,3p)    -> [2s,2p]     P. J. Hay and W. R. Wadt, J. Chem. Phys.
+K  - Ca:  (5s,5p)    -> [3s,3p]     82, 270 (1985).
+Sc - Cu:  (5s,5p,5d) -> [3s,3p,2d]  P. J. Hay and W. R. Wadt, J. Chem. Phys.
+Zn     :  (3s,2p,5d) -> [2s,2p,2d]  82, 284 (1985).
+Ga - Kr:  (3s,3p)    -> [2s,2p]     P. J. Hay and W. R. Wadt, J. Chem. Phys.
+                                    82, 299 (1985).
+Rb - Sr:  (5s,5p)    -> [3s,3p]
+Y  - Ag:  (5s,6p,4d) -> [3s,3p,2d]
+Cd     :  (3s,3p,4d) -> [2s,2p,2d]
+In - Xe:  (3s,3p)    -> [2s,2p]
+U  - Np:  (6s,5p,2d,2f) -> [3s,3p,2d,2f]  These sets are unpublished, but their
+Pu     :  (7s,6p,2d,2f) -> [3s,3p,2d,2f]  use has been described in J.V. Ortiz,
+                                    P.J. Hay and R.L. Martin, JACS 114, 2736
+                                    114, 2736 (1992).
+This basis set family is a collection of all electron and ECP sets designed to
+mimic the LANL2DZ family in Gaussian 9x.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H  - Ne: T. H. Dunning Jr. and P. J. Hay, in Methods of Electronic Structure
+Theory, Vol. 2, H. F. Schaefer III, ed., PLENUM PRESS (1977)
+Na - Hg: P. J. Hay and W. R. Wadt, J. Chem. Phys. 82, 270 (1985).
+P. J. Hay and W. R. Wadt, J. Chem. Phys. 82, 284 (1985).
+P. J. Hay and W. R. Wadt, J. Chem. Phys. 82, 299 (1985).
+
+
