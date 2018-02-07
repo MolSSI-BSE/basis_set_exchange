@@ -49,9 +49,11 @@ _data_table = [
     ("sg",  106, "seaborgium"),   ("bh",  107, "bohrium"),       ("hs",  108, "hassium"),
     ("mt",  109, "meitnerium"),   ("uun", 110, "ununnilium"),    ("ds",  110, "darmstadtium"),
     ("uuu", 111, "unununium"),    ("rg",  111, "roentgenium"),   ("uub", 112, "ununbium"),
-    ("cn",  112, "copernicium"),  ("uut", 113, "ununtrium"),     ("uuq", 113, "ununquadium"),
-    ("fl",  114, "flerovium"),    ("uup", 115, "ununpentium"),   ("uuh", 116, "ununhexium"),
-    ("lv",  116, "livermorium"),  ("uus", 117, "ununseptium"),   ("uuo", 118, "ununoctium")
+    ("cn",  112, "copernicium"),  ("uut", 113, "ununtrium"),     ("nh",  113, "nihonium"),
+    ("uuq", 114, "ununquadium"),  ("fl",  114, "flerovium"),     ("uup", 115, "ununpentium"),
+    ("mc",  115, "moscovium"),    ("uuh", 116, "ununhexium"),    ("lv",  116, "livermorium"),
+    ("uus", 117, "ununseptium"),  ("ts",  117, "tennessine"),    ("uuo", 118, "ununoctium"),
+    ("og",  118, "oganesson")
 ]
 # yapf: enable
 
