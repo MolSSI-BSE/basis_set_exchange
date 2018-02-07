@@ -3,7 +3,6 @@ Tests for lookups of elemental data
 """
 
 from bse import lut
-import pytest
 
 def test_element_data():
     # Cycle through the elements and check that 

@@ -1,6 +1,11 @@
 from .. import lut
 
 def compact_elements(elements):
+    """
+    Create a string (with ranges) given a list of element numbers
+
+    For example, [1, 2, 3, 6, 7, 8, 10] will return "H-Li,C-O,Ne"
+   """
 
     if len(elements) == 0:
         return
@@ -30,14 +35,15 @@ def compact_elements(elements):
     # Convert to elemental symbols
     range_strs = []
     for r in ranges:
-        sym = lut.element_sym_from_Z(r[0])
-        sym = lut.normalize_element_symbol(sym)
+        sym = lut.element_sym_from_Z(r[0], True)
 
         if len(r) == 1:
             range_strs.append(sym)
+        elif len(r) == 2 and r[1] == r[0]+1:
+            sym2 = lut.element_sym_from_Z(r[1], True)
+            range_strs.append(sym + "," + sym2)
         else:
-            sym2 = lut.element_sym_from_Z(r[1])
-            sym2 = lut.normalize_element_symbol(sym2)
+            sym2 = lut.element_sym_from_Z(r[1], True)
             range_strs.append(sym + "-" + sym2)
 
     return ",".join(range_strs)
