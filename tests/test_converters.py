@@ -5,6 +5,8 @@ Tests for converting to basis set formats
 import bse
 
 def test_converters():
+    # Try to convert every stored basis set to every 
+    # type of format
     formats = bse.converters.converter_map
     bs_metadata = bse.get_metadata()
 

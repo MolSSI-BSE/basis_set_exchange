@@ -1,0 +1,42 @@
+{
+    "title": "BSEReferences",
+    "description": "Reference data for a collection of basis sets",
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+        "^[a-z0-9_\\-]+$" : {
+            "description": "A single reference associated with a basis set",
+            "type": "object",
+            "additionalProperties": false,
+            "required" : [ "type", "title" ],
+            "properties": {
+                "type" : { "type" : "string" },
+                "title" : { "type": "string" },
+                "doi" : { "type": "string" },
+                "authors" : {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "editors" : {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "journal" : { "type" : "string" },
+                "page" : { "type" : "string" },
+                "volume" : { "type" : "string" },
+                "year" : { "type" : "string" },
+                "series" : { "type" : "string" },
+                "booktitle" : { "type" : "string" },
+                "isbn" : { "type" : "string" }
+            }
+        }
+    }
+}

@@ -11,7 +11,8 @@ from . import references
 from . import converters
 from . import refconverters
 
-# Determine the path to the data directory
+# Determine the path to the data directory that is part
+# of this installation
 my_dir = os.path.dirname(os.path.abspath(__file__))
 default_data_dir = os.path.join(my_dir, 'data')
 default_schema_dir = os.path.join(my_dir, 'schema')
@@ -59,7 +60,7 @@ def get_basis_set(name,
 
 def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
     if key_filter:
-        raise RuntimeError("key_filter not implemented")
+        raise NotImplementedError("key_filter not implemented")
 
     basis_filelist = io.get_basis_filelist(data_dir)
 

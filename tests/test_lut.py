@@ -5,9 +5,10 @@ Tests for lookups of elemental data
 from bse import lut
 import pytest
 
-def test_lut():
-
-    for Z in range(1, 100):
+def test_element_data():
+    # Cycle through the elements and check that 
+    # the info returned from the functions is consistent
+    for Z in range(1, 118):
         data = lut.element_data_from_Z(Z)
         assert data[1] == Z
 
@@ -24,6 +25,8 @@ def test_lut():
         assert nname[0] == data[2][0].upper()
 
 
+def test_amchar():
+    # Check that converting am characters, etc, is consistent
     for am in range(12):
         s = lut.amint_to_char([am])
         assert am == lut.amchar_to_int(s)[0]

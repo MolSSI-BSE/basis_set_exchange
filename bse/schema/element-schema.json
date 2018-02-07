@@ -29,7 +29,7 @@
             "type": "object",
             "additionalProperties": false,
             "patternProperties":   {
-                "\\d+" : {
+                "^\\d+$" : {
                     "description": "Data for a single element in the basis set",
                     "type": "object",
                     "additionalProperties": false,
