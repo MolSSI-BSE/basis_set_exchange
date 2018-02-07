@@ -3,14 +3,15 @@ from .. import lut
 from .. import manip
 from .common import *
 
+
 def write_nwchem(basis):
     s = "# NWChem Basis set: " + basis['basisSetName'] + '\n'
 
     # Elements for which we have electron basis
-    electron_elements = [ k for k, v in basis['basisSetElements'].items() if 'elementElectronShells' in v ]
+    electron_elements = [k for k, v in basis['basisSetElements'].items() if 'elementElectronShells' in v]
 
     # Elements for which we have ECP
-    ecp_elements = [ k for k, v in basis['basisSetElements'].items() if 'elementECP' in v ]
+    ecp_elements = [k for k, v in basis['basisSetElements'].items() if 'elementECP' in v]
 
     # basis set starts with a string
     s += 'BASIS "ao basis" PRINT\n'
@@ -40,14 +41,13 @@ def write_nwchem(basis):
             exponent_pad = determine_leftpad(exponents, 8)
 
             for p in range(nprim):
-                line = ' '*exponent_pad[p] + exponents[p]
+                line = ' ' * exponent_pad[p] + exponents[p]
                 for c in range(ngen):
-                    desired_point = 8 + (c+1)*23  # determined from PNNL BSE
+                    desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
                     coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                    line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
+                    line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
     s += "END\n"
-
 
     # Write out ECP
     if len(ecp_elements):
@@ -59,7 +59,7 @@ def write_nwchem(basis):
         sym = lut.element_sym_from_Z(z)
         sym = lut.normalize_element_symbol(sym)
 
-        max_ecp_am = max([ x['potentialAngularMomentum'][0] for x in data['elementECP'] ])
+        max_ecp_am = max([x['potentialAngularMomentum'][0] for x in data['elementECP']])
         max_ecp_amchar = lut.amint_to_char([max_ecp_am])
 
         s += '{} nelec {}\n'.format(sym, data['elementECPElectrons'])
@@ -79,7 +79,6 @@ def write_nwchem(basis):
             nprim = len(rexponents)
             ngen = len(coefficients)
 
-
             # Title line
             if am[0] == max_ecp_am:
                 s += '{} {} potential\n'.format(sym, amchar)
@@ -91,11 +90,11 @@ def write_nwchem(basis):
 
             # General contractions?
             for p in range(nprim):
-                line = str(rexponents[p]) + ' '*(gexponent_pad[p]-1) + gexponents[p]
+                line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
                 for c in range(ngen):
-                    desired_point = 9 + (c+1)*23  # determined from PNNL BSE
+                    desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
                     coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                    line += ' '*(coeff_pad[p] - len(line)) + coefficients[c][p]
+                    line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
 
     if len(ecp_elements):

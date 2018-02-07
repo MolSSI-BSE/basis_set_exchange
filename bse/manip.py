@@ -26,7 +26,7 @@ def contraction_string(element):
             if am not in cont_map:
                 cont_map[am] = (nprim, 1)
             else:
-                cont_map[am] = (cont_map[am][0]+nprim, cont_map[am][1]+1)
+                cont_map[am] = (cont_map[am][0] + nprim, cont_map[am][1] + 1)
 
     primstr = ""
     contstr = ""
@@ -215,7 +215,7 @@ def uncontract_segmented(basis):
             for i in range(len(sh['shellExponents'])):
                 newsh = sh.copy()
                 newsh['shellExponents'] = [exponents[i]]
-                newsh['shellCoefficients'] = [["1.00000000"]*nam]
+                newsh['shellCoefficients'] = [["1.00000000"] * nam]
 
                 # Remember to transpose the coefficients
                 newsh['shellCoefficients'] = list(map(list, zip(*newsh['shellCoefficients'])))

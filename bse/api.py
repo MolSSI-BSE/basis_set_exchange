@@ -42,7 +42,7 @@ def get_basis_set(name,
             if not el in bs_elements:
                 raise RuntimeError("Element {} not found in basis {}".format(el, name))
 
-            bs['basisSetElements'] = { k:v for k, v in bs_elements.items() if k in elements }
+            bs['basisSetElements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
     if uncontract_general:
         bs = manip.uncontract_general(bs)
@@ -94,18 +94,11 @@ def get_formats():
     return list(converters.converter_map.keys())
 
 
-def get_references(name,
-                   data_dir=default_data_dir,
-                   reffile_name='REFERENCES.json',
-                   elements=None,
-                   fmt='dict'):
+def get_references(name, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt='dict'):
 
     reffile_path = os.path.join(data_dir, reffile_name)
 
-    basis_dict = get_basis_set(name, 
-                               data_dir=data_dir,
-                               elements=elements,
-                               fmt='dict')
+    basis_dict = get_basis_set(name, data_dir=data_dir, elements=elements, fmt='dict')
 
     ref_data = references.compact_references(basis_dict, reffile_path)
 
@@ -114,7 +107,7 @@ def get_references(name,
     else:
         return refconverters.converter_map[fmt](ref_data)
 
-    return ref_data 
+    return ref_data
 
 
 def get_schema(schema_type):
@@ -122,12 +115,9 @@ def get_schema(schema_type):
     file_path = os.path.join(default_schema_dir, schema_file)
 
     if not os.path.isfile(file_path):
-        raise RuntimeError('Schema file \'{}\' does not exist, is not '
-                           'readable, or is not a file'.format(file_path))
+        raise RuntimeError('Schema file \'{}\' does not exist, is not ' 'readable, or is not a file'.format(file_path))
 
     with open(file_path, 'r') as f:
         js = json.load(f)
 
     return js
-
-
