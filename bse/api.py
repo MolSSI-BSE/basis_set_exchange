@@ -120,7 +120,7 @@ def get_schema(schema_type):
     file_path = os.path.join(default_schema_dir, schema_file)
 
     if not os.path.isfile(file_path):
-        raise RuntimeError('Schema file \'{}\' does not exist, is not ' 'readable, or is not a file'.format(file_path))
+        raise RuntimeError('Schema file \'{}\' does not exist, is not readable, or is not a file'.format(file_path))
 
     with open(file_path, 'r') as f:
         js = json.load(f)
