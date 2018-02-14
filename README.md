@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/bennybp/bse-scratch.svg?branch=master)](https://travis-ci.org/bennybp/bse-scratch)
-[![codecov](https://codecov.io/gh/bennybp/bse-scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/bennybp/bse-scratch)
+[![Build Status](https://travis-ci.org/MolSSI/basis_set_exchange.svg?branch=master)](https://travis-ci.org/MolSSI/basis_set_exchange)
+[![codecov](https://codecov.io/gh/MolSSI/basis_set_exchange/branch/master/graph/badge.svg)](https://codecov.io/gh/MolSSI/basis_set_exchange)
 
 **Warning - This project is still under heavy development.**
 
