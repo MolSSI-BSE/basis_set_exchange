@@ -25,8 +25,8 @@ def test_get_basis_set():
             for unc in unc_comb:
                 bse.get_basis_set(basis_name, elements=None, fmt=f,
                                   uncontract_general=unc[0],
-                                  uncontract_segmented=unc[0],
-                                  uncontract_spdf=unc[0])
+                                  uncontract_segmented=unc[1],
+                                  uncontract_spdf=unc[2])
 
 
 
