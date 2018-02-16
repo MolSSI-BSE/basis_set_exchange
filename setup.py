@@ -2,12 +2,12 @@ import setuptools
 
 if __name__ == "__main__":
     setuptools.setup(
-        name='bse_scratch',
+        name='basis_set_exchange',
         version="0.1.0",
         description='The Quantum Chemistry Basis Set Exchange',
         author='The Molecular Sciences Software Institute',
         author_email='bpp4@vt.edu',
-        url="https://github.com/bennybp/bse-scratch",
+        url="https://github.com/MolSSI/basis_set_exchange",
         license='BSD-3C',
         packages=setuptools.find_packages(),
         install_requires=[
