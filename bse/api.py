@@ -82,11 +82,19 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         internal_name = os.path.basename(bs_file_path)
         internal_name = internal_name.replace(".table.json", "")
 
-        metadata[internal_name] = {
+        single_meta = { 
             'displayname': displayname,
             'elements': defined_elements,
             'functiontypes': list(function_types),
         }
+
+        if keys is not None:
+            all_keys = list(single_meta.keys())
+            for k in all_keys:
+                if not k in keys:
+                    single_meta.pop(k)
+            
+        metadata[internal_name] = single_meta
 
     return metadata
 
