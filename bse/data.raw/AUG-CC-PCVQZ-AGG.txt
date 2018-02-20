@@ -1,0 +1,38 @@
+
+
+FROM DESCRIPTION:
+----------------
+ Augmented Polarized Core/Valence Quadruple Zeta (aug-cc-pVTZ) Basis
+ -------------------------------------------------------------------
+Elements        Contraction                        References
+ B - Ne: (16s,10p,6d,4f,2g) -> [9s,8p,6d,4f,2g] T.H. Dunning, Jr. J. Chem.
+                                                Phys. 90, 1007 (1989).
+Na - Ar: (20s,15p,7d,5f,3g) -> [10s,9p,7d,5f,3g] D.E. Woon and T.H. Dunning, Jr
+                                          J. Chem. Phys. 98, 1358 (1993).
+                                          K.A. Peterson and T.H. Dunning, Jr.
+                                          J. Chem. Phys. 117, 10548 (2002).
+
+The neon CV exponents were extrapolated from the oxygen and fluorine values.
+
+The correlation consistent core-valence basis sets extend the ideas of the
+original cc-pVxZ sets by including extra functions designed for core-core and
+core-valence correlation.
+
+                        aug-cc-pCVQZ Atomic Energies
+
+                           MOLPRO 2000 and later
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq)
+             ROHF         ROHF          ROHF         ROHF
+   State  Froz. core   Froz. core    All elect.   All elect.
+   -----  ----------   ----------    ----------   -----------
+H   2-S
+He  1-S
+Li  2-S
+Be  1-S
+B   2-P
+C   3-P
+N   4-S
+O   3-P   -74.992410   -74.996494     -75.0511633  -75.055563
+F   2-P   -99.650125   -99.655259     -99.7118617  -99.717317
+Ne  1-S
+

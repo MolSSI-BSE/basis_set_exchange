@@ -1,0 +1,46 @@
+
+
+FROM DESCRIPTION:
+----------------
+                     3-21G* Split Valence + Polarization Basis
+                     -----------------------------------------
+Elements      Contraction                       References
+ H - He: (4s)        -> [3s]       J.S. Binkley, J.A. Pople and W.J. Hehre,
+Li - Ne: (7s,4p)     -> [4s,3p]    J. Am. Chem. Soc. 102, 939 (1980).
+Na - Ar: (10s,7p,1d) -> [5s,4p,1d] M.S. Gordon, J.S. Binkley, J.A. Pople, W.J.
+                                   Pietro and W.J. Hehre, J. Am. Chem. Soc.
+                                   104, 2797 (1983)
+Polarization Exponents: W. J. Pietro, M. M. Francl, W. J. Hehre, D.J. DeFrees,
+                        J. A.  Pople and J. S. Binkley, J. Am. Chem. Soc. 104,
+                        5039 (1982).
+
+The 3-21G* basis set adds a single set of 6-term d functions to elements Na -
+Ar to account for the participation of d functions in second row bonds. The
+authors suggest that the 3-21G* basis not be considered a full polarized basis
+set.
+Note: This basis uses 6-component d functions.
+
+                     3-21G* Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.496199    -0.496199    -0.496199     -0.50000
+He  1-S    -2.835680    -2.835680    -2.835680     -2.86168
+Li  2-S    -7.381513    -7.381513    -7.381513     -7.43273
+Be  1-S   -14.486820   -14.486820   -14.486820    -14.57302
+B   2-P   -24.389762   -24.389634   -24.148989    -24.52906
+C   3-P   -37.481070   -37.480389   -37.480389    -37.68862
+N   4-S   -54.105390   -54.103658   -54.103658    -54.40094
+O   3-P   -74.393657   -74.392512   -74.391782    -74.80940
+F   2-P   -98.845009   -98.844645   -98.844230    -99.40935
+Ne  1-S  -127.132546  -127.803824  -127.803824   -128.54710
+Na  2-S  -160.854064  -160.854041  -160.854041   -161.85891
+Mg  1-S  -198.468103  -198.468103  -198.468103   -199.61463
+Al  2-P  -240.551046  -240.551024  -240.551010   -241.87671
+Si  3-P  -287.344431  -287.344419  -287.344393   -288.85436
+P   4-S  -339.000079  -339.000027  -339.000027   -340.71878
+S   3-P  -395.551336  -395.551083  -395.550591   -397.50490
+Cl  2-P  -457.276552  -457.276414  -457.276096   -459.48207
+Ar  1-S  -524.342962  -524.342962  -524.342962   -526.81751
+K   2-S  -596.152980  -596.152923  -596.152923   -599.16479
+

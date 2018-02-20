@@ -1,0 +1,58 @@
+
+
+FROM DESCRIPTION:
+----------------
+                      aug-cc-pV(D+d)Z Basis
+                      ---------------------
+Elements      Contraction                       References
+Al - Ar: (12s,8p,2d) -> [4s,3p,2d]   T.H. Dunning, Jr., K.A. Peterson and
+                                     A.K. Wilson 114, 9244 (2001)
+
+                      cc-pV(D+d)Z Atomic Energies
+
+                                    MP2(noneq)
+                                        UHF
+   State  UHF (noneq) ROHF (noneq)   Froz. core
+   -----  ----------  -----------   -----------
+Al  2-P  -241.874285                -241.905643
+Si  3-P  -288.851096                -288.898232
+P   4-S  -340.709957                -340.778060
+S   3-P  -397.498974                -397.590882
+Cl  2-P  -459.473057                -459.595805
+Ar  1-S
+
+   State  UB3LYP (noneq)
+   -----  ----------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P  -398.128079
+Cl  2-P
+Ar  1-S
+
+         CCSD(T)(noneq) CCSD(T)(noneq)
+             UHF           ROHF
+   State  Froz. core     Froz. Core
+   -----  ----------     ----------
+Al  2-P  -241.923398    -241.923347
+Si  3-P  -288.919715    -288.919635
+P   4-S  -340.798889    -340.798816
+S   3-P  -397.614547    -397.614396
+Cl  2-P  -459.618075    -459.617962
+Ar  1-S
+
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+Si  3-P
+P   4-S
+S   3-P  -397.611915  -397.614322   -397.612026  -397.614410
+Cl  2-P
+Ar  1-S
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

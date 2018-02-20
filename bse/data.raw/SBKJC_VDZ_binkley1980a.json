@@ -1,0 +1,86 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "SBKJC VDZ ECP",
+    "basisSetDescription": "VDZ     Valence Double Zeta designed for an ECP",
+    "basisSetReferences": [
+        "binkley1980a"
+    ],
+    "basisSetElements": {
+        "1": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "5.447178",
+                        "0.824547"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.156285",
+                            "0.904691"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "0.183192"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.000000"
+                        ]
+                    ]
+                }
+            ]
+        },
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "13.62670",
+                        "1.999350"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.175230",
+                            "0.893483"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "0.382993"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.00000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

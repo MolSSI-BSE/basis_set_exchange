@@ -1,0 +1,71 @@
+FROM DESCRIPTION:
+----------------
+ FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn:  .
+6-31G* Split Valence + Polarization Basis
+-----------------------------------------
+Elements      Contraction                       References
+H - He: (4s)           -> [2s]          P.C. Hariharan and J.A. Pople, Theoret.
+Li - Ne: (10s,4p,1d)    -> [3s,2p,1d]    Chimica Acta 28, 213 (1973).
+Na - Ar: (16s,10p,1d)   -> [4s,3p,1d]    M.M. Francl, W.J. Petro, W.J. Hehre,
+J.S. Binkley, M.S. Gordon, D.J. DeFrees
+and J.A.
+Pople, J. Chem. Phys. 77, 3654 (1982).
+K  - Ca: (22s,16p,1d)   -> [5s,4p,1d]    V. Rassolov, J.A. Pople, M. Ratner
+Sc - Zn: (22s,16p,4d,1f)-> [5s,4p,2d,1f] and T.L. Windus, J. Chem. Phys.
+109, 1223 (1998).
+Ga - Kr: (22s,16p,5d)   -> [5s,4p,3d]    V. Rassolov, J.A. Pople, M. Ratner,
+P.C. Redfern, L.A. Curtiss,
+J. Comp. Chem. 22, 976 (2001),
+DOI: 10.1002/jcc.1058
+Note: He and Ne are unpublished basis sets
+taken from the Gaussian program.
+Note: This basis set uses 6-component d functions.
+6-31G* Atomic Energies
+ROHF
+State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+-----  ----------  -----------   -----------   ---------
+H   2-S    -0.498233    -0.498233    -0.498233     -0.50000
+He  1-S    -2.855160    -2.855160    -2.855160     -2.86168
+Li  2-S    -7.431372    -7.431372    -7.431372     -7.43273
+Be  1-S   -14.566944                              -14.57302
+B   2-P                                           -24.52906
+C   3-P   -37.680860   -37.677126                 -37.68862
+N   4-S                                           -54.40094
+O   3-P   -74.783933   -74.778966                 -74.80940
+F   2-P   -99.364956                              -99.40935
+Ne  1-S  -128.474407  -128.474407  -128.474407   -128.54710
+Na  2-S                                          -161.85891
+Mg  1-S  -199.595611  -199.595611                -199.61463
+Al  2-P  -241.856975  -241.854779                -241.87671
+Si  3-P  -288.831785  -288.829149                -288.85436
+P   4-S  -340.690204  -340.689985                -340.71878
+S   3-P  -397.475957  -397.472327                -397.50490
+Cl  2-P  -459.442939  -459.442771                -459.48207
+Ar  1-S  -526.773744  -526.773744                -526.81751
+MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+-----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.498233    -0.498233    -0.498233    -0.498233       -0.498233
+He  1-S
+Li  2-S    -7.431858    -7.431372    -7.431372    -7.431372       -7.431372
+Be  1-S                -14.593260   -14.608875
+B   2-P
+C   3-P                -37.732974
+N   4-S
+O   3-P                -74.880036
+F   2-P                -99.487271   -99.498652
+Ne  1-S               -128.624722
+S   3-P               -397.553377  -397.571468
+Cl  2-P
+Ar  1-S  -526.919990  -526.911053  -526.924438
+UCCSD(noneq)   UCCSD(T)(noneq)
+State  No core         Froz. core
+-----  -------------- --------------
+H   2-S    -0.498233       -0.498233
+Ne  1-S  -128.626735     -128.628553
+
+

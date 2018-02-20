@@ -1,0 +1,41 @@
+FROM DESCRIPTION:
+----------------
+G3LargeXP basis set (XP = &quot;eXpanded Polarization&quot;) derives
+from the G3Large basis set used in the G3 Method.
+&quot;...the 2df polarization set in G3Large on the first row
+ is replaced by a 3df with a 4:1:1/4 geometrical progression,
+ and the 3d2f polarization functions on the second row
+ (Al-Cl) are replaced by 4d2f.&quot;
+Gaussian-4 theory
+L. A. Curtiss, P. C. Redfern, and K. Raghavachari,
+J. Chem. Phys. 126, 084108 2007.
+TABLE X. Polarization exponents used in the G3LargeXP basis set.
+----------------------------------------------------------------
+----------------------------------------------------------------
+Atom    4d      d       d/4     4th d   MP2full/G3LargeXP
+----------------------------------------------------------------
+Li      0.8     0.2     0.05              -7.46422
+Be      1.02    0.255   0.0638           -14.63586
+B       1.604   0.401   0.1003           -24.61420
+C       2.504   0.626   0.1565           -37.79867
+N       3.652   0.913   0.2283           -54.53846
+O       5.168   1.292   0.323            -74.99855
+F       7.0     1.75    0.4375           -99.65043
+Ne      9.126   2.304   0.576           -128.84311
+Na      0.7     0.175   0.0438          -162.10297
+Mg      0.7     0.175   0.0438          -199.89069
+Al      2.16    0.54    0.135   0.39    -242.18916
+Si      3.04    0.76    0.19    0.47    -289.19896
+P       3.68    0.92    0.23    0.61    -341.09358
+S       4.08    1.02    0.26    0.59    -397.92605
+Cl      4.8     1.2     0.3     0.72    -459.95186
+Ar      5.6     1.4     0.35    0.85    -527.33284
+----------------------------------------------------------------
+----------------------------------------------------------------
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr: L. A. Curtiss, P. C. Redfern, and K. Raghavachari, Gaussian-4 theory, J. Chem. Phys. 126, 084108 (2007).
+
+

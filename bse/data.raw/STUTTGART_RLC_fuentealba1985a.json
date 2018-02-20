@@ -1,0 +1,86 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "Stuttgart RLC ECP",
+    "basisSetDescription": "DZ      Double Zeta Basis Set designed for an ECP",
+    "basisSetReferences": [
+        "fuentealba1985a"
+    ],
+    "basisSetElements": {
+        "12": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "2.4257193",
+                        "0.8226250",
+                        "0.1077490"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.0267640",
+                            "-0.2238800",
+                            "0.6204640"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "0.0394850"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "0.7690470",
+                        "0.1886750",
+                        "0.0751010"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "-0.0366480",
+                            "0.2431450",
+                            "0.5547840"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "0.0294970"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

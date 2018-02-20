@@ -1,0 +1,25 @@
+FROM DESCRIPTION:
+----------------
+             Chipman DZ + Double Polarization + Diffuse Basis
+             ------------------------------------------------
+Elements     Contraction                   References
+      H: (6s,1p)     -> [4s,1p]    D. Chipman, Theor. Chim. Acta 76, 73 (1989).
+  B - F: (10s,6p,2d) -> [6s,3p,2d]
+
+This collection of basis functions for first row elements was developed as
+a modest-sized alternative to more extended basis sets (which are,
+therefore, more costly to use).  The exponents began with the (9s,5p/4s)
+energy optimized sets of Huzinaga and Dunning's DZ contraction coefficients.
+To these were added a set of diffuse (s,p) functions for elements B - F,
+and a tighter inner s function on hydrogen.  Finally, a set of two d-type
+polarization functions were added.  These contractions were designed to mimic
+numerical spin density results obtained with an MCSCF procedure.
+
+Note: This basis set uses 5-component d functions.
+FROM REFERENCE:
+----------------
+
+
+!
+
+  

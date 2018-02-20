@@ -1,0 +1,53 @@
+FROM DESCRIPTION:
+----------------
+               cc-pV(D+d)Z Basis
+               -----------------
+Elements      Contraction                       References
+Al - Ar: (12s,8p,2d) -> [4s,3p,2d]   T.H. Dunning, Jr., K.A. Peterson and
+                                     A.K. Wilson, J. Chem. Phys. 114,
+                                     9244 (2001)
+
+                      cc-pV(D+d)Z Atomic Energies
+
+   State  UHF (noneq) ROHF (noneq)
+   -----  ----------  ------------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+
+          MP2(noneq)
+             UHF
+          Froz. core
+          -----------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+
+          CCSD(T)         CCSD(T)
+             UHF           ROHF
+   State  Froz. core     Froz. Core
+   -----  ----------     ----------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+
+
+
+**************************************************************************
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+Al - Ar: T.H. Dunning, Jr., K.A. Peterson and A.K. Wilson, J. Chem. Phys. 114,
+9244 (2001)
+
+  

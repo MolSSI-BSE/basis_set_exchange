@@ -1,0 +1,65 @@
+
+
+FROM DESCRIPTION:
+----------------
+ Augmented Correlation Consistent Polarized Weighted Core/Valence Double Zeta
+  (aug-cc-pwCVDZ) Basis
+ --------------------------------------------------------------------------
+Elements      Contraction                       References
+ H    :  (5s,2p)     -> [3s,2p]      T.H. Dunning, Jr. J. Chem. Phys. 90,
+                                     1007 (1989).
+ He   :  (5s,2p)     -> [3s,2p]      D.E. Woon and T.H. Dunning, Jr.,
+                                     J. Chem. Phys. 100, 2975 (1994).
+B  - Ne: (11s,6p,2d) -> [5s,4p,2d]   T.H. Dunning, Jr. J.C.P. 90, 1007 (1989).
+Al - Ar: (14s,10p,3d)-> [6s,5p,3d]   K.A. Peterson and T.H. Dunning, Jr.
+                                     J. Chem. Phys. 117, 10548 (2002).
+
+The correlation consistent core-valence basis sets extend the ideas of the
+original cc-pVxZ sets by including extra functions designed for core-core and
+core-valence correlation. The weighted core/valence basis sets weight the
+KL intershell correlation energy at the expense of the KK correlation.
+
+Diffuse functions are taken from: R.A. Kendall, T.H. Dunning, Jr. and
+R.J. Harrison, J. Chem. Phys. 96, 6769 (1992) and D.E. Woon and T.H. Dunning,
+Jr. J. Chem. Phys. 98, 1358 (1993).
+
+                      aug-cc-pwCVDZ Atomic Energies
+
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)  HF Limit(equiv) UB3LYP (noneq)
+   -----  ----------  -----------   -----------  ----------      --------------
+B   2-P                                           -24.52906
+C   3-P                             -37.683071    -37.68862       -37.854874
+N   4-S                                           -54.40094
+O   3-P                                           -74.80940
+F   2-P                                           -99.40935
+Ne  1-S                                          -128.54710
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P                            -397.493462   -397.50490      -398.130141
+Cl  2-P
+Ar  1-S
+
+         CCSD(T)(eq)  CCSD(T)(eq)     CCSD(T)(eq)  CCSD(T)(eq)
+           ROHF          ROHF            R/U          R/U
+   State  Froz. core   Nonfroz. core   Froz. core   Nonfroz. core
+   -----  ----------   -------------   ----------   -------------
+Li  2-S
+Be  1-S
+B   2-P
+C   3-P   -37.767228   -37.796555       -37.767272   -37.796603
+N   4-S
+O   3-P
+F   2-P
+Ne  1-S
+Si  3-P
+P   4-S
+S   3-P  -397.615745  -397.761652      -397.615834  -397.761752
+Cl  2-P
+Ar  1-S
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

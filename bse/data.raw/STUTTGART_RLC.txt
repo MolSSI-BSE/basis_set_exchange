@@ -1,0 +1,55 @@
+FROM DESCRIPTION:
+----------------
+           Stuttgart Relativistic, Large Core ECP Basis Set
+           ------------------------------------------------
+                     Stuttgart
+          Core         Name     Primitives        Contractions
+Li - Be:  2[He]       ECP2SDF  (4s,4p)          -> [2s,2p]
+ B - N :  2           ECP2MWB  (4s,4p)          -> [2s,2p]
+ O - F :  2           ECP2MWB  (4s,5p)          -> [2s,3p]
+Ne     :  2           ECP2MWB  (7s,7p,3d,1f)    -> [4s,4p,3d,1f]
+Na - Mg: 10[Ne]       ECP10SDF (4s,4p)          -> [2s,2p]
+Al - P : 10           ECP10MWB (4s,4p)          -> [2s,2p]
+ S - Cl: 10           ECP10MWB (4s,5p)          -> [2s,3p]
+Ar     : 10           ECP10MWB (6s,6p,3d,1f)    -> [4s,4p,3d,1f]
+ K - Ca: 18[Ar]       ECP18SDF (4s,4p)          -> [2s,2p]
+Zn     : 28[Ar+3d]    ECP28MWB (4s,2p)          -> [3s,2p]
+Ga - As: 28           ECP28MWB (4s,2p)          -> [3s,2p]
+Se - Br: 28           ECP28MWB (4s,5p)          -> [2s,3p]
+Kr     : 28           ECP28MWB (6s,6p,3d,1f)    -> [4s,4p,3d,1f]
+Rb - Sr: 36[Kr]       ECP36SDF (4s,4p)          -> [2s,2p]
+In - Sb: 46[Kr+4d]    ECP46MWB (4s,4p)          -> [2s,2p]
+Te - I : 46           ECP46MWB (4s,5p)          -> [2s,3p]
+Xe     : 46           ECP46MWB (6s,6p,3d,1f)    -> [4s,4p,3d,1f]
+Cs - Ba: 54[Xe]       ECP54SDF (4s,4p)          -> [2s,2p]
+Hg - Rn: 78[Xe+4f+5d] ECP78MWB (4s,4p,1d)       -> [2s,2p,1d]
+Ac - Lr: 78           ECP78MWB (8s,8p,6d,5f,2g) -> [5s,5p,4d,3f,2g]
+
+Li - Be: P. Fuentealba, H. Preuss, H. Stoll, L. v. Szentpaly, Chem. Phys. Lett.
+Na       89, 418 (1982).
+B  - Ne: A. Bergner, M. Dolg, W. Kuechle, H. Stoll, H. Preuss, Mol. Phys. 80,
+         1431 (1993).
+Mg     : P. Fuentealba, L. v. Szentpaly, H. Preuss, H. Stoll, J. Phys. B 18,
+         1287 (1985).
+Al     : G. Igel-Mann, H. Stoll, H. Preuss, Mol. Phys. 65, 1321 (1988).
+Hg - Rn: W. Kuechle, M. Dolg, H. Stoll, H. Preuss, Mol. Phys. 74, 1245 (1991).
+Ac - Lr: W. Kuechle, to be published
+
+
+
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+Li - Be: P. Fuentealba, H. Preuss, H. Stoll, L. v. Szentpaly, Chem. Phys. Lett.
+Na       89, 418 (1982).
+B  - Ne: A. Bergner, M. Dolg, W. Kuechle, H. Stoll, H. Preuss, Mol. Phys. 80,
+         1431 (1993).
+Mg     : P. Fuentealba, L. v. Szentpaly, H. Preuss, H. Stoll, J. Phys. B 18, 
+         1287 (1985).
+Al     : G. Igel-Mann, H. Stoll, H. Preuss, Mol. Phys. 65, 1321 (1988).
+Hg - Rn: W. Kuechle, M. Dolg, H. Stoll, H. Preuss, Mol. Phys. 74, 1245 (1991).
+
+
+  

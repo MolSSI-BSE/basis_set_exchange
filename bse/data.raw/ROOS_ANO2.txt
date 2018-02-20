@@ -1,0 +1,42 @@
+FROM DESCRIPTION:
+----------------
+Atomic Natural Orbital Basis
+            ----------------------------
+Elements          Contraction                        Reference
+      H:  (8s,4p,3d)     -> [4s,3p,2d]     P. O. Widmark, P. A. Malmqvist,
+     He:  (9s,4p,3d)     -> [4s,3p,2d]     B. Roos, Theor. Chim. Acta, 77,
+Li - Ne:  (14s,9p,4d,3f) -> [5s,4p,3d,2f]  291 (1990).
+Na - Ar:  (17s,12p,5d,4f)-> [6s,5p,3d,2f]  P. O. Widmark, B. J. Persson and
+                                           B. Roos, Theor. Chim. Acta, 79,
+                                           419 (1991).
+Sc - Zn: (21s,15p,10d,6f,4g)->[8s,7p,5d,3f,2g] R. Pou-Amerigo, M. Merchan,
+                                           I. Nebot-Gil, P.O. Widmark and
+                                           B. Roos, Theor. Chim. Acta, 92, 149
+                                           (1995).
+The ANO basis sets of Widmark, Malmqvist and Roos are based on atomic valence
+SD-CI's. However, in contrast to the ANO contractions of Almlof and Taylor,
+these contractions were based not just on the atomic ground states, but on
+the positive and negative ions and electric field polarized atom as well.
+Additional low-lying electronic states were included for some atoms.  For
+example, the singlet D state of oxygen was included in the averaging process.
+The Gaussian primitive set is based on the van Duijneveldt (13s,8p) set.
+The primitives for the transition metals were based on the [20s,12p,9d] set
+set of H. Partridge, J. Chem. Phys., 90, 1043 (1989).
+The ANO basis sets of Widmark, Malmqvist and Roos are based on atomic valence 
+SD-CI's. However, in contrast to the ANO contractions of Almlof and Taylor,
+these contractions were based not just on the atomic ground states, but on
+the positive and negative ions and electric field polarized atom as well.
+Additional low-lying electronic states were included for some atoms.  For
+example, the singlet D state of oxygen was included in the averaging process.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H - Ne:  P.O. Widmark, P.A. Malmqvist, B. Roos, Theor. Chim. Acta, 77,
+291 (1990).
+Na - Ar: P.O. Widmark, B. J. Persson and B. Roos Theor. Chim. Acta, 79,
+419 (1991).
+Sc - Zn: R. Pou-Amerigo, M. Merchan, I. Nebot-Gil, P.O. Widmark and B. Roos,
+Theor. Chim. Acta, 92, 149 (1995).
+
+

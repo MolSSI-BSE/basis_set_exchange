@@ -1,0 +1,39 @@
+FROM DESCRIPTION:
+----------------
+ 6-311++G* Valence Triple Zeta + Polarization + Diffuse Basis
+        -------------------------------------------------------------
+Elements      Contraction                       Reference
+      H: (6s,1p)     -> [4s,1p]    R. Krishnan, J.S. Binkley, R. Seeger and
+Li - Ne: (12s,6p,1d) -> [5s,4p,1d] J.A. Pople, J. Chem. Phys. 72, 650 (1980).
+Diffuse exponents: T. Clark, J. Chandrasekhar, P.v.R. Schleyer, J. Comp. Chem.
+                   4, 294 (1983).
+This basis has increased flexibility in the valence region relative to the
+6-31G basis because it uses three functions to represent each valence AO.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca:  .
+
+H, Li - Ne: R. Krishnan, J.S. Binkley, R. Seeger and J.A. Pople,
+J. Chem. Phys. 72, 650 (1980)
+Na - Ar:    A.D. McLean and G.S. Chandler J. Chem. Phys. 72, 5639, (1980).
+K  - Ca:    J-P. Blaudeau, M. P. McGrath, L.A. Curtiss and L. Radom,
+J. Chem. Phys. 107, 5016 (1997).
+
+6-311G* Polarization Functions
+-------------------------------
+Elements                            Reference
+H - He: (1p) R. Krishnan, J.S. Binkley, R. Seeger and J.A. Pople, J. Chem.
+Li - Ne: (1d) Phys. 72, 650 (1980).
+Note: This basis uses 5-component d functions.
+This collection of polarization functions was chosen to give the lowest
+possible energy for the atomic ground states in frozen core UMP2
+calculations. For Be all exponents were optimized for the 1s2 2s1 2p1
+excited 2-P state.
+
+Diffuse functions:
+H, Li-Cl: T. Clark, J. Chandrasekhar,  G.W. Spitznagel, P.V.R. Schleyer,
+J. Comp. Chem. 4, 294 (1983).
+
+

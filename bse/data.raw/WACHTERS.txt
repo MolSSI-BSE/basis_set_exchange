@@ -1,0 +1,31 @@
+FROM DESCRIPTION:
+----------------
+              Wachters+f First Row Transition Metal Basis
+              -------------------------------------------
+Elements     Contraction                   References
+Sc - Cu: (14s,11p,6d,3f) -> [8s,6p,4d,1f] A. J. H. Wachters, J. Chem. Phys.
+                                          52, 1033 (1970).
+                                          A. J. H. Wachters, IBM Tech. Rept.
+                                          RJ584 (1969)
+f exponents from: C. W. Bauschlicher, Jr. S. R. Langhoff and L. A. Barnes,
+J. Chem. Phys. 91, 2399 (1989)
+
+The f functions are contracted (3f)/[1f]. You can split off the last f for a
+(3f)/[2f] contraction.  The contraction coefficients are from a three term fit
+to an STO with exponents of 1.6(Sc) to 4.8(Cu) in steps of 0.4.  It is easy
+to replace (3f) with (1f) using Stewards fits.
+For Sc and Ti the 3s and 3p orbitals sometimes mix with ligands which are
+bound to the metal.  You can get around this by changing the 3p contraction
+to 3311111 and correlate the metal 3s and 3p.
+
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+Sc - Cu: A. J. H. Wachters, J. Chem. Phys. 52, 1033 (1970).
+         A. J. H. Wachters, IBM Tech. Rept. RJ584 (1969)
+Note: C. W. Bauschlicher, Jr. S. R. Langhoff and L. A. Barnes, F exponents.
+             J. Chem. Phys. 91, 2399 (1989).
+
+  

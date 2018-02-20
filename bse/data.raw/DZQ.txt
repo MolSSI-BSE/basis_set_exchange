@@ -1,0 +1,16 @@
+FROM DESCRIPTION:
+----------------
+In our papers on transition metals, 
+- "Databases for Transition Element Bonding: Metal~VMetal Bond Energies and Bond Lengths and Their Use to Test Hybrid, Hybrid Meta, and Meta Density Functionals and Generalized Gradient Approximations," N. E. Schultz, Y. Zhao, and D. G. Truhlar, Journal of Physical Chemistry A 109, 4388-4403 (2005). 
+- "Density Functionals for Inorganometallic and Organometallic Chemistry,~T N. E. Schultz, Y. Zhao, and D. G. Truhlar, Journal of Physical Chemistry A 109, 11127-11143 (2005). 
+we have recommended double zeta quality (DZQ) and triple zeta quality basis sets for 3d and 4d transition metals. The DZQ basis set is the combination of effective core potential (ECP) and basis set from Stevens, Basch, Krauss, Jasien and Cundari: 
+- (Li - Ar; Non-Relativistic): Stevens, W. J.; Basch, H.; Krauss, M. J. Chem. Phys. 1984, 81, 6026. 
+- (rows 3-5: Relativistic): Stevens, W. J.; Krauss, M.; Basch, H.; Jasien, P. G. Can. J. Chem. 1992, 70, 612. 
+- (lanthanides; Relativistic): Cundari, T. R.; Stevens, W. J. J. Chem. Phys. 1993, 98, 5555. 
+This combination of relativistic ECP (called an RECP) and basis set is typically referred to as CEP or SBKJC. The EMSL basis set site refers to it as SBKJC, while Gaussian and the authors of the original paper refer to it as CEP.FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+Y Zr Nb Mo Tc Ru Rh Pd Ag : T N. E. Schultz, Y. Zhao, and D. G. Truhlar, Density Functionals for Inorganometallic and Organometallic Chemistry, Journal of Physical Chemistry A 109, 11127-11143 (2005).
+
+

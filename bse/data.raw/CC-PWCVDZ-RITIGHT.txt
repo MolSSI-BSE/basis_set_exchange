@@ -1,0 +1,17 @@
+FROM DESCRIPTION:
+----------------
+tight functions for te cc-pVDZ and aug-cc-pVDZ
+auxiliary basis sets for correlated calculations
+with second-order methods
+using the resolution-of-the-identity approximation
+as e.g. RI-MP2, RI-CC2, RI-CIS(D), RI-ADC(2), etc.
+The full cc-pwCVDZ-RI and aug-cc-pwCVDZ-RI auxiliary 
+basis sets are obtained by augmenting the valence auxiliary
+basis sets with these tight functions
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+B C N O F Ne Al Si P S Cl Ar : Christof Hattig, Optimization of auxiliary basis sets for RI-MP2 and RI-CC2 calculations: Core-valence and quintuple-? basis sets for H to Ar and QZVPP basis sets for Li to Kr, Physical Chemistry Chemical Physics 7, 59 (2005).
+
+

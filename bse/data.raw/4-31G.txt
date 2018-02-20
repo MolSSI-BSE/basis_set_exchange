@@ -1,0 +1,46 @@
+FROM DESCRIPTION:
+----------------
+                           4-31G Split Valence Basis
+                           -------------------------
+Elements      Contraction                       References
+ H - He: (4s)        -> [2s]       R. Ditchfield, W.J. Hehre and J.A. Pople,
+Li - Ne: (8s,4p)     -> [3s,2p]    J. Chem. Phys. 54, 724 (1971).
+ P - Cl: (12,8p)     -> [4s,3p]
+
+Note: For Li and Be Gaussian actually uses a 5-21G set, as are given here.
+      He and Ne are unpublished basis sets taken from the Gaussian program.
+
+                          Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.498233    -0.498233    -0.498233     -0.50000
+He  1-S                                            -2.86168
+Li  2-S    -7.428464    -7.428464    -7.428464     -7.43273
+Be  1-S   -14.556871                              -14.57302
+B   2-P   -24.487190   -24.487074                 -24.52906
+C   3-P   -37.635052   -37.634172                 -37.68862
+N   4-S                                           -54.40094
+O   3-P   -74.704872                              -74.80940
+F   2-P   -99.265481                              -99.40935
+Al  2-P                                          -241.87671
+Si  3-P                                          -288.85436
+P   4-S                                          -340.71878
+S   3-P  -397.051666  -397.051521                -397.50490
+Cl  2-P                                          -459.48207
+
+
+
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+H, C - F: R. Ditchfield, W.J. Hehre and J.A. Pople, J. Chem. Phys. 54, 724 
+          (1971).
+He, Ne:   Gaussian 90 
+Li, Be:   These are actually 5-21G basis sets.
+Na - Ar:  M.S. Gordon, J.S. Binkley, J.A. Pople, W.J. Pietro and W.J. Hehre,
+          J. Am. Chem. Soc. 104, 2797 (1983).
+
+  

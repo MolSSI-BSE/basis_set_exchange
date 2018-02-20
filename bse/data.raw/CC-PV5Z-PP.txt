@@ -1,0 +1,52 @@
+FROM DESCRIPTION:
+----------------
+cc-pV5Z-PP small-core relativistic PP correlation consistent basis sets
+  -----------------------------------------------------------------------
+          Core         Name     Primitives                  Contractions
+Cu-Zn: 10 [Ne]      ECP10MDF (16s,13p,12d,4f,3g,2h,1i) -> [7s,7p,6d,4f,3g,2h,1i]
+Ga-As: 10 [Ne]      ECP10MDF (16s,13p,13d,3f,2g,1h) ->   [7s,6p,5d,3f,2g,1h]
+Ag-Cd: 28 [Ar+3d]   ECP28MDF (16s,13p,12d,4f,3g,2h,1i) -> [7s,7p,6d,4f,3g,2h,1i]
+In-Xe: 28 [Ar+3d]   ECP28MDF (16s,13p,13d,3f,2g,1h) ->   [7s,7p,5d,3f,2g,1h]
+Au-Hg: 60 [Kr+4d3f] ECP60MDF (16s,13p,11d,4f,3g,2h,1i) -> [7s,7p,6d,4f,3g,2h,1i]
+Tl-Rn: 60 [Kr+4d3f] ECP60MDF (16s,13p,12d,3f,2g,1h) ->   [7s,7p,5d,3f,2g,1h]
+Exponents from:
+---------------
+Ga-As,In-Sb, Tl-Bi:
+K.A. Peterson, Systematically convergent basis sets with relativistic
+pseudopotentials. I. Correlation consistent basis sets for the post-d group 13
+- 15 elements, J. Chem. Phys., 119, 11099 (2003).
+Se-Kr, Te-Xe, Po-Rn:
+K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, Systematically
+convergent basis sets with relativistic pseudopotentials. II. Small-core
+pseudopotentials and correlation consistent basis sets for the post-d group 16
+- 18 elements, J. Chem. Phys. 119, 11113 (2003).
+Cu, Zn, Pd, Ag, Au, Hg:
+K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+PP parameters from:
+-------------------
+Tl:
+B. Metz, M. Schweizer, H. Stoll, M. Dolg, W. Liu, Theor. Chem. Acc. 104, 22
+(2000).
+Ga-As, In-Sb, Pb-Bi:
+B. Metz, H. Stoll, M. Dolg, J. Chem. Phys. 113, 2563 (2000).
+Se-Kr, Te-Xe, Po-Rn:
+K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, J. Chem. Phys. 119,
+11113 (2003).
+Cu, Zn, Pd, Ag, Au, Hg:
+D. Figgen, G. Rauhut, M. Dolg, and H. Stoll, Chem. Phys. 311, 227 (2005). 
+Adds Y - Pd 
+Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+Ga-As,In-Sb, Tl-Bi   : K.A. Peterson, J. Chem. Phys. 119, 11099 (2003).
+Se-Kr, Te-Xe, Po-Rn  : K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and
+M. Dolg, J. Chem. Phys. 119, 11113 (2003).
+Cu, Zn, Pd, Ag, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+Y Zr Nb Mo Tc Ru Rh Pd     : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+I : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+
+Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+
+

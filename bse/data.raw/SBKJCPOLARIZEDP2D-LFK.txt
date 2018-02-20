@@ -1,0 +1,12 @@
+FROM DESCRIPTION:
+----------------
+This small ECP basis set was designed to calculate molecular electronic properties.  The SBKJC basis functions describe the valence (n-31) orbitals, which are augmented by polarizing functions heavily influenced in number and type by Sadlej's all-electron pVTZ basis set.  These functions were optmized to reproduce atomic polarizabilities.   
+Other notes:  The H and He -31 valence description is from the Binkley et. al. 3-21G basis set.  The [s,2p] augmentation was optimized analogously to the [p,2d] of the main group elements.  Contraction coefficients of the original SBKJC basis were altered for the elements Li, Na, K, Rb, and Cs.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Ge As Se Br Kr Rb Sr Sn Sb Te I Xe Cs Ba Pb Bi Po At Rn : N.P. Labello, A.M. Ferreira, H.A. Kurtz, An augmented effective core potential basis set for the calculation of molecular polarizabilities., J. Comput. Chem. 26, 1464-1471 (2005), and N.P. Labello, A.M. Ferreira, H.A. Kurtz, Correlated, relativistic, and basis set limit molecular polarizability calculations to evaluate an augmented effective core potential basis set.  
+Int. J. Quant. Chem. 106, 3140-3148 (2006).
+
+

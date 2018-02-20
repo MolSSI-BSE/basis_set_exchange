@@ -1,0 +1,31 @@
+FROM DESCRIPTION:
+----------------
+              Hay-Wadt (n+1) ECP Minimal Basis Sets
+              -----------------------------------------
+Elements     Contraction                   References
+ K - Ca: (5s,5p)    -> [2s,1p]     P. J. Hay and W. R. Wadt, J. Chem. Phys.
+Sc - Cu: (5s,5p,5d) -> [2s,1p,1d]  82, 299 (1985).
+Rb - Sr: (5s,6p)    -> [2s,1p]
+ Y - Ag: (5s,6p,5d) -> [2s,1p,1d]
+Cs - Ba: (5s,6p)    -> [2s,1p]
+La - Au: (5s,6p,5d) -> [2s,1p,1d]
+
+The Hay-Wadt (n+1) effective core potentials include an extra shell of
+electrons beyond what is traditionally available in effective core potentials.
+For example, on potassium the 3s and 3p electrons are not subsumed into the
+core as they would be in other ECP's.  This set is derived from the exponents
+and contraction coefficients given in the Hay-Wadt paper and were obtained
+directly from P. J. Hay.  Any discrepancy between the numbers contained in
+these basis sets and the JCP paper are attributable to the file obtained from
+Jeff at Los Alamos National Laboratory.  The elements beyond Kr include the
+1-electron Darwin and mass-velocity relativistic corrections in their
+definitions.
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+K - Au: P. J. Hay and W. R. Wadt, J. Chem. Phys. 82, 299 (1985). 
+        P. J. Hay (Private Communication).
+
+  

@@ -1,0 +1,14 @@
+
+
+FROM DESCRIPTION:
+----------------
+         Dunning-Hay Split Valence + Polarization + Diffuse Basis
+         --------------------------------------------------------
+Elements     Contraction                   References
+     H: (5s,1p)    -> [3s,1p]     T. H. Dunning, Jr. and P. J. Hay, in Methods
+Li - F:(10s,6p,1d) -> [4s,3p,1d]  of Electronic Structure Theory, Vol. 3,
+                                  H.F. Schaefer III, Ed. Plenum Press (1977).
+
+The diffuse exponents were optimized at the SCF level for the negative ions.
+For H, Li and Be (where exponents were not given by Dunning & Hay) the values
+were obtained by simply extending the exponents in an even-tempered sense.

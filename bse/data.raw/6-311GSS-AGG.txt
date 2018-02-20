@@ -1,0 +1,22 @@
+
+
+FROM DESCRIPTION:
+----------------
+                6-311G** Valence Triple Zeta + Polarization Basis
+                -------------------------------------------------
+Elements      Contraction                       Reference
+ H - He: (5s,1p)     -> [3s,1p]    R. Krishnan, J.S. Binkley, R. Seeger and
+Li - Ne: (11s,5p,1d) -> [4s,3p,1d] J.A. Pople, J. Chem. Phys. 72, 650 (1980).
+K  - Ca: (14s,11p,4d)-> [8s,7p,2d] J-P. Blaudeau, M. P. McGrath, L.A. Curtiss
+                                   and L. Radom, J. Chem. Phys. 107, 5016
+                                   (1997).
+Ga - Kr: (14,12p,6d) -> [8s,7p,3d] L. A. Curtiss, M. P. McGrath, J-P. Blaudeau,
+                                   N. E. Davis, R. C. Binning, Jr., L. Radom,
+                                   J. Chem. Phys. 103, 6104 (1995).
+I      : (15s,12p,6d)-> [10s,9p,4d] M.N. Glukhovtsev, A. Pross, M.P. McGrath
+                                   and L. Radom, J. Chem. Phys. 103, 1878
+                                   (1995).
+
+This basis has increased flexibility in the valence region relative to the
+6-31G basis because it uses three functions to represent each valence AO.
+Note: This basis uses 5-component d functions.

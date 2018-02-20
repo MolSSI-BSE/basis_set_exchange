@@ -1,0 +1,30 @@
+FROM DESCRIPTION:
+----------------
+                       Huzinaga MINI Minimal Basis
+                       ---------------------------
+Elements     Contraction                   References
+ H - He: (3s)      -> [1s]      S. Huzinaga, Ed., J. Andzelm, M. Klobukowski,
+Li - Ne: (6s,3p)   -> [2s,1p]   E. Radzio-Andzelm, Y. Sakai, H. Tatewaki in
+Na - Ar: (9s,6p)   -> [3s,2p]   Gaussian Basis Sets for Molecular Calculations:
+                                Elsevier, Amsterdam, 1984.
+
+The MINI minimal basis sets use 3 Gaussians to expand each AO.  Exponents
+and contraction coefficients were determined by minimizing the energy
+for the resticted Hartree-Fock groundstate.  In the paper of Tatewaki and
+Huzinaga (H. Tatewaki and S. Huzinaga, J. Comp. Chem. 1, 205 (1980)) these
+were called the MINI-1 basis sets.
+
+Main group elements in this set have their valence orbitals scaled by
+factors determined by John Deisz of North Dakota State University.
+These scale factors were determined by minimizing the energy of a set
+of one and two heavy atom molecules at the experimental geometry.  The
+actual value is an average over 20 - 30 molecules.
+FROM REFERENCE:
+----------------
+
+S. HUZINAGA, ED.,J. ANDZELM, M. KLOBUKOWSKI, E. RADZIO-ANDZELM, Y. SAKAI, 
+ H. TATEWAKI IN GAUSSIAN BASIS SETS FOR MOLECULAR CALCULATIONS: 
+ ELSEVIER, AMSTERDAM, 1984. 
+ VALENCE SCALE FACTORS FROM JOHN DEISZ OF NORTH DAKOTA STATE UNIVERSITY.
+
+  

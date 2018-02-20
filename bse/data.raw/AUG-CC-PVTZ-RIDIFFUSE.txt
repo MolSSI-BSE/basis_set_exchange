@@ -1,0 +1,17 @@
+FROM DESCRIPTION:
+----------------
+Diffuse function for the cc-pVTZ, cc-pV(T+d)Z, or cc-pwCVTZ
+auxiliary basis sets for correlated calculations
+with second-order methods
+using the resolution-of-the-identity approximation
+as e.g. RI-MP2, RI-CC2, RI-CIS(D), RI-ADC(2), etc.
+The full aug-cc-pVTZ-RI, aug-cc-pV(T+d)Z-RI, and aug-cc-pwCVTZ-RI
+auxiliary basis sets are obtained by augmenting the (core+)valence
+auxiliary basis sets with these diffuse functions.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He B C N O F Ne Al Si P S Cl Ar Ga Ge As Se Br Kr : F. Weigend, A. Kohn, C. Hattig, Efficient use of the correlation consistent basis sets in resolution of the identity MP2 calculations, The Journal of Chemical Physics 116, 3175 (2002).
+
+

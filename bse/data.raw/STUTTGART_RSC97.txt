@@ -1,0 +1,45 @@
+FROM DESCRIPTION:
+----------------
+Stuttgart Relativistic, Small Core ECP Basis Set
+           ------------------------------------------------
+                        Stuttgart
+              Core         Name     Primitives        Contractions
+     K     : 10[Ne]       ECP10MWB (7s,6p)          -> [5s,4p]
+    Ca     : 10           ECP10MWB (6s,6p,5d)       -> [4s,4p,2d]
+    Sc - Zn: 10           ECP10MDF (8s,7p,6d,1f)    -> [6s,5p,3d,1f]
+    Rb     : 28[Ar+3d]    ECP28MWB (7s,6p)          -> [5s,4p]
+    Sr     : 28           ECP28MWB (6s,6p,5d)       -> [4s,4p,2d]
+    Y  - Cd: 28           ECP28MWB (8s,7p,6d)       -> [6s,5p,3d]
+    Cs     : 46[Kr+4d]    ECP46MWB (7s,6p)          -> [5s,4p]
+    Ba     : 46           ECP46MWB (6s,6p,5d,1f)    -> [3s,3p,2d,1f]
+    Ce - Ho: 28[Ar+3d]    ECP28MWB (12s,11p,9d,8f)  -> [5s,5p,4d,3f]
+    Er - Yb: 28           ECP28MWB (12s,10p,8d,8f)  -> [5s,5p,4d,3f]
+    Hf - Pt: 60[Kr+4d+4f] ECP60MWB (8s,7p,6d)       -> [6s,5p,3d]
+    Au     : 60[Kr+4d+4f] ECP60MDF (8s,6p,5d)       -> [7s,3p,4d]
+    Hg     : 60[Kr+4d+4f] ECP60MDF (8s,8p,7d)       -> [6s,6p,4d]
+    Ac - Lr: 60           ECP60MWB (12s,11p,10d,8f) -> [8s,7p,6d,4f]
+    Db     : 92[Xe+4f+5d] ECP92MWB (8s,7p,6d,2f,1g) -> [6s,5p,4d,2f,1g]
+
+Note that the Au and Hg basis sets included with this family correspond to ECP60MDF in the Stuttgart nomenclature.  The rest of the third row transition metal elements (Hf - Pt) correspond to ECP60MWB.
+
+K      : A. Bergner, M. Dolg, W. Kuechle, H. Stoll, H. Preuss, Mol. Phys. 80,
+         1431 (1993).
+Ca     : M. Kaupp, P. v. R. Schleyer, H. Stoll, H. Preuss, J. Chem. Phys. 94,
+         1360 (1991).
+Sc - Zn: M. Dolg, U. Wedig, H. Stoll, H. Preuss, J. Chem. Phys. 86, 866 (1987).
+Rf - Db:  M. Dolg, H. Stoll, H. Preuss, R.M. Pitzer, J. Phys. Chem. 97, 5852
+          (1993).
+These basis sets and ECPs correspond to Revision: Fri Jun 27 1997 of the
+Stuttgart/Dresden groups.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+K      : A. Bergner, M. Dolg, W. Kuechle, H. Stoll, H. Preuss, Mol. Phys. 80,
+1431 (1993).
+Ca     : M. Kaupp, P. v. R. Schleyer, H. Stoll, H. Preuss, J. Chem. Phys. 94,
+1360 (1991).
+Rf - Db:  M. Dolg, H. Stoll, H. Preuss, R.M. Pitzer, J. Phys. Chem. 97, 5852
+(1993).
+
+

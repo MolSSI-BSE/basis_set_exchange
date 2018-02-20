@@ -1,0 +1,20 @@
+FROM DESCRIPTION:
+----------------
+The 6-31G-J basis sets developed by Kj&#230;r and Sauer are modifications of the 6-31G basis sets by Pople and co-workers
+(W.J. Hehre, R. Ditchfield and J.A. Pople, J. Chem. Phys. 56, 2257 (1972)).
+They were optimized for the calculation of Fermi contact dominated NMR indirect nuclear spin-spin coupling constants at the level of density functional theory with the B3LYP exchange-correlation functional.
+Currently the basis sets exist for:
+H, C, N, O
+The composition of the basis sets are:
+for H:          (7s) contracted to [4s]
+for C, N, O: (13s5p) contracted to [6s2p]
+The references for the basis sets are:
+H. Kjaer and S. P. A. Sauer, J. Chem. Theory Comput. 7, 4070-4076 (2011).
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H C N O: W. J. Hehre, R. Ditchfield and J. A. Pople, Self?Consistent Molecular Orbital Methods. XII. Further Extensions of Gaussian?Type Basis Sets for Use in Molecular Orbital Studies of Organic Molecules, J. Chem. Phys. 56, 2257-2261 (1972).
+H C N O: H. Kjær and S. P. A. Sauer, Pople style basis sets for the calculation of NMR spin-spin coupling constants: the 6-31G-J and 6-311G-J basis sets, J. Chem. Theory Comput. 7, 4070-4076 (2011).
+
+

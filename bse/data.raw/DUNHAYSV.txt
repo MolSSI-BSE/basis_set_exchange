@@ -1,0 +1,34 @@
+FROM DESCRIPTION:
+----------------
+                      Dunning-Hay Split Valence Basis
+                      -------------------------------
+Elements     Contraction                   References
+      H: (4s)      -> [2s]      T. H. Dunning and P. J. Hay, in Methods of
+Li - Ne: (9s,5p)   -> [3s,2p]   Electronic Structure Theory, Vol. 3,
+                                H.F. Schaefer III, Ed. Plenum Press (1977).
+
+The Dunning-Hay split valence basis sets are moderate sized segmented
+contractions, which can be used efficiently in programs that don't support
+general contractions.
+                     Dunning/Hay SV Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.497637    -0.497637    -0.497637     -0.50000
+He  1-S                                            -2.86168
+Li  2-S                                            -7.43273
+Be  1-S   -14.570907                              -14.57302
+B   2-P   -24.526602   -24.526415                 -24.52906
+C   3-P   -37.685571   -37.684500                 -37.68862
+N   4-S   -54.397260   -54.394390                 -54.40094
+O   3-P   -74.802766                              -74.80940
+F   2-P   -99.395013   -99.394283                 -99.40935
+Ne  1-S                                          -128.54710
+
+FROM REFERENCE:
+----------------
+
+T.H. DUNNING JR. AND P.J. HAY, IN METHODS OF ELECTRONIC STRUCTURE THEORY, 
+ VOL. 2, H.F. SCHAEFER III, ED., PLENUM PRESS (1977).
+
+  

@@ -1,0 +1,33 @@
+
+
+FROM DESCRIPTION:
+----------------
+                3-21++G* Split Valence + Diffuse + Polarization Basis
+                -----------------------------------------------------
+Elements      Contraction                       References
+ H - He: (4s)        -> [3s]       J.S. Binkley, J.A. Pople and W.J. Hehre,
+Li - Ne: (7s,4p)     -> [4s,3p]    J. Am. Chem. Soc. 102, 939 (1980).
+Na - Ar: (10s,7p,1d) -> [5s,4p,1d] M.S. Gordon, J.S. Binkley, J.A. Pople, W.J.
+                                   Pietro and W.J. Hehre, J. Am. Chem. Soc.
+                                   104, 2797 (1983)
+Diffuse exponents: T. Clark, J. Chandrasekhar, P.v.R. Schleyer, J. Comp. Chem.
+                   4, 294 (1983).  R. Krishnam, J.S. Binkley, R. Seeger, J.A.
+                   Pople, J. Chem. Phys. 72, 650 (1980).  P.M.W. Gill, B.G.
+                   Johnson, J.A. Pople and M.J. Frisch, Chem. Phys. Lett.
+                   197, 499 (1992).
+
+Polarization Exponents: W. J. Pietro, M. M. Francl, W. J. Hehre, D.J. DeFrees,
+                        J. A.  Pople and J. S. Binkley, J. Am. Chem. Soc. 104,
+                        5039 (1982).
+
+The 3-21G++ basis set adds a diffuse (s,p) shell to elements Li - Cl and a
+single diffuse s to hydrogen.  These exponents were optimized for 8 small
+anions using the 3-21G basis set at the HF level of theory by Clark et al.
+Frisch, Pople and Binkley reoptimized the exponents at the MP4 level for both
+neutral and anionic systems.
+
+The 3-21G* basis set adds a single set of 6-term d functions to elements Na -
+Ar to account for the participation of d functions in second row bonds. The
+authors suggest that the 3-21G* basis not be considered a full polarized basis
+set.
+

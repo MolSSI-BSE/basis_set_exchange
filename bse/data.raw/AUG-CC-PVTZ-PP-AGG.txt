@@ -1,0 +1,46 @@
+
+
+FROM DESCRIPTION:
+----------------
+  aug-cc-pVTZ-PP small-core relativistic PP correlation consistent basis sets
+  -----------------------------------------------------------------------
+          Core         Name     Primitives          Contractions
+Cu - Zn: 10 [Ne]      ECP10MDF  (11s,10p,9d,3f,2g) -> [6s,6p,5d,3f,2g]
+Ga - As: 10 [Ne]      ECP10MDF  (11s,12p,10d,2f) ->   [6s,5p,4d,2f]
+Ag - Cd: 28 [Ar+3d]   ECP28MDF  (11s,10p,9d,3f,2g) -> [6s,6p,5d,3f,2g]
+In - Xe: 28 [Ar+3d]   ECP28MDF  (13s,12p,10d,2f) ->   [6s,5p,4d,2f]
+Au - Hg: 60 [Kr+4d3f] ECP60MDF  (11s,10p,9d,3f,2g) -> [6s,6p,5d,3f,2g]
+Tl - Rn: 60 [Kr+4d3f] ECP60MDF  (13s,12p,9d,2f) ->    [6s,5p,4d,2f]
+
+Exponents from:
+---------------
+Ga-As,In-Sb, Tl-Bi:
+K.A. Peterson, Systematically convergent basis sets with relativistic
+pseudopotentials. I. Correlation consistent basis sets for the post-d group 13
+- 15 elements, J. Chem. Phys., 119, 11099 (2003).
+
+Se-Kr, Te-Xe, Po-Rn:
+K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, Systematically
+convergent basis sets with relativistic pseudopotentials. II. Small-core
+pseudopotentials and correlation consistent basis sets for the post-d group 16
+- 18 elements, J. Chem. Phys. 119, 11113 (2003).
+
+Cu, Zn, Pd, Ag, Au, Hg:
+K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., in press (2005)
+
+PP parameters from:
+-------------------
+Tl:
+B. Metz, M. Schweizer, H. Stoll, M. Dolg, W. Liu, Theor. Chem. Acc. 104, 22
+(2000).
+
+Ga-As, In-Sb, Pb-Bi:
+B. Metz, H. Stoll, M. Dolg, J. Chem. Phys. 113, 2563 (2000).
+
+Se-Kr, Te-Xe, Po-Rn:
+K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, J. Chem. Phys. 119,
+11113 (2003).
+
+Cu, Zn, Pd, Ag, Au, Hg:
+D. Figgen, G. Rauhut, M. Dolg, and H. Stoll, Chem. Phys. 311, 227 (2005).
+

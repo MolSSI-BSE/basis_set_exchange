@@ -1,0 +1,27 @@
+
+
+FROM DESCRIPTION:
+----------------
+                           6-31++G** Split Valence Basis
+                           -----------------------------
+Elements      Contraction                       References
+ H - He: (5s,1p)     -> [3s,1p]    W.J. Hehre, R. Ditchfield and J.A. Pople,
+Li - Ne: (11s,5p)    -> [4s,3p]    J. Chem. Phys. 56, 2257 (1972).
+                                   Note: Li and B come from J.D. Dill and J.A.
+                                         Pople, J. Chem. Phys. 62, 2921 (1975)
+Na - Ar: (17s,11p)   -> [5s,4p]    M.M. Francl, W.J. Petro, W.J. Hehre, J.S.
+                                   Binkley, M.S. Gordon, D.J. DeFrees and J.A.
+                                   Pople, J. Chem. Phys. 77, 3654 (1982)
+                                   Note: He and Ne are unpublished basis sets
+                                         taken from the Gaussian program.
+
+Diffuse exponents: T. Clark, J. Chandrasekhar, P.v.R. Schleyer, J. Comp. Chem.
+                   4, 294 (1983).  R. Krishnam, J.S. Binkley, R. Seeger, J.A.
+                   Pople, J. Chem. Phys. 72, 650 (1980). P.M.W. Gill, B.G.
+                   Johnson, J.A. Pople and M.J. Frisch, Chem. Phys. Lett.
+                   197, 499 (1992).
+
+The 6-31++G** basis set adds a diffuse (s,p) shell to elements Li - Cl and a
+single diffuse s to hydrogen.
+The 6-31G basis set uses 6 Gaussians to expand the 1s core of second period
+elements.

@@ -1,0 +1,26 @@
+FROM DESCRIPTION:
+----------------
+              Pople-style Diffuse Functions
+              ------------------------------
+Elements                    References
+      H: (1s)     T. Clark, J. Chandrasekhar, G.W. Spitznagel and P. von R.
+Li - Ne: (1s,1p)  Schleyer. J. Comp. Chem. 4, 294 (1983).
+Na - Ar: (1s,1p)  R. Krishnam, J.S. Binkley, R. Seeger, J.A. Pople,
+                  J. Chem. Phys. 72, 650 (1980).
+                  P.M.W. Gill, B.G. Johnson, J.A. Pople and M.J. Frisch,
+                  Chem. Phys. Lett. 197, 499 (1992).
+
+These exponents were optimized for 8 small anions using the 3-21G basis set at
+the HF level of theory by Clark et al.  Frisch, Pople and Binkley reoptimized
+the exponents at the MP4 level for both neutral and anionic systems.  The
+(s,p) sets employ shared exponents for better integral speed.
+
+FROM REFERENCE:
+----------------
+
+Elements                             Reference
+--------                             ----------
+H, Li-Cl: T. Clark, J. Chandrasekhar,  G.W. Spitznagel, P.V.R. Schleyer, 
+          J. Comp. Chem. 4, 294 (1983).
+
+  

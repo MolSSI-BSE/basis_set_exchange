@@ -1,0 +1,26 @@
+FROM DESCRIPTION:
+----------------
+          DGauss DZVP2 Polarized DFT Orbitals Basis Sets
+          ----------------------------------------------
+Elements     Contraction                   References
+ H     : ( 5s,1p)    -> [2s,1p]     N. Godbout, D. R. Salahub, J. Andzelm,
+ He    : ( 6s,1p)    -> [2s,1p]     and E. Wimmer, Can. J. Chem. 70, 560
+Li - Be: (10s,1p,1d) -> [3s,1p,1d]  (1992). Other basis sets were taken
+ B - F : (10s,6p,1d) -> [3s,2p,1d]  from the DGauss Basis Set Library.
+Al - Ar: (13s,9p,1d) -> [4s,3p,1d]
+Sc - Zn: (15s,9p,5d) -> [5s,4p,2d]
+
+DGauss basis sets provided courtesy of Cray Research, Inc.
+
+These local spin density basis sets were developed by Nathalie Godbout and
+Jan Andzelm.  They were taken from a file provided by Cray Research, Inc.
+The file format was by M. Kohout and the basis sets were originally entered by
+M. Kohout and Ilene Carpenter.
+
+FROM REFERENCE:
+----------------
+
+N. Godbout, D. R. Salahub, J. Andzelm, and E. Wimmer, Can. J. Chem. 70, 560
+ (1992)
+
+  

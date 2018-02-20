@@ -1,0 +1,156 @@
+
+
+FROM DESCRIPTION:
+----------------
+                      Augmented cc-pVTZ Basis
+                      -----------------------
+Elements      Contraction                       References
+ H    : (6s,3p,2d)      -> [4s,3p,2d]     T.H. Dunning, Jr. J. Chem. Phys.
+                                          90, 1007 (1989).
+ He   : (6s,3p,2d)      -> [4s,3p,2d]     D.E. Woon and T.H. Dunning, Jr.,
+                                          J. Chem. Phys. 100, 2975 (1994).
+Li - F: (11s,6p,3d,2f)  -> [5s,4p,3d,2f]  T.H. Dunning, Jr. J. Chem. Phys.
+                                          90, 1007 (1989).
+                                          R.A. Kendall, T.H. Dunning, Jr. and
+                                          R.J. Harrison, JCP 96, 6796 (1992).
+Na - Ar:(16s,10p,3d,2f) -> [6s,5p,3d,2f]  D.E. Woon and T.H. Dunning, Jr.
+                                          J. Chem. Phys. 98, 1358 (1993).
+Ga - Kr:(21s,14p,10d,2f)-> [7s,6p,4d,2f]  A.K. Wilson, D.E. Woon, K.A.
+                                          Peterson, T.H. Dunning, Jr.,
+                                          J. Chem. Phys., 110, 7667 (1999).
+
+The diffuse functions for Li, Be, Na and Mg are from D.E. Woon and T.H.
+Dunning (to be published).
+
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+The extra diffuse nonpolarization functions were optimized in Hartree-Fock
+calculations on the lowest state of the anion.  The extra polarization
+functions were optimized in SD-CI calculations.
+
+                      aug-cc-pVTZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit(equiv)  UB3LYP(noneq)
+   -----  ----------  -----------   -----------  ----------       -----------
+H   2-S    -0.499821    -0.499821    -0.499821     -0.50000         -0.502260
+B   2-P   -24.532172   -24.528202                 -24.52906
+C   3-P   -37.691811   -37.686834                 -37.68862        -37.859061
+N   4-S   -54.401162   -54.397610                 -54.40094
+O   3-P   -74.812982   -74.806508                 -74.80940        -75.094180
+F   2-P   -99.406879   -99.402083                 -99.40935
+Al  2-P  -241.879173  -241.870520                -241.87671
+Si  3-P  -288.856628  -288.852357                -288.85436
+P   4-S  -340.716492  -340.716124                -340.71878
+S   3-P  -397.509872  -397.504005                -397.50490       -398.139308
+Cl  2-P  -459.485969  -459.480199   -459.478428  -459.48207
+Ga  2-P -1923.262023
+Ge  3-P
+As  4-S
+Se  3-P
+Br  2-P -2572.445498
+
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+   State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+   -----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.499821    -0.499821    -0.499821     -0.499821      -0.499821
+B   2-P                -24.576577   -24.594529
+C   3-P                -37.759561   -37.779077
+N   4-S                -54.498647   -54.515945
+O   3-P                -74.959294   -74.977908
+F   2-P                -99.612106   -99.627470
+Al  2-P               -241.915272  -241.929267
+Si  3-P               -288.913275  -288.932077
+P   4-S               -340.800759  -340.821709
+S   3-P               -397.628326  -397.654823
+Cl  2-P               -459.647331  -459.675179
+Ga  2-P              -1923.295717
+Br  2-P              -2572.581762
+
+          CCSD(noneq) CCSD(T)(noneq) CCSDT(noneq)
+            UHF         UHF             UHF
+   State  Froz. core   Froz. core     Froz. core
+   -----  ----------   ----------     ----------
+H   2-S    -0.499821    -0.499821    -0.4998210
+B   2-P   -24.597094   -24.598450
+C   3-P   -37.779653   -37.781826   -37.7823272
+N   4-S   -54.514368   -54.516924   -54.5172922
+O   3-P   -74.975522   -74.978952   -74.9793095
+F   2-P   -99.623452   -99.627827   -99.6280553
+Al  2-P  -241.930322  -241.931502
+Si  3-P  -288.931281  -288.933833
+P   4-S  -340.818221  -340.822213
+S   3-P  -397.651160  -397.656142
+Cl  2-P  -459.670051  -459.676216
+Ga  2-P -1923.308763 -1923.309667
+Br  2-P -2572.601304 -2572.606299
+
+            MOLPRO 99 and earlier       MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq)
+            ROHF         ROHF           ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   -----------
+H   2-S    -0.499821     -0.499821    -0.499821     -0.499821
+B   2-P   -24.596873    -24.598364   -24.596882    -24.598374
+C   3-P   -37.779253    -37.781560   -37.779295    -37.781595
+N   4-S   -54.513844    -54.516483   -54.513880    -54.516521
+O   3-P   -74.975017    -74.978558   -74.975091    -74.978641
+F   2-P   -99.623168    -99.627609   -99.623215    -99.627659
+Ne  1-S  -128.807368   -128.812648  -128.807368   -128.812648
+Al  2-P                             -241.930028   -241.931406
+Si  3-P  -288.930684   -288.933468  -288.930776   -288.933548
+P   4-S  -340.817648   -340.821747
+S   3-P  -397.650469   -397.655744  -397.650521   -397.655800
+Cl  2-P                             -459.669621   -459.676018
+Br  2-P                                          -2572.606062
+
+                                            MOLPRO
+          CCSD(noneq) CCSD(T)(noneq) CISD(noneq)  CISD+Q(noneq) Full CI (noneq)
+            R/U         R/U             ROHF         ROHF          ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core    Froz. core
+   -----  ----------   ----------    ----------   ----------    ----------
+H   2-S    -0.499821    -0.499821    -0.499821     -0.499821    -0.499821
+B   2-P                             -24.596791    -24.601969   -24.59886426
+C   3-P   -37.779450   -37.781729
+N   4-S   -54.514113   -54.516714   -54.512798
+O   3-P   -74.975311   -74.978823                              -74.979231
+F   2-P   -99.623350   -99.627771                              -99.628051
+Si  3-P  -288.931046  -288.933775
+P   4-S
+S   3-P  -397.650892  -397.656084  -397.645985   -397.656050
+Ar  1-S
+
+Note: because MOLPRO uses the internal contraction code for open shell CISD
+calculations, these energies may differ from CISD and CISD+Q energies reported
+by other programs.  Specifically, these energies may be higher.
+
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.499821    -0.499821     -0.499821    -0.499821
+B   2-P
+C   3-P   -37.779281   -37.781590    -37.779436   -37.781725
+N   4-S   -54.513880   -54.516521    -54.514112   -54.516714
+O   3-P
+F   2-P
+Si  3-P
+P   4-S
+S   3-P  -397.650531  -397.655775   -397.650857  -397.656021
+Cl  2-P
+Ar  1-S
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

@@ -1,0 +1,22 @@
+FROM DESCRIPTION:
+----------------
+These segmented contracted Gaussian basis sets were optimized for the one-electron exact two-component decoupling of the Dirac-operator method (X2C) at HF level. For this purpose a finite size model (Gaussian charge distribution) for the nucleus was used. These basis sets are available for elements up to Rn in SV(P)-, SVP-, TZVP- and TZVPP-quality. In addition, extensions for self-consistent two-component calculations, required for the splitting of inner shells by spin&#8211;orbit coupling, as well as auxiliary basis sets for fitting the Coulomb part of the Fock matrix are provided. These basis sets are counterparts for relativistic all-electron calculations to the Karlsruhe &#8220;def2&#8221; basis sets for non-relativistic (H&#8211;Kr) or effective core potential based (Rb&#8211;Rn) treatments. Emphasis was put both on the accuracy of energies of atomic orbitals and on the accuracy of molecular properties. A large set of more than 300 molecules representing (nearly) all elements in their common oxidation states was used to assess the quality of the basis sets all across the periodic table.
+Errors were obtained in comparison to large well-tempered reference basis sets.
+Results for atoms:
+Errors in orbital and spinor energies for SVP/TZVP basis sets: &lt; 5/1 eV
+Errors in spin-orbit splitting of the 2p spinor for SVP/TZVP basis sets: &lt; 0.5 eV
+Test set results:
+Errors in atomization energies for SVP/TZVP basis sets: ca. 20/5 kJ/mol per atom
+Errors in dipole moments for SVP/TZVP basis sets: ca. 0.5/0.1 D
+Errors in energies of the highest occupied molecular orbital for SVP/TZVP basis sets: ca. 0.5/0.1 eV
+Results for RI-J auxiliary basis sets:
+Errors in total energies of atoms for SVP/TZVP basis sets: &lt; 20 &#181;Eh
+Reference:
+P. Pollak, F. Weigend, Segmented Contracted Error-Consistent Basis Sets of Double- and Triple-Zeta Valence Quality for One- and Two-Component Relativistic All-Electron Calculations, J. Chem. Theory Comput., 2017, 13 (8), 3696-3705.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn: P. Pollak, F. Weigend, Segmented Contracted Error-Consistent Basis Sets of Double- and Triple-Zeta Valence Quality for One- and Two-Component Relativistic All-Electron Calculations, J. Chem. Theory Comput. 13, 3696-3705 (2017).
+
+

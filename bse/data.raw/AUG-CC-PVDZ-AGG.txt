@@ -1,0 +1,175 @@
+
+
+FROM DESCRIPTION:
+----------------
+                Diffuse Function Augmented cc-pVDZ Basis
+                ----------------------------------------
+Elements      Contraction                       References
+ H    :  (5s,2p)     -> [3s,2p]      T.H. Dunning, Jr. J. Chem. Phys. 90,
+                                     1007 (1989).
+ He   :  (5s,2p)     -> [3s,2p]      D.E. Woon and T.H. Dunning, Jr.,
+                                     J. Chem. Phys. 100, 2975 (1994).
+Li - F:  (10s,5p,2d) -> [4s,3p,2d]   T.H. Dunning, Jr. J. Chem. Phys. 90,
+                                     1007 (1989).
+                                     R.A. Kendall, T.H. Dunning, Jr. and
+                                     R.J. Harrison, JCP 96, 6796 (1992).
+Na - Cl: (13s,9p,2d) -> [5s,4p,2d]   D.E. Woon and T.H. Dunning, Jr.
+                                     J. Chem. Phys. 98, 1358 (1993).
+                                     The Na augmenting functions are from
+                                     D.E. Woon and T.H. Dunning, Jr.
+                                     (to be published).
+Ga - Kr: (15s,12p,7d) -> [6s,5p,3d]  A.K. Wilson, D.E. Woon, K.A. Peterson,
+                                     T.H. Dunning, Jr., J. Chem. Phys.,
+                                     110, 7667 (1999).
+
+The diffuse functions for Li, Be, Na and Mg are from D.E. Woon and T.H.
+Dunning (to be published).
+Additional core/valence functions which are added to the original cc-pVDZ
+exponents are from D. Woon and T. H. Dunning, Jr., J. Chem. Phys. 103, 4572
+(1995).
+
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+The extra diffuse nonpolarization functions were optimized in Hartree-Fock
+calculations on the lowest state of the anion.  The extra polarization
+functions were optimized in SD-CI calculations.
+
+Note that the Ga - Kr basis sets are intended for use with a 14 orbital
+frozen core, i.e. (1s,2s,2px,2py,2pz,3s,3px,3py,3pz,3d(z2),3d(x2-y2),3dxy,
+3dxz,3dyz) atomic orbitals. This is not the default in Gaussian, which
+keeps the 3d space active.
+
+                      aug-cc-pVDZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)  HF Limit(equiv) UB3LYP (noneq)
+   -----  ----------  -----------   -----------  ----------       ---------
+H   2-S    -0.499334    -0.499334    -0.499334     -0.50000        -0.501657
+B   2-P   -24.530573   -24.526872   -24.526808    -24.52906
+C   3-P   -37.687763   -37.683130   -37.683071    -37.68862       -37.854196
+N   4-S   -54.393183   -54.389871   -54.389870    -54.40094
+O   3-P   -74.796601   -74.790958   -74.789052    -74.80940       -75.077163
+F   2-P   -99.381091   -99.377069   -99.375957    -99.40935
+Ne  1-S  -128.496350  -128.496350  -128.496350   -128.54710
+Al  2-P  -241.874158  -241.870520                -241.87671
+Si  3-P  -288.850936  -288.847041                -288.85436
+P   4-S  -340.709049  -340.709814  -340.468478   -340.71878
+S   3-P  -397.498740  -397.494303                -397.50490      -398.127992
+Cl  2-P  -459.472781  -459.468478  -459.467951   -459.48207
+Ga  2-P -1923.192956
+Ge  3-P -2075.292758
+As  4-S -2234.168331
+Se  3-P -2399.799586
+Br  2-P -2572.370780
+
+Note: the B3YLP energies were obtained with Gaussian 98.
+
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+   State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+   -----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.499334    -0.499334    -0.499334    -0.499334       -0.499334
+B   2-P                -24.567643   -24.587082
+C   3-P                -37.741465   -37.761997
+N   4-S                -54.468174   -54.486013
+O   3-P                -74.906966   -74.924665
+F   2-P                -99.535699   -99.549804    -99.40935
+Ne  1-S               -128.703223  -128.710457
+Al  2-P               -241.905157  -241.920480
+Si  3-P               -288.897470  -288.916663
+P   4-S               -340.772561  -340.791147
+S   3-P               -397.588621  -397.609563
+Cl  2-P               -459.592150  -459.611512
+Ga  2-P              -1923.222314
+Ge  3-P              -2075.334145
+As  4-S              -2234.225482
+Se  3-P              -2399.875420
+Br  2-P              -2572.468939
+
+          CCSD(noneq) CCSD(T)(noneq) CCSDT(noneq)
+            UHF         UHF            UHF
+   State  Froz. core   Froz. core    Froz. core
+   -----  ----------   ----------    -----------
+H   2-S    -0.499334    -0.499334    -0.499334
+B   2-P   -24.590193   -24.591102
+C   3-P   -37.763604   -37.764866   -37.7652621
+N   4-S   -54.485708   -54.486982   -54.4872292
+O   3-P   -74.923841   -74.925654   -74.9259286
+F   2-P   -99.547749   -99.550069   -99.5502875
+Ne  1-S  -128.706504  -128.709295
+Al  2-P  -241.921904  -241.922690
+Si  3-P  -288.917017  -288.918305
+P   4-S  -340.795143  -340.796697
+S   3-P  -397.608560  -397.610557
+Cl  2-P  -459.609931  -459.612222   -459.612574
+Ga  2-P -1923.237079 -1923.237662
+Ge  3-P -2075.350615 -2075.351560
+As  4-S -2234.240663 -2234.241819
+Se  3-P -2399.892095 -2399.893648
+Br  2-P -2572.484027 -2572.485789
+
+            MOLPRO 99 and earlier       MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq)
+            ROHF         ROHF           ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   -----------
+H   2-S    -0.499334    -0.499334    -0.499334    -0.499334
+B   2-P   -24.590058   -24.591059   -24.590065   -24.591067
+C   3-P   -37.763395   -37.764732   -37.763419   -37.764761
+N   4-S   -54.485444   -54.486757   -54.485472   -54.486787
+O   3-P   -74.923524   -74.925400   -74.923590   -74.925471
+F   2-P   -99.547573   -99.549934   -99.547606   -99.549970
+Ne  1-S  -128.706504  -128.709294  -128.706504  -128.709294
+Al  2-P                            -241.921716  -241.922643
+Si  3-P  -288.916757  -288.918183  -288.916817  -288.918232
+P   4-S  -340.795064  -340.796629
+S   3-P  -397.608275  -397.610391  -397.608305  -397.610424
+Cl  2-P                            -459.609721  -459.612126
+Br  2-P                                        -2572.485639
+
+         CCSD(noneq) CCSD(T)(noneq)  CISD(noneq)  CISD+Q(noneq) Full CI (noneq)
+           R/U          R/U           ROHF         ROHF          ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core    Froz. core
+   -----  ----------   ----------    ----------   ----------    ----------
+H   2-S    -0.499334    -0.499334    -0.499334    -0.499334       -0.499334
+B   2-P                                                          -24.59149055
+C   3-P   -37.763468   -37.764803   -37.762915   -37.767361
+N   4-S   -54.485548   -54.486849   -54.484639
+O   3-P   -74.923711   -74.925570   -74.921167   -74.926182
+F   2-P   -99.547685   -99.550034                                -99.55031623
+Si  3-P  -288.916861  -288.918269
+P   4-S                            -340.794040  -340.799266
+S   3-P  -397.608409  -397.610509
+Cl  2-P                                                         -459.6127605
+Ar  1-S
+
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.499334    -0.499334     -0.499334    -0.499334
+B   2-P   -24.590049   -24.591061    -24.590060   -24.591073
+C   3-P   -37.763406   -37.764756    -37.763456   -37.764798
+N   4-S   -54.485472   -54.486787    -54.485548   -54.486849
+O   3-P   -74.923711   -74.925570    -74.923684   -74.925567
+F   2-P   -99.547597   -99.549972    -99.547673   -99.550031
+Ne  1-S  -128.706504  -128.709295   -128.706504  -128.709295
+Si  3-P  -288.916776  -288.918204   -288.916821  -288.918241
+P   4-S  -340.795067  -340.796632   -340.795124  -340.796677
+S   3-P  -397.608249  -397.610385   -397.608348  -397.610465
+Cl  2-P  -459.609640  -459.612052   -459.609716  -459.612113
+Ar  1-S  -526.967159  -526.969684   -526.967159  -526.969684
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

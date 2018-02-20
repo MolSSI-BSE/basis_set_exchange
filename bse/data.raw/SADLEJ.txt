@@ -1,0 +1,29 @@
+FROM DESCRIPTION:
+----------------
+Sadlej's Polarized Electric Property Basis Sets
+          -----------------------------------------------
+Elements     Contraction                   References
+H      : (6s,4p)         ->    [3s,2p]     A. J. Sadlej, Collec. Czech. Chem.
+Li - Be: (10s,6p,4d)     -> [5s,3p,2d]     Commun.  53, 1995 (1988).
+C  - F : (10s,6p,4d)     -> [5s,3p,2d]
+Na - Mg: (14s,10p,4d)    -> [7s,5p,2d]
+Si - Cl: (14s,10p,4d)    -> [7s,5p,2d]     A. J. Sadlej, Theor. Chim. Acta 79,
+K  - Ca: (15s,13p,4d)    -> [9s,7p,2d]     123 (1992).
+Br     : (15s,12p,9d,4f) -> [9s,7p,4d,2f]  A. J. Sadlej, Theor. Chim. Acta 81,
+Rb - Sr: (18s,15p,10d)   -> [11s,9p,4d]    45 (1992).
+I      : (19s,15p,12d,4f)-> [11s,9p,6d,2f] A. J. Sadlej, Theor. Chim. Acta 81,
+                                           339 (1992).
+These medium-size basis sets are designed to reproduce molecular electric
+properties, especially polarizabilities.  They were developed using the
+basis set polarization method.  Orbital exponents and contraction coefficients
+were not energy optimized.  They were obtained from an analysis of the
+assumed form of the electric field dependence of Gaussians.
+FROM REFERENCE:
+----------------
+A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)
+A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)
+A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)
+A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)
+A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)
+
+

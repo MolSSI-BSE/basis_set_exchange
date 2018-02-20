@@ -1,0 +1,32 @@
+FROM DESCRIPTION:
+----------------
+The B2 basis set for Zn was defined by Amin and Truhlar. 
+It is a modification of the Wachters-Hay basis for Zn as 
+implemented in Gaussian03, which is the basis that one gets 
+for Zn if one specifies 6-311+G(d,p) in Gaussian03.  The 
+Gaussian 03 version Wachters-Hay basis set is called basis 
+set B1, and it involves using the contraction scheme of 
+Raghavachari and Trucks, with diffuse functions added by R
+aghavachari and Trucks, Wachters's optimized diffuse p-functions, 
+and Hay's optimized diffuse d-function. Raghavachari and Trucks 
+described both an ?spd? basis and an ?spdf? basis. The basis used 
+in B1 is the spd basis further polarized with a single f set with
+an exponent of 1.62. As a result the B1 Zn basis consists of a 
+15s11p6d1f primitive basis contracted to 10s7p4d1f, with the 
+outer functions uncontracted. Amin and Truhlar augmented the B1 
+basis with two additional f-functions (with exponents of 0.486 
+and 5.40) specified by Raghavachari and Trucks; this augmentation 
+yields the present B2 basis.
+
+References:
+A.J.H. Wachters, J. Chem. Phys. 1970, 52, 1033 
+P. J. Hay, J. Chem. Phys. 1977, 66, 4377 
+K. Raghavachari and G. W. Trucks, J. Chem. Phys. 1989, 91, 1062.
+E. A. Amin and D. G. Truhlar, J. Chem. Theory Comput. 2008, 4, 75.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+E. A. Amin and D. G. Truhlar, J. Chem. Theory Comput. 2008, 4, 75.
+
+

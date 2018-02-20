@@ -1,0 +1,19 @@
+FROM DESCRIPTION:
+----------------
+Diffuse function for the aug-cc-pVDZ-PP and aug-cc-pwCVDZ-PP
+auxiliary basis sets for correlated calculations
+with second-order methods
+using the resolution-of-the-identity approximation
+as e.g. RI-MP2, RI-CC2, RI-CIS(D), RI-ADC(2), etc.
+The full aug-cc-pVDZ-RI and aug-cc-pwCVDZ-PP-RI
+auxiliary basis sets are obtained by augmenting the valence
+auxiliary basis sets with these diffuse functions.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+
+Cu Zn Ag Cd Au Hg: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+
+

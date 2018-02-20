@@ -1,0 +1,46 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "aug-cc-pVDZ-DK Diffuse",
+    "basisSetDescription": "aug-cc-pVDZ-DK Diffuse",
+    "basisSetReferences": [
+        "dunning1989a"
+    ],
+    "basisSetElements": {
+        "1": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "diffuse",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "0.0297400"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "diffuse",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "0.1410000"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

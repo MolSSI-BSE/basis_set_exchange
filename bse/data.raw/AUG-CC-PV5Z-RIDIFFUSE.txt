@@ -1,0 +1,17 @@
+FROM DESCRIPTION:
+----------------
+Diffuse function for the cc-pV5Z, cc-pV(5+d)Z, or cc-pwCV5Z
+auxiliary basis sets for correlated calculations
+with second-order methods
+using the resolution-of-the-identity approximation
+as e.g. RI-MP2, RI-CC2, RI-CIS(D), RI-ADC(2), etc.
+The full aug-cc-pV5Z-RI, aug-cc-pV(5+d)Z-RI, and aug-cc-pwCV5Z-RI
+auxiliary basis sets are obtained by augmenting the (core+)valence
+auxiliary basis sets with these diffuse functions.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He B C N O F Ne Al Si P S Cl Ar Ga Ge As Se Br Kr : Christof Hattig, Optimization of auxiliary basis sets for RI-MP2 and RI-CC2 calculations: Core-valence and quintuple-? basis sets for H to Ar and QZVPP basis sets for Li to Kr, Physical Chemistry Chemical Physics 7, 59 (2005).
+
+

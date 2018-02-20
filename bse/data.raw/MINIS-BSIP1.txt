@@ -1,0 +1,22 @@
+FROM DESCRIPTION:
+----------------
+This basis set is the same as MINI (scaled) on the EMSL. Reference:
+ S. Huzinaga, ED.,J. Andzelm, M. Klobukowski, E. Radzio-Andzelm, Y. Sakai, 
+ H. Tatewaki in Gaussian Basis Sets for Molecular Calculations: 
+ Elsevier, Amsterdam, 1984. 
+Valence scale factors from John Deisz of North Dakota State University.
+The basis-set incompletness potentials (BSIP) provided with it are
+designed to improve the description of non-covalent interactions and
+intra- and inter-molecular geometries from MINI (scaled)
+calculations by removing basis-set incompletness error. BSIPs have
+been developed for use with DFT methods. BSIPs are described in:
+ A. Otero-de-la-Roza and Gino A. DiLabio, J. Chem. Theory Comput., 2017, 13 (8), pp 3505-3524
+The BSIP1 label refers to these BSIPs being the first version
+developed, for atoms H, C, N, O, F, P, S, and Cl.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H C N O F P S Cl: Alberto Otero-de-la-Roza and Gino A. DiLabio, Transferable Atom-Centered Potentials for the Correction of Basis Set Incompleteness Errors in Density-Functional Theory, J. Chem. Theory Comput. 13, 3505 (2017).
+
+

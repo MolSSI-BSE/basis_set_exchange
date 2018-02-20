@@ -1,0 +1,81 @@
+FROM DESCRIPTION:
+----------------
+Correlation Consistent Polarized Core/Valence Quintuple Zeta (cc-pCV5Z) Basis
+ -----------------------------------------------------------------------------
+Elements        Contraction                             References
+ B - Ne: (18s,12p,7d,5f,3g,1h) -> [10s,9p,7d,5f,3g,1h] D. Woon, K. Peterson
+ Al- Ar: (20s,12p,8d,6f,4g,2h) -> [7s,6p,4d,3f,2g,1h]
+                                           K.A. Peterson and T.H. Dunning, Jr.
+                                           J. Chem. Phys. 117,10548 (2002).
+Ca     : (26s,18p,12d,6f,4g,2h)-> [12s,10p,9d,6f,4g,2h]  J. Koput and K.A.
+                                                       Peterson, J.  Phys.
+                                                       Chem. A, 106, 9595
+                                                       (2002)
+The correlation consistent core-valence basis sets extend the ideas of the
+original cc-pVxZ sets by including extra functions designed for core-core and
+core-valence correlation.
+                     cc-pCV5Z Atomic Energies
+   State  UHF (noneq) ROHF (noneq)    ROHF (eq)
+   -----  ----------  ------------   -----------
+N   4-S    -54.404443   -54.400853   -54.400853
+Ne  1-S   -128.546771  -128.546771  -128.546771
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+         MP2(noneq)     MP2(noneq)
+            UHF           UHF
+   State  Froz. core   Nonfroz. core
+   -----  ----------   -------------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+   State  UB3LYP (noneq)
+   -----  ----------
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+         CCSD(T)(noneq) CCSD(T)(noneq)
+             UHF            UHF
+   State  Froz. core     Nonfroz. Core
+   -----  ----------     -------------
+N   4-S   -54.528284     -54.585679
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+          CCSD(T)(eq)    CCSD(T)(eq)     CCSD(T)(eq)  CCSD(T)(eq)
+            ROHF           ROHF             R/U          R/U
+   State  Froz. core    Nonfroz. core    Froz. core   Nonfroz. core
+   -----  -----------   -------------    ----------   -------------
+N   4-S    -54.527860    -54.585461       -54.528062    -54.585669
+Ne  1-S   -128.860002   -128.926936      -128.860002   -128.926936
+Si  3-P
+P   4-S
+S   3-P
+Cl  2-P
+Ar  1-S
+Note: for Ca the S- and P-functions are already included in the contraction
+      of the basis set itself.
+FROM REFERENCE:
+----------------
+(cc-pCV5Z)
+--------------------------------------
+Elements                            Reference
+B - Ne: (18s,12p,7d,5f,3g,1h) -> [10s,9p,7d,5f,3g,1h] D. Woon, K. Peterson
+Al- Ar: (20s,12p,8d,6f,4g,2h) -> [7s,6p,4d,3f,2g,1h] K.A. Peterson and T.H.
+Dunning, Jr., J. Chem. Phys. 117,10548 (2002).
+Ca     : (26s,18p,12d,6f,4g,2h)-> [12s,10p,9d,6f,4g,2h]  J. Koput and K.A.
+Peterson, J.  Phys. Chem. A, 106, 9595(2002)
+
+

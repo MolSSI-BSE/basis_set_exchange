@@ -1,0 +1,23 @@
+FROM DESCRIPTION:
+----------------
+ 6-311++G Valence Triple Zeta + Polarization + Diffuse Basis
+        -------------------------------------------------------------
+Elements      Contraction                       Reference
+      H: (6s)     -> [4s]    R. Krishnan, J.S. Binkley, R. Seeger and
+Li - Ne: (12s,6p) -> [5s,4p] J.A. Pople, J. Chem. Phys. 72, 650 (1980).
+Diffuse exponents: T. Clark, J. Chandrasekhar, P.v.R. Schleyer, J. Comp. Chem.
+                   4, 294 (1983).
+This basis has increased flexibility in the valence region relative to the
+6-31G basis because it uses three functions to represent each valence AO.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H, Li - Ne: R. Krishnan, J.S. Binkley, R. Seeger and J.A. Pople, J. Chem. Phys. 72, 650 (1980)
+Na - Ar:    A.D. McLean and G.S. Chandler J. Chem. Phys. 72, 5639, (1980).
+K  - Ca:    J-P. Blaudeau, M. P. McGrath, L.A. Curtiss and L. Radom, J. Chem. Phys. 107, 5016 (1997).
+H, Li-Cl: T. Clark, J. Chandrasekhar,  G.W. Spitznagel, P.V.R. Schleyer,
+J. Comp. Chem. 4, 294 (1983).
+
+Note: Diffuse functions (J. Comp. Chem. 4, 294 (1983).)
+

@@ -1,0 +1,31 @@
+FROM DESCRIPTION:
+----------------
+Dunning Triple Zeta Basis
+                      -------------------------
+Elements     Contraction                   References
+      H: (5s)      -> [3s]      T. H. Dunning, Jr., J. Chem. Phys. 55,
+Li     : (10s)     -> [4s]      716 (1971).
+Be     : (10s)     -> [5s]
+B  - Ne: (10s,6p)  -> [5s,3p]
+The set of contracted basis functions for B - F was derived from the
+Huzinaga (10s,6p) primitive set using contraction coefficients taken
+directly from atomic calculations.
+                     Dunning TZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.497637    -0.497637    -0.497637     -0.50000
+He  1-S                                            -2.86168
+Li  2-S                                            -7.43273
+Be  1-S   -14.570907                              -14.57302
+B   2-P   -24.526602   -24.526415                 -24.52906
+C   3-P                                           -37.68862
+N   4-S   -54.397260                              -54.40094
+O   3-P   -74.802766                              -74.80940
+F   2-P   -99.395013   -99.394283                 -99.40935
+Ne  1-S                                          -128.54710
+FROM REFERENCE:
+----------------
+!
+
+

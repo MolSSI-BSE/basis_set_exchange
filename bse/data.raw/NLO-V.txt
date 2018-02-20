@@ -1,0 +1,21 @@
+FROM DESCRIPTION:
+----------------
+NLO-V valence double-zeta polarized basis set developed for nonlinear optics calculation, specially for first hiperpolarizability (beta) prediction.
+Below, we presented the average absolute deviation for first hyperpolarizability (beta) for a total of 69 organic push-pull molecules calculated at cam-B3LYP/NLO-V and cam-B3LYP/6-31G(2d) levels.
+------------------------------------------------------------------------------
+First Hyperpolarizability                       Average Absolute Deviation
+------------------------------------------------------------------------------
+                                               NLO-V              6-31G(2d)
+------------------------------------------------------------------------------
+Beta values between 0-20 esu                    7.2                 8.8
+Beta values between 21-100 esu                  22.0                33.2
+Beta values between 101-190 esu                 18.8                146.3
+------------------------------------------------------------------------------
+We conclude that the new basis set (NLO-V), together with cam-B3LYP functional, make an affordable calculation scheme to predict NLO properties of large organic molecules.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H B C N O F Si P S Cl: Diego Paschoal, Hélio F. Dos Santos, Assessing the quantum mechanical level of theory for prediction of linear and nonlinear optical properties of push-pull organic molecules, Journal of Molecular Modeling 19, 2079-2090 (2013) DOI: 10.1007/s00894-012-1644-4.
+
+

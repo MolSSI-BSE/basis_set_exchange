@@ -1,0 +1,126 @@
+
+
+FROM DESCRIPTION:
+----------------
+ Diffuse Function Augmented Polarized Valence Sextuple Zeta (aug-cc-pV6Z)
+ -----------------------------------------------------------------------
+Elements        Contraction                             References
+H - He: (11s,6p,5d,4f,3g,2h) -> [7s,6p,5d,4f,3g,2h]        K.A. Peterson and
+                                                           D.E. Woon,
+                                                           (unpublished)
+B - F : (17s,11p,6d,5f,4g,3h,2i) -> [8s,7p,6d,5f,4g,3h,2i] A.K. Wilson, T. van
+                                                           Mourik and T.H.
+                                                           Dunning, Jr.,
+                                                           J. Mol. Struct.
+                                                           (THEOCHEM) 388,
+                                                           339 (1997).
+                                                        Diffuse Functions:
+                                                           T. van Mourik, A.K.
+                                                           Wilson and T.H.
+                                                           Dunning, Jr.,
+                                                           Mol. Phys. 96, 529
+                                                           (1999)
+Ne    : (17s,11p,6d,5f,4g,3h,2i) -> [8s,7p,6d,5f,4g,3h,2i] Unoffical set of
+                                                           diffuse functions
+                                                           from D. Feller
+Al- Ar: (22s,15p,6d,5f,4g,3h,2i) -> [9s,8p,6d,5f,4g,3h,2i] T. van Mourik and
+                                                           T.H. Dunning, Jr.,
+                                                           Int. J. Quantum
+                                                           Chem. 76, 205 (2000)
+
+                      aug-cc-pV6Z Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.4999993   -0.4999993   -0.4999993    -0.50000
+B   2-P   -24.5331532                             -24.52906
+C   3-P   -37.6937323  -37.688686                 -37.68862
+N   4-S   -54.4045377  -54.400924                 -54.40094
+O   3-P   -74.8189614  -74.812378                 -74.80940
+F   2-P   -99.4162785  -99.411386                 -99.40935
+Ne  1-S                                          -128.54710
+Al  2-P                                          -241.87671
+Si  3-P  -288.858911                             -288.85436
+P   4-S                                          -340.71878
+S   3-P  -397.5133435 -397.507245                -397.50490
+Cl  2-P  -459.4899117                            -459.48207
+
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+   State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+   -----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.4999993   -0.4999993   -0.4999993    -0.4999993    -0.4999993
+B   2-P                -24.5820036
+C   3-P                -37.7690022
+N   4-S                -54.5132732
+O   3-P                -74.9858357
+F   2-P                -99.6518653
+Al  2-P
+Si  3-P               -288.9214604
+P   4-S
+S   3-P               -397.6485286
+Cl  2-P               -459.6769993
+
+          CCSD(noneq) CCSD(T)(noneq)
+            UHF         UHF
+   State  Froz. core   Froz. core
+   -----  ----------   ----------
+H   2-S    -0.4999993   -0.4999993
+B   2-P   -24.6002982  -24.6018163
+C   3-P   -37.7863571  -37.7888693
+N   4-S   -54.5260102  -54.5290754
+O   3-P   -74.9984546  -75.0025689
+F   2-P   -99.6593528  -99.6646136
+Al  2-P
+Si  3-P  -288.9365390 -288.9395433
+P   4-S  -340.8262281 -340.8311107
+S   3-P  -397.6672163 -397.6735207
+Cl  2-P  -459.6956410 -459.7036399
+
+            MOLPRO 99 and earlier         MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq)   CCSD(noneq)  CCSD(T)(noneq)
+            ROHF         ROHF             ROHF         ROHF
+   State  Froz. core   Froz. core      Froz. core   Froz. core
+   -----  ----------   ----------      ----------   -----------
+H   2-S    -0.4999993     -0.4999993     -0.4999993     -0.4999993
+B   2-P   -24.60006265   -24.60172752   -24.6000728    -24.6017382
+C   3-P   -37.78594292   -37.78859353   -37.7859732    -37.7886251
+N   4-S   -54.52545506   -54.52861009   -54.5254936    -54.5286503
+O   3-P   -74.99788857   -75.00213100   -74.9979733    -75.0022225
+F   2-P   -99.65902569   -99.66436272   -99.6590754    -99.6644167
+Ne  1-S  -128.85766889  -128.86403601  -128.85766889  -128.86403601
+Al  2-P
+Si  3-P  -288.93595970  -288.93921638
+P   4-S  -340.82554730  -340.83055865
+S   3-P  -397.66635294  -397.67300354  -397.6664054   -397.6730609
+Cl  2-P                                -459.6950771   -459.7033521
+
+          CCSD(noneq) CCSD(T)(noneq)  CISD(noneq)  CISD+Q(noneq)
+            R/U         R/U             ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.4999993   -0.4999993   -0.4999993    -0.4999993
+N   4-S   -54.5257439  -54.5288530
+O   3-P   -74.9982197  -75.0024247
+Si  3-P  -288.9362763 -288.9394769
+
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.4999993   -0.4999993    -0.4999993   -0.4999993
+B   2-P
+C   3-P   -37.785955   -37.788617    -37.786120   -37.788755
+N   4-S   -54.5254936  -54.5286503   -54.5257439  -54.5288530
+O   3-P
+F   2-P
+Si  3-P
+P   4-S
+S   3-P  -397.666357  -397.672975   -397.666756  -397.673276
+Cl  2-P
+Ar  1-S
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

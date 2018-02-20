@@ -1,0 +1,60 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "maug-cc-pVDZ",
+    "basisSetDescription": "maug-cc-pVDZ",
+    "basisSetReferences": [
+        "papajak2009a",
+        "papajak2010a",
+        "woon1994a"
+    ],
+    "basisSetElements": {
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "38.3600000",
+                        "5.7700000",
+                        "1.2400000",
+                        "0.2976000"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.0238090",
+                            "0.1548910",
+                            "0.4699870",
+                            "0.0000000"
+                        ],
+                        [
+                            "0.0000000",
+                            "0.0000000",
+                            "0.0000000",
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "1.2750000"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

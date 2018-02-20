@@ -1,0 +1,23 @@
+
+
+FROM DESCRIPTION:
+----------------
+         6-31G(3df,3pd) Split Valence + Extended Polarization Basis
+         ----------------------------------------------------------
+Elements      Contraction                       References
+ H - He: (4s,3p,1d)     ->[2s,3p,1d]    W.J. Hehre, R. Ditchfield and J.A.
+Li - Ne: (10s,4p,3d,1f) ->[3s,2p,3d,1f] Pople, J. Chem. Phys. 56, 2257 (1972).
+                                        Note: Li and B come from J.D. Dill and
+                                        JA Pople, J.Chem.Phys. 62, 2921 (1975)
+Na - Cl: (16s,10p,3d,1f)->[4s,3p,3d,1f] M.M. Francl, W.J. Petro, W.J. Hehre,
+                                        J.S. Binkley, M.S. Gordon, D.J. DeFrees
+                                        DeFrees and J.A.  Pople, J.Chem.Phys.
+                                        77, 3654 (1982).
+Ar: polarization functions are unpublished, extapolated from P, S, Cl.
+
+  Polarization Funct's: M.J. Frisch, J.A. Pople and J.S. Binkley J. Chem.
+                        Phys. 80 3265 (1984).
+
+This basis extends the 6-31G** basis by adding three sets of 5-component d's
+and one set of 7-component f's to second and third period elements and three
+sets of p's and one set of d's to hydrogen.

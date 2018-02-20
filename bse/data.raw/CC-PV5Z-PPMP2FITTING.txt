@@ -1,0 +1,14 @@
+FROM DESCRIPTION:
+----------------
+Auxiliary basis set to be used with the cc-pV5Z-PP AO basis set in MP2 density fitting 
+MP2 auxiliary basis for use with cc-pV5Z-PP AO basis set. It should be noted that this auxiliary basis contains exponents with angular momentum &gt; i and this may not be supported in all packages. 
+Auxiliary basis set for density fitting in MP2, matched to the cc-pV5Z-PP basis set.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+Ru: J. G. Hill and J. A. Platts, Calculating interaction energies in transition metal complexes with local electron correlation methods, J. Chem. Phys. 129, 134101 (2008).
+Y Zr Nb Mo Tc Rh Pd: J. Grant Hill and James A. Platts, Auxiliary Basis Sets for Density-Fitted MP2 Calculations: Correlation-Consistent Basis Sets for the 4d Elements, J. Chem. Theory Comput. 5, 500 (2009).
+Hf Ta W Re Os Ir Pt: J. Grant Hill, Auxiliary basis sets for density fitting second-order Møller-Plesset perturbation theory: Correlation consistent basis sets for the 5d elements Hf-Pt, J. Chem. Phys. 135, 044105 (2011).
+
+

@@ -1,0 +1,40 @@
+FROM DESCRIPTION:
+----------------
+                3-21GSP Split Valence Basis
+                ----------------------------
+Elements      Contraction                       References
+ H - He: (3s)    -> [2s]    A.V. Mitin, G. Hirsch and R. J. Buenker,
+Li - Ne: (6s,3p) -> [3s,2p] Chem. Phys. Lett. 259, 151 (1996).
+Na - Ar: (9s,6p) -> [4s,3p] A.V. Mitin, G. Hirsch and R. J. Buenker,
+                            J. Comp. Chem. 18, 1200 (1997).
+
+The 3-21GSP basis set family was obtained by reoptimizing the Gaussian
+exponents and contraction coefficients, subject to the constraint that
+the valence (s,p) shells share the same exponents. The resulting
+energy lowerings were: C (-0.116 Eh), N (-0.151 Eh) and O (-0.197 Eh).
+
+                     3-21GSP Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.496979    -0.496979    -0.496979     -0.50000
+He  1-S    -2.835680    -2.835680    -2.835680     -2.86168
+Li  2-S    -7.426766    -7.426754    -7.426754     -7.43273
+Be  1-S   -14.555224   -14.555224   -14.555224    -14.57302
+B   2-P   -24.473946   -24.473943                 -24.52906
+C   3-P   -37.596126   -37.596107                 -37.68862
+N   4-S   -54.255045   -54.254991   -54.254991    -54.40094
+O   3-P   -74.588587   -74.588561                 -74.80940
+F   2-P   -99.089341   -99.089333                 -99.40935
+Ne  1-S  -128.100691  -128.100691  -128.100691   -128.54710
+
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+ H - Ne: A.V. Mitin, G. Hirsch, R. J. Buenker, Chem. Phys. Lett. 259, 151 (1996)
+Na - Ar: A.V. Mitin, G. Hirsch, R. J. Buenker, J. Comp. Chem. 18, 1200 (1997).
+
+
+  

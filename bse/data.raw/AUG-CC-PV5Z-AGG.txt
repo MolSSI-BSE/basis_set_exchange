@@ -1,0 +1,135 @@
+
+
+FROM DESCRIPTION:
+----------------
+ Diffuse Function Augmented Polarized Valence Quintuple Zeta (aug-cc-pV5Z)
+ -------------------------------------------------------------------------
+Elements        Contraction                             References
+ H     : (9s,5p,4d,3f,2g)      -> [6s,5p,4d,3f,2g]      T.H. Dunning, Jr.
+ B -Ne : (15s,8p,5d,4f,3g,2h)  -> [7s,6p,5d,4f,3g,2h]   D. Woon, K. Peterson
+ Al-Ar : (21s,13p,5d,4f,3g,2h) -> [8s,7p,5d,4f,3g,2h]   (unpublished)
+Ga - Kr: (27s,18p,14d,4f,3g,2h)-> [9s,8p,6d,4f,3g,2h]  A.K. Wilson, D.E. Woon,
+                                                       K.A. Peterson, T.H.
+                                                       Dunning, Jr., J.
+                                                       Chem. Phys.,
+                                                       110, 7667 (1999).
+
+Additional core/valence functions which are added to the original cc-pV5Z
+exponents are from D. Woon and T. H. Dunning, Jr., J. Chem. Phys. 103, 4572
+(1995).
+
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+                      aug-cc-pV5Z Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit(equiv)  UB3LYP(noneq)
+   -----  ----------  -----------   -----------  ----------       -----------
+H   2-S    -0.4999948   -0.4999948   -0.4999948    -0.50000         -0.502438
+B   2-P   -24.533130   -24.529112                 -24.52906
+C   3-P   -37.693690   -37.688646                 -37.68862        -37.861541
+N   4-S   -54.404469   -54.400855                 -54.40094
+O   3-P   -74.818838   -74.812258                 -74.80940
+F   2-P   -99.416088   -99.411197                 -99.40935
+Al  2-P  -241.880751  -241.876784                -241.87671
+Si  3-P  -288.858825  -288.854447                -288.85436
+P   4-S  -340.719160  -340.718682                -340.71878
+S   3-P  -397.513207  -397.507134                -397.50490       -398.145349
+Cl  2-P  -459.489745  -459.483797                -459.48207
+Ga  2-P
+Ge  3-P
+As  4-S
+Se  3-P
+Br  2-P -2572.4483645
+
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+   State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+   -----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.4999948   -0.499995    -0.4999948    -0.499995     -0.499995
+B   2-P                -24.581477   -24.597646
+C   3-P                -37.768111   -37.785608
+N   4-S                -54.511969   -54.527191
+O   3-P                -74.983326   -74.999742
+F   2-P                -99.648052   -99.661366
+Al  2-P               -241.919924  -241.932127
+Si  3-P               -288.920587  -288.937115
+P   4-S               -340.811112  -340.829566
+S   3-P               -397.646028  -397.670345
+Cl  2-P               -459.672994  -459.699594
+Br  2-P              -2572.605656
+
+          CCSD(noneq) CCSD(T)(noneq)
+            UHF         UHF
+   State  Froz. core   Froz. core
+   -----  ----------   ----------
+H   2-S    -0.4999948  -0.4999948
+B   2-P   -24.600099   -24.601603
+C   3-P   -37.785896   -37.788380
+N   4-S   -54.525199   -54.528223
+O   3-P   -74.996701   -75.000753
+F   2-P   -99.656493   -99.661666
+Al  2-P  -241.933208  -241.934526
+Si  3-P  -288.936132  -288.939094
+P   4-S  -340.825548  -340.830349
+S   3-P  -397.665706  -397.671880
+Cl  2-P  -459.692978  -459.700770
+Br  2-P -2572.622195 -2572.628447
+
+            MOLPRO 99 and earlier       MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq)
+            ROHF         ROHF            ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   -----------
+H   2-S    -0.4999948   -0.4999948     -0.4999948     -0.4999948
+B   2-P   -24.600099   -24.601603     -24.599874     -24.601524
+C   3-P   -37.785896   -37.788380     -37.785513     -37.788136
+N   4-S   -54.525199   -54.528223     -54.524683     -54.527798
+O   3-P   -74.996137   -75.000316     -74.996222     -75.000408
+F   2-P   -99.656493   -99.661666     -99.656217     -99.661470
+Ne  1-S  -128.853584  -128.859837    -128.853584    -128.859837
+Al  2-P  -241.933208  -241.934526
+Si  3-P  -288.936132  -288.939094
+P   4-S  -340.825548  -340.830349
+S   3-P  -397.665706  -397.671880    -397.664912    -397.671432
+Cl  2-P  -459.692978  -459.700770
+Br  2-P                                            -2572.628132
+
+          CCSD(noneq) CCSD(T)(noneq)  CISD(noneq)  CISD+Q(noneq)
+            R/U         R/U             ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.4999948   -0.4999948   -0.4999948    -0.4999948
+C   3-P   -37.785678   -37.788274
+N   4-S   -54.524934   -54.528001
+O   3-P   -74.996468   -75.000610
+F   2-P   -99.656371   -99.661598
+Si  3-P  -288.935871  -288.939028
+S   3-P  -397.665357  -397.671771
+
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.4999948   -0.4999948    -0.4999948   -0.4999948
+B   2-P
+C   3-P   -37.785495   -37.788129    -37.785660   -37.788267
+N   4-S   -54.524683   -54.527798    -54.524934   -54.528001
+O   3-P
+F   2-P
+Si  3-P
+P   4-S
+S   3-P  -397.664872  -397.671355   -397.665270  -397.671656
+Cl  2-P
+Ar  1-S
+
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+

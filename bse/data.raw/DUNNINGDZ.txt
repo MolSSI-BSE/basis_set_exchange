@@ -1,0 +1,55 @@
+FROM DESCRIPTION:
+----------------
+                     Dunning/Dunning-Hay DZ Basis
+                     ----------------------------
+Elements     Contraction                   References
+      H: (4s)     -> [2s]      T. H. Dunning, Jr. J.Chem.Phys. 53, 2823 (1970)
+Li     : (9s,5p)  -> [4s,2p]   This is a DZ contraction of the SV set given
+                               by Dunning and Hay, ala Gaussian 94.
+  B - F: (9s,5p)  -> [4s,2p]   T. H. Dunning, Jr. and P. J. Hay, in Methods of
+Al - Cl: (11s,7p) -> [6s,4p]   Electronic Structure Theory, Vol. 3,
+                               H.F. Schaefer III, Ed. Plenum Press (1977).
+
+The set of contracted basis functions for B - F was derived from the
+Huzinaga (9s,5p) primitive set using contraction coefficients taken directly
+from atomic calculations.  A given primitive is not allowed to appear in
+more than one contracted function, ie. these are segmented contractions.
+
+The Al - Cl set of functions was derived from the Huzinaga (11s,7p)
+primitve set. In these contractions one of the s primitives and one of p
+primitives are used twice.
+
+The neon basis is unpublished.  It was derived from the SV contraction of
+Dunning and Hay.
+
+                     Dunning/Hay SV Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.497637    -0.497637    -0.497637     -0.50000
+He  1-S                                            -2.86168
+Li  2-S                                            -7.43273
+Be  1-S                                           -14.57302
+B   2-P                                           -24.52906
+C   3-P   -37.685627   -37.684507                 -37.68862
+N   4-S   -54.397373   -54.394390                 -54.40094
+O   3-P                                           -74.80940
+F   2-P                                           -99.40935
+Ne  1-S                                          -128.54710
+Na  2-S                                          -161.85891
+Mg  1-S                                          -199.61463
+Al  2-P                                          -241.87671
+Si  3-P                                          -288.85436
+P   4-S                                          -340.71878
+S   3-P  -397.468664  -397.468325                -397.50490
+
+
+
+FROM REFERENCE:
+----------------
+
+T.H. DUNNING, JR., J. CHEM. PHYS. 53, 2823 (1970). 
+ T.H. DUNNING, JR. AND P.J. HAY, IN METHODS OF ELECTRONIC STRUCTURE THEORY, 
+ VOL. 2, H.F. SCHAEFER III, ED., PLENUM PRESS (1977).
+
+  

@@ -1,0 +1,18 @@
+
+
+FROM DESCRIPTION:
+----------------
+        Dunning-Hay Split Valence + Polarization + Rydberg Basis
+        --------------------------------------------------------
+Elements     Contraction                   References
+      H: (4s,1p)     -> [2s,1p]     T. H. Dunning and P. J. Hay, in Methods of
+Li - Be: (9s,5p,1d)  -> [3s,2p,1d]
+ B - Ne: (10s,6p,2d) -> [4s,3p,2d]  Electronic Structure Theory, Vol. 3,
+                                    H.F. Schaefer III, Ed. Plenum Press (1977).
+
+The Dunning-Hay split valence basis sets are moderate sized segmented
+contractions, which can be used efficiently in programs that don't support
+general contractions.  The single shell of Rydberg functions is designed to
+describe the n=3 states of first row atoms and the n=4 states of the next row.
+For Ne and Ar (where exponents were not given by Dunning & Hay) the
+values were estimated on the basis of neighboring elements.

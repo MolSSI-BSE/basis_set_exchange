@@ -1,0 +1,58 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "cc-pVDZ(fi/sf/sc)",
+    "basisSetDescription": "VDZP    Relativistic Valence Double Zeta + Polarization",
+    "basisSetReferences": [
+        "woon1994a"
+    ],
+    "basisSetElements": {
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "3.8360000E+01",
+                        "5.7700000E+00",
+                        "1.2400000E+00",
+                        "2.9760000E-01"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "2.38133585062E-02",
+                            "1.54903399380E-01",
+                            "4.69984922799E-01",
+                            "5.12992389006E-01"
+                        ],
+                        [
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "9.99925723852E-01"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "1.2750000E+00"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "9.99872723867E-01"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,32 @@
+FROM DESCRIPTION:
+----------------
+cc-pwCVQZ-PP core/valence relativistic small core PP basis sets
+   ---------------------------------------------------------------
+          Core         Name       Primitives               Contractions
+Cu - Zn: 10 [Ne]      ECP10MDF (16s,13p,13d,4f,3g,2h) -> [8s,8p,7d,4f,3g,2h]
+Ag - Cd: 28 [Ar+3d]   ECP28MDF (16s,13p,13d,4f,3g,2h) -> [8s,8p,7d,4f,3g,2h]
+Au - Hg: 60 [Kr+4d3f] ECP60MDF (16s,13p,13d,4f,3g,2h) -> [8s,8p,7d,4f,3g,2h]
+Note: these basis sets are designed to be used with an active space that
+includes all electrons not subsumed into the pseudopotential.  For example,
+for Cu the 3s3p3d4s electrons are correlated.
+Exponents from:
+---------------
+K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+PP parameters from:
+-------------------
+D. Figgen, G. Rauhut, M. Dolg, and H. Stoll, Chem. Phys. 311, 227 (2005). 
+Adds Y - Pd 
+I    : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006). 
+Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009 
+Core-valence basis sets for the post-d elements Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+Cu, Zn, Ag, Cd, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+Y Zr Nb Mo Tc Ru Rh Pd      : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+I     : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: K.A. Peterson and K.E. Yousaf, Molecular core-valence correlation effects involving the post-d elements Ga-Rn: Benchmarks and new pseudopotential-based correlation consistent basis sets, The Journal of Chemical Physics 133, 174116 (2010).
+
+
