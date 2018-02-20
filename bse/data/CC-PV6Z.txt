@@ -1,0 +1,75 @@
+FROM DESCRIPTION:
+----------------
+Correlation Consistent Polarized Valence Sextuple Zeta (cc-pV6Z) Basis
+ ----------------------------------------------------------------------
+Elements        Contraction                             References
+H - He: (10s,5p,4d,3f,2g,1h) -> [6s,5p,4d,3f,2g,1h]        K.A. Peterson,
+                                                           D.E. Woon and
+                                                           T.H. Dunning, Jr.,
+                                                           J. Chem. Phys. 100,
+                                                           7410 (1994).
+                                                           K.A. Peterson, to
+                                                           be published
+B - Ne: (16s,10p,5d,4f,3g,2h,1i) -> [7s,6p,5d,4f,3g,2h,1i] A. Wilson,
+                                                           T. van Mourik and
+                                                           T.H. Dunning, Jr.,
+                                                           J. Mol. Struct.
+                                                           (THEOCHEM) 388,
+                                                           339 (1996)
+Al- Ar: (21s,14p,5d,4f,3g,2h,1i) -> [8s,7p,5d,4f,3g,2h,1i] T. van Mourik and
+                                                           T.H. Dunning, Jr.,
+                                                           Int. J. Quantum
+                                                           Chem. 76, 205 (1999)
+                        cc-pV6Z Atomic Energies
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.4999992   -0.4999992   -0.4999992    -0.50000
+He  1-S                                            -2.86168
+Li  2-S                                            -7.43273
+Be  1-S                                           -14.57302
+B   2-P                -24.5291327                -24.52906
+C   3-P                -37.688686   -37.688571    -37.68862
+N   4-S                -54.400852   -54.400852    -54.40094
+O   3-P                -74.8123718                -74.80940
+F   2-P                -99.4113795                -99.40935
+Ne  1-S  -128.547061  -128.547061  -128.547061   -128.54710
+Ar  1-S  -526.817484  -526.8174836               -526.81751
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(T)(noneq)
+            UHF          UHF          UHF           UHF
+   State  No core      Froz. core   Froz. core   Froz. core
+   -----  ----------   ----------   ----------  --------------
+H   2-S    -0.4999992   -0.4999992   -0.4999992    -0.4999992
+Ar  1-S               -527.0633727
+          CCSD(noneq) CCSD(T)(noneq  CCSD(noneq)  CCSD(T)(noneq)
+            UHF          UHF          ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   -----------   ----------   -----------
+H   2-S    -0.4999992   -0.4999992    -0.4999992    -0.4999992
+He  1-S
+Li  2-S
+Be  1-S
+B   2-P                                            -24.6016993
+C   3-P                                            -37.7885185
+N   4-S                                            -54.5284735
+O   3-P                                            -75.0018102
+F   2-P                                            -99.6638242
+Ne  1-S                             -128.8569669  -128.8632622
+The basic idea behind the correlation consistent basis sets is that
+functions which contribute approximately the same amount of correlation
+energy should be grouped together.
+The SD-CI energies quoted below are for valence CI's.  However, unlike
+the SD-CI's for the smaller basis sets these calculations used just a
+single reference configuration.  With the smaller sets the SD-CI
+energies were obtained with a symmetry equivalenced reference space.
+For example, for carbon all 3 p(2) configurations were used in the
+reference space.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H:         K.A. Peterson, D.E. Woon and T. H. Dunning, Jr., (to be published).
+B - Ne:    A. K. Wilson, T. v. Mourik and T. H. Dunning, Jr., J. Mol. Struct.
+(THEOCHEM) 388, 339 (1997).
+S:         J.G. Hill, S. Mazumder, and K.A. Peterson, Correlation consistent basis sets for molecular core-valence effects with explicitly correlated wave functions: the atoms B-Ne and Al-Ar, Journal of Chemical Physics 132, 054108 (2010).
+
+

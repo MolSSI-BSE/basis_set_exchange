@@ -1,0 +1,63 @@
+FROM DESCRIPTION:
+----------------
+3-21G Split Valence Basis
+                           -------------------------
+Elements      Contraction                       References
+ H - He: (3s)        -> [2s]       J.S. Binkley, J.A. Pople and W.J. Hehre,
+Li - Ne: (6s,3p)     -> [3s,2p]    J. Am. Chem. Soc. 102, 939 (1980).
+Na - Ar: (9s,6p)     -> [4s,3p]    M.S. Gordon, J.S. Binkley, J.A. Pople, W.J.
+                                   Pietro and W.J. Hehre, J. Am. Chem. Soc.
+                                   104, 2797 (1982)
+ K - Ca: (12s,9p)    -> [5s,4p]    K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 7,
+Ga - Kr: (12s,9p,3d) -> [5s,4p,1d] 359 (1986).
+Sc - Zn: (12s,9p,3d) -> [5s,4p,2d] K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 8,
+                                   861 (1987).
+Rb - Sr: (15s,12p,3d)-> [6s,5p,1d]
+ Y - Cd: (15s,12p,6d)-> [6s,5p,3d] K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 8,
+In -  I: (15s,12p,6d)-> [6s,5p,2d] 880 (1987).
+Cs     : (18s,12p,6d)-> [6s,5p,2d] A 3-21G quality set derived from the
+                                   Huzinage MIDI basis sets.
+                                   E.D. Glendening and D. Feller, J. Phys.
+                                   Chem. 99, 3060 (1995).
+The 3-21G basis set contains the same number of Gaussian primitives as the
+STO-3G basis, but the valence electrons are described with two functions per
+AO instead of one.  In most cases the 3-21G basis set gives results which are
+as good as the more expensive 4-31G and 6-31G sets.
+                     3-21G Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.496199    -0.496199    -0.496199     -0.50000
+He  1-S    -2.835680    -2.835680    -2.835680     -2.86168
+Li  2-S    -7.381513    -7.381513    -7.381513     -7.43273
+Be  1-S   -14.486820   -14.486820   -14.486820    -14.57302
+B   2-P   -24.389762   -24.389634   -24.148989    -24.52906
+C   3-P   -37.481070   -37.480389   -37.480389    -37.68862
+N   4-S   -54.105390   -54.103658   -54.103658    -54.40094
+O   3-P   -74.393657   -74.392512   -74.391782    -74.80940
+F   2-P   -98.845009   -98.844645   -98.844230    -99.40935
+Ne  1-S  -127.132546  -127.803824  -127.803824   -128.54710
+Na  2-S  -160.854064  -160.854041  -160.854041   -161.85891
+Mg  1-S  -198.468103  -198.468103  -198.468103   -199.61463
+Al  2-P  -240.551046  -240.551024  -240.551010   -241.87671
+Si  3-P  -287.344431  -287.344419  -287.344393   -288.85436
+P   4-S  -339.000079  -339.000027  -339.000027   -340.71878
+S   3-P  -395.551336  -395.551083  -395.550591   -397.50490
+Cl  2-P  -457.276552  -457.276414  -457.276096   -459.48207
+Ar  1-S  -524.342962  -524.342962  -524.342962   -526.81751
+K   2-S  -596.152980  -596.152923  -596.152923   -599.16479
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H - Ne: J.S. Binkley, J.A. Pople, W.J. Hehre, J. Am. Chem. Soc 102 939 (1980)
+Na - Ar: M.S. Gordon, J.S. Binkley, J.A. Pople, W.J. Pietro and W.J. Hehre,
+J. Am. Chem. Soc. 104, 2797 (1983).
+K - Ca: K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 7, 359 (1986).
+Ga - Kr: K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 7, 359 (1986).
+Sc - Zn: K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 8, 861 (1987).
+Y - Cd: K.D. Dobbs, W.J. Hehre, J. Comput. Chem. 8, 880 (1987).
+Cs     : A 3-21G quality set derived from the Huzinage MIDI basis sets.
+E.D. Glendening and D. Feller, J. Phys. Chem. 99, 3060 (1995)
+
+
