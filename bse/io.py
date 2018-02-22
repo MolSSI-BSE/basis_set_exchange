@@ -7,6 +7,7 @@ import json
 import os
 import glob
 import collections
+import codecs
 
 
 def _sort_basis_dict(bs):
@@ -143,8 +144,10 @@ def write_json_basis(file_path, bs):
         Basis set information to write
     """
 
-    with open(file_path, 'w') as f:
-        json.dump(_sort_basis_dict(bs), f, indent=4)
+    # Disable ascii in the json - this prevents the json writer
+    # from escaping everything
+    with codecs.open(file_path, 'w', 'utf-8') as f:
+        json.dump(_sort_basis_dict(bs), f, indent=4, ensure_ascii=False)
 
 
 def write_references(file_path, refs):
@@ -159,8 +162,10 @@ def write_references(file_path, refs):
         Reference information to write
     """
 
-    with open(file_path, 'w') as f:
-        json.dump(_sort_references_dict(refs), f, indent=4)
+    # Disable ascii in the json - this prevents the json writer
+    # from escaping everything
+    with codecs.open(file_path, 'w', 'utf-8') as f:
+        js = json.dump(_sort_references_dict(refs), f, indent=4, ensure_ascii=False)
 
 
 def get_basis_filelist(data_dir):
