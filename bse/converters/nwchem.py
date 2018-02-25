@@ -5,7 +5,7 @@ from .common import *
 
 
 def write_nwchem(basis):
-    s = "# NWChem Basis set: " + basis['basisSetName'] + '\n'
+    s = u'# NWChem Basis set: ' + basis['basisSetName'] + '\n'
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['basisSetElements'].items() if 'elementElectronShells' in v]
@@ -46,11 +46,11 @@ def write_nwchem(basis):
                     coeff_pad = determine_leftpad(coefficients[c], desired_point)
                     line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
                 s += line + '\n'
-    s += "END\n"
+    s += 'END\n'
 
     # Write out ECP
     if len(ecp_elements):
-        s += "\n\nECP\n"
+        s += '\n\nECP\n'
 
     for z in ecp_elements:
         data = basis['basisSetElements'][z]
@@ -97,6 +97,6 @@ def write_nwchem(basis):
                 s += line + '\n'
 
     if len(ecp_elements):
-        s += "END\n"
+        s += 'END\n'
 
     return s
