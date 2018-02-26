@@ -24,6 +24,10 @@
             "description": "Brief description of the basis set",
             "type": "string"
         },
+        "basisSetNotes": {
+            "description": "Any notes pertaining to this basis set",
+            "type": "string"
+        },
         "basisSetReferences": {
             "description": "Citation/Reference information for this basis set component",
             "type": "array",
@@ -43,6 +47,10 @@
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
+                        "elementNotes": {
+                            "description": "Any notes pertaining to the basis set for this element",
+                            "type": "string"
+                        },
                         "elementElectronShells": {
                             "description": "(Electronic) shells for this element",
                             "type": "array",
