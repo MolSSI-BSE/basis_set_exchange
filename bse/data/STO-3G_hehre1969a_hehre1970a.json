@@ -3,10 +3,12 @@
     "basisSetName": "STO-3G",
     "basisSetDescription": "MB      Minimal Basis: 1 Function/AO",
     "basisSetReferences": [
-        "hehre1969a"
+        "hehre1969a",
+        "hehre1970a"
     ],
+    "basisSetNotes" : "Uses base information from hehre1969a, with molecular Slater coefficients from hehre1970a",
     "basisSetElements": {
-        "1": {
+        "2": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -16,9 +18,9 @@
                         0
                     ],
                     "shellExponents": [
-                        "3.42525091",
-                        "0.62391373",
-                        "0.16885540"
+                        "6.36242139",
+                        "1.15892300",
+                        "0.31364979"
                     ],
                     "shellCoefficients": [
                         [
@@ -30,7 +32,7 @@
                 }
             ]
         },
-        "6": {
+        "3": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -40,9 +42,9 @@
                         0
                     ],
                     "shellExponents": [
-                        "71.616837",
-                        "13.045096",
-                        "3.5305122"
+                        "16.119575",
+                        "2.9362007",
+                        "0.7946505"
                     ],
                     "shellCoefficients": [
                         [
@@ -61,9 +63,9 @@
                         1
                     ],
                     "shellExponents": [
-                        "2.9412494",
-                        "0.6834831",
-                        "0.2222899"
+                        "0.6362897",
+                        "0.1478601",
+                        "0.0480887"
                     ],
                     "shellCoefficients": [
                         [
@@ -80,7 +82,7 @@
                 }
             ]
         },
-        "7": {
+        "4": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -90,9 +92,9 @@
                         0
                     ],
                     "shellExponents": [
-                        "99.106169",
-                        "18.052312",
-                        "4.8856602"
+                        "30.167871",
+                        "5.4951153",
+                        "1.4871927"
                     ],
                     "shellCoefficients": [
                         [
@@ -111,9 +113,9 @@
                         1
                     ],
                     "shellExponents": [
-                        "3.7804559",
-                        "0.8784966",
-                        "0.2857144"
+                        "1.3148331",
+                        "0.3055389",
+                        "0.0993707"
                     ],
                     "shellCoefficients": [
                         [
@@ -130,7 +132,7 @@
                 }
             ]
         },
-        "8": {
+        "5": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -140,9 +142,9 @@
                         0
                     ],
                     "shellExponents": [
-                        "130.70932",
-                        "23.808861",
-                        "6.4436083"
+                        "48.791113",
+                        "8.8873622",
+                        "2.4052670"
                     ],
                     "shellCoefficients": [
                         [
@@ -161,9 +163,9 @@
                         1
                     ],
                     "shellExponents": [
-                        "5.0331513",
-                        "1.1695961",
-                        "0.3803890"
+                        "2.2369561",
+                        "0.5198205",
+                        "0.1690618"
                     ],
                     "shellCoefficients": [
                         [
@@ -180,7 +182,7 @@
                 }
             ]
         },
-        "9": {
+        "10": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -190,9 +192,9 @@
                         0
                     ],
                     "shellExponents": [
-                        "166.67913",
-                        "30.360812",
-                        "8.2168207"
+                        "207.01561",
+                        "37.708151",
+                        "10.205297"
                     ],
                     "shellCoefficients": [
                         [
@@ -211,9 +213,9 @@
                         1
                     ],
                     "shellExponents": [
-                        "6.4648032",
-                        "1.5022812",
-                        "0.4885885"
+                        "8.2463151",
+                        "1.9162662",
+                        "0.6232293"
                     ],
                     "shellCoefficients": [
                         [
