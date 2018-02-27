@@ -3,10 +3,10 @@
     "basisSetName": "STO-2G",
     "basisSetDescription": "MB      Minimal Basis: 1 Function/AO",
     "basisSetReferences": [
-        "hehre1969a"
+        "pietro1980a"
     ],
     "basisSetElements": {
-        "1": {
+        "19": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -16,35 +16,13 @@
                         0
                     ],
                     "shellExponents": [
-                        "1.309756377",
-                        "0.233135974"
+                        "295.0121465",
+                        "52.51201337"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.430128498",
-                            "0.678913531"
-                        ]
-                    ]
-                }
-            ]
-        },
-        "6": {
-            "elementElectronShells": [
-                {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
-                        0
-                    ],
-                    "shellExponents": [
-                        "27.38503303",
-                        "4.874522052"
-                    ],
-                    "shellCoefficients": [
-                        [
-                            "0.430128498",
-                            "0.678913531"
+                            "0.4301284983",
+                            "0.6789135305"
                         ]
                     ]
                 },
@@ -57,39 +35,17 @@
                         1
                     ],
                     "shellExponents": [
-                        "1.136748189",
-                        "0.288309360"
+                        "20.25259239",
+                        "5.136592224"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.049471769",
-                            "0.963782408"
+                            "0.0494717692",
+                            "0.9637824081"
                         ],
                         [
-                            "0.511540708",
-                            "0.612819896"
-                        ]
-                    ]
-                }
-            ]
-        },
-        "7": {
-            "elementElectronShells": [
-                {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
-                        0
-                    ],
-                    "shellExponents": [
-                        "37.896475",
-                        "6.745554"
-                    ],
-                    "shellCoefficients": [
-                        [
-                            "0.430128",
-                            "0.678914"
+                            "0.5115407076",
+                            "0.6128198961"
                         ]
                     ]
                 },
@@ -102,39 +58,17 @@
                         1
                     ],
                     "shellExponents": [
-                        "1.461089",
-                        "0.370571"
+                        "1.466966455",
+                        "0.503301550"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.049472",
-                            "0.963782"
+                            "-0.298398604",
+                            "1.227982887"
                         ],
                         [
-                            "0.511541",
-                            "0.612820"
-                        ]
-                    ]
-                }
-            ]
-        },
-        "8": {
-            "elementElectronShells": [
-                {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
-                        0
-                    ],
-                    "shellExponents": [
-                        "49.980971",
-                        "8.896588"
-                    ],
-                    "shellCoefficients": [
-                        [
-                            "0.430128",
-                            "0.678914"
+                            "0.3480471912",
+                            "0.7222523221"
                         ]
                     ]
                 },
@@ -147,23 +81,23 @@
                         1
                     ],
                     "shellExponents": [
-                        "1.945237",
-                        "0.493363"
+                        "0.254048142",
+                        "0.102239820"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.049472",
-                            "0.963782"
+                            "-0.661560302",
+                            "1.510754134"
                         ],
                         [
-                            "0.511541",
-                            "0.612820"
+                            "0.1309890515",
+                            "0.8946431268"
                         ]
                     ]
                 }
             ]
         },
-        "9": {
+        "20": {
             "elementElectronShells": [
                 {
                     "shellFunctionType": "gto",
@@ -173,13 +107,13 @@
                         0
                     ],
                     "shellExponents": [
-                        "63.735202",
-                        "11.344834"
+                        "326.5671727",
+                        "58.12879211"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.430128",
-                            "0.678914"
+                            "0.4301284983",
+                            "0.6789135305"
                         ]
                     ]
                 },
@@ -192,17 +126,63 @@
                         1
                     ],
                     "shellExponents": [
-                        "2.498548",
-                        "0.633698"
+                        "23.01915102",
+                        "5.838264545"
                     ],
                     "shellCoefficients": [
                         [
-                            "0.049472",
-                            "0.963782"
+                            "0.0494717692",
+                            "0.9637824081"
                         ],
                         [
-                            "0.511541",
-                            "0.612820"
+                            "0.5115407076",
+                            "0.6128198961"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0,
+                        1
+                    ],
+                    "shellExponents": [
+                        "1.757469459",
+                        "0.602970232"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "-0.2983986044",
+                            "1.2279828870"
+                        ],
+                        [
+                            "0.3480471912",
+                            "0.7222523221"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0,
+                        1
+                    ],
+                    "shellExponents": [
+                        "0.229785047",
+                        "0.092475315"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "-0.6615603018",
+                            "1.5107541340"
+                        ],
+                        [
+                            "0.1309890515",
+                            "0.8946431268"
                         ]
                     ]
                 }
