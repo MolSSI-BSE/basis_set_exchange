@@ -1,0 +1,82 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "4-31G",
+    "basisSetDescription": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
+    "basisSetReferences": [
+        "hehre1972c"
+    ],
+    "basisSetElements": {
+        "5": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "330.75285",
+                        "49.843865",
+                        "11.117054",
+                        "2.9227243"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.0179942",
+                            "0.1246937",
+                            "0.4343354",
+                            "0.5609794"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0,
+                        1
+                    ],
+                    "shellExponents": [
+                        "5.6812646",
+                        "1.4544046",
+                        "0.4283786"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "-0.1303871",
+                            "-0.2514344",
+                            "1.2051292"
+                        ],
+                        [
+                            "0.0637429",
+                            "0.2761331",
+                            "0.7773866"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0,
+                        1
+                    ],
+                    "shellExponents": [
+                        "0.1442192"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.0000000"
+                        ],
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
