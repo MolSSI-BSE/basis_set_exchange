@@ -1,0 +1,50 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "4-31G-BSE",
+    "basisSetDescription": "4-31G for H taken from old BSE/6-31G",
+    "basisSetReferences": [
+        "ditchfield1971a"
+    ],
+    "basisSetElements": {
+        "1": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "18.7311370",
+                        "2.8253937",
+                        "0.6401217"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "0.03349460",
+                            "0.23472695",
+                            "0.81375733"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "0.1612778"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.00000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
