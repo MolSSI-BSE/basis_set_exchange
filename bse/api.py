@@ -21,6 +21,7 @@ default_schema_dir = os.path.join(my_dir, 'schema')
 def get_basis_set(name,
                   data_dir=default_data_dir,
                   elements=None,
+                  version=None,
                   fmt='dict',
                   uncontract_general=False,
                   uncontract_spdf=False,
@@ -31,7 +32,10 @@ def get_basis_set(name,
     in this project
     '''
 
-    table_basis_path = os.path.join(data_dir, name + '.table.json')
+    if version is None:
+        version = io.get_latest_version_number(name, data_dir)
+
+    table_basis_path = os.path.join(data_dir, name + '.{}.table.json'.format(version))
     bs = compose.compose_table_basis(table_basis_path)
 
     # Handle optional arguments
@@ -72,6 +76,7 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         # Prepare the metadata
         displayname = bs['basisSetName']
         defined_elements = list(bs['basisSetElements'].keys())
+        revision_desc = bs['basisSetRevisionDescription']
 
         function_types = set()
         for e in bs['basisSetElements'].values():
@@ -82,19 +87,28 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         internal_name = os.path.basename(bs_file_path)
         internal_name = internal_name.replace(".table.json", "")
 
+        # split out the version number
+        internal_name,ver = os.path.splitext(internal_name)
+        ver = int(ver[1:])
+
         single_meta = { 
             'displayname': displayname,
+            'revdesc': revision_desc,
             'elements': defined_elements,
             'functiontypes': list(function_types),
         }
 
+        # Select specific keys if key_filter is given
         if keys is not None:
             all_keys = list(single_meta.keys())
             for k in all_keys:
                 if not k in keys:
                     single_meta.pop(k)
-            
-        metadata[internal_name] = single_meta
+
+        if not internal_name in metadata: 
+            metadata[internal_name] = {ver: single_meta}
+        else:
+            metadata[internal_name][ver] = {ver: single_meta}
 
     return metadata
 
@@ -103,11 +117,11 @@ def get_formats():
     return list(converters.converter_map.keys())
 
 
-def get_references(name, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt='dict'):
+def get_references(name, version=None, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt='dict'):
 
     reffile_path = os.path.join(data_dir, reffile_name)
 
-    basis_dict = get_basis_set(name, data_dir=data_dir, elements=elements, fmt='dict')
+    basis_dict = get_basis_set(name, version=version, data_dir=data_dir, elements=elements, fmt='dict')
 
     ref_data = references.compact_references(basis_dict, reffile_path)
 

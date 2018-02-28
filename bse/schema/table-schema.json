@@ -7,6 +7,7 @@
         "molssi_bse_magic",
         "basisSetName",
         "basisSetDescription",
+        "basisSetRevisionDescription",
         "basisSetRole",
         "basisSetElements"
     ],
@@ -23,6 +24,10 @@
         },
         "basisSetDescription": {
             "description": "Brief description of the basis set",
+            "type": "string"
+        },
+        "basisSetRevisionDescription": {
+            "description": "Brief description of the difference between this revision and the last",
             "type": "string"
         },
         "basisSetRole": {
