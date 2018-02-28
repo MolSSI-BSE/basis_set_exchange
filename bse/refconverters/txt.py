@@ -26,7 +26,7 @@ def write_txt(refs):
         full_str += u'{}\n'.format(compact_elements(refinfo['elements']))
 
         if len(refinfo['refdata']) == 0:
-            full_str += u'    (...no reference...)\n'
+            full_str += u'    (...no reference...)\n\n'
         for r in refinfo['refdata']:
             full_str += u'{}\n\n'.format(ref_txt(r))
 

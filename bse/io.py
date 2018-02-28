@@ -19,11 +19,12 @@ def _sort_basis_dict(bs):
     """
 
     keyorder = [
-        'molssi_bse_magic', 'basisSetName', 'basisSetDescription', 'basisSetRole', 'basisSetReferences', 'basisSetNotes',
-        'basisSetElements', 'elementReferences', 'elementNotes', 'elementECPElectrons', 'elementElectronShells', 'elementECP',
-        'elementComponents', 'elementEntry', 'shellFunctionType', 'shellHarmonicType', 'shellRegion',
-        'shellAngularMomentum', 'shellExponents', 'shellCoefficients', 'potentialECPType', 'potentialAngularMomentum',
-        'potentialRExponents', 'potentialGaussianExponents', 'potentialCoefficients'
+        'molssi_bse_magic', 'basisSetName', 'basisSetDescription', 'basisSetRevisionDescription', 'basisSetRole',
+        'basisSetReferences', 'basisSetNotes', 'basisSetElements', 'elementReferences',
+        'elementECPElectrons', 'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
+        'shellFunctionType', 'shellHarmonicType', 'shellRegion', 'shellAngularMomentum', 'shellExponents',
+        'shellCoefficients', 'potentialECPType', 'potentialAngularMomentum', 'potentialRExponents',
+        'potentialGaussianExponents', 'potentialCoefficients'
     ]
 
     # Add integers for the elements
@@ -175,3 +176,14 @@ def get_basis_filelist(data_dir):
     """
 
     return glob.glob(os.path.join(data_dir, '*.table.json'))
+
+
+def get_latest_version_number(basis_name, data_dir):
+    """
+    Searches the filesystem for a basis with the given internal name and
+    returns an integer representing the latest version
+    """
+
+    all_version_files = glob.glob(os.path.join(data_dir, basis_name + '.*.table.json'))
+    all_versions = [ int(x.split('.')[-3]) for x in all_version_files ]
+    return sorted(all_versions)[-1]
