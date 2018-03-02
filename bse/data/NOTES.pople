@@ -1,0 +1,29 @@
+Notes about Pople basis sets
+============================
+
+K-LMG - type basis sets
+-----------------------
+
+There are a few types - 3-21G, 4-31G, 5-21G, 5-31G, 6-21G, 6-31G. Of these, only
+3-21G and 6-31G are regularly used.
+
+For hydrogen and helium, there is no split core/valence. Therefore,
+4-31G, 5-31G, and 6-31G are all equivalent for H and He.
+
+For Na-Ar (Z=11-18), 6-31G uses the same core as 6-21G (gorodon1982a) with
+a different valence (francl1982a). This is the only piece of 6-21G that is
+included in the BSE.
+
+Also, in 6-31G, K and Ca (Z=19 and 20) were defined in rassolov1998a, with additional
+functions added in rassolov2001a. These modifications were missing in the original BSE.
+
+5-21G is only included in the original BSE due to Gaussian using it for Li and B for
+the 4-31G basis set. I believe they are rarely used.
+
+dill1975a defines basis sets 5-21G/6-31G for Li, Be, and B (6-31G only). However, the basis sets
+for Be were superceded in binkley1977a. The original data from dill is not included in the
+new BSE.
+
+3-21G was developed later, and uses pieces of the Huzinaga MINI basis set for the
+core and some valence.
+
