@@ -1,0 +1,28 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "6-31G* Polarization",
+    "basisSetDescription": "1P      Polarization functions associated with 6-31G",
+    "basisSetReferences": [ ],
+    "basisSetElements": {
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "cartesian",
+                    "shellRegion": "polarization",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "1.100000"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "1.000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
