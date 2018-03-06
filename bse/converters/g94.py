@@ -5,7 +5,7 @@ from .common import *
 
 
 def write_g94(basis):
-    s = u'! G94 Basis set: ' + basis['basisSetName'] + '\n'
+    s = u'! Basis set: ' + basis['basisSetName'] + '\n'
 
     unc_basis = manip.uncontract_general(basis)
 

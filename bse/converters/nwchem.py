@@ -5,7 +5,7 @@ from .common import *
 
 
 def write_nwchem(basis):
-    s = u'# NWChem Basis set: ' + basis['basisSetName'] + '\n'
+    s = u'# Basis set: ' + basis['basisSetName'] + '\n'
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['basisSetElements'].items() if 'elementElectronShells' in v]
@@ -22,7 +22,7 @@ def write_nwchem(basis):
 
         sym = lut.element_sym_from_Z(z, True)
 
-        s += '# BASIS SET: {}\n'.format(manip.contraction_string(data))
+        s += '#BASIS SET: {}\n'.format(manip.contraction_string(data))
 
         for shell in data['elementElectronShells']:
             am = shell['shellAngularMomentum']
