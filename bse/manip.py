@@ -75,7 +75,9 @@ def merge_element_data(dest, sources):
         if 'elementReferences' in s:
             if 'elementReferences' not in ret:
                 ret['elementReferences'] = []
-            ret['elementReferences'].extend(s['elementReferences'])
+            for ref in s['elementReferences']:
+                if not ref in ret['elementReferences']:
+                    ret['elementReferences'].append(ref)
 
     # Sort the shells by angular momentum
     ret['elementElectronShells'].sort(key=lambda x: x['shellAngularMomentum'])
