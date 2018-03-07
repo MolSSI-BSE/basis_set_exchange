@@ -1,0 +1,27 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetName": "6-31G* Polarization",
+    "basisSetDescription": "1P      Polarization functions associated with 6-31G",
+    "basisSetElements": {
+        "1": {
+            "elementComponents": [
+                "pople/31G_ditchfield1971a.0.json",
+                "pople/6-31G-diffuse_clark1983a.0.json"
+            ]
+        },
+        "19": {
+            "elementComponents": [
+                "pople/6-31G_rassolov1998a.0.json",
+                "pople/6-31G-add-K-Ca_rassolov2001a.0.json",
+                "pople/6-31G-diffuse_noref.0.json"
+            ]
+        },
+        "20": {
+            "elementComponents": [
+                "pople/6-31G_rassolov1998a.0.json",
+                "pople/6-31G-add-K-Ca_rassolov2001a.0.json",
+                "pople/6-31G-diffuse_noref.0.json"
+            ]
+        }
+    }
+}

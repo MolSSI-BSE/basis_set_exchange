@@ -16,9 +16,10 @@ def compose_elemental_basis(file_path):
     information together into one 'elemental' basis dictionary
     """
 
-    # Where to look for components (should be in the same directory
-    # as the given file_path)
+    # Where to look for components (should be relative to the parent
+    # of the given file_path)
     data_dir = os.path.dirname(file_path)
+    data_dir = os.path.dirname(data_dir)
 
     # Do a simple read of the json
     js = io.read_json_basis(file_path)
@@ -64,8 +65,8 @@ def compose_table_basis(file_path):
     information together into one 'table' basis dictionary
     """
 
-    # Where to look for components (should be in the same directory
-    # as the given file_path)
+    # Where to look for components (should be relative to the directory
+    # of the given file_path)
     data_dir = os.path.dirname(file_path)
 
     # Do a simple read of the json
