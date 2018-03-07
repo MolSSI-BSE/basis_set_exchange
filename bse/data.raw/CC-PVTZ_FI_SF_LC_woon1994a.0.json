@@ -1,0 +1,93 @@
+{
+    "molssi_bse_magic": 1,
+    "basisSetDescription": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
+    "basisSetReferences": [
+        "woon1994a"
+    ],
+    "basisSetElements": {
+        "2": {
+            "elementElectronShells": [
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        0
+                    ],
+                    "shellExponents": [
+                        "2.3400000E+02",
+                        "3.5160000E+01",
+                        "7.9890000E+00",
+                        "2.2120000E+00",
+                        "6.6690000E-01",
+                        "2.0890000E-01"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "2.59172921138E-03",
+                            "1.95443472567E-02",
+                            "9.10178868220E-02",
+                            "2.72061690222E-01",
+                            "4.78048506632E-01",
+                            "3.07703834946E-01"
+                        ],
+                        [
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "9.99955838724E-01",
+                            "0.00000000000E+00"
+                        ],
+                        [
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "0.00000000000E+00",
+                            "9.99986683475E-01"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        1
+                    ],
+                    "shellExponents": [
+                        "3.0440000E+00",
+                        "7.5800000E-01"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "9.99974775667E-01",
+                            "0.00000000000E+00"
+                        ],
+                        [
+                            "0.00000000000E+00",
+                            "9.99898745699E-01"
+                        ]
+                    ]
+                },
+                {
+                    "shellFunctionType": "gto",
+                    "shellHarmonicType": "spherical",
+                    "shellRegion": "valence",
+                    "shellAngularMomentum": [
+                        2
+                    ],
+                    "shellExponents": [
+                        "1.9650000E+00"
+                    ],
+                    "shellCoefficients": [
+                        [
+                            "9.99908487020E-01"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
