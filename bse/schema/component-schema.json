@@ -5,7 +5,6 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_magic",
-        "basisSetName",
         "basisSetDescription",
         "basisSetElements"
     ],
@@ -15,10 +14,6 @@
             "description": "Magic number for BSE project",
             "type": "integer",
             "enum": [ 1 ]
-        },
-        "basisSetName": {
-            "description": "Common name for the basis set",
-            "type": "string"
         },
         "basisSetDescription": {
             "description": "Brief description of the basis set",
