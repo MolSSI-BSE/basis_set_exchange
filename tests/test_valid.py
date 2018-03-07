@@ -14,6 +14,7 @@ def test_valid():
     # Validate all the data files in the data directory
     # against their respective schemas
     filelist = glob.glob(data_dir + "/*.json")
+    filelist.extend(glob.glob(data_dir + "/*/*.json"))
 
     for f in filelist:
         if f.endswith('REFERENCES.json'):

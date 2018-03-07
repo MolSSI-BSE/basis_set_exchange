@@ -1,0 +1,146 @@
+FROM DESCRIPTION:
+----------------
+1. GENERAL DESCRIPTION 
+  Def2-bases form a system of segmented contracted basis sets for the 
+  elements H-Rn for different levels of flexibility/accuracy. The 
+  respective basis set types are named def2-SV(P) to def2-QZVPP. These 
+  basis sets are designed to give similar errors all accross the 
+  periodic table for a given basis set type. They were tested for a set 
+  of ca. 300 molecules representing nearly each element in nearly all 
+  of its common oxidation states. These basis sets were derived from 
+  previous Karlsruhe bases ("def-SV(P)", etc.) in many cases.
+  Details of developent and coordinates of test compounds are given in
+  [1] F. Weigend, R. Ahlrichs, Phys.Chem.Chem.Phys., 2005, 7, 3297?3305.
+  Basis for this work are preceding treatments:
+  [2] A. Schaefer, H. Horn, R. Ahlrichs, 
+      J. Chem. Phys., 1992, 97(4), 2571?2577.
+  [3] A. Schaefer, C. Huber, R. Ahlrichs, 
+      J. Chem. Phys., 1994, 100(8), 5829?5835.
+  [4] K. Eichkorn, F. Weigend, O. Treutler, R. Ahlrichs, 
+      Theor. Chem. Acc., 1997, 97, 119?124.
+  [5] F. Weigend, F. Furche, R. Ahlrichs,
+      J. Chem. Phys. ,2003, 119(24), 12753?12762.
+  For the elements beyond Krypton def2-bases are designed to be used 
+  with ECPs:
+  Y-Cd(ecp-28), Hf-Hg(ecp-46):
+  [6] D. Andrae,U. Haeussermann, M.Dolg, H.Stoll, H.Preuss, 
+      Theor.Chim.Acta, 1990, 77, 123?141.
+  In-Sb(ecp-28), Tl-Bi(ecp-46):
+  [7] B. Metz, H. Stoll, M. Dolg, 
+      J. Chem. Phys., 2000, 113, 2563?2569.
+  Te-Xe(ecp-28), Po-Rn(ecp-46):
+  [8]K. A. Peterson, D. Figgen, E. Goll, H. Stoll, M. Dolg, 
+     J. Chem. Phys., 2003, 119, 11113?11123.
+  Rb(ecp-28), Cs(ecp-46):
+  [9] T.Leininger, A.Nicklass, W.Kuechle, H.Stoll, M.Dolg, A.Bergner, 
+      Chem. Phys. Lett., 1996, 255, 274?280.
+  Sr(ecp-28), Ba(ecp-46):
+  [10] M. Kaupp, P. V. Schleyer, H. Stoll and H. Preuss, 
+       J. Chem. Phys., 1991, 94, 1360?1366.
+2. RECOMMENDATIONS:
+  A) How to use
+     Summarizing the results of ref.1 we may roughly give the 
+     following scheme:
+   ____________________________________________________________________ 
+  |                                                                    |
+  |Accuracy:   - exploratory - qualitative - quantitative  -  cbs-limit|
+  |                                                                    |  
+  |Typical errors*           30            10          3        1      |
+  |                                                                    |
+  | HF                          SVP             TZVPP       QZVPP      |
+  | DFT                         SV(P)           TZVP        QZVP       |
+  | MP2              SVP         TZVPP       QZVPP                     |
+  |                                                                    |
+  |                                                                    |
+  |*:atomization energy per atom kJ/mol                                |
+  |____________________________________________________________________|
+   B) How to quote
+     Use of def2-bases requires citation of ref.1 and in case of ECPs 
+     that of the respective reference. Further citation of ref.2-5 is 
+     recommended. Thus:
+               H-He    Y-Cd     Rb,Cs  Sr,Ba  Li,Mg  In-Sb  Te-Xe
+               B-Ne    La-Hg                  K,Ca   Tl-Bi  Po-Rn
+               Al-Ar                       
+               Sc-Kr                       
+     SV(P)/P   1,(2)   1,6,(4)  1,9    1,10   1       1,7    1,8 
+     TZVP/PP   1,(3)   1,6,(4)  1,9    1,10   1       1,7    1,8
+     QZVP/PP   1,(5)   1,6      1,9    1,10   1,(5)   1,7    1,8
+3. AVAILABILITY
+  def2-basis sets in original form can be retrieved from
+  http://www.ipc.uni-karlsruhe.de/tch/tch1/index.html
+  in formats TURBOMOLE, GAUSSIAN, DALTON and MOLPRO.
+4. MOST RELEVANT DATA/RESULTS OF REFERENCE 1 (FOR CONVENIENCE):
+  A)Numbers of contraction basis functions (for representative 
+    elements, slight deviations within a period):
+    def2- QZVPP    QZVP   TZVPP TZVP  SVP SV(P) 
+          spdfg    spdfg  spdfg spdf  spdf spd
+    H     4321     4321   321   31    21   2   
+    N     74321    74321  5321  5321  321  321
+    P     96421    96421  5531  5521  431  431
+    As (11)7441 (11)7421  6541  6541  543  543
+    Sb    76441    76441  6532  6532  442  442
+    Bi    76441    76441  6532  6532  442  442
+    Mn (11)6542 (11)6531  65421 6441  5321 532
+    Tc    75442    75431  64321 6431  5321 532
+    Re    75442    75431  64321 6431  6321 632
+    Li    6421     6421   531   53    32   32 
+    Na    9542     9531   543   543   421  421
+    K  (11)643  (11)641   643   643   532  532
+    Rb    7543     7541   6431  643   532  532
+    Cs    6533     6531   5331  533   532  532
+    Be    7421     7421   531   531   32   32 
+    Mg    9552     9541   543   543   431  431
+    Ca (11)643  (11)641   653   653   532  532
+    Sr    7543     7541   6431  643   432  432
+    Ba    7533     7531   6431  6431  432  432
+  B) Accuracy: 
+     Differences in atomization energies per atom, in kJ/mol:
+     a) def-QZVPP to limit (typically): HF,DFT<1, MP2:ca.5
+     b) smaller def2-bases vs. def2-QZVPP by statistical evaluation 
+        all over the test set, see below; "avg":average, 
+	"sig":standard deviation.
+                   HF       DFT(BP86)      MP2
+                 avg sig    avg sig     avg sig
+    def2-SV(P)  -150 159    -60 102    -387 163
+    def2-SVP     -92 108    -21  91    -312 156
+    def2-TZVP    -38  35    -27  22    -119  52
+    def2-TZVPP   -21  23    -11  18     -96  43
+    def2-QZVP     -2   6     -1   4      -3  14
+  C) Compounds included in the test set:
+    BaF, BaF2, BaH2, BaO, BaS, Be2F4, Be2H4, Be4, BeC2H6, BeF2O2H4, 
+    BeH2, BeS, CaCl2, CaF2, CaH2, CsF, CsH, CsO, K2S, K3P, KBr, KCl, 
+    KF, KH, KI, Li2, Li2O, Li4C4H12, Li4Cl4, Li4H4, Li8, LiBH4, LiCl, 
+    LiF, LiH, LiSLi, Mg4, MgCl2, MgF, MgF2, MgH2, Na2O, Na2S, Na3N, 
+    Na3P, NaCl, NaF, NaH, PLi3, RbF, RbH, RbO, SrF, SrF2, SrH2, SrO, 
+    SrS, 
+    B2H6, B3N3H6, B4H4, BF3, BH3, BH3CO, BH3NH3, C2H2, C2H3N, C2H4, 
+    C2H6, C4H4, C6H6, CF4, CH2O, CH2O2, CH3N, CH3OH, CH4, CO, CO2, F2, 
+    H2, H2CO3, H2O, H2O2, HCN, HF, HNC, HNO, HNO2, HNO3, N2, N2H2, 
+    N2H4, N4, NF3, NH3, NH4F, OF2, Al2O3, Al2S3, AlCl3, AlF3, AlH3, 
+    AlN, CS2, Cl2, ClF, ClF3, H2SO4, H3PO4, HCP, HCl, HSH, HSSH, P2, 
+    PF3, PF5, PH3, S2, S5, SF2, SF4, SF6, SiCl4, SiF4, SiH4, SiO2, 
+    SiS2, As4 , As4S4, AsCl3, AsCl6, AsH3, Br2, BrCl, BrO4, GaCl, 
+    GaCl3, GaF, GaF2, GaH3, GaO, GeCl4, GeF3, GeF4, GeH4, GeO, GeO2, 
+    HBr, HCBr3, Se8, SeH2, SeO, SeO2, I2, ICl, IH, IO4, InCl, InCl3, 
+    InH, InH3, InO, SbCl6, SbF, SbF3, SbH3, SbO2, SnF3, SnH4, SnO, SnO2,
+    TeF3, TeH2, TeO, TeO2, XeF2, XeF4, XeOF4, BiCl6, BiF, BiF3, BiH3, 
+    BiO2, PbF3, PbH4, PbO, PbO2, TlCl, TlCl3, TlH, TlH3, TlO, 
+    CoCl3, CoF2, CoF3, Cr(CO)6, CrCl3, CrF3, CrO3, Cu2, Cu2O, Cu2S, 
+    CuCN, CuCl, CuF, CuH, Fe(CO)5, FeF2, FeF3, FeO, Ferrocene, MnF2, 
+    MnO, MnO2, MnO3F, MnO4, MnS, Ni(CO)4, NiCl2, NiF2, NiF3, NiO,
+    NiS, ScCl3, ScF3, ScH3, ScO, Ti(CO)4, TiCl4, TiF3, TiF4, TiH4, TiO, 
+    TiO2, TiS2, VH5, VO, VOF3, ZnCl2, ZnF2, ZnH2, ZnMe2, Ag2, AgCl, 
+    CdF2, CdMe2, Mo(CO)6, MoF3, MoH, MoO2, MoO3, NbF3, NbO, NbO2, NbO2F,
+    Pd(CO)4, PdF, PdO2, RhF, RhF4, RhF6, RhO, Ru(CO)5, RuF, RuO, RuO2, 
+    RuO4, Tc2O7, TcO, TcO3F, YF, YF3, YO, ZrF, ZrF3, ZrO, ZrO2, Au2, 
+    Au3, AuCl, AuCl3, HfF, HfF3, HfO, HfO2, Hg2Cl2, HgF2, HgMe2, IrF6, 
+    Os(CO)5, OsO2, OsO3, OsO4, OsOF5, Pt(CO)4, PtO, PtO2, ReH, ReO, 
+    ReO2, ReO3, ReO3F, TaF, TaF3, TaO2F, W(CO)6, WF3, WH, WO, WO2, WO3.
+FROM REFERENCE:
+----------------
+Elements                             References
+--------                             ----------
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn: F. Weigend and R. Ahlrichs, Phys. Chem. Chem. Phys., Balanced basis sets of split valence, triple zeta valence and quadruple zeta valence
+quality for H to Rn Design and assessment of accuracy 7, 3297 (2005).
+
+
