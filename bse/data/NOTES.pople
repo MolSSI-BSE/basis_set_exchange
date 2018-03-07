@@ -1,31 +1,53 @@
 Notes about Pople basis sets
 ============================
 
-K-LMG - type basis sets
------------------------
+There are a few types - 3-21G, 4-31G, 5-21G, 5-31G, 6-21G, 6-31G. Of
+these, only 3-21G and 6-31G are regularly used.
 
-There are a few types - 3-21G, 4-31G, 5-21G, 5-31G, 6-21G, 6-31G. Of these, only
-3-21G and 6-31G are regularly used.
+5-21G is only included in the original BSE due to Gaussian using it for
+Li and B for the "4-31G" basis set. I believe they are rarely used.
 
 For hydrogen and helium, there is no split core/valence. Therefore,
-4-31G, 5-31G, and 6-31G are all equivalent for H and He.
+4-31G, 5-31G, and 6-31G are all equivalent for H and He. These basis
+sets are stored in the 31G-* files.
 
-Note: In the BSE, the H basis for 6-31G and 4-31G differ slightly
+For beryllium, the 5-21G/6-31G basis sets given in dill1975a were
+superseded by ones given in binkley1977a. The original data from dill1975a
+is not included in the new BSE.
 
-For Na-Ar (Z=11-18), 6-31G uses the same core as 6-21G (gorodon1982a) with
-a different valence (francl1982a). This is the only piece of 6-21G that is
-included in the BSE.
+For 6-31G, the basis sets for potassium and calcium were originally
+given in rassolov1998a, along with d-type polarization functions with an
+exponent of 0.2000.  Rassolov2001a updates these basis sets, adding extra
+d functions to the valence. In doing so, the d-type polarization functions
+were also updated, to be 1/4 the smallest valence d function.  As far
+as I know, the diffuse functions have been updated.
 
-Also, in 6-31G, K and Ca (Z=19 and 20) were defined in rassolov1998a, with additional
-functions added in rassolov2001a. These modifications were missing in the original BSE.
+There does not appear to be diffuse functions available for helium.
 
-5-21G is only included in the original BSE due to Gaussian using it for Li and B for
-the 4-31G basis set. I believe they are rarely used.
+For Na-Ar (Z=11-18), 6-31G uses the same core as 6-21G (gorodon1982a)
+with a different valence (francl1982a). This is the only piece of 6-21G
+that is included in the BSE.
 
-dill1975a defines basis sets 5-21G/6-31G for Li, Be, and B (6-31G only). However, the basis sets
-for Be were superceded in binkley1977a. The original data from dill is not included in the
-new BSE.
+TODO: INSERT NOTE ABOUT HE,NE COMING FROM GAUSSIAN
+
+
+3-21G basis
+-----------
 
 3-21G was developed later, and uses pieces of the Huzinaga MINI basis set for the
 core and some valence.
+
+
+Differences/Issues with the original BSE
+----------------------------------------
+
+The original BSE sometimes truncates to a fixed number of decimal places, removing
+significant figures. 
+
+In the original BSE, the H basis for 6-31G and 4-31G differ slightly,
+possibly due to transcription error. The 6-31G basis set for H in
+GAMESS and Gaussion both agree with the basis set given in 4-31G in the
+original BSE.
+
+The original BSE was missing the modified potassium and calcium given in rassolov2001a.
 
