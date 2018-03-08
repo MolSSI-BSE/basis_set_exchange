@@ -21,12 +21,19 @@ def contraction_string(element):
     cont_map = dict()
     for sh in element['elementElectronShells']:
         nprim = len(sh['shellExponents'])
+        ngeneral = len(sh['shellCoefficients'])
+
+        # is a combined general contraction (sp, spd, etc)
+        is_spdf = len(sh['shellAngularMomentum']) > 1
 
         for am in sh['shellAngularMomentum']:
+            # If this a general contraction (and not combined am), then use that
+            ncont = ngeneral if not is_spdf else 1
+
             if am not in cont_map:
-                cont_map[am] = (nprim, 1)
+                cont_map[am] = (nprim, ncont)
             else:
-                cont_map[am] = (cont_map[am][0] + nprim, cont_map[am][1] + 1)
+                cont_map[am] = (cont_map[am][0] + nprim, cont_map[am][1] + ncont)
 
     primstr = ""
     contstr = ""
