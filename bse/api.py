@@ -36,6 +36,13 @@ def get_basis_set(name,
         version = io.get_latest_version_number(name, data_dir)
 
     table_basis_path = os.path.join(data_dir, name + '.{}.table.json'.format(version))
+
+    # Check here for a better error message. Otherwise, It will also be
+    # checked later, but the error message will be a little more cryptic
+    if not os.path.isfile(table_basis_path):
+        raise RuntimeError('Basis set \'{}\' (version {}) does not exist, or the '
+                           'basis set file is not readable'.format(name, version))
+
     bs = compose.compose_table_basis(table_basis_path)
 
     # Handle optional arguments
