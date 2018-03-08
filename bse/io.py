@@ -186,4 +186,8 @@ def get_latest_version_number(basis_name, data_dir):
 
     all_version_files = glob.glob(os.path.join(data_dir, basis_name + '.*.table.json'))
     all_versions = [ int(x.split('.')[-3]) for x in all_version_files ]
+
+    if len(all_versions) == 0:
+        raise RuntimeError('Basis set \'{}\' does not exist'.format(basis_name))
+
     return sorted(all_versions)[-1]
