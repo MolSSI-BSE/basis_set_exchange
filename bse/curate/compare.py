@@ -25,17 +25,18 @@ def _compare_vector(arr1, arr2):
         return False
 
     for i in range(length):
-        element_1 = float(arr1(i))
-        element_2 = float(arr2(i))
+        element_1 = float(arr1[i])
+        element_2 = float(arr2[i])
 
 
         diff = abs(abs(element_1) - abs(element_2))
-        rel = diff / min(abs(element_1), abs(element_2))
+        if diff != 0.0:
+            rel = diff / min(abs(element_1), abs(element_2))
         
-        # For a basis set, a relatively coarse comparison
-        # should be acceptible
-        if rel > 1.0e-10:
-            return False
+            # For a basis set, a relatively coarse comparison
+            # should be acceptible
+            if rel > 1.0e-10:
+                return False
 
     return True
 
@@ -55,7 +56,7 @@ def _compare_matrix(mat1, mat2):
         return False
 
     for i in range(length):
-        if _compare_vector(mat1(i), mat2(i)) == False:
+        if _compare_vector(mat1[i], mat2[i]) == False:
             return False
 
     return True
