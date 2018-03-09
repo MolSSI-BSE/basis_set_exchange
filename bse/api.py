@@ -35,13 +35,7 @@ def get_basis_set(name,
     if version is None:
         version = io.get_latest_version_number(name, data_dir)
 
-    table_basis_path = os.path.join(data_dir, name + '.{}.table.json'.format(version))
-
-    # Check here for a better error message. Otherwise, It will also be
-    # checked later, but the error message will be a little more cryptic
-    if not os.path.isfile(table_basis_path):
-        raise RuntimeError('Basis set \'{}\' (version {}) does not exist, or the '
-                           'basis set file is not readable'.format(name, version))
+    table_basis_path = io.get_basis_file_path(name, version, data_dir)
 
     bs = compose.compose_table_basis(table_basis_path)
 
@@ -99,7 +93,6 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         ver = int(ver[1:])
 
         single_meta = { 
-            'displayname': displayname,
             'revdesc': revision_desc,
             'elements': defined_elements,
             'functiontypes': list(function_types),
@@ -112,10 +105,10 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
                 if not k in keys:
                     single_meta.pop(k)
 
-        if not internal_name in metadata: 
-            metadata[internal_name] = {ver: single_meta}
+        if not displayname in metadata: 
+            metadata[displayname] = {ver: single_meta}
         else:
-            metadata[internal_name][ver] = {ver: single_meta}
+            metadata[displayname][ver] = single_meta
 
     return metadata
 
