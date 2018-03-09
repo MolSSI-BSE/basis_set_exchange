@@ -178,16 +178,49 @@ def get_basis_filelist(data_dir):
     return glob.glob(os.path.join(data_dir, '*.table.json'))
 
 
+def get_files_for_basis(basis_name, data_dir):
+    """
+    Searches the filesystem for a basis with the given 'display' name and
+    returns which files contain that basis
+    """
+
+    all_basis_files = get_basis_filelist(data_dir)
+
+    containing_files = []
+
+    for basis_file in all_basis_files:
+        displayname = read_json_basis(basis_file)['basisSetName']
+        if displayname == basis_name:
+            containing_files.append(basis_file)
+
+    return containing_files
+
+
+def get_basis_file_path(basis_name, version, data_dir):
+
+    basis_files = get_files_for_basis(basis_name, data_dir)
+
+    if len(basis_files) == 0:
+        raise RuntimeError('Basis set \'{}\' does not exist'.format(basis_name, version))
+
+    for bf in basis_files:
+        if bf.endswith('{}.table.json'.format(version)):
+            return bf 
+    else:
+        raise RuntimeError('Basis set \'{}\' (version {}) does not exist, or the '
+                           'basis set file is not readable'.format(basis_name, version))
+    
+
 def get_latest_version_number(basis_name, data_dir):
     """
     Searches the filesystem for a basis with the given internal name and
     returns an integer representing the latest version
     """
 
-    all_version_files = glob.glob(os.path.join(data_dir, basis_name + '.*.table.json'))
-    all_versions = [ int(x.split('.')[-3]) for x in all_version_files ]
+    all_version_files = get_files_for_basis(basis_name, data_dir)
 
-    if len(all_versions) == 0:
+    if len(all_version_files) == 0:
         raise RuntimeError('Basis set \'{}\' does not exist'.format(basis_name))
 
+    all_versions = [ int(x.split('.')[-3]) for x in all_version_files ]
     return sorted(all_versions)[-1]
