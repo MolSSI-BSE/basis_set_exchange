@@ -90,6 +90,8 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         for e in bs['basisSetElements'].values():
             for s in e['elementElectronShells']:
                 function_types.add(s['shellFunctionType'])
+            if 'elementECP' in e:
+                function_types.add('ECP')
 
         # convert the file path to the internal identifier for the basis set
         internal_name = os.path.basename(bs_file_path)
