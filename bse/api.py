@@ -22,7 +22,7 @@ def get_basis_set(name,
                   data_dir=default_data_dir,
                   elements=None,
                   version=None,
-                  fmt='dict',
+                  fmt=None,
                   uncontract_general=False,
                   uncontract_spdf=False,
                   uncontract_segmented=False):
@@ -30,6 +30,8 @@ def get_basis_set(name,
 
     The path to the basis set file is taken to be the 'data' directory
     in this project
+
+    fmt is case insensitive
     '''
 
     if version is None:
@@ -57,10 +59,15 @@ def get_basis_set(name,
     if uncontract_segmented:
         bs = manip.uncontract_segmented(bs)
 
-    if not fmt in converters.converter_map:
-        raise RuntimeError('Unknown format {}'.format(fmt))
+    if fmt is None:
+        return bs
+
+    # make converters case insensitive
+    fmt = fmt.lower()
+    if fmt in converters.converter_map:
+        return converters.converter_map[fmt]['function'](bs)
     else:
-        return converters.converter_map[fmt](bs)
+        raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
 
 def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
@@ -114,27 +121,32 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
 
 
 def get_formats():
-    return list(converters.converter_map.keys())
+    return converters.converter_map.keys()
 
 
-def get_references(name, version=None, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt='dict'):
+def get_references(name, version=None, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt=None):
 
     reffile_path = os.path.join(data_dir, reffile_name)
 
-    basis_dict = get_basis_set(name, version=version, data_dir=data_dir, elements=elements, fmt='dict')
+    basis_dict = get_basis_set(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
 
     ref_data = references.compact_references(basis_dict, reffile_path)
 
-    if not fmt in refconverters.converter_map:
-        raise RuntimeError('Unknown format {}'.format(fmt))
+    if fmt is None:
+        return ref_data
+
+    # Make fmt case insensitive
+    fmt = fmt.lower()
+    if fmt in refconverters.converter_map:
+        return refconverters.converter_map[fmt]['function'](ref_data)
     else:
-        return refconverters.converter_map[fmt](ref_data)
+        raise RuntimeError('Unknown reference format "{}"'.format(fmt))
 
     return ref_data
 
 
 def get_reference_formats():
-    return list(refconverters.converter_map.keys())
+    return refconverters.converter_map.keys()
 
 
 def get_schema(schema_type):
