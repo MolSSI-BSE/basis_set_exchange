@@ -84,6 +84,7 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         # Prepare the metadata
         displayname = bs['basisSetName']
         defined_elements = list(bs['basisSetElements'].keys())
+        description = bs['basisSetDescription']
         revision_desc = bs['basisSetRevisionDescription']
 
         function_types = set()
@@ -102,6 +103,7 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         ver = int(ver[1:])
 
         single_meta = { 
+            'description': description,
             'revdesc': revision_desc,
             'elements': defined_elements,
             'functiontypes': list(function_types),
@@ -119,11 +121,16 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
         else:
             metadata[displayname][ver] = single_meta
 
+
+    # find the max version
+    for k,v in metadata.items():
+        metadata[k]['latest_version'] = max(metadata[k].keys())
+
     return metadata
 
 
 def get_formats():
-    return converters.converter_map.keys()
+    return converters.converter_map
 
 
 def get_references(name, version=None, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt=None):
@@ -148,7 +155,7 @@ def get_references(name, version=None, data_dir=default_data_dir, reffile_name='
 
 
 def get_reference_formats():
-    return refconverters.converter_map.keys()
+    return refconverters.converter_map
 
 
 def get_schema(schema_type):
