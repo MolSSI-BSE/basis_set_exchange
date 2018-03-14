@@ -117,14 +117,14 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
                     single_meta.pop(k)
 
         if not displayname in metadata: 
-            metadata[displayname] = {ver: single_meta}
+            metadata[displayname] = {'versions': {ver: single_meta}}
         else:
-            metadata[displayname][ver] = single_meta
+            metadata[displayname]['versions'][ver] = single_meta
 
 
     # find the max version
     for k,v in metadata.items():
-        metadata[k]['latest_version'] = max(metadata[k].keys())
+        metadata[k]['latest_version'] = max(metadata[k]['versions'].keys())
 
     return metadata
 
