@@ -130,7 +130,7 @@ def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
 
 
 def get_formats():
-    return converters.converter_map
+    return { k:v['display'] for k,v in converters.converter_map.items() }
 
 
 def get_references(name, version=None, data_dir=default_data_dir, reffile_name='REFERENCES.json', elements=None, fmt=None):
@@ -155,7 +155,7 @@ def get_references(name, version=None, data_dir=default_data_dir, reffile_name='
 
 
 def get_reference_formats():
-    return refconverters.converter_map
+    return { k:v['display'] for k,v in refconverters.converter_map.items() }
 
 
 def get_schema(schema_type):

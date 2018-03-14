@@ -24,7 +24,7 @@ def test_get_basis_set():
         for ver in bs_metadata[basis_name]['versions'].keys():
 
             # TODO - test getting subsets of elements
-            for f in formats:
+            for f in formats.keys():
                 for unc in unc_comb:
                     bse.get_basis_set(basis_name, elements=None, fmt=f,
                                       version=ver,
@@ -40,7 +40,7 @@ def test_get_references():
 
     for basis_name in bs_metadata.keys():
         # TODO - test getting subsets of elements
-        for f in formats:
+        for f in formats.keys():
             bse.get_references(basis_name, elements=None, fmt=f)
 
 
