@@ -7,8 +7,7 @@ import hashlib
 import bse
 from bse import curate
 
-bse_path = bse.__path__[0]
-data_dir = os.path.join(bse_path, 'data')
+data_dir = bse.default_data_dir
 
 def test_get_metadata():
     bse.get_metadata()

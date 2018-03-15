@@ -6,8 +6,7 @@ import bse
 import glob
 import os
 
-bse_path = bse.__path__[0]
-data_dir = os.path.join(bse_path, 'data')
+data_dir = bse.default_data_dir
 
 def test_valid():
     # Validate all the data files in the data directory
