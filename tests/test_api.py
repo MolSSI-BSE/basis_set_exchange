@@ -42,9 +42,3 @@ def test_get_references():
         # TODO - test getting subsets of elements
         for f in formats.keys():
             bse.get_references(basis_name, elements=None, fmt=f)
-
-
-# TODO - Add keys to test (when filtering is available)
-@pytest.mark.parametrize("keys", [None])
-def test_get_metadata(keys):
-    bse.get_metadata(keys=keys, key_filter=None)

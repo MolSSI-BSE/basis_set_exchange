@@ -125,6 +125,30 @@ def read_references(file_path):
     return js
 
 
+def read_metadata(file_path):
+    """
+    Reads a file containing the metadata for all the basis sets
+
+    Parameters
+    ----------
+    file_path : str
+        Full path to the file to read
+    """
+
+    if not os.path.isfile(file_path):
+        raise RuntimeError('Metadata file \'{}\' does not exist, is not '
+                           'readable, or is not a file'.format(file_path))
+
+    with open(file_path, 'r') as f:
+        js = json.load(f)
+
+    # Change version numbers to integers
+    for k,v in js.items():
+        v['versions'] = { int(k2):v2 for k2,v2 in v['versions'].items() }
+
+    return js
+
+
 def dump_basis(bs):
     """
     Returns a string with all the basis information (pretty-printed)
@@ -166,7 +190,7 @@ def write_references(file_path, refs):
     # Disable ascii in the json - this prevents the json writer
     # from escaping everything
     with codecs.open(file_path, 'w', 'utf-8') as f:
-        js = json.dump(_sort_references_dict(refs), f, indent=4, ensure_ascii=False)
+        json.dump(_sort_references_dict(refs), f, indent=4, ensure_ascii=False)
 
 
 def get_basis_filelist(data_dir):

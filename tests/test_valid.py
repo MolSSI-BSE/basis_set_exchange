@@ -17,6 +17,8 @@ def test_valid():
     filelist.extend(glob.glob(data_dir + "/*/*.json"))
 
     for f in filelist:
+        if f.endswith('METADATA.json'):
+            continue
         if f.endswith('REFERENCES.json'):
             bse.validate('references', f)
         elif f.endswith('.table.json'):

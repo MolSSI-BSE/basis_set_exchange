@@ -34,11 +34,17 @@ def get_basis_set(name,
     fmt is case insensitive
     '''
 
+    metadata = get_metadata(data_dir)
+
+    if not name in metadata:
+        raise RuntimeError("Basis set {} does not exist".format(name))
+
+    bs_data = metadata[name]
+
     if version is None:
-        version = io.get_latest_version_number(name, data_dir)
+        version = bs_data['latest_version']
 
-    table_basis_path = io.get_basis_file_path(name, version, data_dir)
-
+    table_basis_path = os.path.join(data_dir, bs_data['versions'][version]['filename'])
     bs = compose.compose_table_basis(table_basis_path)
 
     # Handle optional arguments
@@ -70,63 +76,9 @@ def get_basis_set(name,
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
 
-def get_metadata(keys=None, key_filter=None, data_dir=default_data_dir):
-    if key_filter:
-        raise NotImplementedError("key_filter not implemented")
-
-    basis_filelist = io.get_basis_filelist(data_dir)
-
-    metadata = {}
-    for bs_file_path in basis_filelist:
-        # Actually compose the basis set from components
-        bs = compose.compose_table_basis(bs_file_path)
-
-        # Prepare the metadata
-        displayname = bs['basisSetName']
-        defined_elements = list(bs['basisSetElements'].keys())
-        description = bs['basisSetDescription']
-        revision_desc = bs['basisSetRevisionDescription']
-
-        function_types = set()
-        for e in bs['basisSetElements'].values():
-            for s in e['elementElectronShells']:
-                function_types.add(s['shellFunctionType'])
-            if 'elementECP' in e:
-                function_types.add('ECP')
-
-        # convert the file path to the internal identifier for the basis set
-        internal_name = os.path.basename(bs_file_path)
-        internal_name = internal_name.replace(".table.json", "")
-
-        # split out the version number
-        internal_name,ver = os.path.splitext(internal_name)
-        ver = int(ver[1:])
-
-        single_meta = { 
-            'description': description,
-            'revdesc': revision_desc,
-            'elements': defined_elements,
-            'functiontypes': list(function_types),
-        }
-
-        # Select specific keys if key_filter is given
-        if keys is not None:
-            all_keys = list(single_meta.keys())
-            for k in all_keys:
-                if not k in keys:
-                    single_meta.pop(k)
-
-        if not displayname in metadata: 
-            metadata[displayname] = {'versions': {ver: single_meta}}
-        else:
-            metadata[displayname]['versions'][ver] = single_meta
-
-
-    # find the max version
-    for k,v in metadata.items():
-        metadata[k]['latest_version'] = max(metadata[k]['versions'].keys())
-
-    return metadata
+def get_metadata(data_dir=default_data_dir):
+    metadata_file = os.path.join(data_dir, "METADATA.json")
+    return io.read_metadata(metadata_file)
 
 
 def get_formats():
