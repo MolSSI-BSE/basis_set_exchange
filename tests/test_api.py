@@ -5,18 +5,10 @@ Tests for the BSE exposed API
 import bse
 import pytest
 
-def test_get_basis_set():
-    # TODO change to nested pytest parametrize
-    # Test combinations of contration options
-    unc_comb = [(False, False, False),
-                (False, False, True),
-                (False, True, False),
-                (False, True, True),
-                (True, False, False),
-                (True, False, True),
-                (True, True, False),
-                (True, True, True)]
-
+@pytest.mark.parametrize('unc_general', [True, False])
+@pytest.mark.parametrize('unc_seg', [True, False])
+@pytest.mark.parametrize('unc_spdf', [True, False])
+def test_get_basis_set(unc_general, unc_seg, unc_spdf):
     bs_metadata = bse.get_metadata()
     formats = bse.get_formats()
 
@@ -25,12 +17,11 @@ def test_get_basis_set():
 
             # TODO - test getting subsets of elements
             for f in formats.keys():
-                for unc in unc_comb:
-                    bse.get_basis_set(basis_name, elements=None, fmt=f,
-                                      version=ver,
-                                      uncontract_general=unc[0],
-                                      uncontract_segmented=unc[1],
-                                      uncontract_spdf=unc[2])
+                bse.get_basis_set(basis_name, elements=None, fmt=f,
+                                  version=ver,
+                                  uncontract_general=unc_general,
+                                  uncontract_segmented=unc_seg,
+                                  uncontract_spdf=unc_spdf)
 
 
 

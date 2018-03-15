@@ -4,7 +4,6 @@ Validation tests for the data
 
 import bse
 import glob
-import pytest
 import os
 
 bse_path = bse.__path__[0]
