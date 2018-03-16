@@ -1,5 +1,6 @@
 import operator
 
+
 def _compare_keys(element1, element2, key, compare_func, *args):
     if key in element1 and key in element2:
         if not compare_func(element1[key], element2[key], *args):
@@ -28,11 +29,10 @@ def _compare_vector(arr1, arr2):
         element_1 = float(arr1[i])
         element_2 = float(arr2[i])
 
-
         diff = abs(abs(element_1) - abs(element_2))
         if diff != 0.0:
             rel = diff / min(abs(element_1), abs(element_2))
-        
+
             # For a basis set, a relatively coarse comparison
             # should be acceptible
             if rel > 1.0e-10:
@@ -60,7 +60,7 @@ def _compare_matrix(mat1, mat2):
             return False
 
     return True
-         
+
 
 def compare_shells(shell1, shell2, compare_meta=False):
     if shell1['shellAngularMomentum'] != shell2['shellAngularMomentum']:
@@ -145,23 +145,18 @@ def ecp_pots_are_equal(pots1, pots2, compare_meta=False):
     return ecp_pots_are_subset(pots1, pots2, compare_meta) and ecp_pots_are_subset(pots2, pots1, compare_meta)
 
 
-def compare_elements(element1, element2, compare_shells_meta=False,
-                     compare_ecp_pots_meta=False, compare_meta=False):
-    if not _compare_keys(element1, element2, 'elementElectronShells',
-                        shells_are_equal, compare_shells_meta):
+def compare_elements(element1, element2, compare_shells_meta=False, compare_ecp_pots_meta=False, compare_meta=False):
+    if not _compare_keys(element1, element2, 'elementElectronShells', shells_are_equal, compare_shells_meta):
         return False
 
-    if not _compare_keys(element1, element2, 'elementECP',
-                        ecp_pots_are_equal, compare_ecp_pots_meta):
-        return False; 
+    if not _compare_keys(element1, element2, 'elementECP', ecp_pots_are_equal, compare_ecp_pots_meta):
+        return False
 
     if not _compare_keys(element1, element2, 'elementECPElectrons', operator.eq):
-        return False; 
-
+        return False
 
     if compare_meta:
-        if not _compare_keys(element1, element2, 'elementReferences',
-                            shells_are_equal, operator.eq):
+        if not _compare_keys(element1, element2, 'elementReferences', shells_are_equal, operator.eq):
             return False
 
     return True

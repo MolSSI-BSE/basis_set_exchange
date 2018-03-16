@@ -1,4 +1,3 @@
-
 def create_reference_key(existing_references, author, year):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     test_key_base = author.lower() + ':' + str(year)
@@ -13,7 +12,7 @@ def create_reference_key(existing_references, author, year):
 
 def find_ref_by_doi(references, doi):
     test_doi = doi.strip().lower()
-    for k,v in references.items():
+    for k, v in references.items():
         if 'DOI' in v and v['DOI'].strip().lower() == test_doi:
             return k
     return None

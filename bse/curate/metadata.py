@@ -9,6 +9,7 @@ from collections import OrderedDict
 from .. import io
 from .. import compose
 
+
 def create_metadata_file(output_path, data_dir):
 
     basis_filelist = io.get_basis_filelist(data_dir)
@@ -40,29 +41,22 @@ def create_metadata_file(output_path, data_dir):
         internal_name = internal_name.replace(".table.json", "")
 
         # split out the version number
-        internal_name,ver = os.path.splitext(internal_name)
+        internal_name, ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = OrderedDict([ 
-            ('filename', filename),
-            ('description', description),
-            ('revdesc', revision_desc),
-            ('functiontypes', function_types),
-            ('elements', defined_elements)
-        ])
+        single_meta = OrderedDict([('filename', filename), ('description', description), ('revdesc', revision_desc),
+                                   ('functiontypes', function_types), ('elements', defined_elements)])
 
-        if not displayname in metadata: 
+        if not displayname in metadata:
             metadata[displayname] = {'versions': {ver: single_meta}}
         else:
             metadata[displayname]['versions'][ver] = single_meta
 
     # sort the versions and find the max version
-    for k,v in metadata.items():
-        metadata[k] = OrderedDict([
-            ('latest_version', max(v['versions'].keys())),
-            ('versions', OrderedDict(sorted(v['versions'].items())))
-        ])
-                                                 
+    for k, v in metadata.items():
+        metadata[k] = OrderedDict([('latest_version', max(v['versions'].keys())),
+                                   ('versions', OrderedDict(sorted(v['versions'].items())))])
+
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))
     with codecs.open(output_path, 'w', 'utf-8') as f:
