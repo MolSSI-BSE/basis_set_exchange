@@ -5,7 +5,7 @@ Main interface to BSE functionality
 import os
 import json
 import codecs
-import collections
+from collections import OrderedDict
 from .. import io
 from .. import compose
 
@@ -22,7 +22,7 @@ def create_metadata_file(output_path, data_dir):
 
         # Prepare the metadata
         displayname = bs['basisSetName']
-        defined_elements = list(bs['basisSetElements'].keys())
+        defined_elements = sorted(list(bs['basisSetElements'].keys()))
         description = bs['basisSetDescription']
         revision_desc = bs['basisSetRevisionDescription']
 
@@ -43,25 +43,27 @@ def create_metadata_file(output_path, data_dir):
         internal_name,ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = { 
-            'description': description,
-            'revdesc': revision_desc,
-            'elements': defined_elements,
-            'functiontypes': list(function_types),
-            'filename': filename 
-        }
+        single_meta = OrderedDict([ 
+            ('filename', filename),
+            ('description', description),
+            ('revdesc', revision_desc),
+            ('functiontypes', function_types),
+            ('elements', defined_elements)
+        ])
 
         if not displayname in metadata: 
             metadata[displayname] = {'versions': {ver: single_meta}}
         else:
             metadata[displayname]['versions'][ver] = single_meta
 
-    # find the max version
+    # sort the versions and find the max version
     for k,v in metadata.items():
-        metadata[k]['latest_version'] = max(metadata[k]['versions'].keys())
-
+        metadata[k] = OrderedDict([
+            ('latest_version', max(v['versions'].keys())),
+            ('versions', OrderedDict(sorted(v['versions'].items())))
+        ])
+                                                 
     # Write out the metadata
-    metadata_sorted = sorted(list(metadata.items()))
-    metadata_sorted = collections.OrderedDict(metadata_sorted)
+    metadata = OrderedDict(sorted(list(metadata.items())))
     with codecs.open(output_path, 'w', 'utf-8') as f:
-        json.dump(metadata_sorted, f, indent=4, ensure_ascii=False)
+        json.dump(metadata, f, indent=4, ensure_ascii=False)

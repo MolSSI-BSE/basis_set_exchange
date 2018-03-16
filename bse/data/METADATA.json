@@ -1,9 +1,14 @@
 {
     "3-21G": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "3-21G.0.table.json",
                 "description": "3-21G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -60,20 +65,20 @@
                     53,
                     54,
                     55
-                ],
+                ]
+            }
+        }
+    },
+    "4-31G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "4-31G.0.table.json",
+                "description": "4-31G valence double-zeta basis set",
+                "revdesc": "Original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "3-21G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "4-31G": {
-        "versions": {
-            "0": {
-                "description": "4-31G valence double-zeta basis set",
-                "revdesc": "Original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -86,37 +91,37 @@
                     15,
                     16,
                     17
-                ],
+                ]
+            }
+        }
+    },
+    "5-21G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "5-21G.0.table.json",
+                "description": "5-21G valence double-zeta basis set",
+                "revdesc": "Original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "4-31G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "5-21G": {
-        "versions": {
-            "0": {
-                "description": "5-21G valence double-zeta basis set",
-                "revdesc": "Original Basis Set Exchange",
                 "elements": [
                     3,
                     4
-                ],
+                ]
+            }
+        }
+    },
+    "6-21G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "6-21G.0.table.json",
+                "description": "6-21G valence double-zeta basis set",
+                "revdesc": "Original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "5-21G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "6-21G": {
-        "versions": {
-            "0": {
-                "description": "6-21G valence double-zeta basis set",
-                "revdesc": "Original Basis Set Exchange",
                 "elements": [
                     11,
                     12,
@@ -126,20 +131,20 @@
                     16,
                     17,
                     18
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-21G.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "6-31++G": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PPG.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -160,15 +165,15 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPG.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31PPG.1.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -189,20 +194,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPG.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31++G*": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PPGS.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -223,15 +228,15 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPGS.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31PPGS.1.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -252,20 +257,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPGS.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31++G**": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PPGSS.0.table.json",
                 "description": "6-31G valence double-zeta with diffuse functions and polarization",
                 "revdesc": "Original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -286,15 +291,15 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPGSS.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31PPGSS.1.table.json",
                 "description": "6-31G valence double-zeta with diffuse and polarization functions",
                 "revdesc": "Includes additional D functions for K,Ca. Fixes H to use 4-31G",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     3,
@@ -315,20 +320,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PPGSS.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31+G": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PG.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -350,15 +355,15 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PG.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31PG.1.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -380,20 +385,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PG.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31+G*": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PGS.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -415,15 +420,15 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PGS.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31PGS.1.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -445,20 +450,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PGS.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31+G**": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31PGSS.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -480,15 +485,15 @@
                     18,
                     19,
                     20
-                ],
+                ]
+            },
+            "1": {
+                "filename": "6-31PGSS.1.table.json",
+                "description": "6-31G",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "6-31PGSS.0.table.json"
-            },
-            "1": {
-                "description": "6-31G",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     3,
@@ -509,20 +514,20 @@
                     18,
                     19,
                     20
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31PGSS.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-311G": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "6-311G.0.table.json",
                 "description": "VTZ     Valence Triple Zeta: 3 Funct.'s/Valence AO",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -551,20 +556,20 @@
                     35,
                     36,
                     53
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-311G.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "6-311G*": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "6-311GS.0.table.json",
                 "description": "VTZ     Valence Triple Zeta: 3 Funct.'s/Valence AO",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -593,20 +598,20 @@
                     35,
                     36,
                     53
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-311GS.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "6-311G**": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "6-311GSS.0.table.json",
                 "description": "VTZ     Valence Triple Zeta: 3 Funct.'s/Valence AO",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -635,20 +640,20 @@
                     35,
                     36,
                     53
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-311GSS.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "6-31G": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31G.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -686,15 +691,15 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31G.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31G.1.table.json",
                 "description": "6-31G valence double-zeta",
                 "revdesc": "Includes additional D functions for K,Ca. Fixes H to use 4-31G",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -732,20 +737,20 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31G.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31G*": {
+        "latest_version": 1,
         "versions": {
             "0": {
+                "filename": "6-31GS.0.table.json",
                 "description": "6-31G",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -783,15 +788,15 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31GS.0.table.json"
+                ]
             },
             "1": {
+                "filename": "6-31GS.1.table.json",
                 "description": "6-31G",
                 "revdesc": "Adds extra d shells to K and Ca. Fixes H to use 4-31G",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -829,66 +834,20 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31GS.1.table.json"
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
     "6-31G**": {
+        "latest_version": 1,
         "versions": {
-            "1": {
-                "description": "6-31G",
-                "revdesc": "Adds Ga-Kr and adds extra d shells to K and Ca. Fixes H to use 4-31G",
-                "elements": [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19,
-                    20,
-                    21,
-                    22,
-                    23,
-                    24,
-                    25,
-                    26,
-                    27,
-                    28,
-                    29,
-                    30,
-                    31,
-                    32,
-                    33,
-                    34,
-                    35,
-                    36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "6-31GSS.1.table.json"
-            },
             "0": {
+                "filename": "6-31GSS.0.table.json",
                 "description": "6-31G**",
                 "revdesc": "Original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -926,20 +885,198 @@
                     34,
                     35,
                     36
-                ],
+                ]
+            },
+            "1": {
+                "filename": "6-31GSS.1.table.json",
+                "description": "6-31G",
+                "revdesc": "Adds Ga-Kr and adds extra d shells to K and Ca. Fixes H to use 4-31G",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "6-31GSS.0.table.json"
+                "elements": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
             }
-        },
-        "latest_version": 1
+        }
     },
-    "CRENBL ECP": {
+    "CRENBL": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "CRENBL.0.table.json",
+                "description": "CRENBL",
+                "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64,
+                    65,
+                    66,
+                    67,
+                    68,
+                    69,
+                    70,
+                    71,
+                    72,
+                    73,
+                    74,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79,
+                    80,
+                    81,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86,
+                    87,
+                    88,
+                    89,
+                    90,
+                    91,
+                    92,
+                    93,
+                    94,
+                    95,
+                    96,
+                    97,
+                    98,
+                    99,
+                    100,
+                    101,
+                    102,
+                    103,
+                    104,
+                    105,
+                    106,
+                    107,
+                    108,
+                    109,
+                    110,
+                    111,
+                    112,
+                    113,
+                    115,
+                    116,
+                    117,
+                    118
+                ]
+            }
+        }
+    },
+    "CRENBL ECP": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "CRENBL-ECP.0.table.json",
                 "description": "CRENBL ECP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP"
+                ],
                 "elements": [
                     3,
                     4,
@@ -1056,20 +1193,20 @@
                     116,
                     117,
                     118
-                ],
-                "functiontypes": [
-                    "ECP"
-                ],
-                "filename": "CRENBL-ECP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "DZP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DZP.0.table.json",
                 "description": "DZP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1143,71 +1280,72 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "DZP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-ECP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-ECP.0.table.json",
                 "description": "Def2-ECP",
                 "revdesc": "Values from original Basis Set Exchange",
-                "elements": [
-                    37,
-                    38,
-                    39,
-                    40,
-                    41,
-                    42,
-                    43,
-                    44,
-                    45,
-                    46,
-                    47,
-                    48,
-                    49,
-                    50,
-                    51,
-                    52,
-                    53,
-                    54,
-                    55,
-                    56,
-                    57,
-                    72,
-                    73,
-                    74,
-                    75,
-                    76,
-                    77,
-                    78,
-                    79,
-                    80,
-                    81,
-                    82,
-                    83,
-                    84,
-                    85,
-                    86
-                ],
                 "functiontypes": [
                     "ECP"
                 ],
-                "filename": "DEF2-ECP.0.table.json"
+                "elements": [
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    72,
+                    73,
+                    74,
+                    75,
+                    76,
+                    77,
+                    78,
+                    79,
+                    80,
+                    81,
+                    82,
+                    83,
+                    84,
+                    85,
+                    86
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-QZVP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-QZVP.0.table.json",
                 "description": "Def2-QZVP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1281,21 +1419,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-QZVP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-QZVPD": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-QZVPD.0.table.json",
                 "description": "Def2-QZVPD",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1369,21 +1507,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-QZVPD.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-QZVPP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-QZVPP.0.table.json",
                 "description": "Def2-QZVPP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1457,21 +1595,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-QZVPP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-QZVPPD": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-QZVPPD.0.table.json",
                 "description": "Def2-QZVPPD",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1545,21 +1683,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-QZVPPD.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-SV(P)": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-SVP-P.0.table.json",
                 "description": "Def2-SV(P)",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1633,21 +1771,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-SVP-P.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-SVP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-SVP.0.table.json",
                 "description": "Def2-SVP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1721,21 +1859,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-SVP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-SVPD": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-SVPD.0.table.json",
                 "description": "Def2-SVPD",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1809,21 +1947,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-SVPD.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-TZVP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-TZVP.0.table.json",
                 "description": "Def2-TZVP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1897,21 +2035,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-TZVP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-TZVPD": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-TZVPD.0.table.json",
                 "description": "Def2-TZVPD",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -1985,21 +2123,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-TZVPD.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-TZVPP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-TZVPP.0.table.json",
                 "description": "Def2-TZVPP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2073,21 +2211,21 @@
                     84,
                     85,
                     86
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "DEF2-TZVPP.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "Def2-TZVPPD": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "DEF2-TZVPPD.0.table.json",
                 "description": "Def2-TZVPPD",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "ECP",
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2161,21 +2299,21 @@
                     84,
                     85,
                     86
-                ],
+                ]
+            }
+        }
+    },
+    "LANL2DZ ECP": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "LANL2DZ.0.table.json",
+                "description": "LANL2DZ ECP",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "ECP",
                     "gto"
                 ],
-                "filename": "DEF2-TZVPPD.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "LANL2DZ ECP": {
-        "versions": {
-            "0": {
-                "description": "LANL2DZ ECP",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     3,
@@ -2248,21 +2386,20 @@
                     92,
                     93,
                     94
-                ],
-                "functiontypes": [
-                    "ECP",
-                    "gto"
-                ],
-                "filename": "LANL2DZ.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "QZP": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "QZP.0.table.json",
                 "description": "QZP",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2318,20 +2455,20 @@
                     52,
                     53,
                     54
-                ],
+                ]
+            }
+        }
+    },
+    "STO-2G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "STO-2G.0.table.json",
+                "description": "MB      Minimal Basis: 1 Function/AO",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "QZP.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "STO-2G": {
-        "versions": {
-            "0": {
-                "description": "MB      Minimal Basis: 1 Function/AO",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2354,20 +2491,20 @@
                     19,
                     20,
                     38
-                ],
+                ]
+            }
+        }
+    },
+    "STO-3G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "STO-3G.0.table.json",
+                "description": "MB      Minimal Basis: 1 Function/AO",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "STO-2G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "STO-3G": {
-        "versions": {
-            "0": {
-                "description": "MB      Minimal Basis: 1 Function/AO",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2422,20 +2559,20 @@
                     51,
                     52,
                     53
-                ],
+                ]
+            }
+        }
+    },
+    "STO-6G": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "STO-6G.0.table.json",
+                "description": "STO-6G",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "STO-3G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "STO-6G": {
-        "versions": {
-            "0": {
-                "description": "STO-6G",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2473,20 +2610,20 @@
                     34,
                     35,
                     36
-                ],
+                ]
+            }
+        }
+    },
+    "TZP": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "TZP.0.table.json",
+                "description": "TZP",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "STO-6G.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "TZP": {
-        "versions": {
-            "0": {
-                "description": "TZP",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2542,20 +2679,20 @@
                     52,
                     53,
                     54
-                ],
+                ]
+            }
+        }
+    },
+    "cc-pV5Z": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "CC-PV5Z.0.table.json",
+                "description": "cc-pV5Z",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "TZP.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "cc-pV5Z": {
-        "versions": {
-            "0": {
-                "description": "cc-pV5Z",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2592,20 +2729,20 @@
                     34,
                     35,
                     36
-                ],
+                ]
+            }
+        }
+    },
+    "cc-pV6Z": {
+        "latest_version": 0,
+        "versions": {
+            "0": {
+                "filename": "CC-PV6Z.0.table.json",
+                "description": "cc-pV6Z",
+                "revdesc": "Values from original Basis Set Exchange",
                 "functiontypes": [
                     "gto"
                 ],
-                "filename": "CC-PV5Z.0.table.json"
-            }
-        },
-        "latest_version": 0
-    },
-    "cc-pV6Z": {
-        "versions": {
-            "0": {
-                "description": "cc-pV6Z",
-                "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     1,
                     2,
@@ -2621,20 +2758,20 @@
                     16,
                     17,
                     18
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "CC-PV6Z.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "cc-pVDZ": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "CC-PVDZ.0.table.json",
                 "description": "cc-pVDZ",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2671,20 +2808,20 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "CC-PVDZ.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "cc-pVQZ": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "CC-PVQZ.0.table.json",
                 "description": "cc-pVQZ",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2721,20 +2858,20 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "CC-PVQZ.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     },
     "cc-pVTZ": {
+        "latest_version": 0,
         "versions": {
             "0": {
+                "filename": "CC-PVTZ.0.table.json",
                 "description": "cc-pVTZ",
                 "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
                 "elements": [
                     1,
                     2,
@@ -2771,13 +2908,8 @@
                     34,
                     35,
                     36
-                ],
-                "functiontypes": [
-                    "gto"
-                ],
-                "filename": "CC-PVTZ.0.table.json"
+                ]
             }
-        },
-        "latest_version": 0
+        }
     }
 }
