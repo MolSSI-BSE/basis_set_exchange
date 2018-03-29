@@ -16,6 +16,15 @@ def ref_txt(ref):
             s += u'\n    {}, {}, {} ({})'.format(ref['series'], ref['volume'], ref['page'], ref['year'])
         if 'doi' in ref:
             s += u'\n    ' + ref['doi']
+    elif ref['type'] == 'techreport':
+        print(ref)
+        s += u', '.join(ref['authors'])
+        s += u'\n    {}'.format(ref['title'])
+        s += u'\n    \'{}\''.format(ref['institution'])
+        s += u'\n    Technical Report {}'.format(ref['number'])
+        s += u'\n    {}'.format(ref['year'])
+        if 'doi' in ref:
+            s += u'\n    ' + ref['doi']
     else:
         raise RuntimeError('Cannot handle reference type {}'.format(ref['type']))
     return s
