@@ -1,33 +1,36 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetName": "6-21G",
-    "basisSetDescription": "6-21G valence double-zeta basis set",
-    "basisSetRevisionDescription" : "Original Basis Set Exchange",
-    "basisSetRole": "orbital",
-    "basisSetElements": {
+    "molssi_bse_schema": {
+        "schema_type": "table",
+        "schema_version": "0.1"
+    },
+    "basis_set_name": "6-21G",
+    "basis_set_description": "6-21G valence double-zeta basis set",
+    "basis_set_revision_description": "Original Basis Set Exchange",
+    "basis_set_role": "orbital",
+    "basis_set_elements": {
         "11": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "12": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "13": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "14": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "15": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "16": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "17": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         },
         "18": {
-            "elementEntry": "pople/6-21G.0.element.json"
+            "element_entry": "pople/6-21G.0.element.json"
         }
     }
 }

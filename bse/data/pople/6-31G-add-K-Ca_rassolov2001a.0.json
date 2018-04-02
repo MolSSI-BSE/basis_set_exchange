@@ -1,25 +1,28 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "6-31G: Additional valence D functions for K,Ca",
-    "basisSetReferences": [
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "6-31G: Additional valence D functions for K,Ca",
+    "basis_set_references": [
         "rassolov2001a"
     ],
-    "basisSetElements": {
+    "basis_set_elements": {
         "19": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         2
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "9.029078",
                         "2.285045",
                         "0.663892"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.08747672",
                             "0.3795635",
@@ -28,16 +31,16 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         2
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.179389"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.000000E+00"
                         ]
@@ -46,20 +49,20 @@
             ]
         },
         "20": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         2
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "10.11067",
                         "2.558769",
                         "0.743420"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.08747672",
                             "0.3795635",
@@ -68,16 +71,16 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         2
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.200878"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.000000E+00"
                         ]

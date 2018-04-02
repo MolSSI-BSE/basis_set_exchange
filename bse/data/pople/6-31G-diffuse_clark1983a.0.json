@@ -1,23 +1,26 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "Diffuse functions asociated with 6-31G",
-    "basisSetReferences": [
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "Diffuse functions asociated with 6-31G",
+    "basis_set_references": [
         "clark1983a"
     ],
-    "basisSetElements": {
+    "basis_set_elements": {
         "1": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0360000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ]
@@ -26,19 +29,19 @@
             ]
         },
         "3": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0074000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -50,19 +53,19 @@
             ]
         },
         "4": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0207000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -74,19 +77,19 @@
             ]
         },
         "5": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0315000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -98,19 +101,19 @@
             ]
         },
         "6": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0438000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -122,19 +125,19 @@
             ]
         },
         "7": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0639000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -146,19 +149,19 @@
             ]
         },
         "8": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.0845000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],
@@ -170,19 +173,19 @@
             ]
         },
         "9": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "spherical",
-                    "shellRegion": "diffuse",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "diffuse",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.1076000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ],

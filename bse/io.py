@@ -19,12 +19,12 @@ def _sort_basis_dict(bs):
     """
 
     keyorder = [
-        'molssi_bse_magic', 'basisSetName', 'basisSetDescription', 'basisSetRevisionDescription', 'basisSetRole',
-        'basisSetReferences', 'basisSetNotes', 'basisSetElements', 'elementReferences',
-        'elementECPElectrons', 'elementElectronShells', 'elementECP', 'elementComponents', 'elementEntry',
-        'shellFunctionType', 'shellHarmonicType', 'shellRegion', 'shellAngularMomentum', 'shellExponents',
-        'shellCoefficients', 'potentialECPType', 'potentialAngularMomentum', 'potentialRExponents',
-        'potentialGaussianExponents', 'potentialCoefficients'
+        'molssi_bse_schema', 'schema_type', 'schema_version', 'basis_set_name', 'basis_set_description', 'basis_set_revision_description', 'basis_set_role',
+        'basis_set_references', 'basis_set_notes', 'basis_set_elements', 'element_references',
+        'element_ecp_electrons', 'element_electron_shells', 'element_ecp', 'element_components', 'element_entry',
+        'shell_function_type', 'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents',
+        'shell_coefficients', 'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents',
+        'potential_gaussian_exponents', 'potential_coefficients'
     ]
 
     # Add integers for the elements
@@ -36,7 +36,7 @@ def _sort_basis_dict(bs):
     for k, v in bs_sorted.items():
         if isinstance(v, dict):
             bs_sorted[k] = _sort_basis_dict(v)
-        elif k == 'elementElectronShells':
+        elif k == 'element_electron_shells':
             bs_sorted[k] = [_sort_basis_dict(x) for x in v]
 
     return bs_sorted
@@ -76,12 +76,12 @@ def read_json_basis(file_path):
     with open(file_path, 'r') as f:
         js = json.load(f)
 
-    # Check for magic key/number
-    if 'molssi_bse_magic' not in js:
+    # Check for molssi_bse_schema key
+    if 'molssi_bse_schema' not in js:
         raise RuntimeError('This file does not appear to be a BSE JSON file')
 
     # change the element keys to integers
-    js['basisSetElements'] = {int(k): v for k, v in js['basisSetElements'].items()}
+    js['basis_set_elements'] = {int(k): v for k, v in js['basis_set_elements'].items()}
 
     return js
 
@@ -213,7 +213,7 @@ def get_files_for_basis(basis_name, data_dir):
     containing_files = []
 
     for basis_file in all_basis_files:
-        displayname = read_json_basis(basis_file)['basisSetName']
+        displayname = read_json_basis(basis_file)['basis_set_name']
         if displayname == basis_name:
             containing_files.append(basis_file)
 

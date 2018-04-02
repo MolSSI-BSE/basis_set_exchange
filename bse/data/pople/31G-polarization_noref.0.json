@@ -1,21 +1,24 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "1P Polarization functions associated with 31G",
-    "basisSetReferences": [],
-    "basisSetElements": {
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "1P Polarization functions associated with 31G",
+    "basis_set_references": [],
+    "basis_set_elements": {
         "2": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "polarization",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "polarization",
+                    "shell_angular_momentum": [
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "1.1000000"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.0000000"
                         ]

@@ -27,8 +27,8 @@ def compact_references(basis_dict, reffile_path):
     element_ref_map = []
 
     # Create a dictionary of elements -> refdata
-    for el, eldata in basis_dict['basisSetElements'].items():
-        ref = sorted(eldata['elementReferences'])
+    for el, eldata in basis_dict['basis_set_elements'].items():
+        ref = sorted(eldata['element_references'])
 
         for x in element_ref_map:
             if x['refkeys'] == ref:

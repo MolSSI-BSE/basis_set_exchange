@@ -1,24 +1,27 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "MB      Minimal Basis: 1 Function/AO",
-    "basisSetReferences": [
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "MB      Minimal Basis: 1 Function/AO",
+    "basis_set_references": [
         "pietro1981a"
     ],
-    "basisSetElements": {
+    "basis_set_elements": {
         "38": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "1185.76233",
                         "211.065097"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.4301284983",
                             "0.6789135305"
@@ -26,18 +29,18 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "101.8394821",
                         "25.82918184"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.0494717692",
                             "0.9637824081"
@@ -49,18 +52,18 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "12.54411156",
                         "3.879731996"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "-0.3121716958",
                             "1.2253984220"
@@ -72,17 +75,17 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         2
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "12.54411156",
                         "3.879731996"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.6006042500",
                             "0.5292040571"
@@ -90,18 +93,18 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "1.240560967",
                         "0.499254706"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "-0.6615603018",
                             "1.5107541340"
@@ -113,18 +116,18 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0,
                         1
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.2632280820",
                         "0.1273435176"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "-1.0936897920",
                             "1.8813746560"

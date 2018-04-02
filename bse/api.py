@@ -49,14 +49,14 @@ def get_basis_set(name,
 
     # Handle optional arguments
     if elements is not None:
-        bs_elements = bs['basisSetElements']
+        bs_elements = bs['basis_set_elements']
 
         # Are elements part of this basis set?
         for el in elements:
             if not el in bs_elements:
                 raise RuntimeError("Element {} not found in basis {}".format(el, name))
 
-            bs['basisSetElements'] = {k: v for k, v in bs_elements.items() if k in elements}
+            bs['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
     if uncontract_general:
         bs = manip.uncontract_general(bs)

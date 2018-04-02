@@ -1,45 +1,63 @@
 {
-    "title": "ElementalBasisSetFile",
-    "description": "A component of a basis set",
+    "$schema": "http://json-schema.org/draft-07/#",
+    "name": "bse_table_basis_set",
+    "version": "0.1",
+    "url": "TODO",
+    "description": "JSON for describing how a table-based basis set is composed",
     "type": "object",
     "additionalProperties": false,
     "required": [
-        "molssi_bse_magic",
-        "basisSetName",
-        "basisSetDescription",
-        "basisSetRevisionDescription",
-        "basisSetRole",
-        "basisSetElements"
+        "molssi_bse_schema",
+        "basis_set_name",
+        "basis_set_description",
+        "basis_set_revision_description",
+        "basis_set_role",
+        "basis_set_elements"
     ],
     "properties":
     {
-        "molssi_bse_magic": {
-            "description": "Magic number for BSE project",
-            "type": "integer",
-            "enum": [ 1 ]
+        "molssi_bse_schema": {
+            "description": "Info about which schema the file follows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "schema_type",
+                "schema_version"
+            ],
+            "properties": {
+                "schema_type" : {
+                    "description": "What type of BSE JSON file this is",
+                    "type": "string",
+                    "enum": [ "table" ]
+                },
+                "schema_version": {
+                    "description": "Version of the BSE table basis set schema being used",
+                    "type": "string"
+                }
+            }
         },
-        "basisSetName": {
+        "basis_set_name": {
             "description": "Common name for the basis set",
             "type": "string"
         },
-        "basisSetDescription": {
+        "basis_set_description": {
             "description": "Brief description of the basis set",
             "type": "string"
         },
-        "basisSetNotes": {
+        "basis_set_notes": {
             "description": "Any notes pertaining to this basis set",
             "type": "string"
         },
-        "basisSetRevisionDescription": {
+        "basis_set_revision_description": {
             "description": "Brief description of the difference between this revision and the last",
             "type": "string"
         },
-        "basisSetRole": {
+        "basis_set_role": {
             "description": "Role that this basis plays in a calculation",
             "type": "string",
             "enum": [ "orbital", "ri" ]
         },
-        "basisSetElements": {
+        "basis_set_elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
             "additionalProperties": false,
@@ -48,9 +66,9 @@
                     "description": "Data for a single element in the basis set",
                     "type": "object",
                     "additionalProperties": false,
-                    "required": [ "elementEntry" ],
+                    "required": [ "element_entry" ],
                     "properties": {
-                        "elementReferences": {
+                        "element_references": {
                             "description": "Citation/Reference information for this element",
                             "type": "array",
                             "minItems": 1,
@@ -59,7 +77,7 @@
                                 "type": "string"
                             }
                         },
-                        "elementEntry": {
+                        "element_entry": {
                             "description": "Elemental basis set for this element",
                             "type": "string"
                         }

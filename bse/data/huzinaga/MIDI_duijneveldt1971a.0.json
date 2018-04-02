@@ -1,24 +1,27 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
-    "basisSetReferences": [
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
+    "basis_set_references": [
         "duijneveldt1971a"
     ],
-    "basisSetElements": {
+    "basis_set_elements": {
         "1": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "4.501800",
                         "0.681444"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.070452",
                             "0.407826"
@@ -26,16 +29,16 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.151398"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "1.000000"
                         ]
@@ -44,19 +47,19 @@
             ]
         },
         "2": {
-            "elementElectronShells": [
+            "element_electron_shells": [
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "13.626736",
                         "1.999349"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.080241",
                             "0.409143"
@@ -64,16 +67,16 @@
                     ]
                 },
                 {
-                    "shellFunctionType": "gto",
-                    "shellHarmonicType": "cartesian",
-                    "shellRegion": "valence",
-                    "shellAngularMomentum": [
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
                         0
                     ],
-                    "shellExponents": [
+                    "shell_exponents": [
                         "0.382993"
                     ],
-                    "shellCoefficients": [
+                    "shell_coefficients": [
                         [
                             "0.657278"
                         ]

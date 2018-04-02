@@ -1,46 +1,49 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetDescription": "Def2-ECP",
-    "basisSetReferences": [
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "Def2-ECP",
+    "basis_set_references": [
         "dolg1989a"
     ],
-    "basisSetElements": {
+    "basis_set_elements": {
         "57": {
-            "elementECPElectrons": 46,
-            "elementECP": [
+            "element_ecp_electrons": 46,
+            "element_ecp": [
                 {
-                    "potentialECPType": "scalar",
-                    "potentialAngularMomentum": [
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
                         3
                     ],
-                    "potentialRExponents": [
+                    "potential_r_exponents": [
                         2
                     ],
-                    "potentialGaussianExponents": [
+                    "potential_gaussian_exponents": [
                         "4.0286000"
                     ],
-                    "potentialCoefficients": [
+                    "potential_coefficients": [
                         [
                             "-36.0100160"
                         ]
                     ]
                 },
                 {
-                    "potentialECPType": "scalar",
-                    "potentialAngularMomentum": [
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
                         0
                     ],
-                    "potentialRExponents": [
+                    "potential_r_exponents": [
                         2,
                         2,
                         2
                     ],
-                    "potentialGaussianExponents": [
+                    "potential_gaussian_exponents": [
                         "3.3099000",
                         "1.6550000",
                         "4.0286000"
                     ],
-                    "potentialCoefficients": [
+                    "potential_coefficients": [
                         [
                             "91.9321770",
                             "-3.7887640",
@@ -49,21 +52,21 @@
                     ]
                 },
                 {
-                    "potentialECPType": "scalar",
-                    "potentialAngularMomentum": [
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
                         1
                     ],
-                    "potentialRExponents": [
+                    "potential_r_exponents": [
                         2,
                         2,
                         2
                     ],
-                    "potentialGaussianExponents": [
+                    "potential_gaussian_exponents": [
                         "2.8368000",
                         "1.4184000",
                         "4.0286000"
                     ],
-                    "potentialCoefficients": [
+                    "potential_coefficients": [
                         [
                             "63.7594860",
                             "-0.6479580",
@@ -72,21 +75,21 @@
                     ]
                 },
                 {
-                    "potentialECPType": "scalar",
-                    "potentialAngularMomentum": [
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
                         2
                     ],
-                    "potentialRExponents": [
+                    "potential_r_exponents": [
                         2,
                         2,
                         2
                     ],
-                    "potentialGaussianExponents": [
+                    "potential_gaussian_exponents": [
                         "2.0213000",
                         "1.0107000",
                         "4.0286000"
                     ],
-                    "potentialCoefficients": [
+                    "potential_coefficients": [
                         [
                             "36.1161730",
                             "0.2191140",

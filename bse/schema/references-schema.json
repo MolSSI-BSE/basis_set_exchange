@@ -1,10 +1,39 @@
 {
-    "title": "BSEReferences",
-    "description": "Reference data for a collection of basis sets",
+    "$schema": "http://json-schema.org/draft-07/#",
+    "name": "bse_basis_set_references",
+    "version": "0.1",
+    "url": "TODO",
+    "description": "Citation data for a collection of basis sets",
     "type": "object",
     "additionalProperties": false,
+    "required": [
+        "molssi_bse_schema"
+    ],
+    "properties":
+    {
+        "molssi_bse_schema": {
+            "description": "Info about which schema the file follows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "schema_type",
+                "schema_version"
+            ],
+            "properties": {
+                "schema_type" : {
+                    "description": "What type of BSE JSON file this is",
+                    "type": "string",
+                    "enum": [ "references" ]
+                },
+                "schema_version": {
+                    "description": "Version of the BSE basis set references schema being used",
+                    "type": "string"
+                }
+            }
+        }
+    },
     "patternProperties": {
-        "^[a-z0-9_\\-]+$" : {
+        "^[a-z0-9]+$" : {
             "description": "A single reference associated with a basis set",
             "type": "object",
             "additionalProperties": false,

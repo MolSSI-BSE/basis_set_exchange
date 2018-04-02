@@ -1,16 +1,19 @@
 {
-    "molssi_bse_magic": 1,
-    "basisSetName": "31G*",
-    "basisSetDescription": "31G valence double-zeta w/ polarization",
-    "basisSetElements": {
+    "molssi_bse_schema": {
+        "schema_type": "element",
+        "schema_version": "0.1"
+    },
+    "basis_set_name": "31G*",
+    "basis_set_description": "31G valence double-zeta w/ polarization",
+    "basis_set_elements": {
         "1": {
-            "elementComponents": [
+            "element_components": [
                 "pople/31G_ditchfield1971a.0.json",
                 "pople/31G-polarization_hariharan1973a.0.json"
             ]
         },
         "2": {
-            "elementComponents": [
+            "element_components": [
                 "pople/31G_noref.0.json",
                 "pople/31G-polarization_noref.0.json"
             ]

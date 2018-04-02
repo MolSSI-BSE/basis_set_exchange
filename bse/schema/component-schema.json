@@ -1,29 +1,47 @@
 {
-    "title": "BasisSetComponent",
-    "description": "A component of a basis set",
+    "$schema": "http://json-schema.org/draft-07/#",
+    "name": "bse_basis_set_component",
+    "version": "0.1",
+    "url": "TODO",
+    "description": "Basis Set Exchange - A component of a basis set",
     "type": "object",
     "additionalProperties": false,
     "required": [
-        "molssi_bse_magic",
-        "basisSetDescription",
-        "basisSetElements"
+        "molssi_bse_schema",
+        "basis_set_description",
+        "basis_set_elements"
     ],
     "properties":
     {
-        "molssi_bse_magic": {
-            "description": "Magic number for BSE project",
-            "type": "integer",
-            "enum": [ 1 ]
+        "molssi_bse_schema": {
+            "description": "Info about which schema the file follows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "schema_type",
+                "schema_version"
+            ],
+            "properties": {
+                "schema_type" : {
+                    "description": "What type of BSE JSON file this is",
+                    "type": "string",
+                    "enum": [ "component" ]
+                },
+                "schema_version": {
+                    "description": "Version of the BSE basis set component schema being used",
+                    "type": "string"
+                }
+            }
         },
-        "basisSetDescription": {
+        "basis_set_description": {
             "description": "Brief description of the basis set",
             "type": "string"
         },
-        "basisSetNotes": {
+        "basis_set_notes": {
             "description": "Any notes pertaining to this basis set",
             "type": "string"
         },
-        "basisSetReferences": {
+        "basis_set_references": {
             "description": "Citation/Reference information for this basis set component",
             "type": "array",
             "minItems": 0,
@@ -32,46 +50,46 @@
                 "type": "string"
             }
         },
-        "basisSetElements": {
+        "basis_set_elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
             "additionalProperties": false,
             "patternProperties":   {
                 "^\\d+$" : {
-                    "$ref" : "#/definitions/basisData"
+                    "$ref" : "#/definitions/bse_basis_data"
                 }
             }
         }
     },
     "definitions": {
-        "electronShell": {
+        "bse_electron_shell": {
             "description": "Information for a single electronic shell",
             "additionalProperties": false,
             "required": [
-                "shellFunctionType",
-                "shellHarmonicType",
-                "shellRegion",
-                "shellAngularMomentum",
-                "shellExponents",
-                "shellCoefficients"
+                "shell_function_type",
+                "shell_harmonic_type",
+                "shell_region",
+                "shell_angular_momentum",
+                "shell_exponents",
+                "shell_coefficients"
             ],
             "properties": {
-                "shellFunctionType": {
+                "shell_function_type": {
                     "description": "Type of function for this shell",
                     "type": "string",
                     "enum": [ "gto", "sto" ]
                 },
-                "shellHarmonicType": {
+                "shell_harmonic_type": {
                     "description": "Harmonic type (spherical, cartesian)",
                     "type": "string",
                     "enum": [ "spherical", "cartesian" ]
                 },
-                "shellRegion": {
+                "shell_region": {
                     "description": "The region this shell describes",
                     "type": "string",
                     "enum": [ "valence", "polarization", "core", "tight", "diffuse" ]
                 },
-                "shellAngularMomentum": {
+                "shell_angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",
                     "type": "array",
                     "minItems": 1,
@@ -82,7 +100,7 @@
                     }
                     
                 },
-                "shellExponents": {
+                "shell_exponents": {
                     "description": "Exponents for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -91,7 +109,7 @@
                         "type": "string"
                     }
                 },
-                "shellCoefficients": {
+                "shell_coefficients": {
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -106,23 +124,23 @@
                 }
             }
         },
-        "ecpPotential": {
+        "ecp_potential": {
             "description": "ECP potential",
             "additionalProperties": false,
             "required": [
-                "potentialECPType",
-                "potentialAngularMomentum",
-                "potentialRExponents",
-                "potentialGaussianExponents",
-                "potentialCoefficients"
+                "potential_ecp_type",
+                "potential_angular_momentum",
+                "potential_r_exponents",
+                "potential_gaussian_exponents",
+                "potential_coefficients"
             ],
             "properties": {
-                "potentialECPType": {
+                "potential_ecp_type": {
                     "description": "Type of the ECP Potential",
                     "type": "string",
                     "enum": [ "scalar", "spinorbit" ]
                 },
-                "potentialAngularMomentum": {
+                "potential_angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",
                     "type": "array",
                     "minItems": 1,
@@ -132,7 +150,7 @@
                         "minimum": 0
                     }
                 },
-                "potentialRExponents": {
+                "potential_r_exponents": {
                     "description": "Exponents of the r term",
                     "type": "array",
                     "minItems": 1,
@@ -141,7 +159,7 @@
                         "type": "integer"
                     }
                 },
-                "potentialGaussianExponents": {
+                "potential_gaussian_exponents": {
                     "description": "Exponents of the gaussian term",
                     "type": "array",
                     "minItems": 1,
@@ -150,7 +168,7 @@
                         "type": "string"
                     }
                 },
-                "potentialCoefficients": {
+                "potential_coefficients": {
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -165,33 +183,33 @@
                 }
             }
         },
-        "basisData": {
+        "bse_basis_data": {
             "description": "Data for a single element or atom in the basis set",
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "elementElectronShells": {
+                "element_electron_shells": {
                     "description": "(Electronic) shells for this element",
                     "type": "array",
                     "minItems": 1,
                     "uniqueItems": true,
                     "items": {
-                        "$ref": "#/definitions/electronShell"
+                        "$ref": "#/definitions/bse_electron_shell"
                     }
                 },
-                "elementECPElectrons":
+                "element_ecp_electrons":
                 {
                     "description": "Number of electrons replaced by ECP",
                     "type": "integer",
                     "minimum": 1
                 },
-                "elementECP": {
+                "element_ecp": {
                     "description": "Effective Core Potential for this element",
                     "type": "array",
                     "minItems": 1,
                     "uniqueItems": true,
                     "items": {
-                        "$ref": "#/definitions/ecpPotential"
+                        "$ref": "#/definitions/ecp_potential"
                     }
                 }
             }

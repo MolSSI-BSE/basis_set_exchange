@@ -63,24 +63,24 @@ def _compare_matrix(mat1, mat2):
 
 
 def compare_shells(shell1, shell2, compare_meta=False):
-    if shell1['shellAngularMomentum'] != shell2['shellAngularMomentum']:
+    if shell1['shell_angular_momentum'] != shell2['shell_angular_momentum']:
         return False
 
-    exponents1 = shell1['shellExponents']
-    exponents2 = shell2['shellExponents']
-    coefficients1 = shell1['shellCoefficients']
-    coefficients2 = shell2['shellCoefficients']
+    exponents1 = shell1['shell_exponents']
+    exponents2 = shell2['shell_exponents']
+    coefficients1 = shell1['shell_coefficients']
+    coefficients2 = shell2['shell_coefficients']
 
     if not _compare_vector(exponents1, exponents2):
         return False
     if not _compare_matrix(coefficients1, coefficients2):
         return False
     if compare_meta:
-        if shell1['shellRegion'] != shell2['shellRegion']:
+        if shell1['shell_region'] != shell2['shell_region']:
             return False
-        if shell1['shellHarmonicType'] != shell2['shellHarmonicType']:
+        if shell1['shell_harmonic_type'] != shell2['shell_harmonic_type']:
             return False
-        if shell1['shellFunctionType'] != shell2['shellFunctionType']:
+        if shell1['shell_function_type'] != shell2['shell_function_type']:
             return False
         return True
     else:
@@ -104,15 +104,15 @@ def shells_are_equal(shells1, shells2, compare_meta=False):
 
 
 def compare_ecp_pots(potential1, potential2, compare_meta=False):
-    if potential1['potentialAngularMomentum'] != potential2['potentialAngularMomentum']:
+    if potential1['potential_angular_momentum'] != potential2['potential_angular_momentum']:
         return False
 
-    rexponents1 = potential1['potentialRExponents']
-    rexponents2 = potential2['potentialRExponents']
-    gexponents1 = potential1['potentialGaussianExponents']
-    gexponents2 = potential2['potentialGaussianExponents']
-    coefficients1 = potential1['potentialCoefficients']
-    coefficients2 = potential2['potentialCoefficients']
+    rexponents1 = potential1['potential_r_exponents']
+    rexponents2 = potential2['potential_r_exponents']
+    gexponents1 = potential1['potential_gaussian_exponents']
+    gexponents2 = potential2['potential_gaussian_exponents']
+    coefficients1 = potential1['potential_coefficients']
+    coefficients2 = potential2['potential_coefficients']
 
     # integer comparison
     if rexponents1 != rexponents2:
@@ -122,7 +122,7 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False):
     if not _compare_matrix(coefficients1, coefficients2):
         return False
     if compare_meta:
-        if potential1['potentialECPType'] != potential2['potentialECPType']:
+        if potential1['potential_ecp_type'] != potential2['potential_ecp_type']:
             return False
         return True
     else:
@@ -146,17 +146,17 @@ def ecp_pots_are_equal(pots1, pots2, compare_meta=False):
 
 
 def compare_elements(element1, element2, compare_shells_meta=False, compare_ecp_pots_meta=False, compare_meta=False):
-    if not _compare_keys(element1, element2, 'elementElectronShells', shells_are_equal, compare_shells_meta):
+    if not _compare_keys(element1, element2, 'element_electron_shells', shells_are_equal, compare_shells_meta):
         return False
 
-    if not _compare_keys(element1, element2, 'elementECP', ecp_pots_are_equal, compare_ecp_pots_meta):
+    if not _compare_keys(element1, element2, 'element_ecp', ecp_pots_are_equal, compare_ecp_pots_meta):
         return False
 
-    if not _compare_keys(element1, element2, 'elementECPElectrons', operator.eq):
+    if not _compare_keys(element1, element2, 'element_ecp_electrons', operator.eq):
         return False
 
     if compare_meta:
-        if not _compare_keys(element1, element2, 'elementReferences', shells_are_equal, operator.eq):
+        if not _compare_keys(element1, element2, 'element_references', shells_are_equal, operator.eq):
             return False
 
     return True

@@ -22,16 +22,16 @@ def create_metadata_file(output_path, data_dir):
         bs = compose.compose_table_basis(bs_file_path)
 
         # Prepare the metadata
-        displayname = bs['basisSetName']
-        defined_elements = sorted(list(bs['basisSetElements'].keys()))
-        description = bs['basisSetDescription']
-        revision_desc = bs['basisSetRevisionDescription']
+        displayname = bs['basis_set_name']
+        defined_elements = sorted(list(bs['basis_set_elements'].keys()))
+        description = bs['basis_set_description']
+        revision_desc = bs['basis_set_revision_description']
 
         function_types = set()
-        for e in bs['basisSetElements'].values():
-            for s in e['elementElectronShells']:
-                function_types.add(s['shellFunctionType'])
-            if 'elementECP' in e:
+        for e in bs['basis_set_elements'].values():
+            for s in e['element_electron_shells']:
+                function_types.add(s['shell_function_type'])
+            if 'element_ecp' in e:
                 function_types.add('ECP')
 
         function_types = sorted(list(function_types))
