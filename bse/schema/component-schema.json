@@ -104,7 +104,6 @@
                     "description": "Exponents for this contracted shell",
                     "type": "array",
                     "minItems": 1,
-                    "uniqueItems": false,
                     "items": {
                         "type": "string"
                     }
@@ -113,12 +112,10 @@
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
-                    "uniqueItems": false,
                     "items": {
                         "description": "Segmented contraction coefficients",
                         "type": "array",
                         "minItems": 1,
-                        "uniqueItems": false,
                         "items": { "type": "string" }
                     }
                 }
@@ -154,7 +151,6 @@
                     "description": "Exponents of the r term",
                     "type": "array",
                     "minItems": 1,
-                    "uniqueItems": false,
                     "items": {
                         "type": "integer"
                     }
@@ -163,7 +159,6 @@
                     "description": "Exponents of the gaussian term",
                     "type": "array",
                     "minItems": 1,
-                    "uniqueItems": false,
                     "items": {
                         "type": "string"
                     }
@@ -172,12 +167,10 @@
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
-                    "uniqueItems": false,
                     "items": {
                         "description": "Segmented contraction coefficients",
                         "type": "array",
                         "minItems": 1,
-                        "uniqueItems": false,
                         "items": { "type": "string" }
                     }
                 }
