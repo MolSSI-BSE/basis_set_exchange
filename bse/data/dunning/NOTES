@@ -1,10 +1,23 @@
 Notes about Dunning basis sets
 ==============================
 
+cc-pVDZ (and related) for Sc-Zn
+--------------------------------
+
+balabanov2006a forms cc-pVDZ-DK from cc-pVTZ-DK by "removing the last
+atomic natural orbital (ANO) contraction in the s, p, and d shells,
+as well as the single g function. The two f-type functions from the
+triple-zeta set were contracted to one according to...". See paper
+for details.
+
+The cc-pVnZ are then formed from cc-pVnZ-DK
+
+
 Calcium basis sets
 ------------------
 
 koput2002a is cited for several basis sets for Ca. The paper only has
 details for cc-PVQZ and cc-PV5Z. The others have not yet been published
 (as of March 2018).  According to Dr. J. Grant Hill, this paper is still
-typically referenced for the other basis sets in the absence.
+typically referenced for the other basis sets in the absence of a better
+reference.
