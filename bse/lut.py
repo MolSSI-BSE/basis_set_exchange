@@ -71,7 +71,11 @@ element_name_map = {x[2]: x for x in _data_table}
 
 # Maps AM characters to integers (the integer is the
 # index of the character in this string)
-amchar_map = 'spdfghiklmnoqrtuvwxyzabce'
+# This is the 'hik' convention, where AM=7 is k
+amchar_map_hik = 'spdfghiklmnoqrtuvwxyzabce'
+
+# This is the 'hij' convention, where AM=7 is j
+amchar_map_hij = 'spdfghijklmnoqrtuvwxyzabce'
 
 
 def element_data_from_Z(Z):
@@ -166,7 +170,7 @@ def normalize_element_name(name):
     return name2
 
 
-def amint_to_char(am):
+def amint_to_char(am, hij=False):
     '''Convert an angular momentum integer to a character
 
     The input is a list (to handle sp, spd, ... orbitals). The return
@@ -174,6 +178,11 @@ def amint_to_char(am):
 
     For example, converts [0] to 's' and [0,1,2] to 'spd'
     '''
+
+    if hij:
+        amchar_map = amchar_map_hij
+    else:
+        amchar_map = amchar_map_hik
 
     amchar = []
 
@@ -187,13 +196,18 @@ def amint_to_char(am):
     return ''.join(amchar)
 
 
-def amchar_to_int(amchar):
+def amchar_to_int(amchar, hij=False):
     '''Convert an angular momentum integer to a character
 
     The return value is a list of integers (to handle sp, spd, ... orbitals)
 
     For example, converts 'p' to [1] and 'sp' to [0,1]
     '''
+
+    if hij:
+        amchar_map = amchar_map_hij
+    else:
+        amchar_map = amchar_map_hik
 
     amchar_lower = amchar.lower()
 

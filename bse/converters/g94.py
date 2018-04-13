@@ -29,7 +29,7 @@ def write_g94(basis):
 
         for shell in data['element_electron_shells']:
             am = shell['shell_angular_momentum']
-            amchar = lut.amint_to_char(am)
+            amchar = lut.amint_to_char(am, hij=True)
             amchar = amchar.upper()
 
             exponents = shell['shell_exponents']
@@ -63,7 +63,7 @@ def write_g94(basis):
         sym = sym.upper()
 
         max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
-        max_ecp_amchar = lut.amint_to_char([max_ecp_am])
+        max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
 
         s += '{}     0\n'.format(sym)
         s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
@@ -74,7 +74,7 @@ def write_g94(basis):
 
         for pot in ecp_list:
             am = pot['potential_angular_momentum']
-            amchar = lut.amint_to_char(am)
+            amchar = lut.amint_to_char(am, hij=True)
             amchar = amchar.lower()
 
             rexponents = pot['potential_r_exponents']
