@@ -1,0 +1,33 @@
+Notes about STO basis sets
+============================
+
+STO basis sets are formed by fitting a set of 2/3/4/5/6 exponents/coefficients to
+a corresponding Slater function. A set of elements (first row main group, for example)
+will share a set of coefficients and a common set of 'base' exponents which are
+multiplied by an element-specific scaling factor.
+
+In general, all STO basis sets share a common set of papers.
+
+hehre1969a - Original exponents/scaling factors for H, Li-F
+
+hehre1970a - Adds exponents/scaling for Na-Ar. Also has scaling factors
+             for He and Ne, and fixes the scaling factors for Li, Be, and B.
+             Since these elements derive from both hehre1969a and 1970a,
+             they have both references
+
+pietro1980a - All info for K, Ca, Ga-Kr
+pietro1981a - All info for Rb, Sr, and In-Xe
+pietro1983a - Scaling factors for Sc-Zn and Y-Cd. These are combined
+              with the exponents/coefficients from pietro1980a and pietro 1981a
+
+
+Note that pietro1983a only specifically deals with STO-3G. However, the scaling
+factors appear to be applied also to the exponents/coefficients for 2G/4G/5G/6G.
+
+
+Difference with GAMESS
+----------------------
+
+GAMESS uses a different scaling factor Na-Cl, so these are split into
+a separate basis set for our purposes. The modified scaling factors come
+from gordon1978a.
