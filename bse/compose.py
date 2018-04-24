@@ -46,8 +46,7 @@ def compose_elemental_basis(file_path):
         # all of the component data for this element
         el_data = [component_map[c]['basis_set_elements'][k] for c in components]
 
-        # start with an empty shell list, and merge in all the data
-        v['element_electron_shells'] = []
+        # merge all the data
         v = manip.merge_element_data(v, el_data)
 
         # Set it in the actual dict (v was a reference before)

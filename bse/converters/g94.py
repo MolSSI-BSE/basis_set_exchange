@@ -20,88 +20,90 @@ def write_g94(basis):
     s += '****'
 
     # Electron Basis
-    for z in electron_elements:
-        data = unc_basis['basis_set_elements'][z]
+    if len(electron_elements) > 0:
+        for z in electron_elements:
+            data = unc_basis['basis_set_elements'][z]
 
-        s += '\n'
-        sym = lut.element_sym_from_Z(z, True)
-        s += '{}     0\n'.format(sym)
+            s += '\n'
+            sym = lut.element_sym_from_Z(z, True)
+            s += '{}     0\n'.format(sym)
 
-        for shell in data['element_electron_shells']:
-            am = shell['shell_angular_momentum']
-            amchar = lut.amint_to_char(am, hij=True)
-            amchar = amchar.upper()
+            for shell in data['element_electron_shells']:
+                am = shell['shell_angular_momentum']
+                amchar = lut.amint_to_char(am, hij=True)
+                amchar = amchar.upper()
 
-            exponents = shell['shell_exponents']
-            coefficients = shell['shell_coefficients']
-            nprim = len(exponents)
-            ngen = len(coefficients)
+                exponents = shell['shell_exponents']
+                coefficients = shell['shell_coefficients']
+                nprim = len(exponents)
+                ngen = len(coefficients)
 
-            # padding for exponents
-            exponent_pad = determine_leftpad(exponents, 8)
+                # padding for exponents
+                exponent_pad = determine_leftpad(exponents, 8)
 
-            # Split apart general contractions, except for SP, SPD, etc orbitals
-            # (basis was already uncontracted above)
-            s += '{}   {}   1.00\n'.format(amchar, nprim)
+                # Split apart general contractions, except for SP, SPD, etc orbitals
+                # (basis was already uncontracted above)
+                s += '{}   {}   1.00\n'.format(amchar, nprim)
 
-            for p in range(nprim):
-                line = ' ' * exponent_pad[p] + exponents[p]
-                for c in range(ngen):
-                    desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
-                    coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                    line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-                s += line + '\n'
+                for p in range(nprim):
+                    line = ' ' * exponent_pad[p] + exponents[p]
+                    for c in range(ngen):
+                        desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
+                        coeff_pad = determine_leftpad(coefficients[c], desired_point)
+                        line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
+                    s += line + '\n'
 
-        s += '****'
+            s += '****'
 
     # Write out ECP
-    for z in ecp_elements:
-        data = unc_basis['basis_set_elements'][z]
+    if len(ecp_elements) > 0:
+        for z in ecp_elements:
+            data = unc_basis['basis_set_elements'][z]
 
-        s += '\n'
-        sym = lut.element_sym_from_Z(z)
-        sym = sym.upper()
+            s += '\n'
+            sym = lut.element_sym_from_Z(z)
+            sym = sym.upper()
 
-        max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
-        max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
+            max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
+            max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
 
-        s += '{}     0\n'.format(sym)
-        s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
+            s += '{}     0\n'.format(sym)
+            s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
 
-        # Sort lowest->highest, then put the highest at the beginning
-        ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])
-        ecp_list.insert(0, ecp_list.pop())
+            # Sort lowest->highest, then put the highest at the beginning
+            ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])
+            ecp_list.insert(0, ecp_list.pop())
 
-        for pot in ecp_list:
-            am = pot['potential_angular_momentum']
-            amchar = lut.amint_to_char(am, hij=True)
-            amchar = amchar.lower()
+            for pot in ecp_list:
+                am = pot['potential_angular_momentum']
+                amchar = lut.amint_to_char(am, hij=True)
+                amchar = amchar.lower()
 
-            rexponents = pot['potential_r_exponents']
-            gexponents = pot['potential_gaussian_exponents']
-            coefficients = pot['potential_coefficients']
-            nprim = len(rexponents)
-            ngen = len(coefficients)
+                rexponents = pot['potential_r_exponents']
+                gexponents = pot['potential_gaussian_exponents']
+                coefficients = pot['potential_coefficients']
+                nprim = len(rexponents)
+                ngen = len(coefficients)
 
-            # Title line
-            if am[0] == max_ecp_am:
-                s += '{} potential\n'.format(amchar)
-            else:
-                s += '{}-{} potential\n'.format(amchar, max_ecp_amchar)
+                # Title line
+                if am[0] == max_ecp_am:
+                    s += '{} potential\n'.format(amchar)
+                else:
+                    s += '{}-{} potential\n'.format(amchar, max_ecp_amchar)
 
-            # Number of entries
-            s += '  ' + str(nprim) + '\n'
+                # Number of entries
+                s += '  ' + str(nprim) + '\n'
 
-            # padding for exponents
-            gexponent_pad = determine_leftpad(gexponents, 9)
+                # padding for exponents
+                gexponent_pad = determine_leftpad(gexponents, 9)
 
-            # General contractions?
-            for p in range(nprim):
-                line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
-                for c in range(ngen):
-                    desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
-                    coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                    line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-                s += line + '\n'
+                # General contractions?
+                for p in range(nprim):
+                    line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
+                    for c in range(ngen):
+                        desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
+                        coeff_pad = determine_leftpad(coefficients[c], desired_point)
+                        line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
+                    s += line + '\n'
 
     return s

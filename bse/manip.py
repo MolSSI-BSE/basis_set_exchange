@@ -87,7 +87,8 @@ def merge_element_data(dest, sources):
                     ret['element_references'].append(ref)
 
     # Sort the shells by angular momentum
-    ret['element_electron_shells'].sort(key=lambda x: x['shell_angular_momentum'])
+    if 'element_electron_shells' in ret:
+        ret['element_electron_shells'].sort(key=lambda x: x['shell_angular_momentum'])
 
     return ret
 
@@ -104,6 +105,9 @@ def prune_basis(basis):
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basis_set_elements'].items():
+        if not 'element_electron_shells' in el:
+            continue
+
         for sh in el['element_electron_shells']:
 
             new_exponents = []
@@ -151,6 +155,9 @@ def uncontract_spdf(basis):
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basis_set_elements'].items():
+
+        if not 'element_electron_shells' in el:
+            continue
         newshells = []
 
         for sh in el['element_electron_shells']:
@@ -183,6 +190,10 @@ def uncontract_general(basis):
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basis_set_elements'].items():
+
+        if not 'element_electron_shells' in el:
+            continue
+
         newshells = []
 
         for sh in el['element_electron_shells']:
@@ -214,6 +225,10 @@ def uncontract_segmented(basis):
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basis_set_elements'].items():
+
+        if not 'element_electron_shells' in el:
+            continue
+
         newshells = []
 
         for sh in el['element_electron_shells']:

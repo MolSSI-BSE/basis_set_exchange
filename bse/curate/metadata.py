@@ -29,8 +29,9 @@ def create_metadata_file(output_path, data_dir):
 
         function_types = set()
         for e in bs['basis_set_elements'].values():
-            for s in e['element_electron_shells']:
-                function_types.add(s['shell_function_type'])
+            if 'element_electron_shells' in e:
+                for s in e['element_electron_shells']:
+                    function_types.add(s['shell_function_type'])
             if 'element_ecp' in e:
                 function_types.add('ECP')
 
