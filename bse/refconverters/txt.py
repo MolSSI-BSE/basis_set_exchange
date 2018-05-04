@@ -29,15 +29,19 @@ def ref_txt(ref):
         raise RuntimeError('Cannot handle reference type {}'.format(ref['type']))
     return s
 
+
 def write_txt(refs):
     full_str = u''
     for refinfo in refs:
         full_str += u'{}\n'.format(compact_elements(refinfo['elements']))
 
-        if len(refinfo['refdata']) == 0:
+        if len(refinfo['ref_data']) == 0:
             full_str += u'    (...no reference...)\n\n'
-        for r in refinfo['refdata']:
-            full_str += u'{}\n\n'.format(ref_txt(r))
+        for rd in refinfo['ref_data']:
+            full_str += u'    ## {}\n'.format(rd['description'])
+
+            for r in rd['reference']:
+                full_str += u'{}\n\n'.format(ref_txt(r))
 
     return full_str
 
