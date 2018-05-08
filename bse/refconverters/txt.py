@@ -1,6 +1,13 @@
+'''
+Conversion of references to plain text format
+'''
+
 from .common import *
 
-def ref_txt(ref):
+
+def _ref_txt(ref):
+    '''Convert a single reference to plain text format
+    '''
     s = u'    '
     if ref['type'] == 'article':
         s += u', '.join(ref['authors'])
@@ -31,17 +38,18 @@ def ref_txt(ref):
 
 
 def write_txt(refs):
+    '''Converts references to plain text format
+    '''
     full_str = u''
     for refinfo in refs:
         full_str += u'{}\n'.format(compact_elements(refinfo['elements']))
 
-        if len(refinfo['ref_data']) == 0:
+        if len(refinfo['ref_info']) == 0:
             full_str += u'    (...no reference...)\n\n'
-        for rd in refinfo['ref_data']:
+        for rd in refinfo['ref_info']:
             full_str += u'    ## {}\n'.format(rd['reference_description'])
 
             for r in rd['reference_data']:
-                full_str += u'{}\n\n'.format(ref_txt(r))
+                full_str += u'{}\n\n'.format(_ref_txt(r))
 
     return full_str
-

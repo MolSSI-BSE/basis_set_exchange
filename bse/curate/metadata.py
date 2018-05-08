@@ -1,9 +1,8 @@
 '''
-Main interface to BSE functionality
+Helpers for handling BSE metadata
 '''
 
 import os
-import json
 import codecs
 from collections import OrderedDict
 from .. import io
@@ -12,6 +11,10 @@ from .. import manip
 
 
 def create_metadata_file(output_path, data_dir):
+    '''Creates a METADATA.json file from a data directory
+
+    The file is written to output_path
+    '''
 
     basis_filelist = io.get_basis_filelist(data_dir)
 
@@ -47,9 +50,9 @@ def create_metadata_file(output_path, data_dir):
         internal_name, ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = OrderedDict([('displayname', displayname),
-                                   ('filename', filename), ('description', description), ('revdesc', revision_desc),
-                                   ('functiontypes', function_types), ('elements', defined_elements)])
+        single_meta = OrderedDict([('displayname', displayname), ('filename', filename), ('description', description),
+                                   ('revdesc', revision_desc), ('functiontypes', function_types), ('elements',
+                                                                                                   defined_elements)])
 
         if not tr_name in metadata:
             metadata[tr_name] = {'versions': {ver: single_meta}}
@@ -63,5 +66,4 @@ def create_metadata_file(output_path, data_dir):
 
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))
-    with codecs.open(output_path, 'w', 'utf-8') as f:
-        json.dump(metadata, f, indent=4, ensure_ascii=False)
+    io._write_plain_json(output_path, metadata)

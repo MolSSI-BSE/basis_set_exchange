@@ -1,3 +1,7 @@
+'''
+Conversion of basis sets to Gaussian format
+'''
+
 import os
 from .. import lut
 from .. import manip
@@ -5,6 +9,9 @@ from .common import *
 
 
 def write_g94(basis):
+    '''Converts a basis set to Gaussian format
+    '''
+
     s = u'! Basis set: ' + basis['basis_set_name'] + '\n'
 
     unc_basis = manip.uncontract_general(basis)

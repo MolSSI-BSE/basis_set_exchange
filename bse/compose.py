@@ -1,5 +1,5 @@
 """
-Functions related to composing full basis sets from individual components
+Functions related to composing basis sets from individual components
 """
 
 import os
@@ -11,8 +11,8 @@ def compose_elemental_basis(file_path):
     """
     Creates an 'elemental' basis from an elemental json file
 
-    This function reads the info from the given path, and reads all the component
-    basis set information from the files listed there. It then composes all the
+    This function reads the info from the given file, and reads all the component
+    basis set information from the files listed therein. It then composes all the
     information together into one 'elemental' basis dictionary
     """
 
@@ -22,46 +22,46 @@ def compose_elemental_basis(file_path):
     data_dir = os.path.dirname(data_dir)
 
     # Do a simple read of the json
-    js = io.read_json_basis(file_path)
+    el_bs = io.read_json_basis(file_path)
 
     # construct a list of all files to read
-    # TODO - can likely be replaced by memoization
     component_names = set()
-    for k, v in js['basis_set_elements'].items():
+    for k, v in el_bs['basis_set_elements'].items():
         component_names.update(set(v['element_components']))
 
+    # Read all the data from these files into a big dictionary
     component_map = {k: io.read_json_basis(os.path.join(data_dir, k)) for k in component_names}
 
     # Broadcast the basis_set_references to each element
+    # Use the basis_set_description for the reference description
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
-            el_data['element_references'] = [{ 'reference_keys': v['basis_set_references'],
-                                               'reference_description': v['basis_set_description']}]
+            el_data['element_references'] = [{
+                'reference_keys': v['basis_set_references'],
+                'reference_description': v['basis_set_description']
+            }]
 
     # Compose on a per-element basis
-    for k, v in js['basis_set_elements'].items():
+    for k, v in el_bs['basis_set_elements'].items():
 
-        # Also removes 'element_components' from the dict
         components = v.pop('element_components')
 
         # all of the component data for this element
-        el_data = [component_map[c]['basis_set_elements'][k] for c in components]
+        el_comp_data = [component_map[c]['basis_set_elements'][k] for c in components]
 
         # merge all the data
-        v = manip.merge_element_data(v, el_data)
+        v = manip.merge_element_data(v, el_comp_data)
+        el_bs['basis_set_elements'][k] = v
 
-        # Set it in the actual dict (v was a reference before)
-        js['basis_set_elements'][k] = v
-
-    return js
+    return el_bs
 
 
 def compose_table_basis(file_path):
     """
-    Creates a full 'table' basis from an table json file
+    Creates a 'table' basis from an table json file
 
-    This function reads the info from the given path, and reads all the elemental
-    basis set information from the files listed there. It then composes all the
+    This function reads the info from the given file, and reads all the elemental
+    basis set information from the files listed therein. It then composes all the
     information together into one 'table' basis dictionary
     """
 
@@ -70,23 +70,22 @@ def compose_table_basis(file_path):
     data_dir = os.path.dirname(file_path)
 
     # Do a simple read of the json
-    js = io.read_json_basis(file_path)
+    table_bs = io.read_json_basis(file_path)
 
-    # construct a list of all files to read
-    # TODO - can likely be replaced by memoization
+    # construct a list of all elemental files to read
     component_names = set()
-    for k, v in js['basis_set_elements'].items():
+    for k, v in table_bs['basis_set_elements'].items():
         component_names.add(v['element_entry'])
 
-    # Create a map of the elemental bases
+    # Create a map of the elemental basis data
     element_map = {k: compose_elemental_basis(os.path.join(data_dir, k)) for k in component_names}
 
-    for k, v in js['basis_set_elements'].items():
+    for k, v in table_bs['basis_set_elements'].items():
         entry = v['element_entry']
         data = element_map[entry]
 
         # Replace the basis set for this element with the one
         # from the elemental basis
-        js['basis_set_elements'][k] = data['basis_set_elements'][k]
+        table_bs['basis_set_elements'][k] = data['basis_set_elements'][k]
 
-    return js
+    return table_bs

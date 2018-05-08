@@ -1,10 +1,10 @@
 """
-Functions related to validating JSON files against schema
+Functions related to validating JSON files (including against schema)
 """
 
 import jsonschema
 import json
-from bse import api
+from bse import api, io
 
 
 def validate(file_type, file_path):
@@ -28,15 +28,10 @@ def validate(file_type, file_path):
         If the file given by file_path doesn't exist
     """
 
-    valid_schema = ['component', 'element', 'table', 'references']
-    if file_type not in valid_schema:
+    _valid_schema = ['component', 'element', 'table', 'references']
+    if file_type not in _valid_schema:
         raise RuntimeError("{} is not a valid file_type".format(file_type))
 
-    # We have to manually load the json (to bypass an processing,
-    # ie, turning keys into integers
-    with open(file_path, 'r') as f:
-        to_validate = json.load(f)
-
+    to_validate = io._read_plain_json(file_path, False)
     schema = api.get_schema(file_type)
-
     jsonschema.validate(to_validate, schema)

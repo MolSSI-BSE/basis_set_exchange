@@ -1,9 +1,17 @@
+'''
+Helpers for printing pieces of basis sets
+'''
+
 from .. import lut
 from .. import manip
 from ..converters.common import *
 
 
-def print_shell(shell, shellidx=None):
+def print_electron_shell(shell, shellidx=None):
+    '''Print the data for an electron shell
+
+    If shellidx (index of the shell) is not None, it will also be printed
+    '''
     am = shell['shell_angular_momentum']
     amchar = lut.amint_to_char(am)
     amchar = amchar.upper()
@@ -31,6 +39,9 @@ def print_shell(shell, shellidx=None):
 
 
 def print_ecp_pot(pot):
+    '''Print the data for an ECP potential
+    '''
+
     am = pot['potential_angular_momentum']
     amchar = lut.amint_to_char(am)
 
@@ -57,6 +68,16 @@ def print_ecp_pot(pot):
 
 
 def print_element(z, eldata):
+    '''Print all data for an element
+
+    Parameters
+    ----------
+    z : integer
+        Element Z-number
+    eldata:
+        Data for the element to be printed
+    '''
+
     sym = lut.element_sym_from_Z(z)
     sym = lut.normalize_element_symbol(sym, True)
 
@@ -69,7 +90,7 @@ def print_element(z, eldata):
 
     if 'element_electron_shells' in eldata:
         for shellidx, shell in enumerate(eldata['element_electron_shells']):
-            print_shell(shell, shellidx)
+            print_electron_shell(shell, shellidx)
 
     if 'element_ecp' in eldata:
         max_ecp_am = max([x['potential_angular_momentum'][0] for x in eldata['element_ecp']])
@@ -86,6 +107,11 @@ def print_element(z, eldata):
 
 
 def print_component_basis(basis, elements=None):
+    '''Print a component basis set
+
+    If elements is not None, only the specified elements will be printed
+    (list of integers)
+    '''
     print("Basis set: " + basis['basis_set_name'])
     print("Description: " + basis['basis_set_description'])
     eldata = basis['basis_set_elements']
@@ -102,6 +128,11 @@ def print_component_basis(basis, elements=None):
 
 
 def print_element_basis(basis, elements=None):
+    '''Print an element basis set
+
+    If elements is not None, only the specified elements will be printed
+    (list of integers)
+    '''
     print("Basis set: " + basis['basis_set_name'])
     print("Description: " + basis['basis_set_description'])
 
@@ -134,6 +165,12 @@ def print_element_basis(basis, elements=None):
 
 
 def print_table_basis(basis, elements=None):
+    '''Print a full table basis set
+
+    If elements is not None, only the specified elements will be printed
+    (list of integers)
+    '''
+
     print("Basis set: " + basis['basis_set_name'])
     print("Description: " + basis['basis_set_description'])
     print("Role: " + basis['basis_set_role'])
@@ -165,27 +202,3 @@ def print_table_basis(basis, elements=None):
         print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp + 1, reflist[z] if z in reflist else 'None'))
 
     print()
-
-
-def print_citation(citkey, cit):
-    print("Citation: {}".format(citkey))
-
-    doistr = cit['DOI'] if 'DOI' in cit else 'MISSING'
-    print("    DOI: {}".format(doistr))
-
-    titlestr = cit['title'] if 'title' in cit else 'MISSING'
-    print("    Title: {}".format(titlestr))
-
-    if 'authors' in cit and len(cit['authors']) > 0:
-        print("    Authors: {}".format(cit['authors'][0]))
-        for a in cit['authors'][1:]:
-            print("             {}".format(a))
-    else:
-        print("    Authors: NONE")
-
-    journalstr = cit['journal'] if 'journal' in cit else "MISSING"
-    volumestr = cit['volume'] if 'volume' in cit else "MISSING"
-    pagestr = cit['page'] if 'page' in cit else "MISSING"
-    yearstr = cit['year'] if 'year' in cit else "MISSING"
-
-    print("    {} v{} pp {} ({})".format(journalstr, volumestr, pagestr, yearstr))

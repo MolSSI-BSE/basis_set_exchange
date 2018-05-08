@@ -1,3 +1,7 @@
+'''
+Conversion of basis sets to NWChem format
+'''
+
 import os
 from .. import lut
 from .. import manip
@@ -5,6 +9,9 @@ from .common import *
 
 
 def write_nwchem(basis):
+    '''Converts a basis set to NWChem format
+    '''
+
     s = u'# Basis set: ' + basis['basis_set_name'] + '\n'
 
     # Elements for which we have electron basis

@@ -1,4 +1,9 @@
+'''
+Helper functions for writing out references/citations in various formats
+'''
+
 from .. import lut
+
 
 def compact_elements(elements):
     """
@@ -24,7 +29,7 @@ def compact_elements(elements):
             if el[i] != end_el + 1:
                 break
 
-            end_el += 1 
+            end_el += 1
             i += 1
 
         if start_el == end_el:
@@ -39,7 +44,7 @@ def compact_elements(elements):
 
         if len(r) == 1:
             range_strs.append(sym)
-        elif len(r) == 2 and r[1] == r[0]+1:
+        elif len(r) == 2 and r[1] == r[0] + 1:
             sym2 = lut.element_sym_from_Z(r[1], True)
             range_strs.append(sym + "," + sym2)
         else:

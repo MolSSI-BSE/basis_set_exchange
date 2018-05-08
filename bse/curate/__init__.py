@@ -1,4 +1,7 @@
+'''
+Functions for helping curate BSE basis set data
+'''
+
 from .printing import *
 from .compare import *
-from .references import *
 from .metadata import *

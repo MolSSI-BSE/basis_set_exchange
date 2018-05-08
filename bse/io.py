@@ -64,7 +64,7 @@ def _write_plain_json(file_path, js):
     # Disable ascii in the json - this prevents the json writer
     # from escaping everything
     with codecs.open(file_path, 'w', 'utf-8') as f:
-        json.dump(_sort_basis_dict(bs), f, indent=4, ensure_ascii=False)
+        json.dump(js, f, indent=4, ensure_ascii=False)
 
 
 def _sort_basis_dict(bs):
@@ -75,9 +75,6 @@ def _sort_basis_dict(bs):
     This is purely for cosmetic reasons.
     """
 
-    # Notes:
-    #    'reference_keys' and 'reference_description' are part of the references block for a complete basis set.
-    #        These are only used for dump_basis_set, and shouldn't be written to a file
     _keyorder = [
         'molssi_bse_schema', 'schema_type', 'schema_version', 'basis_set_name', 'basis_set_description',
         'basis_set_revision_description', 'basis_set_role', 'basis_set_references', 'basis_set_notes',
@@ -85,7 +82,7 @@ def _sort_basis_dict(bs):
         'element_components', 'element_entry', 'shell_function_type', 'shell_harmonic_type', 'shell_region',
         'shell_angular_momentum', 'shell_exponents', 'shell_coefficients', 'potential_ecp_type',
         'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients', 'reference_keys', 'reference_description'
+        'potential_coefficients'
     ]
 
     # Add integers for the elements (being optimistic that element 150 will be found someday)
@@ -124,7 +121,8 @@ def _sort_references_dict(refs):
     ]
 
     refs_sorted = collections.OrderedDict()
-    refs_sorted['molssi_bse_schema'] = refs.pop('molssi_bse_schema')
+
+    refs_sorted['molssi_bse_schema'] = refs['molssi_bse_schema']
     for k in sorted(refs.keys()):
         sorted_entry = sorted(refs[k].items(), key=lambda x: _keyorder.index(x[0]))
         refs_sorted[k] = collections.OrderedDict(sorted_entry)
@@ -201,14 +199,6 @@ def read_metadata(file_path):
         v['versions'] = {int(k2): v2 for k2, v2 in v['versions'].items()}
 
     return md
-
-
-def dump_basis(bs):
-    """
-    Returns a string with all the basis information (pretty-printed)
-    """
-
-    return json.dumps(_sort_basis_dict(bs), indent=4)
 
 
 def write_json_basis(file_path, bs):

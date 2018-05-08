@@ -1,5 +1,8 @@
 """
-Common basis set manipulations (such as uncontracting)
+Common basis set manipulations
+
+This module contains functions for uncontracting and merging basis set
+data, as well as some other small functions.
 """
 
 import json
@@ -15,6 +18,7 @@ def contraction_string(element):
     ie, (16s,10p) -> [4s,3p]
     """
 
+    # Does not have electron shells (ECP only?)
     if 'element_electron_shells' not in element:
         return ""
 
@@ -49,27 +53,18 @@ def contraction_string(element):
     return "({}) -> [{}]".format(primstr, contstr)
 
 
-def check_compatible_merge(dest, source):
-    """
-    TODO - check for any incompatibilities between the two elements
-    """
-    pass
-
-
 def merge_element_data(dest, sources):
     """
     Merges the basis set data for an element from multiple sources
     into dest.
 
-    The destination is not modified
+    The destination is not modified, and a (shallow) copy of dest is returned
+    with the data from sources added.
     """
 
-    # return a shallow copy
     ret = dest.copy()
 
     for s in sources:
-        check_compatible_merge(dest, s)
-
         if 'element_electron_shells' in s:
             if 'element_electron_shells' not in ret:
                 ret['element_electron_shells'] = []
@@ -87,6 +82,8 @@ def merge_element_data(dest, sources):
                     ret['element_references'].append(ref)
 
     # Sort the shells by angular momentum
+    # Note that I don't sort ECP - ECP can't be composed, and
+    # it should be sorted in the only source with ECP
     if 'element_electron_shells' in ret:
         ret['element_electron_shells'].sort(key=lambda x: x['shell_angular_momentum'])
 
@@ -100,6 +97,8 @@ def prune_basis(basis):
 
     This only finds EXACT duplicates, and is meant to be used
     after uncontracting
+
+    The input basis set is not modified.
     """
 
     new_basis = copy.deepcopy(basis)
@@ -109,7 +108,6 @@ def prune_basis(basis):
             continue
 
         for sh in el['element_electron_shells']:
-
             new_exponents = []
             new_coefficients = []
 
@@ -128,12 +126,11 @@ def prune_basis(basis):
             # as the slowest index
             new_coefficients = list(map(list, zip(*new_coefficients)))
 
-            # only add if there isn't a duplicate
             sh['shell_exponents'] = new_exponents
             sh['shell_coefficients'] = new_coefficients
 
         # Remove any duplicates
-        shells = el['element_electron_shells']
+        shells = el.pop('element_electron_shells')
         el['element_electron_shells'] = []
 
         for sh in shells:
@@ -149,7 +146,8 @@ def uncontract_spdf(basis):
 
     The general contractions are replaced by uncontracted versions
 
-    The input basis set is not modified.
+    The input basis set is not modified, and any primitives with all
+    zero coefficients are removed
     """
 
     new_basis = copy.deepcopy(basis)
@@ -184,7 +182,8 @@ def uncontract_general(basis):
     """
     Removes the general contractions from a basis set
 
-    The input basis set is not modified
+    The input basis set is not modified, and any primitives with all
+    zero coefficients are removed
     """
 
     new_basis = copy.deepcopy(basis)
@@ -257,6 +256,6 @@ def transform_basis_name(name):
 
     This makes comparison of basis set names easier by, for example,
     converting the name to all lower case.
-    """ 
+    """
 
     return name.lower()
