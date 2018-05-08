@@ -8,6 +8,7 @@ import codecs
 from collections import OrderedDict
 from .. import io
 from .. import compose
+from .. import manip
 
 
 def create_metadata_file(output_path, data_dir):
@@ -22,6 +23,7 @@ def create_metadata_file(output_path, data_dir):
         bs = compose.compose_table_basis(bs_file_path)
 
         # Prepare the metadata
+        tr_name = manip.transform_basis_name(bs['basis_set_name'])
         displayname = bs['basis_set_name']
         defined_elements = sorted(list(bs['basis_set_elements'].keys()))
         description = bs['basis_set_description']
@@ -45,13 +47,14 @@ def create_metadata_file(output_path, data_dir):
         internal_name, ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = OrderedDict([('filename', filename), ('description', description), ('revdesc', revision_desc),
+        single_meta = OrderedDict([('displayname', displayname),
+                                   ('filename', filename), ('description', description), ('revdesc', revision_desc),
                                    ('functiontypes', function_types), ('elements', defined_elements)])
 
-        if not displayname in metadata:
-            metadata[displayname] = {'versions': {ver: single_meta}}
+        if not tr_name in metadata:
+            metadata[tr_name] = {'versions': {ver: single_meta}}
         else:
-            metadata[displayname]['versions'][ver] = single_meta
+            metadata[tr_name]['versions'][ver] = single_meta
 
     # sort the versions and find the max version
     for k, v in metadata.items():

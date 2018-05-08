@@ -18,6 +18,7 @@ default_data_dir = os.path.join(my_dir, 'data')
 default_schema_dir = os.path.join(my_dir, 'schema')
 
 
+
 def get_basis_set(name,
                   data_dir=default_data_dir,
                   elements=None,
@@ -36,10 +37,12 @@ def get_basis_set(name,
 
     metadata = get_metadata(data_dir)
 
-    if not name in metadata:
+    tr_name = manip.transform_basis_name(name)
+
+    if not tr_name in metadata:
         raise RuntimeError("Basis set {} does not exist".format(name))
 
-    bs_data = metadata[name]
+    bs_data = metadata[tr_name]
 
     if version is None:
         version = bs_data['latest_version']

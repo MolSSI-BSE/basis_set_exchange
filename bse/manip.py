@@ -249,3 +249,14 @@ def uncontract_segmented(basis):
         el['element_electron_shells'] = newshells
 
     return new_basis
+
+
+def transform_basis_name(name):
+    """
+    Transforms the name of a basis set to an internal representation
+
+    This makes comparison of basis set names easier by, for example,
+    converting the name to all lower case.
+    """ 
+
+    return name.lower()
