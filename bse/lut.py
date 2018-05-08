@@ -1,6 +1,10 @@
 '''
-Lookup tables (lut) for converting to/from element names,
-angular momentum characters, etc
+Functions for looking up element names, numbers, and symbols
+and for converting between angular momentum conventions
+
+This module has functions for looking up element information by
+symbol, name, or number. It also has functions for converting
+angular momentum between integers (0, 1, 2) and letters (s, p, d).
 '''
 
 import os
@@ -61,21 +65,21 @@ _data_table = [
 # Note that only the last entry for a particular Z number will
 # be stored (which contains the new, official data rather than
 # the older systematic names for some elements)
-element_Z_map = {x[1]: x for x in _data_table}
+_element_Z_map = {x[1]: x for x in _data_table}
 
 # Maps element symbol to element data
-element_sym_map = {x[0]: x for x in _data_table}
+_element_sym_map = {x[0]: x for x in _data_table}
 
 # Maps element name to element data
-element_name_map = {x[2]: x for x in _data_table}
+_element_name_map = {x[2]: x for x in _data_table}
 
 # Maps AM characters to integers (the integer is the
 # index of the character in this string)
 # This is the 'hik' convention, where AM=7 is k
-amchar_map_hik = 'spdfghiklmnoqrtuvwxyzabce'
+_amchar_map_hik = 'spdfghiklmnoqrtuvwxyzabce'
 
 # This is the 'hij' convention, where AM=7 is j
-amchar_map_hij = 'spdfghijklmnoqrtuvwxyzabce'
+_amchar_map_hij = 'spdfghijklmnoqrtuvwxyzabce'
 
 
 def element_data_from_Z(Z):
@@ -84,9 +88,9 @@ def element_data_from_Z(Z):
     An exception is thrown if the Z number is not found
     '''
 
-    if Z not in element_Z_map:
-        raise RuntimeError('No element data for Z = {}'.format(Z))
-    return element_Z_map[Z]
+    if Z not in _element_Z_map:
+        raise KeyError('No element data for Z = {}'.format(Z))
+    return _element_Z_map[Z]
 
 
 def element_data_from_sym(sym):
@@ -98,9 +102,9 @@ def element_data_from_sym(sym):
     '''
 
     sym_lower = sym.lower()
-    if sym_lower not in element_sym_map:
-        raise RuntimeError('No element data for symbol \'{}\''.format(sym))
-    return element_sym_map[sym_lower]
+    if sym_lower not in _element_sym_map:
+        raise KeyError('No element data for symbol \'{}\''.format(sym))
+    return _element_sym_map[sym_lower]
 
 
 def element_data_from_name(name):
@@ -112,9 +116,9 @@ def element_data_from_name(name):
     '''
 
     name_lower = name.lower()
-    if name_lower not in element_name_map:
-        raise RuntimeError('No element data for name \'{}\''.format(name))
-    return element_name_map[name_lower]
+    if name_lower not in _element_name_map:
+        raise KeyError('No element data for name \'{}\''.format(name))
+    return _element_name_map[name_lower]
 
 
 def element_name_from_Z(Z, normalize=False):
@@ -147,15 +151,13 @@ def element_sym_from_Z(Z, normalize=False):
 
 
 def normalize_element_symbol(sym):
-    '''Normalize the capitalization of an element symbol
+    '''Normalize the capitalization of an element symbol (where only the first letter is capitalized
 
     For example, converts "he" to "He" and "uUo" to "Uuo"
     '''
 
-    sym = sym.lower()
-    sym2 = sym[0].upper()
-    sym2 += sym[1:]
-    return sym2
+    # We can cheat, since this will be the same algorithm as normalizing the name
+    return normalize_element_name(sym)
 
 
 def normalize_element_name(name):
@@ -177,20 +179,23 @@ def amint_to_char(am, hij=False):
     value is a string
 
     For example, converts [0] to 's' and [0,1,2] to 'spd'
+
+    If hij is True, the ordering spdfghijkl is used. Otherwise, the
+    ordering will be spdfghikl (skipping j)
     '''
 
     if hij:
-        amchar_map = amchar_map_hij
+        amchar_map = _amchar_map_hij
     else:
-        amchar_map = amchar_map_hik
+        amchar_map = _amchar_map_hik
 
     amchar = []
 
     for a in am:
         if a < 0:
-            raise RuntimeError('Angular momentum must be a positive integer (not {})'.format(a))
+            raise IndexError('Angular momentum must be a positive integer (not {})'.format(a))
         if a >= len(amchar_map):
-            raise RuntimeError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
+            raise IndexError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
         amchar.append(amchar_map[a])
 
     return ''.join(amchar)
@@ -202,12 +207,15 @@ def amchar_to_int(amchar, hij=False):
     The return value is a list of integers (to handle sp, spd, ... orbitals)
 
     For example, converts 'p' to [1] and 'sp' to [0,1]
+
+    If hij is True, the ordering spdfghijkl is used. Otherwise, the
+    ordering will be spdfghikl (skipping j)
     '''
 
     if hij:
-        amchar_map = amchar_map_hij
+        amchar_map = _amchar_map_hij
     else:
-        amchar_map = amchar_map_hik
+        amchar_map = _amchar_map_hik
 
     amchar_lower = amchar.lower()
 
@@ -215,7 +223,7 @@ def amchar_to_int(amchar, hij=False):
 
     for c in amchar_lower:
         if c not in amchar_map:
-            raise RuntimeError('Angular momentum character {} is not valid'.format(c))
+            raise KeyError('Angular momentum character {} is not valid'.format(c))
 
         amint.append(amchar_map.index(c))
 

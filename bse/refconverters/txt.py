@@ -38,9 +38,9 @@ def write_txt(refs):
         if len(refinfo['ref_data']) == 0:
             full_str += u'    (...no reference...)\n\n'
         for rd in refinfo['ref_data']:
-            full_str += u'    ## {}\n'.format(rd['description'])
+            full_str += u'    ## {}\n'.format(rd['reference_description'])
 
-            for r in rd['reference']:
+            for r in rd['reference_data']:
                 full_str += u'{}\n\n'.format(ref_txt(r))
 
     return full_str

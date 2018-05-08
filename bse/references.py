@@ -39,6 +39,6 @@ def compact_references(basis_dict, reffile_path):
 
     for item in element_ref_map:
         for refs in item['ref_data']:
-            refs['reference'] = [ref_data[r] for r in refs['reference']]
+            refs['reference_data'] = [ref_data[r] for r in refs['reference_keys']]
 
     return element_ref_map

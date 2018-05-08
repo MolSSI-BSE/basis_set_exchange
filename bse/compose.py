@@ -35,8 +35,8 @@ def compose_elemental_basis(file_path):
     # Broadcast the basis_set_references to each element
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
-            el_data['element_references'] = [{ 'reference': v['basis_set_references'],
-                                               'description': v['basis_set_description']}]
+            el_data['element_references'] = [{ 'reference_keys': v['basis_set_references'],
+                                               'reference_description': v['basis_set_description']}]
 
     # Compose on a per-element basis
     for k, v in js['basis_set_elements'].items():
