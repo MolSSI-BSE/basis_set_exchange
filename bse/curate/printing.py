@@ -67,7 +67,7 @@ def print_ecp_pot(pot):
         print(line)
 
 
-def print_element(z, eldata):
+def print_element(z, eldata, print_references=True):
     '''Print all data for an element
 
     Parameters
@@ -78,15 +78,18 @@ def print_element(z, eldata):
         Data for the element to be printed
     '''
 
-    sym = lut.element_sym_from_Z(z)
-    sym = lut.normalize_element_symbol(sym, True)
+    sym = lut.element_sym_from_Z(z, True)
 
     print()
     print('Element: {}   Contraction: {}'.format(sym, manip.contraction_string(eldata)))
-    if 'element_references' in eldata:
-        print('References: {}'.format(' '.join(eldata['element_references'])))
-    else:
-        print('References: NONE')
+    if print_references:
+        if 'element_references' in eldata:
+            print('References:')
+            for x in eldata['element_references']:
+                print('    ' + ', '.join(x['reference_keys']))
+                print('        ' + x['reference_description'])
+        else:
+            print('References: NONE')
 
     if 'element_electron_shells' in eldata:
         for shellidx, shell in enumerate(eldata['element_electron_shells']):
@@ -112,8 +115,9 @@ def print_component_basis(basis, elements=None):
     If elements is not None, only the specified elements will be printed
     (list of integers)
     '''
-    print("Basis set: " + basis['basis_set_name'])
     print("Description: " + basis['basis_set_description'])
+    print('References: ' + ', '.join(basis['basis_set_references']))
+
     eldata = basis['basis_set_elements']
 
     # Filter to the given elements
@@ -124,7 +128,7 @@ def print_component_basis(basis, elements=None):
 
     # Electron Basis
     for z in elements:
-        print_element(z, eldata[z])
+        print_element(z, eldata[z], False)
 
 
 def print_element_basis(basis, elements=None):
@@ -144,23 +148,17 @@ def print_element_basis(basis, elements=None):
         elements = [k for k in eldata.keys() if k in elements]
 
     # strings
-    complist = {z: ' '.join(eldata[z]['element_components']) for z in elements}
-    reflist = {z: ' '.join(eldata[z]['element_references']) for z in elements if 'element_references' in eldata[z]}
-
-    max_comp = max([len(x) for k, x in complist.items()])
-    max_comp = max(max_comp, len("Components"))
+    complist = {z: eldata[z]['element_components'] for z in elements}
 
     # Header line
-    print('{:4} {:{}} {:20}'.format("El", "Components", max_comp + 1, "References"))
+    print('{:4} {}'.format("El", "Components"))
     print('-' * 80)
     for z in elements:
         data = basis['basis_set_elements'][z]
-
-        sym = lut.element_sym_from_Z(z)
-        sym = lut.normalize_element_symbol(sym)
-
-        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp + 1, reflist[z] if z in reflist else 'None'))
-
+        sym = lut.element_sym_from_Z(z, True)
+        print('{:4} {}'.format(sym, complist[z][0]))
+        for v in complist[z][1:]:
+            print('{:4} {}'.format('', v))
     print()
 
 
@@ -185,20 +183,15 @@ def print_table_basis(basis, elements=None):
 
     # strings
     complist = {z: eldata[z]['element_entry'] for z in elements}
-    reflist = {z: eldata[z]['element_references'] for z in elements if 'element_references' in eldata[z]}
-
-    max_comp = max([len(x) for k, x in complist.items()])
-    max_comp = max(max_comp, len("Components"))
 
     # Header line
-    print('{:4} {:{}} {:20}'.format("El", "Entry", max_comp + 1, "References"))
+    print('{:4} {}'.format("El", "Entry"))
     print('-' * 80)
     for z in elements:
         data = basis['basis_set_elements'][z]
 
-        sym = lut.element_sym_from_Z(z)
-        sym = lut.normalize_element_symbol(sym)
+        sym = lut.element_sym_from_Z(z, True)
 
-        print('{:4} {:{}} {:20}'.format(sym, complist[z], max_comp + 1, reflist[z] if z in reflist else 'None'))
+        print('{:4} {}'.format(sym, complist[z]))
 
     print()

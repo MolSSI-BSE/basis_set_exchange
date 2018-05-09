@@ -4,8 +4,9 @@ Tests BSE curation functions
 
 import bse
 import pytest
+import os
 
-data_dir = bse.default_data_dir
+_data_dir = bse.default_data_dir
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -22,7 +23,7 @@ def test_electron_subset(basis1, basis2, element, expected):
     el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
-    assert bse.curate.electron_shells_are_subset(shells1, shells2) == expected
+    assert bse.curate.electron_shells_are_subset(shells1, shells2, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -38,8 +39,8 @@ def test_electron_equal(basis1, basis2, element, expected):
     el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
-    assert bse.curate.electron_shells_are_equal(shells1, shells2) == expected
-    assert bse.curate.electron_shells_are_equal(shells2, shells1) == expected
+    assert bse.curate.electron_shells_are_equal(shells1, shells2, True) == expected
+    assert bse.curate.electron_shells_are_equal(shells2, shells1, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -53,9 +54,9 @@ def test_electron_equal(basis1, basis2, element, expected):
 def test_ecp_equal(basis1, basis2, element, expected):
     el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
     el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
-    shells1 = el1['element_ecp']
-    shells2 = el2['element_ecp']
-    assert bse.curate.ecp_pots_are_equal(shells1, shells2) == expected
+    ecps1 = el1['element_ecp']
+    ecps2 = el2['element_ecp']
+    assert bse.curate.ecp_pots_are_equal(ecps1, ecps2, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -75,5 +76,55 @@ def test_ecp_equal(basis1, basis2, element, expected):
 def test_compare_elements(basis1, basis2, element, expected):
     el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
     el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
-    assert bse.curate.compare_elements(el1, el2) == expected
-    assert bse.curate.compare_elements(el2, el1) == expected
+    assert bse.curate.compare_elements(el1, el2, True, True, True) == expected
+    assert bse.curate.compare_elements(el2, el1, True, True, True) == expected
+
+
+@pytest.mark.parametrize('basis, element', [
+                              ['6-31g', 8],
+                              ['CRENBL', 3],
+                              ['CRENBL', 92],
+                              ['LANL2DZ', 78]
+                         ])
+def test_printing(basis, element):
+    el = bse.get_basis_set(basis)['basis_set_elements'][element]
+
+    shells = el['element_electron_shells']
+    bse.curate.print_electron_shell(shells[0])
+
+    if 'element_ecp' in el:
+        ecps = el['element_ecp']
+        bse.curate.print_ecp_pot(ecps[0])
+
+    bse.curate.print_element(element, el)
+
+
+@pytest.mark.parametrize('file_path', [
+                              'dunning/CC-PVDZ_dunning1989a.0.json',
+                              'crenb/CRENBL_ross1994a.0.json',
+                              'crenb/CRENBL-ECP_ross1994a.0.json'
+                         ])
+def test_print_component_basis(file_path):
+    full_path = os.path.join(_data_dir, file_path)
+    comp = bse.io.read_json_basis(full_path)
+    bse.curate.print_component_basis(comp)
+
+
+@pytest.mark.parametrize('file_path', [
+                              'dunning/CC-PVDZ.0.element.json',
+                              'crenb/CRENBL.0.element.json'
+                         ])
+def test_print_elemental_basis(file_path):
+    full_path = os.path.join(_data_dir, file_path)
+    el = bse.io.read_json_basis(full_path)
+    bse.curate.print_element_basis(el)
+
+
+@pytest.mark.parametrize('file_path', [
+                              'CC-PVDZ.0.table.json',
+                              'CRENBL.0.table.json'
+                         ])
+def test_print_table_basis(file_path):
+    full_path = os.path.join(_data_dir, file_path)
+    tab = bse.io.read_json_basis(full_path)
+    bse.curate.print_table_basis(tab)
