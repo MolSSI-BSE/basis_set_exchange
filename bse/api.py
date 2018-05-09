@@ -129,6 +129,23 @@ def get_metadata(data_dir=default_data_dir):
     return io.read_metadata(metadata_file)
 
 
+def get_all_basis_names(data_dir=default_data_dir):
+    '''Obtain a list of all basis set names
+
+    The returned list is the internal representation of the basis set name.
+
+    The data is read from the METADATA.json file in the data directory.
+
+    Parameters
+    ----------
+    data_dir : str
+        Data directory with all the basis set information. By default,
+        it is in the 'data' subdirectory of this project.
+    '''
+
+    return sorted(list(get_metadata().keys()))
+
+
 def get_references(name, elements=None, version=None, fmt=None, data_dir=default_data_dir):
     '''Get the references/citations for a basis set
 

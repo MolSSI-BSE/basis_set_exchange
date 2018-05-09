@@ -25,5 +25,4 @@ def test_metadata_uptodate():
 
     os.remove(new_metadata)
 
-    if old_data != new_data:
-        raise RuntimeError("Metadata does not appear to be up to date")
+    assert old_data == new_data
