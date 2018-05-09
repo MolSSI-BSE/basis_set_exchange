@@ -2,11 +2,11 @@
 Tests for reference handling
 """
 
+import bse
 import os
 import json
 import pytest
 import glob
-import bse
 
 data_dir = bse.default_data_dir
 

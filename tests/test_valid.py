@@ -1,5 +1,5 @@
 """
-Validation tests for the data
+Test for validating the formatting of the json files
 """
 
 import bse
