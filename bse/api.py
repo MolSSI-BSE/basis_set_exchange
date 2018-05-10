@@ -29,7 +29,9 @@ def get_basis(name,
               data_dir=default_data_dir):
     '''Obtain a basis set
 
-    This is the main function for getting basis set information
+    This is the main function for getting basis set information.
+    This function reads in all the basis data and returns it either
+    as a string or as a python dictionary.
 
     Parameters
     ----------
@@ -43,8 +45,9 @@ def get_basis(name,
         the latest version is returned.
     fmt: str
         What format to return the basis set as. By defaut, 
-        basis set information is returned as a python dictionary. Use
-        get_formats() to obtain the available formats. 
+        basis set information is returned as a python dictionary. Otherwise,
+        if a format is specified, a string is returned.
+        Use :func:`bse.api.get_formats` to obtain the available formats. 
     optimize_general : bool
         Optimize by removing general contractions that contain uncontracted
         functions (see :func:`bse.manip.optimize_general`)
@@ -125,7 +128,7 @@ def get_metadata(data_dir=default_data_dir):
     The metadata includes information such as the display name of the basis set,
     its versions, and what elements are included in the basis set
 
-    The data is read from the METADATA.json file in the data directory.
+    The data is read from the METADATA.json file in the `data_dir` directory.
 
     Parameters
     ----------
@@ -158,7 +161,8 @@ def get_all_basis_names(data_dir=default_data_dir):
 def get_references(name, elements=None, version=None, fmt=None, data_dir=default_data_dir):
     '''Get the references/citations for a basis set
 
-    The reference data is read from the REFERENCES.json file in the data directory.
+    The reference data is read from the REFERENCES.json file in the given
+    `data_dir` directory.
 
     Parameters
     ----------
@@ -233,6 +237,6 @@ def get_reference_formats():
     '''Return information about the reference/citation formats available
 
     The returned data is a map of format to display name. The format
-    can be passed as the fmt argument to get_references()
+    can be passed as the fmt argument to :func:`get_references`
     '''
     return {k: v['display'] for k, v in refconverters.converter_map.items()}
