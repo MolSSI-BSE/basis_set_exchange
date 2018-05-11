@@ -31,8 +31,7 @@ install:
   - source activate bse_env
 
     # Install anything not in conda
-  - pip install codecov
-  - pip install pytest-cov
+  - pip install codecov pytest-cov pybtex
   - conda list
 
 before_script:
