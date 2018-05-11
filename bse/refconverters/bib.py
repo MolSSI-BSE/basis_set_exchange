@@ -13,9 +13,11 @@ def _ref_bib(key,ref):
 
     entry_lines = []
     for k,v in ref.items():
-        # Handle authors
+        # Handle authors/editors
         if k == 'authors':
             entry_lines.append(u'    author = {{{}}}'.format(' and '.join(v)))
+        elif k == 'editors':
+            entry_lines.append(u'    editor = {{{}}}'.format(' and '.join(v)))
         else:
             entry_lines.append(u'    {} = {{{}}}'.format(k,v))
 
