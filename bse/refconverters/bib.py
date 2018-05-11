@@ -20,7 +20,7 @@ def _ref_bib(key,ref):
             entry_lines.append(u'    {} = {{{}}}'.format(k,v))
 
     s += ',\n'.join(entry_lines)
-    s += '}'
+    s += '\n}'
 
     return s
 
