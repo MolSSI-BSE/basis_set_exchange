@@ -37,19 +37,21 @@ def _ref_txt(ref):
     return s
 
 
-def write_txt(refs):
+def write_txt(header, refs):
     '''Converts references to plain text format
     '''
-    full_str = u''
-    for refinfo in refs:
-        full_str += u'{}\n'.format(compact_elements(refinfo['elements']))
+    full_str = u'** ' + header + '\n\n'
+    for ref in refs:
+        full_str += u'{}\n'.format(compact_elements(ref['elements']))
 
-        if len(refinfo['ref_info']) == 0:
-            full_str += u'    (...no reference...)\n\n'
-        for rd in refinfo['ref_info']:
-            full_str += u'    ## {}\n'.format(rd['reference_description'])
+        for ri in ref['reference_info']:
+            full_str += u'    ## {}\n'.format(ri['reference_description'])
 
-            for r in rd['reference_data']:
+            refdata = ri['reference_data']
+
+            if len(refdata) == 0:
+                full_str += u'    (...no reference...)\n\n'
+            for k,r in refdata.items():
                 full_str += u'{}\n\n'.format(_ref_txt(r))
 
     return full_str

@@ -8,11 +8,11 @@ from .. import manip
 from .common import *
 
 
-def write_g94(basis):
+def write_g94(header, basis):
     '''Converts a basis set to Gaussian format
     '''
 
-    s = u'! Basis set: ' + basis['basis_set_name'] + '\n'
+    s = u'! ' + header + '\n'
 
     unc_basis = manip.uncontract_general(basis)
 

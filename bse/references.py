@@ -10,7 +10,7 @@ def compact_references(basis_dict, reffile_path):
     Creates a mapping of elements to reference keys
 
     A list is returned, with each element being a dictionary
-    with entries 'ref_info' containing data for (possibly) multiple references,
+    with entries 'reference_info' containing data for (possibly) multiple references,
     and 'elements' which is a list of element Z numbers
     that those references apply to
 
@@ -22,23 +22,29 @@ def compact_references(basis_dict, reffile_path):
         Full path to the JSON file containing reference information
     """
 
-    ref_info = io.read_references(reffile_path)
+    allref_info = io.read_references(reffile_path)
 
-    element_ref_map = []
+    element_refs = []
 
-    # Create a dictionary of elements -> ref_info
+    # Create a mapping of elements -> reference information
     for el, eldata in basis_dict['basis_set_elements'].items():
-        ref_keys = eldata['element_references']
 
-        for x in element_ref_map:
-            if x['ref_info'] == ref_keys:
+        # elref is a list of dict
+        # dict is { 'reference_description': str, 'reference_keys': [keys] }
+        elref = eldata['element_references']
+
+        for x in element_refs:
+            if x['reference_info'] == elref:
                 x['elements'].append(el)
                 break
         else:
-            element_ref_map.append({'ref_info': ref_keys, 'elements': [el]})
+            element_refs.append({'reference_info': elref, 'elements': [el]})
 
-    for item in element_ref_map:
-        for refs in item['ref_info']:
-            refs['reference_data'] = [ref_info[r] for r in refs['reference_keys']]
+    for item in element_refs:
 
-    return element_ref_map
+        # Loop over a list of dictionaries for this group of elements
+        # Note that reference_data needs to be in the same order as the reference_keys
+        for elref in item['reference_info']:
+            elref['reference_data'] = {k: allref_info[k] for k in elref['reference_keys']}
+
+    return element_refs

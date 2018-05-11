@@ -8,11 +8,11 @@ from .. import manip
 from .common import *
 
 
-def write_nwchem(basis):
+def write_nwchem(header, basis):
     '''Converts a basis set to NWChem format
     '''
 
-    s = u'# Basis set: ' + basis['basis_set_name'] + '\n'
+    s = u'# ' + header + '\n'
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_electron_shells' in v]

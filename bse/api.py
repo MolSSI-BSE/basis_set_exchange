@@ -77,11 +77,11 @@ def get_basis_set(name,
 
     # Compose the entire basis set (all elements)
     table_basis_path = os.path.join(data_dir, bs_data['versions'][version]['filename'])
-    bs = compose.compose_table_basis(table_basis_path)
+    basis_dict = compose.compose_table_basis(table_basis_path)
 
     # Handle optional arguments
     if elements is not None:
-        bs_elements = bs['basis_set_elements']
+        bs_elements = basis_dict['basis_set_elements']
 
         # Are elements part of this basis set?
         for el in elements:
@@ -92,20 +92,23 @@ def get_basis_set(name,
             bs['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
     if uncontract_general:
-        bs = manip.uncontract_general(bs)
+        basis_dict = manip.uncontract_general(basis_dict)
     if uncontract_spdf:
-        bs = manip.uncontract_spdf(bs)
+        basis_dict = manip.uncontract_spdf(basis_dict)
     if uncontract_segmented:
-        bs = manip.uncontract_segmented(bs)
+        basis_dict = manip.uncontract_segmented(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:
-        return bs
+        return basis_dict
+
+    # What should we put at the top?
+    header = u'Basis Set Exchange: {} ({})'.format(name, basis_dict['basis_set_description'])
 
     # make converters case insensitive
     fmt = fmt.lower()
     if fmt in converters.converter_map:
-        return converters.converter_map[fmt]['function'](bs)
+        return converters.converter_map[fmt]['function'](header, basis_dict)
     else:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
@@ -179,10 +182,13 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=default
     if fmt is None:
         return ref_data
 
+    # What should we put at the top?
+    header = u'Basis Set Exchange: {} ({})'.format(name, basis_dict['basis_set_description'])
+
     # Make fmt case insensitive
     fmt = fmt.lower()
     if fmt in refconverters.converter_map:
-        return refconverters.converter_map[fmt]['function'](ref_data)
+        return refconverters.converter_map[fmt]['function'](header, ref_data)
     else:
         raise RuntimeError('Unknown reference format "{}"'.format(fmt))
 

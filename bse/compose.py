@@ -36,10 +36,12 @@ def compose_elemental_basis(file_path):
     # Use the basis_set_description for the reference description
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
-            el_data['element_references'] = [{
-                'reference_keys': v['basis_set_references'],
-                'reference_description': v['basis_set_description']
-            }]
+            el_data['element_references'] = [
+                { 
+                  'reference_description' : v['basis_set_description'],
+                  'reference_keys' : v['basis_set_references']
+                }
+            ]
 
     # Compose on a per-element basis
     for k, v in el_bs['basis_set_elements'].items():
