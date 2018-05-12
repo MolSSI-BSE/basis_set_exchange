@@ -4,7 +4,7 @@ Validation of bibtex output
 
 import bse
 import pytest
-from . import check_bibtex
+import check_bibtex
 
 
 # Load all the metadata once
