@@ -24,7 +24,6 @@ def _ref_txt(ref):
         if 'doi' in ref:
             s += u'\n    ' + ref['doi']
     elif ref['type'] == 'techreport':
-        print(ref)
         s += u', '.join(ref['authors'])
         s += u'\n    {}'.format(ref['title'])
         s += u'\n    \'{}\''.format(ref['institution'])
