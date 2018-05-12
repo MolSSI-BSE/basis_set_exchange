@@ -88,9 +88,9 @@ def write_nwchem(header, basis):
 
                 # Title line
                 if am[0] == max_ecp_am:
-                    s += '{} {} potential\n'.format(sym, amchar)
+                    s += '{} ul\n'.format(sym)
                 else:
-                    s += '{} {}-{} potential\n'.format(sym, amchar, max_ecp_amchar)
+                    s += '{} {}\n'.format(sym, amchar.upper())
 
                 # padding for exponents
                 gexponent_pad = determine_leftpad(gexponents, 9)

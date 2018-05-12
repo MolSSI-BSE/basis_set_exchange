@@ -5,7 +5,7 @@
     },
     "basis_set_name": "4-31G",
     "basis_set_description": "4-31G valence double-zeta basis set",
-    "basis_set_revision_description": "Original Basis Set Exchange",
+    "basis_set_revision_description": "Modified 4-31G to remove Li,B (which are 5-21)",
     "basis_set_role": "orbital",
     "basis_set_elements": {
         "1": {
@@ -13,12 +13,6 @@
         },
         "2": {
             "element_entry": "pople/31G.0.element.json"
-        },
-        "3": {
-            "element_entry": "pople/5-21G.0.element.json"
-        },
-        "4": {
-            "element_entry": "pople/5-21G.0.element.json"
         },
         "5": {
             "element_entry": "pople/4-31G.0.element.json"

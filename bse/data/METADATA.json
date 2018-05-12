@@ -71,13 +71,37 @@
         }
     },
     "4-31g": {
-        "latest_version": 0,
+        "latest_version": 1,
         "versions": {
             "0": {
                 "displayname": "4-31G",
                 "filename": "4-31G.0.table.json",
                 "description": "4-31G valence double-zeta basis set",
                 "revdesc": "Original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    15,
+                    16,
+                    17
+                ]
+            },
+            "1": {
+                "displayname": "4-31G",
+                "filename": "4-31G.1.table.json",
+                "description": "4-31G valence double-zeta basis set",
+                "revdesc": "Modified 4-31G to remove Li,B (which are 5-21)",
                 "functiontypes": [
                     "gto"
                 ],
@@ -98,13 +122,13 @@
         }
     },
     "5-21g": {
-        "latest_version": 0,
+        "latest_version": 1,
         "versions": {
-            "0": {
+            "1": {
                 "displayname": "5-21G",
-                "filename": "5-21G.0.table.json",
+                "filename": "5-21G.1.table.json",
                 "description": "5-21G valence double-zeta basis set",
-                "revdesc": "Original Basis Set Exchange",
+                "revdesc": "Curated",
                 "functiontypes": [
                     "gto"
                 ],
@@ -116,13 +140,13 @@
         }
     },
     "6-21g": {
-        "latest_version": 0,
+        "latest_version": 1,
         "versions": {
-            "0": {
+            "1": {
                 "displayname": "6-21G",
-                "filename": "6-21G.0.table.json",
+                "filename": "6-21G.1.table.json",
                 "description": "6-21G valence double-zeta basis set",
-                "revdesc": "Original Basis Set Exchange",
+                "revdesc": "Curated",
                 "functiontypes": [
                     "gto"
                 ],
@@ -217,6 +241,7 @@
                 ],
                 "elements": [
                     1,
+                    2,
                     3,
                     4,
                     5,
@@ -241,7 +266,7 @@
                 "displayname": "6-31++G*",
                 "filename": "6-31PPGS.1.table.json",
                 "description": "6-31G",
-                "revdesc": "Values from original Basis Set Exchange",
+                "revdesc": "Includes additional D functions for K,Ca. Fixes H to use 4-31G. Removes He from 6-31G (erroneous)",
                 "functiontypes": [
                     "gto"
                 ],
@@ -704,13 +729,7 @@
                     27,
                     28,
                     29,
-                    30,
-                    31,
-                    32,
-                    33,
-                    34,
-                    35,
-                    36
+                    30
                 ]
             },
             "1": {
@@ -902,13 +921,7 @@
                     27,
                     28,
                     29,
-                    30,
-                    31,
-                    32,
-                    33,
-                    34,
-                    35,
-                    36
+                    30
                 ]
             },
             "1": {
@@ -1681,6 +1694,7 @@
                     111,
                     112,
                     113,
+                    114,
                     115,
                     116,
                     117,
@@ -1826,6 +1840,7 @@
                     111,
                     112,
                     113,
+                    114,
                     115,
                     116,
                     117,

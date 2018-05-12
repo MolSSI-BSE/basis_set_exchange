@@ -4,25 +4,29 @@ Compares version 0 with historical BSE
 
 import os
 import re
-import bse
+import bz2
 import pytest
+import bse
 
 # Find the dir with all the bse files
 _my_dir = os.path.dirname(os.path.abspath(__file__))
 _hist_data_dir = os.path.join(_my_dir, 'basis_set_exchange_historical')
 _bse_data_dir = os.path.join(_hist_data_dir, 'bse-formatted')
 _hist_testfile = os.path.join(_hist_data_dir, '.is_historical')
+_hist_testfile_exists = os.path.isfile(_hist_testfile)
 
 # Skip everying in this file if the submodule isn't checked out
-pytestmark = pytest.mark.skipif(os.path.isfile(_hist_testfile) != True, reason="Historical basis data not downloaded")
+pytestmark = pytest.mark.skipif(_hist_testfile_exists != True, reason="Historical basis data not downloaded")
 
 # Load all the metadata once
 _bs_metadata = bse.get_metadata()
-_bs_names = bse.get_all_basis_names()
+
+# Only the names with a version zero
+_bs_names_only_v0 = [x for x,y in _bs_metadata.items() if 0 in y['versions']]
 
 # Read the mapping of new BSE names to old BSE files
 with open(os.path.join(_my_dir, 'bse_v0_map.txt'), 'r') as f:
-    _bse_v0_map = dict(x.strip().split('\t') for x in f.readlines())
+    _bse_v0_map = dict(re.split('\t+', x.strip()) for x in f.readlines())
 
 # Mapping of new->old symbols    
 _sym_replace_map = { 'Uun': 'Ds', 'Uuu': 'Rg', 'Uub': 'Cn', 'Uut': 'Nh',
@@ -42,6 +46,9 @@ def _process_nwline(x):
     # Substitute old symbols (BSE had old symbols for some elements)
     for k,v in _sym_replace_map.items():
         x = x.replace(k, v)
+
+    # Replace D with E for exponents
+    x = re.sub(r'(\d)D([\+\-]?)(\d)', r'\1E\2\3', x)
 
     return x
 
@@ -82,8 +89,7 @@ def _lines_equivalent(line1, line2):
     return True
 
 
-#@pytest.mark.parametrize('basis_name', _bs_names)
-@pytest.mark.parametrize('basis_name', ['6-31g*'])
+@pytest.mark.parametrize('basis_name', _bs_names_only_v0)
 def test_v0_with_bse(basis_name):
     basis_meta = _bs_metadata[basis_name]
 
@@ -96,11 +102,11 @@ def test_v0_with_bse(basis_name):
         raise RuntimeError("Mapping from BSE to old BSE name doesn't exist for " + basis_name)
 
     bse_name = _bse_v0_map[basis_name]
-    bse_file = os.path.join(_bse_data_dir, bse_name + '.NWChem')
+    bse_file = os.path.join(_bse_data_dir, bse_name + '.NWChem.bz2')
     if not os.path.isfile(bse_file):
         raise FileNotFoundError("File {} does not exist (for comparing basis {})".format(bse_file, basis_name))
 
-    with open(bse_file, 'r') as f:
+    with bz2.open(bse_file, 'rt') as f:
         bse_data = f.readlines()
     bse_data = _process_nwchem(bse_data)
 
@@ -110,6 +116,8 @@ def test_v0_with_bse(basis_name):
     new_data = _process_nwchem(new_data)
 
     if len(new_data) != len(bse_data):
+        open('T.new', 'w').write("\n".join(new_data))
+        open('T.old', 'w').write("\n".join(bse_data))
         raise RuntimeError("Basis set: {} different number of lines: {} vs {}".format(basis_name, len(new_data), len(bse_data)))
 
     for i in range(len(new_data)):
