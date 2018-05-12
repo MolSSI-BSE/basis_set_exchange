@@ -39,7 +39,7 @@ before_script:
   - pip install -e .
 
 script:
-  - py.test -v --cov=bse/ --durations=5
+  - py.test -v --cov=bse/
 
 notifications:
   email: false

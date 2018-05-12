@@ -89,7 +89,7 @@ def get_basis_set(name,
                 raise KeyError("Element {} not found in basis {}".format(el, name))
 
             # Set to only the elements we want
-            bs['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
+            basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
     if uncontract_general:
         basis_dict = manip.uncontract_general(basis_dict)
