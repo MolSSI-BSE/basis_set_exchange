@@ -84,7 +84,6 @@ def write_g94(header, basis):
             for pot in ecp_list:
                 am = pot['potential_angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True)
-                amchar = amchar.lower()
 
                 rexponents = pot['potential_r_exponents']
                 gexponents = pot['potential_gaussian_exponents']
