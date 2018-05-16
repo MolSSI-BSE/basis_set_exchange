@@ -21,6 +21,8 @@ pytestmark = pytest.mark.skipif(_hist_testfile_exists != True, reason="Historica
 # Load all the metadata once
 _bs_metadata = bse.get_metadata()
 _bs_formats = list(bse.get_formats().keys())
+_bs_formats.remove('json') # Don't need to test json (nothing to compare to)
+_true_false = [ True, False ]
 
 # Only the names with a version zero
 _bs_names_only_v0 = [x for x,y in _bs_metadata.items() if 0 in y['versions']]
@@ -81,8 +83,6 @@ def _process_gaussian(lines):
     # Remove comments and empty lines
     lines = [ x for x in lines if not x.startswith('!') and x != '']
 
-    
-
     return lines
 
 
@@ -117,8 +117,10 @@ _format_map = { 'nwchem' : ('NWChem', _process_nwchem),
               }
 
 @pytest.mark.parametrize('basis_name', _bs_names_only_v0)
-@pytest.mark.parametrize('fmt', ['nwchem', 'gaussian94'])
-def test_v0_with_bse(basis_name, fmt):
+@pytest.mark.parametrize('fmt', _bs_formats)
+@pytest.mark.parametrize('opt_gen', [True])
+def test_v0_with_bse(basis_name, fmt, opt_gen):
+
     basis_meta = _bs_metadata[basis_name]
     fmt_info = _format_map[fmt]
 
@@ -133,6 +135,15 @@ def test_v0_with_bse(basis_name, fmt):
     # Read in the data from the old BSE
     bse_name = _bse_v0_map[basis_name]
     fmt_suffix = '.' + fmt_info[0] + '.bz2'
+
+    # See if the bse optimized-general file is there. If not, it is the
+    # same as the un-optimized
+    if opt_gen:
+        fmt_suffix2 = '.min' + fmt_suffix
+        bse_file = os.path.join(_bse_data_dir, bse_name + fmt_suffix2)
+        if os.path.isfile(bse_file):
+            fmt_suffix = fmt_suffix2
+
     bse_file = os.path.join(_bse_data_dir, bse_name + fmt_suffix)
     if not os.path.isfile(bse_file):
         raise FileNotFoundError("File {} does not exist (for comparing basis {})".format(bse_file, basis_name))
@@ -142,11 +153,14 @@ def test_v0_with_bse(basis_name, fmt):
     bse_data = fmt_info[1](bse_data)
 
     # read in data from the new bse (version 0)
-    new_data = bse.get_basis_set(basis_name, version=0, fmt=fmt)
+    new_data = bse.get_basis_set(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
     new_data = new_data.split('\n')
     new_data = fmt_info[1](new_data)
 
     if len(new_data) != len(bse_data):
+        print("BSE FILE: " + bse_file)
+        #open('T.new', 'w').write("\n".join(new_data))
+        #open('T.old', 'w').write("\n".join(bse_data))
         raise RuntimeError("Basis set: {} different number of lines: {} vs {}".format(basis_name, len(new_data), len(bse_data)))
 
     for i in range(len(new_data)):
@@ -157,5 +171,7 @@ def test_v0_with_bse(basis_name, fmt):
             errstr = '''Difference found. Line {}
                         New: {}
                         Old: {}'''.format(i, new_line, bse_line)
+            #open('T.new', 'w').write("\n".join(new_data))
+            #open('T.old', 'w').write("\n".join(bse_data))
             raise RuntimeError(errstr)
 

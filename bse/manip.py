@@ -11,6 +11,15 @@ import copy
 from . import lut
 
 
+def _general_unc_candidate(col):
+    found_1 = False
+    for x in col:
+        if float(x) == 0.0:
+            return True
+
+    return False
+
+
 def contraction_string(element):
     """
     Forms a string specifying the contractions for an element
@@ -216,11 +225,12 @@ def uncontract_segmented(basis):
     """
     Removes the segmented contractions from a basis set
 
-    The input basis set is not modified
+    This implicitly removes general contractions as well,
+    but will leave sp, spd, ... orbitals alone
+
+    The input basis set is not modified.
     """
 
-    # This implicitly removes general contractions as well
-    # But will leave sp, spd, orbitals alone
     new_basis = copy.deepcopy(basis)
 
     for k, el in new_basis['basis_set_elements'].items():
@@ -235,7 +245,7 @@ def uncontract_segmented(basis):
             coefficients = sh['shell_coefficients']
             nam = len(sh['shell_angular_momentum'])
 
-            for i in range(len(sh['shell_exponents'])):
+            for i in range(len(exponents)):
                 newsh = sh.copy()
                 newsh['shell_exponents'] = [exponents[i]]
                 newsh['shell_coefficients'] = [["1.00000000"] * nam]
@@ -246,6 +256,153 @@ def uncontract_segmented(basis):
                 newshells.append(newsh)
 
         el['element_electron_shells'] = newshells
+
+    return new_basis
+
+
+def _is_single_column(col):
+    return sum(float(x) != 0.0 for x in col) == 1
+
+
+def _is_zero_column(col):
+    return sum(float(x) != 0.0 for x in col) == 0
+
+
+def _nonzero_range(vec):
+    for idx, x in enumerate(vec):
+        if float(x) != 0.0:
+            first = idx
+            break
+
+    for idx, x in enumerate(reversed(vec)):
+        if float(x) != 0.0:
+            last = (len(vec) - idx)
+            break
+
+    if first is None:
+        return (None, None)
+    else:
+        return (first, last)
+
+
+def _find_block(mat):
+
+    # Initial range of rows
+    row_range = _nonzero_range(mat[0])
+    rows = range(row_range[0], row_range[1])
+
+    # Find the right-most column with a nonzero in it
+    col_range = (0, 0)
+    for r in rows:
+        x, y = _nonzero_range([col[r] for col in mat])
+        col_range = (min(col_range[0], x), max(col_range[1], y))
+
+    cols = range(col_range[0], col_range[1])
+
+    # Columns may be jagged also
+    # Iterate until we don't see any change
+    while True:
+        row_range_old = row_range
+        col_range_old = col_range
+        for c in cols:
+            x, y = _nonzero_range(mat[c])
+            row_range = (min(row_range[0], x), max(row_range[1], y))
+
+        rows = range(row_range[0], row_range[1])
+
+        for r in rows:
+            x, y = _nonzero_range([col[r] for col in mat])
+            col_range = (min(col_range[0], x), max(col_range[1], y))
+
+        cols = range(col_range[0], col_range[1])
+
+        if col_range == col_range_old and row_range == row_range_old:
+            break
+
+    return (rows, cols)
+
+
+def optimize_general(basis):
+    """
+    Optimizes the general contraction using the method of Hashimoto et al
+
+    See: T. Hashimoto, K. Hirao, H. Tatewaki
+         'Comment on Dunning's correlation-consistent basis set'
+         Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)
+         https://doi.org/10.1016/0009-2614(95)00807-G
+    """
+
+    new_basis = copy.deepcopy(basis)
+    for k, el in new_basis['basis_set_elements'].items():
+
+        if not 'element_electron_shells' in el:
+            continue
+
+        elshells = el.pop('element_electron_shells')
+        el['element_electron_shells'] = []
+        for sh in elshells:
+            exponents = sh['shell_exponents']
+            coefficients = sh['shell_coefficients']
+            nprim = len(exponents)
+            nam = len(sh['shell_angular_momentum'])
+
+            if nam > 1 or len(coefficients) < 2:
+                el['element_electron_shells'].append(sh)
+                continue
+
+            # First, find columns (general contractions) with a single non-zero value
+            single_columns = [idx for idx, c in enumerate(coefficients) if _is_single_column(c)]
+
+            # Find the corresponding rows that have a value in one of these columns
+            # Note that at this stage, the row may have coefficients in more than one
+            # column. That is ok, we are going to split it off anyway
+            single_rows = []
+            for col_idx in single_columns:
+                col = coefficients[col_idx]
+                for row_idx in range(nprim):
+                    if float(col[row_idx]) != 0.0:
+                        single_rows.append(row_idx)
+
+            # Split those out into new shells, and remove them from the
+            # original shell
+            new_shells_single = []
+            for row_idx in single_rows:
+                newsh = copy.deepcopy(sh)
+                newsh['shell_exponents'] = [exponents[row_idx]]
+                newsh['shell_coefficients'] = [['1.0000000']]
+                new_shells_single.append(newsh)
+
+            exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
+            coefficients = [x for idx, x in enumerate(coefficients) if idx not in single_columns]
+            coefficients = [[x for idx, x in enumerate(col) if not idx in single_rows] for col in coefficients]
+
+            # Remove Zero columns
+            #coefficients = [ x for x in coefficients if not _is_zero_column(x) ]
+
+            # Find contiguous rectanglar blocks
+            new_shells = []
+            while len(exponents) > 0:
+                block_rows, block_cols = _find_block(coefficients)
+
+                # add as a new shell
+                newsh = copy.deepcopy(sh)
+                newsh['shell_exponents'] = [exponents[i] for i in block_rows]
+                newsh['shell_coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
+                new_shells.append(newsh)
+
+                # Remove from the original exponent/coefficient set
+                exponents = [x for idx, x in enumerate(exponents) if idx not in block_rows]
+                coefficients = [x for idx, x in enumerate(coefficients) if idx not in block_cols]
+                coefficients = [[x for idx, x in enumerate(col) if not idx in block_rows] for col in coefficients]
+
+            # I do this order to mimic the output of the original BSE
+            el['element_electron_shells'].extend(new_shells)
+            el['element_electron_shells'].extend(new_shells_single)
+
+        # Fix coefficients for completely uncontracted shells to 1.0
+        for sh in el['element_electron_shells']:
+            if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
+                sh['shell_coefficients'][0][0] = '1.0000000'
 
     return new_basis
 

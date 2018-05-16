@@ -22,6 +22,7 @@ def get_basis_set(name,
                   elements=None,
                   version=None,
                   fmt=None,
+                  optimize_general=False,
                   uncontract_general=False,
                   uncontract_spdf=False,
                   uncontract_segmented=False,
@@ -44,6 +45,9 @@ def get_basis_set(name,
         What format to return the basis set as. By defaut, 
         basis set information is returned as a python dictionary. Use
         get_formats() to obtain the available formats. 
+    optimize_general : bool
+        Optimize by removing general contractions that contain uncontracted
+        functions (see :func:`bse.manip.optimize_general`)
     uncontract_general : bool
         If True, remove general contractions by duplicating the set
         of primitive exponents with each vector of coefficients.
@@ -91,6 +95,8 @@ def get_basis_set(name,
             # Set to only the elements we want
             basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
+    if optimize_general:
+        basis_dict = manip.optimize_general(basis_dict)
     if uncontract_general:
         basis_dict = manip.uncontract_general(basis_dict)
     if uncontract_spdf:
