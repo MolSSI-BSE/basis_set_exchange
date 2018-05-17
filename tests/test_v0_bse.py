@@ -118,7 +118,7 @@ _format_map = { 'nwchem' : ('NWChem', _process_nwchem),
 
 @pytest.mark.parametrize('basis_name', _bs_names_only_v0)
 @pytest.mark.parametrize('fmt', _bs_formats)
-@pytest.mark.parametrize('opt_gen', [True])
+@pytest.mark.parametrize('opt_gen', _true_false)
 def test_v0_with_bse(basis_name, fmt, opt_gen):
 
     basis_meta = _bs_metadata[basis_name]
