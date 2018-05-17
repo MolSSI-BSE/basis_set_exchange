@@ -1,0 +1,16 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "element",
+        "schema_version": "0.1"
+    },
+    "basis_set_name": "aug-cc-pVTZ",
+    "basis_set_description": "VTZ2PD  Valence Triple Zeta + Polarization + Diffuse",
+    "basis_set_elements": {
+        "23": {
+            "element_components": [
+                "dunning/CC-PVTZ_balabanov2005a.1.json",
+                "dunning/CC-PVTZ-diffuse_balabanov2005a.0.json"
+            ]
+        }
+    }
+}
