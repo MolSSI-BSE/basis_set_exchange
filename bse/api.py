@@ -18,15 +18,15 @@ default_data_dir = os.path.join(my_dir, 'data')
 default_schema_dir = os.path.join(my_dir, 'schema')
 
 
-def get_basis_set(name,
-                  elements=None,
-                  version=None,
-                  fmt=None,
-                  optimize_general=False,
-                  uncontract_general=False,
-                  uncontract_spdf=False,
-                  uncontract_segmented=False,
-                  data_dir=default_data_dir):
+def get_basis(name,
+              elements=None,
+              version=None,
+              fmt=None,
+              optimize_general=False,
+              uncontract_general=False,
+              uncontract_spdf=False,
+              uncontract_segmented=False,
+              data_dir=default_data_dir):
     '''Obtain a basis set
 
     This is the main function for getting basis set information
@@ -181,7 +181,7 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=default
 
     reffile_path = os.path.join(data_dir, 'REFERENCES.json')
 
-    basis_dict = get_basis_set(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
+    basis_dict = get_basis(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
 
     ref_data = references.compact_references(basis_dict, reffile_path)
 
@@ -224,7 +224,7 @@ def get_formats():
     '''Return information about the basis set formats available
 
     The returned data is a map of format to display name. The format
-    can be passed as the fmt argument to get_basis_set()
+    can be passed as the fmt argument to :func:`get_basis()`
     '''
     return {k: v['display'] for k, v in converters.converter_map.items()}
 

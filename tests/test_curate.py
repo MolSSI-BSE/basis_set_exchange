@@ -19,8 +19,8 @@ _data_dir = bse.default_data_dir
                               ['cc-pvtz', 'aug-cc-pvtz', 13, True]
                          ]) 
 def test_electron_subset(basis1, basis2, element, expected):
-    el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
+    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
+    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
     assert bse.curate.electron_shells_are_subset(shells1, shells2, True) == expected
@@ -35,8 +35,8 @@ def test_electron_subset(basis1, basis2, element, expected):
                               ['cc-pvtz', 'aug-cc-pvtz', 13, False]
                          ]) 
 def test_electron_equal(basis1, basis2, element, expected):
-    el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
+    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
+    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
     assert bse.curate.electron_shells_are_equal(shells1, shells2, True) == expected
@@ -52,8 +52,8 @@ def test_electron_equal(basis1, basis2, element, expected):
                               ['LANL2DZ', 'CRENBL', 78, False]
                          ]) 
 def test_ecp_equal(basis1, basis2, element, expected):
-    el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
+    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
+    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
     ecps1 = el1['element_ecp']
     ecps2 = el2['element_ecp']
     assert bse.curate.ecp_pots_are_equal(ecps1, ecps2, True) == expected
@@ -74,8 +74,8 @@ def test_ecp_equal(basis1, basis2, element, expected):
                               ['LANL2DZ', 'CRENBL', 78, False]
                          ]) 
 def test_compare_elements(basis1, basis2, element, expected):
-    el1 = bse.get_basis_set(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis_set(basis2)['basis_set_elements'][element]
+    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
+    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
     assert bse.curate.compare_elements(el1, el2, True, True, True) == expected
     assert bse.curate.compare_elements(el2, el1, True, True, True) == expected
 
@@ -87,7 +87,7 @@ def test_compare_elements(basis1, basis2, element, expected):
                               ['LANL2DZ', 78]
                          ])
 def test_printing(basis, element):
-    el = bse.get_basis_set(basis)['basis_set_elements'][element]
+    el = bse.get_basis(basis)['basis_set_elements'][element]
 
     shells = el['element_electron_shells']
     bse.curate.print_electron_shell(shells[0])

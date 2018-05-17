@@ -153,7 +153,7 @@ def test_v0_with_bse(basis_name, fmt, opt_gen):
     bse_data = fmt_info[1](bse_data)
 
     # read in data from the new bse (version 0)
-    new_data = bse.get_basis_set(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
+    new_data = bse.get_basis(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
     new_data = new_data.split('\n')
     new_data = fmt_info[1](new_data)
 

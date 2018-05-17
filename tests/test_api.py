@@ -23,27 +23,27 @@ _true_false = [ True, False ]
 @pytest.mark.parametrize('unc_seg', _true_false)
 @pytest.mark.parametrize('unc_spdf', _true_false)
 @pytest.mark.parametrize('opt_gen', _true_false)
-def test_get_basis_set(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
+def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
     this_metadata = _bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bs = bse.get_basis_set(basis_name, elements=None, fmt=fmt,
-                               version=ver,
-                               uncontract_general=unc_general,
-                               uncontract_segmented=unc_seg,
-                               uncontract_spdf=unc_spdf,
-                               optimize_general=opt_gen)
+        bs = bse.get_basis(basis_name, elements=None, fmt=fmt,
+                           version=ver,
+                           uncontract_general=unc_general,
+                           uncontract_segmented=unc_seg,
+                           uncontract_spdf=unc_spdf,
+                           optimize_general=opt_gen)
 
         # Get subset of elements
         avail_elements = this_metadata['versions'][ver]['elements']
         nelements = random.randint(1, len(avail_elements))
         selected_elements = random.sample(avail_elements, nelements)
-        bs = bse.get_basis_set(basis_name, elements=selected_elements,
-                               fmt=fmt,
-                               version=ver,
-                               uncontract_general=unc_general,
-                               uncontract_segmented=unc_seg,
-                               uncontract_spdf=unc_spdf,
-                               optimize_general=opt_gen)
+        bs = bse.get_basis(basis_name, elements=selected_elements,
+                           fmt=fmt,
+                           version=ver,
+                           uncontract_general=unc_general,
+                           uncontract_segmented=unc_seg,
+                           uncontract_spdf=unc_spdf,
+                           optimize_general=opt_gen)
 
 
 @pytest.mark.parametrize('basis_name', _bs_names)

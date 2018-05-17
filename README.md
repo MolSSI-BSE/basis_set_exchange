@@ -23,7 +23,7 @@ Tests can be run using `py.test -v` once installed.
 import bse
 
 # Obtain the STO-3G basis set in nwchem format (as a string) for hydrogen and carbon
-bse.get_basis_set('STO-3G', elements=[1,6], fmt='nwchem')
+bse.get_basis('STO-3G', elements=[1,6], fmt='nwchem')
 
 # Obtain the references for the above
 bse.get_references('STO-3G', elements=[1,6], fmt='txt')
