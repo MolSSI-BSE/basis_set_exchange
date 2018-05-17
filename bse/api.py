@@ -5,6 +5,7 @@ Main interface to Basis Set Exchange functionality
 import os
 import json
 from . import io
+from . import lut
 from . import manip
 from . import compose
 from . import references
@@ -16,6 +17,23 @@ from . import refconverters
 my_dir = os.path.dirname(os.path.abspath(__file__))
 default_data_dir = os.path.join(my_dir, 'data')
 default_schema_dir = os.path.join(my_dir, 'schema')
+
+
+def _convert_element_list(elements):
+    '''Convert a list of elements to an internal list
+
+    A list of elements can contain both integers and strings.
+    This converts the list entirely to integers
+    '''
+
+    ret = []
+    for el in elements:
+        if isinstance(el, str):
+            ret.append(lut.element_Z_from_sym(el))
+        else:
+            ret.append(el)
+
+    return ret
 
 
 def get_basis(name,
@@ -38,16 +56,17 @@ def get_basis(name,
     name : str
         Name of the basis set. This is not case sensitive.
     elements : list
-        List of element numbers that you want the basis set for. By default,
+        List of elements that you want the basis set for. By default,
         all elements for which the basis set is defined are included.
+        Elements can be specified by Z-number (int) or by symbol (string)
     version : int
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
     fmt: str
-        What format to return the basis set as. By defaut, 
+        What format to return the basis set as. By defaut,
         basis set information is returned as a python dictionary. Otherwise,
         if a format is specified, a string is returned.
-        Use :func:`bse.api.get_formats` to obtain the available formats. 
+        Use :func:`bse.api.get_formats` to obtain the available formats.
     optimize_general : bool
         Optimize by removing general contractions that contain uncontracted
         functions (see :func:`bse.manip.optimize_general`)
@@ -88,6 +107,9 @@ def get_basis(name,
 
     # Handle optional arguments
     if elements is not None:
+        # Convert to purely a list of integers
+        elements = _convert_element_list(elements)
+
         bs_elements = basis_dict['basis_set_elements']
 
         # Are elements part of this basis set?

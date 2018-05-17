@@ -150,6 +150,15 @@ def element_sym_from_Z(Z, normalize=False):
         return r
 
 
+def element_Z_from_sym(sym):
+    '''Obtain an element's Z-number given its symbol
+
+    An exception is thrown if the symbol is not found
+    '''
+
+    return element_data_from_sym(sym)[1]
+
+
 def normalize_element_symbol(sym):
     '''Normalize the capitalization of an element symbol (where only the first letter is capitalized
 
