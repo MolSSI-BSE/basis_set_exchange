@@ -3,6 +3,7 @@ Tests for the BSE main API
 """
 
 import bse
+from bse import lut
 import pytest
 import random
 
@@ -38,6 +39,12 @@ def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
         avail_elements = this_metadata['versions'][ver]['elements']
         nelements = random.randint(1, len(avail_elements))
         selected_elements = random.sample(avail_elements, nelements)
+
+        # Change some selected elements to strings 
+        for idx in range(len(selected_elements)):
+            if idx % 2 == 0:
+                selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
+            
         bs = bse.get_basis(basis_name, elements=selected_elements,
                            fmt=fmt,
                            version=ver,

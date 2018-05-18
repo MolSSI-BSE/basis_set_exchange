@@ -38,10 +38,13 @@ instread.::
 
 
 By default, all elements for which the basis set is defined are included - this
-can be overridden with the `elements` parameter.::
+can be overridden with the `elements` parameter::
 
   # Get only carbon and oxygen
   bse.get_basis('aug-cc-pvtz', elements=[6,8])
+
+  # Can also use strings with the element symbols
+  bse.get_basis('aug-cc-pvtz', elements=[6,'O', 'Ne'])
 
 
 Getting references
