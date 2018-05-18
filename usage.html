@@ -172,27 +172,55 @@
 <p>The main function for getting a basis set is <a class="reference internal" href="user_api.html#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_basis()</span></code></a>.
 Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
-instread.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bse</span>
+instread.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get a basis set as a python dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;basis_set_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;6-31G*&#39;</span>
 
-<span class="c1"># Get a basis set as a python dictionary</span>
-<span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Basis set names are case insensitive</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;basis_set_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;6-31G*&#39;</span>
 
-<span class="c1"># Basis set names are case insensitive</span>
-<span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31Gg*&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, but in gaussian format (as a string)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
+<span class="go">! Basis Set Exchange: 6-31G* (6-31G)</span>
+<span class="go">****</span>
+<span class="go">H     0</span>
+<span class="go">S   3   1.00</span>
+<span class="go">     18.731137               0.0334946</span>
+<span class="go">      2.8253944              0.2347269</span>
+<span class="gp">...</span>
 
-<span class="c1"># Same as above, but in gaussian format (as a string)</span>
-<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 
-<span class="c1"># Available formats are available via get_formats</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bse</span><span class="o">.</span><span class="n">get_formats</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_formats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_formats</span><span class="p">()</span>
+<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian94&#39;}</span>
 </pre></div>
 </div>
 <p>By default, all elements for which the basis set is defined are included - this
-can be overridden with the <cite>elements</cite> parameter.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get only carbon and oxygen</span>
-<span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+can be overridden with the <cite>elements</cite> parameter</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get only carbon and oxygen</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
+<span class="go"># Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)</span>
+<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
+<span class="go">C    S</span>
+<span class="go">   8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000</span>
+<span class="gp">...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can also use strings with the element symbols (and be mixed with integers)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
+<span class="go"># Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)</span>
+<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
+<span class="go">C    S</span>
+<span class="go">   8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000</span>
+<span class="gp">...</span>
 </pre></div>
 </div>
 </div>
@@ -201,18 +229,41 @@ can be overridden with the <cite>elements</cite> parameter.:</p>
 <p>Reference/citations can be obtained via <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a>. The <cite>elements</cite>
 parameter is similar to that in <a class="reference internal" href="user_api.html#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_basis()</span></code></a>.</p>
 <p>The <cite>fmt</cite> parameter controls the output format. By default, the output
-is a dictionary. If <cite>fmt</cite> is specified, the output is a string.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get references for 6-31G*, all elements, as a dictionary</span>
-<span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
+is a dictionary. If <cite>fmt</cite> is specified, the output is a string.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># As bibtex, restricting to H and F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bib</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;bib&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bib</span><span class="p">)</span>
+<span class="go">% Basis Set Exchange: 6-31G* (6-31G)</span>
 
-<span class="c1"># Restrict to hydrogen and fluorine</span>
-<span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="go">% H</span>
+<span class="go">%     31G valence double-zeta</span>
+<span class="go">%         ditchfield1971a</span>
+<span class="go">%</span>
+<span class="go">% F</span>
+<span class="go">%     6-31G valence double-zeta</span>
+<span class="go">%         hehre1972a</span>
+<span class="go">%</span>
+<span class="go">%     Polarization functions associated with 6-31G</span>
+<span class="go">%         hariharan1973a</span>
+<span class="go">%</span>
 
-<span class="c1"># In bibtex</span>
-<span class="n">bib</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;bib&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
 
-<span class="c1"># Available formats are available via get_reference_formats</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">bse</span><span class="o">.</span><span class="n">get_reference_formats</span><span class="p">())</span>
+<span class="go">@article{ditchfield1971a,</span>
+<span class="go">    type = {article},</span>
+<span class="go">    author = {R. Ditchfield and W. J. Hehre and J. A. Pople},</span>
+<span class="go">    title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},</span>
+<span class="go">    journal = {J. Chem. Phys.},</span>
+<span class="go">    volume = {54},</span>
+<span class="go">    page = {724-728},</span>
+<span class="go">    year = {1971},</span>
+<span class="go">    doi = {10.1063/1.1674902}</span>
+<span class="go">}</span>
+<span class="gp">...</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_reference_formats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_reference_formats</span><span class="p">()</span>
+<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;bib&#39;: &#39;BibTeX&#39;, &#39;txt&#39;: &#39;Plain Text&#39;}</span>
 </pre></div>
 </div>
 </div>
@@ -225,12 +276,12 @@ v0 will match the original BSE data.</p>
 <p>Versions are meant to be increased only when there is a material change to the data.
 If data is simply being added (new elements), the version will not be incremented.</p>
 <p>Both <cite>bse.get_basis</cite> and <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a> accept a <cite>version</cite> parameter.
-If <cite>version</cite> is not specified, the latest version is used.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get latest version</span>
-<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+If <cite>version</cite> is not specified, the latest version is used.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get latest version</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
 
-<span class="c1"># Get the original BSE data</span>
-<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the original BSE data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -244,18 +295,25 @@ This information can be accessed by the <a class="reference internal" href="user
 into some internal name (see <a class="reference internal" href="developer_api.html#bse.manip.transform_basis_name" title="bse.manip.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.transform_basis_name()</span></code></a>)</p>
 </div>
 <p>A simple list containing all the basis set names can be obtained via <a class="reference internal" href="user_api.html#bse.get_all_basis_names" title="bse.get_all_basis_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_all_basis_names()</span></code></a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the metadata</span>
-<span class="n">md</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the metadata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
 
-<span class="c1"># Show all the metadata for 6-31G</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># What is the latest version of 6-31G</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;latest_version&#39;</span><span class="p">]</span>
+<span class="go">1</span>
 
-<span class="c1"># What is the latest version</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;latest_version&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># All versions of 6-31G</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;versions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">dict_keys([0, 1])</span>
 
-<span class="c1"># Print all the basis sets known to the BSE</span>
-<span class="n">all_bs</span> <span class="o">=</span> <span class="n">bse_get_all_basis_names</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Elements defined in v0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;versions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span>
+<span class="go">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print all the basis sets known to the BSE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">all_bs</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
+<span class="go">[&#39;3-21g&#39;, &#39;4-31g&#39;, &#39;5-21g&#39;, ...</span>
 </pre></div>
 </div>
 </div>
