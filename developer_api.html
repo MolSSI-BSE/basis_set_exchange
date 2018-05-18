@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer API &mdash; Basis Set Exchange  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer Curation API" href="developer_curate.html" />
+    <link rel="prev" title="Developer Documentation" href="developer.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developer API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.api">api - The main API Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.compose">compose - Composition of basis set information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.manip">manip - Manipulation of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.fileio">fileio - Input/Output of files (including json)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.lut">lut - Lookup tables element information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.references">references - Handling of reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.validator">validator - Validation of basis sets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_curate.html">Developer Curation API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Developer API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/developer_api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-api">
+<h1>Developer API<a class="headerlink" href="#developer-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-bse.api">
+<span id="api-the-main-api-module"></span><h2>api - The main API Module<a class="headerlink" href="#module-bse.api" title="Permalink to this headline">¶</a></h2>
+<p>Main interface to Basis Set Exchange functionality</p>
+<dl class="function">
+<dt id="bse.api.get_all_basis_names">
+<code class="descclassname">bse.api.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a list of all basis set names</p>
+<p>The returned list is the internal representation of the basis set name.</p>
+<p>The data is read from the METADATA.json file in the data directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_basis">
+<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a basis set</p>
+<p>This is the main function for getting basis set information.
+This function reads in all the basis data and returns it either
+as a string or as a python dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
+</dd>
+<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of elements that you want the basis set for. By default,
+all elements for which the basis set is defined are included.
+Elements can be specified by Z-number (int) or by symbol (string)</p>
+</dd>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Obtain a specific version of this basis set. By default,
+the latest version is returned.</p>
+</dd>
+<dt><strong>fmt: str</strong></dt>
+<dd><p class="first last">What format to return the basis set as. By defaut,
+basis set information is returned as a python dictionary. Otherwise,
+if a format is specified, a string is returned.
+Use <a class="reference internal" href="#bse.api.get_formats" title="bse.api.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code></a> to obtain the available formats.</p>
+</dd>
+<dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Optimize by removing general contractions that contain uncontracted
+functions (see <a class="reference internal" href="#bse.manip.optimize_general" title="bse.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code></a>)</p>
+</dd>
+<dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True, remove general contractions by duplicating the set
+of primitive exponents with each vector of coefficients.
+Primitives with zero coefficient are removed, as are duplicate shells.</p>
+</dd>
+<dt><strong>uncontract_spdf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True, remove general contractions with combined angular momentum (sp, spd, etc)
+by duplicating the set of primitive exponents with each vector of coefficients.
+Primitives with zero coefficient are removed, as are duplicate shells.</p>
+</dd>
+<dt><strong>uncontract_segmented</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True, remove segmented contractions by duplicating each primitive into new shells.
+Each coefficient is set to 1.0</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_formats">
+<code class="descclassname">bse.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about the basis set formats available</p>
+<p>The returned data is a map of format to display name. The format
+can be passed as the fmt argument to <a class="reference internal" href="#bse.api.get_basis" title="bse.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_metadata">
+<code class="descclassname">bse.api.</code><code class="descname">get_metadata</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the metadata for all basis sets</p>
+<p>The metadata includes information such as the display name of the basis set,
+its versions, and what elements are included in the basis set</p>
+<p>The data is read from the METADATA.json file in the <cite>data_dir</cite> directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_reference_formats">
+<code class="descclassname">bse.api.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_reference_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about the reference/citation formats available</p>
+<p>The returned data is a map of format to display name. The format
+can be passed as the fmt argument to <a class="reference internal" href="#bse.api.get_references" title="bse.api.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_references">
+<code class="descclassname">bse.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the references/citations for a basis set</p>
+<p>The reference data is read from the REFERENCES.json file in the given
+<cite>data_dir</cite> directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
+</dd>
+<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of element numbers that you want the basis set for. By default,
+all elements for which the basis set is defined are included.</p>
+</dd>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Obtain a specific version of this basis set. By default,
+the latest version is returned.</p>
+</dd>
+<dt><strong>fmt: str</strong></dt>
+<dd><p class="first last">What format to return the basis set as. By defaut,
+basis set information is returned as a python dictionary. Use
+get_reference_formats() to obtain the available formats.</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_schema">
+<code class="descclassname">bse.api.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a schema that can validate BSE JSON files</p>
+<p>The schema_type represents the type of BSE JSON file to be validated,
+and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.compose">
+<span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-bse.compose" title="Permalink to this headline">¶</a></h2>
+<p>Functions related to composing basis sets from individual components</p>
+<dl class="function">
+<dt id="bse.compose.compose_elemental_basis">
+<code class="descclassname">bse.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ‘elemental’ basis from an elemental json file</p>
+<p>This function reads the info from the given file, and reads all the component
+basis set information from the files listed therein. It then composes all the
+information together into one ‘elemental’ basis dictionary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.compose.compose_table_basis">
+<code class="descclassname">bse.compose.</code><code class="descname">compose_table_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.compose.compose_table_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a ‘table’ basis from an table json file</p>
+<p>This function reads the info from the given file, and reads all the elemental
+basis set information from the files listed therein. It then composes all the
+information together into one ‘table’ basis dictionary</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.manip">
+<span id="manip-manipulation-of-basis-sets"></span><h2>manip - Manipulation of basis sets<a class="headerlink" href="#module-bse.manip" title="Permalink to this headline">¶</a></h2>
+<p>Common basis set manipulations</p>
+<p>This module contains functions for uncontracting and merging basis set
+data, as well as some other small functions.</p>
+<dl class="function">
+<dt id="bse.manip.contraction_string">
+<code class="descclassname">bse.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forms a string specifying the contractions for an element</p>
+<p>ie, (16s,10p) -&gt; [4s,3p]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.merge_element_data">
+<code class="descclassname">bse.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merges the basis set data for an element from multiple sources
+into dest.</p>
+<p>The destination is not modified, and a (shallow) copy of dest is returned
+with the data from sources added.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.optimize_general">
+<code class="descclassname">bse.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<div class="last line-block">
+<div class="line">T. Hashimoto, K. Hirao, H. Tatewaki</div>
+<div class="line">‘Comment on Dunning’s correlation-consistent basis set’</div>
+<div class="line">Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)</div>
+<div class="line"><a class="reference external" href="https://doi.org/10.1016/0009-2614(95)00807-G">https://doi.org/10.1016/0009-2614(95)00807-G</a></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.prune_basis">
+<code class="descclassname">bse.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes primitives that have a zero coefficient, and
+removes duplicate shells</p>
+<p>This only finds EXACT duplicates, and is meant to be used
+after uncontracting</p>
+<p>The input basis set is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.transform_basis_name">
+<code class="descclassname">bse.manip.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the name of a basis set to an internal representation</p>
+<p>This makes comparison of basis set names easier by, for example,
+converting the name to all lower case.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.uncontract_general">
+<code class="descclassname">bse.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the general contractions from a basis set</p>
+<p>The input basis set is not modified, and any primitives with all
+zero coefficients are removed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.uncontract_segmented">
+<code class="descclassname">bse.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the segmented contractions from a basis set</p>
+<p>This implicitly removes general contractions as well,
+but will leave sp, spd, … orbitals alone</p>
+<p>The input basis set is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.uncontract_spdf">
+<code class="descclassname">bse.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
+<p>The general contractions are replaced by uncontracted versions</p>
+<p>The input basis set is not modified, and any primitives with all
+zero coefficients are removed</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.fileio">
+<span id="fileio-input-output-of-files-including-json"></span><h2>fileio - Input/Output of files (including json)<a class="headerlink" href="#module-bse.fileio" title="Permalink to this headline">¶</a></h2>
+<p>Functions for reading and writing the standard JSON-based
+basis set format</p>
+<dl class="function">
+<dt id="bse.fileio.get_basis_filelist">
+<code class="descclassname">bse.fileio.</code><code class="descname">get_basis_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.get_basis_filelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the full paths to all the table basis sets contained
+in the given data directory</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.read_json_basis">
+<code class="descclassname">bse.fileio.</code><code class="descname">read_json_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_json_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads generic basis set information from a JSON file</p>
+<p>After reading, the MolSSI BSE schema information is searched for and if not
+found, an exception is raised.</p>
+<p>The keys for the elements within a basis set (the Z number) are converted
+to integers (from strings) in this function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to read</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.read_metadata">
+<code class="descclassname">bse.fileio.</code><code class="descname">read_metadata</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a file containing the metadata for all the basis sets</p>
+<p>All the version numbers (keys) are converted to integers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to read</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.read_references">
+<code class="descclassname">bse.fileio.</code><code class="descname">read_references</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a references JSON file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to read</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.read_schema">
+<code class="descclassname">bse.fileio.</code><code class="descname">read_schema</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a JSON schema file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to read</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.write_json_basis">
+<code class="descclassname">bse.fileio.</code><code class="descname">write_json_basis</code><span class="sig-paren">(</span><em>file_path</em>, <em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write basis set information to a JSON file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+</dd>
+<dt><strong>bs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Basis set information to write</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.write_references">
+<code class="descclassname">bse.fileio.</code><code class="descname">write_references</code><span class="sig-paren">(</span><em>file_path</em>, <em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.write_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write reference information to a JSON file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+</dd>
+<dt><strong>refs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Reference information to write</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.lut">
+<span id="lut-lookup-tables-element-information"></span><h2>lut - Lookup tables element information<a class="headerlink" href="#module-bse.lut" title="Permalink to this headline">¶</a></h2>
+<p>Functions for looking up element names, numbers, and symbols
+and for converting between angular momentum conventions</p>
+<p>This module has functions for looking up element information by
+symbol, name, or number. It also has functions for converting
+angular momentum between integers (0, 1, 2) and letters (s, p, d).</p>
+<dl class="function">
+<dt id="bse.lut.amchar_to_int">
+<code class="descclassname">bse.lut.</code><code class="descname">amchar_to_int</code><span class="sig-paren">(</span><em>amchar</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an angular momentum integer to a character</p>
+<p>The return value is a list of integers (to handle sp, spd, … orbitals)</p>
+<p>For example, converts ‘p’ to [1] and ‘sp’ to [0,1]</p>
+<p>If hij is True, the ordering spdfghijkl is used. Otherwise, the
+ordering will be spdfghikl (skipping j)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.amint_to_char">
+<code class="descclassname">bse.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an angular momentum integer to a character</p>
+<p>The input is a list (to handle sp, spd, … orbitals). The return
+value is a string</p>
+<p>For example, converts [0] to ‘s’ and [0,1,2] to ‘spd’</p>
+<p>If hij is True, the ordering spdfghijkl is used. Otherwise, the
+ordering will be spdfghikl (skipping j)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_Z_from_sym">
+<code class="descclassname">bse.lut.</code><code class="descname">element_Z_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an element’s Z-number given its symbol</p>
+<p>An exception is thrown if the symbol is not found</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_data_from_Z">
+<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_Z</code><span class="sig-paren">(</span><em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain elemental data given a Z number</p>
+<p>An exception is thrown if the Z number is not found</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_data_from_name">
+<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain elemental data given an elemental name</p>
+<p>The given name is not case sensitive</p>
+<p>An exception is thrown if the name is not found</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_data_from_sym">
+<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_sym" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain elemental data given an elemental symbol</p>
+<p>The given symbol is not case sensitive</p>
+<p>An exception is thrown if the symbol is not found</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_name_from_Z">
+<code class="descclassname">bse.lut.</code><code class="descname">element_name_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_name_from_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an element’s name from its Z number</p>
+<p>An exception is thrown if the Z number is not found</p>
+<p>If normalize is True, the first letter will be capitalized</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.element_sym_from_Z">
+<code class="descclassname">bse.lut.</code><code class="descname">element_sym_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_sym_from_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an element’s symbol from its Z number</p>
+<p>An exception is thrown if the Z number is not found</p>
+<p>If normalize is True, the first letter will be capitalized</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.normalize_element_name">
+<code class="descclassname">bse.lut.</code><code class="descname">normalize_element_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.normalize_element_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the capitalization of an element name</p>
+<p>For example, converts “helium” to “Helium” and “aRgOn” to “Argon”</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.lut.normalize_element_symbol">
+<code class="descclassname">bse.lut.</code><code class="descname">normalize_element_symbol</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.normalize_element_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the capitalization of an element symbol (where only the first letter is capitalized</p>
+<p>For example, converts “he” to “He” and “uUo” to “Uuo”</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.references">
+<span id="references-handling-of-reference-data"></span><h2>references - Handling of reference data<a class="headerlink" href="#module-bse.references" title="Permalink to this headline">¶</a></h2>
+<p>Some helper functions related to handling of references/citations</p>
+<dl class="function">
+<dt id="bse.references.compact_references">
+<code class="descclassname">bse.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>reffile_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.references.compact_references" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a mapping of elements to reference keys</p>
+<p>A list is returned, with each element being a dictionary
+with entries ‘reference_info’ containing data for (possibly) multiple references,
+and ‘elements’ which is a list of element Z numbers
+that those references apply to</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>basis_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary containing basis set information</p>
+</dd>
+<dt><strong>reffile_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the JSON file containing reference information</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-bse.validator">
+<span id="validator-validation-of-basis-sets"></span><h2>validator - Validation of basis sets<a class="headerlink" href="#module-bse.validator" title="Permalink to this headline">¶</a></h2>
+<p>Functions related to validating JSON files (including against schema)</p>
+<dl class="function">
+<dt id="bse.validator.validate">
+<code class="descclassname">bse.validator.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.validator.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a file against a schema</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>file_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
+</dd>
+<dt><strong>file_path:</strong></dt>
+<dd><p class="first last">Full path to the file to be validated</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>RuntimeError</strong></dt>
+<dd><p class="first last">If the file_type is not valid (and/or a schema doesn’t exist)</p>
+</dd>
+<dt><strong>ValidationError</strong></dt>
+<dd><p class="first last">If the given file does not pass validation</p>
+</dd>
+<dt><strong>FileNotFoundError</strong></dt>
+<dd><p class="first last">If the file given by file_path doesn’t exist</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developer_curate.html" class="btn btn-neutral float-right" title="Developer Curation API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="developer.html" class="btn btn-neutral" title="Developer Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Benjamin Pritchard.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart and Basic Usage &mdash; Basis Set Exchange  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Main User API" href="user_api.html" />
+    <link rel="prev" title="Basis Set Exchange - Library" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart and Basic Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing">Importing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-a-basis-set">Getting a basis set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-references">Getting references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quickstart and Basic Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quickstart-and-basic-usage">
+<h1>Quickstart and Basic Usage<a class="headerlink" href="#quickstart-and-basic-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The BSE can be installed with <cite>pip</cite></p>
+<p>For example, to install in to the current directory, <cite>pip install -e .</cite></p>
+</div>
+<div class="section" id="importing">
+<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
+<p>All end-user functionality is available by importing the <cite>bse</cite> module.</p>
+</div>
+<div class="section" id="getting-a-basis-set">
+<h2>Getting a basis set<a class="headerlink" href="#getting-a-basis-set" title="Permalink to this headline">¶</a></h2>
+<p>The main function for getting a basis set is <a class="reference internal" href="user_api.html#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_basis()</span></code></a>.
+Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
+dictionary is returned. If a format is specified, a string is returned
+instread.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bse</span>
+
+<span class="c1"># Get a basis set as a python dictionary</span>
+<span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
+
+<span class="c1"># Basis set names are case insensitive</span>
+<span class="n">bs_dict</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31Gg*&#39;</span><span class="p">)</span>
+
+<span class="c1"># Same as above, but in gaussian format (as a string)</span>
+<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
+
+<span class="c1"># Available formats are available via get_formats</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bse</span><span class="o">.</span><span class="n">get_formats</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>By default, all elements for which the basis set is defined are included - this
+can be overridden with the <cite>elements</cite> parameter.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get only carbon and oxygen</span>
+<span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-references">
+<h2>Getting references<a class="headerlink" href="#getting-references" title="Permalink to this headline">¶</a></h2>
+<p>Reference/citations can be obtained via <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a>. The <cite>elements</cite>
+parameter is similar to that in <a class="reference internal" href="user_api.html#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_basis()</span></code></a>.</p>
+<p>The <cite>fmt</cite> parameter controls the output format. By default, the output
+is a dictionary. If <cite>fmt</cite> is specified, the output is a string.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get references for 6-31G*, all elements, as a dictionary</span>
+<span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
+
+<span class="c1"># Restrict to hydrogen and fluorine</span>
+<span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+
+<span class="c1"># In bibtex</span>
+<span class="n">bib</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;bib&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+
+<span class="c1"># Available formats are available via get_reference_formats</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bse</span><span class="o">.</span><span class="n">get_reference_formats</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>Basis sets within the package are versioned. This allows for changes to be made to a
+basis set, while keeping the old data accessible for historical purposes.
+Versions are specified by integers. By default,
+v0 will match the original BSE data.</p>
+<p>Versions are meant to be increased only when there is a material change to the data.
+If data is simply being added (new elements), the version will not be incremented.</p>
+<p>Both <cite>bse.get_basis</cite> and <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a> accept a <cite>version</cite> parameter.
+If <cite>version</cite> is not specified, the latest version is used.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get latest version</span>
+<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the original BSE data</span>
+<span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<p>The BSE contains metadata for all the basis sets that is in its data directory.
+This information can be accessed by the <a class="reference internal" href="user_api.html#bse.get_metadata" title="bse.get_metadata"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_metadata()</span></code></a> function</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that the key is the name of the basis set that has been transformed
+into some internal name (see <a class="reference internal" href="developer_api.html#bse.manip.transform_basis_name" title="bse.manip.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.transform_basis_name()</span></code></a>)</p>
+</div>
+<p>A simple list containing all the basis set names can be obtained via <a class="reference internal" href="user_api.html#bse.get_all_basis_names" title="bse.get_all_basis_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_all_basis_names()</span></code></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the metadata</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
+
+<span class="c1"># Show all the metadata for 6-31G</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">])</span>
+
+<span class="c1"># What is the latest version</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;latest_version&#39;</span><span class="p">])</span>
+
+<span class="c1"># Print all the basis sets known to the BSE</span>
+<span class="n">all_bs</span> <span class="o">=</span> <span class="n">bse_get_all_basis_names</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_api.html" class="btn btn-neutral float-right" title="Main User API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Basis Set Exchange - Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Benjamin Pritchard.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

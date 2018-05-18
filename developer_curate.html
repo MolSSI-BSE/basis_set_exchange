@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer Curation API &mdash; Basis Set Exchange  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Output converters" href="developer_converters.html" />
+    <link rel="prev" title="Developer API" href="developer_api.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Curation API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-bse.curate">curate - Functions for helping to curate data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Developer Curation API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/developer_curate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-curation-api">
+<h1>Developer Curation API<a class="headerlink" href="#developer-curation-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-bse.curate">
+<span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-bse.curate" title="Permalink to this headline">¶</a></h2>
+<p>Functions for helping curate BSE basis set data</p>
+<dl class="function">
+<dt id="bse.curate.compare_ecp_pots">
+<code class="descclassname">bse.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare two ecp potentials for approximate equality
+(exponents/coefficients are within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.compare_electron_shells">
+<code class="descclassname">bse.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare two electron shells for approximate equality
+(exponents/coefficients are within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.compare_elements">
+<code class="descclassname">bse.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the basis information for two elements is the same as another</p>
+<p>Exponents/coefficients are compared using a tolerance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>element1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Basis information for an element</p>
+</dd>
+<dt><strong>element2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Basis information for another element</p>
+</dd>
+<dt><strong>compare_electron_shells_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Compare the metadata of electron shells</p>
+</dd>
+<dt><strong>compare_ecp_pots_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Compare the metadata of ECP potentials</p>
+</dd>
+<dt><strong>compare_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Compare the overall element metadata</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.create_metadata_file">
+<code class="descclassname">bse.curate.</code><code class="descname">create_metadata_file</code><span class="sig-paren">(</span><em>output_path</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a METADATA.json file from a data directory</p>
+<p>The file is written to output_path</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.ecp_pots_are_equal">
+<code class="descclassname">bse.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a list of electron shells is the same as another</p>
+<p>The potentials are compared approximately (exponents/coefficients are 
+within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.ecp_pots_are_subset">
+<code class="descclassname">bse.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a list of ecp potentials is a subset of another</p>
+<p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
+<p>The potentials are compared approximately (exponents/coefficients are 
+within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.electron_shells_are_equal">
+<code class="descclassname">bse.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a list of electron shells is the same as another</p>
+<p>The shells are compared approximately (exponents/coefficients are 
+within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.electron_shells_are_subset">
+<code class="descclassname">bse.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a list of electron shells is a subset of another</p>
+<p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
+<p>The shells are compared approximately (exponents/coefficients are 
+within a tolerance)</p>
+<p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_component_basis">
+<code class="descclassname">bse.curate.</code><code class="descname">print_component_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_component_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a component basis set</p>
+<p>If elements is not None, only the specified elements will be printed
+(list of integers)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_ecp_pot">
+<code class="descclassname">bse.curate.</code><code class="descname">print_ecp_pot</code><span class="sig-paren">(</span><em>pot</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_ecp_pot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the data for an ECP potential</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_electron_shell">
+<code class="descclassname">bse.curate.</code><code class="descname">print_electron_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>shellidx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_electron_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the data for an electron shell</p>
+<p>If shellidx (index of the shell) is not None, it will also be printed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_element">
+<code class="descclassname">bse.curate.</code><code class="descname">print_element</code><span class="sig-paren">(</span><em>z</em>, <em>eldata</em>, <em>print_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print all data for an element</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer</span></dt>
+<dd><p class="first last">Element Z-number</p>
+</dd>
+<dt><strong>eldata:</strong></dt>
+<dd><p class="first last">Data for the element to be printed</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_element_basis">
+<code class="descclassname">bse.curate.</code><code class="descname">print_element_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_element_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print an element basis set</p>
+<p>If elements is not None, only the specified elements will be printed
+(list of integers)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.curate.print_table_basis">
+<code class="descclassname">bse.curate.</code><code class="descname">print_table_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_table_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a full table basis set</p>
+<p>If elements is not None, only the specified elements will be printed
+(list of integers)</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developer_converters.html" class="btn btn-neutral float-right" title="Output converters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="developer_api.html" class="btn btn-neutral" title="Developer API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Benjamin Pritchard.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
