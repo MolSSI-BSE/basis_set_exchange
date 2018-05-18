@@ -8,10 +8,10 @@ import json
 import pytest
 import glob
 
-data_dir = bse.default_data_dir
+_data_dir = bse.api._default_data_dir
 
 # _all_files shouldn't contain .table. files
-_all_files = glob.glob(os.path.join(data_dir, '*', '*.json'))
+_all_files = glob.glob(os.path.join(_data_dir, '*', '*.json'))
 _all_component_files = [x for x in _all_files if '.element.' not in x]
 
 

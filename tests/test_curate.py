@@ -6,7 +6,7 @@ import bse
 import pytest
 import os
 
-_data_dir = bse.default_data_dir
+_data_dir = bse.api._default_data_dir
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [

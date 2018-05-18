@@ -9,7 +9,7 @@ import bse
 import os
 import pytest
 
-_data_dir = bse.default_data_dir
+_data_dir = bse.api._default_data_dir
 
 @pytest.mark.parametrize('file_path', [
                               'CC-PVDZ.0.table.json',

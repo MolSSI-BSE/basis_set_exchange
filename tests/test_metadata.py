@@ -6,16 +6,16 @@ import os
 import bse
 import json
 
-data_dir = bse.default_data_dir
+_data_dir = bse.api._default_data_dir
 
 def test_get_metadata():
     bse.get_metadata()
 
 
 def test_metadata_uptodate():
-    old_metadata = os.path.join(data_dir, 'METADATA.json')
-    new_metadata = os.path.join(data_dir, 'METADATA.json.new')
-    bse.curate.create_metadata_file(new_metadata, data_dir)
+    old_metadata = os.path.join(_data_dir, 'METADATA.json')
+    new_metadata = os.path.join(_data_dir, 'METADATA.json.new')
+    bse.curate.create_metadata_file(new_metadata, _data_dir)
 
     with open(old_metadata, 'r') as f:
         old_data = json.load(f)

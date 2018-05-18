@@ -7,10 +7,10 @@ import pytest
 import glob
 import os
 
-data_dir = bse.default_data_dir
+_data_dir = bse.api._default_data_dir
 
-_all_files = glob.glob(os.path.join(data_dir, '*.json'))
-_all_files.extend(glob.glob(os.path.join(data_dir, '*', '*.json')))
+_all_files = glob.glob(os.path.join(_data_dir, '*.json'))
+_all_files.extend(glob.glob(os.path.join(_data_dir, '*', '*.json')))
 
 @pytest.mark.parametrize('file_path', _all_files)
 def test_valid(file_path):

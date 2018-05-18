@@ -14,9 +14,9 @@ from . import refconverters
 
 # Determine the path to the data directory that is part
 # of this installation
-my_dir = os.path.dirname(os.path.abspath(__file__))
-default_data_dir = os.path.join(my_dir, 'data')
-default_schema_dir = os.path.join(my_dir, 'schema')
+_my_dir = os.path.dirname(os.path.abspath(__file__))
+_default_data_dir = os.path.join(_my_dir, 'data')
+_default_schema_dir = os.path.join(_my_dir, 'schema')
 
 
 def _convert_element_list(elements):
@@ -44,7 +44,7 @@ def get_basis(name,
               uncontract_general=False,
               uncontract_spdf=False,
               uncontract_segmented=False,
-              data_dir=default_data_dir):
+              data_dir=None):
     '''Obtain a basis set
 
     This is the main function for getting basis set information.
@@ -85,6 +85,9 @@ def get_basis(name,
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
     '''
+
+    if data_dir is None:
+        data_dir = _default_data_dir
 
     # Transform the name into an internal representation
     tr_name = manip.transform_basis_name(name)
@@ -144,7 +147,7 @@ def get_basis(name,
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
 
-def get_metadata(data_dir=default_data_dir):
+def get_metadata(data_dir=None):
     '''Obtain the metadata for all basis sets
 
     The metadata includes information such as the display name of the basis set,
@@ -159,11 +162,14 @@ def get_metadata(data_dir=default_data_dir):
         it is in the 'data' subdirectory of this project.
     '''
 
+    if data_dir is None:
+        data_dir = _default_data_dir
+
     metadata_file = os.path.join(data_dir, "METADATA.json")
     return io.read_metadata(metadata_file)
 
 
-def get_all_basis_names(data_dir=default_data_dir):
+def get_all_basis_names(data_dir=None):
     '''Obtain a list of all basis set names
 
     The returned list is the internal representation of the basis set name.
@@ -177,10 +183,10 @@ def get_all_basis_names(data_dir=default_data_dir):
         it is in the 'data' subdirectory of this project.
     '''
 
-    return sorted(list(get_metadata().keys()))
+    return sorted(list(get_metadata(data_dir).keys()))
 
 
-def get_references(name, elements=None, version=None, fmt=None, data_dir=default_data_dir):
+def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     '''Get the references/citations for a basis set
 
     The reference data is read from the REFERENCES.json file in the given
@@ -197,13 +203,16 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=default
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
     fmt: str
-        What format to return the basis set as. By defaut, 
+        What format to return the basis set as. By defaut,
         basis set information is returned as a python dictionary. Use
-        get_reference_formats() to obtain the available formats. 
+        get_reference_formats() to obtain the available formats.
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
     '''
+
+    if data_dir is None:
+        data_dir = _default_data_dir
 
     reffile_path = os.path.join(data_dir, 'REFERENCES.json')
 
@@ -235,7 +244,7 @@ def get_schema(schema_type):
     '''
 
     schema_file = "{}-schema.json".format(schema_type)
-    file_path = os.path.join(default_schema_dir, schema_file)
+    file_path = os.path.join(_default_schema_dir, schema_file)
 
     if not os.path.isfile(file_path):
         raise RuntimeError('Schema file \'{}\' does not exist, is not readable, or is not a file'.format(file_path))
