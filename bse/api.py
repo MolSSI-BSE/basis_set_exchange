@@ -204,7 +204,7 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
         the latest version is returned.
     fmt: str
         What format to return the basis set as. By defaut,
-        basis set information is returned as a python dictionary. Use
+        basis set information is returned as a list of dictionaries. Use
         get_reference_formats() to obtain the available formats.
     data_dir : str
         Data directory with all the basis set information. By default,

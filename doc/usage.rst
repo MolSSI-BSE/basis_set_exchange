@@ -1,6 +1,11 @@
 Quickstart and Basic Usage
 ==============================================
 
+.. testsetup:: *
+
+   import bse
+
+
 Installation
 -------------------
 
@@ -19,32 +24,61 @@ Getting a basis set
 The main function for getting a basis set is :func:`bse.get_basis`.
 Output format is controlled by the `fmt` parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
-instread.::
+instread.
 
-  import bse
+.. doctest::
 
-  # Get a basis set as a python dictionary
-  bs_dict = bse.get_basis('6-31G*')
+   >>> # Get a basis set as a python dictionary
+   >>> bs_dict = bse.get_basis('6-31G*')
+   >>> bs_dict['basis_set_name']  
+   '6-31G*'
 
-  # Basis set names are case insensitive
-  bs_dict = bse.get_basis('6-31Gg*')
+   >>> # Basis set names are case insensitive
+   >>> bs_dict = bse.get_basis('6-31g*')
+   >>> bs_dict['basis_set_name']  
+   '6-31G*'
 
-  # Same as above, but in gaussian format (as a string)
-  bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
-  print(bs_str)
+   >>> # Same as above, but in gaussian format (as a string)
+   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
+   >>> print(bs_str)
+   ! Basis Set Exchange: 6-31G* (6-31G)
+   ****
+   H     0
+   S   3   1.00
+        18.731137               0.0334946
+         2.8253944              0.2347269
+   ...
 
-  # Available formats are available via get_formats
-  print(bse.get_formats())
+
+   >>> # Available formats are available via get_formats
+   >>> bse.get_formats()
+   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94'}
 
 
 By default, all elements for which the basis set is defined are included - this
-can be overridden with the `elements` parameter::
+can be overridden with the `elements` parameter
 
-  # Get only carbon and oxygen
-  bse.get_basis('aug-cc-pvtz', elements=[6,8])
+.. doctest::
 
-  # Can also use strings with the element symbols
-  bse.get_basis('aug-cc-pvtz', elements=[6,'O', 'Ne'])
+   >>> # Get only carbon and oxygen
+   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem')
+   >>> print(bs_str)
+   # Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)
+   BASIS "ao basis" PRINT
+   #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
+   C    S
+      8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000
+   ...
+
+   >>> # Can also use strings with the element symbols (and be mixed with integers)
+   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne'], fmt='nwchem')
+   >>> print(bs_str)
+   # Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)
+   BASIS "ao basis" PRINT
+   #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
+   C    S
+      8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000
+   ...
 
 
 Getting references
@@ -54,19 +88,48 @@ Reference/citations can be obtained via :func:`bse.get_references`. The `element
 parameter is similar to that in :func:`bse.get_basis`.
 
 The `fmt` parameter controls the output format. By default, the output
-is a dictionary. If `fmt` is specified, the output is a string.::
+is a dictionary. If `fmt` is specified, the output is a string.
 
-  # Get references for 6-31G*, all elements, as a dictionary
-  bse.get_references('6-31G*')
+.. doctest::
+   >>> # Get references for 6-31G*, all elements, as a list of dictionaries
+   >>> refs = bse.get_references('6-31G*')
+   >>> print(refs[0])
+   {'reference_info': [{'reference_description': ...
+ 
+   >>> # As bibtex, restricting to H and F
+   >>> bib = bse.get_references('6-31G*', fmt='bib', elements=[1,9])
+   >>> print(bib)
+   % Basis Set Exchange: 6-31G* (6-31G)
+   <BLANKLINE> 
+   % H
+   %     31G valence double-zeta
+   %         ditchfield1971a
+   %
+   % F
+   %     6-31G valence double-zeta
+   %         hehre1972a
+   %
+   %     Polarization functions associated with 6-31G
+   %         hariharan1973a
+   %
+   <BLANKLINE> 
+   <BLANKLINE> 
+   @article{ditchfield1971a,
+       type = {article},
+       author = {R. Ditchfield and W. J. Hehre and J. A. Pople},
+       title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},
+       journal = {J. Chem. Phys.},
+       volume = {54},
+       page = {724-728},
+       year = {1971},
+       doi = {10.1063/1.1674902}
+   }
+   ...
 
-  # Restrict to hydrogen and fluorine
-  bse.get_references('6-31G*', elements=[1,9])
 
-  # In bibtex
-  bib = bse.get_references('6-31G*', fmt='bib', elements=[1,9])
-
-  # Available formats are available via get_reference_formats
-  print(bse.get_reference_formats())
+   >>> # Available formats are available via get_reference_formats
+   >>> bse.get_reference_formats()
+   {'json': 'JSON', 'bib': 'BibTeX', 'txt': 'Plain Text'}
 
 
 Versioning
@@ -81,13 +144,17 @@ Versions are meant to be increased only when there is a material change to the d
 If data is simply being added (new elements), the version will not be incremented.
 
 Both `bse.get_basis` and :func:`bse.get_references` accept a `version` parameter.
-If `version` is not specified, the latest version is used.::
+If `version` is not specified, the latest version is used.
 
-  # Get latest version
-  bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
 
-  # Get the original BSE data
-  bs_str = bse.get_basis('6-31G*', version=0, fmt='gaussian94')
+.. doctest::
+
+   >>> # Get latest version
+   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
+
+   >>> # Get the original BSE data
+   >>> bs_str = bse.get_basis('6-31G*', version=0, fmt='gaussian94')
+
 
 Metadata
 -------------------
@@ -100,17 +167,24 @@ This information can be accessed by the :func:`bse.get_metadata` function
 
 A simple list containing all the basis set names can be obtained via :func:`bse.get_all_basis_names`
 
-::
+.. doctest::
 
-  # Get the metadata
-  md = bse.get_metadata()
+   >>> # Get the metadata
+   >>> md = bse.get_metadata()
+ 
+   >>> # What is the latest version of 6-31G
+   >>> md['6-31g']['latest_version']
+   1
+ 
+   >>> # All versions of 6-31G
+   >>> md['6-31g']['versions'].keys()
+   dict_keys([0, 1])
 
-  # Show all the metadata for 6-31G
-  print(md['6-31g'])
-
-  # What is the latest version
-  print(md['6-31g']['latest_version'])
-
-  # Print all the basis sets known to the BSE
-  all_bs = bse_get_all_basis_names()
-  print(all_bs)
+   >>> # Elements defined in v0
+   >>> md['6-31g']['versions'][0]['elements']
+   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+ 
+   >>> # Print all the basis sets known to the BSE
+   >>> all_bs = bse.get_all_basis_names()
+   >>> print(all_bs)
+   ['3-21g', '4-31g', '5-21g', ...
