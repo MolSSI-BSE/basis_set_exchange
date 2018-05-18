@@ -1,16 +1,10 @@
 '''
-Basis Set Exchange - Next Generation
+Basis Set Exchange
 
 Contains utilities for reading, writing, and converting
 basis set information
 '''
 
-from . import converters
-from . import refconverters
-from . import curate
-from .manip import *
-from .io import *
+
+# Just import the basic user API
 from .api import *
-from .compose import *
-from .references import *
-from .validator import *

@@ -4,7 +4,7 @@ Main interface to Basis Set Exchange functionality
 
 import os
 import json
-from . import io
+from . import fileio
 from . import lut
 from . import manip
 from . import compose
@@ -166,7 +166,7 @@ def get_metadata(data_dir=None):
         data_dir = _default_data_dir
 
     metadata_file = os.path.join(data_dir, "METADATA.json")
-    return io.read_metadata(metadata_file)
+    return fileio.read_metadata(metadata_file)
 
 
 def get_all_basis_names(data_dir=None):

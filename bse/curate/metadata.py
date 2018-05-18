@@ -5,7 +5,7 @@ Helpers for handling BSE metadata
 import os
 import codecs
 from collections import OrderedDict
-from .. import io
+from .. import fileio
 from .. import compose
 from .. import manip
 
@@ -16,7 +16,7 @@ def create_metadata_file(output_path, data_dir):
     The file is written to output_path
     '''
 
-    basis_filelist = io.get_basis_filelist(data_dir)
+    basis_filelist = fileio.get_basis_filelist(data_dir)
 
     metadata = {}
     for bs_file_path in basis_filelist:
@@ -66,4 +66,4 @@ def create_metadata_file(output_path, data_dir):
 
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))
-    io._write_plain_json(output_path, metadata)
+    fileio._write_plain_json(output_path, metadata)

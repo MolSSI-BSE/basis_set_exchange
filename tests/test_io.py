@@ -5,11 +5,11 @@ Tests for the BSE IO functions
 # Most functionality is covered under other tests.
 # This tests the remainder
 
-import bse
+from bse import fileio,api
 import os
 import pytest
 
-_data_dir = bse.api._default_data_dir
+_data_dir = api._default_data_dir
 
 @pytest.mark.parametrize('file_path', [
                               'CC-PVDZ.0.table.json',
@@ -25,8 +25,8 @@ def test_read_write_basis(file_path):
     # out of the sort lists, etc
     full_path = os.path.join(_data_dir, file_path)
     full_path_new = full_path + '.new'
-    data = bse.io.read_json_basis(full_path)
-    bse.io.write_json_basis(full_path_new, data)
+    data = fileio.read_json_basis(full_path)
+    fileio.write_json_basis(full_path_new, data)
     os.remove(full_path_new)
 
 
@@ -38,6 +38,6 @@ def test_read_write_references(file_path):
     # out of the sort lists, etc
     full_path = os.path.join(_data_dir, file_path)
     full_path_new = full_path + '.new'
-    data = bse.io.read_references(full_path)
-    bse.io.write_references(full_path_new, data)
+    data = fileio.read_references(full_path)
+    fileio.write_references(full_path_new, data)
     os.remove(full_path_new)

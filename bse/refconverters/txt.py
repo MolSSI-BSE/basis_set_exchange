@@ -2,7 +2,7 @@
 Conversion of references to plain text format
 '''
 
-from .common import *
+from .common import compact_elements
 
 
 def _ref_txt(ref):

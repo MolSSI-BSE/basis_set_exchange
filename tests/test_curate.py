@@ -2,11 +2,11 @@
 Tests BSE curation functions
 """
 
-import bse
+from bse import api,curate,fileio
 import pytest
 import os
 
-_data_dir = bse.api._default_data_dir
+_data_dir = api._default_data_dir
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -19,11 +19,11 @@ _data_dir = bse.api._default_data_dir
                               ['cc-pvtz', 'aug-cc-pvtz', 13, True]
                          ]) 
 def test_electron_subset(basis1, basis2, element, expected):
-    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
+    el1 = api.get_basis(basis1)['basis_set_elements'][element]
+    el2 = api.get_basis(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
-    assert bse.curate.electron_shells_are_subset(shells1, shells2, True) == expected
+    assert curate.electron_shells_are_subset(shells1, shells2, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -35,12 +35,12 @@ def test_electron_subset(basis1, basis2, element, expected):
                               ['cc-pvtz', 'aug-cc-pvtz', 13, False]
                          ]) 
 def test_electron_equal(basis1, basis2, element, expected):
-    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
+    el1 = api.get_basis(basis1)['basis_set_elements'][element]
+    el2 = api.get_basis(basis2)['basis_set_elements'][element]
     shells1 = el1['element_electron_shells']
     shells2 = el2['element_electron_shells']
-    assert bse.curate.electron_shells_are_equal(shells1, shells2, True) == expected
-    assert bse.curate.electron_shells_are_equal(shells2, shells1, True) == expected
+    assert curate.electron_shells_are_equal(shells1, shells2, True) == expected
+    assert curate.electron_shells_are_equal(shells2, shells1, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -52,11 +52,11 @@ def test_electron_equal(basis1, basis2, element, expected):
                               ['LANL2DZ', 'CRENBL', 78, False]
                          ]) 
 def test_ecp_equal(basis1, basis2, element, expected):
-    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
+    el1 = api.get_basis(basis1)['basis_set_elements'][element]
+    el2 = api.get_basis(basis2)['basis_set_elements'][element]
     ecps1 = el1['element_ecp']
     ecps2 = el2['element_ecp']
-    assert bse.curate.ecp_pots_are_equal(ecps1, ecps2, True) == expected
+    assert curate.ecp_pots_are_equal(ecps1, ecps2, True) == expected
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
@@ -74,10 +74,10 @@ def test_ecp_equal(basis1, basis2, element, expected):
                               ['LANL2DZ', 'CRENBL', 78, False]
                          ]) 
 def test_compare_elements(basis1, basis2, element, expected):
-    el1 = bse.get_basis(basis1)['basis_set_elements'][element]
-    el2 = bse.get_basis(basis2)['basis_set_elements'][element]
-    assert bse.curate.compare_elements(el1, el2, True, True, True) == expected
-    assert bse.curate.compare_elements(el2, el1, True, True, True) == expected
+    el1 = api.get_basis(basis1)['basis_set_elements'][element]
+    el2 = api.get_basis(basis2)['basis_set_elements'][element]
+    assert curate.compare_elements(el1, el2, True, True, True) == expected
+    assert curate.compare_elements(el2, el1, True, True, True) == expected
 
 
 @pytest.mark.parametrize('basis, element', [
@@ -87,16 +87,16 @@ def test_compare_elements(basis1, basis2, element, expected):
                               ['LANL2DZ', 78]
                          ])
 def test_printing(basis, element):
-    el = bse.get_basis(basis)['basis_set_elements'][element]
+    el = api.get_basis(basis)['basis_set_elements'][element]
 
     shells = el['element_electron_shells']
-    bse.curate.print_electron_shell(shells[0])
+    curate.print_electron_shell(shells[0])
 
     if 'element_ecp' in el:
         ecps = el['element_ecp']
-        bse.curate.print_ecp_pot(ecps[0])
+        curate.print_ecp_pot(ecps[0])
 
-    bse.curate.print_element(element, el)
+    curate.print_element(element, el)
 
 
 @pytest.mark.parametrize('file_path', [
@@ -106,8 +106,8 @@ def test_printing(basis, element):
                          ])
 def test_print_component_basis(file_path):
     full_path = os.path.join(_data_dir, file_path)
-    comp = bse.io.read_json_basis(full_path)
-    bse.curate.print_component_basis(comp)
+    comp = fileio.read_json_basis(full_path)
+    curate.print_component_basis(comp)
 
 
 @pytest.mark.parametrize('file_path', [
@@ -116,8 +116,8 @@ def test_print_component_basis(file_path):
                          ])
 def test_print_elemental_basis(file_path):
     full_path = os.path.join(_data_dir, file_path)
-    el = bse.io.read_json_basis(full_path)
-    bse.curate.print_element_basis(el)
+    el = fileio.read_json_basis(full_path)
+    curate.print_element_basis(el)
 
 
 @pytest.mark.parametrize('file_path', [
@@ -126,5 +126,5 @@ def test_print_elemental_basis(file_path):
                          ])
 def test_print_table_basis(file_path):
     full_path = os.path.join(_data_dir, file_path)
-    tab = bse.io.read_json_basis(full_path)
-    bse.curate.print_table_basis(tab)
+    tab = fileio.read_json_basis(full_path)
+    curate.print_table_basis(tab)

@@ -2,20 +2,20 @@
 Tests for BSE metadata
 """
 
+from bse import api,curate
 import os
-import bse
 import json
 
-_data_dir = bse.api._default_data_dir
+_data_dir = api._default_data_dir
 
 def test_get_metadata():
-    bse.get_metadata()
+    api.get_metadata()
 
 
 def test_metadata_uptodate():
     old_metadata = os.path.join(_data_dir, 'METADATA.json')
     new_metadata = os.path.join(_data_dir, 'METADATA.json.new')
-    bse.curate.create_metadata_file(new_metadata, _data_dir)
+    curate.create_metadata_file(new_metadata, _data_dir)
 
     with open(old_metadata, 'r') as f:
         old_data = json.load(f)

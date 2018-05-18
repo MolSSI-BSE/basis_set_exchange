@@ -2,11 +2,11 @@
 Compares version 0 with historical BSE
 """
 
+from bse import api
 import os
 import re
 import bz2
 import pytest
-import bse
 
 # Find the dir with all the bse files
 _my_dir = os.path.dirname(os.path.abspath(__file__))
@@ -19,8 +19,8 @@ _hist_testfile_exists = os.path.isfile(_hist_testfile)
 pytestmark = pytest.mark.skipif(_hist_testfile_exists != True, reason="Historical basis data not downloaded")
 
 # Load all the metadata once
-_bs_metadata = bse.get_metadata()
-_bs_formats = list(bse.get_formats().keys())
+_bs_metadata = api.get_metadata()
+_bs_formats = list(api.get_formats().keys())
 _bs_formats.remove('json') # Don't need to test json (nothing to compare to)
 _true_false = [ True, False ]
 
@@ -153,7 +153,7 @@ def test_v0_with_bse(basis_name, fmt, opt_gen):
     bse_data = fmt_info[1](bse_data)
 
     # read in data from the new bse (version 0)
-    new_data = bse.get_basis(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
+    new_data = api.get_basis(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
     new_data = new_data.split('\n')
     new_data = fmt_info[1](new_data)
 

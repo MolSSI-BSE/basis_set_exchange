@@ -2,7 +2,7 @@
 Conversion of references to bibtex format
 '''
 
-from .common import *
+from .common import compact_elements
 
 def _ref_bib(key,ref):
     '''Convert a single reference to bibtex format

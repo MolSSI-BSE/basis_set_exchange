@@ -1,5 +1,6 @@
 Main Basis Set Exchange API
 ==============================================
 
-.. automodule:: bse.api
+.. automodule:: bse
    :members:
+   :imported-members:

@@ -2,13 +2,13 @@
 Tests for reference handling
 """
 
-import bse
+from bse import api,refconverters
 import os
 import json
 import pytest
 import glob
 
-_data_dir = bse.api._default_data_dir
+_data_dir = api._default_data_dir
 
 # _all_files shouldn't contain .table. files
 _all_files = glob.glob(os.path.join(_data_dir, '*', '*.json'))
@@ -21,7 +21,7 @@ _all_component_files = [x for x in _all_files if '.element.' not in x]
                            ([1,10], "H,Ne"),
                            ([1,2,3,11,23,24], "H-Li,Na,V,Cr")])
 def test_compact_string(elements, expected):
-    assert bse.refconverters.compact_elements(elements) == expected
+    assert refconverters.compact_elements(elements) == expected
 
 
 

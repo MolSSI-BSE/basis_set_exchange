@@ -5,7 +5,7 @@ Conversion of basis sets to Gaussian format
 import os
 from .. import lut
 from .. import manip
-from .common import *
+from .common import determine_leftpad
 
 
 def write_g94(header, basis):

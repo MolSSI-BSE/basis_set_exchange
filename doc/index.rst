@@ -17,7 +17,7 @@ This library is written as part of a rewrite of the Basis Set Exchange (https://
    :caption: Contents:
 
    usage
-   api
+   user_api
 
 
 License

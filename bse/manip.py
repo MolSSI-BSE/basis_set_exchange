@@ -5,19 +5,8 @@ This module contains functions for uncontracting and merging basis set
 data, as well as some other small functions.
 """
 
-import json
-import os
 import copy
 from . import lut
-
-
-def _general_unc_candidate(col):
-    found_1 = False
-    for x in col:
-        if float(x) == 0.0:
-            return True
-
-    return False
 
 
 def contraction_string(element):
@@ -326,10 +315,11 @@ def optimize_general(basis):
     """
     Optimizes the general contraction using the method of Hashimoto et al
 
-    See: T. Hashimoto, K. Hirao, H. Tatewaki
-         'Comment on Dunning's correlation-consistent basis set'
-         Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)
-         https://doi.org/10.1016/0009-2614(95)00807-G
+    .. seealso :: | T. Hashimoto, K. Hirao, H. Tatewaki
+                  | 'Comment on Dunning's correlation-consistent basis set'
+                  | Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)
+                  | https://doi.org/10.1016/0009-2614(95)00807-G
+
     """
 
     new_basis = copy.deepcopy(basis)

@@ -2,7 +2,7 @@
 Some helper functions related to handling of references/citations
 """
 
-from . import io
+from . import fileio
 
 
 def compact_references(basis_dict, reffile_path):
@@ -22,7 +22,7 @@ def compact_references(basis_dict, reffile_path):
         Full path to the JSON file containing reference information
     """
 
-    allref_info = io.read_references(reffile_path)
+    allref_info = fileio.read_references(reffile_path)
 
     element_refs = []
 

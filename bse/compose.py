@@ -4,7 +4,7 @@ Functions related to composing basis sets from individual components
 
 import os
 from . import manip
-from . import io
+from . import fileio
 
 
 def compose_elemental_basis(file_path):
@@ -22,7 +22,7 @@ def compose_elemental_basis(file_path):
     data_dir = os.path.dirname(data_dir)
 
     # Do a simple read of the json
-    el_bs = io.read_json_basis(file_path)
+    el_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all files to read
     component_names = set()
@@ -30,7 +30,7 @@ def compose_elemental_basis(file_path):
         component_names.update(set(v['element_components']))
 
     # Read all the data from these files into a big dictionary
-    component_map = {k: io.read_json_basis(os.path.join(data_dir, k)) for k in component_names}
+    component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_names}
 
     # Broadcast the basis_set_references to each element
     # Use the basis_set_description for the reference description
@@ -72,7 +72,7 @@ def compose_table_basis(file_path):
     data_dir = os.path.dirname(file_path)
 
     # Do a simple read of the json
-    table_bs = io.read_json_basis(file_path)
+    table_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all elemental files to read
     component_names = set()

@@ -1,5 +1,5 @@
 """
-Tests for the BSE exposed API
+Tests for the BSE main API
 """
 
 import bse
@@ -16,6 +16,7 @@ _bs_names = bse.get_all_basis_names()
 _bs_formats = list(bse.get_formats().keys())
 _ref_formats = list(bse.get_reference_formats().keys())
 _true_false = [ True, False ]
+
 
 @pytest.mark.parametrize('basis_name', _bs_names)
 @pytest.mark.parametrize('fmt', _bs_formats)

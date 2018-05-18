@@ -3,8 +3,8 @@ Functions related to validating JSON files (including against schema)
 """
 
 import jsonschema
-import json
-from bse import api, io
+from . import api
+from . import fileio
 
 
 def validate(file_type, file_path):
@@ -32,6 +32,6 @@ def validate(file_type, file_path):
     if file_type not in _valid_schema:
         raise RuntimeError("{} is not a valid file_type".format(file_type))
 
-    to_validate = io._read_plain_json(file_path, False)
+    to_validate = fileio._read_plain_json(file_path, False)
     schema = api.get_schema(file_type)
     jsonschema.validate(to_validate, schema)

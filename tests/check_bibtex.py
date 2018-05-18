@@ -1,4 +1,9 @@
-'''Thorough testing of bibtex output
+'''
+Testing of a string containing bibtex entries
+
+This tests by running latex/bibtex on a file containing the
+string. Warnings are interpreted as failures (which catches
+missing fields)
 '''
 
 import subprocess

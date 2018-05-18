@@ -7,8 +7,6 @@ symbol, name, or number. It also has functions for converting
 angular momentum between integers (0, 1, 2) and letters (s, p, d).
 '''
 
-import os
-
 # Contains the symbols, names, and Z numbers for all known elements
 # NOTE: Some Z number have multiple entries. This is to allow for querying
 #       based on older, systematic names/symbols (like uuh), however a query

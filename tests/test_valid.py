@@ -2,12 +2,12 @@
 Test for validating the formatting of the json files
 """
 
-import bse
+from bse import api,validator
 import pytest
 import glob
 import os
 
-_data_dir = bse.api._default_data_dir
+_data_dir = api._default_data_dir
 
 _all_files = glob.glob(os.path.join(_data_dir, '*.json'))
 _all_files.extend(glob.glob(os.path.join(_data_dir, '*', '*.json')))
@@ -19,10 +19,10 @@ def test_valid(file_path):
     if file_path.endswith('METADATA.json'):
         return
     if file_path.endswith('REFERENCES.json'):
-        bse.validate('references', file_path)
+        validator.validate('references', file_path)
     elif file_path.endswith('.table.json'):
-        bse.validate('table', file_path)
+        validator.validate('table', file_path)
     elif file_path.endswith('.element.json'):
-        bse.validate('element', file_path)
+        validator.validate('element', file_path)
     else:
-        bse.validate('component', file_path)
+        validator.validate('component', file_path)
