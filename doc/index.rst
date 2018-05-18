@@ -13,11 +13,12 @@ This library is written as part of a rewrite of the Basis Set Exchange (https://
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    usage
    user_api
+   developer
 
 
 License

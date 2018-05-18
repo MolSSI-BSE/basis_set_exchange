@@ -4,7 +4,7 @@ Helpers for printing pieces of basis sets
 
 from .. import lut
 from .. import manip
-from ..converters.common import *
+from ..converters.common import determine_leftpad
 
 
 def print_electron_shell(shell, shellidx=None):

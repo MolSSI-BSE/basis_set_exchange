@@ -1,4 +1,4 @@
-Main Basis Set Exchange API
+Main User API
 ==============================================
 
 .. automodule:: bse
