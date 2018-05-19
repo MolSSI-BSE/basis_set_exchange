@@ -27,7 +27,7 @@ def create_metadata_file(output_path, data_dir):
 
         # Prepare the metadata
         tr_name = manip.transform_basis_name(bs['basis_set_name'])
-        displayname = bs['basis_set_name']
+        display_name = bs['basis_set_name']
         defined_elements = sorted(list(bs['basis_set_elements'].keys()))
         description = bs['basis_set_description']
         revision_desc = bs['basis_set_revision_description']
@@ -50,7 +50,7 @@ def create_metadata_file(output_path, data_dir):
         internal_name, ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = OrderedDict([('displayname', displayname), ('filename', filename), ('description', description),
+        single_meta = OrderedDict([('display_name', display_name), ('filename', filename), ('description', description),
                                    ('revdesc', revision_desc), ('functiontypes', function_types), ('elements',
                                                                                                    defined_elements)])
 
@@ -61,8 +61,14 @@ def create_metadata_file(output_path, data_dir):
 
     # sort the versions and find the max version
     for k, v in metadata.items():
-        metadata[k] = OrderedDict([('latest_version', max(v['versions'].keys())),
+        latest = max(v['versions'].keys())
+        metadata[k] = OrderedDict([('display_name', v['versions'][latest]['display_name']), ('latest_version', latest),
                                    ('versions', OrderedDict(sorted(v['versions'].items())))])
+
+    # Remove all display_names under versions
+    for v in metadata.values():
+        for ver in v['versions'].values():
+            ver.pop('display_name')
 
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))
