@@ -147,6 +147,25 @@ def get_basis(name,
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
 
+def lookup_basis_by_role(primary_basis, role, data_dir=None):
+    '''Lookup the name of a basis set given a primary basis set and role
+    '''
+
+    tr_name = manip.transform_basis_name(primary_basis)
+    role = role.lower()
+    metadata = get_metadata(data_dir)
+    
+    if not tr_name in metadata:
+        raise RuntimeError("Unknown primary basis set " + primary_basis)
+
+    auxdata = metadata[tr_name]['auxiliaries']
+
+    if not role in auxdata:
+        raise RuntimeError("Role {} doesn't exist for {}".format(role, primary_basis))
+
+    return auxdata[role]
+
+
 def get_metadata(data_dir=None):
     '''Obtain the metadata for all basis sets
 

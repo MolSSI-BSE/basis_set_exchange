@@ -31,6 +31,8 @@ def create_metadata_file(output_path, data_dir):
         defined_elements = sorted(list(bs['basis_set_elements'].keys()))
         description = bs['basis_set_description']
         revision_desc = bs['basis_set_revision_description']
+        role = bs['basis_set_role']
+        auxiliaries = bs['basis_set_auxiliaries']
 
         function_types = set()
         for e in bs['basis_set_elements'].values():
@@ -50,8 +52,9 @@ def create_metadata_file(output_path, data_dir):
         internal_name, ver = os.path.splitext(internal_name)
         ver = int(ver[1:])
 
-        single_meta = OrderedDict([('display_name', display_name), ('filename', filename), ('description', description),
-                                   ('revdesc', revision_desc), ('functiontypes', function_types), ('elements',
+        single_meta = OrderedDict([('display_name', display_name), ('filename', filename),
+                                   ('description', description), ('revdesc', revision_desc), ('role', role),
+                                   ('auxiliaries', auxiliaries), ('functiontypes', function_types), ('elements',
                                                                                                    defined_elements)])
 
         if not tr_name in metadata:
@@ -60,15 +63,22 @@ def create_metadata_file(output_path, data_dir):
             metadata[tr_name]['versions'][ver] = single_meta
 
     # sort the versions and find the max version
+    # Also place display_name, role, auxiliaries into the top level for this basis
     for k, v in metadata.items():
         latest = max(v['versions'].keys())
-        metadata[k] = OrderedDict([('display_name', v['versions'][latest]['display_name']), ('latest_version', latest),
+        latest_data = v['versions'][latest]
+        metadata[k] = OrderedDict([('display_name', latest_data['display_name']),
+                                   ('latest_version', latest),
+                                   ('role', latest_data['role']),
+                                   ('auxiliaries', latest_data['auxiliaries']),
                                    ('versions', OrderedDict(sorted(v['versions'].items())))])
 
-    # Remove all display_names under versions
+    # Remove all display_name, role, auxiliaries under versions
     for v in metadata.values():
         for ver in v['versions'].values():
             ver.pop('display_name')
+            ver.pop('role')
+            ver.pop('auxiliaries')
 
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))

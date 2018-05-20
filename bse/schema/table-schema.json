@@ -12,7 +12,8 @@
         "basis_set_description",
         "basis_set_revision_description",
         "basis_set_role",
-        "basis_set_elements"
+        "basis_set_elements",
+        "basis_set_auxiliaries"
     ],
     "properties":
     {
@@ -55,7 +56,17 @@
         "basis_set_role": {
             "description": "Role that this basis plays in a calculation",
             "type": "string",
-            "enum": [ "orbital", "ri" ]
+            "enum": [ "orbital", "rimp2" ]
+        },
+        "basis_set_auxiliaries": {
+            "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jkfit" : { "type": "string" },
+                "rifit" : { "type": "string" },
+                "mp2fit" : { "type": "string" }
+            }
         },
         "basis_set_elements": {
             "description": "Data for the elements of the basis set",

@@ -77,12 +77,13 @@ def _sort_basis_dict(bs):
 
     _keyorder = [
         'molssi_bse_schema', 'schema_type', 'schema_version', 'basis_set_name', 'basis_set_description',
-        'basis_set_revision_description', 'basis_set_role', 'basis_set_references', 'basis_set_notes',
-        'basis_set_elements', 'element_references', 'element_ecp_electrons', 'element_electron_shells', 'element_ecp',
-        'element_components', 'element_entry', 'shell_function_type', 'shell_harmonic_type', 'shell_region',
-        'shell_angular_momentum', 'shell_exponents', 'shell_coefficients', 'potential_ecp_type',
-        'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients'
+        'basis_set_revision_description', 'basis_set_role', 'basis_set_auxiliaries', 'basis_set_references',
+        'basis_set_notes', 'basis_set_elements', 'element_references', 'element_ecp_electrons',
+        'element_electron_shells', 'element_ecp', 'element_components', 'element_entry', 'shell_function_type',
+        'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents', 'shell_coefficients',
+        'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
+        'potential_coefficients',
+        'mp2fit'
     ]
 
     # Add integers for the elements (being optimistic that element 150 will be found someday)

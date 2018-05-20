@@ -18,7 +18,6 @@ _bs_formats = list(bse.get_formats().keys())
 _ref_formats = list(bse.get_reference_formats().keys())
 _true_false = [ True, False ]
 
-
 @pytest.mark.parametrize('basis_name', _bs_names)
 @pytest.mark.parametrize('fmt', _bs_formats)
 @pytest.mark.parametrize('unc_general', _true_false)
@@ -65,3 +64,10 @@ def test_get_references(basis_name, fmt):
         nelements = random.randint(1, len(avail_elements))
         selected_elements = random.sample(avail_elements, nelements)
         bse.get_references(basis_name, elements=selected_elements, fmt=fmt, version=ver)
+
+
+_role_tests = [ ('cc-pvdz', 'mp2fit') ]
+
+@pytest.mark.parametrize('primary_basis,role', _role_tests)
+def test_lookup_by_role(primary_basis, role):
+    bse.lookup_basis_by_role(primary_basis, role)
