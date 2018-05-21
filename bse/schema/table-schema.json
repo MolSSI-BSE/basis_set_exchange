@@ -9,6 +9,7 @@
     "required": [
         "molssi_bse_schema",
         "basis_set_name",
+        "basis_set_family",
         "basis_set_description",
         "basis_set_revision_description",
         "basis_set_role",
@@ -39,6 +40,10 @@
         },
         "basis_set_name": {
             "description": "Common name for the basis set",
+            "type": "string"
+        },
+        "basis_set_family": {
+            "description": "Broad family that the basis set is from",
             "type": "string"
         },
         "basis_set_description": {
