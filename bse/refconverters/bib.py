@@ -13,6 +13,9 @@ def _ref_bib(key,ref):
 
     entry_lines = []
     for k,v in ref.items():
+        if k == 'type':
+            continue
+
         # Handle authors/editors
         if k == 'authors':
             entry_lines.append(u'    author = {{{}}}'.format(' and '.join(v)))
