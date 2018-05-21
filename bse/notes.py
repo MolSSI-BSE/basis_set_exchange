@@ -31,6 +31,9 @@ def process_notes(notes, data_dir):
     reference_sec += '-------------------------------------\n'
 
     # Add reference data
+    if len(found_refs) == 0:
+        return notes
+
     for r in sorted(found_refs):
         rtxt= references.reference_text(ref_data[r])
         reference_sec += r + '\n'
