@@ -156,6 +156,25 @@ If `version` is not specified, the latest version is used.
    >>> bs_str = bse.get_basis('6-31G*', version=0, fmt='gaussian94')
 
 
+Lookup by Role
+--------------
+
+Many basis sets have auxiliary basis sets for different purposes (density fitting,
+for example). These auxiliary basis sets can be queried in the BSE
+using the :func:`bse.lookup_basis_by_role`. This function takes the
+primary basis set and the role you wish to look up. The function
+returns the name of the basis set.
+
+Like the other functions, the basis name and role are not
+case sensitive.
+
+.. doctest::
+
+   >>> # Find the MP2-fit basis set for cc-pvtz
+   >>> bse.lookup_basis_by_role('cc-pvtz', 'mp2fit')
+   'cc-pvtz-mp2fit'
+ 
+
 Metadata
 -------------------
 
