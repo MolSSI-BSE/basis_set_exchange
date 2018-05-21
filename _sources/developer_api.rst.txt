@@ -29,7 +29,6 @@ fileio - Input/Output of files (including json)
    :members:
 
 
-
 lut - Lookup tables element information
 ----------------------------------------
 
@@ -41,6 +40,13 @@ references - Handling of reference data
 ---------------------------------------
 
 .. automodule:: bse.references
+   :members:
+
+
+notes - Handling of notes
+---------------------------------------
+
+.. automodule:: bse.notes
    :members:
 
 
