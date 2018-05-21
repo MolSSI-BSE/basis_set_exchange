@@ -11,6 +11,7 @@ from . import compose
 from . import references
 from . import converters
 from . import refconverters
+from . import notes
 
 # Determine the path to the data directory that is part
 # of this installation
@@ -267,7 +268,7 @@ def get_family_notes(family, data_dir=None):
     if notes_str is None:
         notes_str = "Notes are not available for the {} family".format(family)
 
-    return notes_str
+    return notes.process_notes(notes_str, data_dir)
 
 
 def get_basis_family(name, data_dir=None):
@@ -296,7 +297,7 @@ def get_basis_notes(name, data_dir=None):
     if notes_str is None:
         notes_str = "Notes are not available for the {} basis".format(name)
 
-    return notes_str
+    return notes.process_notes(notes_str, data_dir)
 
 
 def get_schema(schema_type):
