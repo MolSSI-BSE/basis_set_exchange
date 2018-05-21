@@ -10,7 +10,7 @@ import pytest
 
 # Find the dir with all the bse files
 _my_dir = os.path.dirname(os.path.abspath(__file__))
-_hist_data_dir = os.path.join(_my_dir, 'basis_set_exchange_historical')
+_hist_data_dir = os.path.join(_my_dir, 'basis_set_exchange-historical')
 _bse_data_dir = os.path.join(_hist_data_dir, 'bse-formatted')
 _hist_testfile = os.path.join(_hist_data_dir, '.is_historical')
 _hist_testfile_exists = os.path.isfile(_hist_testfile)
