@@ -251,6 +251,26 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="bse.api.get_basis_family">
+<code class="descclassname">bse.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lookup a family by a basis set name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_basis_notes">
+<code class="descclassname">bse.api.</code><code class="descname">get_basis_notes</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representing the notes about a specific basis set</p>
+<p>If the notes are not found, a string saying so is returned</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.api.get_family_notes">
+<code class="descclassname">bse.api.</code><code class="descname">get_family_notes</code><span class="sig-paren">(</span><em>family</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_family_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representing the notes about a basis set family</p>
+<p>If the notes are not found, a string saying so is returned</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="bse.api.get_formats">
 <code class="descclassname">bse.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
@@ -497,6 +517,13 @@ to integers (from strings) in this function.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.fileio.read_notes_file">
+<code class="descclassname">bse.fileio.</code><code class="descname">read_notes_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_notes_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contents of a notes file.</p>
+<p>If the notes file does not exist, None is returned</p>
 </dd></dl>
 
 <dl class="function">

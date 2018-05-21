@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lookup-by-role">Lookup by Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-on-basis-sets-and-families">Notes on basis sets and families</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
@@ -330,6 +331,24 @@ into some internal name (see <a class="reference internal" href="developer_api.h
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_bs</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
 <span class="go">[&#39;3-21g&#39;, &#39;4-31g&#39;, &#39;5-21g&#39;, ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes-on-basis-sets-and-families">
+<h2>Notes on basis sets and families<a class="headerlink" href="#notes-on-basis-sets-and-families" title="Permalink to this headline">¶</a></h2>
+<p>Notes about a basis set or a basis set family can be obtained, also.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notes from a basis (name is case insensitive)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_basis_notes</span><span class="p">(</span><span class="s1">&#39;6-31g&#39;</span><span class="p">)</span>
+<span class="go">&#39;Notes are not available for the 6-31g basis&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the family of a basis set from the metadata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fam</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis_family</span><span class="p">(</span><span class="s1">&#39;6-31G**&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fam</span>
+<span class="go">&#39;pople&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get family notes (not case sensitive)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_family_notes</span><span class="p">(</span><span class="s1">&#39;pople&#39;</span><span class="p">)</span>
+<span class="go">&#39;Notes about Pople basis sets...</span>
 </pre></div>
 </div>
 </div>
