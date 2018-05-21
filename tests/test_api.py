@@ -66,8 +66,15 @@ def test_get_references(basis_name, fmt):
         bse.get_references(basis_name, elements=selected_elements, fmt=fmt, version=ver)
 
 
-_role_tests = [ ('cc-pvdz', 'mp2fit') ]
+_role_tests = [ ('cc-pvdz', 'mp2fit', 'cc-pvdz-mp2fit'),
+                ('cc-pvtz', 'mp2fit', 'cc-pvtz-mp2fit'),
+                ('cc-pvqz', 'mp2fit', 'cc-pvqz-mp2fit'),
+                ('aug-cc-pvdz', 'mp2fit', 'aug-cc-pvdz-mp2fit'),
+                ('aug-cc-pvtz', 'mp2fit', 'aug-cc-pvtz-mp2fit'),
+                ('aug-cc-pvqz', 'mp2fit', 'aug-cc-pvqz-mp2fit')
+              ]
 
-@pytest.mark.parametrize('primary_basis,role', _role_tests)
-def test_lookup_by_role(primary_basis, role):
-    bse.lookup_basis_by_role(primary_basis, role)
+@pytest.mark.parametrize('primary_basis,role,expected', _role_tests)
+def test_lookup_by_role(primary_basis, role, expected):
+    bs = bse.lookup_basis_by_role(primary_basis, role)
+    assert bs.lower() == expected.lower()

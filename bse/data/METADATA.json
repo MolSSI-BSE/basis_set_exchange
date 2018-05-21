@@ -1083,7 +1083,9 @@
         "display_name": "aug-cc-pVDZ",
         "latest_version": 0,
         "role": "orbital",
-        "auxiliaries": {},
+        "auxiliaries": {
+            "mp2fit": "aug-cc-pvdz-mp2fit"
+        },
         "versions": {
             "0": {
                 "filename": "AUG-CC-PVDZ.0.table.json",
@@ -1131,11 +1133,51 @@
             }
         }
     },
+    "aug-cc-pvdz-mp2fit": {
+        "display_name": "aug-cc-pVDZ-MP2FIT",
+        "latest_version": 1,
+        "role": "orbital",
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "filename": "AUG-CC-PVDZ-MP2FIT-diffuse.1.table.json",
+                "description": "aug-cc-pVDZ-MP2FIT",
+                "revdesc": "Values composed from original Basis Set Exchange data",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
+            }
+        }
+    },
     "aug-cc-pvqz": {
         "display_name": "aug-cc-pVQZ",
         "latest_version": 0,
         "role": "orbital",
-        "auxiliaries": {},
+        "auxiliaries": {
+            "mp2fit": "aug-cc-pvqz-mp2fit"
+        },
         "versions": {
             "0": {
                 "filename": "AUG-CC-PVQZ.0.table.json",
@@ -1183,11 +1225,51 @@
             }
         }
     },
+    "aug-cc-pvqz-mp2fit": {
+        "display_name": "aug-cc-pVQZ-MP2FIT",
+        "latest_version": 1,
+        "role": "orbital",
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "filename": "AUG-CC-PVQZ-MP2FIT-diffuse.1.table.json",
+                "description": "aug-cc-pVQZ-MP2FIT",
+                "revdesc": "Values composed from original Basis Set Exchange data",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
+            }
+        }
+    },
     "aug-cc-pvtz": {
         "display_name": "aug-cc-pVTZ",
         "latest_version": 1,
         "role": "orbital",
-        "auxiliaries": {},
+        "auxiliaries": {
+            "mp2fit": "aug-cc-pvtz-mp2fit"
+        },
         "versions": {
             "0": {
                 "filename": "AUG-CC-PVTZ.0.table.json",
@@ -1269,6 +1351,44 @@
                     28,
                     29,
                     30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
+            }
+        }
+    },
+    "aug-cc-pvtz-mp2fit": {
+        "display_name": "aug-cc-pVTZ-MP2FIT",
+        "latest_version": 1,
+        "role": "orbital",
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "filename": "AUG-CC-PVTZ-MP2FIT-diffuse.1.table.json",
+                "description": "aug-cc-pVTZ-MP2FIT",
+                "revdesc": "Values composed from original Basis Set Exchange data",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
                     31,
                     32,
                     33,
@@ -1369,7 +1489,7 @@
         "latest_version": 0,
         "role": "orbital",
         "auxiliaries": {
-            "mp2fit": "CC-PVDZ-MP2FIT"
+            "mp2fit": "cc-pvdz-mp2fit"
         },
         "versions": {
             "0": {
@@ -1465,7 +1585,9 @@
         "display_name": "cc-pVQZ",
         "latest_version": 0,
         "role": "orbital",
-        "auxiliaries": {},
+        "auxiliaries": {
+            "mp2fit": "cc-pvqz-mp2fit"
+        },
         "versions": {
             "0": {
                 "filename": "CC-PVQZ.0.table.json",
@@ -1514,11 +1636,55 @@
             }
         }
     },
+    "cc-pvqz-mp2fit": {
+        "display_name": "cc-pVQZ-MP2FIT",
+        "latest_version": 0,
+        "role": "orbital",
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "filename": "CC-PVQZ-MP2FIT.0.table.json",
+                "description": "cc-pVQZ-MP2FIT",
+                "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
+            }
+        }
+    },
     "cc-pvtz": {
         "display_name": "cc-pVTZ",
         "latest_version": 1,
         "role": "orbital",
-        "auxiliaries": {},
+        "auxiliaries": {
+            "mp2fit": "cc-pvtz-mp2fit"
+        },
         "versions": {
             "0": {
                 "filename": "CC-PVTZ.0.table.json",
@@ -1602,6 +1768,48 @@
                     28,
                     29,
                     30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ]
+            }
+        }
+    },
+    "cc-pvtz-mp2fit": {
+        "display_name": "cc-pVTZ-MP2FIT",
+        "latest_version": 0,
+        "role": "orbital",
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "filename": "CC-PVTZ-MP2FIT.0.table.json",
+                "description": "cc-pVTZ-MP2FIT",
+                "revdesc": "Values from original Basis Set Exchange",
+                "functiontypes": [
+                    "gto"
+                ],
+                "elements": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
                     31,
                     32,
                     33,
