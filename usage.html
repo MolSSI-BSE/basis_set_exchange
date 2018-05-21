@@ -87,6 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#getting-a-basis-set">Getting a basis set</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-references">Getting references</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lookup-by-role">Lookup by Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
 </ul>
 </li>
@@ -282,6 +283,21 @@ If <cite>version</cite> is not specified, the latest version is used.</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the original BSE data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lookup-by-role">
+<h2>Lookup by Role<a class="headerlink" href="#lookup-by-role" title="Permalink to this headline">¶</a></h2>
+<p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
+for example). These auxiliary basis sets can be queried in the BSE
+using the <a class="reference internal" href="user_api.html#bse.lookup_basis_by_role" title="bse.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.lookup_basis_by_role()</span></code></a>. This function takes the
+primary basis set and the role you wish to look up. The function
+returns the name of the basis set.</p>
+<p>Like the other functions, the basis name and role are not
+case sensitive.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;cc-pvtz&#39;</span><span class="p">,</span> <span class="s1">&#39;mp2fit&#39;</span><span class="p">)</span>
+<span class="go">&#39;cc-pvtz-mp2fit&#39;</span>
 </pre></div>
 </div>
 </div>
