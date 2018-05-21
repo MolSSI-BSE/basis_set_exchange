@@ -207,3 +207,24 @@ A simple list containing all the basis set names can be obtained via :func:`bse.
    >>> all_bs = bse.get_all_basis_names()
    >>> print(all_bs)
    ['3-21g', '4-31g', '5-21g', ...
+
+
+Notes on basis sets and families
+--------------------------------
+
+Notes about a basis set or a basis set family can be obtained, also.
+
+.. doctest::
+
+   >>> # Notes from a basis (name is case insensitive)
+   >>> bse.get_basis_notes('6-31g')
+   'Notes are not available for the 6-31g basis'
+
+   >>> # Get the family of a basis set from the metadata
+   >>> fam = bse.get_basis_family('6-31G**')
+   >>> fam
+   'pople'
+
+   >>> # Get family notes (not case sensitive)
+   >>> bse.get_family_notes('pople')
+   'Notes about Pople basis sets...

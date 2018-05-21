@@ -22,6 +22,10 @@ def create_metadata_file(output_path, data_dir):
     for bs_file_path in basis_filelist:
         filename = os.path.split(bs_file_path)[1]
 
+        filebase = os.path.splitext(filename)[0] # remove .json
+        filebase = os.path.splitext(filebase)[0] # remove .table
+        filebase = os.path.splitext(filebase)[0] # remove .version
+
         # Fully compose the basis set from components
         bs = compose.compose_table_basis(bs_file_path)
 
@@ -54,7 +58,7 @@ def create_metadata_file(output_path, data_dir):
         ver = int(ver[1:])
 
         single_meta = OrderedDict([('display_name', display_name),
-                                   ('filename', filename),
+                                   ('filebase', filebase),
                                    ('family', family),
                                    ('description', description),
                                    ('revdesc', revision_desc),
@@ -74,6 +78,7 @@ def create_metadata_file(output_path, data_dir):
         latest = max(v['versions'].keys())
         latest_data = v['versions'][latest]
         metadata[k] = OrderedDict([('display_name', latest_data['display_name']),
+                                   ('filebase', latest_data['filebase']),
                                    ('latest_version', latest),
                                    ('family', latest_data['family']),
                                    ('role', latest_data['role']),
@@ -83,7 +88,7 @@ def create_metadata_file(output_path, data_dir):
 
     
     # Remove these from under versions
-    to_remove = [ 'display_name', 'role', 'auxiliaries', 'family' ]
+    to_remove = [ 'display_name', 'role', 'auxiliaries', 'family', 'filebase' ]
     for v in metadata.values():
         for ver in v['versions'].values():
             for x in to_remove:

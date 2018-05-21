@@ -36,6 +36,24 @@ def _convert_element_list(elements):
     return ret
 
 
+def _get_basis_metadata(name, data_dir):
+    '''Get metadata for a single basis set
+
+    If the basis doesn't exist, an exception is raise
+    '''
+
+    # Transform the name into an internal representation
+    tr_name = manip.transform_basis_name(name)
+
+    # Get the metadata for all basis sets
+    metadata = get_metadata(data_dir)
+
+    if not tr_name in metadata:
+        raise KeyError("Basis set {} does not exist".format(name))
+
+    return metadata[tr_name]
+
+
 def get_basis(name,
               elements=None,
               version=None,
@@ -86,27 +104,17 @@ def get_basis(name,
         it is in the 'data' subdirectory of this project.
     '''
 
-    if data_dir is None:
-        data_dir = _default_data_dir
-
-    # Transform the name into an internal representation
-    tr_name = manip.transform_basis_name(name)
-
-    # Get the metadata for all basis sets
-    metadata = get_metadata(data_dir)
-
-    if not tr_name in metadata:
-        raise KeyError("Basis set {} does not exist".format(name))
-
-    bs_data = metadata[tr_name]
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    bs_data = _get_basis_metadata(name, data_dir)
 
     # If version is not specified, use the latest
     if version is None:
         version = bs_data['latest_version']
 
     # Compose the entire basis set (all elements)
-    table_basis_path = os.path.join(data_dir, bs_data['versions'][version]['filename'])
-    basis_dict = compose.compose_table_basis(table_basis_path)
+    table_file_name = '{}.{}.table.json'.format(bs_data['filebase'], str(version))
+    table_file_path = os.path.join(data_dir, table_file_name)
+    basis_dict = compose.compose_table_basis(table_file_path)
 
     # Handle optional arguments
     if elements is not None:
@@ -151,14 +159,9 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     '''Lookup the name of a basis set given a primary basis set and role
     '''
 
-    tr_name = manip.transform_basis_name(primary_basis)
-    role = role.lower()
-    metadata = get_metadata(data_dir)
-    
-    if not tr_name in metadata:
-        raise RuntimeError("Unknown primary basis set " + primary_basis)
-
-    auxdata = metadata[tr_name]['auxiliaries']
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    bs_data = _get_basis_metadata(primary_basis, data_dir)
+    auxdata = bs_data['auxiliaries']
 
     if not role in auxdata:
         raise RuntimeError("Role {} doesn't exist for {}".format(role, primary_basis))
@@ -181,9 +184,7 @@ def get_metadata(data_dir=None):
         it is in the 'data' subdirectory of this project.
     '''
 
-    if data_dir is None:
-        data_dir = _default_data_dir
-
+    data_dir = _default_data_dir if data_dir is None else data_dir
     metadata_file = os.path.join(data_dir, "METADATA.json")
     return fileio.read_metadata(metadata_file)
 
@@ -230,13 +231,10 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
         it is in the 'data' subdirectory of this project.
     '''
 
-    if data_dir is None:
-        data_dir = _default_data_dir
-
+    data_dir = _default_data_dir if data_dir is None else data_dir
     reffile_path = os.path.join(data_dir, 'REFERENCES.json')
 
     basis_dict = get_basis(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
-
     ref_data = references.compact_references(basis_dict, reffile_path)
 
     if fmt is None:
@@ -253,6 +251,52 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
         raise RuntimeError('Unknown reference format "{}"'.format(fmt))
 
     return ref_data
+
+
+def get_family_notes(family, data_dir=None):
+    '''Return a string representing the notes about a basis set family
+    
+    If the notes are not found, a string saying so is returned
+    '''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    file_name = 'NOTES.' + family.lower()
+    file_path = os.path.join(data_dir, file_name)
+
+    notes_str = fileio.read_notes_file(file_path)
+    if notes_str is None:
+        notes_str = "Notes are not available for the {} family".format(family)
+
+    return notes_str
+
+
+def get_basis_family(name, data_dir=None):
+    '''Lookup a family by a basis set name
+    '''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    bs_data = _get_basis_metadata(name, data_dir)
+    return bs_data['family']
+
+
+def get_basis_notes(name, data_dir=None):
+    '''Return a string representing the notes about a specific basis set
+    
+    If the notes are not found, a string saying so is returned
+    '''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    bs_data = _get_basis_metadata(name, data_dir)
+
+    # the notes file is the same as the base file name, with a .notes extension
+    file_name = bs_data['filebase'] + '.notes'
+    file_path = os.path.join(data_dir, file_name)
+
+    notes_str = fileio.read_notes_file(file_path)
+    if notes_str is None:
+        notes_str = "Notes are not available for the {} basis".format(name)
+
+    return notes_str
 
 
 def get_schema(schema_type):

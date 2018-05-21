@@ -54,6 +54,14 @@ def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
 
 
 @pytest.mark.parametrize('basis_name', _bs_names)
+def test_notes(basis_name):
+    # Test getting family & notes
+    bse.get_basis_notes(basis_name)
+    fam = bse.get_basis_family(basis_name)
+    bse.get_family_notes(fam)
+
+
+@pytest.mark.parametrize('basis_name', _bs_names)
 @pytest.mark.parametrize('fmt', _ref_formats)
 def test_get_references(basis_name, fmt):
     this_metadata = _bs_metadata[basis_name]

@@ -238,3 +238,17 @@ def get_basis_filelist(data_dir):
     """
 
     return glob.glob(os.path.join(data_dir, '*.table.json'))
+
+
+def read_notes_file(file_path):
+    """
+    Returns the contents of a notes file.
+
+    If the notes file does not exist, None is returned
+    """
+
+    if not os.path.isfile(file_path):
+        return None
+
+    with open(file_path, 'r') as f:
+        return f.read()
