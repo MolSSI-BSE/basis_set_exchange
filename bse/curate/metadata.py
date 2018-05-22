@@ -45,7 +45,7 @@ def create_metadata_file(output_path, data_dir):
                 for s in e['element_electron_shells']:
                     function_types.add(s['shell_function_type'])
             if 'element_ecp' in e:
-                function_types.add('ECP')
+                function_types.add('ecp')
 
         function_types = sorted(list(function_types))
 
@@ -82,13 +82,14 @@ def create_metadata_file(output_path, data_dir):
                                    ('latest_version', latest),
                                    ('family', latest_data['family']),
                                    ('role', latest_data['role']),
+                                   ('functiontypes', latest_data['functiontypes']),
                                    ('auxiliaries', latest_data['auxiliaries']),
                                    ('versions', OrderedDict(sorted(v['versions'].items())))])
 
 
     
     # Remove these from under versions
-    to_remove = [ 'display_name', 'role', 'auxiliaries', 'family', 'filebase' ]
+    to_remove = [ 'display_name', 'role', 'auxiliaries', 'family', 'filebase', 'functiontypes' ]
     for v in metadata.values():
         for ver in v['versions'].values():
             for x in to_remove:
