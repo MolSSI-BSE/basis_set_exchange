@@ -227,3 +227,25 @@ Notes about a basis set or a basis set family can be obtained, also.
    >>> # Get family notes (not case sensitive)
    >>> bse.get_family_notes('pople')
    'Notes about Pople basis sets...
+
+
+Memoization
+--------------------------------
+
+By default, the library will memoize/cache some internal data. This has a big effect when,
+for example, running :func:`bse.get_basis` with the same basis set name (even if choosing
+different elements and options).
+
+For most uses, this can be left enabled - memory usage will still be very low, even if reading
+many basis sets. If you wish, it can be disabled by setting :attr:`bse.memoize_enabled` to `False`.
+Note that this does not clear any existing cache.
+
+
+   >>> # Default is enabled
+   >>> bse.memoize_enabled
+   True
+
+   >>> # Manually disable it
+   >>> bse.memoize_enabled = False
+   >>> bse.memoize_enabled
+   False

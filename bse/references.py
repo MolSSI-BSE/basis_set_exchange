@@ -2,11 +2,10 @@
 Some helper functions related to handling of references/citations
 """
 
-from . import fileio
 import textwrap
 
 
-def compact_references(basis_dict, reffile_path):
+def compact_references(basis_dict, ref_data):
     """
     Creates a mapping of elements to reference keys
 
@@ -19,11 +18,9 @@ def compact_references(basis_dict, reffile_path):
     ----------
     basis_dict : dict
         Dictionary containing basis set information
-    reffile_path : str
-        Full path to the JSON file containing reference information
+    ref_data : dict
+        Dictionary containing all reference information
     """
-
-    allref_info = fileio.read_references(reffile_path)
 
     element_refs = []
 
@@ -46,7 +43,7 @@ def compact_references(basis_dict, reffile_path):
         # Loop over a list of dictionaries for this group of elements
         # Note that reference_data needs to be in the same order as the reference_keys
         for elref in item['reference_info']:
-            elref['reference_data'] = {k: allref_info[k] for k in elref['reference_keys']}
+            elref['reference_data'] = {k: ref_data[k] for k in elref['reference_keys']}
 
     return element_refs
 

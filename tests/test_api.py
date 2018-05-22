@@ -44,13 +44,25 @@ def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
             if idx % 2 == 0:
                 selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
             
-        bs = bse.get_basis(basis_name, elements=selected_elements,
-                           fmt=fmt,
-                           version=ver,
-                           uncontract_general=unc_general,
-                           uncontract_segmented=unc_seg,
-                           uncontract_spdf=unc_spdf,
-                           optimize_general=opt_gen)
+        bs1 = bse.get_basis(basis_name, elements=selected_elements,
+                            fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_general,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            optimize_general=opt_gen)
+
+        # Tests memoization
+        bs2 = bse.get_basis(basis_name, elements=selected_elements,
+                            fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_general,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            optimize_general=opt_gen)
+
+        assert bs1 == bs2
+
 
 
 @pytest.mark.parametrize('basis_name', _bs_names)

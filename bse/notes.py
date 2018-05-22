@@ -4,18 +4,14 @@ Functionality for handling basis set and family notes
 
 import os
 import textwrap
-from . import fileio
 from . import references
 
 
-def process_notes(notes, data_dir):
+def process_notes(notes, ref_data):
     '''Add reference information to the bottom of a notes file
 
     `:ref:` tags are removed and the actual reference data is appended
     '''
-
-    reffile_path = os.path.join(data_dir, 'REFERENCES.json')
-    ref_data = fileio.read_references(reffile_path)            
 
     ref_keys = ref_data.keys()
 

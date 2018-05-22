@@ -12,6 +12,7 @@ from . import references
 from . import converters
 from . import refconverters
 from . import notes
+from . import memo
 
 # Determine the path to the data directory that is part
 # of this installation
@@ -19,6 +20,11 @@ _my_dir = os.path.dirname(os.path.abspath(__file__))
 _default_data_dir = os.path.join(_my_dir, 'data')
 _default_schema_dir = os.path.join(_my_dir, 'schema')
 
+
+# If set to True, memoization of some internal functions
+# will be used. Generally safe to leave enabled - it
+# won't use that much memory
+memoize_enabled = True
 
 def _convert_element_list(elements):
     '''Convert a list of elements to an internal list
@@ -170,6 +176,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     return auxdata[role]
 
 
+@memo.BSEMemoize
 def get_metadata(data_dir=None):
     '''Obtain the metadata for all basis sets
 
@@ -188,6 +195,22 @@ def get_metadata(data_dir=None):
     data_dir = _default_data_dir if data_dir is None else data_dir
     metadata_file = os.path.join(data_dir, "METADATA.json")
     return fileio.read_metadata(metadata_file)
+
+
+@memo.BSEMemoize
+def get_reference_data(data_dir=None):
+    '''Obtain information for all stored references
+
+    This is a nested dictionary with all the data for all the references
+
+    The reference data is read from the REFERENCES.json file in the given
+    `data_dir` directory.
+    '''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    reffile_path = os.path.join(data_dir, 'REFERENCES.json')
+
+    return fileio.read_references(reffile_path)
 
 
 def get_all_basis_names(data_dir=None):
@@ -210,9 +233,6 @@ def get_all_basis_names(data_dir=None):
 def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     '''Get the references/citations for a basis set
 
-    The reference data is read from the REFERENCES.json file in the given
-    `data_dir` directory.
-
     Parameters
     ----------
     name : str
@@ -233,10 +253,10 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
-    reffile_path = os.path.join(data_dir, 'REFERENCES.json')
-
     basis_dict = get_basis(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
-    ref_data = references.compact_references(basis_dict, reffile_path)
+
+    all_ref_data = get_reference_data(data_dir)
+    ref_data = references.compact_references(basis_dict, all_ref_data)
 
     if fmt is None:
         return ref_data
@@ -254,6 +274,16 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     return ref_data
 
 
+def get_basis_family(name, data_dir=None):
+    '''Lookup a family by a basis set name
+    '''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    bs_data = _get_basis_metadata(name, data_dir)
+    return bs_data['family']
+
+
+@memo.BSEMemoize
 def get_family_notes(family, data_dir=None):
     '''Return a string representing the notes about a basis set family
     
@@ -264,22 +294,16 @@ def get_family_notes(family, data_dir=None):
     file_name = 'NOTES.' + family.lower()
     file_path = os.path.join(data_dir, file_name)
 
+
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:
         notes_str = "Notes are not available for the {} family".format(family)
 
-    return notes.process_notes(notes_str, data_dir)
+    ref_data = get_reference_data(data_dir)
+    return notes.process_notes(notes_str, ref_data)
 
 
-def get_basis_family(name, data_dir=None):
-    '''Lookup a family by a basis set name
-    '''
-
-    data_dir = _default_data_dir if data_dir is None else data_dir
-    bs_data = _get_basis_metadata(name, data_dir)
-    return bs_data['family']
-
-
+@memo.BSEMemoize
 def get_basis_notes(name, data_dir=None):
     '''Return a string representing the notes about a specific basis set
     
@@ -297,7 +321,8 @@ def get_basis_notes(name, data_dir=None):
     if notes_str is None:
         notes_str = "Notes are not available for the {} basis".format(name)
 
-    return notes.process_notes(notes_str, data_dir)
+    ref_data = get_reference_data(data_dir)
+    return notes.process_notes(notes_str, ref_data)
 
 
 def get_schema(schema_type):

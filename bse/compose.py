@@ -5,6 +5,7 @@ Functions related to composing basis sets from individual components
 import os
 from . import manip
 from . import fileio
+from . import memo
 
 
 def compose_elemental_basis(file_path):
@@ -57,7 +58,7 @@ def compose_elemental_basis(file_path):
 
     return el_bs
 
-
+@memo.BSEMemoize
 def compose_table_basis(file_path):
     """
     Creates a 'table' basis from an table json file
