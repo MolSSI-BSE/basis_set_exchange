@@ -61,7 +61,7 @@
         "basis_set_role": {
             "description": "Role that this basis plays in a calculation",
             "type": "string",
-            "enum": [ "orbital", "rimp2" ]
+            "enum": [ "orbital", "mp2fit", "jkfit", "jfit" ]
         },
         "basis_set_auxiliaries": {
             "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
