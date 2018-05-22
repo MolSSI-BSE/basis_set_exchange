@@ -115,7 +115,6 @@ is a dictionary. If `fmt` is specified, the output is a string.
    <BLANKLINE> 
    <BLANKLINE> 
    @article{ditchfield1971a,
-       type = {article},
        author = {R. Ditchfield and W. J. Hehre and J. A. Pople},
        title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},
        journal = {J. Chem. Phys.},
@@ -209,7 +208,7 @@ A simple list containing all the basis set names can be obtained via :func:`bse.
    ['3-21g', '4-31g', '5-21g', ...
 
 
-Notes on basis sets and families
+Basis set and family notes
 --------------------------------
 
 Notes about a basis set or a basis set family can be obtained, also.
