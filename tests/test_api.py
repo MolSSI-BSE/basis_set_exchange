@@ -51,8 +51,10 @@ def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
 
         # Change some selected elements to strings 
         for idx in range(len(selected_elements)):
-            if idx % 2 == 0:
+            if idx % 3 == 1:
                 selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
+            elif idx % 3 == 2:
+                selected_elements[idx] = str(selected_elements[idx])
             
         bs1 = bse.get_basis(basis_name, elements=selected_elements,
                             fmt=fmt,

@@ -86,6 +86,10 @@ def element_data_from_Z(Z):
     An exception is thrown if the Z number is not found
     '''
 
+    # Z may be a str
+    if isinstance(Z, str) and Z.isdecimal():
+        Z = int(Z)
+
     if Z not in _element_Z_map:
         raise KeyError('No element data for Z = {}'.format(Z))
     return _element_Z_map[Z]
@@ -141,6 +145,7 @@ def element_sym_from_Z(Z, normalize=False):
 
     If normalize is True, the first letter will be capitalized
     '''
+
     r = element_data_from_Z(Z)[0]
     if normalize:
         return normalize_element_symbol(r)

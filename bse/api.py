@@ -30,13 +30,16 @@ def _convert_element_list(elements):
     '''Convert a list of elements to an internal list
 
     A list of elements can contain both integers and strings.
-    This converts the list entirely to integers
+    This converts the list entirely to strings containing integer
+    Z-numbers
     '''
 
     ret = []
     for el in elements:
-        if isinstance(el, str):
-            ret.append(lut.element_Z_from_sym(el))
+        if isinstance(el, int):
+            ret.append(str(el))
+        elif isinstance(el, str) and not el.isdecimal():
+            ret.append(str(lut.element_Z_from_sym(el)))
         else:
             ret.append(el)
 
@@ -125,7 +128,7 @@ def get_basis(name,
 
     # Handle optional arguments
     if elements is not None:
-        # Convert to purely a list of integers
+        # Convert to purely a list of strings (representing integers)
         elements = _convert_element_list(elements)
 
         bs_elements = basis_dict['basis_set_elements']

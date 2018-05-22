@@ -86,7 +86,7 @@ def _sort_basis_dict(bs):
     ]
 
     # Add integers for the elements (being optimistic that element 150 will be found someday)
-    _keyorder.extend(list(range(150)))
+    _keyorder.extend([str(x) for x in range(150)])
 
     bs_sorted = sorted(bs.items(), key=lambda x: _keyorder.index(x[0]))
     bs_sorted = collections.OrderedDict(bs_sorted)
@@ -137,21 +137,13 @@ def read_json_basis(file_path):
     After reading, the MolSSI BSE schema information is searched for and if not
     found, an exception is raised.
 
-    The keys for the elements within a basis set (the Z number) are converted
-    to integers (from strings) in this function.
-
     Parameters
     ----------
     file_path : str
         Full path to the file to read
     """
 
-    bs = _read_plain_json(file_path, True)
-
-    # change the element keys to integers
-    bs['basis_set_elements'] = {int(k): v for k, v in bs['basis_set_elements'].items()}
-
-    return bs
+    return _read_plain_json(file_path, True)
 
 
 def read_schema(file_path):
