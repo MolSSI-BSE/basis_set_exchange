@@ -355,10 +355,7 @@ def get_schema(schema_type):
     if not os.path.isfile(file_path):
         raise RuntimeError('Schema file \'{}\' does not exist, is not readable, or is not a file'.format(file_path))
 
-    with open(file_path, 'r') as f:
-        js = json.load(f)
-
-    return js
+    return fileio.read_schema(file_path)
 
 
 def get_formats():
