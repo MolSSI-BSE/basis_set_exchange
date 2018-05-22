@@ -71,7 +71,8 @@ can be overridden with the `elements` parameter
    ...
 
    >>> # Can also use strings with the element symbols (and be mixed with integers)
-   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne'], fmt='nwchem')
+   >>> # and integers as strings
+   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem')
    >>> print(bs_str)
    # Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)
    BASIS "ao basis" PRINT
@@ -142,9 +143,8 @@ v0 will match the original BSE data.
 Versions are meant to be increased only when there is a material change to the data.
 If data is simply being added (new elements), the version will not be incremented.
 
-Both `bse.get_basis` and :func:`bse.get_references` accept a `version` parameter.
-If `version` is not specified, the latest version is used.
-
+Both `bse.get_basis` and :func:`bse.get_references` accept a `version` parameter,
+which is a string. If `version` is not specified, the latest version is used.
 
 .. doctest::
 
@@ -152,6 +152,9 @@ If `version` is not specified, the latest version is used.
    >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
 
    >>> # Get the original BSE data
+   >>> bs_str = bse.get_basis('6-31G*', version='0', fmt='gaussian94')
+
+   >>> # Versions can also be passed as integers
    >>> bs_str = bse.get_basis('6-31G*', version=0, fmt='gaussian94')
 
 
@@ -192,15 +195,15 @@ A simple list containing all the basis set names can be obtained via :func:`bse.
  
    >>> # What is the latest version of 6-31G
    >>> md['6-31g']['latest_version']
-   1
+   '1'
  
    >>> # All versions of 6-31G
    >>> md['6-31g']['versions'].keys()
-   dict_keys([0, 1])
+   dict_keys(['0', '1'])
 
    >>> # Elements defined in v0
-   >>> md['6-31g']['versions'][0]['elements']
-   [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+   >>> md['6-31g']['versions']['0']['elements']
+   ['1', '2', '3', '4', '5', '6',...
  
    >>> # Print all the basis sets known to the BSE
    >>> all_bs = bse.get_all_basis_names()

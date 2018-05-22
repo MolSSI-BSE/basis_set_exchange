@@ -46,10 +46,22 @@ def _convert_element_list(elements):
     return ret
 
 
+def _convert_version(ver):
+    '''Convert a version to a string
+
+    Versions can be either integers or strings.
+    '''
+
+    if isinstance(ver, int):
+        return str(ver)
+    else:
+        return ver
+
+
 def _get_basis_metadata(name, data_dir):
     '''Get metadata for a single basis set
 
-    If the basis doesn't exist, an exception is raise
+    If the basis doesn't exist, an exception is raised
     '''
 
     # Transform the name into an internal representation
@@ -86,8 +98,8 @@ def get_basis(name,
     elements : list
         List of elements that you want the basis set for. By default,
         all elements for which the basis set is defined are included.
-        Elements can be specified by Z-number (int) or by symbol (string)
-    version : int
+        Elements can be specified by Z-number (int or str) or by symbol (str)
+    version : int or str
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
     fmt: str
@@ -120,15 +132,17 @@ def get_basis(name,
     # If version is not specified, use the latest
     if version is None:
         version = bs_data['latest_version']
+    else:
+        version = _convert_version(version)
 
     # Compose the entire basis set (all elements)
-    table_file_name = '{}.{}.table.json'.format(bs_data['filebase'], str(version))
+    table_file_name = '{}.{}.table.json'.format(bs_data['filebase'], version)
     table_file_path = os.path.join(data_dir, table_file_name)
     basis_dict = compose.compose_table_basis(table_file_path)
 
     # Handle optional arguments
     if elements is not None:
-        # Convert to purely a list of strings (representing integers)
+        # Convert to purely a list of strings tath represent integers
         elements = _convert_element_list(elements)
 
         bs_elements = basis_dict['basis_set_elements']
@@ -256,7 +270,7 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
-    basis_dict = get_basis(name, version=version, data_dir=data_dir, elements=elements, fmt=None)
+    basis_dict = get_basis(name, elements=elements, version=version, data_dir=data_dir)
 
     all_ref_data = get_reference_data(data_dir)
     ref_data = references.compact_references(basis_dict, all_ref_data)

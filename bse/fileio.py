@@ -176,21 +176,13 @@ def read_metadata(file_path):
     """
     Reads a file containing the metadata for all the basis sets
 
-    All the version numbers (keys) are converted to integers.
-
     Parameters
     ----------
     file_path : str
         Full path to the file to read
     """
 
-    md = _read_plain_json(file_path, False)
-
-    # Change version numbers to integers
-    for k, v in md.items():
-        v['versions'] = {int(k2): v2 for k2, v2 in v['versions'].items()}
-
-    return md
+    return _read_plain_json(file_path, False)
 
 
 def write_json_basis(file_path, bs):

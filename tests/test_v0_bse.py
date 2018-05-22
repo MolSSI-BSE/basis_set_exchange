@@ -25,7 +25,7 @@ _bs_formats.remove('json') # Don't need to test json (nothing to compare to)
 _true_false = [ True, False ]
 
 # Only the names with a version zero
-_bs_names_only_v0 = [x for x,y in _bs_metadata.items() if 0 in y['versions']]
+_bs_names_only_v0 = [x for x,y in _bs_metadata.items() if '0' in y['versions']]
 
 # Read the mapping of new BSE names to old BSE files
 with open(os.path.join(_my_dir, 'bse_v0_map.txt'), 'r') as f:
@@ -126,11 +126,6 @@ def test_v0_with_bse(basis_name, fmt, opt_gen):
     basis_meta = _bs_metadata[basis_name]
     fmt_info = _format_map[fmt]
 
-    # It's ok if the basis doesn't have v0. That means it wasn't in the old BSE
-    if not 0 in basis_meta['versions']:
-        print("Basis set {} doesn't have a version 0".format(basis_name))
-        return
-
     if not basis_name in _bse_v0_map:
         raise RuntimeError("Mapping from BSE to old BSE name doesn't exist for " + basis_name)
 
@@ -155,7 +150,7 @@ def test_v0_with_bse(basis_name, fmt, opt_gen):
     bse_data = fmt_info[1](bse_data)
 
     # read in data from the new bse (version 0)
-    new_data = api.get_basis(basis_name, version=0, fmt=fmt, optimize_general=opt_gen)
+    new_data = api.get_basis(basis_name, version='0', fmt=fmt, optimize_general=opt_gen)
     new_data = new_data.split('\n')
     new_data = fmt_info[1](new_data)
 

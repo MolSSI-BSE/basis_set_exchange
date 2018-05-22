@@ -32,7 +32,7 @@ def create_metadata_file(output_path, data_dir):
         # Prepare the metadata
         tr_name = manip.transform_basis_name(bs['basis_set_name'])
         display_name = bs['basis_set_name']
-        defined_elements = sorted(list(bs['basis_set_elements'].keys()))
+        defined_elements = sorted(list(bs['basis_set_elements'].keys()), key=lambda x: int(x))
         description = bs['basis_set_description']
         revision_desc = bs['basis_set_revision_description']
         role = bs['basis_set_role']
@@ -55,7 +55,7 @@ def create_metadata_file(output_path, data_dir):
 
         # split out the version number
         internal_name, ver = os.path.splitext(internal_name)
-        ver = int(ver[1:])
+        ver = ver[1:]
 
         single_meta = OrderedDict([('display_name', display_name),
                                    ('filebase', filebase),
