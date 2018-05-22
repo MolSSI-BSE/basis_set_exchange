@@ -27,12 +27,22 @@ _true_false = [ True, False ]
 def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
     this_metadata = _bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bs = bse.get_basis(basis_name, elements=None, fmt=fmt,
-                           version=ver,
-                           uncontract_general=unc_general,
-                           uncontract_segmented=unc_seg,
-                           uncontract_spdf=unc_spdf,
-                           optimize_general=opt_gen)
+        bs1 = bse.get_basis(basis_name, elements=None, fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_general,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            optimize_general=opt_gen)
+
+        # This tests memoization
+        bs2 = bse.get_basis(basis_name, elements=None, fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_general,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            optimize_general=opt_gen)
+
+        assert bs1 == bs2
 
         # Get subset of elements
         avail_elements = this_metadata['versions'][ver]['elements']
