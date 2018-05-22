@@ -10,13 +10,13 @@ _data_dir = api._default_data_dir
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
-                              ['6-31g', '6-31g*', 6, True],
-                              ['6-31g', '6-31g**', 6, True],
-                              ['6-31g*', '6-31g*', 6, True],
-                              ['6-31g*', '6-31g', 6, False],
-                              ['6-31g*', '6-31g', 1, True],
-                              ['6-31g**', '6-31g', 1, False],
-                              ['cc-pvtz', 'aug-cc-pvtz', 13, True]
+                              ['6-31g', '6-31g*', '6', True],
+                              ['6-31g', '6-31g**', '6', True],
+                              ['6-31g*', '6-31g*', '6', True],
+                              ['6-31g*', '6-31g', '6', False],
+                              ['6-31g*', '6-31g', '1', True],
+                              ['6-31g**', '6-31g','1', False],
+                              ['cc-pvtz', 'aug-cc-pvtz', '13', True]
                          ]) 
 def test_electron_subset(basis1, basis2, element, expected):
     el1 = api.get_basis(basis1)['basis_set_elements'][element]
@@ -27,12 +27,12 @@ def test_electron_subset(basis1, basis2, element, expected):
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
-                              ['6-31g', '6-31g', 8, True],
-                              ['6-31g', '6-31g*', 8, False],
-                              ['6-31g', '6-31g**', 8, False],
-                              ['6-31g', '6-31g**', 1, False],
-                              ['6-31g', '6-31g*', 1, True],
-                              ['cc-pvtz', 'aug-cc-pvtz', 13, False]
+                              ['6-31g', '6-31g', '8', True],
+                              ['6-31g', '6-31g*', '8', False],
+                              ['6-31g', '6-31g**', '8', False],
+                              ['6-31g', '6-31g**', '1', False],
+                              ['6-31g', '6-31g*', '1', True],
+                              ['cc-pvtz', 'aug-cc-pvtz', '13', False]
                          ]) 
 def test_electron_equal(basis1, basis2, element, expected):
     el1 = api.get_basis(basis1)['basis_set_elements'][element]
@@ -44,12 +44,12 @@ def test_electron_equal(basis1, basis2, element, expected):
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
-                              ['CRENBL', 'CRENBL', 78, True],
-                              ['CRENBL', 'CRENBL', 92, True],
-                              ['CRENBL', 'CRENBL', 118, True],
-                              ['LANL2DZ', 'LANL2DZ', 78, True],
-                              ['CRENBL', 'LANL2DZ', 78, False],
-                              ['LANL2DZ', 'CRENBL', 78, False]
+                              ['CRENBL', 'CRENBL', '78', True],
+                              ['CRENBL', 'CRENBL', '92', True],
+                              ['CRENBL', 'CRENBL', '118', True],
+                              ['LANL2DZ', 'LANL2DZ', '78', True],
+                              ['CRENBL', 'LANL2DZ', '78', False],
+                              ['LANL2DZ', 'CRENBL', '78', False]
                          ]) 
 def test_ecp_equal(basis1, basis2, element, expected):
     el1 = api.get_basis(basis1)['basis_set_elements'][element]
@@ -60,18 +60,18 @@ def test_ecp_equal(basis1, basis2, element, expected):
 
 
 @pytest.mark.parametrize('basis1, basis2, element, expected', [
-                              ['6-31g', '6-31g', 8, True],
-                              ['6-31g', '6-31g*', 8, False],
-                              ['6-31g', '6-31g**', 8, False],
-                              ['6-31g', '6-31g**', 1, False],
-                              ['6-31g', '6-31g*', 1, True],
-                              ['aug-cc-pvtz', 'aug-cc-pvqz', 15, False],
-                              ['aug-cc-pvtz', 'aug-cc-pvdz', 18, False],
-                              ['CRENBL', 'CRENBL', 78, True],
-                              ['CRENBL', 'CRENBL', 92, True],
-                              ['CRENBL', 'CRENBL', 118, True],
-                              ['CRENBL', 'LANL2DZ', 78, False],
-                              ['LANL2DZ', 'CRENBL', 78, False]
+                              ['6-31g', '6-31g', '8', True],
+                              ['6-31g', '6-31g*', '8', False],
+                              ['6-31g', '6-31g**', '8', False],
+                              ['6-31g', '6-31g**', '1', False],
+                              ['6-31g', '6-31g*', '1', True],
+                              ['aug-cc-pvtz', 'aug-cc-pvqz', '15', False],
+                              ['aug-cc-pvtz', 'aug-cc-pvdz', '18', False],
+                              ['CRENBL', 'CRENBL', '78', True],
+                              ['CRENBL', 'CRENBL', '92', True],
+                              ['CRENBL', 'CRENBL', '118', True],
+                              ['CRENBL', 'LANL2DZ', '78', False],
+                              ['LANL2DZ', 'CRENBL', '78', False]
                          ]) 
 def test_compare_elements(basis1, basis2, element, expected):
     el1 = api.get_basis(basis1)['basis_set_elements'][element]
@@ -81,10 +81,10 @@ def test_compare_elements(basis1, basis2, element, expected):
 
 
 @pytest.mark.parametrize('basis, element', [
-                              ['6-31g', 8],
-                              ['CRENBL', 3],
-                              ['CRENBL', 92],
-                              ['LANL2DZ', 78]
+                              ['6-31g', '8'],
+                              ['CRENBL', '3'],
+                              ['CRENBL', '92'],
+                              ['LANL2DZ', '78']
                          ])
 def test_printing(basis, element):
     el = api.get_basis(basis)['basis_set_elements'][element]

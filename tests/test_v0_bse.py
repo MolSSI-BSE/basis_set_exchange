@@ -116,6 +116,8 @@ _format_map = { 'nwchem' : ('NWChem', _process_nwchem),
                 'gaussian94' : ('Gaussian94', _process_gaussian)
               }
 
+
+@pytest.mark.slow
 @pytest.mark.parametrize('basis_name', _bs_names_only_v0)
 @pytest.mark.parametrize('fmt', _bs_formats)
 @pytest.mark.parametrize('opt_gen', _true_false)

@@ -6,91 +6,83 @@ import bse
 from bse import lut
 import pytest
 import random
+from common_testvars import *
 
 # Use random for getting sets of elements
-_rand_seed = 39466 # from random.org
-random.seed(_rand_seed, version=2)
+random.seed(rand_seed, version=2)
 
-# Load all the metadata once
-_bs_metadata = bse.get_metadata()
-_bs_names = bse.get_all_basis_names()
-_bs_formats = list(bse.get_formats().keys())
-_ref_formats = list(bse.get_reference_formats().keys())
-_true_false = [ True, False ]
-
-@pytest.mark.parametrize('basis_name', _bs_names)
-@pytest.mark.parametrize('fmt', _bs_formats)
-@pytest.mark.parametrize('unc_general', _true_false)
-@pytest.mark.parametrize('unc_seg', _true_false)
-@pytest.mark.parametrize('unc_spdf', _true_false)
-@pytest.mark.parametrize('opt_gen', _true_false)
-def test_get_basis(basis_name, fmt, unc_general, unc_seg, unc_spdf, opt_gen):
-    this_metadata = _bs_metadata[basis_name]
+@pytest.mark.parametrize('basis_name', bs_names)
+def test_get_basis_1(basis_name):
+    '''For all versions of basis sets, test a simple get_basis
+    '''
+    this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bs1 = bse.get_basis(basis_name, elements=None, fmt=fmt,
-                            version=ver,
-                            uncontract_general=unc_general,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            optimize_general=opt_gen)
-
-        # This tests memoization
-        bs2 = bse.get_basis(basis_name, elements=None, fmt=fmt,
-                            version=ver,
-                            uncontract_general=unc_general,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            optimize_general=opt_gen)
-
-        assert bs1 == bs2
-
-        # Get subset of elements
-        avail_elements = this_metadata['versions'][ver]['elements']
-        nelements = random.randint(1, len(avail_elements))
-        selected_elements = random.sample(avail_elements, nelements)
-
-        # Change some selected elements to strings 
-        for idx in range(len(selected_elements)):
-            if idx % 3 == 1:
-                selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
-            elif idx % 3 == 2:
-                selected_elements[idx] = str(selected_elements[idx])
-            
-        bs1 = bse.get_basis(basis_name, elements=selected_elements,
-                            fmt=fmt,
-                            version=ver,
-                            uncontract_general=unc_general,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            optimize_general=opt_gen)
-
-        # Tests memoization
-        bs2 = bse.get_basis(basis_name, elements=selected_elements,
-                            fmt=fmt,
-                            version=ver,
-                            uncontract_general=unc_general,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            optimize_general=opt_gen)
-
-        assert bs1 == bs2
+        bse.get_basis(basis_name, version=ver)
 
 
+@pytest.mark.parametrize('basis_name', bs_names)
+def test_get_basis_2(basis_name):
+    '''For all versions of basis sets, test a simple get_basis
+       with different element selections
+    '''
+    this_metadata = bs_metadata[basis_name]
+    latest = this_metadata['latest_version']
+    avail_elements = this_metadata['versions'][latest]['elements']
+    nelements = random.randint(1, len(avail_elements))
+    selected_elements = random.sample(avail_elements, nelements)
 
-@pytest.mark.parametrize('basis_name', _bs_names)
-def test_notes(basis_name):
-    # Test getting family & notes
-    bse.get_basis_notes(basis_name)
-    fam = bse.get_basis_family(basis_name)
-    bse.get_family_notes(fam)
+    # Change some selected elements to strings 
+    for idx in range(len(selected_elements)):
+        if idx % 3 == 1:
+            selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
+        elif idx % 3 == 2:
+            selected_elements[idx] = str(selected_elements[idx])
+
+    bs = bse.get_basis(basis_name, elements=selected_elements)
+    assert len(bs['basis_set_elements']) == len(selected_elements)
 
 
-@pytest.mark.parametrize('basis_name', _bs_names)
-@pytest.mark.parametrize('fmt', _ref_formats)
-def test_get_references(basis_name, fmt):
-    this_metadata = _bs_metadata[basis_name]
+@pytest.mark.parametrize('basis_name', bs_names_sample)
+@pytest.mark.parametrize('bool_opts', bool_matrix(4))
+def test_get_basis_3(basis_name, bool_opts):
+    '''For a sample of basis sets, test different options 
+    '''
+    bse.get_basis(basis_name,
+                  uncontract_general=bool_opts[0],
+                  uncontract_segmented=bool_opts[1],
+                  uncontract_spdf=bool_opts[2],
+                  optimize_general=bool_opts[3])
+
+
+@pytest.mark.parametrize('basis_name', bs_names_sample)
+@pytest.mark.parametrize('fmt', bs_formats)
+def test_get_basis_4(basis_name, fmt):
+    '''For a sample of basis sets, test getting different formats
+       of the latest version
+    '''
+    bse.get_basis(basis_name, fmt=fmt)
+
+
+@pytest.mark.parametrize('basis_name', bs_names_sample)
+def test_get_basis_memo(basis_name):
+    '''For a sample of basis sets, test memoization
+    '''
+    bs1 = bse.get_basis(basis_name)
+    bs2 = bse.get_basis(basis_name)
+
+    # Should be equal, but not aliased
+    assert bs1 == bs2
+    assert bs1['basis_set_elements'] is not bs2['basis_set_elements']
+
+
+@pytest.mark.parametrize('basis_name', bs_names)
+@pytest.mark.parametrize('fmt', ref_formats)
+def test_get_references_1(basis_name, fmt):
+    ''' Tests getting references for all basis sets
+    '''
+    this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bse.get_references(basis_name, elements=None, fmt=fmt, version=ver)
+        bse.get_references(basis_name, fmt=fmt, version=ver)
 
         avail_elements = this_metadata['versions'][ver]['elements']
         nelements = random.randint(1, len(avail_elements))
@@ -98,15 +90,19 @@ def test_get_references(basis_name, fmt):
         bse.get_references(basis_name, elements=selected_elements, fmt=fmt, version=ver)
 
 
-_role_tests = [ ('cc-pvdz', 'mp2fit', 'cc-pvdz-mp2fit'),
-                ('cc-pvtz', 'mp2fit', 'cc-pvtz-mp2fit'),
-                ('cc-pvqz', 'mp2fit', 'cc-pvqz-mp2fit'),
-                ('aug-cc-pvdz', 'mp2fit', 'aug-cc-pvdz-mp2fit'),
-                ('aug-cc-pvtz', 'mp2fit', 'aug-cc-pvtz-mp2fit'),
-                ('aug-cc-pvqz', 'mp2fit', 'aug-cc-pvqz-mp2fit')
-              ]
-
-@pytest.mark.parametrize('primary_basis,role,expected', _role_tests)
+@pytest.mark.parametrize('primary_basis,role,expected', role_tests)
 def test_lookup_by_role(primary_basis, role, expected):
+    '''Test looking up data by role
+    '''
     bs = bse.lookup_basis_by_role(primary_basis, role)
     assert bs.lower() == expected.lower()
+
+
+@pytest.mark.parametrize('basis_name', bs_names)
+def test_notes(basis_name):
+    '''Test getting family, family notes, and basis set notes
+    '''
+    bse.get_basis_notes(basis_name)
+    fam = bse.get_basis_family(basis_name)
+    bse.get_family_notes(fam)
+
