@@ -41,7 +41,6 @@ instread.
    >>> # Same as above, but in gaussian format (as a string)
    >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
    >>> print(bs_str)
-   ! Basis Set Exchange: 6-31G* (6-31G)
    ****
    H     0
    S   3   1.00
@@ -63,7 +62,6 @@ can be overridden with the `elements` parameter
    >>> # Get only carbon and oxygen
    >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem')
    >>> print(bs_str)
-   # Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
@@ -74,7 +72,6 @@ can be overridden with the `elements` parameter
    >>> # and integers as strings
    >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem')
    >>> print(bs_str)
-   # Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
@@ -100,8 +97,6 @@ is a dictionary. If `fmt` is specified, the output is a string.
    >>> # As bibtex, restricting to H and F
    >>> bib = bse.get_references('6-31G*', fmt='bib', elements=[1,9])
    >>> print(bib)
-   % Basis Set Exchange: 6-31G* (6-31G)
-   <BLANKLINE> 
    % H
    %     31G valence double-zeta
    %         ditchfield1971a
