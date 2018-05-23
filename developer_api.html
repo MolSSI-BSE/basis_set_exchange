@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer Curation API" href="developer_curate.html" />
-    <link rel="prev" title="Developer Documentation" href="developer.html" /> 
+    <link rel="prev" title="Developer FAQ" href="developer_faq.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-bse.api">api - The main API Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-bse.compose">compose - Composition of basis set information</a></li>
@@ -210,9 +211,9 @@ as a string or as a python dictionary.</p>
 <dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
 <dd><p class="first last">List of elements that you want the basis set for. By default,
 all elements for which the basis set is defined are included.
-Elements can be specified by Z-number (int) or by symbol (string)</p>
+Elements can be specified by Z-number (int or str) or by symbol (str)</p>
 </dd>
-<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or str</span></dt>
 <dd><p class="first last">Obtain a specific version of this basis set. By default,
 the latest version is returned.</p>
 </dd>
@@ -258,48 +259,11 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_basis_notes">
-<code class="descclassname">bse.api.</code><code class="descname">get_basis_notes</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the notes about a specific basis set</p>
-<p>If the notes are not found, a string saying so is returned</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.api.get_family_notes">
-<code class="descclassname">bse.api.</code><code class="descname">get_family_notes</code><span class="sig-paren">(</span><em>family</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_family_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the notes about a basis set family</p>
-<p>If the notes are not found, a string saying so is returned</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="bse.api.get_formats">
 <code class="descclassname">bse.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
 can be passed as the fmt argument to <a class="reference internal" href="#bse.api.get_basis" title="bse.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.api.get_metadata">
-<code class="descclassname">bse.api.</code><code class="descname">get_metadata</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain the metadata for all basis sets</p>
-<p>The metadata includes information such as the display name of the basis set,
-its versions, and what elements are included in the basis set</p>
-<p>The data is read from the METADATA.json file in the <cite>data_dir</cite> directory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
@@ -314,8 +278,6 @@ can be passed as the fmt argument to <a class="reference internal" href="#bse.ap
 <dt id="bse.api.get_references">
 <code class="descclassname">bse.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
-<p>The reference data is read from the REFERENCES.json file in the given
-<cite>data_dir</cite> directory.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -373,15 +335,6 @@ and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
 information together into one ‘elemental’ basis dictionary</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.compose.compose_table_basis">
-<code class="descclassname">bse.compose.</code><code class="descname">compose_table_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.compose.compose_table_basis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a ‘table’ basis from an table json file</p>
-<p>This function reads the info from the given file, and reads all the elemental
-basis set information from the files listed therein. It then composes all the
-information together into one ‘table’ basis dictionary</p>
 </dd></dl>
 
 </div>
@@ -483,8 +436,6 @@ in the given data directory</p>
 <dd><p>Reads generic basis set information from a JSON file</p>
 <p>After reading, the MolSSI BSE schema information is searched for and if not
 found, an exception is raised.</p>
-<p>The keys for the elements within a basis set (the Z number) are converted
-to integers (from strings) in this function.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -504,7 +455,6 @@ to integers (from strings) in this function.</p>
 <dt id="bse.fileio.read_metadata">
 <code class="descclassname">bse.fileio.</code><code class="descname">read_metadata</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
-<p>All the version numbers (keys) are converted to integers.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -704,7 +654,7 @@ ordering will be spdfghikl (skipping j)</p>
 <p>Some helper functions related to handling of references/citations</p>
 <dl class="function">
 <dt id="bse.references.compact_references">
-<code class="descclassname">bse.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>reffile_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.references.compact_references" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.references.compact_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a mapping of elements to reference keys</p>
 <p>A list is returned, with each element being a dictionary
 with entries ‘reference_info’ containing data for (possibly) multiple references,
@@ -718,8 +668,8 @@ that those references apply to</p>
 <dt><strong>basis_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
 <dd><p class="first last">Dictionary containing basis set information</p>
 </dd>
-<dt><strong>reffile_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the JSON file containing reference information</p>
+<dt><strong>ref_data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary containing all reference information</p>
 </dd>
 </dl>
 </td>
@@ -753,7 +703,7 @@ that those references apply to</p>
 <p>Functionality for handling basis set and family notes</p>
 <dl class="function">
 <dt id="bse.notes.process_notes">
-<code class="descclassname">bse.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.notes.process_notes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.notes.process_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add reference information to the bottom of a notes file</p>
 <p><cite>:ref:</cite> tags are removed and the actual reference data is appended</p>
 </dd></dl>
@@ -811,7 +761,7 @@ that those references apply to</p>
         <a href="developer_curate.html" class="btn btn-neutral float-right" title="Developer Curation API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="developer.html" class="btn btn-neutral" title="Developer Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="developer_faq.html" class="btn btn-neutral" title="Developer FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

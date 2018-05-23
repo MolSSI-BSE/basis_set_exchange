@@ -193,9 +193,9 @@ as a string or as a python dictionary.</p>
 <dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
 <dd><p class="first last">List of elements that you want the basis set for. By default,
 all elements for which the basis set is defined are included.
-Elements can be specified by Z-number (int) or by symbol (string)</p>
+Elements can be specified by Z-number (int or str) or by symbol (str)</p>
 </dd>
-<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or str</span></dt>
 <dd><p class="first last">Obtain a specific version of this basis set. By default,
 the latest version is returned.</p>
 </dd>
@@ -241,48 +241,11 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_basis_notes">
-<code class="descclassname">bse.</code><code class="descname">get_basis_notes</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_basis_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the notes about a specific basis set</p>
-<p>If the notes are not found, a string saying so is returned</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.get_family_notes">
-<code class="descclassname">bse.</code><code class="descname">get_family_notes</code><span class="sig-paren">(</span><em>family</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_family_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the notes about a basis set family</p>
-<p>If the notes are not found, a string saying so is returned</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="bse.get_formats">
 <code class="descclassname">bse.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
 can be passed as the fmt argument to <a class="reference internal" href="#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.get_metadata">
-<code class="descclassname">bse.</code><code class="descname">get_metadata</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain the metadata for all basis sets</p>
-<p>The metadata includes information such as the display name of the basis set,
-its versions, and what elements are included in the basis set</p>
-<p>The data is read from the METADATA.json file in the <cite>data_dir</cite> directory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
@@ -297,8 +260,6 @@ can be passed as the fmt argument to <a class="reference internal" href="#bse.ge
 <dt id="bse.get_references">
 <code class="descclassname">bse.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
-<p>The reference data is read from the REFERENCES.json file in the given
-<cite>data_dir</cite> directory.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

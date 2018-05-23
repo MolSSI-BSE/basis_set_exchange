@@ -90,6 +90,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#lookup-by-role">Lookup by Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basis-set-and-family-notes">Basis set and family notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memoization">Memoization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
@@ -215,7 +216,8 @@ can be overridden with the <cite>elements</cite> parameter</p>
 <span class="gp">...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can also use strings with the element symbols (and be mixed with integers)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># and integers as strings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;16&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 <span class="go"># Basis Set Exchange: aug-cc-pvtz (aug-cc-pVTZ)</span>
 <span class="go">BASIS &quot;ao basis&quot; PRINT</span>
@@ -276,12 +278,15 @@ Versions are specified by integers. By default,
 v0 will match the original BSE data.</p>
 <p>Versions are meant to be increased only when there is a material change to the data.
 If data is simply being added (new elements), the version will not be incremented.</p>
-<p>Both <cite>bse.get_basis</cite> and <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a> accept a <cite>version</cite> parameter.
-If <cite>version</cite> is not specified, the latest version is used.</p>
+<p>Both <cite>bse.get_basis</cite> and <a class="reference internal" href="user_api.html#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_references()</span></code></a> accept a <cite>version</cite> parameter,
+which is a string. If <cite>version</cite> is not specified, the latest version is used.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get latest version</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the original BSE data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Versions can also be passed as integers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -304,7 +309,7 @@ case sensitive.</p>
 <div class="section" id="metadata">
 <h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
 <p>The BSE contains metadata for all the basis sets that is in its data directory.
-This information can be accessed by the <a class="reference internal" href="user_api.html#bse.get_metadata" title="bse.get_metadata"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_metadata()</span></code></a> function</p>
+This information can be accessed by the <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_metadata()</span></code> function</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Note that the key is the name of the basis set that has been transformed
@@ -316,15 +321,15 @@ into some internal name (see <a class="reference internal" href="developer_api.h
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># What is the latest version of 6-31G</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;latest_version&#39;</span><span class="p">]</span>
-<span class="go">1</span>
+<span class="go">&#39;1&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># All versions of 6-31G</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;versions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">dict_keys([0, 1])</span>
+<span class="go">dict_keys([&#39;0&#39;, &#39;1&#39;])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Elements defined in v0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;versions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span>
-<span class="go">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="p">[</span><span class="s1">&#39;6-31g&#39;</span><span class="p">][</span><span class="s1">&#39;versions&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span>
+<span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;,...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print all the basis sets known to the BSE</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_bs</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
@@ -348,6 +353,26 @@ into some internal name (see <a class="reference internal" href="developer_api.h
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get family notes (not case sensitive)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_family_notes</span><span class="p">(</span><span class="s1">&#39;pople&#39;</span><span class="p">)</span>
 <span class="go">&#39;Notes about Pople basis sets...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memoization">
+<h2>Memoization<a class="headerlink" href="#memoization" title="Permalink to this headline">¶</a></h2>
+<p>By default, the library will memoize/cache some internal data. This has a big effect when,
+for example, running <a class="reference internal" href="user_api.html#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_basis()</span></code></a> with the same basis set name (even if choosing
+different elements and options).</p>
+<p>For most uses, this can be left enabled - memory usage will still be very low, even if reading
+many basis sets. If you wish, it can be disabled by setting <code class="xref py py-attr docutils literal notranslate"><span class="pre">bse.memoize_enabled</span></code> to <cite>False</cite>.
+Note that this does not clear any existing cache.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default is enabled</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">memoize_enabled</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Manually disable it</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">memoize_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">memoize_enabled</span>
+<span class="go">False</span>
 </pre></div>
 </div>
 </div>

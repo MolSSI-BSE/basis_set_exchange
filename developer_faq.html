@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Developer Documentation &mdash; Basis Set Exchange  documentation</title>
+  <title>Developer FAQ &mdash; Basis Set Exchange  documentation</title>
   
 
   
@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Developer FAQ" href="developer_faq.html" />
-    <link rel="prev" title="Main User API" href="user_api.html" /> 
+    <link rel="next" title="Developer API" href="developer_api.html" />
+    <link rel="prev" title="Developer Documentation" href="developer.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -83,8 +83,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Developer FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_curate.html">Developer Curation API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
@@ -135,13 +135,15 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Developer Documentation</li>
+          <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
+        
+      <li>Developer FAQ</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/developer.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/developer_faq.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -154,34 +156,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="developer-documentation">
-<h1>Developer Documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developer_api.html">Developer API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.api">api - The main API Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.compose">compose - Composition of basis set information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.manip">manip - Manipulation of basis sets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.fileio">fileio - Input/Output of files (including json)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.lut">lut - Lookup tables element information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.references">references - Handling of reference data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.notes">notes - Handling of notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-bse.validator">validator - Validation of basis sets</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="developer_curate.html">Developer Curation API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_curate.html#module-bse.curate">curate - Functions for helping to curate data</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="developer_converters.html">Output converters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_converters.html#module-bse.converters">converters - Conversion basis set output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_converters.html#module-bse.refconverters">refconverters - Conversion of reference data</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="developer-faq">
+<h1>Developer FAQ<a class="headerlink" href="#developer-faq" title="Permalink to this headline">¶</a></h1>
+<p><strong>Q:</strong> Why are elements and versions stored as strings even though
+they are integers?</p>
+<p><strong>A:</strong> Because JSON is used as the backend, and JSON only supports
+using strings as keys in objects. Z numbers and versions are
+used as keys.  It was decided to keep them as strings throughout. This is for
+consistency, since JSON is also an output format.</p>
 </div>
 
 
@@ -192,10 +174,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="developer_faq.html" class="btn btn-neutral float-right" title="Developer FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="developer_api.html" class="btn btn-neutral float-right" title="Developer API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="user_api.html" class="btn btn-neutral" title="Main User API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="developer.html" class="btn btn-neutral" title="Developer Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
