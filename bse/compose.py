@@ -37,12 +37,10 @@ def compose_elemental_basis(file_path):
     # Use the basis_set_description for the reference description
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
-            el_data['element_references'] = [
-                { 
-                  'reference_description' : v['basis_set_description'],
-                  'reference_keys' : v['basis_set_references']
-                }
-            ]
+            el_data['element_references'] = [{
+                'reference_description': v['basis_set_description'],
+                'reference_keys': v['basis_set_references']
+            }]
 
     # Compose on a per-element basis
     for k, v in el_bs['basis_set_elements'].items():
@@ -57,6 +55,7 @@ def compose_elemental_basis(file_path):
         el_bs['basis_set_elements'][k] = v
 
     return el_bs
+
 
 @memo.BSEMemoize
 def compose_table_basis(file_path):
@@ -90,5 +89,9 @@ def compose_table_basis(file_path):
         # Replace the basis set for this element with the one
         # from the elemental basis
         table_bs['basis_set_elements'][k] = data['basis_set_elements'][k]
+
+    # Add the version to the dictionary
+    file_base = os.path.basename(file_path)
+    table_bs['basis_set_version'] = file_base.split('.')[-3]
 
     return table_bs

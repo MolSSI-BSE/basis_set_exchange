@@ -168,13 +168,10 @@ def get_basis(name,
     if fmt is None:
         return basis_dict
 
-    # What should we put at the top?
-    header = u'Basis Set Exchange: {} ({})'.format(name, basis_dict['basis_set_description'])
-
     # make converters case insensitive
     fmt = fmt.lower()
     if fmt in converters.converter_map:
-        return converters.converter_map[fmt]['function'](header, basis_dict)
+        return converters.converter_map[fmt]['function'](basis_dict)
     else:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
@@ -278,13 +275,10 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     if fmt is None:
         return ref_data
 
-    # What should we put at the top?
-    header = u'Basis Set Exchange: {} ({})'.format(name, basis_dict['basis_set_description'])
-
     # Make fmt case insensitive
     fmt = fmt.lower()
     if fmt in refconverters.converter_map:
-        return refconverters.converter_map[fmt]['function'](header, ref_data)
+        return refconverters.converter_map[fmt]['function'](ref_data)
     else:
         raise RuntimeError('Unknown reference format "{}"'.format(fmt))
 

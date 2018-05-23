@@ -30,11 +30,11 @@ def _ref_bib(key,ref):
     return s
 
 
-def write_bib(header, refs):
+def write_bib(refs):
     '''Converts references to bibtex
     '''
 
-    full_str = u'% ' + header + '\n\n'
+    full_str = u''
 
     # First, write out the element, description -> key mapping
     # Also make a dict of unique reference to output

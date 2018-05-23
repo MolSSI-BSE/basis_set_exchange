@@ -8,11 +8,11 @@ from .. import manip
 from .common import determine_leftpad
 
 
-def write_nwchem(header, basis):
+def write_nwchem(basis):
     '''Converts a basis set to NWChem format
     '''
 
-    s = u'# ' + header + '\n'
+    s = ''
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_electron_shells' in v]

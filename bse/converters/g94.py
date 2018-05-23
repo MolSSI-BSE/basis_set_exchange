@@ -8,11 +8,11 @@ from .. import manip
 from .common import determine_leftpad
 
 
-def write_g94(header, basis):
+def write_g94(basis):
     '''Converts a basis set to Gaussian format
     '''
 
-    s = u'! ' + header + '\n'
+    s = ''
 
     unc_basis = manip.uncontract_general(basis)
 
