@@ -31,7 +31,7 @@ _bs_names_only_v0 = [x for x,y in _bs_metadata.items() if '0' in y['versions']]
 with open(os.path.join(_my_dir, 'bse_v0_map.txt'), 'r') as f:
     _bse_v0_map = dict(re.split('\t+', x.strip()) for x in f.readlines())
 
-# Mapping of new->old symbols    
+# Mapping of old->new symbols    
 _sym_replace_map = { 'Uun': 'Ds', 'UUN': 'DS',
                      'Uuu': 'Rg', 'UUU': 'RG',
                      'Uub': 'Cn', 'UUB': 'CN',
@@ -42,6 +42,22 @@ _sym_replace_map = { 'Uun': 'Ds', 'UUN': 'DS',
                      'Uus': 'Ts', 'UUS': 'TS',
                      'Uuo': 'Og', 'UUO': 'OG'
                    }
+
+# Mapping of old->new names
+_name_replace_map = { 'ununnilium':  'darmstadtium', 'UNUNNILIUM':  'DARMSTADTIUM',
+                      'unununium':   'roentgenium',  'UNUNUNIUM':   'ROENTGENIUM',
+                      'ununbium':    'copernicium',  'UNUNBIUM':    'COPERNICIUM',
+                      'ununtrium':   'nihonium',     'UNUNTRIUM':   'NIHONIUM',
+                      'ununquadium': 'flerovium',    'UNUNQUADIUM': 'FLEROVIUM',
+                      'ununpentium': 'moscovium',    'UNUNPENTIUM': 'MOSCOVIUM',
+                      'ununhexium':  'livermorium',  'UNUNHEXIUM':  'LIVERMORIUM',
+                      'ununseptium': 'tennessine',   'UNUNSEPTIUM': 'TENNESSINE',
+                      'ununoctium':  'oganesson',    'UNUNOCTIUM':  'OGANESSON',
+                      'elemtn113' :  'nihonium',     'ELEMTN113' :  'NIHONIUM',
+                      'element115' :  'moscovium',   'ELEMENT115' : 'MOSCOVIUM',
+                      'element117' :  'tennessine',  'ELEMENT117' : 'TENNESSINE'
+                    }
+
 
 def _process_commonline(x):
     x = x.strip()
@@ -55,6 +71,10 @@ def _process_commonline(x):
 
     # Substitute old symbols (BSE had old symbols for some elements)
     for k,v in _sym_replace_map.items():
+        x = x.replace(k, v)
+
+    # Substitute names, too
+    for k,v in _name_replace_map.items():
         x = x.replace(k, v)
 
     # Replace D with E for exponents
@@ -86,6 +106,22 @@ def _process_gaussian(lines):
     return lines
 
 
+def _process_gamess_us(lines):
+    # Process lines from a GAMESS US formatted file
+    lines = [ _process_commonline(x) for x in lines ]
+
+    # Remove comments and empty lines
+    lines = [ x for x in lines if not x.startswith('!') and x != '']
+
+    # The old bse misspells 'PHOSPHORUS' as 'PHOSPHOROUS'
+    lines = [ x.replace('PHOSPHOROUS', 'PHOSPHORUS') for x in lines ]
+
+    # The 'potential' parts are just comments
+    lines = [ re.sub(r'-----.*-----', '', x) for x in lines ]
+
+    return lines
+
+
 def _lines_equivalent(line1, line2):
     # Bail early if they are exactly the same
     if line1 == line2:
@@ -113,7 +149,8 @@ def _lines_equivalent(line1, line2):
 
 # Maps formats to processing functions and bse suffixes
 _format_map = { 'nwchem' : ('NWChem', _process_nwchem),
-                'gaussian94' : ('Gaussian94', _process_gaussian)
+                'gaussian94' : ('Gaussian94', _process_gaussian),
+                'gamess_us' : ('GAMESS-US', _process_gamess_us)
               }
 
 

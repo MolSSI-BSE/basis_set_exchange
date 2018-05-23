@@ -184,7 +184,7 @@ def normalize_element_name(name):
     return name2
 
 
-def amint_to_char(am, hij=False):
+def amint_to_char(am, hij=False, use_L=False):
     '''Convert an angular momentum integer to a character
 
     The input is a list (to handle sp, spd, ... orbitals). The return
@@ -194,8 +194,12 @@ def amint_to_char(am, hij=False):
 
     If hij is True, the ordering spdfghijkl is used. Otherwise, the
     ordering will be spdfghikl (skipping j)
+
+    If use_L is True, sp shells ([0,1]) will return l instead
     '''
 
+    if use_L and am == [0, 1]:
+        return 'l'
     if hij:
         amchar_map = _amchar_map_hij
     else:
