@@ -43,7 +43,7 @@ def test_get_basis_2(basis_name):
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)
-@pytest.mark.parametrize('bool_opts', bool_matrix(4))
+@pytest.mark.parametrize('bool_opts', bool_matrix(5))
 def test_get_basis_3(basis_name, bool_opts):
     '''For a sample of basis sets, test different options 
     '''
@@ -51,7 +51,8 @@ def test_get_basis_3(basis_name, bool_opts):
                   uncontract_general=bool_opts[0],
                   uncontract_segmented=bool_opts[1],
                   uncontract_spdf=bool_opts[2],
-                  optimize_general=bool_opts[3])
+                  make_general=bool_opts[3],
+                  optimize_general=bool_opts[4])
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)

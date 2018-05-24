@@ -130,10 +130,11 @@ def get_basis(name,
               elements=None,
               version=None,
               fmt=None,
-              optimize_general=False,
               uncontract_general=False,
               uncontract_spdf=False,
               uncontract_segmented=False,
+              make_general=False,
+              optimize_general=False,
               data_dir=None,
               header=True):
     '''Obtain a basis set
@@ -158,9 +159,6 @@ def get_basis(name,
         basis set information is returned as a python dictionary. Otherwise,
         if a format is specified, a string is returned.
         Use :func:`bse.api.get_formats` to obtain the available formats.
-    optimize_general : bool
-        Optimize by removing general contractions that contain uncontracted
-        functions (see :func:`bse.manip.optimize_general`)
     uncontract_general : bool
         If True, remove general contractions by duplicating the set
         of primitive exponents with each vector of coefficients.
@@ -172,6 +170,12 @@ def get_basis(name,
     uncontract_segmented : bool
         If True, remove segmented contractions by duplicating each primitive into new shells.
         Each coefficient is set to 1.0
+    make_general : bool
+        If True, make the basis set as generally-contracted as possible. There will be one
+        shell per angular momentum (for each element)
+    optimize_general : bool
+        Optimize by removing general contractions that contain uncontracted
+        functions (see :func:`bse.manip.optimize_general`)
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -214,6 +218,8 @@ def get_basis(name,
         basis_dict = manip.uncontract_spdf(basis_dict)
     if uncontract_segmented:
         basis_dict = manip.uncontract_segmented(basis_dict)
+    if make_general:
+        basis_dict = manip.make_general(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

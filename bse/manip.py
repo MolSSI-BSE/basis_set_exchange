@@ -249,6 +249,72 @@ def uncontract_segmented(basis):
     return new_basis
 
 
+def make_general(basis):
+    """
+    Makes one large general contraction for each angular momentum
+
+    If split_spdf is True, sp... orbitals will be split apary
+    """
+
+    zero = '0.00000000'
+
+    new_basis = uncontract_spdf(basis)
+
+    for k, el in new_basis['basis_set_elements'].items():
+        if not 'element_electron_shells' in el:
+            continue
+
+        # See what we have
+        all_am = []
+        for sh in el['element_electron_shells']:
+            if not sh['shell_angular_momentum'] in all_am:
+                all_am.append(sh['shell_angular_momentum'])
+
+        all_am = sorted(all_am)
+
+        newshells = []
+        for am in all_am:
+            # TODO - Check all shells to make sure region and harmonic type are consistent
+            newsh = {'shell_angular_momentum': am,
+                     'shell_exponents': [], 
+                     'shell_coefficients': [],
+                     'shell_region': 'combined',
+                     'shell_harmonic_type': 'spherical'
+                    }
+
+            # Do exponents first
+            for sh in el['element_electron_shells']:
+                if sh['shell_angular_momentum'] != am:
+                    continue
+                newsh['shell_exponents'].extend(sh['shell_exponents'])
+
+            # Number of primitives in the new shell
+            nprim = len(newsh['shell_exponents'])
+                     
+            cur_prim = 0 
+            for sh in el['element_electron_shells']:
+                if sh['shell_angular_momentum'] != am:
+                    continue
+
+                print("cur_prim", cur_prim)
+                ngen = len(sh['shell_coefficients'])
+
+                for g in range(ngen):
+                    coef = [zero]*cur_prim
+                    coef.extend(sh['shell_coefficients'][g])
+                    coef.extend([zero]*(nprim-len(coef)))
+                    print("HERE: {}".format(coef))
+                    newsh['shell_coefficients'].append(coef)
+
+                cur_prim += len(sh['shell_exponents'])
+         
+            newshells.append(newsh)    
+
+        el['element_electron_shells'] = newshells
+
+    return prune_basis(new_basis)
+
+
 def _is_single_column(col):
     return sum(float(x) != 0.0 for x in col) == 1
 
