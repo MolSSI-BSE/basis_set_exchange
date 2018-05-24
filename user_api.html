@@ -177,7 +177,7 @@ it is in the ‘data’ subdirectory of this project.</p>
 
 <dl class="function">
 <dt id="bse.get_basis">
-<code class="descclassname">bse.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
@@ -304,6 +304,14 @@ and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 <dt id="bse.lookup_basis_by_role">
 <code class="descclassname">bse.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup the name of a basis set given a primary basis set and role</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.transform_basis_name">
+<code class="descclassname">bse.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the name of a basis set to an internal representation</p>
+<p>This makes comparison of basis set names easier by, for example,
+converting the name to all lower case.</p>
 </dd></dl>
 
 </div>

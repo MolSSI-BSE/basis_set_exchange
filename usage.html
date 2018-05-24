@@ -187,7 +187,8 @@ instread.</p>
 <span class="go">&#39;6-31G*&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, but in gaussian format (as a string)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># header=False disables printing an information block</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 <span class="go">****</span>
 <span class="go">H     0</span>
@@ -199,13 +200,13 @@ instread.</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_formats</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bse</span><span class="o">.</span><span class="n">get_formats</span><span class="p">()</span>
-<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian94&#39;}</span>
+<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian94&#39;, &#39;gamess_us&#39;: &#39;GAMESS US&#39;}</span>
 </pre></div>
 </div>
 <p>By default, all elements for which the basis set is defined are included - this
 can be overridden with the <cite>elements</cite> parameter</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get only carbon and oxygen</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 <span class="go">BASIS &quot;ao basis&quot; PRINT</span>
 <span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
@@ -215,7 +216,7 @@ can be overridden with the <cite>elements</cite> parameter</p>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can also use strings with the element symbols (and be mixed with integers)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># and integers as strings</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;16&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;16&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 <span class="go">BASIS &quot;ao basis&quot; PRINT</span>
 <span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
@@ -308,7 +309,7 @@ This information can be accessed by the <code class="xref py py-func docutils li
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Note that the key is the name of the basis set that has been transformed
-into some internal name (see <a class="reference internal" href="developer_api.html#bse.manip.transform_basis_name" title="bse.manip.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.transform_basis_name()</span></code></a>)</p>
+into some internal name (see <a class="reference internal" href="user_api.html#bse.transform_basis_name" title="bse.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.transform_basis_name()</span></code></a>)</p>
 </div>
 <p>A simple list containing all the basis set names can be obtained via <a class="reference internal" href="user_api.html#bse.get_all_basis_names" title="bse.get_all_basis_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.get_all_basis_names()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the metadata</span>

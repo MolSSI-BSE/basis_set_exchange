@@ -195,7 +195,7 @@ it is in the ‘data’ subdirectory of this project.</p>
 
 <dl class="function">
 <dt id="bse.api.get_basis">
-<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
@@ -324,6 +324,14 @@ and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 <dd><p>Lookup the name of a basis set given a primary basis set and role</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="bse.api.transform_basis_name">
+<code class="descclassname">bse.api.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the name of a basis set to an internal representation</p>
+<p>This makes comparison of basis set names easier by, for example,
+converting the name to all lower case.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-bse.compose">
 <span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-bse.compose" title="Permalink to this headline">¶</a></h2>
@@ -382,14 +390,6 @@ removes duplicate shells</p>
 <p>This only finds EXACT duplicates, and is meant to be used
 after uncontracting</p>
 <p>The input basis set is not modified.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="bse.manip.transform_basis_name">
-<code class="descclassname">bse.manip.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.transform_basis_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transforms the name of a basis set to an internal representation</p>
-<p>This makes comparison of basis set names easier by, for example,
-converting the name to all lower case.</p>
 </dd></dl>
 
 <dl class="function">
@@ -579,13 +579,14 @@ ordering will be spdfghikl (skipping j)</p>
 
 <dl class="function">
 <dt id="bse.lut.amint_to_char">
-<code class="descclassname">bse.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em>, <em>use_L=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
 <p>The input is a list (to handle sp, spd, … orbitals). The return
 value is a string</p>
 <p>For example, converts [0] to ‘s’ and [0,1,2] to ‘spd’</p>
 <p>If hij is True, the ordering spdfghijkl is used. Otherwise, the
 ordering will be spdfghikl (skipping j)</p>
+<p>If use_L is True, sp shells ([0,1]) will return l instead</p>
 </dd></dl>
 
 <dl class="function">

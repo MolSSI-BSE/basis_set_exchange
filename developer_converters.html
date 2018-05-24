@@ -165,37 +165,15 @@
 <span id="converters-conversion-basis-set-output"></span><h2>converters - Conversion basis set output<a class="headerlink" href="#module-bse.converters" title="Permalink to this headline">¶</a></h2>
 <p>Conversion of basis sets to various formats</p>
 <dl class="function">
-<dt id="bse.converters.determine_leftpad">
-<code class="descclassname">bse.converters.</code><code class="descname">determine_leftpad</code><span class="sig-paren">(</span><em>column</em>, <em>desired_place</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.converters.determine_leftpad" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Find how many spaces to put before a column of numbers</dt>
-<dd>so that all the decimal points line up</dd>
-</dl>
-<p>This function takes a column of decimal numbers, and returns a
-vector containing the number of spaces to place before each number
-so that (when possible) the decimal points line up.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>column</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">Numbers that will be printed as a column</p>
-</dd>
-<dt><strong>desired_place</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Number of the character column to put the decimal place</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="bse.converters.write_g94">
 <code class="descclassname">bse.converters.</code><code class="descname">write_g94</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.converters.write_g94" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a basis set to Gaussian format</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.converters.write_gamess_us">
+<code class="descclassname">bse.converters.</code><code class="descname">write_gamess_us</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.converters.write_gamess_us" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a basis set to GAMESS-US</p>
 </dd></dl>
 
 <dl class="function">
