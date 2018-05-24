@@ -39,7 +39,8 @@ instread.
    '6-31G*'
 
    >>> # Same as above, but in gaussian format (as a string)
-   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
+   >>> # header=False disables printing an information block
+   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94', header=False)
    >>> print(bs_str)
    ****
    H     0
@@ -51,7 +52,7 @@ instread.
 
    >>> # Available formats are available via get_formats
    >>> bse.get_formats()
-   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94'}
+   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'gamess_us': 'GAMESS US'}
 
 
 By default, all elements for which the basis set is defined are included - this
@@ -60,7 +61,7 @@ can be overridden with the `elements` parameter
 .. doctest::
 
    >>> # Get only carbon and oxygen
-   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem')
+   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem', header=False)
    >>> print(bs_str)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
@@ -70,7 +71,7 @@ can be overridden with the `elements` parameter
 
    >>> # Can also use strings with the element symbols (and be mixed with integers)
    >>> # and integers as strings
-   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem')
+   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem', header=False)
    >>> print(bs_str)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
