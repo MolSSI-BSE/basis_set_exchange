@@ -4,7 +4,7 @@ Helpers for printing pieces of basis sets
 
 from .. import lut
 from .. import manip
-from ..converters.common import determine_leftpad
+from ..converters.common import write_matrix
 
 
 def print_electron_shell(shell, shellidx=None):
@@ -19,24 +19,14 @@ def print_electron_shell(shell, shellidx=None):
     if shellidx is not None:
         shellidx = ''
 
-    print("Shell {} '{}': AM {} ({})".format(shellidx, shell['shell_region'], am, amchar))
-
     exponents = shell['shell_exponents']
     coefficients = shell['shell_coefficients']
-    nprim = len(exponents)
-    ngen = len(coefficients)
+    ncol = len(coefficients)+1
 
-    # padding for exponents
-    exponent_pad = determine_leftpad(exponents, 8)
-
-    for p in range(nprim):
-        line = ' ' * exponent_pad[p] + exponents[p]
-        for c in range(ngen):
-            desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
-            coeff_pad = determine_leftpad(coefficients[c], desired_point)
-            line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-        print(line)
-
+    point_places = [8*i + 15*(i-1) for i in range(1, ncol+1)]
+    print("Shell {} '{}': AM {} ({})".format(shellidx, shell['shell_region'], am, amchar))
+    print(write_matrix([exponents, *coefficients], point_places))
+    
 
 def print_ecp_pot(pot):
     '''Print the data for an ECP potential
@@ -48,23 +38,10 @@ def print_ecp_pot(pot):
     rexponents = pot['potential_r_exponents']
     gexponents = pot['potential_gaussian_exponents']
     coefficients = pot['potential_coefficients']
-    nprim = len(rexponents)
-    ngen = len(coefficients)
 
-    # Title line
+    point_places = [0, 10, 33]
     print('Potential: {} potential'.format(amchar))
-
-    # padding for exponents
-    gexponent_pad = determine_leftpad(gexponents, 9)
-
-    # General contractions?
-    for p in range(nprim):
-        line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
-        for c in range(ngen):
-            desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
-            coeff_pad = determine_leftpad(coefficients[c], desired_point)
-            line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-        print(line)
+    print(write_matrix([rexponents, gexponents, *coefficients], point_places))
 
 
 def print_element(z, eldata, print_references=True):

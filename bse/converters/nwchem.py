@@ -5,7 +5,7 @@ Conversion of basis sets to NWChem format
 import os
 from .. import lut
 from .. import manip
-from .common import determine_leftpad
+from .common import write_matrix
 
 
 def write_nwchem(basis):
@@ -27,81 +27,54 @@ def write_nwchem(basis):
         # Electron Basis
         for z in electron_elements:
             data = basis['basis_set_elements'][z]
-
             sym = lut.element_sym_from_Z(z, True)
-
             s += '#BASIS SET: {}\n'.format(manip.contraction_string(data))
 
             for shell in data['element_electron_shells']:
-                am = shell['shell_angular_momentum']
-                amchar = lut.amint_to_char(am)
-                amchar = amchar.upper()
-
-                s += '{}    {}\n'.format(sym, amchar)
-
                 exponents = shell['shell_exponents']
                 coefficients = shell['shell_coefficients']
-                nprim = len(exponents)
-                ngen = len(coefficients)
+                ncol = len(coefficients)+1
 
-                # padding for exponents
-                exponent_pad = determine_leftpad(exponents, 8)
+                am = shell['shell_angular_momentum']
+                amchar = lut.amint_to_char(am).upper()
+                s += '{}    {}\n'.format(sym, amchar)
 
-                for p in range(nprim):
-                    line = ' ' * exponent_pad[p] + exponents[p]
-                    for c in range(ngen):
-                        desired_point = 8 + (c + 1) * 23  # determined from PNNL BSE
-                        coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                        line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-                    s += line + '\n'
+                point_places = [8*i + 15*(i-1) for i in range(1, ncol+1)]
+                s += write_matrix([exponents, *coefficients], point_places)
+
         s += 'END\n'
 
     # Write out ECP
-    if len(ecp_elements):
+    if len(ecp_elements) > 0:
         s += '\n\nECP\n'
 
         for z in ecp_elements:
             data = basis['basis_set_elements'][z]
-
-            sym = lut.element_sym_from_Z(z)
-            sym = lut.normalize_element_symbol(sym)
-
+            sym = lut.element_sym_from_Z(z, True)
             max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
             max_ecp_amchar = lut.amint_to_char([max_ecp_am])
-
-            s += '{} nelec {}\n'.format(sym, data['element_ecp_electrons'])
 
             # Sort lowest->highest, then put the highest at the beginning
             ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            for pot in ecp_list:
-                am = pot['potential_angular_momentum']
-                amchar = lut.amint_to_char(am)
+            s += '{} nelec {}\n'.format(sym, data['element_ecp_electrons'])
 
+            for pot in ecp_list:
                 rexponents = pot['potential_r_exponents']
                 gexponents = pot['potential_gaussian_exponents']
                 coefficients = pot['potential_coefficients']
-                nprim = len(rexponents)
-                ngen = len(coefficients)
 
-                # Title line
+                am = pot['potential_angular_momentum']
+                amchar = lut.amint_to_char(am).upper()
+
                 if am[0] == max_ecp_am:
                     s += '{} ul\n'.format(sym)
                 else:
-                    s += '{} {}\n'.format(sym, amchar.upper())
+                    s += '{} {}\n'.format(sym, amchar)
 
-                # padding for exponents
-                gexponent_pad = determine_leftpad(gexponents, 9)
-
-                # General contractions?
-                for p in range(nprim):
-                    line = str(rexponents[p]) + ' ' * (gexponent_pad[p] - 1) + gexponents[p]
-                    for c in range(ngen):
-                        desired_point = 9 + (c + 1) * 23  # determined from PNNL BSE
-                        coeff_pad = determine_leftpad(coefficients[c], desired_point)
-                        line += ' ' * (coeff_pad[p] - len(line)) + coefficients[c][p]
-                    s += line + '\n'
+                point_places = [0, 10, 33]
+                s += write_matrix([rexponents, gexponents, *coefficients], point_places)
 
         s += 'END\n'
 
