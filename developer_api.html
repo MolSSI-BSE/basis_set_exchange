@@ -195,7 +195,7 @@ it is in the ‘data’ subdirectory of this project.</p>
 
 <dl class="function">
 <dt id="bse.api.get_basis">
-<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>optimize_general=False</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
@@ -223,10 +223,6 @@ basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
 Use <a class="reference internal" href="#bse.api.get_formats" title="bse.api.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code></a> to obtain the available formats.</p>
 </dd>
-<dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">Optimize by removing general contractions that contain uncontracted
-functions (see <a class="reference internal" href="#bse.manip.optimize_general" title="bse.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code></a>)</p>
-</dd>
 <dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">If True, remove general contractions by duplicating the set
 of primitive exponents with each vector of coefficients.
@@ -240,6 +236,14 @@ Primitives with zero coefficient are removed, as are duplicate shells.</p>
 <dt><strong>uncontract_segmented</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">If True, remove segmented contractions by duplicating each primitive into new shells.
 Each coefficient is set to 1.0</p>
+</dd>
+<dt><strong>make_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True, make the basis set as generally-contracted as possible. There will be one
+shell per angular momentum (for each element)</p>
+</dd>
+<dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Optimize by removing general contractions that contain uncontracted
+functions (see <a class="reference internal" href="#bse.manip.optimize_general" title="bse.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code></a>)</p>
 </dd>
 <dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Data directory with all the basis set information. By default,
@@ -356,6 +360,13 @@ data, as well as some other small functions.</p>
 <code class="descclassname">bse.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forms a string specifying the contractions for an element</p>
 <p>ie, (16s,10p) -&gt; [4s,3p]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bse.manip.make_general">
+<code class="descclassname">bse.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.make_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes one large general contraction for each angular momentum</p>
+<p>If split_spdf is True, sp… orbitals will be split apary</p>
 </dd></dl>
 
 <dl class="function">
