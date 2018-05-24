@@ -395,14 +395,3 @@ def optimize_general(basis):
                 sh['shell_coefficients'][0][0] = '1.0000000'
 
     return new_basis
-
-
-def transform_basis_name(name):
-    """
-    Transforms the name of a basis set to an internal representation
-
-    This makes comparison of basis set names easier by, for example,
-    converting the name to all lower case.
-    """
-
-    return name.lower()

@@ -3,12 +3,14 @@ Class/decorator for memoizing BSE functionality
 '''
 
 from . import api
+import functools
 import pickle
 
 class BSEMemoize:
     def __init__(self, f):
         self.__f = f
         self.__memo = {}
+        functools.update_wrapper(self, f)
 
     def __call__(self, *args):
         if api.memoize_enabled is not True:

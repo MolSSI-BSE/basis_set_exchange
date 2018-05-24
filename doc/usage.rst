@@ -179,7 +179,7 @@ The BSE contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the :func:`bse.get_metadata` function
 
 .. note:: Note that the key is the name of the basis set that has been transformed
-          into some internal name (see :func:`bse.manip.transform_basis_name`)
+          into some internal name (see :func:`bse.transform_basis_name`)
 
 A simple list containing all the basis set names can be obtained via :func:`bse.get_all_basis_names`
 

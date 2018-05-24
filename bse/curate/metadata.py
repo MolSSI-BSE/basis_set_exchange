@@ -7,7 +7,7 @@ import codecs
 from collections import OrderedDict
 from .. import fileio
 from .. import compose
-from .. import manip
+from .. import api
 
 
 def create_metadata_file(output_path, data_dir):
@@ -30,7 +30,7 @@ def create_metadata_file(output_path, data_dir):
         bs = compose.compose_table_basis(bs_file_path)
 
         # Prepare the metadata
-        tr_name = manip.transform_basis_name(bs['basis_set_name'])
+        tr_name = api.transform_basis_name(bs['basis_set_name'])
         display_name = bs['basis_set_name']
         defined_elements = sorted(list(bs['basis_set_elements'].keys()), key=lambda x: int(x))
         description = bs['basis_set_description']

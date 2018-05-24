@@ -4,6 +4,8 @@ Main interface to Basis Set Exchange functionality
 
 import os
 import json
+import textwrap
+import datetime
 from . import fileio
 from . import lut
 from . import manip
@@ -20,11 +22,14 @@ _my_dir = os.path.dirname(os.path.abspath(__file__))
 _default_data_dir = os.path.join(_my_dir, 'data')
 _default_schema_dir = os.path.join(_my_dir, 'schema')
 
+# Main URL of the project
+_main_url = 'http://bse.pnl.gov'
 
 # If set to True, memoization of some internal functions
 # will be used. Generally safe to leave enabled - it
 # won't use that much memory
 memoize_enabled = True
+
 
 def _convert_element_list(elements):
     '''Convert a list of elements to an internal list
@@ -65,7 +70,7 @@ def _get_basis_metadata(name, data_dir):
     '''
 
     # Transform the name into an internal representation
-    tr_name = manip.transform_basis_name(name)
+    tr_name = transform_basis_name(name)
 
     # Get the metadata for all basis sets
     metadata = get_metadata(data_dir)
@@ -76,6 +81,51 @@ def _get_basis_metadata(name, data_dir):
     return metadata[tr_name]
 
 
+def transform_basis_name(name):
+    """
+    Transforms the name of a basis set to an internal representation
+
+    This makes comparison of basis set names easier by, for example,
+    converting the name to all lower case.
+    """
+
+    return name.lower()
+
+
+def _header_string():
+    '''Creates a string that is placed ahead of many outputs
+    '''
+
+    dt = datetime.datetime.utcnow()
+    timestamp = dt.strftime('%Y-%m-%d %H:%M:%S UTC')
+
+    header = '|' + '-' * 70 + '\n'
+    header += '| Basis Set Exchange\n'
+    header += '| ' + _main_url + '\n'
+    header += '| Accessed ' + timestamp + '\n'
+    header += '|' + '-' * 70 + '\n'
+
+    return header
+
+
+def _header_string_basis(basis_dict):
+    '''Creates a header with information about a basis set
+
+    Information includes description, revision, etc, but not references
+    '''
+
+    tw = textwrap.TextWrapper(initial_indent='', subsequent_indent='|' + ' ' * 20)
+    header = _header_string()
+    header += '|   Basis set: ' + basis_dict['basis_set_name'] + '\n'
+    header += tw.fill('| Description: ' + basis_dict['basis_set_description']) + '\n'
+    header += '|        Role: ' + basis_dict['basis_set_role'] + '\n'
+    header += tw.fill('|     Version: {}  ({})'.format(basis_dict['basis_set_version'],
+                                                       basis_dict['basis_set_revision_description'])) + '\n'
+    header += '|' + '-' * 70 + '\n'
+
+    return header
+
+
 def get_basis(name,
               elements=None,
               version=None,
@@ -84,7 +134,8 @@ def get_basis(name,
               uncontract_general=False,
               uncontract_spdf=False,
               uncontract_segmented=False,
-              data_dir=None):
+              data_dir=None,
+              header=True):
     '''Obtain a basis set
 
     This is the main function for getting basis set information.
@@ -171,9 +222,14 @@ def get_basis(name,
     # make converters case insensitive
     fmt = fmt.lower()
     if fmt in converters.converter_map:
-        return converters.converter_map[fmt]['function'](basis_dict)
+        ret_str = converters.converter_map[fmt]['function'](basis_dict)
     else:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
+
+    if header:
+        ret_str = _header_string_basis(basis_dict) + '\n\n' + ret_str
+
+    return ret_str
 
 
 def lookup_basis_by_role(primary_basis, role, data_dir=None):
@@ -304,7 +360,6 @@ def get_family_notes(family, data_dir=None):
     data_dir = _default_data_dir if data_dir is None else data_dir
     file_name = 'NOTES.' + family.lower()
     file_path = os.path.join(data_dir, file_name)
-
 
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:
