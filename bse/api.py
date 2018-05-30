@@ -232,7 +232,7 @@ def get_basis(name,
     else:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
-    if header:
+    if header and fmt != 'json':
         ret_str = _header_string_basis(basis_dict) + '\n\n' + ret_str
 
     return ret_str
