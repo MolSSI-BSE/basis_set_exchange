@@ -92,36 +92,36 @@ def transform_basis_name(name):
     return name.lower()
 
 
-def _header_string():
+def _header_string(comment_str):
     '''Creates a string that is placed ahead of many outputs
     '''
 
     dt = datetime.datetime.utcnow()
     timestamp = dt.strftime('%Y-%m-%d %H:%M:%S UTC')
 
-    header = '|' + '-' * 70 + '\n'
-    header += '| Basis Set Exchange\n'
-    header += '| ' + _main_url + '\n'
-    header += '| Accessed ' + timestamp + '\n'
-    header += '|' + '-' * 70 + '\n'
+    header = comment_str + '-' * 70 + '\n'
+    header += comment_str + ' Basis Set Exchange\n'
+    header += comment_str + ' ' + _main_url + '\n'
+    header += comment_str + ' Accessed ' + timestamp + '\n'
+    header += comment_str + '-' * 70 + '\n'
 
     return header
 
 
-def _header_string_basis(basis_dict):
+def _header_string_basis(basis_dict, comment_str):
     '''Creates a header with information about a basis set
 
     Information includes description, revision, etc, but not references
     '''
 
-    tw = textwrap.TextWrapper(initial_indent='', subsequent_indent='|' + ' ' * 20)
-    header = _header_string()
-    header += '|   Basis set: ' + basis_dict['basis_set_name'] + '\n'
-    header += tw.fill('| Description: ' + basis_dict['basis_set_description']) + '\n'
-    header += '|        Role: ' + basis_dict['basis_set_role'] + '\n'
-    header += tw.fill('|     Version: {}  ({})'.format(basis_dict['basis_set_version'],
+    tw = textwrap.TextWrapper(initial_indent='', subsequent_indent=comment_str + ' ' * 20)
+    header = _header_string(comment_str)
+    header += comment_str + '   Basis set: ' + basis_dict['basis_set_name'] + '\n'
+    header += tw.fill(comment_str + ' Description: ' + basis_dict['basis_set_description']) + '\n'
+    header += comment_str + '        Role: ' + basis_dict['basis_set_role'] + '\n'
+    header += tw.fill(comment_str + '     Version: {}  ({})'.format(basis_dict['basis_set_version'],
                                                        basis_dict['basis_set_revision_description'])) + '\n'
-    header += '|' + '-' * 70 + '\n'
+    header += comment_str + '-' * 70 + '\n'
 
     return header
 
@@ -233,7 +233,8 @@ def get_basis(name,
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
     if header and fmt != 'json':
-        ret_str = _header_string_basis(basis_dict) + '\n\n' + ret_str
+        comment_str = converters.converter_map[fmt]['comment']
+        ret_str = _header_string_basis(basis_dict, comment_str) + '\n\n' + ret_str
 
     return ret_str
 
