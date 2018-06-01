@@ -11,7 +11,7 @@ and the Environmental Molecular Sciences Laboratory (https://www.emsl.pnl.gov)
 
 ## Documentation
 
-Full user and developer documentation can be found at https://basissetexchange.github.io/basis_set_exchange
+Full user and developer documentation can be found at https://molssi-bse.github.io/basis_set_exchange
 
 ## Installation
 To do a local install of the Python directory,
