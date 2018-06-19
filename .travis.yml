@@ -39,7 +39,7 @@ before_script:
   - pip install -e .
 
 script:
-  - py.test -v --cov=bse/
+  - py.test -v --cov=basis_set_exchange/
 
 notifications:
   email: false

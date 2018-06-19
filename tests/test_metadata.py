@@ -2,7 +2,7 @@
 Tests for BSE metadata
 """
 
-from bse import api,curate
+from basis_set_exchange import api,curate
 import os
 import json
 

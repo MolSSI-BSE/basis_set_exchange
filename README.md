@@ -24,7 +24,7 @@ Tests can be run using `py.test -v` once installed.
 
 ## Examples
 ```
-import bse
+import basis_set_exchange as bse
 
 # Obtain the STO-3G basis set in nwchem format (as a string) for hydrogen and carbon
 bse.get_basis('STO-3G', elements=[1,6], fmt='nwchem')

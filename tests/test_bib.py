@@ -2,7 +2,7 @@
 Validation of bibtex output
 """
 
-from bse import api
+from basis_set_exchange import api
 import pytest
 import check_bibtex
 

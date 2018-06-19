@@ -5,7 +5,7 @@ Tests for the BSE IO functions
 # Most functionality is covered under other tests.
 # This tests the remainder
 
-from bse import fileio,api
+from basis_set_exchange import fileio,api
 import os
 import pytest
 

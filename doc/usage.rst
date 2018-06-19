@@ -3,7 +3,7 @@ Quickstart and Basic Usage
 
 .. testsetup:: *
 
-   import bse
+   import basis_set_exchange
 
 
 Installation
@@ -16,12 +16,13 @@ For example, to install in to the current directory, `pip install -e .`
 Importing
 -------------------
 
-All end-user functionality is available by importing the `bse` module.
+All end-user functionality is available by importing the `basis_set_exchange` module
+
 
 Getting a basis set
 -------------------
 
-The main function for getting a basis set is :func:`bse.get_basis`.
+The main function for getting a basis set is :func:`basis_set_exchange.get_basis`.
 Output format is controlled by the `fmt` parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
 instread.
@@ -29,18 +30,18 @@ instread.
 .. doctest::
 
    >>> # Get a basis set as a python dictionary
-   >>> bs_dict = bse.get_basis('6-31G*')
+   >>> bs_dict = basis_set_exchange.get_basis('6-31G*')
    >>> bs_dict['basis_set_name']  
    '6-31G*'
 
    >>> # Basis set names are case insensitive
-   >>> bs_dict = bse.get_basis('6-31g*')
+   >>> bs_dict = basis_set_exchange.get_basis('6-31g*')
    >>> bs_dict['basis_set_name']  
    '6-31G*'
 
    >>> # Same as above, but in gaussian format (as a string)
    >>> # header=False disables printing an information block
-   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94', header=False)
+   >>> bs_str = basis_set_exchange.get_basis('6-31G*', fmt='gaussian94', header=False)
    >>> print(bs_str)
    ****
    H     0
@@ -51,7 +52,7 @@ instread.
 
 
    >>> # Available formats are available via get_formats
-   >>> bse.get_formats()
+   >>> basis_set_exchange.get_formats()
    {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'gamess_us': 'GAMESS US'}
 
 
@@ -61,7 +62,7 @@ can be overridden with the `elements` parameter
 .. doctest::
 
    >>> # Get only carbon and oxygen
-   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem', header=False)
+   >>> bs_str = basis_set_exchange.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem', header=False)
    >>> print(bs_str)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
@@ -71,7 +72,7 @@ can be overridden with the `elements` parameter
 
    >>> # Can also use strings with the element symbols (and be mixed with integers)
    >>> # and integers as strings
-   >>> bs_str = bse.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem', header=False)
+   >>> bs_str = basis_set_exchange.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem', header=False)
    >>> print(bs_str)
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
@@ -83,20 +84,20 @@ can be overridden with the `elements` parameter
 Getting references
 ------------------
 
-Reference/citations can be obtained via :func:`bse.get_references`. The `elements`
-parameter is similar to that in :func:`bse.get_basis`.
+Reference/citations can be obtained via :func:`basis_set_exchange.get_references`. The `elements`
+parameter is similar to that in :func:`basis_set_exchange.get_basis`.
 
 The `fmt` parameter controls the output format. By default, the output
 is a dictionary. If `fmt` is specified, the output is a string.
 
 .. doctest::
    >>> # Get references for 6-31G*, all elements, as a list of dictionaries
-   >>> refs = bse.get_references('6-31G*')
+   >>> refs = basis_set_exchange.get_references('6-31G*')
    >>> print(refs[0])
    {'reference_info': [{'reference_description': ...
  
    >>> # As bibtex, restricting to H and F
-   >>> bib = bse.get_references('6-31G*', fmt='bib', elements=[1,9])
+   >>> bib = basis_set_exchange.get_references('6-31G*', fmt='bib', elements=[1,9])
    >>> print(bib)
    % H
    %     31G valence double-zeta
@@ -124,7 +125,7 @@ is a dictionary. If `fmt` is specified, the output is a string.
 
 
    >>> # Available formats are available via get_reference_formats
-   >>> bse.get_reference_formats()
+   >>> basis_set_exchange.get_reference_formats()
    {'json': 'JSON', 'bib': 'BibTeX', 'txt': 'Plain Text'}
 
 
@@ -139,19 +140,19 @@ v0 will match the original BSE data.
 Versions are meant to be increased only when there is a material change to the data.
 If data is simply being added (new elements), the version will not be incremented.
 
-Both `bse.get_basis` and :func:`bse.get_references` accept a `version` parameter,
+Both `basis_set_exchange.get_basis` and :func:`basis_set_exchange.get_references` accept a `version` parameter,
 which is a string. If `version` is not specified, the latest version is used.
 
 .. doctest::
 
    >>> # Get latest version
-   >>> bs_str = bse.get_basis('6-31G*', fmt='gaussian94')
+   >>> bs_str = basis_set_exchange.get_basis('6-31G*', fmt='gaussian94')
 
    >>> # Get the original BSE data
-   >>> bs_str = bse.get_basis('6-31G*', version='0', fmt='gaussian94')
+   >>> bs_str = basis_set_exchange.get_basis('6-31G*', version='0', fmt='gaussian94')
 
    >>> # Versions can also be passed as integers
-   >>> bs_str = bse.get_basis('6-31G*', version=0, fmt='gaussian94')
+   >>> bs_str = basis_set_exchange.get_basis('6-31G*', version=0, fmt='gaussian94')
 
 
 Lookup by Role
@@ -159,7 +160,7 @@ Lookup by Role
 
 Many basis sets have auxiliary basis sets for different purposes (density fitting,
 for example). These auxiliary basis sets can be queried in the BSE
-using the :func:`bse.lookup_basis_by_role`. This function takes the
+using the :func:`basis_set_exchange.lookup_basis_by_role`. This function takes the
 primary basis set and the role you wish to look up. The function
 returns the name of the basis set.
 
@@ -169,7 +170,7 @@ case sensitive.
 .. doctest::
 
    >>> # Find the MP2-fit basis set for cc-pvtz
-   >>> bse.lookup_basis_by_role('cc-pvtz', 'mp2fit')
+   >>> basis_set_exchange.lookup_basis_by_role('cc-pvtz', 'mp2fit')
    'cc-pvtz-mp2fit'
  
 
@@ -177,17 +178,17 @@ Metadata
 -------------------
 
 The BSE contains metadata for all the basis sets that is in its data directory.
-This information can be accessed by the :func:`bse.get_metadata` function
+This information can be accessed by the :func:`basis_set_exchange.get_metadata` function
 
 .. note:: Note that the key is the name of the basis set that has been transformed
-          into some internal name (see :func:`bse.transform_basis_name`)
+          into some internal name (see :func:`basis_set_exchange.transform_basis_name`)
 
-A simple list containing all the basis set names can be obtained via :func:`bse.get_all_basis_names`
+A simple list containing all the basis set names can be obtained via :func:`basis_set_exchange.get_all_basis_names`
 
 .. doctest::
 
    >>> # Get the metadata
-   >>> md = bse.get_metadata()
+   >>> md = basis_set_exchange.get_metadata()
  
    >>> # What is the latest version of 6-31G
    >>> md['6-31g']['latest_version']
@@ -202,7 +203,7 @@ A simple list containing all the basis set names can be obtained via :func:`bse.
    ['1', '2', '3', '4', '5', '6',...
  
    >>> # Print all the basis sets known to the BSE
-   >>> all_bs = bse.get_all_basis_names()
+   >>> all_bs = basis_set_exchange.get_all_basis_names()
    >>> print(all_bs)
    ['3-21g', '4-31g', '5-21g', ...
 
@@ -215,16 +216,16 @@ Notes about a basis set or a basis set family can be obtained, also.
 .. doctest::
 
    >>> # Notes from a basis (name is case insensitive)
-   >>> bse.get_basis_notes('6-31g')
+   >>> basis_set_exchange.get_basis_notes('6-31g')
    'Notes are not available for the 6-31g basis'
 
    >>> # Get the family of a basis set from the metadata
-   >>> fam = bse.get_basis_family('6-31G**')
+   >>> fam = basis_set_exchange.get_basis_family('6-31G**')
    >>> fam
    'pople'
 
    >>> # Get family notes (not case sensitive)
-   >>> bse.get_family_notes('pople')
+   >>> basis_set_exchange.get_family_notes('pople')
    'Notes about Pople basis sets...
 
 
@@ -232,19 +233,19 @@ Memoization
 --------------------------------
 
 By default, the library will memoize/cache some internal data. This has a big effect when,
-for example, running :func:`bse.get_basis` with the same basis set name (even if choosing
+for example, running :func:`basis_set_exchange.get_basis` with the same basis set name (even if choosing
 different elements and options).
 
 For most uses, this can be left enabled - memory usage will still be very low, even if reading
-many basis sets. If you wish, it can be disabled by setting :attr:`bse.memoize_enabled` to `False`.
+many basis sets. If you wish, it can be disabled by setting :attr:`basis_set_exchange.memoize_enabled` to `False`.
 Note that this does not clear any existing cache.
 
 
    >>> # Default is enabled
-   >>> bse.memoize_enabled
+   >>> basis_set_exchange.memoize_enabled
    True
 
    >>> # Manually disable it
-   >>> bse.memoize_enabled = False
-   >>> bse.memoize_enabled
+   >>> basis_set_exchange.memoize_enabled = False
+   >>> basis_set_exchange.memoize_enabled
    False

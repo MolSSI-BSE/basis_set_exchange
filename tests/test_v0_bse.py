@@ -2,7 +2,7 @@
 Compares version 0 with historical BSE
 """
 
-from bse import api
+from basis_set_exchange import api
 import os
 import re
 import bz2

@@ -2,7 +2,7 @@
 Test for validating the formatting of the json files
 """
 
-from bse import api,validator
+from basis_set_exchange import api,validator
 import pytest
 import glob
 import os

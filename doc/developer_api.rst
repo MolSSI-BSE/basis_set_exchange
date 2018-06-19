@@ -4,54 +4,54 @@ Developer API
 api - The main API Module
 -------------------------
 
-.. automodule:: bse.api
+.. automodule:: basis_set_exchange.api
    :members:
 
 
 compose - Composition of basis set information
 ----------------------------------------------
 
-.. automodule:: bse.compose
+.. automodule:: basis_set_exchange.compose
    :members:
 
 
 manip - Manipulation of basis sets
 ----------------------------------
 
-.. automodule:: bse.manip
+.. automodule:: basis_set_exchange.manip
    :members:
 
 
 fileio - Input/Output of files (including json)
 -----------------------------------------------
 
-.. automodule:: bse.fileio
+.. automodule:: basis_set_exchange.fileio
    :members:
 
 
 lut - Lookup tables element information
 ----------------------------------------
 
-.. automodule:: bse.lut
+.. automodule:: basis_set_exchange.lut
    :members:
 
 
 references - Handling of reference data
 ---------------------------------------
 
-.. automodule:: bse.references
+.. automodule:: basis_set_exchange.references
    :members:
 
 
 notes - Handling of notes
 ---------------------------------------
 
-.. automodule:: bse.notes
+.. automodule:: basis_set_exchange.notes
    :members:
 
 
 validator - Validation of basis sets
 ------------------------------------
 
-.. automodule:: bse.validator
+.. automodule:: basis_set_exchange.validator
    :members:

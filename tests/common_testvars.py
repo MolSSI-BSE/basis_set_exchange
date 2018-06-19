@@ -2,7 +2,7 @@
 Some data common to all tests
 '''
 
-import bse
+import basis_set_exchange as bse
 
 # Use random for getting sets of elements
 rand_seed = 39466 # from random.org

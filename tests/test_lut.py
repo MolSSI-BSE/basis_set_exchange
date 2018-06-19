@@ -3,7 +3,7 @@ Tests for lookups of elemental data
 """
 
 import pytest
-from bse import lut
+from basis_set_exchange import lut
 
 _all_elements = list(range(1,119))
 _all_am = list(range(1, 13))

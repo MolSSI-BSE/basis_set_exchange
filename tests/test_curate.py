@@ -2,7 +2,7 @@
 Tests BSE curation functions
 """
 
-from bse import api,curate,fileio
+from basis_set_exchange import api,curate,fileio
 import pytest
 import os
 

@@ -2,7 +2,7 @@
 Tests for reference handling
 """
 
-from bse import api,refconverters
+from basis_set_exchange import api,refconverters
 import os
 import json
 import pytest
