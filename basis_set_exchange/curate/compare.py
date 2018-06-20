@@ -81,7 +81,7 @@ def _compare_matrix(mat1, mat2):
         return False
 
     for i in range(length):
-        if _compare_vector(mat1[i], mat2[i]) == False:
+        if _compare_vector(mat1[i], mat2[i]) is False:
             return False
 
     return True

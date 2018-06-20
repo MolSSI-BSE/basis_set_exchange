@@ -15,9 +15,8 @@ def compact_elements(elements):
     if len(elements) == 0:
         return
 
-
     # We have to convert to integers for this function
-    elements = [ int(el) for el in elements ]
+    elements = [int(el) for el in elements]
 
     # Just to be safe, sort the list
     el = sorted(set(elements))

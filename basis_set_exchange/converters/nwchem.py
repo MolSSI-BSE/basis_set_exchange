@@ -33,13 +33,13 @@ def write_nwchem(basis):
             for shell in data['element_electron_shells']:
                 exponents = shell['shell_exponents']
                 coefficients = shell['shell_coefficients']
-                ncol = len(coefficients)+1
+                ncol = len(coefficients) + 1
 
                 am = shell['shell_angular_momentum']
                 amchar = lut.amint_to_char(am).upper()
                 s += '{}    {}\n'.format(sym, amchar)
 
-                point_places = [8*i + 15*(i-1) for i in range(1, ncol+1)]
+                point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += write_matrix([exponents, *coefficients], point_places)
 
         s += 'END\n'

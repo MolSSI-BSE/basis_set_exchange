@@ -57,7 +57,7 @@ def reference_text(ref):
         Information about a single reference
     '''
 
-    ref_wrap = textwrap.TextWrapper(initial_indent='', subsequent_indent=' '*8)
+    ref_wrap = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 8)
 
     s = u''
     if ref['type'] == 'article':

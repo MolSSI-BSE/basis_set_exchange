@@ -31,9 +31,9 @@ def process_notes(notes, ref_data):
         return notes
 
     for r in sorted(found_refs):
-        rtxt= references.reference_text(ref_data[r])
+        rtxt = references.reference_text(ref_data[r])
         reference_sec += r + '\n'
-        reference_sec += textwrap.indent(rtxt, ' '*4)
+        reference_sec += textwrap.indent(rtxt, ' ' * 4)
         reference_sec += '\n\n'
 
     return notes + reference_sec

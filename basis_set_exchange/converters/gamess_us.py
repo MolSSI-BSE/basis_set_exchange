@@ -36,7 +36,7 @@ def write_gamess_us(basis):
             for shell in data['element_electron_shells']:
                 exponents = shell['shell_exponents']
                 coefficients = shell['shell_coefficients']
-                ncol = len(coefficients)+2 #include index column
+                ncol = len(coefficients) + 2  #include index column
                 nprim = len(exponents)
 
                 am = shell['shell_angular_momentum']
@@ -44,8 +44,8 @@ def write_gamess_us(basis):
                 s += '{}   {}\n'.format(amchar, nprim)
 
                 # 1-based indexing
-                idx_column = list(range(1, nprim+1))
-                point_places = [0] + [4 + 8*i + 15*(i-1) for i in range(1, ncol)]
+                idx_column = list(range(1, nprim + 1))
+                point_places = [0] + [4 + 8 * i + 15 * (i - 1) for i in range(1, ncol)]
                 s += write_matrix([idx_column, exponents, *coefficients], point_places)
 
         s += "$END"

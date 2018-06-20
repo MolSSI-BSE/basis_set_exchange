@@ -37,14 +37,14 @@ def write_g94(basis):
             for shell in data['element_electron_shells']:
                 exponents = shell['shell_exponents']
                 coefficients = shell['shell_coefficients']
-                ncol = len(coefficients)+1
+                ncol = len(coefficients) + 1
                 nprim = len(exponents)
 
                 am = shell['shell_angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True).upper()
                 s += '{}   {}   1.00\n'.format(amchar, nprim)
 
-                point_places = [8*i + 15*(i-1) for i in range(1, ncol+1)]
+                point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += write_matrix([exponents, *coefficients], point_places)
 
             s += '****'

@@ -2,12 +2,13 @@
 Helper functions for writing out basis set in various formats
 '''
 
+
 def _find_point(x):
     if isinstance(x, int):
         return 0
     else:
         return x.index('.')
-        
+
 
 def _determine_leftpad(column, point_place):
     '''Find how many spaces to put before a column of numbers
@@ -36,22 +37,20 @@ def _determine_leftpad(column, point_place):
 def write_matrix(mat, point_place):
 
     # Padding for the whole matrix
-    pad = [ _determine_leftpad(c, point_place[i]) for i,c in enumerate(mat) ]
+    pad = [_determine_leftpad(c, point_place[i]) for i, c in enumerate(mat)]
 
-    # Use the transposes (easier to write out by row) 
+    # Use the transposes (easier to write out by row)
     pad = list(map(list, zip(*pad)))
     mat = list(map(list, zip(*mat)))
 
     lines = ''
-    for r,row in enumerate(mat):
+    for r, row in enumerate(mat):
         line = ''
-        for c,val in enumerate(row):
+        for c, val in enumerate(row):
             sp = pad[r][c] - len(line)
             # ensure at least one space
             sp = max(sp, 1)
-            line += ' '*sp + str(mat[r][c])
+            line += ' ' * sp + str(mat[r][c])
         lines += line + '\n'
 
     return lines
-
-

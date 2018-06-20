@@ -276,12 +276,13 @@ def make_general(basis):
         newshells = []
         for am in all_am:
             # TODO - Check all shells to make sure region and harmonic type are consistent
-            newsh = {'shell_angular_momentum': am,
-                     'shell_exponents': [], 
-                     'shell_coefficients': [],
-                     'shell_region': 'combined',
-                     'shell_harmonic_type': 'spherical'
-                    }
+            newsh = {
+                'shell_angular_momentum': am,
+                'shell_exponents': [],
+                'shell_coefficients': [],
+                'shell_region': 'combined',
+                'shell_harmonic_type': 'spherical'
+            }
 
             # Do exponents first
             for sh in el['element_electron_shells']:
@@ -291,8 +292,8 @@ def make_general(basis):
 
             # Number of primitives in the new shell
             nprim = len(newsh['shell_exponents'])
-                     
-            cur_prim = 0 
+
+            cur_prim = 0
             for sh in el['element_electron_shells']:
                 if sh['shell_angular_momentum'] != am:
                     continue
@@ -301,15 +302,15 @@ def make_general(basis):
                 ngen = len(sh['shell_coefficients'])
 
                 for g in range(ngen):
-                    coef = [zero]*cur_prim
+                    coef = [zero] * cur_prim
                     coef.extend(sh['shell_coefficients'][g])
-                    coef.extend([zero]*(nprim-len(coef)))
+                    coef.extend([zero] * (nprim - len(coef)))
                     print("HERE: {}".format(coef))
                     newsh['shell_coefficients'].append(coef)
 
                 cur_prim += len(sh['shell_exponents'])
-         
-            newshells.append(newsh)    
+
+            newshells.append(newsh)
 
         el['element_electron_shells'] = newshells
 

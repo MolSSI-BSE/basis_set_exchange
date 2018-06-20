@@ -4,7 +4,8 @@ Conversion of references to bibtex format
 
 from .common import compact_elements
 
-def _ref_bib(key,ref):
+
+def _ref_bib(key, ref):
     '''Convert a single reference to bibtex format
     '''
     s = u''
@@ -12,7 +13,7 @@ def _ref_bib(key,ref):
     s += u'@{}{{{},\n'.format(ref['type'], key)
 
     entry_lines = []
-    for k,v in ref.items():
+    for k, v in ref.items():
         if k == 'type':
             continue
 
@@ -22,7 +23,7 @@ def _ref_bib(key,ref):
         elif k == 'editors':
             entry_lines.append(u'    editor = {{{}}}'.format(' and '.join(v)))
         else:
-            entry_lines.append(u'    {} = {{{}}}'.format(k,v))
+            entry_lines.append(u'    {} = {{{}}}'.format(k, v))
 
     s += ',\n'.join(entry_lines)
     s += '\n}'
@@ -50,17 +51,16 @@ def write_bib(refs):
 
             if len(refdata) == 0:
                 full_str += u'%     (...no reference...)\n%\n'
-            else: 
+            else:
                 full_str += u'%         {}\n%\n'.format(' '.join(ri['reference_keys']))
 
-            for k,r in refdata.items():
+            for k, r in refdata.items():
                 unique_refs[k] = r
-
 
     full_str += u'\n\n'
 
     # Go through them sorted alphabetically by key
-    for k,r in sorted(unique_refs.items(), key=lambda x: x[0]):
-        full_str += u'{}\n\n'.format(_ref_bib(k,r))
+    for k, r in sorted(unique_refs.items(), key=lambda x: x[0]):
+        full_str += u'{}\n\n'.format(_ref_bib(k, r))
 
     return full_str

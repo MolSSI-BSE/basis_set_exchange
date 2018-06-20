@@ -120,8 +120,8 @@ def _header_string_basis(basis_dict, comment_str):
     header += comment_str + '   Basis set: ' + basis_dict['basis_set_name'] + '\n'
     header += tw.fill(comment_str + ' Description: ' + basis_dict['basis_set_description']) + '\n'
     header += comment_str + '        Role: ' + basis_dict['basis_set_role'] + '\n'
-    header += tw.fill(comment_str + '     Version: {}  ({})'.format(basis_dict['basis_set_version'],
-                                                       basis_dict['basis_set_revision_description'])) + '\n'
+    header += tw.fill(comment_str + '     Version: {}  ({})'.format(
+        basis_dict['basis_set_version'], basis_dict['basis_set_revision_description'])) + '\n'
     header += comment_str + '-' * 70 + '\n'
 
     return header

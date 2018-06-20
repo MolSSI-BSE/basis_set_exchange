@@ -22,9 +22,9 @@ def create_metadata_file(output_path, data_dir):
     for bs_file_path in basis_filelist:
         filename = os.path.split(bs_file_path)[1]
 
-        filebase = os.path.splitext(filename)[0] # remove .json
-        filebase = os.path.splitext(filebase)[0] # remove .table
-        filebase = os.path.splitext(filebase)[0] # remove .version
+        filebase = os.path.splitext(filename)[0]  # remove .json
+        filebase = os.path.splitext(filebase)[0]  # remove .table
+        filebase = os.path.splitext(filebase)[0]  # remove .version
 
         # Fully compose the basis set from components
         bs = compose.compose_table_basis(bs_file_path)
@@ -57,15 +57,10 @@ def create_metadata_file(output_path, data_dir):
         internal_name, ver = os.path.splitext(internal_name)
         ver = ver[1:]
 
-        single_meta = OrderedDict([('display_name', display_name),
-                                   ('filebase', filebase),
-                                   ('family', family),
-                                   ('description', description),
-                                   ('revdesc', revision_desc),
-                                   ('role', role),
-                                   ('auxiliaries', auxiliaries),
-                                   ('functiontypes', function_types),
-                                   ('elements', defined_elements)])
+        single_meta = OrderedDict([('display_name', display_name), ('filebase', filebase), ('family', family),
+                                   ('description', description), ('revdesc', revision_desc), ('role', role),
+                                   ('auxiliaries', auxiliaries), ('functiontypes',
+                                                                  function_types), ('elements', defined_elements)])
 
         if not tr_name in metadata:
             metadata[tr_name] = {'versions': {ver: single_meta}}
@@ -77,19 +72,15 @@ def create_metadata_file(output_path, data_dir):
     for k, v in metadata.items():
         latest = max(v['versions'].keys())
         latest_data = v['versions'][latest]
-        metadata[k] = OrderedDict([('display_name', latest_data['display_name']),
-                                   ('filebase', latest_data['filebase']),
-                                   ('latest_version', latest),
-                                   ('family', latest_data['family']),
-                                   ('role', latest_data['role']),
-                                   ('functiontypes', latest_data['functiontypes']),
-                                   ('auxiliaries', latest_data['auxiliaries']),
-                                   ('versions', OrderedDict(sorted(v['versions'].items())))])
+        metadata[k] = OrderedDict(
+            [('display_name', latest_data['display_name']), ('filebase', latest_data['filebase']), ('latest_version',
+                                                                                                    latest),
+             ('family', latest_data['family']), ('role', latest_data['role']), ('functiontypes',
+                                                                                latest_data['functiontypes']),
+             ('auxiliaries', latest_data['auxiliaries']), ('versions', OrderedDict(sorted(v['versions'].items())))])
 
-
-    
     # Remove these from under versions
-    to_remove = [ 'display_name', 'role', 'auxiliaries', 'family', 'filebase', 'functiontypes' ]
+    to_remove = ['display_name', 'role', 'auxiliaries', 'family', 'filebase', 'functiontypes']
     for v in metadata.values():
         for ver in v['versions'].values():
             for x in to_remove:

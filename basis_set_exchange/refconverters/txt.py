@@ -21,9 +21,9 @@ def write_txt(refs):
 
             if len(refdata) == 0:
                 full_str += u'    (...no reference...)\n\n'
-            for k,r in refdata.items():
+            for k, r in refdata.items():
                 ref_txt = reference_text(r)
-                ref_txt = textwrap.indent(ref_txt, ' '*4)
+                ref_txt = textwrap.indent(ref_txt, ' ' * 4)
                 full_str += u'{}\n\n'.format(ref_txt)
 
     return full_str

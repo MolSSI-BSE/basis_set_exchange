@@ -21,12 +21,12 @@ def print_electron_shell(shell, shellidx=None):
 
     exponents = shell['shell_exponents']
     coefficients = shell['shell_coefficients']
-    ncol = len(coefficients)+1
+    ncol = len(coefficients) + 1
 
-    point_places = [8*i + 15*(i-1) for i in range(1, ncol+1)]
+    point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
     print("Shell {} '{}': AM {} ({})".format(shellidx, shell['shell_region'], am, amchar))
     print(write_matrix([exponents, *coefficients], point_places))
-    
+
 
 def print_ecp_pot(pot):
     '''Print the data for an ECP potential
