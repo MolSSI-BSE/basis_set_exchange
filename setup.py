@@ -1,9 +1,11 @@
 import setuptools
+import versioneer
 
 if __name__ == "__main__":
     setuptools.setup(
         name='basis_set_exchange',
-        version="0.3.0",
+        version=versioneer.get_version(),
+        cmdclass=versioneer.get_cmdclass(),
         description='The Quantum Chemistry Basis Set Exchange',
         author='The Molecular Sciences Software Institute',
         author_email='bpp4@vt.edu',
