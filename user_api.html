@@ -24,8 +24,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -148,14 +147,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bse">
-<span id="main-user-api"></span><h1>Main User API<a class="headerlink" href="#module-bse" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-basis_set_exchange">
+<span id="main-user-api"></span><h1>Main User API<a class="headerlink" href="#module-basis_set_exchange" title="Permalink to this headline">¶</a></h1>
 <p>Basis Set Exchange</p>
 <p>Contains utilities for reading, writing, and converting
 basis set information</p>
 <dl class="function">
-<dt id="bse.get_all_basis_names">
-<code class="descclassname">bse.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_all_basis_names">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a list of all basis set names</p>
 <p>The returned list is the internal representation of the basis set name.</p>
 <p>The data is read from the METADATA.json file in the data directory.</p>
@@ -176,8 +175,8 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_basis">
-<code class="descclassname">bse.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_basis">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
@@ -203,7 +202,7 @@ the latest version is returned.</p>
 <dd><p class="first last">What format to return the basis set as. By defaut,
 basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
-Use <a class="reference internal" href="developer_api.html#bse.api.get_formats" title="bse.api.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code></a> to obtain the available formats.</p>
+Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to obtain the available formats.</p>
 </dd>
 <dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">If True, remove general contractions by duplicating the set
@@ -225,7 +224,7 @@ shell per angular momentum (for each element)</p>
 </dd>
 <dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">Optimize by removing general contractions that contain uncontracted
-functions (see <a class="reference internal" href="developer_api.html#bse.manip.optimize_general" title="bse.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code></a>)</p>
+functions (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code>)</p>
 </dd>
 <dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Data directory with all the basis set information. By default,
@@ -239,30 +238,30 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_basis_family">
-<code class="descclassname">bse.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_basis_family" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_basis_family">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_basis_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup a family by a basis set name</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_formats">
-<code class="descclassname">bse.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_formats" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_formats">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
-can be passed as the fmt argument to <a class="reference internal" href="#bse.get_basis" title="bse.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
+can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_reference_formats">
-<code class="descclassname">bse.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_reference_formats" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_reference_formats">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_reference_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the reference/citation formats available</p>
 <p>The returned data is a map of format to display name. The format
-can be passed as the fmt argument to <a class="reference internal" href="#bse.get_references" title="bse.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
+can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.get_references" title="basis_set_exchange.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_references">
-<code class="descclassname">bse.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_references" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_references">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -297,22 +296,22 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.get_schema">
-<code class="descclassname">bse.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.get_schema" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.get_schema">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a schema that can validate BSE JSON files</p>
 <p>The schema_type represents the type of BSE JSON file to be validated,
 and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lookup_basis_by_role">
-<code class="descclassname">bse.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lookup_basis_by_role">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup the name of a basis set given a primary basis set and role</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.transform_basis_name">
-<code class="descclassname">bse.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.transform_basis_name">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.transform_basis_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms the name of a basis set to an internal representation</p>
 <p>This makes comparison of basis set names easier by, for example,
 converting the name to all lower case.</p>
@@ -376,10 +375,7 @@ converting the name to all lower case.</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

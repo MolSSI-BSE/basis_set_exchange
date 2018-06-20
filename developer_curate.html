@@ -24,8 +24,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -87,7 +86,7 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Curation API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.curate">curate - Functions for helping to curate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
@@ -161,28 +160,28 @@
             
   <div class="section" id="developer-curation-api">
 <h1>Developer Curation API<a class="headerlink" href="#developer-curation-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-bse.curate">
-<span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-bse.curate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.curate">
+<span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this headline">¶</a></h2>
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
-<dt id="bse.curate.compare_ecp_pots">
-<code class="descclassname">bse.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.compare_ecp_pots">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two ecp potentials for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.compare_electron_shells">
-<code class="descclassname">bse.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.compare_electron_shells">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two electron shells for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.compare_elements">
-<code class="descclassname">bse.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.compare_elements">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if the basis information for two elements is the same as another</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -213,15 +212,15 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.create_metadata_file">
-<code class="descclassname">bse.curate.</code><code class="descname">create_metadata_file</code><span class="sig-paren">(</span><em>output_path</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.create_metadata_file">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">create_metadata_file</code><span class="sig-paren">(</span><em>output_path</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a METADATA.json file from a data directory</p>
 <p>The file is written to output_path</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.ecp_pots_are_equal">
-<code class="descclassname">bse.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.ecp_pots_are_equal">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -229,8 +228,8 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.ecp_pots_are_subset">
-<code class="descclassname">bse.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.ecp_pots_are_subset">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of ecp potentials is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
@@ -239,8 +238,8 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.electron_shells_are_equal">
-<code class="descclassname">bse.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.electron_shells_are_equal">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The shells are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -248,8 +247,8 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.electron_shells_are_subset">
-<code class="descclassname">bse.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.electron_shells_are_subset">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The shells are compared approximately (exponents/coefficients are 
@@ -258,29 +257,29 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_component_basis">
-<code class="descclassname">bse.curate.</code><code class="descname">print_component_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_component_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_component_basis">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_component_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_component_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a component basis set</p>
 <p>If elements is not None, only the specified elements will be printed
 (list of integers)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_ecp_pot">
-<code class="descclassname">bse.curate.</code><code class="descname">print_ecp_pot</code><span class="sig-paren">(</span><em>pot</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_ecp_pot" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_ecp_pot">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_ecp_pot</code><span class="sig-paren">(</span><em>pot</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_ecp_pot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the data for an ECP potential</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_electron_shell">
-<code class="descclassname">bse.curate.</code><code class="descname">print_electron_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>shellidx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_electron_shell" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_electron_shell">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_electron_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>shellidx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_electron_shell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the data for an electron shell</p>
 <p>If shellidx (index of the shell) is not None, it will also be printed</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_element">
-<code class="descclassname">bse.curate.</code><code class="descname">print_element</code><span class="sig-paren">(</span><em>z</em>, <em>eldata</em>, <em>print_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_element" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_element">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_element</code><span class="sig-paren">(</span><em>z</em>, <em>eldata</em>, <em>print_references=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print all data for an element</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -301,16 +300,16 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_element_basis">
-<code class="descclassname">bse.curate.</code><code class="descname">print_element_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_element_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_element_basis">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_element_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_element_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print an element basis set</p>
 <p>If elements is not None, only the specified elements will be printed
 (list of integers)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.curate.print_table_basis">
-<code class="descclassname">bse.curate.</code><code class="descname">print_table_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.curate.print_table_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.curate.print_table_basis">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">print_table_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.print_table_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a full table basis set</p>
 <p>If elements is not None, only the specified elements will be printed
 (list of integers)</p>
@@ -375,10 +374,7 @@ within a tolerance)</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

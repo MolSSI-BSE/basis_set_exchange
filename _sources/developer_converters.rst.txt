@@ -4,7 +4,7 @@ Output converters
 converters - Conversion basis set output
 ----------------------------------------
 
-.. automodule:: bse.converters
+.. automodule:: basis_set_exchange.converters
    :members:
    :imported-members:
 
@@ -12,6 +12,6 @@ converters - Conversion basis set output
 refconverters - Conversion of reference data
 --------------------------------------------
 
-.. automodule:: bse.refconverters
+.. automodule:: basis_set_exchange.refconverters
    :members:
    :imported-members:

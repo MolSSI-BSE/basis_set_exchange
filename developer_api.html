@@ -24,8 +24,7 @@
 
   
 
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -86,14 +85,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.api">api - The main API Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.compose">compose - Composition of basis set information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.manip">manip - Manipulation of basis sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.fileio">fileio - Input/Output of files (including json)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.lut">lut - Lookup tables element information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.references">references - Handling of reference data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.notes">notes - Handling of notes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-bse.validator">validator - Validation of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.api">api - The main API Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.compose">compose - Composition of basis set information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.fileio">fileio - Input/Output of files (including json)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.lut">lut - Lookup tables element information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.references">references - Handling of reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.notes">notes - Handling of notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.validator">validator - Validation of basis sets</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="developer_curate.html">Developer Curation API</a></li>
@@ -168,12 +167,12 @@
             
   <div class="section" id="developer-api">
 <h1>Developer API<a class="headerlink" href="#developer-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-bse.api">
-<span id="api-the-main-api-module"></span><h2>api - The main API Module<a class="headerlink" href="#module-bse.api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.api">
+<span id="api-the-main-api-module"></span><h2>api - The main API Module<a class="headerlink" href="#module-basis_set_exchange.api" title="Permalink to this headline">¶</a></h2>
 <p>Main interface to Basis Set Exchange functionality</p>
 <dl class="function">
-<dt id="bse.api.get_all_basis_names">
-<code class="descclassname">bse.api.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_all_basis_names">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a list of all basis set names</p>
 <p>The returned list is the internal representation of the basis set name.</p>
 <p>The data is read from the METADATA.json file in the data directory.</p>
@@ -194,8 +193,8 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_basis">
-<code class="descclassname">bse.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_basis">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
@@ -221,7 +220,7 @@ the latest version is returned.</p>
 <dd><p class="first last">What format to return the basis set as. By defaut,
 basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
-Use <a class="reference internal" href="#bse.api.get_formats" title="bse.api.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code></a> to obtain the available formats.</p>
+Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to obtain the available formats.</p>
 </dd>
 <dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">If True, remove general contractions by duplicating the set
@@ -243,7 +242,7 @@ shell per angular momentum (for each element)</p>
 </dd>
 <dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">Optimize by removing general contractions that contain uncontracted
-functions (see <a class="reference internal" href="#bse.manip.optimize_general" title="bse.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code></a>)</p>
+functions (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code>)</p>
 </dd>
 <dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Data directory with all the basis set information. By default,
@@ -257,30 +256,30 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_basis_family">
-<code class="descclassname">bse.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_basis_family">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup a family by a basis set name</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_formats">
-<code class="descclassname">bse.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_formats" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_formats">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
-can be passed as the fmt argument to <a class="reference internal" href="#bse.api.get_basis" title="bse.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
+can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.api.get_basis" title="basis_set_exchange.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_reference_formats">
-<code class="descclassname">bse.api.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_reference_formats" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_reference_formats">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_reference_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the reference/citation formats available</p>
 <p>The returned data is a map of format to display name. The format
-can be passed as the fmt argument to <a class="reference internal" href="#bse.api.get_references" title="bse.api.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
+can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.api.get_references" title="basis_set_exchange.api.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_references">
-<code class="descclassname">bse.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_references" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_references">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -315,34 +314,34 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.get_schema">
-<code class="descclassname">bse.api.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.get_schema" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.get_schema">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a schema that can validate BSE JSON files</p>
 <p>The schema_type represents the type of BSE JSON file to be validated,
 and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.lookup_basis_by_role">
-<code class="descclassname">bse.api.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.lookup_basis_by_role">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup the name of a basis set given a primary basis set and role</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.api.transform_basis_name">
-<code class="descclassname">bse.api.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.api.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.api.transform_basis_name">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.transform_basis_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms the name of a basis set to an internal representation</p>
 <p>This makes comparison of basis set names easier by, for example,
 converting the name to all lower case.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.compose">
-<span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-bse.compose" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.compose">
+<span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-basis_set_exchange.compose" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to composing basis sets from individual components</p>
 <dl class="function">
-<dt id="bse.compose.compose_elemental_basis">
-<code class="descclassname">bse.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.compose.compose_elemental_basis">
+<code class="descclassname">basis_set_exchange.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an ‘elemental’ basis from an elemental json file</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
@@ -350,28 +349,28 @@ information together into one ‘elemental’ basis dictionary</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.manip">
-<span id="manip-manipulation-of-basis-sets"></span><h2>manip - Manipulation of basis sets<a class="headerlink" href="#module-bse.manip" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.manip">
+<span id="manip-manipulation-of-basis-sets"></span><h2>manip - Manipulation of basis sets<a class="headerlink" href="#module-basis_set_exchange.manip" title="Permalink to this headline">¶</a></h2>
 <p>Common basis set manipulations</p>
 <p>This module contains functions for uncontracting and merging basis set
 data, as well as some other small functions.</p>
 <dl class="function">
-<dt id="bse.manip.contraction_string">
-<code class="descclassname">bse.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.contraction_string">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forms a string specifying the contractions for an element</p>
 <p>ie, (16s,10p) -&gt; [4s,3p]</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.make_general">
-<code class="descclassname">bse.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.make_general" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.make_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes one large general contraction for each angular momentum</p>
 <p>If split_spdf is True, sp… orbitals will be split apary</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.merge_element_data">
-<code class="descclassname">bse.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.merge_element_data">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges the basis set data for an element from multiple sources
 into dest.</p>
 <p>The destination is not modified, and a (shallow) copy of dest is returned
@@ -379,8 +378,8 @@ with the data from sources added.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.optimize_general">
-<code class="descclassname">bse.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.optimize_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -394,8 +393,8 @@ with the data from sources added.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.prune_basis">
-<code class="descclassname">bse.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.prune_basis">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes primitives that have a zero coefficient, and
 removes duplicate shells</p>
 <p>This only finds EXACT duplicates, and is meant to be used
@@ -404,16 +403,16 @@ after uncontracting</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.uncontract_general">
-<code class="descclassname">bse.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.uncontract_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the general contractions from a basis set</p>
 <p>The input basis set is not modified, and any primitives with all
 zero coefficients are removed</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.uncontract_segmented">
-<code class="descclassname">bse.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.uncontract_segmented">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the segmented contractions from a basis set</p>
 <p>This implicitly removes general contractions as well,
 but will leave sp, spd, … orbitals alone</p>
@@ -421,8 +420,8 @@ but will leave sp, spd, … orbitals alone</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.manip.uncontract_spdf">
-<code class="descclassname">bse.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.manip.uncontract_spdf">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
 <p>The general contractions are replaced by uncontracted versions</p>
 <p>The input basis set is not modified, and any primitives with all
@@ -430,20 +429,20 @@ zero coefficients are removed</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.fileio">
-<span id="fileio-input-output-of-files-including-json"></span><h2>fileio - Input/Output of files (including json)<a class="headerlink" href="#module-bse.fileio" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.fileio">
+<span id="fileio-input-output-of-files-including-json"></span><h2>fileio - Input/Output of files (including json)<a class="headerlink" href="#module-basis_set_exchange.fileio" title="Permalink to this headline">¶</a></h2>
 <p>Functions for reading and writing the standard JSON-based
 basis set format</p>
 <dl class="function">
-<dt id="bse.fileio.get_basis_filelist">
-<code class="descclassname">bse.fileio.</code><code class="descname">get_basis_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.get_basis_filelist" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.get_basis_filelist">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">get_basis_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_basis_filelist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the full paths to all the table basis sets contained
 in the given data directory</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.read_json_basis">
-<code class="descclassname">bse.fileio.</code><code class="descname">read_json_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_json_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.read_json_basis">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_json_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_json_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads generic basis set information from a JSON file</p>
 <p>After reading, the MolSSI BSE schema information is searched for and if not
 found, an exception is raised.</p>
@@ -463,8 +462,8 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.read_metadata">
-<code class="descclassname">bse.fileio.</code><code class="descname">read_metadata</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.read_metadata">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_metadata</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -482,15 +481,15 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.read_notes_file">
-<code class="descclassname">bse.fileio.</code><code class="descname">read_notes_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_notes_file" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.read_notes_file">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_notes_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_notes_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the contents of a notes file.</p>
 <p>If the notes file does not exist, None is returned</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.read_references">
-<code class="descclassname">bse.fileio.</code><code class="descname">read_references</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_references" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.read_references">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_references</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a references JSON file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -508,8 +507,8 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.read_schema">
-<code class="descclassname">bse.fileio.</code><code class="descname">read_schema</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.read_schema" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.read_schema">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_schema</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a JSON schema file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -527,8 +526,8 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.write_json_basis">
-<code class="descclassname">bse.fileio.</code><code class="descname">write_json_basis</code><span class="sig-paren">(</span><em>file_path</em>, <em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.write_json_basis">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_json_basis</code><span class="sig-paren">(</span><em>file_path</em>, <em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write basis set information to a JSON file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -549,8 +548,8 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.fileio.write_references">
-<code class="descclassname">bse.fileio.</code><code class="descname">write_references</code><span class="sig-paren">(</span><em>file_path</em>, <em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.fileio.write_references" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.fileio.write_references">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_references</code><span class="sig-paren">(</span><em>file_path</em>, <em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write reference information to a JSON file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -571,16 +570,16 @@ found, an exception is raised.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.lut">
-<span id="lut-lookup-tables-element-information"></span><h2>lut - Lookup tables element information<a class="headerlink" href="#module-bse.lut" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.lut">
+<span id="lut-lookup-tables-element-information"></span><h2>lut - Lookup tables element information<a class="headerlink" href="#module-basis_set_exchange.lut" title="Permalink to this headline">¶</a></h2>
 <p>Functions for looking up element names, numbers, and symbols
 and for converting between angular momentum conventions</p>
 <p>This module has functions for looking up element information by
 symbol, name, or number. It also has functions for converting
 angular momentum between integers (0, 1, 2) and letters (s, p, d).</p>
 <dl class="function">
-<dt id="bse.lut.amchar_to_int">
-<code class="descclassname">bse.lut.</code><code class="descname">amchar_to_int</code><span class="sig-paren">(</span><em>amchar</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.amchar_to_int">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">amchar_to_int</code><span class="sig-paren">(</span><em>amchar</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
 <p>The return value is a list of integers (to handle sp, spd, … orbitals)</p>
 <p>For example, converts ‘p’ to [1] and ‘sp’ to [0,1]</p>
@@ -589,8 +588,8 @@ ordering will be spdfghikl (skipping j)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.amint_to_char">
-<code class="descclassname">bse.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em>, <em>use_L=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.amint_to_char">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em>, <em>use_L=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
 <p>The input is a list (to handle sp, spd, … orbitals). The return
 value is a string</p>
@@ -601,72 +600,72 @@ ordering will be spdfghikl (skipping j)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_Z_from_sym">
-<code class="descclassname">bse.lut.</code><code class="descname">element_Z_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_Z_from_sym">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_Z_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s Z-number given its symbol</p>
 <p>An exception is thrown if the symbol is not found</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_data_from_Z">
-<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_Z</code><span class="sig-paren">(</span><em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_Z" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_data_from_Z">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_Z</code><span class="sig-paren">(</span><em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given a Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_data_from_name">
-<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_name" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_data_from_name">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given an elemental name</p>
 <p>The given name is not case sensitive</p>
 <p>An exception is thrown if the name is not found</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_data_from_sym">
-<code class="descclassname">bse.lut.</code><code class="descname">element_data_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_data_from_sym" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_data_from_sym">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given an elemental symbol</p>
 <p>The given symbol is not case sensitive</p>
 <p>An exception is thrown if the symbol is not found</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_name_from_Z">
-<code class="descclassname">bse.lut.</code><code class="descname">element_name_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_name_from_Z" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_name_from_Z">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_name_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_name_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s name from its Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 <p>If normalize is True, the first letter will be capitalized</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.element_sym_from_Z">
-<code class="descclassname">bse.lut.</code><code class="descname">element_sym_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.element_sym_from_Z" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.element_sym_from_Z">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_sym_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_sym_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s symbol from its Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 <p>If normalize is True, the first letter will be capitalized</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.normalize_element_name">
-<code class="descclassname">bse.lut.</code><code class="descname">normalize_element_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.normalize_element_name" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.normalize_element_name">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">normalize_element_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.normalize_element_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalize the capitalization of an element name</p>
 <p>For example, converts “helium” to “Helium” and “aRgOn” to “Argon”</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.lut.normalize_element_symbol">
-<code class="descclassname">bse.lut.</code><code class="descname">normalize_element_symbol</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.lut.normalize_element_symbol" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.lut.normalize_element_symbol">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">normalize_element_symbol</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.normalize_element_symbol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalize the capitalization of an element symbol (where only the first letter is capitalized</p>
 <p>For example, converts “he” to “He” and “uUo” to “Uuo”</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.references">
-<span id="references-handling-of-reference-data"></span><h2>references - Handling of reference data<a class="headerlink" href="#module-bse.references" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.references">
+<span id="references-handling-of-reference-data"></span><h2>references - Handling of reference data<a class="headerlink" href="#module-basis_set_exchange.references" title="Permalink to this headline">¶</a></h2>
 <p>Some helper functions related to handling of references/citations</p>
 <dl class="function">
-<dt id="bse.references.compact_references">
-<code class="descclassname">bse.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.references.compact_references" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.references.compact_references">
+<code class="descclassname">basis_set_exchange.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.compact_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a mapping of elements to reference keys</p>
 <p>A list is returned, with each element being a dictionary
 with entries ‘reference_info’ containing data for (possibly) multiple references,
@@ -691,8 +690,8 @@ that those references apply to</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="bse.references.reference_text">
-<code class="descclassname">bse.references.</code><code class="descname">reference_text</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.references.reference_text" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.references.reference_text">
+<code class="descclassname">basis_set_exchange.references.</code><code class="descname">reference_text</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a single reference to plain text format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -710,23 +709,23 @@ that those references apply to</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.notes">
-<span id="notes-handling-of-notes"></span><h2>notes - Handling of notes<a class="headerlink" href="#module-bse.notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.notes">
+<span id="notes-handling-of-notes"></span><h2>notes - Handling of notes<a class="headerlink" href="#module-basis_set_exchange.notes" title="Permalink to this headline">¶</a></h2>
 <p>Functionality for handling basis set and family notes</p>
 <dl class="function">
-<dt id="bse.notes.process_notes">
-<code class="descclassname">bse.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.notes.process_notes" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.notes.process_notes">
+<code class="descclassname">basis_set_exchange.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.notes.process_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add reference information to the bottom of a notes file</p>
 <p><cite>:ref:</cite> tags are removed and the actual reference data is appended</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-bse.validator">
-<span id="validator-validation-of-basis-sets"></span><h2>validator - Validation of basis sets<a class="headerlink" href="#module-bse.validator" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-basis_set_exchange.validator">
+<span id="validator-validation-of-basis-sets"></span><h2>validator - Validation of basis sets<a class="headerlink" href="#module-basis_set_exchange.validator" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to validating JSON files (including against schema)</p>
 <dl class="function">
-<dt id="bse.validator.validate">
-<code class="descclassname">bse.validator.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#bse.validator.validate" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.validator.validate">
+<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates a file against a schema</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -818,10 +817,7 @@ that those references apply to</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

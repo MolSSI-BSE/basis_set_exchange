@@ -1,6 +1,6 @@
 Main User API
 ==============================================
 
-.. automodule:: bse
+.. automodule:: basis_set_exchange
    :members:
    :imported-members:
