@@ -4,7 +4,7 @@ Validation of bibtex output
 
 from basis_set_exchange import api
 import pytest
-import check_bibtex
+from . import check_bibtex
 
 
 # Load all the metadata once

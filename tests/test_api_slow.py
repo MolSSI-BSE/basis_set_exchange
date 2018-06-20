@@ -2,11 +2,12 @@
 Tests for the BSE main API
 """
 
-import basis_set_exchange as bse
-from basis_set_exchange import lut
 import pytest
 import random
-from common_testvars import *
+
+import basis_set_exchange as bse
+from basis_set_exchange import lut
+from .common_testvars import *
 
 # Use random for getting sets of elements
 random.seed(rand_seed, version=2)
