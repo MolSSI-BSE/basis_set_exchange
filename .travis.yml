@@ -11,7 +11,7 @@ before_install:
   - uname -a
 
 install:
-  - pip install -e . .[docs] .[tests]
+  - pip install .[docs,tests]
 
 before_script:
   - python -V
