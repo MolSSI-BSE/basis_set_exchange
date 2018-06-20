@@ -24,16 +24,9 @@ if __name__ == "__main__":
             ],
             'tests': [
                 'pytest',
-                'pytest-cov',
-                'pytest-pep8',
+                'pytest-cov'
             ],
         },
-
-        tests_require=[
-            'pytest',
-            'pytest-cov',
-            'pytest-pep8',
-        ],
 
         classifiers=[
             'Development Status :: 4 - Beta',
