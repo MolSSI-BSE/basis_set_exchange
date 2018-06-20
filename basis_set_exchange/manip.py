@@ -6,6 +6,7 @@ data, as well as some other small functions.
 """
 
 import copy
+
 from . import lut
 
 

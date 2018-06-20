@@ -3,8 +3,9 @@ Functions related to composing basis sets from individual components
 """
 
 import os
-from . import manip
+
 from . import fileio
+from . import manip
 from . import memo
 
 

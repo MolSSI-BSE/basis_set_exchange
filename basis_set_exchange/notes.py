@@ -2,8 +2,8 @@
 Functionality for handling basis set and family notes
 '''
 
-import os
 import textwrap
+
 from . import references
 
 

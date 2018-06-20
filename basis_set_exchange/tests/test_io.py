@@ -5,9 +5,10 @@ Tests for the BSE IO functions
 # Most functionality is covered under other tests.
 # This tests the remainder
 
-from basis_set_exchange import fileio,api
 import os
+
 import pytest
+from basis_set_exchange import fileio, api
 
 _data_dir = api._default_data_dir
 

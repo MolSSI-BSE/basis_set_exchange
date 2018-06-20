@@ -2,10 +2,12 @@
 Tests for the BSE main API
 """
 
-import basis_set_exchange as bse
-from basis_set_exchange import lut
-import pytest
 import random
+
+import basis_set_exchange as bse
+import pytest
+from basis_set_exchange import lut
+
 from .common_testvars import *
 
 # Use random for getting sets of elements
@@ -13,8 +15,8 @@ random.seed(rand_seed, version=2)
 
 @pytest.mark.parametrize('basis_name', bs_names)
 def test_get_basis_1(basis_name):
-    '''For all versions of basis sets, test a simple get_basis
-    '''
+    """For all versions of basis sets, test a simple get_basis
+    """
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
         bse.get_basis(basis_name, version=ver)
@@ -22,9 +24,9 @@ def test_get_basis_1(basis_name):
 
 @pytest.mark.parametrize('basis_name', bs_names)
 def test_get_basis_2(basis_name):
-    '''For all versions of basis sets, test a simple get_basis
+    """For all versions of basis sets, test a simple get_basis
        with different element selections
-    '''
+    """
     this_metadata = bs_metadata[basis_name]
     latest = this_metadata['latest_version']
     avail_elements = this_metadata['versions'][latest]['elements']
@@ -45,8 +47,8 @@ def test_get_basis_2(basis_name):
 @pytest.mark.parametrize('basis_name', bs_names_sample)
 @pytest.mark.parametrize('bool_opts', bool_matrix(5))
 def test_get_basis_3(basis_name, bool_opts):
-    '''For a sample of basis sets, test different options 
-    '''
+    """For a sample of basis sets, test different options
+    """
     bse.get_basis(basis_name,
                   uncontract_general=bool_opts[0],
                   uncontract_segmented=bool_opts[1],
@@ -58,16 +60,16 @@ def test_get_basis_3(basis_name, bool_opts):
 @pytest.mark.parametrize('basis_name', bs_names_sample)
 @pytest.mark.parametrize('fmt', bs_formats)
 def test_get_basis_4(basis_name, fmt):
-    '''For a sample of basis sets, test getting different formats
+    """For a sample of basis sets, test getting different formats
        of the latest version
-    '''
+    """
     bse.get_basis(basis_name, fmt=fmt)
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)
 def test_get_basis_memo(basis_name):
-    '''For a sample of basis sets, test memoization
-    '''
+    """For a sample of basis sets, test memoization
+    """
     bs1 = bse.get_basis(basis_name)
     bs2 = bse.get_basis(basis_name)
 
@@ -79,8 +81,8 @@ def test_get_basis_memo(basis_name):
 @pytest.mark.parametrize('basis_name', bs_names)
 @pytest.mark.parametrize('fmt', ref_formats)
 def test_get_references_1(basis_name, fmt):
-    ''' Tests getting references for all basis sets
-    '''
+    """ Tests getting references for all basis sets
+    """
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
         bse.get_references(basis_name, fmt=fmt, version=ver)
@@ -93,16 +95,16 @@ def test_get_references_1(basis_name, fmt):
 
 @pytest.mark.parametrize('primary_basis,role,expected', role_tests)
 def test_lookup_by_role(primary_basis, role, expected):
-    '''Test looking up data by role
-    '''
+    """Test looking up data by role
+    """
     bs = bse.lookup_basis_by_role(primary_basis, role)
     assert bs.lower() == expected.lower()
 
 
 @pytest.mark.parametrize('basis_name', bs_names)
 def test_notes(basis_name):
-    '''Test getting family, family notes, and basis set notes
-    '''
+    """Test getting family, family notes, and basis set notes
+    """
     bse.get_basis_notes(basis_name)
     fam = bse.get_basis_family(basis_name)
     bse.get_family_notes(fam)

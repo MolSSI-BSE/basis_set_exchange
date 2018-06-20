@@ -2,9 +2,11 @@
 Class/decorator for memoizing BSE functionality
 '''
 
-from . import api
 import functools
 import pickle
+
+from . import api
+
 
 class BSEMemoize:
     def __init__(self, f):

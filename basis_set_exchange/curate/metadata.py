@@ -3,11 +3,11 @@ Helpers for handling BSE metadata
 '''
 
 import os
-import codecs
 from collections import OrderedDict
-from .. import fileio
-from .. import compose
+
 from .. import api
+from .. import compose
+from .. import fileio
 
 
 def create_metadata_file(output_path, data_dir):

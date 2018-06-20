@@ -2,9 +2,10 @@
 Tests for BSE metadata
 """
 
-from basis_set_exchange import api,curate
-import os
 import json
+import os
+
+from basis_set_exchange import api, curate
 
 _data_dir = api._default_data_dir
 

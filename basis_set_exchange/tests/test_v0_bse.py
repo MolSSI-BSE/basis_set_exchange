@@ -2,11 +2,12 @@
 Compares version 0 with historical BSE
 """
 
-from basis_set_exchange import api
+import bz2
 import os
 import re
-import bz2
+
 import pytest
+from basis_set_exchange import api
 
 # Find the dir with all the bse files
 _my_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +17,7 @@ _hist_testfile = os.path.join(_hist_data_dir, '.is_historical')
 _hist_testfile_exists = os.path.isfile(_hist_testfile)
 
 # Skip everying in this file if the submodule isn't checked out
-pytestmark = pytest.mark.skipif(_hist_testfile_exists != True, reason="Historical basis data not downloaded")
+pytestmark = pytest.mark.skipif(_hist_testfile_exists is not True, reason="Historical basis data not downloaded")
 
 # Load all the metadata once
 _bs_metadata = api.get_metadata()
@@ -28,8 +29,8 @@ _true_false = [ True, False ]
 _bs_names_only_v0 = [x for x,y in _bs_metadata.items() if '0' in y['versions']]
 
 # Read the mapping of new BSE names to old BSE files
-with open(os.path.join(_my_dir, 'bse_v0_map.txt'), 'r') as f:
-    _bse_v0_map = dict(re.split('\t+', x.strip()) for x in f.readlines())
+with open(os.path.join(_my_dir, 'bse_v0_map.txt'), 'r') as handle:
+    _bse_v0_map = dict(re.split('\t+', x.strip()) for x in handle.readlines())
 
 # Mapping of old->new symbols    
 _sym_replace_map = { 'Uun': 'Ds', 'UUN': 'DS',

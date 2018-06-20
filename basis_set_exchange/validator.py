@@ -3,6 +3,7 @@ Functions related to validating JSON files (including against schema)
 """
 
 import jsonschema
+
 from . import api
 from . import fileio
 

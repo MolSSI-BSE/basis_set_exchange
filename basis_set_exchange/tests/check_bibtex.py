@@ -6,10 +6,10 @@ string. Warnings are interpreted as failures (which catches
 missing fields)
 '''
 
+import os
+import shutil
 import subprocess
 import tempfile
-import shutil
-import os
 
 # Other modules should query this variable
 available = bool(shutil.which('bibtex')) and bool(shutil.which('latex'))

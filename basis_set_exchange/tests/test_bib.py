@@ -2,10 +2,10 @@
 Validation of bibtex output
 """
 
-from basis_set_exchange import api
 import pytest
-from . import check_bibtex
+from basis_set_exchange import api
 
+from . import check_bibtex
 
 # Load all the metadata once
 _bs_names = api.get_all_basis_names()

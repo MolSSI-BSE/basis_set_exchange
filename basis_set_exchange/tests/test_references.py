@@ -2,11 +2,12 @@
 Tests for reference handling
 """
 
-from basis_set_exchange import api,refconverters
-import os
-import json
-import pytest
 import glob
+import json
+import os
+
+import pytest
+from basis_set_exchange import api, refconverters
 
 _data_dir = api._default_data_dir
 

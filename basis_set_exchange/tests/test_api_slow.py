@@ -2,11 +2,11 @@
 Tests for the BSE main API
 """
 
-import pytest
 import random
 
 import basis_set_exchange as bse
-from basis_set_exchange import lut
+import pytest
+
 from .common_testvars import *
 
 # Use random for getting sets of elements
@@ -21,11 +21,11 @@ random.seed(rand_seed, version=2)
 @pytest.mark.parametrize('make_gen', true_false)
 @pytest.mark.parametrize('opt_gen', true_false)
 def test_slow_get_basis_1(basis_name, fmt, unc_gen, unc_seg, unc_spdf, make_gen, opt_gen):
-    '''Tests getting all basis sets in all formats
+    """Tests getting all basis sets in all formats
        and with every combination of option
 
        Also tests memoization
-    '''
+    """
 
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():

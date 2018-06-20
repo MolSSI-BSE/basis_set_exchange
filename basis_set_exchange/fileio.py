@@ -3,11 +3,11 @@ Functions for reading and writing the standard JSON-based
 basis set format
 """
 
+import codecs
+import collections
+import glob
 import json
 import os
-import glob
-import collections
-import codecs
 
 
 def _read_plain_json(file_path, check_bse):

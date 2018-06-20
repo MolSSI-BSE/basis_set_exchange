@@ -2,19 +2,20 @@
 Main interface to Basis Set Exchange functionality
 '''
 
-import os
-import json
-import textwrap
 import datetime
+import json
+import os
+import textwrap
+
+from . import compose
+from . import converters
 from . import fileio
 from . import lut
 from . import manip
-from . import compose
-from . import references
-from . import converters
-from . import refconverters
-from . import notes
 from . import memo
+from . import notes
+from . import refconverters
+from . import references
 
 # Determine the path to the data directory that is part
 # of this installation

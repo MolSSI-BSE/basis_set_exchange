@@ -2,10 +2,11 @@
 Test for validating the formatting of the json files
 """
 
-from basis_set_exchange import api,validator
-import pytest
 import glob
 import os
+
+import pytest
+from basis_set_exchange import api, validator
 
 _data_dir = api._default_data_dir
 
