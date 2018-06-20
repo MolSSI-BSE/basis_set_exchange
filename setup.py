@@ -2,6 +2,8 @@ import setuptools
 import versioneer
 
 if __name__ == "__main__":
+    my_packages=setuptools.find_packages()
+
     setuptools.setup(
         name='basis_set_exchange',
         version=versioneer.get_version(),
@@ -11,7 +13,7 @@ if __name__ == "__main__":
         author_email='bpp4@vt.edu',
         url="https://github.com/MolSSI/basis_set_exchange",
         license='BSD-3C',
-        packages=setuptools.find_packages(),
+        packages=my_packages,
         install_requires=[
             'jsonschema',
         ],
@@ -33,5 +35,8 @@ if __name__ == "__main__":
             'Intended Audience :: Science/Research',
             'Programming Language :: Python :: 3',
         ],
+
+        package_data={'basis_set_exchange': ['data/*', 'data/*/*']},
+
         zip_safe=True,
     )
