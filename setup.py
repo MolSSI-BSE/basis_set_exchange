@@ -11,7 +11,7 @@ if __name__ == "__main__":
         description='The Quantum Chemistry Basis Set Exchange',
         author='The Molecular Sciences Software Institute',
         author_email='bpp4@vt.edu',
-        url="https://github.com/MolSSI/basis_set_exchange",
+        url="https://github.com/MolSSI-BSE/basis_set_exchange",
         license='BSD-3C',
         packages=my_packages,
         install_requires=[
