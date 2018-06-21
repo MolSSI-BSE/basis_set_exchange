@@ -15,13 +15,19 @@ and the Environmental Molecular Sciences Laboratory (https://www.emsl.pnl.gov)
 Full user and developer documentation can be found at https://molssi-bse.github.io/basis_set_exchange
 
 ## Installation
-To do a local install of the Python directory,
+This project can be installed via pip/PyPI.
+```
+pip install basis_set_exchange
+```
+
+If checking out from github, you can do a local install of the Python directory,
 ```
 pip install -e .
 ```
 
 ## Testing
-Tests can be run using `py.test -v` once installed.
+Tests can be run using `py.test -v` once installed. Thorough (but very long) tests can
+be run with `py.test --runslow`.
 
 ## Examples
 ```
@@ -33,6 +39,8 @@ bse.get_basis('STO-3G', elements=[1,6], fmt='nwchem')
 # Obtain the references for the above
 bse.get_references('STO-3G', elements=[1,6], fmt='txt')
 ```
+
+For more documentation, see https://molssi-bse.github.io/basis_set_exchange
 
 ## License
 
