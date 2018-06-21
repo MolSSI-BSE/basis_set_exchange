@@ -11,7 +11,7 @@ before_install:
   - uname -a
 
 install:
-  - pip install .[docs,tests]
+  - pip install .[docs,tests] codecov
 
 before_script:
   - python -V
