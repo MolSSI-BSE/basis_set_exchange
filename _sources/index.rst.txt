@@ -11,6 +11,8 @@ plus a library for reading and manipulating the basis sets.
 
 This library is written as part of a rewrite of the Basis Set Exchange (https://bse.pnl.gov/bse/portal).
 
+The code for this project is located on GitHub at https://github.com/MolSSI-BSE/basis_set_exchange
+
 
 .. toctree::
    :maxdepth: 2
