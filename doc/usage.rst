@@ -9,14 +9,18 @@ Quickstart and Basic Usage
 Installation
 -------------------
 
-The BSE can be installed with `pip`
+The BSE can be installed with `pip`.
 
-For example, to install in to the current directory, `pip install -e .`
+To install from PyPI: `pip install basis_set_exchange`
+
+To install from the local directory, you can use `pip install -e .` inside
+the cloned git repository.
+
 
 Importing
 -------------------
 
-All end-user functionality is available by importing the `basis_set_exchange` module
+All end-user functionality is available by importing the `basis_set_exchange` module.
 
 
 Getting a basis set
