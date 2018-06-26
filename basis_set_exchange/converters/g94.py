@@ -22,17 +22,13 @@ def write_g94(basis):
     # Elements for which we have ECP
     ecp_elements = [k for k, v in unc_basis['basis_set_elements'].items() if 'element_ecp' in v]
 
-    # basis set starts with ****
-    # then we will put **** after each element
-    s += '****'
-
     # Electron Basis
     if len(electron_elements) > 0:
         for z in electron_elements:
             data = unc_basis['basis_set_elements'][z]
 
             sym = lut.element_sym_from_Z(z, True)
-            s += '\n{}     0\n'.format(sym)
+            s += '{}     0\n'.format(sym)
 
             for shell in data['element_electron_shells']:
                 exponents = shell['shell_exponents']
@@ -47,7 +43,7 @@ def write_g94(basis):
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += write_matrix([exponents, *coefficients], point_places)
 
-            s += '****'
+            s += '****\n'
 
     # Write out ECP
     if len(ecp_elements) > 0:
@@ -61,7 +57,7 @@ def write_g94(basis):
             ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            s += '\n{}     0\n'.format(sym)
+            s += '{}     0\n'.format(sym)
             s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
 
             for pot in ecp_list:
