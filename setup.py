@@ -1,6 +1,12 @@
+import os
 import setuptools
 import versioneer
 
+_my_dir = os.path.dirname(os.path.abspath(__file__))
+_readme_path = os.path.join(_my_dir, "README.md")
+with open(_readme_path, 'r') as readme_file:
+    long_description = readme_file.read()
+    
 if __name__ == "__main__":
     my_packages=setuptools.find_packages()
 
@@ -9,6 +15,8 @@ if __name__ == "__main__":
         version=versioneer.get_version(),
         cmdclass=versioneer.get_cmdclass(),
         description='The Quantum Chemistry Basis Set Exchange',
+        long_description=long_description,
+        long_description_content_type='text/markdown',
         author='The Molecular Sciences Software Institute',
         author_email='bpp4@vt.edu',
         url="https://github.com/MolSSI-BSE/basis_set_exchange",

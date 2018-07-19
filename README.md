@@ -5,14 +5,31 @@
 **Warning - This project is still under heavy development.**
 
 ## Overview
-This project is used to form the backend of the new Basis Set Exchange.
 
-This project is a collaboration between the Molecular Sciences Software Institute (http://www.molssi.org)
-and the Environmental Molecular Sciences Laboratory (https://www.emsl.pnl.gov)
+This project is a library containing basis sets for use in quantum
+chemistry calculations.  In addition, this library has functionality
+for manipulation of basis set data.
+
+The goal of this project is to create a consistent, thoroughly curated
+database of basis sets, and to provide a standard nomenclature for
+quantum chemistry.
+
+The data contained within this library is being thoroughly evaluated
+and checked against relevant literature, software implementations, and
+other databases when available. The original data from the PNNL Basis
+Set Exchange is also available.
+
+This library is used to form the backend of the new Basis Set Exchange
+website.
+
+This project is a collaboration between the Molecular Sciences Software
+Institute (http://www.molssi.org) and the Environmental Molecular Sciences
+Laboratory (https://www.emsl.pnl.gov)
 
 ## Documentation
 
-Full user and developer documentation can be found at https://molssi-bse.github.io/basis_set_exchange
+Full user and developer documentation can be found at
+https://molssi-bse.github.io/basis_set_exchange
 
 ## Installation
 This project can be installed via pip/PyPI.
@@ -20,14 +37,16 @@ This project can be installed via pip/PyPI.
 pip install basis_set_exchange
 ```
 
-If checking out from github, you can do a local install of the Python directory,
+If checking out from github, you can do a local install of the Python
+directory,
 ```
 pip install -e .
 ```
 
 ## Testing
-Tests can be run using `py.test -v` once installed. Thorough (but very long) tests can
-be run with `py.test --runslow`.
+
+Tests can be run using `py.test -v` once installed. Thorough (but very
+long) tests can be run with `py.test --runslow`.
 
 ## Examples
 ```
