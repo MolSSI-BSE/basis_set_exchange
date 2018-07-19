@@ -136,7 +136,6 @@ def prune_basis(basis):
             if sh not in el['element_electron_shells']:
                 el['element_electron_shells'].append(sh)
 
-
     return new_basis
 
 
@@ -185,7 +184,7 @@ def uncontract_spdf(basis, max_am=0):
                         newsh['shell_coefficients'].append(coeff[g])
 
                 newshells.insert(0, newsh)
-                    
+
             else:
                 newshells.append(sh)
 
@@ -493,7 +492,7 @@ def sort_shells(shells):
 
     The original data is not modified.
     """
-    
+
     new_shells = copy.deepcopy(shells)
 
     for sh in new_shells:
@@ -508,14 +507,17 @@ def sort_shells(shells):
         tmp = sorted(tmp, key=lambda x: -float(x[0]))
 
         # Unpack, and re-transpose the coefficients
-        tmp_c = [x[1] for x in tmp]        
+        tmp_c = [x[1] for x in tmp]
         sh['shell_exponents'] = [x[0] for x in tmp]
         sh['shell_coefficients'] = list(map(list, zip(*tmp_c)))
 
-
     # Sort by increasing AM, then general contraction level, then decreasing highest exponent
-    return sorted(new_shells, key=lambda x: (max(x['shell_angular_momentum']), len(x['shell_angular_momentum']), -float(x['shell_exponents'][0])))
-    
+    return sorted(
+        new_shells,
+        key=
+        lambda x: (max(x['shell_angular_momentum']), len(x['shell_angular_momentum']), -float(x['shell_exponents'][0]))
+    )
+
 
 def sort_basis(basis):
     """

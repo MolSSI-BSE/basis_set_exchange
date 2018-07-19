@@ -1,6 +1,7 @@
 import os
 from .. import lut
 
+
 def read_g94(basis_path):
     '''Reads a G94-formatted file and converts it to a dictionary with the
        usual BSE fields
@@ -20,11 +21,15 @@ def read_g94(basis_path):
         basis_lines = [l.strip() for l in f]
         basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
 
-    bs_data = {'molssi_bse_schema': { 'schema_type': 'component', 'schema_version': '0.1'},
-               'basis_set_description': fname,
-               'basis_set_references': [],
-               'basis_set_elements': {}
-              }
+    bs_data = {
+        'molssi_bse_schema': {
+            'schema_type': 'component',
+            'schema_version': '0.1'
+        },
+        'basis_set_description': fname,
+        'basis_set_references': [],
+        'basis_set_elements': {}
+    }
 
     i = 0
     if basis_lines[0] == '****':
@@ -73,10 +78,12 @@ def read_g94(basis_path):
                 shell_am = lut.amchar_to_int(lsplt[0])
                 nshell = int(lsplt[1])
 
-                shell = {'shell_function_type': 'gto',
-                         'shell_harmonic_type': 'spherical',
-                         'shell_region': 'valence',
-                         'shell_angular_momentum': shell_am}
+                shell = {
+                    'shell_function_type': 'gto',
+                    'shell_harmonic_type': 'spherical',
+                    'shell_region': 'valence',
+                    'shell_angular_momentum': shell_am
+                }
 
                 exponents = []
                 coefficients = []
