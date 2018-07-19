@@ -3,31 +3,163 @@ Notes about STO basis sets
 
 STO basis sets are formed by fitting a set of 2/3/4/5/6 exponents/coefficients to
 a corresponding Slater function. A set of elements (first row main group, for example)
-will share a set of coefficients and a common set of 'base' exponents which are
-multiplied by an element-specific scaling factor.
+will share a set of coefficients and a common set of base exponents which are
+multiplied by the square of an element-specific scaling factor.
 
-In general, all STO basis sets share a common set of papers.
+The data in this library corresponds to that found in Gaussian09. Scaling
+factors were taken from the literature and verified by dividing them out
+of the exponents from Gaussian. The cobalt discrepancies were resolved by
+reverse engineering the exponent from Gaussian using the base exponents
+from other elements.
 
-hehre1969a - Original exponents/scaling factors for H, Li-F
 
-hehre1970a - Adds exponents/scaling for Na-Ar. Also has scaling factors
+Reference details
+-----------------
+
+hehre1969a - Exponents/coefficients for 1s and 2sp
+             Original scaling factors for H, Li-F
+
+hehre1970a - Exponents/coefficients for 3sp
+             Scaling factors for Na-Ar. Also has scaling factors
              for He and Ne, and fixes the scaling factors for Li, Be, and B.
              Since these elements derive from both hehre1969a and 1970a,
              they have both references
 
-pietro1980a - All info for K, Ca, Ga-Kr
-pietro1981a - All info for Rb, Sr, and In-Xe
-pietro1983a - Scaling factors for Sc-Zn and Y-Cd. These are combined
-              with the exponents/coefficients from pietro1980a and pietro 1981a
+pietro1980a - Exponents/coefficients for 3spd and 4sp.
+              The new 3sp data was re-optimized for use with elements with
+              occupied 3d shells (starting at Sc) 
+              Scaling factors for K, Ca, Ga-Kr
 
+pietro1981a - Exponents/coefficints for 4spd and 5sp.
+              The new 4sp data was re-optimized for use with elements with
+              occupied 4d shells (starting at Y)
+              Scaling factors for Rb, Sr, and In-Xe
+
+pietro1983a - Scaling factors for Sc-Zn and Y-Cd
 
 Note that pietro1983a only specifically deals with STO-3G. However, the scaling
 factors appear to be applied also to the exponents/coefficients for 2G/4G/5G/6G.
 
 
+Differences with Literature
+---------------------------
+
+Gaussian uses slightly different scaling factors for cobalt.
+It is unknown where these come from, but the difference is fairly small.
+
+GAMESS uses the literature values.
+
+          Pietro1983a    Gaussian
+          -----------    --------
+    1s       26.47         26.44
+    2sp      11.09         11.07
+    3sp       4.55          4.56
+
+
 Difference with GAMESS
 ----------------------
 
-GAMESS uses a different scaling factor Na-Cl, so these are split into
-a separate basis set for our purposes. The modified scaling factors come
-from gordon1978a.
+GAMESS uses a different scaling factors for some elements.
+
+  * Factors for Na-Cl reference gordon1978a
+  * Factors for 3d and 4sp shells for Sc-Zn come from Table II in the reference (pietro1983a).
+    Gaussian uses the values from Table IV
+  * Factors for 4d and 5sp shells for Y-Cd also come from Table II in the reference (pietro1983a).
+    Gaussian uses the values from Table IV
+
+Both codes tend to use the "Standard valence-shell scale factors" for other blocks. Therefore,
+I believe Gaussian is most likely correct.
+  
+GAMESS also uses different base exponents and coefficients for some elements.
+
+  * GAMESS uses the data from hehre1970a for all 3sp shells. For elements
+    past Sc, the shells were reoptimized in pietro1980a to account for
+    occupied 3d shells.
+  * Similar, GAMESS uses pietro1980a for all 4sp shells. For elements
+    past Y, the shells were reoptimized in pietro1981a to account for
+    occupied 4d shells.
+  * The source of 3d and 4d exponents/coefficients is unknown.
+  * For STO-6G, the 4sp base exponents/coefficients are erroneously the same as the 3sp
+
+
+Scaling Factors
+---------------
+==========================================           ==========================================
+= GAUSSIAN                               =           = GAMESS                                 =
+==========================================           ==========================================
+Sym     1s    2sp           
+---   ----   ----          
+H     1.24                                          
+He    1.69                                          
+Li    2.69   0.80                                   
+Be    3.68   1.15                                   
+B     4.68   1.50                                   
+C     5.67   1.72                                   
+N     6.67   1.95                                   
+O     7.66   2.25                                   
+F     8.65   2.55                                   
+Ne    9.64   2.88                                   
+     
+     
+Sym     1s   2sp   3sp                                Sym   3sp    
+---  -----  ----  ----                                ---  ----
+Na   10.61  3.48  1.75                                Na   1.21
+Mg   11.59  3.90  1.70                                Mg   1.28
+Al   12.56  4.36  1.70                                Al   1.39
+Si   13.53  4.83  1.75                                Si   1.55
+P    14.50  5.31  1.90                                P    1.74
+S    15.47  5.79  2.05                                S    1.93
+Cl   16.43  6.26  2.10                                Cl   2.14
+Ar   17.40  6.74  2.33                                Ar   2.33
+     
+     
+Sym     1s    2sp   3sp    3d   4sp
+---  -----  -----  ----  ----  ----
+K    18.61   7.26  2.75        1.43
+Ca   19.58   7.74  3.01        1.36
+Ga   30.42  12.99  5.26  5.26  1.80
+Ge   31.40  13.47  5.58  5.58  2.00
+As   32.39  13.94  5.90  5.90  2.12
+Se   33.37  14.40  6.22  6.22  2.22
+Br   34.36  14.87  6.54  6.54  2.38
+Kr   35.34  15.34  6.86  6.86  2.54
+
+
+Sym    1s    2sp    3sp    3d   4sp                   Sym    1s    2sp    3sp    3d   4sp
+---  -----  -----  ----  ----  ----                   ---  -----  -----  ----  ----  ----
+Sc   20.56   8.22  3.21  1.10  1.60                   Sc                       2.33  1.16
+Ti   21.54   8.70  3.44  1.90  1.70                   Ti                       2.68  1.21
+V    22.53   9.18  3.67  2.55  1.70                   V                        2.70  1.25
+Cr   23.52   9.66  3.89  3.05  1.75                   Cr                       3.23  1.29
+Mn   24.50  10.13  4.11  3.45  1.65                   Mn                       3.49  1.32
+Fe   25.49  10.61  4.33  3.75  1.55                   Fe                       3.71  1.36
+Co   26.44  11.07  4.56  4.10  1.55                   Co   26.47  11.09  4.55  3.94  1.40
+Ni   27.46  11.56  4.76  4.35  1.60                   Ni                       4.16  1.43
+Cu   28.44  12.04  4.98  4.60  1.60                   Cu                       4.38  1.46
+Zn   29.43  12.52  5.19  4.90  1.90                   Zn                       4.61  1.50
+
+
+Sym     1s    2sp   3spd   4sp    4d   5sp            Sym   4d   5sp
+---  -----  -----  -----  ----  ----  ----            --- ----  ----
+Y    38.29  16.72   7.97  3.29  1.40  1.80            Y   3.46  1.24
+Zr   39.27  17.19   8.21  3.48  1.95  1.90            Zr  3.00  1.29
+Nb   40.26  17.66   8.51  3.67  2.40  1.90            Nb  2.92  1.35
+Mo   41.24  18.12   8.82  3.87  2.70  1.95            Mo  2.99  1.40
+Tc   42.22  18.59   9.14  4.05  3.00  1.85            Tc  3.12  1.45
+Ru   43.21  19.05   9.45  4.24  3.20  1.75            Ru  3.26  1.49
+Rh   44.19  19.51   9.77  4.41  3.45  1.75            Rh  3.42  1.53
+Pd   45.17  19.97  10.09  4.59  3.60  1.80            Pd  3.58  1.57
+Ag   46.15  20.43  10.41  4.76  3.75  1.80            Ag  3.74  1.60
+Cd   47.14  20.88  10.74  4.93  3.95  2.10            Cd  3.96  1.63
+
+
+Sym    1s    2sp    3spd  4sp     4d   5sp           
+---  -----  -----  -----  ----  ----  ----           
+Rb   36.32  15.81   7.18  3.02        1.90            
+Sr   37.31  16.28   7.49  3.16        1.80            
+In   48.12  21.33  11.08  4.65  4.65  2.05            
+Sn   49.10  21.79  11.39  4.89  4.89  2.15            
+Sb   50.08  22.25  11.71  5.12  5.12  2.20            
+Te   51.07  22.71  12.03  5.36  5.36  2.28            
+I    52.05  23.17  12.35  5.59  5.59  2.42            
+Xe   53.03  23.63  12.66  5.82  5.82  2.57            
