@@ -47,7 +47,6 @@ instread.
    >>> # header=False disables printing an information block
    >>> bs_str = basis_set_exchange.get_basis('6-31G*', fmt='gaussian94', header=False)
    >>> print(bs_str)
-   ****
    H     0
    S   3   1.00
         18.731137               0.0334946

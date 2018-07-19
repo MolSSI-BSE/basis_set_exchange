@@ -403,6 +403,23 @@ after uncontracting</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.manip.sort_basis">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts all the information in a basis set into a standard order</p>
+<p>The original data is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.sort_shells">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_shells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort a list of basis set shells into a standard order</p>
+<p>The order within a shell is by decreasing value of the exponent.</p>
+<p>The order of the shell list is in increasing angular momentum, and then
+by decreasing number of primitives, then decreasing value of the largest exponent.</p>
+<p>The original data is not modified.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_general">
 <code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the general contractions from a basis set</p>
@@ -421,9 +438,11 @@ but will leave sp, spd, … orbitals alone</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_spdf">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
 <p>The general contractions are replaced by uncontracted versions</p>
+<p>Contractions up to max_am will be left in place. For example,
+if max_am = 1, spd will be split into sp and d</p>
 <p>The input basis set is not modified, and any primitives with all
 zero coefficients are removed</p>
 </dd></dl>
