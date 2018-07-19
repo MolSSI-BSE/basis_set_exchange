@@ -136,14 +136,18 @@ def prune_basis(basis):
             if sh not in el['element_electron_shells']:
                 el['element_electron_shells'].append(sh)
 
+
     return new_basis
 
 
-def uncontract_spdf(basis):
+def uncontract_spdf(basis, max_am=0):
     """
     Removes sp, spd, spdf, etc, contractions from a basis set
 
     The general contractions are replaced by uncontracted versions
+
+    Contractions up to max_am will be left in place. For example,
+    if max_am = 1, spd will be split into sp and d
 
     The input basis set is not modified, and any primitives with all
     zero coefficients are removed
@@ -161,14 +165,27 @@ def uncontract_spdf(basis):
 
             # am will be a list
             am = sh['shell_angular_momentum']
+            coeff = sh['shell_coefficients']
 
             # if this is an sp, spd,...  orbital
             if len(am) > 1:
-                for i, c in enumerate(sh['shell_coefficients']):
-                    newsh = sh.copy()
-                    newsh['shell_angular_momentum'] = [am[i]]
-                    newsh['shell_coefficients'] = [c]
-                    newshells.append(newsh)
+                newsh = sh.copy()
+                newsh['shell_angular_momentum'] = []
+                newsh['shell_coefficients'] = []
+
+                ngen = len(sh['shell_coefficients'])
+                for g in range(ngen):
+                    if am[g] > max_am:
+                        newsh2 = sh.copy()
+                        newsh2['shell_angular_momentum'] = [am[g]]
+                        newsh2['shell_coefficients'] = [coeff[g]]
+                        newshells.append(newsh2)
+                    else:
+                        newsh['shell_angular_momentum'].append(am[g])
+                        newsh['shell_coefficients'].append(coeff[g])
+
+                newshells.insert(0, newsh)
+                    
             else:
                 newshells.append(sh)
 
@@ -461,5 +478,56 @@ def optimize_general(basis):
         for sh in el['element_electron_shells']:
             if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
                 sh['shell_coefficients'][0][0] = '1.0000000'
+
+    return new_basis
+
+
+def sort_shells(shells):
+    """
+    Sort a list of basis set shells into a standard order
+
+    The order within a shell is by decreasing value of the exponent.
+
+    The order of the shell list is in increasing angular momentum, and then
+    by decreasing number of primitives, then decreasing value of the largest exponent.
+
+    The original data is not modified.
+    """
+    
+    new_shells = copy.deepcopy(shells)
+
+    for sh in new_shells:
+        # Sort primitives within a shell
+        # Transpose of coefficients
+        tmp_c = list(map(list, zip(*sh['shell_coefficients'])))
+
+        # Zip together exponents and coeffs for sorting
+        tmp = zip(sh['shell_exponents'], tmp_c)
+
+        # Sort by decreasing value of exponent
+        tmp = sorted(tmp, key=lambda x: -float(x[0]))
+
+        # Unpack, and re-transpose the coefficients
+        tmp_c = [x[1] for x in tmp]        
+        sh['shell_exponents'] = [x[0] for x in tmp]
+        sh['shell_coefficients'] = list(map(list, zip(*tmp_c)))
+
+
+    # Sort by increasing AM, then general contraction level, then decreasing highest exponent
+    return sorted(new_shells, key=lambda x: (max(x['shell_angular_momentum']), len(x['shell_angular_momentum']), -float(x['shell_exponents'][0])))
+    
+
+def sort_basis(basis):
+    """
+    Sorts all the information in a basis set into a standard order
+
+    The original data is not modified.
+    """
+
+    new_basis = copy.deepcopy(basis)
+
+    for k, el in new_basis['basis_set_elements'].items():
+        if 'element_electron_shells' in el:
+            el['element_electron_shells'] = sort_shells(el['element_electron_shells'])
 
     return new_basis

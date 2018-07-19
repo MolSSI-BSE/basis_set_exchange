@@ -12,6 +12,10 @@ def write_nwchem(basis):
     '''Converts a basis set to NWChem format
     '''
 
+    # Uncontract all but SP
+    basis = manip.uncontract_spdf(basis, 1)
+    basis = manip.sort_basis(basis)
+
     s = ''
 
     # Elements for which we have electron basis

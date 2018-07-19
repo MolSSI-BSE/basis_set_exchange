@@ -14,18 +14,20 @@ def write_g94(basis):
 
     s = ''
 
-    unc_basis = manip.uncontract_general(basis)
+    basis = manip.uncontract_general(basis)
+    basis = manip.uncontract_spdf(basis, 1)
+    basis = manip.sort_basis(basis)
 
     # Elements for which we have electron basis
-    electron_elements = [k for k, v in unc_basis['basis_set_elements'].items() if 'element_electron_shells' in v]
+    electron_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_electron_shells' in v]
 
     # Elements for which we have ECP
-    ecp_elements = [k for k, v in unc_basis['basis_set_elements'].items() if 'element_ecp' in v]
+    ecp_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_ecp' in v]
 
     # Electron Basis
     if len(electron_elements) > 0:
         for z in electron_elements:
-            data = unc_basis['basis_set_elements'][z]
+            data = basis['basis_set_elements'][z]
 
             sym = lut.element_sym_from_Z(z, True)
             s += '{}     0\n'.format(sym)
@@ -48,7 +50,7 @@ def write_g94(basis):
     # Write out ECP
     if len(ecp_elements) > 0:
         for z in ecp_elements:
-            data = unc_basis['basis_set_elements'][z]
+            data = basis['basis_set_elements'][z]
             sym = lut.element_sym_from_Z(z).upper()
             max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
             max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
