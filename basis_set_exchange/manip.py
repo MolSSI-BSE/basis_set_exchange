@@ -512,11 +512,11 @@ def sort_shells(shells):
         sh['shell_coefficients'] = list(map(list, zip(*tmp_c)))
 
     # Sort by increasing AM, then general contraction level, then decreasing highest exponent
-    return sorted(
+    return list(sorted(
         new_shells,
         key=
-        lambda x: (max(x['shell_angular_momentum']), len(x['shell_angular_momentum']), -float(x['shell_exponents'][0]))
-    )
+        lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']), -float(x['shell_exponents'][0]))
+    ))
 
 
 def sort_basis(basis):
