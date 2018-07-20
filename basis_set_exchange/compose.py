@@ -9,6 +9,27 @@ from . import manip
 from . import memo
 
 
+def _whole_basis_harmonic(basis):
+    '''
+    Find whether an entire basis is cartesian, spherical, or if it is mixed
+
+    May also return 'none' (as a string) if there are no electron shells (ie, ECP only)
+    '''
+
+    all_harm = set()
+
+    for v in basis['basis_set_elements'].values():
+        if not 'element_electron_shells' in v:
+            return "none"
+        for sh in v['element_electron_shells']:
+            all_harm.add(sh['shell_harmonic_type'])
+
+    if len(all_harm) > 1:
+        return 'mixed'
+    else:
+        return all_harm.pop()
+
+
 def compose_elemental_basis(file_path):
     """
     Creates an 'elemental' basis from an elemental json file
@@ -94,5 +115,8 @@ def compose_table_basis(file_path):
     # Add the version to the dictionary
     file_base = os.path.basename(file_path)
     table_bs['basis_set_version'] = file_base.split('.')[-3]
+
+    # Add whether the entire basis is spherical or cartesian
+    table_bs['basis_set_harmonic_type'] = _whole_basis_harmonic(table_bs)
 
     return table_bs

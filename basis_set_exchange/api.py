@@ -237,6 +237,11 @@ def get_basis(name,
         comment_str = converters.converter_map[fmt]['comment']
         ret_str = _header_string_basis(basis_dict, comment_str) + '\n\n' + ret_str
 
+    # HACK - Psi4 requires the first non-comment line be spherical/cartesian
+    #        so we have to add that before the header
+    if fmt == 'psi4':
+        ret_str = basis_dict['basis_set_harmonic_type'] + '\n\n' + ret_str
+
     return ret_str
 
 

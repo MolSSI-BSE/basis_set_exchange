@@ -2,17 +2,18 @@
 Conversion of basis sets to various formats
 '''
 
-from .g94 import *
-from .nwchem import *
-from .gamess_us import *
-from .bsejson import *
+from .bsejson import write_json
+from .nwchem import write_nwchem
+from .g94 import write_g94
+from .gamess_us import write_gamess_us
+from .psi4 import write_psi4
 
 converter_map = {
     'json': {
         'display': 'JSON',
         'extension': '.json',
         'comment': None,
-        'function': write_json,
+        'function': write_json
     },
     'nwchem': {
         'display': 'NWChem',
@@ -31,5 +32,11 @@ converter_map = {
         'extension': '.bas',
         'comment': '!',
         'function': write_gamess_us
+    },
+    'psi4': {
+        'display': 'Psi4',
+        'extension': '.gbs',
+        'comment': '!',
+        'function': write_psi4
     }
 }
