@@ -87,7 +87,7 @@
                 "shell_region": {
                     "description": "The region this shell describes",
                     "type": "string",
-                    "enum": [ "valence", "polarization", "core", "tight", "diffuse" ]
+                    "enum": [ "", "valence", "polarization", "core", "tight", "diffuse" ]
                 },
                 "shell_angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",
