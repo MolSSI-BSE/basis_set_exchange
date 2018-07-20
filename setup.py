@@ -6,6 +6,29 @@ _my_dir = os.path.dirname(os.path.abspath(__file__))
 _readme_path = os.path.join(_my_dir, "README.md")
 with open(_readme_path, 'r') as readme_file:
     long_description = readme_file.read()
+
+long_description = '''
+This project is a library containing basis sets for use in quantum
+chemistry calculations.  In addition, this library has functionality
+for manipulation of basis set data.
+
+The goal of this project is to create a consistent, thoroughly curated
+database of basis sets, and to provide a standard nomenclature for
+quantum chemistry.
+
+The data contained within this library is being thoroughly evaluated
+and checked against relevant literature, software implementations, and
+other databases when available. The original data from the PNNL Basis
+Set Exchange is also available.
+
+This project is a collaboration between the Molecular Sciences Software
+Institute (http://www.molssi.org) and the Environmental Molecular Sciences
+Laboratory (https://www.emsl.pnl.gov)
+
+The source repo is available at https://github.com/MolSSI-BSE/basis_set_exchange
+
+Documentation is available at https://molssi-bse.github.io/basis_set_exchange
+'''
     
 if __name__ == "__main__":
     my_packages=setuptools.find_packages()
