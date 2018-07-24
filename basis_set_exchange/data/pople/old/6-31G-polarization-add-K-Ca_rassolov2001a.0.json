@@ -1,0 +1,53 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "Polarization functions associated with 6-31G",
+    "basis_set_references": [
+        "rassolov2001a"
+    ],
+    "basis_set_notes": "For K,Ca these polarization functions are meant to be used when including the extra valence D orbitals from rassolov2001a",
+    "basis_set_elements": {
+        "19": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "polarization",
+                    "shell_angular_momentum": [
+                        2
+                    ],
+                    "shell_exponents": [
+                        "0.04485"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.000000E+00"
+                        ]
+                    ]
+                }
+            ]
+        },
+        "20": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "cartesian",
+                    "shell_region": "polarization",
+                    "shell_angular_momentum": [
+                        2
+                    ],
+                    "shell_exponents": [
+                        "0.0502"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.000000E+00"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
