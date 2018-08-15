@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Project Planning and Documents</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#public-code-repository">Public Code Repository</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#proposed-components">Proposed Components</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#backend-data-store">Backend Data Store</a></li>
@@ -170,6 +171,15 @@ project.</p>
 <h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
 <p>A rewrite of the current EMSL Basis Set Exchange database and website (<a class="reference external" href="https://bse.pnl.gov/bse/portal">https://bse.pnl.gov/bse/portal</a>)</p>
 </div>
+<div class="section" id="public-code-repository">
+<h2>Public Code Repository<a class="headerlink" href="#public-code-repository" title="Permalink to this headline">¶</a></h2>
+<p>The main code for this project is located on GitHub at
+<a class="reference external" href="https://github.com/MolSSI-BSE/basis_set_exchange">https://github.com/MolSSI-BSE/basis_set_exchange</a>.  Comments and
+bugs/issues should be reported there.</p>
+<p>The main documentation is located at <a class="reference external" href="https://molssi-bse.github.io/basis_set_exchange">https://molssi-bse.github.io/basis_set_exchange</a></p>
+<p>Additional related projects are located under the MolSSI-BSE GitHub
+organization at <a class="reference external" href="https://github.com/MolSSI-BSE">https://github.com/MolSSI-BSE</a></p>
+</div>
 <div class="section" id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>The Basis Set Exchange has served the community well since its inception
@@ -213,7 +223,8 @@ be available to those that are not familiar.</p>
 </div>
 <div class="section" id="backend-library">
 <h3>Backend Library<a class="headerlink" href="#backend-library" title="Permalink to this headline">¶</a></h3>
-<p>This library is responsible for consuming the raw basis set data and producing some useful output. Some aspects of this include:</p>
+<p>This library is responsible for consuming the raw basis set data and
+producing some useful output. Some aspects of this include:</p>
 <ul class="simple">
 <li>Composing complete basis sets from components (for example, adding polarization or diffuse functions)</li>
 <li>Converting a basis set to a particular output format (Gaussian or NWChem, for example)</li>
@@ -231,9 +242,11 @@ library may happen at a later date.</p>
 </div>
 <div class="section" id="public-api-rest-api">
 <h3>Public API (REST API)<a class="headerlink" href="#public-api-rest-api" title="Permalink to this headline">¶</a></h3>
-<p>This component is responsible for allowing users to programmatically obtain basis set information via a REST interface.</p>
+<p>This component is responsible for allowing users to programmatically
+obtain basis set information via a REST interface.</p>
 <p>This interface will mostly mirror the main API of the backend library.</p>
-<p>It should be noted that this interface will be read-only, as the curation of the basis set raw data is done elsewhere.</p>
+<p>It should be noted that this interface will be read-only, as the curation
+of the basis set raw data is done elsewhere.</p>
 </div>
 <div class="section" id="web-frontend">
 <h3>Web Frontend<a class="headerlink" href="#web-frontend" title="Permalink to this headline">¶</a></h3>
@@ -246,20 +259,24 @@ components, allowing for future changes and possible rewrites.</p>
 </div>
 <div class="section" id="data-curation-and-identifiers">
 <h2>Data Curation and Identifiers<a class="headerlink" href="#data-curation-and-identifiers" title="Permalink to this headline">¶</a></h2>
-<p>As part of this project, basis sets will be verified, when possible, against other databases, literature,
-and what is implemented in various codes. An effort will be made to identify canonical, standard
-values based on these sources. When differences are found, they will be recorded within the
-basis set data notes.</p>
-<p>This work will support the community in running well-defined, reproducible computations.</p>
+<p>As part of this project, basis sets will be verified, when possible,
+against other databases, literature, and what is implemented in various
+codes. An effort will be made to identify canonical, standard values
+based on these sources. When differences are found, they will be recorded
+within the basis set data notes.</p>
+<p>This work will support the community in running well-defined, reproducible
+computations.</p>
 </div>
 <div class="section" id="education">
 <h2>Education<a class="headerlink" href="#education" title="Permalink to this headline">¶</a></h2>
-<p>A section of the website will be devoted to education about basis sets, including common
-nomenclature and the best basis sets for different calculations.</p>
+<p>A section of the website will be devoted to education about basis sets,
+including common nomenclature and the best basis sets for different
+calculations.</p>
 </div>
 <div class="section" id="project-members">
 <h2>Project Members<a class="headerlink" href="#project-members" title="Permalink to this headline">¶</a></h2>
-<p>The project is a collaboration between MolSSI and EMSL/PNNL. The members and major responsibilities are:</p>
+<p>The project is a collaboration between MolSSI and EMSL/PNNL. The members
+and major responsibilities are:</p>
 <ul class="simple">
 <li>MolSSI<ul>
 <li>Benjamin Pritchard - Project lead, development of backend library</li>
