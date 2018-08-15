@@ -21,6 +21,7 @@ The code for this project is located on GitHub at https://github.com/MolSSI-BSE/
    usage
    user_api
    developer
+   project_doc
 
 
 License

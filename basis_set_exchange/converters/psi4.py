@@ -11,7 +11,7 @@ def write_psi4(basis):
 
     Psi4 uses the same output as gaussian94, except
     that the first line must be cartesian/spherical,
-    and it prefers to have a starting ****
+    and it prefers to have a starting asterisks
 
     The cartesian/spherical line is added later, since it must
     be the first non-blank line.
