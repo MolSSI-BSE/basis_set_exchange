@@ -6,12 +6,16 @@
 Basis Set Exchange - Library
 ==============================================
 
-This project is the data repository for basis sets found in quantum chemistry,
-plus a library for reading and manipulating the basis sets.
+This project is the data repository for basis sets found in quantum
+chemistry, plus a library for reading and manipulating the basis sets.
 
-This library is written as part of a rewrite of the Basis Set Exchange (https://bse.pnl.gov/bse/portal).
+This library is written as part of a rewrite of the Basis Set Exchange
+(https://bse.pnl.gov/bse/portal) and is a collaboration between the
+Molecular Sciences Software Institute (http://www.molssi.org) and the
+Environmental Molecular Sciences Laboratory (https://www.emsl.pnl.gov)
 
-The code for this project is located on GitHub at https://github.com/MolSSI-BSE/basis_set_exchange
+The code for this project is located on GitHub at
+https://github.com/MolSSI-BSE/basis_set_exchange
 
 
 .. toctree::

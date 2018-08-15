@@ -10,6 +10,19 @@ Goal
 A rewrite of the current EMSL Basis Set Exchange database and website (https://bse.pnl.gov/bse/portal)
 
 
+Public Code Repository
+-----------------------
+
+The main code for this project is located on GitHub at
+https://github.com/MolSSI-BSE/basis_set_exchange.  Comments and
+bugs/issues should be reported there.
+
+The main documentation is located at https://molssi-bse.github.io/basis_set_exchange
+
+Additional related projects are located under the MolSSI-BSE GitHub
+organization at https://github.com/MolSSI-BSE
+
+
 Background
 -------------------
 
@@ -61,7 +74,8 @@ be available to those that are not familiar.
 Backend Library
 *******************
 
-This library is responsible for consuming the raw basis set data and producing some useful output. Some aspects of this include:
+This library is responsible for consuming the raw basis set data and
+producing some useful output. Some aspects of this include:
 
 * Composing complete basis sets from components (for example, adding polarization or diffuse functions)
 * Converting a basis set to a particular output format (Gaussian or NWChem, for example)
@@ -82,11 +96,13 @@ In addition, a command-line interface will also be included as part of this libr
 Public API (REST API)
 *********************
 
-This component is responsible for allowing users to programmatically obtain basis set information via a REST interface.
+This component is responsible for allowing users to programmatically
+obtain basis set information via a REST interface.
 
 This interface will mostly mirror the main API of the backend library.
 
-It should be noted that this interface will be read-only, as the curation of the basis set raw data is done elsewhere.
+It should be noted that this interface will be read-only, as the curation
+of the basis set raw data is done elsewhere.
 
 
 Web Frontend
@@ -103,25 +119,29 @@ components, allowing for future changes and possible rewrites.
 Data Curation and Identifiers
 ------------------------------
 
-As part of this project, basis sets will be verified, when possible, against other databases, literature,
-and what is implemented in various codes. An effort will be made to identify canonical, standard
-values based on these sources. When differences are found, they will be recorded within the
-basis set data notes.
+As part of this project, basis sets will be verified, when possible,
+against other databases, literature, and what is implemented in various
+codes. An effort will be made to identify canonical, standard values
+based on these sources. When differences are found, they will be recorded
+within the basis set data notes.
 
-This work will support the community in running well-defined, reproducible computations.
+This work will support the community in running well-defined, reproducible
+computations.
 
 
 Education
 ------------------------------
 
-A section of the website will be devoted to education about basis sets, including common
-nomenclature and the best basis sets for different calculations.
+A section of the website will be devoted to education about basis sets,
+including common nomenclature and the best basis sets for different
+calculations.
 
 
 Project Members
 -------------------
 
-The project is a collaboration between MolSSI and EMSL/PNNL. The members and major responsibilities are:
+The project is a collaboration between MolSSI and EMSL/PNNL. The members
+and major responsibilities are:
 
 * MolSSI
 
