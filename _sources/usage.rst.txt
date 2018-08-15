@@ -56,7 +56,7 @@ instread.
 
    >>> # Available formats are available via get_formats
    >>> basis_set_exchange.get_formats()
-   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'gamess_us': 'GAMESS US'}
+   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'gamess_us': 'GAMESS US', 'psi4': 'Psi4'} 
 
 
 By default, all elements for which the basis set is defined are included - this
