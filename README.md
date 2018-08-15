@@ -31,6 +31,9 @@ Laboratory (https://www.emsl.pnl.gov)
 Full user and developer documentation can be found at
 https://molssi-bse.github.io/basis_set_exchange
 
+An overview of the project and its design is also available at
+https://molssi-bse.github.io/basis_set_exchange/project_doc.html
+
 ## Installation
 This project can be installed via pip/PyPI.
 ```
