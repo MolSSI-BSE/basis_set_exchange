@@ -34,7 +34,7 @@ def _determine_leftpad(column, point_place):
     return [max((point_place - 1) - x, 0) for x in ndigits_left]
 
 
-def write_matrix(mat, point_place):
+def write_matrix(mat, point_place, convert_exp=False):
 
     # Padding for the whole matrix
     pad = [_determine_leftpad(c, point_place[i]) for i, c in enumerate(mat)]
@@ -52,5 +52,9 @@ def write_matrix(mat, point_place):
             sp = max(sp, 1)
             line += ' ' * sp + str(mat[r][c])
         lines += line + '\n'
+
+    if convert_exp is True:
+        lines = lines.replace('e', 'D')
+        lines = lines.replace('E', 'D')
 
     return lines
