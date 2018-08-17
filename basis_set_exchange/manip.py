@@ -395,7 +395,86 @@ def _find_block(mat):
     return (rows, cols)
 
 
-def optimize_general(basis):
+def optimize_general_shells(shells):
+    """
+    Optimizes the general contraction using the method of Hashimoto et al
+
+    .. seealso :: | T. Hashimoto, K. Hirao, H. Tatewaki
+                  | 'Comment on Dunning's correlation-consistent basis set'
+                  | Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)
+                  | https://doi.org/10.1016/0009-2614(95)00807-G
+
+    """
+
+    all_new_shells = []
+    for sh in shells:
+        exponents = sh['shell_exponents']
+        coefficients = sh['shell_coefficients']
+        nprim = len(exponents)
+        nam = len(sh['shell_angular_momentum'])
+
+        if nam > 1 or len(coefficients) < 2:
+            all_new_shells.append(sh)
+            continue
+
+        # First, find columns (general contractions) with a single non-zero value
+        single_columns = [idx for idx, c in enumerate(coefficients) if _is_single_column(c)]
+
+        # Find the corresponding rows that have a value in one of these columns
+        # Note that at this stage, the row may have coefficients in more than one
+        # column. That is ok, we are going to split it off anyway
+        single_rows = []
+        for col_idx in single_columns:
+            col = coefficients[col_idx]
+            for row_idx in range(nprim):
+                if float(col[row_idx]) != 0.0:
+                    single_rows.append(row_idx)
+
+        # Split those out into new shells, and remove them from the
+        # original shell
+        new_shells_single = []
+        for row_idx in single_rows:
+            newsh = copy.deepcopy(sh)
+            newsh['shell_exponents'] = [exponents[row_idx]]
+            newsh['shell_coefficients'] = [['1.0000000']]
+            new_shells_single.append(newsh)
+
+        exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
+        coefficients = [x for idx, x in enumerate(coefficients) if idx not in single_columns]
+        coefficients = [[x for idx, x in enumerate(col) if not idx in single_rows] for col in coefficients]
+
+        # Remove Zero columns
+        #coefficients = [ x for x in coefficients if not _is_zero_column(x) ]
+
+        # Find contiguous rectanglar blocks
+        new_shells = []
+        while len(exponents) > 0:
+            block_rows, block_cols = _find_block(coefficients)
+
+            # add as a new shell
+            newsh = copy.deepcopy(sh)
+            newsh['shell_exponents'] = [exponents[i] for i in block_rows]
+            newsh['shell_coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
+            new_shells.append(newsh)
+
+            # Remove from the original exponent/coefficient set
+            exponents = [x for idx, x in enumerate(exponents) if idx not in block_rows]
+            coefficients = [x for idx, x in enumerate(coefficients) if idx not in block_cols]
+            coefficients = [[x for idx, x in enumerate(col) if not idx in block_rows] for col in coefficients]
+
+        # I do this order to mimic the output of the original BSE
+        all_new_shells.extend(new_shells)
+        all_new_shells.extend(new_shells_single)
+
+    # Fix coefficients for completely uncontracted shells to 1.0
+    for sh in all_new_shells:
+        if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
+            sh['shell_coefficients'][0][0] = '1.0000000'
+
+    return all_new_shells
+
+
+def optimize_general_basis(basis):
     """
     Optimizes the general contraction using the method of Hashimoto et al
 
@@ -412,72 +491,7 @@ def optimize_general(basis):
         if not 'element_electron_shells' in el:
             continue
 
-        elshells = el.pop('element_electron_shells')
-        el['element_electron_shells'] = []
-        for sh in elshells:
-            exponents = sh['shell_exponents']
-            coefficients = sh['shell_coefficients']
-            nprim = len(exponents)
-            nam = len(sh['shell_angular_momentum'])
-
-            if nam > 1 or len(coefficients) < 2:
-                el['element_electron_shells'].append(sh)
-                continue
-
-            # First, find columns (general contractions) with a single non-zero value
-            single_columns = [idx for idx, c in enumerate(coefficients) if _is_single_column(c)]
-
-            # Find the corresponding rows that have a value in one of these columns
-            # Note that at this stage, the row may have coefficients in more than one
-            # column. That is ok, we are going to split it off anyway
-            single_rows = []
-            for col_idx in single_columns:
-                col = coefficients[col_idx]
-                for row_idx in range(nprim):
-                    if float(col[row_idx]) != 0.0:
-                        single_rows.append(row_idx)
-
-            # Split those out into new shells, and remove them from the
-            # original shell
-            new_shells_single = []
-            for row_idx in single_rows:
-                newsh = copy.deepcopy(sh)
-                newsh['shell_exponents'] = [exponents[row_idx]]
-                newsh['shell_coefficients'] = [['1.0000000']]
-                new_shells_single.append(newsh)
-
-            exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
-            coefficients = [x for idx, x in enumerate(coefficients) if idx not in single_columns]
-            coefficients = [[x for idx, x in enumerate(col) if not idx in single_rows] for col in coefficients]
-
-            # Remove Zero columns
-            #coefficients = [ x for x in coefficients if not _is_zero_column(x) ]
-
-            # Find contiguous rectanglar blocks
-            new_shells = []
-            while len(exponents) > 0:
-                block_rows, block_cols = _find_block(coefficients)
-
-                # add as a new shell
-                newsh = copy.deepcopy(sh)
-                newsh['shell_exponents'] = [exponents[i] for i in block_rows]
-                newsh['shell_coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
-                new_shells.append(newsh)
-
-                # Remove from the original exponent/coefficient set
-                exponents = [x for idx, x in enumerate(exponents) if idx not in block_rows]
-                coefficients = [x for idx, x in enumerate(coefficients) if idx not in block_cols]
-                coefficients = [[x for idx, x in enumerate(col) if not idx in block_rows] for col in coefficients]
-
-            # I do this order to mimic the output of the original BSE
-            el['element_electron_shells'].extend(new_shells)
-            el['element_electron_shells'].extend(new_shells_single)
-
-        # Fix coefficients for completely uncontracted shells to 1.0
-        for sh in el['element_electron_shells']:
-            if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
-                sh['shell_coefficients'][0][0] = '1.0000000'
-
+        el['element_electron_shells'] = optimize_general_shells(el['element_electron_shells'])
     return new_basis
 
 
