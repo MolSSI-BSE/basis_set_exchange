@@ -303,12 +303,8 @@ def shells_difference(s1, s2):
     max_rdiff = 0.0
     nsh = len(s1)
     if len(s2) != nsh:
-        print('*' * 80)
-        print(json.dumps(s1, indent=4))
-        print('*' * 80)
-        print(json.dumps(s2, indent=4))
-        print('*' * 80)
-        raise RuntimeError("Different number of shells")
+        print("Different number of shells")
+        return float('inf')
 
     shells1 = manip.sort_shells(s1)
     shells2 = manip.sort_shells(s2)
@@ -319,11 +315,13 @@ def shells_difference(s1, s2):
 
         nprim = len(sh1['shell_exponents'])
         if len(sh2['shell_exponents']) != nprim:
-            raise RuntimeError("Different number of primitives for shell {}".format(n))
+            print("Different number of primitives for shell {}".format(n))
+            return float('inf')
 
         ngen = len(sh1['shell_coefficients'])
         if len(sh2['shell_coefficients']) != ngen:
-            raise RuntimeError("Different number of general contractions for shell {}".format(n))
+            print("Different number of general contractions for shell {}".format(n))
+            return float('inf')
 
         for p in range(nprim):
             e1 = sh1['shell_exponents'][p]
