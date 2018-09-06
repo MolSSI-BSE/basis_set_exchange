@@ -174,3 +174,9 @@ from basis set authors and the developers of computational chemistry code.
 
 If you would like to help with this project, contact Benjamin Pritchard
 at bpp4@vt.edu
+
+Timelines and Milestones
+------------------------
+
+Current short-to-medium term milestones can be viewed at
+https://github.com/MolSSI-BSE/basis_set_exchange/milestones
