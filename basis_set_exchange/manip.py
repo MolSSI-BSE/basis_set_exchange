@@ -314,14 +314,12 @@ def make_general(basis):
                 if sh['shell_angular_momentum'] != am:
                     continue
 
-                print("cur_prim", cur_prim)
                 ngen = len(sh['shell_coefficients'])
 
                 for g in range(ngen):
                     coef = [zero] * cur_prim
                     coef.extend(sh['shell_coefficients'][g])
                     coef.extend([zero] * (nprim - len(coef)))
-                    print("HERE: {}".format(coef))
                     newsh['shell_coefficients'].append(coef)
 
                 cur_prim += len(sh['shell_exponents'])
@@ -443,7 +441,7 @@ def optimize_general(basis):
             for row_idx in single_rows:
                 newsh = copy.deepcopy(sh)
                 newsh['shell_exponents'] = [exponents[row_idx]]
-                newsh['shell_coefficients'] = [['1.0000000']]
+                newsh['shell_coefficients'] = [['1.00000000000']]
                 new_shells_single.append(newsh)
 
             exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
@@ -512,11 +510,12 @@ def sort_shells(shells):
         sh['shell_coefficients'] = list(map(list, zip(*tmp_c)))
 
     # Sort by increasing AM, then general contraction level, then decreasing highest exponent
-    return list(sorted(
-        new_shells,
-        key=
-        lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']), -float(x['shell_exponents'][0]))
-    ))
+    return list(
+        sorted(
+            new_shells,
+            key=
+            lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']), -float(x['shell_exponents'][0]))
+        ))
 
 
 def sort_basis(basis):

@@ -50,7 +50,7 @@ def read_g94(basis_path):
 
         i += 1
         if "ECP" in basis_lines[i]:
-            raise RuntimeError("TODO")
+            raise NotImplementedError("Parsing of ECP not implemented")
             #maxam = int(lsplt[1])
             #n_elec = int(lsplt[2])
 
@@ -76,7 +76,7 @@ def read_g94(basis_path):
             while basis_lines[i] != '****':
                 lsplt = basis_lines[i].split()
                 shell_am = lut.amchar_to_int(lsplt[0])
-                nshell = int(lsplt[1])
+                nprim = int(lsplt[1])
 
                 shell = {
                     'shell_function_type': 'gto',
@@ -89,7 +89,7 @@ def read_g94(basis_path):
                 coefficients = []
 
                 i += 1
-                for j in range(nshell):
+                for j in range(nprim):
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()

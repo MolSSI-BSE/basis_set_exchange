@@ -3,6 +3,31 @@ Functions for comparing basis sets and pieces of basis sets
 '''
 
 import operator
+import json
+from .. import manip
+
+
+def _reldiff(a, b):
+    """
+    Computes the relative difference of two floating-point numbers
+
+    rel = abs(a-b)/min(abs(a), abs(b))
+
+    If a == 0 and b == 0, then 0.0 is returned
+    Otherwise if a or b is 0.0, inf is returned.
+    """
+
+    a = float(a)
+    b = float(b)
+    aa = abs(a)
+    ba = abs(b)
+
+    if a == 0.0 and b == 0.0:
+        return 0.0
+    elif a == 0 or b == 0.0:
+        return float('inf')
+
+    return abs(a - b) / min(aa, ba)
 
 
 def _compare_keys(element1, element2, key, compare_func, *args):
@@ -265,3 +290,55 @@ def compare_elements(element1,
             return False
 
     return True
+
+
+def shells_difference(s1, s2):
+    """
+    Computes and prints the differences between two shells
+
+    If the shells contain a different number of primitives, an
+    exception is thrown.
+    """
+
+    max_rdiff = 0.0
+    nsh = len(s1)
+    if len(s2) != nsh:
+        print('*' * 80)
+        print(json.dumps(s1, indent=4))
+        print('*' * 80)
+        print(json.dumps(s2, indent=4))
+        print('*' * 80)
+        raise RuntimeError("Different number of shells")
+
+    shells1 = manip.sort_shells(s1)
+    shells2 = manip.sort_shells(s2)
+
+    for n in range(nsh):
+        sh1 = shells1[n]
+        sh2 = shells2[n]
+
+        nprim = len(sh1['shell_exponents'])
+        if len(sh2['shell_exponents']) != nprim:
+            raise RuntimeError("Different number of primitives for shell {}".format(n))
+
+        ngen = len(sh1['shell_coefficients'])
+        if len(sh2['shell_coefficients']) != ngen:
+            raise RuntimeError("Different number of general contractions for shell {}".format(n))
+
+        for p in range(nprim):
+            e1 = sh1['shell_exponents'][p]
+            e2 = sh2['shell_exponents'][p]
+            r = _reldiff(e1, e2)
+            print("   Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            max_rdiff = max(max_rdiff, r)
+
+            for g in range(ngen):
+                c1 = sh1['shell_coefficients'][g][p]
+                c2 = sh2['shell_coefficients'][g][p]
+                r = _reldiff(c1, c2)
+                print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                max_rdiff = max(max_rdiff, r)
+        print()
+
+    print("Max relative difference for these shells: {}".format(max_rdiff))
+    return max_rdiff
