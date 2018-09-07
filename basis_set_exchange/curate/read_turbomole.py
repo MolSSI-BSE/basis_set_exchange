@@ -70,7 +70,7 @@ def read_turbomole(basis_path):
 
                 ecp_shell = {
                     'potential_ecp_type': 'scalar',
-                    'potential_angular_momentum': shell_am,
+                    'potential_angular_momentum': [shell_am],
                 }
                 ecp_exponents = []
                 ecp_rexponents = []
@@ -85,7 +85,7 @@ def read_turbomole(basis_path):
 
                 ecp_shell['potential_r_exponents'] = ecp_rexponents
                 ecp_shell['potential_gaussian_exponents'] = ecp_exponents
-                ecp_shell['potential_coefficients'] = ecp_coefficients
+                ecp_shell['potential_coefficients'] = [ecp_coefficients]
                 eldata['element_ecp'].append(ecp_shell)
 
             eldata['element_ecp_electrons'] = n_elec

@@ -518,6 +518,26 @@ def sort_shells(shells):
         ))
 
 
+def sort_potentials(potentials):
+    """
+    Sort a list of ECP potentials into a standard order
+
+    The order within a potential is not modified.
+
+    The order of the shell list is in increasing angular momentum, with the largest
+    angular momentum being moved to the front.
+
+    The original data is not modified, and a deep copy is returned.
+    """
+
+    new_potentials = copy.deepcopy(potentials)
+
+    # Sort by increasing AM, then move the last element to the front
+    new_potentials = list(sorted(new_potentials, key=lambda x: x['potential_angular_momentum']))
+    new_potentials.insert(0, new_potentials.pop())
+    return new_potentials
+
+
 def sort_basis(basis):
     """
     Sorts all the information in a basis set into a standard order

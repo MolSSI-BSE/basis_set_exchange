@@ -294,10 +294,11 @@ def compare_elements(element1,
 
 def shells_difference(s1, s2):
     """
-    Computes and prints the differences between two shells
+    Computes and prints the differences between two lists of shells
 
-    If the shells contain a different number of primitives, an
-    exception is thrown.
+    If the shells contain a different number primitives,
+    or the lists are of different length, inf is returned.
+    Otherwise, the maximum relative difference is returned.
     """
 
     max_rdiff = 0.0
@@ -339,4 +340,60 @@ def shells_difference(s1, s2):
         print()
 
     print("Max relative difference for these shells: {}".format(max_rdiff))
+    return max_rdiff
+
+
+def potentials_difference(p1, p2):
+    """
+    Computes and prints the differences between two lists of potentials 
+
+    If the shells contain a different number primitives,
+    or the lists are of different length, inf is returned.
+    Otherwise, the maximum relative difference is returned.
+    """
+
+    max_rdiff = 0.0
+    np = len(p1)
+    if len(p2) != np:
+        print("Different number of potentials")
+        return float('inf')
+
+    pots1 = manip.sort_potentials(p1)
+    pots2 = manip.sort_potentials(p2)
+
+    for n in range(np):
+        pot1 = pots1[n]
+        pot2 = pots2[n]
+
+        nprim = len(pot1['potential_gaussian_exponents'])
+        if len(pot2['potential_gaussian_exponents']) != nprim:
+            print("Different number of primitives for potential {}".format(n))
+            return float('inf')
+
+        ngen = len(pot1['potential_coefficients'])
+        if len(pot2['potential_coefficients']) != ngen:
+            print("Different number of general contractions for potential {}".format(n))
+            return float('inf')
+
+        for p in range(nprim):
+            e1 = pot1['potential_gaussian_exponents'][p]
+            e2 = pot2['potential_gaussian_exponents'][p]
+            r = _reldiff(e1, e2)
+            print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+
+            e1 = pot1['potential_r_exponents'][p]
+            e2 = pot2['potential_r_exponents'][p]
+            r = _reldiff(e1, e2)
+            print("          R Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            max_rdiff = max(max_rdiff, r)
+
+            for g in range(ngen):
+                c1 = pot1['potential_coefficients'][g][p]
+                c2 = pot2['potential_coefficients'][g][p]
+                r = _reldiff(c1, c2)
+                print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                max_rdiff = max(max_rdiff, r)
+        print()
+
+    print("Max relative difference for these potentials: {}".format(max_rdiff))
     return max_rdiff
