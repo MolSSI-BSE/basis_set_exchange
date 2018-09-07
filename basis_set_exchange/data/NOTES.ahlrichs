@@ -1,0 +1,18 @@
+Notes about the Ahlrichs def2 basis sets
+========================================
+
+The data in the original BSE was mostly correct. The main exception is
+the basis sets for barium, which were modified in Turbomole sometime after
+they were originally uploaded to the BSE.
+
+In addition, turbomole has some basis sets for the lanthinides (gulde2012a).
+These have been added.
+
+Some coefficients for single uncontracted shells (1 primitive) were not 1.0000 (or were not
+set) in the Turbomole basis set files. These have been forced to 1.0000.
+
+NOTE: While, in general, def2-TZVPD is the same as def2-TZVP + diffuse,
+this is not always true. Some elements contain no additional diffuse functions,
+and sometimes shells are removed from def2-TZVP before additional functions are added.
+This is also true in def2-SV* and def2-QZ* and when going from *ZVP to *ZVPP.
+Compare the basis sets and consult the literature for the reasons.

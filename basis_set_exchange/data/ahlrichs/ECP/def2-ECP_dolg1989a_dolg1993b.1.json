@@ -1,0 +1,105 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "def2-ECP",
+    "basis_set_references": [
+        "dolg1989a",
+        "dolg1993b"
+    ],
+    "basis_set_notes": "Most values from dolg1989a. Updated f potential taken from dolg1993b",
+    "basis_set_elements": {
+        "57": {
+            "element_ecp_electrons": 46,
+            "element_ecp": [
+                {
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
+                        3
+                    ],
+                    "potential_r_exponents": [
+                        2
+                    ],
+                    "potential_gaussian_exponents": [
+                        "4.0286000"
+                    ],
+                    "potential_coefficients": [
+                        [
+                            "-36.0100160"
+                        ]
+                    ]
+                },
+                {
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
+                        0
+                    ],
+                    "potential_r_exponents": [
+                        2,
+                        2,
+                        2
+                    ],
+                    "potential_gaussian_exponents": [
+                        "3.3099000",
+                        "1.6550000",
+                        "4.0286000"
+                    ],
+                    "potential_coefficients": [
+                        [
+                            "91.9321770",
+                            "-3.7887640",
+                            "36.0100160"
+                        ]
+                    ]
+                },
+                {
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
+                        1
+                    ],
+                    "potential_r_exponents": [
+                        2,
+                        2,
+                        2
+                    ],
+                    "potential_gaussian_exponents": [
+                        "2.8368000",
+                        "1.4184000",
+                        "4.0286000"
+                    ],
+                    "potential_coefficients": [
+                        [
+                            "63.7594860",
+                            "-0.6479580",
+                            "36.0100160"
+                        ]
+                    ]
+                },
+                {
+                    "potential_ecp_type": "scalar",
+                    "potential_angular_momentum": [
+                        2
+                    ],
+                    "potential_r_exponents": [
+                        2,
+                        2,
+                        2
+                    ],
+                    "potential_gaussian_exponents": [
+                        "2.0213000",
+                        "1.0107000",
+                        "4.0286000"
+                    ],
+                    "potential_coefficients": [
+                        [
+                            "36.1161730",
+                            "0.2191140",
+                            "36.0100160"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
