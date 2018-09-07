@@ -79,7 +79,7 @@ def read_turbomole(basis_path):
                 while i < len(basis_lines) and basis_lines[i][0].isalpha() is False:
                     lsplt = basis_lines[i].split()
                     ecp_exponents.append(lsplt[2])
-                    ecp_rexponents.append(lsplt[1])
+                    ecp_rexponents.append(int(lsplt[1]))
                     ecp_coefficients.append(lsplt[0])
                     i += 1
 
