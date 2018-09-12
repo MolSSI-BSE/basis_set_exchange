@@ -61,14 +61,14 @@ def _compare_keys(element1, element2, key, compare_func, *args):
     return True
 
 
-def _compare_vector(arr1, arr2):
+def _compare_vector(arr1, arr2, rel_tol):
     """
     Compares two vectors (python lists) for approximate equality.
 
     Each array contains floats or strings convertible to floats
 
     This function returns True if both arrays are of the same length
-    and each value is approximately equal.
+    and each value is within the given relative tolerance.
     """
 
     length = len(arr1)
@@ -85,20 +85,20 @@ def _compare_vector(arr1, arr2):
 
             # For a basis set, a relatively coarse comparison
             # should be acceptible
-            if rel > 1.0e-10:
+            if rel > rel_tol:
                 return False
 
     return True
 
 
-def _compare_matrix(mat1, mat2):
+def _compare_matrix(mat1, mat2, rel_tol):
     """
     Compares two matrices (nested python lists) for approximate equality.
 
     Each matrix contains floats or strings convertible to floats
 
     This function returns True if both matrices are of the same dimensions
-    and each value is approximately equal.
+    and each value is within the given relative tolerance.
     """
 
     length = len(mat1)
@@ -106,13 +106,13 @@ def _compare_matrix(mat1, mat2):
         return False
 
     for i in range(length):
-        if _compare_vector(mat1[i], mat2[i]) is False:
+        if _compare_vector(mat1[i], mat2[i], rel_tol) is False:
             return False
 
     return True
 
 
-def compare_electron_shells(shell1, shell2, compare_meta=False):
+def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     '''
     Compare two electron shells for approximate equality
     (exponents/coefficients are within a tolerance)
@@ -128,9 +128,9 @@ def compare_electron_shells(shell1, shell2, compare_meta=False):
     coefficients1 = shell1['shell_coefficients']
     coefficients2 = shell2['shell_coefficients']
 
-    if not _compare_vector(exponents1, exponents2):
+    if not _compare_vector(exponents1, exponents2, rel_tol):
         return False
-    if not _compare_matrix(coefficients1, coefficients2):
+    if not _compare_matrix(coefficients1, coefficients2, rel_tol):
         return False
     if compare_meta:
         if shell1['shell_region'] != shell2['shell_region']:
@@ -144,7 +144,7 @@ def compare_electron_shells(shell1, shell2, compare_meta=False):
         return True
 
 
-def electron_shells_are_subset(subset, superset, compare_meta=False):
+def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
     '''
     Determine if a list of electron shells is a subset of another
 
@@ -157,7 +157,7 @@ def electron_shells_are_subset(subset, superset, compare_meta=False):
     '''
     for item1 in subset:
         for item2 in superset:
-            if compare_electron_shells(item1, item2, compare_meta):
+            if compare_electron_shells(item1, item2, compare_meta, rel_tol):
                 break
         else:
             return False
@@ -165,7 +165,7 @@ def electron_shells_are_subset(subset, superset, compare_meta=False):
     return True
 
 
-def electron_shells_are_equal(shells1, shells2, compare_meta=False):
+def electron_shells_are_equal(shells1, shells2, compare_meta=False, rel_tol=0.0):
     '''
     Determine if a list of electron shells is the same as another
 
@@ -177,11 +177,11 @@ def electron_shells_are_equal(shells1, shells2, compare_meta=False):
 
     # Lists are equal if each is a subset of the other
     # Slow but effective
-    return electron_shells_are_subset(shells1, shells2, compare_meta) and electron_shells_are_subset(
-        shells2, shells1, compare_meta)
+    return electron_shells_are_subset(shells1, shells2, compare_meta, rel_tol) and electron_shells_are_subset(
+        shells2, shells1, compare_meta, rel_tol)
 
 
-def compare_ecp_pots(potential1, potential2, compare_meta=False):
+def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
     '''
     Compare two ecp potentials for approximate equality
     (exponents/coefficients are within a tolerance)
@@ -202,9 +202,9 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False):
     # integer comparison
     if rexponents1 != rexponents2:
         return False
-    if not _compare_vector(gexponents1, gexponents2):
+    if not _compare_vector(gexponents1, gexponents2, rel_tol):
         return False
-    if not _compare_matrix(coefficients1, coefficients2):
+    if not _compare_matrix(coefficients1, coefficients2, rel_tol):
         return False
     if compare_meta:
         if potential1['potential_ecp_type'] != potential2['potential_ecp_type']:
@@ -214,7 +214,7 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False):
         return True
 
 
-def ecp_pots_are_subset(subset, superset, compare_meta=False):
+def ecp_pots_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
     '''
     Determine if a list of ecp potentials is a subset of another
 
@@ -228,7 +228,7 @@ def ecp_pots_are_subset(subset, superset, compare_meta=False):
 
     for item1 in subset:
         for item2 in superset:
-            if compare_ecp_pots(item1, item2, compare_meta):
+            if compare_ecp_pots(item1, item2, compare_meta, rel_tol):
                 break
         else:
             return False
@@ -236,7 +236,7 @@ def ecp_pots_are_subset(subset, superset, compare_meta=False):
     return True
 
 
-def ecp_pots_are_equal(pots1, pots2, compare_meta=False):
+def ecp_pots_are_equal(pots1, pots2, compare_meta=False, rel_tol=0.0):
     '''
     Determine if a list of electron shells is the same as another
 
@@ -255,7 +255,8 @@ def compare_elements(element1,
                      element2,
                      compare_electron_shells_meta=False,
                      compare_ecp_pots_meta=False,
-                     compare_meta=False):
+                     compare_meta=False,
+                     rel_tol=0.0):
     '''
     Determine if the basis information for two elements is the same as another
 
@@ -273,13 +274,15 @@ def compare_elements(element1,
         Compare the metadata of ECP potentials
     compare_meta : bool
         Compare the overall element metadata
+    rel_tol : float
+        Maximum relative error that is considered equal
     '''
 
     if not _compare_keys(element1, element2, 'element_electron_shells', electron_shells_are_equal,
-                         compare_electron_shells_meta):
+                         compare_electron_shells_meta, rel_tol):
         return False
 
-    if not _compare_keys(element1, element2, 'element_ecp', ecp_pots_are_equal, compare_ecp_pots_meta):
+    if not _compare_keys(element1, element2, 'element_ecp', ecp_pots_are_equal, compare_ecp_pots_meta, rel_tol):
         return False
 
     if not _compare_keys(element1, element2, 'element_ecp_electrons', operator.eq):
