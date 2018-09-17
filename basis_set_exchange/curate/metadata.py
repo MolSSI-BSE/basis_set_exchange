@@ -19,15 +19,15 @@ def create_metadata_file(output_path, data_dir):
     basis_filelist = fileio.get_basis_filelist(data_dir)
 
     metadata = {}
-    for bs_file_path in basis_filelist:
-        filename = os.path.split(bs_file_path)[1]
-
-        filebase = os.path.splitext(filename)[0]  # remove .json
+    for bs_file_relpath in basis_filelist:
+        filebase = os.path.split(bs_file_relpath)[1]
+        filebase = os.path.splitext(filebase)[0]  # remove .json
         filebase = os.path.splitext(filebase)[0]  # remove .table
-        filebase = os.path.splitext(filebase)[0]  # remove .version
+        filebase, ver = os.path.splitext(filebase)  # remove .[version]
+        ver = ver[1:]  # Remove the period
 
         # Fully compose the basis set from components
-        bs = compose.compose_table_basis(bs_file_path)
+        bs = compose.compose_table_basis(bs_file_relpath, data_dir)
 
         # Prepare the metadata
         tr_name = api.transform_basis_name(bs['basis_set_name'])
@@ -49,18 +49,10 @@ def create_metadata_file(output_path, data_dir):
 
         function_types = sorted(list(function_types))
 
-        # convert the file path to the internal identifier for the basis set
-        internal_name = os.path.basename(bs_file_path)
-        internal_name = internal_name.replace(".table.json", "")
-
-        # split out the version number
-        internal_name, ver = os.path.splitext(internal_name)
-        ver = ver[1:]
-
-        single_meta = OrderedDict([('display_name', display_name), ('filebase', filebase), ('family', family),
-                                   ('description', description), ('revdesc', revision_desc), ('role', role),
-                                   ('auxiliaries', auxiliaries), ('functiontypes',
-                                                                  function_types), ('elements', defined_elements)])
+        single_meta = OrderedDict(
+            [('display_name', display_name), ('file_relpath', bs_file_relpath), ('family', family),
+             ('description', description), ('revdesc', revision_desc), ('role', role), ('auxiliaries', auxiliaries),
+             ('functiontypes', function_types), ('elements', defined_elements)])
 
         if not tr_name in metadata:
             metadata[tr_name] = {'versions': {ver: single_meta}}
@@ -73,14 +65,13 @@ def create_metadata_file(output_path, data_dir):
         latest = max(v['versions'].keys())
         latest_data = v['versions'][latest]
         metadata[k] = OrderedDict(
-            [('display_name', latest_data['display_name']), ('filebase', latest_data['filebase']), ('latest_version',
-                                                                                                    latest),
+            [('display_name', latest_data['display_name']), ('filebase', filebase), ('latest_version', latest),
              ('family', latest_data['family']), ('role', latest_data['role']), ('functiontypes',
                                                                                 latest_data['functiontypes']),
              ('auxiliaries', latest_data['auxiliaries']), ('versions', OrderedDict(sorted(v['versions'].items())))])
 
     # Remove these from under versions
-    to_remove = ['display_name', 'role', 'auxiliaries', 'family', 'filebase', 'functiontypes']
+    to_remove = ['display_name', 'role', 'auxiliaries', 'family', 'functiontypes']
     for v in metadata.values():
         for ver in v['versions'].values():
             for x in to_remove:

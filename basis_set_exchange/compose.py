@@ -30,7 +30,7 @@ def _whole_basis_harmonic(basis):
         return all_harm.pop()
 
 
-def compose_elemental_basis(file_path):
+def compose_elemental_basis(file_relpath, data_dir):
     """
     Creates an 'elemental' basis from an elemental json file
 
@@ -39,13 +39,8 @@ def compose_elemental_basis(file_path):
     information together into one 'elemental' basis dictionary
     """
 
-    # Where to look for components (should be relative to the parent
-    # of the given file_path)
-    data_dir = os.path.dirname(file_path)
-    data_dir = os.path.dirname(data_dir)
-
     # Do a simple read of the json
-    el_bs = fileio.read_json_basis(file_path)
+    el_bs = fileio.read_json_basis(os.path.join(data_dir, file_relpath))
 
     # construct a list of all files to read
     component_names = set()
@@ -80,7 +75,7 @@ def compose_elemental_basis(file_path):
 
 
 @memo.BSEMemoize
-def compose_table_basis(file_path):
+def compose_table_basis(file_relpath, data_dir):
     """
     Creates a 'table' basis from an table json file
 
@@ -89,11 +84,8 @@ def compose_table_basis(file_path):
     information together into one 'table' basis dictionary
     """
 
-    # Where to look for components (should be relative to the directory
-    # of the given file_path)
-    data_dir = os.path.dirname(file_path)
-
     # Do a simple read of the json
+    file_path = os.path.join(data_dir, file_relpath)
     table_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all elemental files to read
@@ -102,7 +94,7 @@ def compose_table_basis(file_path):
         component_names.add(v['element_entry'])
 
     # Create a map of the elemental basis data
-    element_map = {k: compose_elemental_basis(os.path.join(data_dir, k)) for k in component_names}
+    element_map = {k: compose_elemental_basis(k, data_dir) for k in component_names}
 
     for k, v in table_bs['basis_set_elements'].items():
         entry = v['element_entry']
@@ -113,7 +105,7 @@ def compose_table_basis(file_path):
         table_bs['basis_set_elements'][k] = data['basis_set_elements'][k]
 
     # Add the version to the dictionary
-    file_base = os.path.basename(file_path)
+    file_base = os.path.basename(file_relpath)
     table_bs['basis_set_version'] = file_base.split('.')[-3]
 
     # Add whether the entire basis is spherical or cartesian

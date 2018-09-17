@@ -192,13 +192,12 @@ def get_basis(name,
         version = _convert_version(version)
 
     # Compose the entire basis set (all elements)
-    table_file_name = '{}.{}.table.json'.format(bs_data['filebase'], version)
-    table_file_path = os.path.join(data_dir, table_file_name)
-    basis_dict = compose.compose_table_basis(table_file_path)
+    file_relpath = bs_data['versions'][version]['file_relpath']
+    basis_dict = compose.compose_table_basis(file_relpath, data_dir)
 
     # Handle optional arguments
     if elements is not None:
-        # Convert to purely a list of strings tath represent integers
+        # Convert to purely a list of strings that represent integers
         elements = _convert_element_list(elements)
 
         bs_elements = basis_dict['basis_set_elements']
@@ -393,8 +392,7 @@ def get_basis_notes(name, data_dir=None):
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension
-    file_name = bs_data['filebase'] + '.notes'
-    file_path = os.path.join(data_dir, file_name)
+    file_path = os.path.join(data_dir, bs_data['filebase'] + '.notes')
 
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:

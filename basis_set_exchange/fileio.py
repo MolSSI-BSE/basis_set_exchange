@@ -5,7 +5,6 @@ basis set format
 
 import codecs
 import collections
-import glob
 import json
 import os
 
@@ -217,11 +216,11 @@ def write_references(file_path, refs):
 
 def get_basis_filelist(data_dir):
     """
-    Returns the full paths to all the table basis sets contained
+    Returns the relative paths to all the table basis sets contained
     in the given data directory
     """
 
-    return glob.glob(os.path.join(data_dir, '*.table.json'))
+    return [x for x in os.listdir(data_dir) if x.endswith('.table.json')]
 
 
 def read_notes_file(file_path):
