@@ -32,6 +32,12 @@ _main_url = 'http://bse.pnl.gov'
 memoize_enabled = True
 
 
+# If set to True, basis sets returned as python dictionaries
+# will contain the path to a file where each shell/potential
+# came from
+debug_data_sources = False
+
+
 def _convert_element_list(elements):
     '''Convert a list of elements to an internal list
 

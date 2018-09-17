@@ -3,10 +3,7 @@ Functions related to composing basis sets from individual components
 """
 
 import os
-
-from . import fileio
-from . import manip
-from . import memo
+from . import fileio,manip,memo,api
 
 
 def _whole_basis_harmonic(basis):
@@ -43,12 +40,24 @@ def compose_elemental_basis(file_relpath, data_dir):
     el_bs = fileio.read_json_basis(os.path.join(data_dir, file_relpath))
 
     # construct a list of all files to read
-    component_names = set()
+    component_files = set()
     for k, v in el_bs['basis_set_elements'].items():
-        component_names.update(set(v['element_components']))
+        component_files.update(set(v['element_components']))
 
     # Read all the data from these files into a big dictionary
-    component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_names}
+    component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_files}
+
+    # If debugging, add file source info
+    if api.debug_data_sources:
+        for k,v in component_map.items():
+            for el, el_data in v['basis_set_elements'].items():
+                if 'element_electron_shells' in el_data:
+                    for sh in el_data['element_electron_shells']:
+                        sh['data_source'] = os.path.join(data_dir, k)
+                if 'element_ecp' in el_data:
+                    for sh in el_data['element_ecp']:
+                        sh['data_source'] = os.path.join(data_dir, k)
+                el_data['lkjasd'] = 'lakjsdlkajs;ldkjal;sdkjasd'
 
     # Broadcast the basis_set_references to each element
     # Use the basis_set_description for the reference description
@@ -89,12 +98,12 @@ def compose_table_basis(file_relpath, data_dir):
     table_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all elemental files to read
-    component_names = set()
+    component_files = set()
     for k, v in table_bs['basis_set_elements'].items():
-        component_names.add(v['element_entry'])
+        component_files.add(v['element_entry'])
 
     # Create a map of the elemental basis data
-    element_map = {k: compose_elemental_basis(k, data_dir) for k in component_names}
+    element_map = {k: compose_elemental_basis(k, data_dir) for k in component_files}
 
     for k, v in table_bs['basis_set_elements'].items():
         entry = v['element_entry']
