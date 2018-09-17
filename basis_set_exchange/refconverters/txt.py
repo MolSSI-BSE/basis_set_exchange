@@ -3,7 +3,7 @@ Conversion of references to plain text format
 '''
 
 import textwrap
-from .common import compact_elements
+from ..misc import compact_elements
 from ..references import reference_text
 
 

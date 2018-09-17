@@ -1,9 +1,8 @@
 '''
-Helper functions for writing out references/citations in various formats
+Miscellaneous helper functions
 '''
 
-from .. import lut
-
+from . import lut
 
 def compact_elements(elements):
     """
