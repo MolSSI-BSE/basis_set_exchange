@@ -4,6 +4,7 @@ Functions for comparing basis sets and pieces of basis sets
 
 import operator
 import json
+import copy
 from .. import manip
 
 
@@ -400,3 +401,21 @@ def potentials_difference(p1, p2):
 
     print("Max relative difference for these potentials: {}".format(max_rdiff))
     return max_rdiff
+
+
+def subtract_electron_shells(s1, s2, rel_tol=0.0):
+    """
+    Returns the difference between two lists of electron shells (s1 - s2)
+
+    This will remove any shells from s1 that are also in s2, within a tolerance
+    """
+
+    diff_shells = []
+    for sh1 in s1:
+        for sh2 in s2:
+            if compare_electron_shells(sh1, sh2, rel_tol=rel_tol):
+                break
+        else:
+            diff_shells.append(copy.deepcopy(sh1))
+
+    return diff_shells
