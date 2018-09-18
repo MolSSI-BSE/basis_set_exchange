@@ -13,7 +13,7 @@ def read_turbomole(basis_path):
     skipchars = '*#'
 
     if not os.path.isfile(basis_path):
-        raise RuntimeError('G94 basis set path \'{}\' does not exist'.format(basis_path))
+        raise RuntimeError('Turbomole basis set path \'{}\' does not exist'.format(basis_path))
 
     fname = os.path.basename(basis_path)
 
