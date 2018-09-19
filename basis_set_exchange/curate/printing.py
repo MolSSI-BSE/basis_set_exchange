@@ -74,7 +74,6 @@ def print_element(z, eldata, print_references=True):
 
     if 'element_ecp' in eldata:
         max_ecp_am = max([x['potential_angular_momentum'][0] for x in eldata['element_ecp']])
-        max_ecp_amchar = lut.amint_to_char([max_ecp_am])
 
         print('ECP: Element: {}   Number of electrons: {}'.format(sym, eldata['element_ecp_electrons']))
 
@@ -131,7 +130,6 @@ def print_element_basis(basis, elements=None):
     print('{:4} {}'.format("El", "Components"))
     print('-' * 80)
     for z in elements:
-        data = basis['basis_set_elements'][z]
         sym = lut.element_sym_from_Z(z, True)
         print('{:4} {}'.format(sym, complist[z][0]))
         for v in complist[z][1:]:
@@ -165,10 +163,7 @@ def print_table_basis(basis, elements=None):
     print('{:4} {}'.format("El", "Entry"))
     print('-' * 80)
     for z in elements:
-        data = basis['basis_set_elements'][z]
-
         sym = lut.element_sym_from_Z(z, True)
-
         print('{:4} {}'.format(sym, complist[z]))
 
     print()

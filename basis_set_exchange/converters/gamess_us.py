@@ -2,7 +2,6 @@
 Conversion of basis sets to Gaussian format
 '''
 
-import os
 from .. import lut
 from .. import manip
 from .common import write_matrix

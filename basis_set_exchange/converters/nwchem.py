@@ -2,7 +2,6 @@
 Conversion of basis sets to NWChem format
 '''
 
-import os
 from .. import lut
 from .. import manip
 from .common import write_matrix
@@ -56,7 +55,6 @@ def write_nwchem(basis):
             data = basis['basis_set_elements'][z]
             sym = lut.element_sym_from_Z(z, True)
             max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
-            max_ecp_amchar = lut.amint_to_char([max_ecp_am])
 
             # Sort lowest->highest, then put the highest at the beginning
             ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])

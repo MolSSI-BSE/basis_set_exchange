@@ -4,6 +4,7 @@ Miscellaneous helper functions
 
 from . import lut
 
+
 def compact_elements(elements):
     """
     Create a string (with ranges) given a list of element numbers

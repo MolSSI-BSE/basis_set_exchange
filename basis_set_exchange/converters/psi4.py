@@ -2,7 +2,6 @@
 Conversion of basis sets to Gaussian format
 '''
 
-import os
 from .g94 import write_g94
 
 

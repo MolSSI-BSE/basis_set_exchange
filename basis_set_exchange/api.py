@@ -3,7 +3,6 @@ Main interface to Basis Set Exchange functionality
 '''
 
 import datetime
-import json
 import os
 import textwrap
 
@@ -30,7 +29,6 @@ _main_url = 'http://bse.pnl.gov'
 # will be used. Generally safe to leave enabled - it
 # won't use that much memory
 memoize_enabled = True
-
 
 # If set to True, basis sets returned as python dictionaries
 # will contain the path to a file where each shell/potential
@@ -355,8 +353,6 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
         return refconverters.converter_map[fmt]['function'](ref_data)
     else:
         raise RuntimeError('Unknown reference format "{}"'.format(fmt))
-
-    return ref_data
 
 
 def get_basis_family(name, data_dir=None):

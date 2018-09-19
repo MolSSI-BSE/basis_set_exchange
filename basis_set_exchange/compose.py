@@ -3,7 +3,7 @@ Functions related to composing basis sets from individual components
 """
 
 import os
-from . import fileio,manip,memo,api
+from . import fileio, manip, memo, api
 
 
 def _whole_basis_harmonic(basis):
@@ -49,7 +49,7 @@ def compose_elemental_basis(file_relpath, data_dir):
 
     # If debugging, add file source info
     if api.debug_data_sources:
-        for k,v in component_map.items():
+        for k, v in component_map.items():
             for el, el_data in v['basis_set_elements'].items():
                 if 'element_electron_shells' in el_data:
                     for sh in el_data['element_electron_shells']:

@@ -248,7 +248,6 @@ def uncontract_segmented(basis):
 
         for sh in el['element_electron_shells']:
             exponents = sh['shell_exponents']
-            coefficients = sh['shell_coefficients']
             nam = len(sh['shell_angular_momentum'])
 
             for i in range(len(exponents)):

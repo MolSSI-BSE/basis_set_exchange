@@ -137,8 +137,8 @@ def _replace_shell_data(old_shells, src_shells):
                 break
         else:
             sh_tmp = copy.deepcopy(sh1)
-            sh1['data_source'] = None
-            new_shells.append(sh1)
+            sh_tmp['data_source'] = None
+            new_shells.append(sh_tmp)
 
     return new_shells
 
@@ -156,16 +156,16 @@ def _replace_ecp_data(old_pots, src_pots):
                 new_pots.append(pot2)
                 break
             elif compare_ecp_pots(pot1, pot2, rel_tol=1e-3):
-                sh_tmp = copy.deepcopy(pot2)
-                sh_tmp['potential_r_exponents'] = pot1['potential_r_exponents']
-                sh_tmp['potential_gaussian_exponents'] = pot1['potential_gaussian_exponents']
-                sh_tmp['potential_coefficients'] = pot1['potential_coefficients']
-                new_pots.append(sh_tmp)
+                pot_tmp = copy.deepcopy(pot2)
+                pot_tmp['potential_r_exponents'] = pot1['potential_r_exponents']
+                pot_tmp['potential_gaussian_exponents'] = pot1['potential_gaussian_exponents']
+                pot_tmp['potential_coefficients'] = pot1['potential_coefficients']
+                new_pots.append(pot_tmp)
                 break
         else:
-            sh_tmp = copy.deepcopy(pot1)
-            pot1['data_source'] = 'MISSING.json'
-            new_pots.append(pot1)
+            pot_tmp = copy.deepcopy(pot1)
+            pot_tmp['data_source'] = 'MISSING.json'
+            new_pots.append(pot_tmp)
 
     return new_pots
 
@@ -237,7 +237,7 @@ def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplac
         if fpath is not None:
             orig_data = fileio.read_json_basis(fpath)
         else:
-            orig_data = { 'basis_set_elements': {} }
+            orig_data = {'basis_set_elements': {}}
             fpath = "MISSING.json"
 
         for el, replace_eldata in replace_data.items():

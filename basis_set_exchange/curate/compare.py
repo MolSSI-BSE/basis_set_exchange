@@ -3,7 +3,6 @@ Functions for comparing basis sets and pieces of basis sets
 '''
 
 import operator
-import json
 import copy
 from .. import manip
 
