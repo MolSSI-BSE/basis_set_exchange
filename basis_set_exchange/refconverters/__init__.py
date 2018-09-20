@@ -2,9 +2,9 @@
 Conversion of references to various formats
 '''
 
-from .bib import *
-from .txt import *
-from .bsejson import *
+from .bib import write_bib
+from .txt import write_txt
+from .bsejson import write_json
 
 converter_map = {
     'json': {
