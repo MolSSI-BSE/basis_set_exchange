@@ -39,8 +39,6 @@ def read_turbomole(basis_path):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        element_data = {}
-
         if not element_Z in bs_data['basis_set_elements']:
             bs_data['basis_set_elements'][element_Z] = {}
 
