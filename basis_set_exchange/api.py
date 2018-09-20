@@ -26,16 +26,6 @@ _default_schema_dir = os.path.join(_my_dir, 'schema')
 # Main URL of the project
 _main_url = 'http://bse.pnl.gov'
 
-# If set to True, memoization of some internal functions
-# will be used. Generally safe to leave enabled - it
-# won't use that much memory
-memoize_enabled = True
-
-# If set to True, basis sets returned as python dictionaries
-# will contain the path to a file where each shell/potential
-# came from
-debug_data_sources = False
-
 
 def _convert_element_list(elements):
     '''Convert a list of elements to an internal list

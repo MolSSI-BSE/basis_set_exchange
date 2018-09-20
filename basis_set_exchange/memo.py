@@ -5,7 +5,10 @@ Class/decorator for memoizing BSE functionality
 import functools
 import pickle
 
-from . import api
+# If set to True, memoization of some internal functions
+# will be used. Generally safe to leave enabled - it
+# won't use that much memory
+memoize_enabled = True
 
 
 class BSEMemoize:
@@ -15,7 +18,7 @@ class BSEMemoize:
         functools.update_wrapper(self, f)
 
     def __call__(self, *args):
-        if api.memoize_enabled is not True:
+        if memoize_enabled is not True:
             return self.__f(*args)
 
         if args in self.__memo:

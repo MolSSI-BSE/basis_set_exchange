@@ -5,6 +5,11 @@ Functions related to composing basis sets from individual components
 import os
 from . import fileio, manip, memo, api
 
+# If set to True, basis sets returned as python dictionaries
+# will contain the path to a file where each shell/potential
+# came from
+debug_data_sources = False
+
 
 def _whole_basis_harmonic(basis):
     '''
@@ -48,7 +53,7 @@ def compose_elemental_basis(file_relpath, data_dir):
     component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_files}
 
     # If debugging, add file source info
-    if api.debug_data_sources:
+    if debug_data_sources:
         for k, v in component_map.items():
             for el, el_data in v['basis_set_elements'].items():
                 if 'element_electron_shells' in el_data:

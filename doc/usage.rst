@@ -116,7 +116,7 @@ is a dictionary. If `fmt` is specified, the output is a string.
    <BLANKLINE> 
    <BLANKLINE> 
    @article{ditchfield1971a,
-       author = {R. Ditchfield and W. J. Hehre and J. A. Pople},
+       author = {Ditchfield, R. and Hehre, W. J. and Pople, J. A.}, 
        title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},
        journal = {J. Chem. Phys.},
        volume = {54},
@@ -240,15 +240,15 @@ for example, running :func:`basis_set_exchange.get_basis` with the same basis se
 different elements and options).
 
 For most uses, this can be left enabled - memory usage will still be very low, even if reading
-many basis sets. If you wish, it can be disabled by setting :attr:`basis_set_exchange.memoize_enabled` to `False`.
+many basis sets. If you wish, it can be disabled by setting :attr:`basis_set_exchange.memo.memoize_enabled` to `False`.
 Note that this does not clear any existing cache.
 
 
    >>> # Default is enabled
-   >>> basis_set_exchange.memoize_enabled
+   >>> basis_set_exchange.memo.memoize_enabled
    True
 
    >>> # Manually disable it
-   >>> basis_set_exchange.memoize_enabled = False
-   >>> basis_set_exchange.memoize_enabled
+   >>> basis_set_exchange.memo.memoize_enabled = False
+   >>> basis_set_exchange.memo.memoize_enabled
    False
