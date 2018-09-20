@@ -3,30 +3,11 @@ Comparison of basis data against authoritative sources
 '''
 
 import copy
-from ..fileio import read_json_basis,write_json_basis
+from ..fileio import read_json_basis, write_json_basis
 from ..api import get_basis
 from ..misc import compact_elements
 from .readers import read_formatted_basis
-
-
-def _fix_uncontracted(basis):
-    '''
-    Forces the contraction coefficient of uncontracted shells to 1.0
-    '''
-
-    for el in basis['basis_set_elements'].values():
-        if 'element_electron_shells' not in el:
-            continue
-
-        for sh in el['element_electron_shells']:
-            if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
-                sh['shell_coefficients'][0][0] = '1.0000000'
-
-            # Some uncontracted shells don't have a coefficient
-            if len(sh['shell_coefficients']) == 0:
-                sh['shell_coefficients'].append(['1.0000000'])
-
-    return basis
+from .compare import shells_difference, potentials_difference
 
 
 def _print_list(lst):
@@ -155,7 +136,6 @@ def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None)
     '''
 
     src_data = read_formatted_basis(src_filepath, file_type)
-    src_data = _fix_uncontracted(src_data)
     _compare_basis_against_ref(basis_name, src_data, version)
 
 
