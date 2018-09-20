@@ -328,21 +328,13 @@ and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 <dd><p>Lookup the name of a basis set given a primary basis set and role</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.api.transform_basis_name">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.transform_basis_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transforms the name of a basis set to an internal representation</p>
-<p>This makes comparison of basis set names easier by, for example,
-converting the name to all lower case.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="module-basis_set_exchange.compose">
 <span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-basis_set_exchange.compose" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to composing basis sets from individual components</p>
 <dl class="function">
 <dt id="basis_set_exchange.compose.compose_elemental_basis">
-<code class="descclassname">basis_set_exchange.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_relpath</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an ‘elemental’ basis from an elemental json file</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
@@ -411,6 +403,16 @@ after uncontracting</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.manip.sort_potentials">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_potentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort a list of ECP potentials into a standard order</p>
+<p>The order within a potential is not modified.</p>
+<p>The order of the shell list is in increasing angular momentum, with the largest
+angular momentum being moved to the front.</p>
+<p>The original data is not modified, and a deep copy is returned.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.manip.sort_shells">
 <code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of basis set shells into a standard order</p>
@@ -456,7 +458,7 @@ basis set format</p>
 <dl class="function">
 <dt id="basis_set_exchange.fileio.get_basis_filelist">
 <code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">get_basis_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_basis_filelist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the full paths to all the table basis sets contained
+<dd><p>Returns the relative paths to all the table basis sets contained
 in the given data directory</p>
 </dd></dl>
 

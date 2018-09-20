@@ -250,7 +250,7 @@ is a dictionary. If <cite>fmt</cite> is specified, the output is a string.</p>
 
 
 <span class="go">@article{ditchfield1971a,</span>
-<span class="go">    author = {R. Ditchfield and W. J. Hehre and J. A. Pople},</span>
+<span class="go">    author = {Ditchfield, R. and Hehre, W. J. and Pople, J. A.},</span>
 <span class="go">    title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},</span>
 <span class="go">    journal = {J. Chem. Phys.},</span>
 <span class="go">    volume = {54},</span>
@@ -310,7 +310,7 @@ This information can be accessed by the <code class="xref py py-func docutils li
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Note that the key is the name of the basis set that has been transformed
-into some internal name (see <a class="reference internal" href="user_api.html#basis_set_exchange.transform_basis_name" title="basis_set_exchange.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.transform_basis_name()</span></code></a>)</p>
+into some internal name (see <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.transform_basis_name()</span></code>)</p>
 </div>
 <p>A simple list containing all the basis set names can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_all_basis_names" title="basis_set_exchange.get_all_basis_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_all_basis_names()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the metadata</span>
@@ -340,7 +340,7 @@ into some internal name (see <a class="reference internal" href="user_api.html#b
 <p>Notes about a basis set or a basis set family can be obtained, also.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notes from a basis (name is case insensitive)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_notes</span><span class="p">(</span><span class="s1">&#39;6-31g&#39;</span><span class="p">)</span>
-<span class="go">&#39;Notes are not available for the 6-31g basis&#39;</span>
+<span class="go">&#39;Notes are not available for the 6-31G basis&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the family of a basis set from the metadata</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fam</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_family</span><span class="p">(</span><span class="s1">&#39;6-31G**&#39;</span><span class="p">)</span>
@@ -359,16 +359,16 @@ into some internal name (see <a class="reference internal" href="user_api.html#b
 for example, running <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a> with the same basis set name (even if choosing
 different elements and options).</p>
 <p>For most uses, this can be left enabled - memory usage will still be very low, even if reading
-many basis sets. If you wish, it can be disabled by setting <code class="xref py py-attr docutils literal notranslate"><span class="pre">basis_set_exchange.memoize_enabled</span></code> to <cite>False</cite>.
+many basis sets. If you wish, it can be disabled by setting <code class="xref py py-attr docutils literal notranslate"><span class="pre">basis_set_exchange.memo.memoize_enabled</span></code> to <cite>False</cite>.
 Note that this does not clear any existing cache.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default is enabled</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memoize_enabled</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span>
 <span class="go">True</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Manually disable it</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memoize_enabled</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memoize_enabled</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span>
 <span class="go">False</span>
 </pre></div>
 </div>

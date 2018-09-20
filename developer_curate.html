@@ -165,8 +165,14 @@
 <span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this headline">¶</a></h2>
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
+<dt id="basis_set_exchange.curate.compare_basis_against_ref">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_ref</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares basis set data from an authoritative source against bse data</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.curate.compare_ecp_pots">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two ecp potentials for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
@@ -174,7 +180,7 @@
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_electron_shells">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two electron shells for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
@@ -182,7 +188,7 @@
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_elements">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if the basis information for two elements is the same as another</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -205,6 +211,9 @@
 <dt><strong>compare_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">Compare the overall element metadata</p>
 </dd>
+<dt><strong>rel_tol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Maximum relative error that is considered equal</p>
+</dd>
 </dl>
 </td>
 </tr>
@@ -221,7 +230,7 @@
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.ecp_pots_are_equal">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -230,7 +239,7 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.ecp_pots_are_subset">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of ecp potentials is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
@@ -240,7 +249,7 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.electron_shells_are_equal">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The shells are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -249,12 +258,21 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.electron_shells_are_subset">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The shells are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.potentials_difference">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">potentials_difference</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and prints the differences between two lists of potentials</p>
+<p>If the shells contain a different number primitives,
+or the lists are of different length, inf is returned.
+Otherwise, the maximum relative difference is returned.</p>
 </dd></dl>
 
 <dl class="function">
@@ -317,12 +335,29 @@ within a tolerance)</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.curate.read_g94">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">read_g94</code><span class="sig-paren">(</span><em>basis_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.read_g94" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a G94-formatted file and converts it to a dictionary with the
-usual BSE fields</p>
-<p>Note that the gaussian format does not store all the fields we
-have, so some fields are left blank</p>
+<dt id="basis_set_exchange.curate.replace_basis_data">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">replace_basis_data</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em>, <em>inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.replace_basis_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces data in basis set files with those from a reference</p>
+<p>Data is replaced only if it doesn’t exactly match.</p>
+<p>If inplace is True, then the data in the original files is overwritten.
+Otherwise, the new data is written to a file with the same name, but
+ending with .diff</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.shells_difference">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">shells_difference</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.shells_difference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and prints the differences between two lists of shells</p>
+<p>If the shells contain a different number primitives,
+or the lists are of different length, inf is returned.
+Otherwise, the maximum relative difference is returned.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.subtract_electron_shells">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">subtract_electron_shells</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.subtract_electron_shells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference between two lists of electron shells (s1 - s2)</p>
+<p>This will remove any shells from s1 that are also in s2, within a tolerance</p>
 </dd></dl>
 
 </div>
