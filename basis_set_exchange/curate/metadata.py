@@ -20,8 +20,8 @@ def create_metadata_file(output_path, data_dir):
 
     metadata = {}
     for bs_file_relpath in basis_filelist:
-        filebase = os.path.split(bs_file_relpath)[1]
-        filebase = os.path.splitext(filebase)[0]  # remove .json
+        # Obtain the version from the filename
+        filebase = os.path.splitext(bs_file_relpath)[0]  # remove .json
         filebase = os.path.splitext(filebase)[0]  # remove .table
         filebase, ver = os.path.splitext(filebase)  # remove .[version]
         ver = ver[1:]  # Remove the period
@@ -64,11 +64,13 @@ def create_metadata_file(output_path, data_dir):
     for k, v in metadata.items():
         latest = max(v['versions'].keys())
         latest_data = v['versions'][latest]
-        metadata[k] = OrderedDict(
-            [('display_name', latest_data['display_name']), ('filebase', filebase), ('latest_version', latest),
-             ('family', latest_data['family']), ('role', latest_data['role']), ('functiontypes',
-                                                                                latest_data['functiontypes']),
-             ('auxiliaries', latest_data['auxiliaries']), ('versions', OrderedDict(sorted(v['versions'].items())))])
+        metadata[k] = OrderedDict([('display_name', latest_data['display_name']), ('latest_version',
+                                                                                   latest), ('family',
+                                                                                             latest_data['family']),
+                                   ('role', latest_data['role']), ('functiontypes', latest_data['functiontypes']),
+                                   ('auxiliaries', latest_data['auxiliaries']), ('versions',
+                                                                                 OrderedDict(
+                                                                                     sorted(v['versions'].items())))])
 
     # Remove these from under versions
     to_remove = ['display_name', 'role', 'auxiliaries', 'family', 'functiontypes']

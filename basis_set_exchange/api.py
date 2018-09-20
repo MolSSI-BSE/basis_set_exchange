@@ -394,7 +394,13 @@ def get_basis_notes(name, data_dir=None):
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension
-    file_path = os.path.join(data_dir, bs_data['filebase'] + '.notes')
+    latest_ver = bs_data['latest_version']
+    bs_ver_data = bs_data['versions'][latest_ver]
+    rel_path = bs_ver_data['file_relpath']
+    filebase = os.path.splitext(rel_path)[0]  # remove .json
+    filebase = os.path.splitext(filebase)[0]  # remove .tablejson
+    filebase = os.path.splitext(filebase)[0]  # remove .[version]
+    file_path = os.path.join(data_dir, filebase + '.notes')
 
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:
