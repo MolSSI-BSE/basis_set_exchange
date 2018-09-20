@@ -45,6 +45,8 @@ def convert_references(ref_dict, fmt, header=None):
         header_str = comment_str + comment_str.join(header.splitlines(True))
         ret_str = header_str + '\n\n' + ret_str
 
+    return ret_str
+
 
 def get_formats():
     return {k: v['display'] for k, v in _converter_map.items()}
