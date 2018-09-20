@@ -8,6 +8,7 @@ from collections import OrderedDict
 from .. import api
 from .. import compose
 from .. import fileio
+from .. import misc
 
 
 def create_metadata_file(output_path, data_dir):
@@ -30,7 +31,7 @@ def create_metadata_file(output_path, data_dir):
         bs = compose.compose_table_basis(bs_file_relpath, data_dir)
 
         # Prepare the metadata
-        tr_name = api.transform_basis_name(bs['basis_set_name'])
+        tr_name = misc.transform_basis_name(bs['basis_set_name'])
         display_name = bs['basis_set_name']
         defined_elements = sorted(list(bs['basis_set_elements'].keys()), key=lambda x: int(x))
         description = bs['basis_set_description']

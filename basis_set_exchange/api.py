@@ -15,6 +15,7 @@ from . import memo
 from . import notes
 from . import refconverters
 from . import references
+from . import misc
 
 # Determine the path to the data directory that is part
 # of this installation
@@ -75,7 +76,7 @@ def _get_basis_metadata(name, data_dir):
     '''
 
     # Transform the name into an internal representation
-    tr_name = transform_basis_name(name)
+    tr_name = misc.transform_basis_name(name)
 
     # Get the metadata for all basis sets
     metadata = get_metadata(data_dir)
@@ -84,17 +85,6 @@ def _get_basis_metadata(name, data_dir):
         raise KeyError("Basis set {} does not exist".format(name))
 
     return metadata[tr_name]
-
-
-def transform_basis_name(name):
-    """
-    Transforms the name of a basis set to an internal representation
-
-    This makes comparison of basis set names easier by, for example,
-    converting the name to all lower case.
-    """
-
-    return name.lower()
 
 
 def _header_string(comment_str):

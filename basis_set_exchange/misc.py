@@ -55,3 +55,14 @@ def compact_elements(elements):
             range_strs.append(sym + "-" + sym2)
 
     return ",".join(range_strs)
+
+
+def transform_basis_name(name):
+    """
+    Transforms the name of a basis set to an internal representation
+
+    This makes comparison of basis set names easier by, for example,
+    converting the name to all lower case.
+    """
+
+    return name.lower()
