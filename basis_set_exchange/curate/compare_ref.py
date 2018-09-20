@@ -3,11 +3,10 @@ Comparison of basis data against authoritative sources
 '''
 
 import copy
-from .. import get_basis
-from .. import fileio
+from ..fileio import read_json_basis,write_json_basis
+from ..api import get_basis
 from ..misc import compact_elements
-from .compare import shells_difference, potentials_difference, compare_electron_shells, compare_ecp_pots
-from .read_turbomole import read_turbomole
+from .readers import read_formatted_basis
 
 
 def _fix_uncontracted(basis):
@@ -97,26 +96,6 @@ def _compare_basis_against_ref(basis_name, src_data, version=None):
     print()
 
 
-def _read_ref_data(src_filepath, file_type):
-    type_readers = {'turbomole': read_turbomole}
-
-    if file_type not in type_readers:
-        raise RuntimeError("Unknown file type to read '{}'".format(file_type))
-
-    data = type_readers[file_type](src_filepath)
-    return _fix_uncontracted(data)
-
-
-def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None):
-    '''
-    Compares basis set data from an authoritative source against bse data
-    '''
-
-    src_data = _read_ref_data(src_filepath, file_type)
-    src_data = _fix_uncontracted(src_data)
-    _compare_basis_against_ref(basis_name, src_data, version)
-
-
 def _replace_shell_data(old_shells, src_shells):
     '''
     Replaces exponents and coefficients of old_data with that in src_data
@@ -170,6 +149,16 @@ def _replace_ecp_data(old_pots, src_pots):
     return new_pots
 
 
+def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None):
+    '''
+    Compares basis set data from an authoritative source against bse data
+    '''
+
+    src_data = read_formatted_basis(src_filepath, file_type)
+    src_data = _fix_uncontracted(src_data)
+    _compare_basis_against_ref(basis_name, src_data, version)
+
+
 def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplace=False):
     '''
     Replaces data in basis set files with those from a reference
@@ -181,7 +170,7 @@ def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplac
     ending with .diff
     '''
 
-    src_data = _read_ref_data(src_filepath, file_type)
+    src_data = read_formatted_basis(src_filepath, file_type)
     bse_data = get_basis(basis_name, version=version)
 
     all_src = list(src_data['basis_set_elements'].keys())

@@ -1,5 +1,5 @@
 import os
-from .. import lut
+from ... import lut
 
 
 def read_turbomole(basis_path):
