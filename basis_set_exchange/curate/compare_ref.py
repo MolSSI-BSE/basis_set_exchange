@@ -25,6 +25,8 @@ def _print_list(lst):
 def _compare_basis_against_ref(basis_name, src_data, version=None):
     '''
     Compares basis set data from an authoritative source against bse data
+
+    Returns true if the basis sets are identical. Otherwise returns false
     '''
     bse_data = get_basis(basis_name, version=version)
     all_src = list(src_data['basis_set_elements'].keys())
@@ -75,6 +77,9 @@ def _compare_basis_against_ref(basis_name, src_data, version=None):
     print("Some difference: ", _print_list(some_diff))
     print(" BIG difference: ", _print_list(big_diff))
     print()
+
+    return (len(not_in_src) == 0 and len(not_in_bse) == 0 and
+            len(some_diff) == 0 and len(big_diff) == 0)
 
 
 def _replace_shell_data(old_shells, src_shells):
@@ -136,7 +141,7 @@ def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None)
     '''
 
     src_data = read_formatted_basis(src_filepath, file_type)
-    _compare_basis_against_ref(basis_name, src_data, version)
+    return _compare_basis_against_ref(basis_name, src_data, version)
 
 
 def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplace=False):
