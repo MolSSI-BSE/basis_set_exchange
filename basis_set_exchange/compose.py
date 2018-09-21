@@ -3,7 +3,7 @@ Functions related to composing basis sets from individual components
 """
 
 import os
-from . import fileio, manip, memo, api
+from . import fileio, manip, memo
 
 # If set to True, basis sets returned as python dictionaries
 # will contain the path to a file where each shell/potential

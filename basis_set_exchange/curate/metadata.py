@@ -5,7 +5,6 @@ Helpers for handling BSE metadata
 import os
 from collections import OrderedDict
 
-from .. import api
 from .. import compose
 from .. import fileio
 from .. import misc

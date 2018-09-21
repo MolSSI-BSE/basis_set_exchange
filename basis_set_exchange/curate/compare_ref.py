@@ -204,7 +204,7 @@ def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplac
 
         # Read the original data from the file
         if fpath is not None:
-            orig_data = fileio.read_json_basis(fpath)
+            orig_data = read_json_basis(fpath)
         else:
             orig_data = {'basis_set_elements': {}}
             fpath = "MISSING.json"
@@ -257,7 +257,7 @@ def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplac
         if not inplace:
             fpath = fpath + '.diff'
 
-        fileio.write_json_basis(fpath, orig_data)
+        write_json_basis(fpath, orig_data)
 
     print()
     print("     Not in src: ", _print_list(not_in_src))
