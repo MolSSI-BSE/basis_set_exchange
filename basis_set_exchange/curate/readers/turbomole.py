@@ -10,7 +10,7 @@ def read_turbomole(basis_path):
        have, so some fields are left blank
     '''
 
-    skipchars = '*#'
+    skipchars = '*#$'
 
     if not os.path.isfile(basis_path):
         raise RuntimeError('Turbomole basis set path \'{}\' does not exist'.format(basis_path))
@@ -51,9 +51,9 @@ def read_turbomole(basis_path):
             i += 1
             line = basis_lines[i]
 
-            lsplt = line.split()
-            maxam = int(lsplt[5])
-            n_elec = int(lsplt[2])
+            lsplt = line.split('=')
+            maxam = int(lsplt[2])
+            n_elec = int(lsplt[1].split()[0])
 
             amlist = [maxam]
             amlist.extend(list(range(0, maxam)))
