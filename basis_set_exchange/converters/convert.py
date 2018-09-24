@@ -2,6 +2,7 @@
 Converts basis set data to a specified output format
 '''
 
+from collections import OrderedDict
 from .bsejson import write_json
 from .nwchem import write_nwchem
 from .g94 import write_g94
@@ -75,4 +76,21 @@ def convert_basis(basis_dict, fmt, header=None):
 
 
 def get_formats():
-    return {k: v['display'] for k, v in _converter_map.items()}
+    '''
+    Returns the available formats mapped to display name.
+
+    This is returned as an ordered dictionary, with the most common
+    at the top, followed by the rest in alphabetical order
+    '''
+
+    at_top = ['nwchem', 'gaussian94', 'psi4']
+    ret = [(k, v['display']) for k, v in _converter_map.items()]
+    ret = OrderedDict(sorted(ret))
+
+    for x in reversed(at_top):
+        ret.move_to_end(x, False)
+
+    # Move JSON to the end
+    ret.move_to_end('json', True)
+
+    return ret

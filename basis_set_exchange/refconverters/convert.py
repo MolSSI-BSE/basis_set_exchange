@@ -2,6 +2,7 @@
 Converts basis set data to a specified output format
 '''
 
+from collections import OrderedDict
 from .bib import write_bib
 from .txt import write_txt
 from .bsejson import write_json
@@ -49,4 +50,21 @@ def convert_references(ref_dict, fmt, header=None):
 
 
 def get_formats():
-    return {k: v['display'] for k, v in _converter_map.items()}
+    '''
+    Returns the available reference formats mapped to display name.
+
+    This is returned as an ordered dictionary, with the most common
+    at the top, followed by the rest in alphabetical order
+    '''
+
+    at_top = ['bib', 'txt']
+    ret = [(k, v['display']) for k, v in _converter_map.items()]
+    ret = OrderedDict(sorted(ret))
+
+    for x in reversed(at_top):
+        ret.move_to_end(x, False)
+
+    # Move JSON to the end
+    ret.move_to_end('json', True)
+
+    return ret
