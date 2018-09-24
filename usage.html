@@ -200,8 +200,9 @@ instread.</p>
 
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_formats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># (returned as an OrderedDict)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_formats</span><span class="p">()</span>
-<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian94&#39;, &#39;gamess_us&#39;: &#39;GAMESS US&#39;, &#39;psi4&#39;: &#39;Psi4&#39;}</span>
+<span class="go">OrderedDict([(&#39;nwchem&#39;, &#39;NWChem&#39;), (&#39;gaussian94&#39;, &#39;Gaussian94&#39;), (&#39;psi4&#39;, &#39;Psi4&#39;), (&#39;gamess_us&#39;, &#39;GAMESS US&#39;), (&#39;turbomole&#39;, &#39;Turbomole&#39;), (&#39;json&#39;, &#39;JSON&#39;)])</span>
 </pre></div>
 </div>
 <p>By default, all elements for which the basis set is defined are included - this
@@ -262,8 +263,9 @@ is a dictionary. If <cite>fmt</cite> is specified, the output is a string.</p>
 
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_reference_formats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># (returned as an OrderedDict)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_reference_formats</span><span class="p">()</span>
-<span class="go">{&#39;json&#39;: &#39;JSON&#39;, &#39;bib&#39;: &#39;BibTeX&#39;, &#39;txt&#39;: &#39;Plain Text&#39;}</span>
+<span class="go">OrderedDict([(&#39;bib&#39;, &#39;BibTeX&#39;), (&#39;txt&#39;, &#39;Plain Text&#39;), (&#39;json&#39;, &#39;JSON&#39;)])</span>
 </pre></div>
 </div>
 </div>

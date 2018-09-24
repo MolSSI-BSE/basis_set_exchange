@@ -55,8 +55,9 @@ instread.
 
 
    >>> # Available formats are available via get_formats
+   >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_formats()
-   {'json': 'JSON', 'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'gamess_us': 'GAMESS US', 'psi4': 'Psi4'} 
+   OrderedDict([('nwchem', 'NWChem'), ('gaussian94', 'Gaussian94'), ('psi4', 'Psi4'), ('gamess_us', 'GAMESS US'), ('turbomole', 'Turbomole'), ('json', 'JSON')])
 
 
 By default, all elements for which the basis set is defined are included - this
@@ -128,8 +129,9 @@ is a dictionary. If `fmt` is specified, the output is a string.
 
 
    >>> # Available formats are available via get_reference_formats
+   >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_reference_formats()
-   {'json': 'JSON', 'bib': 'BibTeX', 'txt': 'Plain Text'}
+   OrderedDict([('bib', 'BibTeX'), ('txt', 'Plain Text'), ('json', 'JSON')])
 
 
 Versioning
