@@ -7,6 +7,7 @@ from .nwchem import write_nwchem
 from .g94 import write_g94
 from .gamess_us import write_gamess_us
 from .psi4 import write_psi4
+from .turbomole import write_turbomole
 
 _converter_map = {
     'json': {
@@ -38,6 +39,12 @@ _converter_map = {
         'extension': '.gbs',
         'comment': '!',
         'function': write_psi4
+    },
+    'turbomole': {
+        'display': 'Turbomole',
+        'extension': '.tm',
+        'comment': '#',
+        'function': write_turbomole
     }
 }
 
