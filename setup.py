@@ -3,9 +3,20 @@ import setuptools
 import versioneer
 
 _my_dir = os.path.dirname(os.path.abspath(__file__))
+_bse_dir = os.path.join(_my_dir, 'basis_set_exchange')
 _readme_path = os.path.join(_my_dir, "README.md")
+
+# Use the readme file for a description
 with open(_readme_path, 'r') as readme_file:
     long_description = readme_file.read()
+
+# Find the json files in the data dir and the schema dir
+bse_package_data = []
+for data_dir in 'data', 'schema':
+    for (path, _, filenames) in os.walk(os.path.join('basis_set_exchange', data_dir)):
+        for filename in filenames:
+            filepath = os.path.join(path, filename)
+            bse_package_data.append(os.path.relpath(filepath, 'basis_set_exchange'))
 
 if __name__ == "__main__":
     my_packages=setuptools.find_packages()
@@ -44,7 +55,7 @@ if __name__ == "__main__":
             'Programming Language :: Python :: 3',
         ],
 
-        package_data={'basis_set_exchange': ['data/*', 'data/*/*']},
+        package_data={'basis_set_exchange': bse_package_data},
 
         zip_safe=True,
     )
