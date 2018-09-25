@@ -71,7 +71,6 @@ def write_turbomole(basis):
                 rexponents = pot['potential_r_exponents']
                 gexponents = pot['potential_gaussian_exponents']
                 coefficients = pot['potential_coefficients']
-                nprim = len(rexponents)
 
                 am = pot['potential_angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True)
