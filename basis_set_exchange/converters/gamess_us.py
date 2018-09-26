@@ -13,7 +13,10 @@ def write_gamess_us(basis):
 
     s = ''
 
+    # Uncontract all but SP
     basis = manip.uncontract_general(basis)
+    basis = manip.uncontract_spdf(basis, 1)
+    basis = manip.sort_basis(basis)
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_electron_shells' in v]
