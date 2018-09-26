@@ -94,3 +94,15 @@ def get_formats():
     ret.move_to_end('json', True)
 
     return ret
+
+
+def get_format_extension(fmt):
+    '''
+    Returns the recommended extension for a given format
+    '''
+
+    fmt = fmt.lower()
+    if fmt not in _converter_map:
+        raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
+
+    return _converter_map[fmt]['extension']
