@@ -1,0 +1,60 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "cc-pVDZ",
+    "basis_set_references": [
+        "woon1994a"
+    ],
+    "basis_set_elements": {
+        "2": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "38.3600000",
+                        "5.7700000",
+                        "1.2400000",
+                        "0.2976000"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "0.0238090",
+                            "0.1548910",
+                            "0.4699870",
+                            "0.5130270"
+                        ],
+                        [
+                            "0.0000000",
+                            "0.0000000",
+                            "0.0000000",
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        1
+                    ],
+                    "shell_exponents": [
+                        "1.2750000"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
