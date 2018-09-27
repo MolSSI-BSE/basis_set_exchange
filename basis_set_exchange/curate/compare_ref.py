@@ -78,8 +78,7 @@ def _compare_basis_against_ref(basis_name, src_data, version=None):
     print(" BIG difference: ", _print_list(big_diff))
     print()
 
-    return (len(not_in_src) == 0 and len(not_in_bse) == 0 and
-            len(some_diff) == 0 and len(big_diff) == 0)
+    return (len(not_in_src) == 0 and len(not_in_bse) == 0 and len(some_diff) == 0 and len(big_diff) == 0)
 
 
 def _replace_shell_data(old_shells, src_shells):

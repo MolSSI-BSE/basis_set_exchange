@@ -295,6 +295,57 @@ def compare_elements(element1,
     return True
 
 
+def compare_basis(bs1,
+                  bs2,
+                  compare_electron_shells_meta=False,
+                  compare_ecp_pots_meta=False,
+                  compare_elements_meta=False,
+                  compare_meta=False,
+                  rel_tol=0.0):
+    '''
+    Determine if two basis set dictionaries are the same
+
+    bs1 : dict
+        Full basis information
+    bs2 : dict
+        Full basis information
+    compare_electron_shells_meta : bool
+        Compare the metadata of electron shells
+    compare_ecp_pots_meta : bool
+        Compare the metadata of ECP potentials
+    compare_elements_meta : bool
+        Compare the overall element metadata
+    compare_meta: bool
+        Compare the metadata for the basis set (name, description, etc)
+    rel_tol : float
+        Maximum relative error that is considered equal
+    '''
+
+    els1 = sorted(list(bs1['basis_set_elements'].keys()))
+    els2 = sorted(list(bs2['basis_set_elements'].keys()))
+    if not els1 == els2:
+        return False
+
+    for el in els1:
+        if not compare_elements(
+                bs1['basis_set_elements'][el],
+                bs2['basis_set_elements'][el],
+                compare_electron_shells_meta=compare_electron_shells_meta,
+                compare_ecp_pots_meta=compare_ecp_pots_meta,
+                compare_meta=compare_elements_meta,
+                rel_tol=rel_tol):
+            print("Elements failed: ", bs1['basis_set_name'], el)
+            return False
+    if compare_meta:
+        for k in [
+                'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_revision_description',
+                'basis_set_role', 'basis_set_auxiliaries'
+        ]:
+            if not _compare_keys(bs1, bs2, k, operator.eq):
+                return False
+    return True
+
+
 def shells_difference(s1, s2):
     """
     Computes and prints the differences between two lists of shells

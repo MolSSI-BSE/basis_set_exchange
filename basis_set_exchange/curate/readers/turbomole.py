@@ -42,11 +42,11 @@ def read_turbomole(basis_path):
         if not element_Z in bs_data['basis_set_elements']:
             bs_data['basis_set_elements'][element_Z] = {}
 
-        eldata = bs_data['basis_set_elements'][element_Z]
+        element_data = bs_data['basis_set_elements'][element_Z]
 
         if "ecp" in line.lower():
-            if not 'element_ecp' in eldata:
-                eldata['element_ecp'] = []
+            if not 'element_ecp' in element_data:
+                element_data['element_ecp'] = []
 
             i += 1
             line = basis_lines[i]
@@ -84,13 +84,13 @@ def read_turbomole(basis_path):
                 ecp_shell['potential_r_exponents'] = ecp_rexponents
                 ecp_shell['potential_gaussian_exponents'] = ecp_exponents
                 ecp_shell['potential_coefficients'] = [ecp_coefficients]
-                eldata['element_ecp'].append(ecp_shell)
+                element_data['element_ecp'].append(ecp_shell)
 
-            eldata['element_ecp_electrons'] = n_elec
+            element_data['element_ecp_electrons'] = n_elec
 
         else:
-            if not 'element_electron_shells' in eldata:
-                eldata['element_electron_shells'] = []
+            if not 'element_electron_shells' in element_data:
+                element_data['element_electron_shells'] = []
 
             i += 1
             while i < len(basis_lines) and basis_lines[i][0].isalpha() == False:
@@ -124,6 +124,6 @@ def read_turbomole(basis_path):
                 # general contraction being the row index)
                 shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
 
-                eldata['element_electron_shells'].append(shell)
+                element_data['element_electron_shells'].append(shell)
 
     return bs_data
