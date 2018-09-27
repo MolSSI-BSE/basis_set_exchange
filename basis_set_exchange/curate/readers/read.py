@@ -5,8 +5,9 @@ Read a basis set file in a given format
 from .turbomole import read_turbomole
 from .g94 import read_g94
 from .nwchem import read_nwchem
+from .gbasis import read_gbasis
 
-_type_readers = {'turbomole': read_turbomole, 'gaussian94': read_g94, 'nwchem': read_nwchem}
+_type_readers = {'turbomole': read_turbomole, 'gaussian94': read_g94, 'nwchem': read_nwchem, 'gbasis': read_gbasis}
 
 
 def _fix_uncontracted(basis):
