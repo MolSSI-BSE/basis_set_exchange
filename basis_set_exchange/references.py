@@ -60,7 +60,11 @@ def reference_text(ref):
     ref_wrap = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 8)
 
     s = u''
-    if ref['type'] == 'article':
+    if ref['type'] == 'unpublished':
+        s += ref_wrap.fill(u', '.join(ref['authors'])) + '\n'
+        s += ref_wrap.fill(ref['title']) + '\n'
+        s += ref_wrap.fill(ref['note']) + '\n'
+    elif ref['type'] == 'article':
         s += ref_wrap.fill(u', '.join(ref['authors'])) + '\n'
         s += ref_wrap.fill(ref['title']) + '\n'
         s += u'{}, {}, {} ({})'.format(ref['journal'], ref['volume'], ref['page'], ref['year'])
