@@ -7,7 +7,7 @@ from ..fileio import read_json_basis, write_json_basis
 from ..api import get_basis
 from ..misc import compact_elements
 from .readers import read_formatted_basis
-from .compare import shells_difference, potentials_difference
+from .compare import shells_difference, potentials_difference, compare_electron_shells
 
 
 def _print_list(lst):
@@ -128,7 +128,7 @@ def _replace_ecp_data(old_pots, src_pots):
                 break
         else:
             pot_tmp = copy.deepcopy(pot1)
-            pot_tmp['data_source'] = 'MISSING.json'
+            pot_tmp['data_source'] = None
             new_pots.append(pot_tmp)
 
     return new_pots
