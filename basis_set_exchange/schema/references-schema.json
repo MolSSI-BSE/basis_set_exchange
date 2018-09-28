@@ -33,7 +33,7 @@
         }
     },
     "patternProperties": {
-        "^[a-z0-9]+$" : {
+        "^[a-z0-9X]+$" : {
             "description": "A single reference associated with a basis set",
             "type": "object",
             "additionalProperties": false,
@@ -68,7 +68,8 @@
                 "isbn" : { "type" : "string" },
                 "institution" : { "type" : "string" },
                 "number" : { "type" : "string" },
-                "address" : { "type" : "string" }
+                "address" : { "type" : "string" },
+                "note" : { "type" : "string" }
             }
         }
     }

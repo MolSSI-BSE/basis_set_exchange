@@ -116,7 +116,7 @@ def _sort_references_dict(refs):
 
     _keyorder = [
         'schema_type', 'schema_version', 'type', 'authors', 'title', 'booktitle', 'series', 'editors', 'journal',
-        'institution', 'volume', 'number', 'page', 'year', 'publisher', 'address', 'isbn', 'doi'
+        'institution', 'volume', 'number', 'page', 'year', 'note', 'publisher', 'address', 'isbn', 'doi'
     ]
 
     refs_sorted = collections.OrderedDict()
