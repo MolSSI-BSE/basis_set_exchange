@@ -81,7 +81,7 @@ def _compare_vector(arr1, arr2, rel_tol):
 
         diff = abs(abs(element_1) - abs(element_2))
         if diff != 0.0:
-            rel = diff / min(abs(element_1), abs(element_2))
+            rel = _reldiff(element_1, element_2)
 
             # For a basis set, a relatively coarse comparison
             # should be acceptible
