@@ -358,7 +358,7 @@ def shells_difference(s1, s2):
     max_rdiff = 0.0
     nsh = len(s1)
     if len(s2) != nsh:
-        print("Different number of shells")
+        print("Different number of shells: {} vs {}".format(len(s1), len(s2)))
         return float('inf')
 
     shells1 = manip.sort_shells(s1)
@@ -382,14 +382,16 @@ def shells_difference(s1, s2):
             e1 = sh1['shell_exponents'][p]
             e2 = sh2['shell_exponents'][p]
             r = _reldiff(e1, e2)
-            print("   Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            if r > 0.0:
+                print("   Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
             max_rdiff = max(max_rdiff, r)
 
             for g in range(ngen):
                 c1 = sh1['shell_coefficients'][g][p]
                 c2 = sh2['shell_coefficients'][g][p]
                 r = _reldiff(c1, c2)
-                print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                if r > 0.0:
+                    print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
         print()
 
@@ -433,19 +435,22 @@ def potentials_difference(p1, p2):
             e1 = pot1['potential_gaussian_exponents'][p]
             e2 = pot2['potential_gaussian_exponents'][p]
             r = _reldiff(e1, e2)
-            print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            if r > 0.0:
+                print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
 
             e1 = pot1['potential_r_exponents'][p]
             e2 = pot2['potential_r_exponents'][p]
             r = _reldiff(e1, e2)
-            print("          R Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            if r > 0.0:
+                print("          R Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
             max_rdiff = max(max_rdiff, r)
 
             for g in range(ngen):
                 c1 = pot1['potential_coefficients'][g][p]
                 c2 = pot2['potential_coefficients'][g][p]
                 r = _reldiff(c1, c2)
-                print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                if r > 0.0:
+                    print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
         print()
 
