@@ -21,8 +21,8 @@ def test_element_data(Z):
     assert data[0] == lut.element_sym_from_Z(Z)
     assert data[2] == lut.element_name_from_Z(Z)
 
-    nsym = lut.normalize_element_symbol(data[0])
-    nname = lut.normalize_element_name(data[2])
+    nsym = lut.element_sym_from_Z(Z, True)
+    nname = lut.element_name_from_Z(Z, True)
 
     assert nsym[0] == data[0][0].upper()
     assert nname[0] == data[2][0].upper()

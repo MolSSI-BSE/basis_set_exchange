@@ -133,7 +133,7 @@ def element_name_from_Z(Z, normalize=False):
 
     r = element_data_from_Z(Z)[2]
     if normalize:
-        return normalize_element_name(r)
+        return r.capitalize()
     else:
         return r
 
@@ -148,7 +148,7 @@ def element_sym_from_Z(Z, normalize=False):
 
     r = element_data_from_Z(Z)[0]
     if normalize:
-        return normalize_element_symbol(r)
+        return r.capitalize()
     else:
         return r
 
@@ -160,28 +160,6 @@ def element_Z_from_sym(sym):
     '''
 
     return element_data_from_sym(sym)[1]
-
-
-def normalize_element_symbol(sym):
-    '''Normalize the capitalization of an element symbol (where only the first letter is capitalized
-
-    For example, converts "he" to "He" and "uUo" to "Uuo"
-    '''
-
-    # We can cheat, since this will be the same algorithm as normalizing the name
-    return normalize_element_name(sym)
-
-
-def normalize_element_name(name):
-    '''Normalize the capitalization of an element name
-
-    For example, converts "helium" to "Helium" and "aRgOn" to "Argon"
-    '''
-
-    name = name.lower()
-    name2 = name[0].upper()
-    name2 += name[1:]
-    return name2
 
 
 def amint_to_char(am, hij=False, use_L=False):
