@@ -165,8 +165,30 @@
 <span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this headline">¶</a></h2>
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
+<dt id="basis_set_exchange.curate.compare_basis">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis</code><span class="sig-paren">(</span><em>bs1</em>, <em>bs2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_elements_meta=False</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if two basis set dictionaries are the same</p>
+<dl class="docutils">
+<dt>bs1 <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd>Full basis information</dd>
+<dt>bs2 <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd>Full basis information</dd>
+<dt>compare_electron_shells_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Compare the metadata of electron shells</dd>
+<dt>compare_ecp_pots_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Compare the metadata of ECP potentials</dd>
+<dt>compare_elements_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd>Compare the overall element metadata</dd>
+<dt>compare_meta: bool</dt>
+<dd>Compare the metadata for the basis set (name, description, etc)</dd>
+<dt>rel_tol <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Maximum relative error that is considered equal</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis_against_ref">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_ref</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_ref" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_ref</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em>, <em>uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_ref" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares basis set data from an authoritative source against bse data</p>
 </dd></dl>
 
@@ -336,7 +358,7 @@ Otherwise, the maximum relative difference is returned.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.replace_basis_data">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">replace_basis_data</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em>, <em>inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.replace_basis_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">replace_basis_data</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type</em>, <em>version=None</em>, <em>inplace=False</em>, <em>uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.replace_basis_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replaces data in basis set files with those from a reference</p>
 <p>Data is replaced only if it doesn’t exactly match.</p>
 <p>If inplace is True, then the data in the original files is overwritten.
