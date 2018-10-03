@@ -71,7 +71,7 @@ can be overridden with the `elements` parameter
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
-      8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000
+         8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00
    ...
 
    >>> # Can also use strings with the element symbols (and be mixed with integers)
@@ -81,7 +81,7 @@ can be overridden with the `elements` parameter
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
-      8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000
+         8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00
    ...
 
 
