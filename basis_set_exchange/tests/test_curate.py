@@ -101,7 +101,7 @@ def test_printing(basis, element):
 
 
 @pytest.mark.parametrize('file_path', [
-                              'dunning/CC-PVDZ_dunning1989a.1.json',
+                              'dunning/cc-pVDZ_dunning1989a.1.json',
                               'crenb/CRENBL_ross1994a.0.json',
                               'crenb/CRENBL-ECP_ross1994a.0.json'
                          ])
@@ -112,7 +112,7 @@ def test_print_component_basis(file_path):
 
 
 @pytest.mark.parametrize('file_path', [
-                              'dunning/CC-PVDZ.1.element.json',
+                              'dunning/cc-pVDZ.1.element.json',
                               'crenb/CRENBL.0.element.json'
                          ])
 def test_print_elemental_basis(file_path):
@@ -122,7 +122,7 @@ def test_print_elemental_basis(file_path):
 
 
 @pytest.mark.parametrize('file_path', [
-                              'CC-PVDZ.1.table.json',
+                              'cc-pVDZ.1.table.json',
                               'CRENBL.0.table.json'
                          ])
 def test_print_table_basis(file_path):
