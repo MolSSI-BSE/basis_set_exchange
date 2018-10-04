@@ -1001,7 +1001,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pv5z-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "aug-cc-pV5+dZ.1.table.json",
@@ -1028,12 +1030,14 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pv5z-rifit"
+        },
         "versions": {
             "0": {
                 "file_relpath": "aug-cc-pV5Z.0.table.json",
                 "description": "aug-cc-pV5Z",
-                "revdesc": "Values from original Basis Set Exchange",
+                "revdesc": "Values from ccRepo",
                 "elements": [
                     "1",
                     "2",
@@ -1114,6 +1118,39 @@
             }
         }
     },
+    "aug-cc-pv5z-rifit": {
+        "display_name": "aug-cc-pV5Z-RIFIT",
+        "latest_version": "0",
+        "family": "dunning_fit",
+        "role": "rifit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "file_relpath": "aug-cc-pV5Z-RIFIT.0.table.json",
+                "description": "aug-cc-pV5Z-RIFIT",
+                "revdesc": "Values from the original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18"
+                ]
+            }
+        }
+    },
     "aug-cc-pv6z": {
         "display_name": "aug-cc-pV6Z",
         "latest_version": "1",
@@ -1176,7 +1213,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pvdz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "aug-cc-pVD+dZ.1.table.json",
@@ -1293,7 +1332,7 @@
     },
     "aug-cc-pvdz-rifit": {
         "display_name": "aug-cc-pVDZ-RIFIT",
-        "latest_version": "1",
+        "latest_version": "0",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1301,8 +1340,8 @@
         ],
         "auxiliaries": {},
         "versions": {
-            "1": {
-                "file_relpath": "aug-cc-pVDZ-RIFIT-diffuse.1.table.json",
+            "0": {
+                "file_relpath": "aug-cc-pVDZ-RIFIT.0.table.json",
                 "description": "aug-cc-pVDZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
@@ -1338,7 +1377,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pvqz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "aug-cc-pVQ+dZ.1.table.json",
@@ -1455,7 +1496,7 @@
     },
     "aug-cc-pvqz-rifit": {
         "display_name": "aug-cc-pVQZ-RIFIT",
-        "latest_version": "1",
+        "latest_version": "0",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1463,8 +1504,8 @@
         ],
         "auxiliaries": {},
         "versions": {
-            "1": {
-                "file_relpath": "aug-cc-pVQZ-RIFIT-diffuse.1.table.json",
+            "0": {
+                "file_relpath": "aug-cc-pVQZ-RIFIT.0.table.json",
                 "description": "aug-cc-pVQZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
@@ -1500,7 +1541,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pvtz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "aug-cc-pVT+dZ.1.table.json",
@@ -1617,7 +1660,7 @@
     },
     "aug-cc-pvtz-rifit": {
         "display_name": "aug-cc-pVTZ-RIFIT",
-        "latest_version": "1",
+        "latest_version": "0",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1625,8 +1668,8 @@
         ],
         "auxiliaries": {},
         "versions": {
-            "1": {
-                "file_relpath": "aug-cc-pVTZ-RIFIT-diffuse.1.table.json",
+            "0": {
+                "file_relpath": "aug-cc-pVTZ-RIFIT.0.table.json",
                 "description": "aug-cc-pVTZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
@@ -1662,7 +1705,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pv5z-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "cc-pV5+dZ.1.table.json",
@@ -1689,7 +1734,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pv5z-rifit"
+        },
         "versions": {
             "0": {
                 "file_relpath": "cc-pV5Z.0.table.json",
@@ -1777,6 +1824,43 @@
             }
         }
     },
+    "cc-pv5z-rifit": {
+        "display_name": "cc-pV5Z-RIFIT",
+        "latest_version": "0",
+        "family": "dunning_fit",
+        "role": "rifit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "file_relpath": "cc-pV5Z-RIFIT.0.table.json",
+                "description": "cc-pV5Z-RIFIT",
+                "revdesc": "Values from original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18"
+                ]
+            }
+        }
+    },
     "cc-pv6z": {
         "display_name": "cc-pV6Z",
         "latest_version": "1",
@@ -1840,7 +1924,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pvdz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "cc-pVD+dZ.1.table.json",
@@ -2008,7 +2094,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pvqz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "cc-pVQ+dZ.1.table.json",
@@ -2176,7 +2264,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pvtz-rifit"
+        },
         "versions": {
             "1": {
                 "file_relpath": "cc-pVT+dZ.1.table.json",
