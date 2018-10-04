@@ -81,7 +81,7 @@ def _sort_basis_dict(bs):
         'element_electron_shells', 'element_ecp', 'element_components', 'element_entry', 'shell_function_type',
         'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents', 'shell_coefficients',
         'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients', 'mp2fit'
+        'potential_coefficients', 'rifit'
     ]
 
     # Add integers for the elements (being optimistic that element 150 will be found someday)

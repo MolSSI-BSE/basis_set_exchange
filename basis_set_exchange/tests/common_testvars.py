@@ -19,12 +19,12 @@ bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz',
                    'lanl2dz', 'def2-tzvp', 'tzp', 'sto-3g']
 
 # To test role lookup
-role_tests = [ ('cc-pvdz', 'mp2fit', 'cc-pvdz-mp2fit'),
-               ('cc-pvtz', 'mp2fit', 'cc-pvtz-mp2fit'),
-               ('cc-pvqz', 'mp2fit', 'cc-pvqz-mp2fit'),
-               ('aug-cc-pvdz', 'mp2fit', 'aug-cc-pvdz-mp2fit'),
-               ('aug-cc-pvtz', 'mp2fit', 'aug-cc-pvtz-mp2fit'),
-               ('aug-cc-pvqz', 'mp2fit', 'aug-cc-pvqz-mp2fit')
+role_tests = [ ('cc-pvdz', 'rifit', 'cc-pvdz-rifit'),
+               ('cc-pvtz', 'rifit', 'cc-pvtz-rifit'),
+               ('cc-pvqz', 'rifit', 'cc-pvqz-rifit'),
+               ('aug-cc-pvdz', 'rifit', 'aug-cc-pvdz-rifit'),
+               ('aug-cc-pvtz', 'rifit', 'aug-cc-pvtz-rifit'),
+               ('aug-cc-pvqz', 'rifit', 'aug-cc-pvqz-rifit')
              ]
 
 

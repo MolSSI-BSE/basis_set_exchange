@@ -61,16 +61,16 @@
         "basis_set_role": {
             "description": "Role that this basis plays in a calculation",
             "type": "string",
-            "enum": [ "orbital", "mp2fit", "jkfit", "jfit" ]
+            "enum": [ "orbital", "rifit", "jkfit", "jfit" ]
         },
         "basis_set_auxiliaries": {
             "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "jfit" : { "type": "string" },
                 "jkfit" : { "type": "string" },
-                "rifit" : { "type": "string" },
-                "mp2fit" : { "type": "string" }
+                "rifit" : { "type": "string" }
             }
         },
         "basis_set_elements": {
