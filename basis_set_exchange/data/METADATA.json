@@ -1204,7 +1204,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "aug-cc-pvdz-mp2fit"
+            "rifit": "aug-cc-pvdz-rifit"
         },
         "versions": {
             "0": {
@@ -1291,19 +1291,19 @@
             }
         }
     },
-    "aug-cc-pvdz-mp2fit": {
-        "display_name": "aug-cc-pVDZ-MP2FIT",
+    "aug-cc-pvdz-rifit": {
+        "display_name": "aug-cc-pVDZ-RIFIT",
         "latest_version": "1",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "1": {
-                "file_relpath": "AUG-CC-PVDZ-MP2FIT-diffuse.1.table.json",
-                "description": "aug-cc-pVDZ-MP2FIT",
+                "file_relpath": "aug-cc-pVDZ-RIFIT-diffuse.1.table.json",
+                "description": "aug-cc-pVDZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
                     "1",
@@ -1366,7 +1366,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "aug-cc-pvqz-mp2fit"
+            "rifit": "aug-cc-pvqz-rifit"
         },
         "versions": {
             "0": {
@@ -1453,19 +1453,19 @@
             }
         }
     },
-    "aug-cc-pvqz-mp2fit": {
-        "display_name": "aug-cc-pVQZ-MP2FIT",
+    "aug-cc-pvqz-rifit": {
+        "display_name": "aug-cc-pVQZ-RIFIT",
         "latest_version": "1",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "1": {
-                "file_relpath": "AUG-CC-PVQZ-MP2FIT-diffuse.1.table.json",
-                "description": "aug-cc-pVQZ-MP2FIT",
+                "file_relpath": "aug-cc-pVQZ-RIFIT-diffuse.1.table.json",
+                "description": "aug-cc-pVQZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
                     "1",
@@ -1528,7 +1528,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "aug-cc-pvtz-mp2fit"
+            "rifit": "aug-cc-pvtz-rifit"
         },
         "versions": {
             "0": {
@@ -1615,19 +1615,19 @@
             }
         }
     },
-    "aug-cc-pvtz-mp2fit": {
-        "display_name": "aug-cc-pVTZ-MP2FIT",
+    "aug-cc-pvtz-rifit": {
+        "display_name": "aug-cc-pVTZ-RIFIT",
         "latest_version": "1",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "1": {
-                "file_relpath": "AUG-CC-PVTZ-MP2FIT-diffuse.1.table.json",
-                "description": "aug-cc-pVTZ-MP2FIT",
+                "file_relpath": "aug-cc-pVTZ-RIFIT-diffuse.1.table.json",
+                "description": "aug-cc-pVTZ-RIFIT",
                 "revdesc": "Values composed from original Basis Set Exchange data",
                 "elements": [
                     "1",
@@ -1868,7 +1868,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "cc-pvdz-mp2fit"
+            "rifit": "cc-pvdz-rifit"
         },
         "versions": {
             "0": {
@@ -1957,19 +1957,19 @@
             }
         }
     },
-    "cc-pvdz-mp2fit": {
-        "display_name": "cc-pVDZ-MP2FIT",
+    "cc-pvdz-rifit": {
+        "display_name": "cc-pVDZ-RIFIT",
         "latest_version": "0",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "0": {
-                "file_relpath": "CC-PVDZ-MP2FIT.0.table.json",
-                "description": "cc-pVDZ-MP2FIT",
+                "file_relpath": "cc-pVDZ-RIFIT.0.table.json",
+                "description": "cc-pVDZ-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     "1",
@@ -2036,7 +2036,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "cc-pvqz-mp2fit"
+            "rifit": "cc-pvqz-rifit"
         },
         "versions": {
             "0": {
@@ -2125,19 +2125,19 @@
             }
         }
     },
-    "cc-pvqz-mp2fit": {
-        "display_name": "cc-pVQZ-MP2FIT",
+    "cc-pvqz-rifit": {
+        "display_name": "cc-pVQZ-RIFIT",
         "latest_version": "0",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "0": {
-                "file_relpath": "CC-PVQZ-MP2FIT.0.table.json",
-                "description": "cc-pVQZ-MP2FIT",
+                "file_relpath": "cc-pVQZ-RIFIT.0.table.json",
+                "description": "cc-pVQZ-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     "1",
@@ -2204,7 +2204,7 @@
             "gto"
         ],
         "auxiliaries": {
-            "mp2fit": "cc-pvtz-mp2fit"
+            "rifit": "cc-pvtz-rifit"
         },
         "versions": {
             "0": {
@@ -2293,19 +2293,19 @@
             }
         }
     },
-    "cc-pvtz-mp2fit": {
-        "display_name": "cc-pVTZ-MP2FIT",
+    "cc-pvtz-rifit": {
+        "display_name": "cc-pVTZ-RIFIT",
         "latest_version": "0",
         "family": "dunning_fit",
-        "role": "mp2fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
         "auxiliaries": {},
         "versions": {
             "0": {
-                "file_relpath": "CC-PVTZ-MP2FIT.0.table.json",
-                "description": "cc-pVTZ-MP2FIT",
+                "file_relpath": "cc-pVTZ-RIFIT.0.table.json",
+                "description": "cc-pVTZ-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
                 "elements": [
                     "1",
