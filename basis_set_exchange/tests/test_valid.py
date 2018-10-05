@@ -6,24 +6,27 @@ import glob
 import os
 
 import pytest
-from basis_set_exchange import api, validator
+from basis_set_exchange import api, validator, fileio
 
 _data_dir = api._default_data_dir
 
-_all_files = glob.glob(os.path.join(_data_dir, '*.json'))
-_all_files.extend(glob.glob(os.path.join(_data_dir, '*', '*.json')))
+_all_files = []
+for x in fileio.get_all_filelist(_data_dir):
+    _all_files.extend(x)
 
 @pytest.mark.parametrize('file_path', _all_files)
 def test_valid(file_path):
+    full_path = os.path.join(_data_dir, file_path)
+
     # Validate all the data files in the data directory
     # against their respective schemas
-    if file_path.endswith('METADATA.json'):
+    if full_path.endswith('METADATA.json'):
         return
-    if file_path.endswith('REFERENCES.json'):
-        validator.validate('references', file_path)
-    elif file_path.endswith('.table.json'):
-        validator.validate('table', file_path)
-    elif file_path.endswith('.element.json'):
-        validator.validate('element', file_path)
+    if full_path.endswith('REFERENCES.json'):
+        validator.validate('references', full_path)
+    elif full_path.endswith('.table.json'):
+        validator.validate('table', full_path)
+    elif full_path.endswith('.element.json'):
+        validator.validate('element', full_path)
     else:
-        validator.validate('component', file_path)
+        validator.validate('component', full_path)
