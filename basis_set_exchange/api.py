@@ -6,6 +6,8 @@ import datetime
 import os
 import textwrap
 
+from collections import OrderedDict
+
 from . import compose
 from . import converters
 from . import fileio
@@ -400,3 +402,16 @@ def get_reference_formats():
     can be passed as the fmt argument to :func:`get_references`
     '''
     return refconverters.get_formats()
+
+
+def get_roles():
+    '''Return information about the available basis set roles available
+
+    The returned data is a map of role to display name. The format
+    can be passed as the role argument to fmt argument to :func:`lookup_basis_by_role`
+    '''
+
+    return OrderedDict((('orbital', 'Orbital basis'),
+                        ('jfit', 'J-fitting'),
+                        ('jkfit', 'JK-fitting'),
+                        ('rifit', 'RI-fitting')))
