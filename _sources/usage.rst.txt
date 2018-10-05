@@ -181,7 +181,15 @@ case sensitive.
    >>> # Find the J-fit basis set for def2-TZVP
    >>> basis_set_exchange.lookup_basis_by_role('def2-tzvp', 'jfit')
    'def2-universal-jfit'
+
+
+Available roles can be retrieved with :func:`basis_set_exchange.get_roles`
  
+.. doctest::
+
+   >>> basis_set_exchange.get_roles()
+  OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting')])
+
 
 Metadata
 -------------------
