@@ -456,6 +456,18 @@ zero coefficients are removed</p>
 <p>Functions for reading and writing the standard JSON-based
 basis set format</p>
 <dl class="function">
+<dt id="basis_set_exchange.fileio.get_all_filelist">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">get_all_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_all_filelist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple containing the following (as lists)</p>
+<ol class="arabic simple">
+<li>All table basis files</li>
+<li>All element basis files</li>
+<li>All component basis files</li>
+</ol>
+<p>The paths to all the files are returned as paths relative to data_dir</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.fileio.get_basis_filelist">
 <code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">get_basis_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_basis_filelist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the relative paths to all the table basis sets contained
