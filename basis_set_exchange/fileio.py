@@ -220,7 +220,42 @@ def get_basis_filelist(data_dir):
     in the given data directory
     """
 
-    return [x for x in os.listdir(data_dir) if x.endswith('.table.json')]
+    return get_all_filelist(data_dir)[0]
+
+
+def get_all_filelist(data_dir):
+    """
+    Returns a tuple containing the following (as lists)
+
+    1. All table basis files
+    2. All element basis files
+    3. All component basis files
+
+    The paths to all the files are returned as paths relative to data_dir
+    """
+
+    all_table = []
+    all_element = []
+    all_component = []
+
+    special = ['METADATA.json', 'REFERENCES.json']
+
+    for root, dirs, files in os.walk(data_dir):
+        for basename in files:
+            if basename in special:
+                continue
+
+            fpath = os.path.join(root, basename)
+            fpath = os.path.relpath(fpath, data_dir)
+
+            if basename.endswith('.table.json'):
+                all_table.append(fpath)
+            elif basename.endswith('.element.json'):
+                all_element.append(fpath)
+            elif basename.endswith('.json'):
+                all_component.append(fpath)
+
+    return (all_table, all_element, all_component)
 
 
 def read_notes_file(file_path):
