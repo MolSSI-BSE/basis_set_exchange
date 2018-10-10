@@ -1,0 +1,28 @@
+Notes about the Ahlrichs fitting basis sets
+===========================================
+
+Data for these basis sets were taken from Turbomole 7.3, with
+some modifications (see below).
+
+All of the common def2 basis sets are covered by the same J-fitting
+basis, (labeled def2-universal-JFIT in the BSE).
+
+This is ALMOST true for JK-fitting. According to Arnim Hellweg,
+the JK fitting for La/SV(P) is different. Therefore, there are
+def2-universal-JKFIT for most def2 basis sets, and a special
+def2-SV(P)-JKFIT with this modification.
+
+
+Differences with the Turbomole
+------------------------------
+
+Some minor issues with the Turbomole basis sets were discovered
+and confirmed by Arnim Hellweg.
+
+Of interest here:
+  * The RIFIT for hf in has an empty shell shell for D(TZVPP), which
+    is part of def2-TZVPPD-RIFIT. This has been corrected.
+  * The aliases for La in def2-SVP-JKFIT and def2-SV(P)-JKFIT were
+    not set.
+
+These will be corrected in future versions of Turbomole as well.

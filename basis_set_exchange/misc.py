@@ -57,6 +57,35 @@ def compact_elements(elements):
     return ",".join(range_strs)
 
 
+def expand_elements(compact_str):
+    """
+    Create a list of integers given a string of compacted elements
+
+    This is the opposite of compact_elements
+
+    For example, "H-Li,C-O,Ne" will return [1, 2, 3, 6, 7, 8, 10]
+    """
+
+    if len(compact_str) == 0:
+        return
+
+    # Split on commas
+    tmp_list = compact_str.split(',')
+
+    # Now go over each one and replace elements with ints
+    el_list = []
+    for el in tmp_list:
+        if not '-' in el:
+            el_list.append(lut.element_Z_from_sym(el))
+        else:
+            begin, end = el.split('-')
+            begin = lut.element_Z_from_sym(begin)
+            end = lut.element_Z_from_sym(end)
+            el_list.extend(list(range(int(begin), int(end) + 1)))
+
+    return el_list
+
+
 def transform_basis_name(name):
     """
     Transforms the name of a basis set to an internal representation

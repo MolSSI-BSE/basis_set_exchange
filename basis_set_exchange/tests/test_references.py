@@ -7,22 +7,13 @@ import json
 import os
 
 import pytest
-from basis_set_exchange import api, refconverters, misc, fileio
+from basis_set_exchange import api, fileio
 
 _data_dir = api._default_data_dir
 
 # _all_files shouldn't contain .table. files
 _all_files = glob.glob(os.path.join(_data_dir, '*', '*.json'))
 _all_component_files = fileio.get_all_filelist(_data_dir)[2]
-
-
-@pytest.mark.parametrize("elements, expected", 
-                         [ ([1], "H"),
-                           ([1,2], "H,He"),
-                           ([1,10], "H,Ne"),
-                           ([1,2,3,11,23,24], "H-Li,Na,V,Cr")])
-def test_compact_string(elements, expected):
-    assert misc.compact_elements(elements) == expected
 
 
 @pytest.mark.parametrize('file_path', _all_component_files)
