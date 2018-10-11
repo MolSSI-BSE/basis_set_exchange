@@ -76,7 +76,7 @@ def _replace_ecp_data(old_pots, src_pots):
     return new_pots
 
 
-def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None, uncontract_general=False):
+def compare_basis_against_ref(basis_name, src_filepath, file_type=None, version=None, uncontract_general=False):
     '''
     Compares basis set data from an authoritative source against bse data
     '''
@@ -111,11 +111,9 @@ def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None,
 
         if 'element_electron_shells' in v:
             max_rdiff_el = shells_difference(v['element_electron_shells'], src_el['element_electron_shells'])
-            print()
         if 'element_ecp' in v:
             max_rdiff_ecp = potentials_difference(v['element_ecp'], src_el['element_ecp'])
             v['element_ecp'] = src_el['element_ecp']
-            print()
 
         max_rdiff = max(max_rdiff_el, max_rdiff_ecp)
 
@@ -140,7 +138,8 @@ def compare_basis_against_ref(basis_name, src_filepath, file_type, version=None,
     return (len(not_in_src) == 0 and len(not_in_bse) == 0 and len(some_diff) == 0 and len(big_diff) == 0)
 
 
-def replace_basis_data(basis_name, src_filepath, file_type, version=None, inplace=False, uncontract_general=False):
+def replace_basis_data(basis_name, src_filepath, file_type=None, version=None, inplace=False,
+                       uncontract_general=False):
     '''
     Replaces data in basis set files with those from a reference
 

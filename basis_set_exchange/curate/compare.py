@@ -393,8 +393,8 @@ def shells_difference(s1, s2):
                 if r > 0.0:
                     print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
-        print()
 
+    print()
     print("Max relative difference for these shells: {}".format(max_rdiff))
     return max_rdiff
 
@@ -452,8 +452,8 @@ def potentials_difference(p1, p2):
                 if r > 0.0:
                     print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
-        print()
 
+    print()
     print("Max relative difference for these potentials: {}".format(max_rdiff))
     return max_rdiff
 

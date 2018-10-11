@@ -2,8 +2,8 @@ import os
 from ... import lut
 
 
-def read_nwchem(basis_path):
-    '''Reads an NWChem-formatted file and converts it to a dictionary with the
+def read_nwchem(basis_lines, fname):
+    '''Reads NWChem-formatted file data and converts it to a dictionary with the
        usual BSE fields
 
        Note that the nwchem format does not store all the fields we
@@ -11,15 +11,7 @@ def read_nwchem(basis_path):
     '''
 
     skipchars = '#'
-
-    if not os.path.isfile(basis_path):
-        raise RuntimeError('NWChem basis set path \'{}\' does not exist'.format(basis_path))
-
-    fname = os.path.basename(basis_path)
-
-    with open(basis_path, 'r') as f:
-        basis_lines = [l.strip() for l in f]
-        basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
+    basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
 
     bs_data = {
         'molssi_bse_schema': {

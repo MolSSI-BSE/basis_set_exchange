@@ -2,8 +2,8 @@ import os
 from ... import lut
 
 
-def read_g94(basis_path):
-    '''Reads a G94-formatted file and converts it to a dictionary with the
+def read_g94(basis_lines, fname):
+    '''Reads G94-formatted file data and converts it to a dictionary with the
        usual BSE fields
 
        Note that the gaussian format does not store all the fields we
@@ -11,15 +11,7 @@ def read_g94(basis_path):
     '''
 
     skipchars = '!'
-
-    if not os.path.isfile(basis_path):
-        raise RuntimeError('G94 basis set path \'{}\' does not exist'.format(basis_path))
-
-    fname = os.path.basename(basis_path)
-
-    with open(basis_path, 'r') as f:
-        basis_lines = [l.strip() for l in f]
-        basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
+    basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
 
     bs_data = {
         'molssi_bse_schema': {
@@ -66,19 +58,18 @@ def read_g94(basis_path):
             element_data['element_ecp_electrons'] = n_elec
 
             # Highest AM first, then the rest in order
-            am_list = list(range(maxam+1))
+            am_list = list(range(maxam + 1))
             am_list.insert(0, am_list.pop())
 
             i += 1
 
             for j in range(maxam + 1):
-                i += 1 # Skip the 'title' block - unused according to gaussian docs
+                i += 1  # Skip the 'title' block - unused according to gaussian docs
                 n_entries = int(basis_lines[i])
-                i += 1 # Skip title block
+                i += 1  # Skip title block
 
                 shell_am = am_list[j]
-                ecp_shell = {'potential_angular_momentum': [shell_am],
-                             'potential_ecp_type': 'scalar'}
+                ecp_shell = {'potential_angular_momentum': [shell_am], 'potential_ecp_type': 'scalar'}
                 rexponents = []
                 gexponents = []
                 coefficients = []
