@@ -18,7 +18,7 @@ before_script:
 
 script:
   - cd /tmp # Move to an unrelated dir
-  - pytest -v --pyargs --cov=basis_set_exchange basis_set_exchange
+  - pytest --pyargs --cov=basis_set_exchange basis_set_exchange
 
 notifications:
   email: false
