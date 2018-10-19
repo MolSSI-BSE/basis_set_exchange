@@ -187,8 +187,9 @@ Available roles can be retrieved with :func:`basis_set_exchange.get_roles`
  
 .. doctest::
 
-   >>> basis_set_exchange.get_roles()
+  >>> basis_set_exchange.get_roles()
   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting')])
+
 
 
 Metadata
