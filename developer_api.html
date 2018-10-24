@@ -204,7 +204,7 @@ as a string or as a python dictionary.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
 <dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
 </dd>
@@ -218,10 +218,22 @@ Elements can be specified by Z-number (int or str) or by symbol (str)</p>
 the latest version is returned.</p>
 </dd>
 <dt><strong>fmt: str</strong></dt>
-<dd><p class="first last">What format to return the basis set as. By defaut,
+<dd><p class="first">The desired output format of the basis set. By default,
 basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
-Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to obtain the available formats.</p>
+Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to programmatically obtain the available
+formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
+<p>Available formats are</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>nwchem</li>
+<li>gaussian94</li>
+<li>psi4</li>
+<li>gamess_us</li>
+<li>turbomole</li>
+<li>json</li>
+</ul>
+</div></blockquote>
 </dd>
 <dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
 <dd><p class="first last">If True, remove general contractions by duplicating the set
@@ -252,13 +264,21 @@ it is in the ‘data’ subdirectory of this project.</p>
 </dl>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>The basis set in the desired format. If `fmt` is none, this will be a python</strong></dt>
+<dd></dd>
+<dt><strong>dictionary. Otherwise, it will be a string.</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_basis_family">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>basis_name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup a family by a basis set name</p>
 </dd></dl>
 
@@ -280,14 +300,14 @@ can be passed as the fmt argument to <a class="reference internal" href="#basis_
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_references">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>basis_name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>basis_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
 </dd>
 <dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
@@ -299,14 +319,31 @@ all elements for which the basis set is defined are included.</p>
 the latest version is returned.</p>
 </dd>
 <dt><strong>fmt: str</strong></dt>
-<dd><p class="first last">What format to return the basis set as. By defaut,
+<dd><p class="first">The desired output format of the basis set references. By default,
 basis set information is returned as a list of dictionaries. Use
-get_reference_formats() to obtain the available formats.</p>
+get_reference_formats() to programmatically obtain the available formats.
+The <cite>fmt</cite> argument is not case sensitive.</p>
+<p>Available reference formats are</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>bib</li>
+<li>tex</li>
+<li>json</li>
+</ul>
+</div></blockquote>
 </dd>
 <dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>The references for the given basis set in the desired format. If `fmt` is none, this will be a python</strong></dt>
+<dd></dd>
+<dt><strong>dictionary. Otherwise, it will be a string.</strong></dt>
+<dd></dd>
 </dl>
 </td>
 </tr>
@@ -333,7 +370,46 @@ and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
 <dl class="function">
 <dt id="basis_set_exchange.api.lookup_basis_by_role">
 <code class="descclassname">basis_set_exchange.api.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lookup the name of a basis set given a primary basis set and role</p>
+<dd><p>Lookup the name of an auxiliary basis set given a primary basis set and role</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>primary_basis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">The primary (orbital) basis set that we want the auxiliary
+basis set for. This is not case sensitive.</p>
+</dd>
+<dt><strong>role: str</strong></dt>
+<dd><p class="first">Desired role/type of auxiliary basis set.
+Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_roles()</span></code> to programmatically obtain the available
+formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
+<p>Available roles are</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>jfit</li>
+<li>jkfit</li>
+<li>rifit</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>The name of the auxiliary basis set for the given primary basis</strong></dt>
+<dd></dd>
+<dt><strong>and role.</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

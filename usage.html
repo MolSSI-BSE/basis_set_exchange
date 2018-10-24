@@ -178,6 +178,8 @@ the cloned git repository.</p>
 Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
 instread.</p>
+<p>The available formats are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>
+and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_formats" title="basis_set_exchange.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_formats()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get a basis set as a python dictionary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;basis_set_name&#39;</span><span class="p">]</span>
@@ -234,6 +236,8 @@ can be overridden with the <cite>elements</cite> parameter</p>
 parameter is similar to that in <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.</p>
 <p>The <cite>fmt</cite> parameter controls the output format. By default, the output
 is a dictionary. If <cite>fmt</cite> is specified, the output is a string.</p>
+<p>The available formats are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.get_references" title="basis_set_exchange.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_references()</span></code></a>
+and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_reference_formats" title="basis_set_exchange.get_reference_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_reference_formats()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># As bibtex, restricting to H and F</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bib</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;bib&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bib</span><span class="p">)</span>
@@ -299,6 +303,8 @@ primary basis set and the role you wish to look up. The function
 returns the name of the basis set.</p>
 <p>Like the other functions, the basis name and role are not
 case sensitive.</p>
+<p>The available roles are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>
+and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;cc-pvtz&#39;</span><span class="p">,</span> <span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
 <span class="go">&#39;cc-pvtz-rifit&#39;</span>
@@ -306,10 +312,10 @@ case sensitive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the J-fit basis set for def2-TZVP</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;def2-tzvp&#39;</span><span class="p">,</span> <span class="s1">&#39;jfit&#39;</span><span class="p">)</span>
 <span class="go">&#39;def2-universal-jfit&#39;</span>
-</pre></div>
-</div>
-<p>Available roles can be retrieved with <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_roles</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available roles are available via get_roles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># (returned as an OrderedDict)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_roles</span><span class="p">()</span>
 <span class="go">OrderedDict([(&#39;orbital&#39;, &#39;Orbital basis&#39;), (&#39;jfit&#39;, &#39;J-fitting&#39;), (&#39;jkfit&#39;, &#39;JK-fitting&#39;), (&#39;rifit&#39;, &#39;RI-fitting&#39;)])</span>
 </pre></div>
 </div>
