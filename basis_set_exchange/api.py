@@ -172,8 +172,9 @@ def get_basis(name,
 
     Returns
     -------
-    The basis set in the desired format. If `fmt` is none, this will be a python
-    dictionary. Otherwise, it will be a string.
+    str or dict
+        The basis set in the desired format. If `fmt` is **None**, this will be a python
+        dictionary. Otherwise, it will be a string.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
@@ -253,8 +254,9 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
 
     Returns
     -------
-    The name of the auxiliary basis set for the given primary basis
-    and role.
+    str
+        The name of the auxiliary basis set for the given primary basis
+        and role.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
@@ -352,8 +354,9 @@ def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=N
 
     Returns
     -------
-    The references for the given basis set in the desired format. If `fmt` is none, this will be a python
-    dictionary. Otherwise, it will be a string.
+    str or dict
+        The references for the given basis set in the desired format. If `fmt` is **None**, this will be a python
+        dictionary. Otherwise, it will be a string.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
