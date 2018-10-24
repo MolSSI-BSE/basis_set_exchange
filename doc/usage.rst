@@ -31,16 +31,19 @@ Output format is controlled by the `fmt` parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
 instread.
 
+The available formats are listed at the documentation for :func:`basis_set_exchange.get_basis`
+and can be obtained via :func:`basis_set_exchange.get_formats`
+
 .. doctest::
 
    >>> # Get a basis set as a python dictionary
    >>> bs_dict = basis_set_exchange.get_basis('6-31G*')
-   >>> bs_dict['basis_set_name']  
+   >>> bs_dict['basis_set_name']
    '6-31G*'
 
    >>> # Basis set names are case insensitive
    >>> bs_dict = basis_set_exchange.get_basis('6-31g*')
-   >>> bs_dict['basis_set_name']  
+   >>> bs_dict['basis_set_name']
    '6-31G*'
 
    >>> # Same as above, but in gaussian format (as a string)
@@ -94,12 +97,15 @@ parameter is similar to that in :func:`basis_set_exchange.get_basis`.
 The `fmt` parameter controls the output format. By default, the output
 is a dictionary. If `fmt` is specified, the output is a string.
 
+The available formats are listed at the documentation for :func:`basis_set_exchange.get_references`
+and can be obtained via :func:`basis_set_exchange.get_reference_formats`
+
 .. doctest::
    >>> # Get references for 6-31G*, all elements, as a list of dictionaries
    >>> refs = basis_set_exchange.get_references('6-31G*')
    >>> print(refs[0])
    {'reference_info': [{'reference_description': ...
- 
+
    >>> # As bibtex, restricting to H and F
    >>> bib = basis_set_exchange.get_references('6-31G*', fmt='bib', elements=[1,9])
    >>> print(bib)
@@ -114,10 +120,10 @@ is a dictionary. If `fmt` is specified, the output is a string.
    %     Polarization functions associated with 6-31G
    %         hariharan1973a
    %
-   <BLANKLINE> 
-   <BLANKLINE> 
+   <BLANKLINE>
+   <BLANKLINE>
    @article{ditchfield1971a,
-       author = {Ditchfield, R. and Hehre, W. J. and Pople, J. A.}, 
+       author = {Ditchfield, R. and Hehre, W. J. and Pople, J. A.},
        title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},
        journal = {J. Chem. Phys.},
        volume = {54},
@@ -172,6 +178,9 @@ returns the name of the basis set.
 Like the other functions, the basis name and role are not
 case sensitive.
 
+The available roles are listed at the documentation for :func:`basis_set_exchange.lookup_basis_by_role`
+and can be obtained via :func:`basis_set_exchange.get_roles`
+
 .. doctest::
 
    >>> # Find the MP2-fit basis set for cc-pvtz
@@ -182,13 +191,10 @@ case sensitive.
    >>> basis_set_exchange.lookup_basis_by_role('def2-tzvp', 'jfit')
    'def2-universal-jfit'
 
-
-Available roles can be retrieved with :func:`basis_set_exchange.get_roles`
- 
-.. doctest::
-
-  >>> basis_set_exchange.get_roles()
-  OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting')])
+   >>> # Available roles are available via get_roles
+   >>> # (returned as an OrderedDict)
+   >>> basis_set_exchange.get_roles()
+   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting')])
 
 
 
@@ -207,11 +213,11 @@ A simple list containing all the basis set names can be obtained via :func:`basi
 
    >>> # Get the metadata
    >>> md = basis_set_exchange.get_metadata()
- 
+
    >>> # What is the latest version of 6-31G
    >>> md['6-31g']['latest_version']
    '1'
- 
+
    >>> # All versions of 6-31G
    >>> md['6-31g']['versions'].keys()
    dict_keys(['0', '1'])
@@ -219,7 +225,7 @@ A simple list containing all the basis set names can be obtained via :func:`basi
    >>> # Elements defined in v0
    >>> md['6-31g']['versions']['0']['elements']
    ['1', '2', '3', '4', '5', '6',...
- 
+
    >>> # Print all the basis sets known to the BSE
    >>> all_bs = basis_set_exchange.get_all_basis_names()
    >>> print(all_bs)

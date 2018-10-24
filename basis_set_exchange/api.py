@@ -134,10 +134,21 @@ def get_basis(name,
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
     fmt: str
-        What format to return the basis set as. By defaut,
+        The desired output format of the basis set. By default,
         basis set information is returned as a python dictionary. Otherwise,
         if a format is specified, a string is returned.
-        Use :func:`bse.api.get_formats` to obtain the available formats.
+        Use :func:`bse.api.get_formats` to programmatically obtain the available
+        formats.  The `fmt` argument is not case sensitive.
+
+        Available formats are
+
+            * nwchem
+            * gaussian94
+            * psi4
+            * gamess_us
+            * turbomole
+            * json
+
     uncontract_general : bool
         If True, remove general contractions by duplicating the set
         of primitive exponents with each vector of coefficients.
@@ -158,6 +169,11 @@ def get_basis(name,
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
+
+    Returns
+    -------
+    The basis set in the desired format. If `fmt` is none, this will be a python
+    dictionary. Otherwise, it will be a string.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
@@ -213,7 +229,32 @@ def get_basis(name,
 
 
 def lookup_basis_by_role(primary_basis, role, data_dir=None):
-    '''Lookup the name of a basis set given a primary basis set and role
+    '''Lookup the name of an auxiliary basis set given a primary basis set and role
+
+    Parameters
+    ----------
+    primary_basis : str
+        The primary (orbital) basis set that we want the auxiliary
+        basis set for. This is not case sensitive.
+    role: str
+        Desired role/type of auxiliary basis set.
+        Use :func:`bse.api.get_roles` to programmatically obtain the available
+        formats.  The `fmt` argument is not case sensitive.
+
+        Available roles are
+
+            * jfit
+            * jkfit
+            * rifit
+
+    data_dir : str
+        Data directory with all the basis set information. By default,
+        it is in the 'data' subdirectory of this project.
+
+    Returns
+    -------
+    The name of the auxiliary basis set for the given primary basis
+    and role.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
@@ -280,12 +321,12 @@ def get_all_basis_names(data_dir=None):
     return sorted(list(get_metadata(data_dir).keys()))
 
 
-def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
+def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=None):
     '''Get the references/citations for a basis set
 
     Parameters
     ----------
-    name : str
+    basis_name : str
         Name of the basis set. This is not case sensitive.
     elements : list
         List of element numbers that you want the basis set for. By default,
@@ -294,16 +335,29 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
     fmt: str
-        What format to return the basis set as. By defaut,
+        The desired output format of the basis set references. By default,
         basis set information is returned as a list of dictionaries. Use
-        get_reference_formats() to obtain the available formats.
+        get_reference_formats() to programmatically obtain the available formats.
+        The `fmt` argument is not case sensitive.
+
+        Available reference formats are
+
+            * bib
+            * tex
+            * json
+
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
+
+    Returns
+    -------
+    The references for the given basis set in the desired format. If `fmt` is none, this will be a python
+    dictionary. Otherwise, it will be a string.
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
-    basis_dict = get_basis(name, elements=elements, version=version, data_dir=data_dir)
+    basis_dict = get_basis(basis_name, elements=elements, version=version, data_dir=data_dir)
 
     all_ref_data = get_reference_data(data_dir)
     ref_data = references.compact_references(basis_dict, all_ref_data)
@@ -314,19 +368,19 @@ def get_references(name, elements=None, version=None, fmt=None, data_dir=None):
     return refconverters.convert_references(ref_data, fmt)
 
 
-def get_basis_family(name, data_dir=None):
+def get_basis_family(basis_name, data_dir=None):
     '''Lookup a family by a basis set name
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
-    bs_data = _get_basis_metadata(name, data_dir)
+    bs_data = _get_basis_metadata(basis_name, data_dir)
     return bs_data['family']
 
 
 @memo.BSEMemoize
 def get_family_notes(family, data_dir=None):
     '''Return a string representing the notes about a basis set family
-    
+
     If the notes are not found, a string saying so is returned
     '''
 
@@ -345,7 +399,7 @@ def get_family_notes(family, data_dir=None):
 @memo.BSEMemoize
 def get_basis_notes(name, data_dir=None):
     '''Return a string representing the notes about a specific basis set
-    
+
     If the notes are not found, a string saying so is returned
     '''
 
@@ -411,7 +465,5 @@ def get_roles():
     can be passed as the role argument to fmt argument to :func:`lookup_basis_by_role`
     '''
 
-    return OrderedDict((('orbital', 'Orbital basis'),
-                        ('jfit', 'J-fitting'),
-                        ('jkfit', 'JK-fitting'),
-                        ('rifit', 'RI-fitting')))
+    return OrderedDict((('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit',
+                                                                                                       'RI-fitting')))
