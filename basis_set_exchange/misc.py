@@ -57,13 +57,16 @@ def compact_elements(elements):
     return ",".join(range_strs)
 
 
-def expand_elements(compact_str):
+def expand_elements(compact_str, as_str=False):
     """
     Create a list of integers given a string of compacted elements
 
     This is the opposite of compact_elements
 
     For example, "H-Li,C-O,Ne" will return [1, 2, 3, 6, 7, 8, 10]
+
+    If as_str is True, the list will contain strings of the integers
+    (ie, the above example will return ['1', '2', '3', '6', '7', '8', '10']
     """
 
     if len(compact_str) == 0:
@@ -83,7 +86,10 @@ def expand_elements(compact_str):
             end = lut.element_Z_from_sym(end)
             el_list.extend(list(range(int(begin), int(end) + 1)))
 
-    return el_list
+    if as_str is True:
+        return [str(x) for x in el_list]
+    else:
+        return el_list
 
 
 def transform_basis_name(name):
