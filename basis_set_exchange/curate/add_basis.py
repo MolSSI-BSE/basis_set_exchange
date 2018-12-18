@@ -6,11 +6,27 @@ import os
 import copy
 from ..fileio import write_json_basis
 from ..misc import expand_elements
-from . import read_formatted_basis
+from .skel import create_skel
+from .readers import read_formatted_basis
 
-def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, description, version, revision_description, refs=None, file_fmt=None):
+
+def add_basis(bs_file,
+              data_dir,
+              subdir,
+              file_base,
+              name,
+              family,
+              role,
+              description,
+              version,
+              revision_description,
+              refs=None,
+              file_fmt=None):
     '''
     Add a basis set to this library
+
+    This takes in a single file containing the basis set is some format,
+    
 
     Parameters
     ----------
@@ -50,14 +66,14 @@ def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, descript
             bs_data['basis_set_references'] = refs['all']
             component_data.append(bs_data)
         else:
-            for k,v in refs.items():
+            for k, v in refs.items():
                 bs_tmp = copy.deepcopy(bs_data)
                 elements = expand_elements(k, True)
                 for e in elements:
                     if e in done_elements:
                         raise RuntimeError("Duplicate element in references dict: {}".format(e))
 
-                bs_tmp['basis_set_elements'] = { x:y for x,y in bs_tmp['basis_set_elements'].items() if x in elements }
+                bs_tmp['basis_set_elements'] = {x: y for x, y in bs_tmp['basis_set_elements'].items() if x in elements}
                 bs_tmp['basis_set_references'] = v
                 component_data.append(bs_tmp)
                 done_elements.extend(elements)
@@ -67,10 +83,10 @@ def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, descript
 
     if len(left_over) > 0:
         bs_tmp = copy.deepcopy(bs_data)
-        bs_tmp['basis_set_elements'] = { x:y for x,y in bs_tmp['basis_set_elements'].items() if x in left_over }
+        bs_tmp['basis_set_elements'] = {x: y for x, y in bs_tmp['basis_set_elements'].items() if x in left_over}
         bs_tmp['basis_set_references'] = []
         component_data.append(bs_tmp)
-    
+
     # Create the component files
     # But keep track of elements for the element and table files
     el_file = {}
@@ -83,7 +99,7 @@ def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, descript
         filename += '.' + str(version) + '.json'
 
         rel_path = os.path.join(subdir, filename)
-        file_path = os.path.join(data_dir, rel_path) 
+        file_path = os.path.join(data_dir, rel_path)
         if os.path.exists(file_path):
             raise RuntimeError("File {} already exists".format(file_path))
 
@@ -92,20 +108,14 @@ def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, descript
         for el in c['basis_set_elements'].keys():
             if el in el_file:
                 raise RuntimeError("Element already exists. This is a programming error")
- 
+
             el_file[el] = {'element_components': [rel_path]}
 
-
     # Now create the element file
-    elfile = { 
-         "molssi_bse_schema": {
-         "schema_type": "element",
-         "schema_version": "0.1"
-     },  
-     "basis_set_name": name,
-     "basis_set_description": description,
-     "basis_set_elements": el_file 
-    }
+    elfile = create_skel('element')
+    elfile['basis_set_name'] = name
+    elfile['basis_set_description'] = description
+    elfile['basis_set_elements'] = el_file
 
     element_file_name = '{}.{}.element.json'.format(file_base, version)
     element_file_relpath = os.path.join(subdir, element_file_name)
@@ -113,23 +123,20 @@ def add_basis(bs_file, data_dir, subdir, file_base, name, family, role, descript
     write_json_basis(element_file_path, elfile)
 
     # And the table basis
-    tabfile = {
-     "molssi_bse_schema": {
-         "schema_type": "table",
-         "schema_version": "0.1"
-     },
-     "basis_set_name": name,
-     "basis_set_family": family,
-     "basis_set_description": description,
-     "basis_set_revision_description": revision_description,
-     "basis_set_role": role,
-     "basis_set_auxiliaries": {},
-     "basis_set_elements": {k: {'element_entry': element_file_relpath} for k in bs_data['basis_set_elements'].keys()}
-}
+    tabfile = create_skel('table')
+    tabfile['basis_set_name'] = name
+    tabfile['basis_set_family'] = family
+    tabfile['basis_set_description'] = description
+    tabfile['basis_set_revision_description'] = revision_description
+    tabfile['basis_set_role'] = role
+    tabfile['basis_set_elements'] = {
+        k: {
+            'element_entry': element_file_relpath
+        }
+        for k in bs_data['basis_set_elements'].keys()
+    }
 
     # This gets created directly in the data directory
     tabfile_name = '{}.{}.table.json'.format(file_base, version)
-    tabfile_path = os.path.join(data_dir, tabfile_name) 
+    tabfile_path = os.path.join(data_dir, tabfile_name)
     write_json_basis(tabfile_path, tabfile)
-     
-

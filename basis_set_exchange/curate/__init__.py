@@ -2,6 +2,7 @@
 Functions for helping curate BSE basis set data
 '''
 
+from .skel import create_skel
 from .readers import read_formatted_basis
 from .metadata import create_metadata_file
 from .add_basis import add_basis

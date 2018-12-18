@@ -1,4 +1,5 @@
 from ... import lut
+from .. import create_skel
 
 
 def read_dalton(basis_lines, fname):
@@ -12,15 +13,7 @@ def read_dalton(basis_lines, fname):
     skipchars = '$'
     basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
 
-    bs_data = {
-        'molssi_bse_schema': {
-            'schema_type': 'component',
-            'schema_version': '0.1'
-        },
-        'basis_set_description': fname,
-        'basis_set_references': [],
-        'basis_set_elements': {}
-    }
+    bs_data = create_skel('component')
 
     i = 0
 
