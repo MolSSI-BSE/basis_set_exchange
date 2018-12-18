@@ -23,10 +23,10 @@ def test_valid(file_path):
     if full_path.endswith('METADATA.json'):
         return
     if full_path.endswith('REFERENCES.json'):
-        validator.validate('references', full_path)
+        validator.validate_file('references', full_path)
     elif full_path.endswith('.table.json'):
-        validator.validate('table', full_path)
+        validator.validate_file('table', full_path)
     elif full_path.endswith('.element.json'):
-        validator.validate('element', full_path)
+        validator.validate_file('element', full_path)
     else:
-        validator.validate('component', full_path)
+        validator.validate_file('component', full_path)
