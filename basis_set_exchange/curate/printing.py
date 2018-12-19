@@ -3,7 +3,7 @@ Helpers for printing pieces of basis sets
 '''
 
 from .. import lut
-from .. import manip
+from ..manip import contraction_string
 from ..converters.common import write_matrix
 
 
@@ -58,7 +58,7 @@ def print_element(z, eldata, print_references=True):
     sym = lut.element_sym_from_Z(z, True)
 
     print()
-    print('Element: {}   Contraction: {}'.format(sym, manip.contraction_string(eldata)))
+    print('Element: {}   Contraction: {}'.format(sym, contraction_string(eldata)))
     if print_references:
         if 'element_references' in eldata:
             print('References:')

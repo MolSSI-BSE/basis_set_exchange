@@ -1,5 +1,5 @@
 from ... import lut
-from .. import create_skel
+from ..skel import create_skel
 
 
 def read_turbomole(basis_lines, fname):

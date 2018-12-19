@@ -4,7 +4,7 @@ Functions for comparing basis sets and pieces of basis sets
 
 import operator
 import copy
-from .. import manip
+from ..manip import sort_shells, sort_potentials
 
 
 def _reldiff(a, b):
@@ -361,8 +361,8 @@ def shells_difference(s1, s2):
         print("Different number of shells: {} vs {}".format(len(s1), len(s2)))
         return float('inf')
 
-    shells1 = manip.sort_shells(s1)
-    shells2 = manip.sort_shells(s2)
+    shells1 = sort_shells(s1)
+    shells2 = sort_shells(s2)
 
     for n in range(nsh):
         sh1 = shells1[n]
@@ -414,8 +414,8 @@ def potentials_difference(p1, p2):
         print("Different number of potentials")
         return float('inf')
 
-    pots1 = manip.sort_potentials(p1)
-    pots2 = manip.sort_potentials(p2)
+    pots1 = sort_potentials(p1)
+    pots2 = sort_potentials(p2)
 
     for n in range(np):
         pot1 = pots1[n]

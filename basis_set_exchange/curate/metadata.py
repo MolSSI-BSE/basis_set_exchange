@@ -5,9 +5,9 @@ Helpers for handling BSE metadata
 import os
 from collections import OrderedDict
 
-from .. import compose
-from .. import fileio
-from .. import misc
+from ..compose import compose_table_basis
+from ..fileio import get_basis_filelist, _write_plain_json
+from ..misc import transform_basis_name
 
 
 def create_metadata_file(output_path, data_dir):
@@ -16,7 +16,7 @@ def create_metadata_file(output_path, data_dir):
     The file is written to output_path
     '''
 
-    basis_filelist = fileio.get_basis_filelist(data_dir)
+    basis_filelist = get_basis_filelist(data_dir)
 
     metadata = {}
     for bs_file_relpath in basis_filelist:
@@ -27,10 +27,10 @@ def create_metadata_file(output_path, data_dir):
         ver = ver[1:]  # Remove the period
 
         # Fully compose the basis set from components
-        bs = compose.compose_table_basis(bs_file_relpath, data_dir)
+        bs = compose_table_basis(bs_file_relpath, data_dir)
 
         # Prepare the metadata
-        tr_name = misc.transform_basis_name(bs['basis_set_name'])
+        tr_name = transform_basis_name(bs['basis_set_name'])
         display_name = bs['basis_set_name']
         defined_elements = sorted(list(bs['basis_set_elements'].keys()), key=lambda x: int(x))
         description = bs['basis_set_description']
@@ -81,4 +81,4 @@ def create_metadata_file(output_path, data_dir):
 
     # Write out the metadata
     metadata = OrderedDict(sorted(list(metadata.items())))
-    fileio._write_plain_json(output_path, metadata)
+    _write_plain_json(output_path, metadata)
