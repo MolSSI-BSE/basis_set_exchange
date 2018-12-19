@@ -828,8 +828,43 @@ that those references apply to</p>
 <span id="validator-validation-of-basis-sets"></span><h2>validator - Validation of basis sets<a class="headerlink" href="#module-basis_set_exchange.validator" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to validating JSON files (including against schema)</p>
 <dl class="function">
-<dt id="basis_set_exchange.validator.validate">
-<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate" title="Permalink to this definition">¶</a></dt>
+<dt id="basis_set_exchange.validator.validate_data">
+<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate_data</code><span class="sig-paren">(</span><em>file_type</em>, <em>bs_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates json basis set data against a schema</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>file_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
+</dd>
+<dt><strong>bs_data:</strong></dt>
+<dd><p class="first last">Data to be validated</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>RuntimeError</strong></dt>
+<dd><p class="first last">If the file_type is not valid (and/or a schema doesn’t exist)</p>
+</dd>
+<dt><strong>ValidationError</strong></dt>
+<dd><p class="first last">If the given file does not pass validation</p>
+</dd>
+<dt><strong>FileNotFoundError</strong></dt>
+<dd><p class="first last">If the file given by file_path doesn’t exist</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.validator.validate_file">
+<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate_file</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates a file against a schema</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

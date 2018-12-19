@@ -165,6 +165,67 @@
 <span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this headline">¶</a></h2>
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
+<dt id="basis_set_exchange.curate.add_basis">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">add_basis</code><span class="sig-paren">(</span><em>bs_file</em>, <em>data_dir</em>, <em>subdir</em>, <em>file_base</em>, <em>name</em>, <em>family</em>, <em>role</em>, <em>description</em>, <em>version</em>, <em>revision_description</em>, <em>refs=None</em>, <em>file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a basis set to this library</p>
+<p>This takes in a single file containing the basis set is some format, parses it, and
+create the component, element, and table basis set files in the given data_dir (and subdir).
+The metadata file is also updated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>bs_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Path to the file with formatted basis set information</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Path to the data directory to add the data to</p>
+</dd>
+<dt><strong>subdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Subdirectory of the data directory to add the basis set to</p>
+</dd>
+<dt><strong>file_base</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Base name for new files</p>
+</dd>
+<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Name of the basis set</p>
+</dd>
+<dt><strong>family</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Family to which this basis set belongs</p>
+</dd>
+<dt><strong>role</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Role of the basis set (orbital, etc)</p>
+</dd>
+<dt><strong>description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Description of the basis set</p>
+</dd>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Version of the basis set</p>
+</dd>
+<dt><strong>revision_description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Description of this version of the basis set</p>
+</dd>
+<dt><strong>refs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict or str</span></dt>
+<dd><p class="first">Mapping of references to elements. This can be a dictionary with a compressed
+string of elements as keys and a list of reference strings as values.
+For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
+<p>If a list or string is passed, then those reference(s) will be used for
+all elements.</p>
+<p class="last">Elements that exist in the file but do not have a reference are given the
+usual ‘noref’ extension and the references entry is empty.</p>
+</dd>
+<dt><strong>file_fmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Format of the input basis data (None = autodetect)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis">
 <code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis</code><span class="sig-paren">(</span><em>bs1</em>, <em>bs2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_elements_meta=False</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if two basis set dictionaries are the same</p>
@@ -248,6 +309,15 @@
 <code class="descclassname">basis_set_exchange.curate.</code><code class="descname">create_metadata_file</code><span class="sig-paren">(</span><em>output_path</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a METADATA.json file from a data directory</p>
 <p>The file is written to output_path</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.create_skel">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">create_skel</code><span class="sig-paren">(</span><em>role</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_skel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the skeleton of a dictionary or JSON file</p>
+<p>A dictionary is returned that contains the “molssi_bse_schema”
+key and other required keys, depending on the role</p>
+<p>role can be either ‘component’, ‘element’, or ‘table’</p>
 </dd></dl>
 
 <dl class="function">
