@@ -3,7 +3,6 @@ Add a basis set to the library
 '''
 
 import os
-import copy
 from ..fileio import write_json_basis
 from ..misc import expand_elements
 from ..validator import validate_data
