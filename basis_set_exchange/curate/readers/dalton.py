@@ -63,6 +63,13 @@ def read_dalton(basis_lines, fname):
                 # general contraction being the row index)
                 shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
 
+                # Make sure the number of general contractions is >0
+                # (This error was found in some bad files)
+                if int(ngen) <= 0:
+                    print(ngen, len(shell['shell_coefficients']))
+                    raise RuntimeError("Number of general contractions is not greater than zero")
+
+                # Make sure the number of general contractions match the heading line
                 if len(shell['shell_coefficients']) != int(ngen):
                     print(ngen, len(shell['shell_coefficients']))
                     print(shell['shell_coefficients'])
