@@ -33,7 +33,7 @@
         }
     },
     "patternProperties": {
-        "^[a-z0-9X]+$" : {
+        "^[a-z0-9A-Z]+$" : {
             "description": "A single reference associated with a basis set",
             "type": "object",
             "additionalProperties": false,

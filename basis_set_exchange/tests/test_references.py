@@ -7,14 +7,10 @@ import json
 import os
 
 import pytest
-from basis_set_exchange import api, fileio
+from basis_set_exchange import api, validator, fileio
 
 _data_dir = api._default_data_dir
-
-# _all_files shouldn't contain .table. files
-_all_files = glob.glob(os.path.join(_data_dir, '*', '*.json'))
 _all_component_files = fileio.get_all_filelist(_data_dir)[2]
-
 
 @pytest.mark.parametrize('file_path', _all_component_files)
 def test_filenames(file_path):
@@ -35,3 +31,9 @@ def test_filenames(file_path):
         print(base_name)
         print(ref_str)
         assert base_name.endswith(ref_str)
+
+
+# Test to make sure the references file is valid
+def test_valid_reffile():
+    full_path = os.path.join(_data_dir, "REFERENCES.json")
+    validator.validate_file('references', full_path)
