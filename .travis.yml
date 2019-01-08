@@ -8,6 +8,8 @@ matrix:
     - python: 3.6
     - python: 3.7
       dist: xenial
+      after_success:
+        - codecov
 
 before_install:
   - uname -a
@@ -24,7 +26,3 @@ script:
 
 notifications:
   email: false
-
-after_success:
-  - codecov
-
