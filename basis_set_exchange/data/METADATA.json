@@ -1386,7 +1386,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "aug-cc-pv5z-rifit"
+            "rifit": "aug-cc-pv5z-rifit",
+            "jkfit": "cc-pv5z-jkfit"
         },
         "versions": {
             "0": {
@@ -1737,7 +1738,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "aug-cc-pvqz-rifit"
+            "rifit": "aug-cc-pvqz-rifit",
+            "jkfit": "cc-pvqz-jkfit"
         },
         "versions": {
             "0": {
@@ -1872,7 +1874,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "aug-cc-pvtz-rifit"
+            "rifit": "aug-cc-pvtz-rifit",
+            "jkfit": "cc-pvtz-jkfit"
         },
         "versions": {
             "0": {
@@ -3050,7 +3053,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "cc-pv5z-rifit"
+            "rifit": "cc-pv5z-rifit",
+            "jkfit": "cc-pv5z-jkfit"
         },
         "versions": {
             "0": {
@@ -3135,6 +3139,41 @@
                     "34",
                     "35",
                     "36"
+                ]
+            }
+        }
+    },
+    "cc-pv5z-jkfit": {
+        "display_name": "cc-pV5Z-JKFIT",
+        "latest_version": "1",
+        "family": "dunning_fit",
+        "role": "jkfit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "file_relpath": "cc-pV5Z-JKFIT.1.table.json",
+                "description": "JK Fitting basis for use with cc-pV5Z",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35"
                 ]
             }
         }
@@ -3414,7 +3453,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "cc-pvqz-rifit"
+            "rifit": "cc-pvqz-rifit",
+            "jkfit": "cc-pvqz-jkfit"
         },
         "versions": {
             "0": {
@@ -3503,6 +3543,41 @@
             }
         }
     },
+    "cc-pvqz-jkfit": {
+        "display_name": "cc-pVQZ-JKFIT",
+        "latest_version": "1",
+        "family": "dunning_fit",
+        "role": "jkfit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "file_relpath": "cc-pVQZ-JKFIT.1.table.json",
+                "description": "JK Fitting basis for use with cc-pVQZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35"
+                ]
+            }
+        }
+    },
     "cc-pvqz-rifit": {
         "display_name": "cc-pVQZ-RIFIT",
         "latest_version": "0",
@@ -3555,7 +3630,8 @@
             "gto"
         ],
         "auxiliaries": {
-            "rifit": "cc-pvtz-rifit"
+            "rifit": "cc-pvtz-rifit",
+            "jkfit": "cc-pvtz-jkfit"
         },
         "versions": {
             "0": {
@@ -3640,6 +3716,41 @@
                     "34",
                     "35",
                     "36"
+                ]
+            }
+        }
+    },
+    "cc-pvtz-jkfit": {
+        "display_name": "cc-pVTZ-JKFIT",
+        "latest_version": "1",
+        "family": "dunning_fit",
+        "role": "jkfit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "1": {
+                "file_relpath": "cc-pVTZ-JKFIT.1.table.json",
+                "description": "JK Fitting basis for use with cc-pVTZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35"
                 ]
             }
         }
