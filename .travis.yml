@@ -25,4 +25,6 @@ script:
   - pytest --pyargs --cov=basis_set_exchange basis_set_exchange
 
 notifications:
-  email: false
+  email:
+    on_success: change
+    on_failure: always
