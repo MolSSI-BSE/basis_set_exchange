@@ -1,11 +1,13 @@
 language: python
-
-# Run jobs on container-based infrastructure, can be overridden per job
 sudo: false
 
-python:
-    - 3.5
-    - 3.6
+# Currently (1/8/2019) python3.7 requires xenial
+matrix:
+  include:
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
 
 before_install:
   - uname -a

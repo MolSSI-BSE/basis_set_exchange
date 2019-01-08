@@ -44,8 +44,7 @@ if __name__ == "__main__":
                 'numpydoc',
             ],
             'tests': [
-                'pytest',
-                'pytest-cov'
+                'pytest-cov' # Also pulls in pytest
             ],
         },
 
@@ -53,6 +52,9 @@ if __name__ == "__main__":
             'Development Status :: 4 - Beta',
             'Intended Audience :: Science/Research',
             'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7'
         ],
 
         package_data={'basis_set_exchange': bse_package_data},
