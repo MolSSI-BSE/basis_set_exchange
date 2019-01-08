@@ -1476,7 +1476,7 @@
     },
     "aug-cc-pv5z-rifit": {
         "display_name": "aug-cc-pV5Z-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1504,6 +1504,35 @@
                     "17",
                     "18"
                 ]
+            },
+            "1": {
+                "file_relpath": "aug-cc-pV5Z-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with aug-cc-pV5Z",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
             }
         }
     },
@@ -1515,7 +1544,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "aug-cc-pv6z-rifit"
+        },
         "versions": {
             "0": {
                 "file_relpath": "aug-cc-pV6Z.0.table.json",
@@ -1563,7 +1594,7 @@
     },
     "aug-cc-pv6z-rifit": {
         "display_name": "aug-cc-pV6Z-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1575,6 +1606,27 @@
                 "file_relpath": "aug-cc-pV6Z-RIFIT.0.table.json",
                 "description": "aug-cc-pV6Z-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18"
+                ]
+            },
+            "1": {
+                "file_relpath": "aug-cc-pV6Z-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with aug-cc-pV6Z",
+                "revdesc": "Values from Turbomole",
                 "elements": [
                     "1",
                     "2",
@@ -1692,7 +1744,7 @@
     },
     "aug-cc-pvdz-rifit": {
         "display_name": "aug-cc-pVDZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1713,6 +1765,35 @@
                     "8",
                     "9",
                     "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "aug-cc-pVDZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with aug-cc-pVDZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "12",
                     "13",
                     "14",
                     "15",
@@ -1828,7 +1909,7 @@
     },
     "aug-cc-pvqz-rifit": {
         "display_name": "aug-cc-pVQZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1849,6 +1930,35 @@
                     "8",
                     "9",
                     "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "aug-cc-pVQZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with aug-cc-pVQZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "12",
                     "13",
                     "14",
                     "15",
@@ -1964,7 +2074,7 @@
     },
     "aug-cc-pvtz-rifit": {
         "display_name": "aug-cc-pVTZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -1991,6 +2101,45 @@
                     "16",
                     "17",
                     "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "aug-cc-pVTZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with aug-cc-pVTZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
                     "31",
                     "32",
                     "33",
@@ -3180,7 +3329,7 @@
     },
     "cc-pv5z-rifit": {
         "display_name": "cc-pV5Z-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -3212,6 +3361,37 @@
                     "17",
                     "18"
                 ]
+            },
+            "1": {
+                "file_relpath": "cc-pV5Z-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with cc-pV5Z",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
             }
         }
     },
@@ -3223,7 +3403,9 @@
         "functiontypes": [
             "gto"
         ],
-        "auxiliaries": {},
+        "auxiliaries": {
+            "rifit": "cc-pv6z-rifit"
+        },
         "versions": {
             "0": {
                 "file_relpath": "cc-pV6Z.0.table.json",
@@ -3272,9 +3454,9 @@
     },
     "cc-pv6z-rifit": {
         "display_name": "cc-pV6Z-RIFIT",
-        "latest_version": "0",
-        "family": "dunning_Fit",
-        "role": "orbital",
+        "latest_version": "1",
+        "family": "dunning_fit",
+        "role": "rifit",
         "functiontypes": [
             "gto"
         ],
@@ -3284,6 +3466,27 @@
                 "file_relpath": "cc-pV6Z-RIFIT.0.table.json",
                 "description": "cc-pV6Z-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18"
+                ]
+            },
+            "1": {
+                "file_relpath": "cc-pV6Z-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with cc-pV6Z",
+                "revdesc": "Values from Turbomole",
                 "elements": [
                     "1",
                     "2",
@@ -3403,7 +3606,7 @@
     },
     "cc-pvdz-rifit": {
         "display_name": "cc-pVDZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -3415,6 +3618,37 @@
                 "file_relpath": "cc-pVDZ-RIFIT.0.table.json",
                 "description": "cc-pVDZ-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "cc-pVDZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with cc-pVDZ",
+                "revdesc": "Values from Turbomole",
                 "elements": [
                     "1",
                     "2",
@@ -3580,7 +3814,7 @@
     },
     "cc-pvqz-rifit": {
         "display_name": "cc-pVQZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -3592,6 +3826,37 @@
                 "file_relpath": "cc-pVQZ-RIFIT.0.table.json",
                 "description": "cc-pVQZ-RIFIT",
                 "revdesc": "Values from original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "cc-pVQZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with cc-pVQZ",
+                "revdesc": "Values from Turbomole",
                 "elements": [
                     "1",
                     "2",
@@ -3757,7 +4022,7 @@
     },
     "cc-pvtz-rifit": {
         "display_name": "cc-pVTZ-RIFIT",
-        "latest_version": "0",
+        "latest_version": "1",
         "family": "dunning_fit",
         "role": "rifit",
         "functiontypes": [
@@ -3788,6 +4053,47 @@
                     "16",
                     "17",
                     "18",
+                    "31",
+                    "32",
+                    "33",
+                    "34",
+                    "35",
+                    "36"
+                ]
+            },
+            "1": {
+                "file_relpath": "cc-pVTZ-RIFIT.1.table.json",
+                "description": "RI Fitting basis for use with cc-pVTZ",
+                "revdesc": "Values from Turbomole",
+                "elements": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
                     "31",
                     "32",
                     "33",
