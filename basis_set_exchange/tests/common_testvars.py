@@ -12,6 +12,7 @@ bs_metadata = bse.get_metadata()
 bs_names = bse.get_all_basis_names()
 bs_formats = list(bse.get_formats().keys())
 ref_formats = list(bse.get_reference_formats().keys())
+all_families = bse.get_families()
 true_false = [ True, False ]
 
 # A representative sample of basis sets

@@ -380,6 +380,36 @@ def get_basis_family(basis_name, data_dir=None):
     return bs_data['family']
 
 
+def get_families(data_dir=None):
+    '''Return a list of all basis set families'''
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    metadata = get_metadata(data_dir)
+
+    families = set()
+    for v in metadata.values():
+        families.add(v['family'])
+
+    return sorted(list(families))
+
+
+def get_basis_names_by_family(family, data_dir=None):
+    '''Return the names of all basis sets for a given family'''
+
+    data_dir = _default_data_dir if data_dir is None else data_dir
+    metadata = get_metadata(data_dir)
+    family = family.lower()
+    bs_lst = []
+
+    for k, v in metadata.items():
+        if v['family'] == family:
+            bs_lst.append(k)
+
+    if len(bs_lst) == 0:
+        raise RuntimeError("There are no basis sets for family {}".format(family))
+
+    return sorted(bs_lst)
+
+
 @memo.BSEMemoize
 def get_family_notes(family, data_dir=None):
     '''Return a string representing the notes about a basis set family
