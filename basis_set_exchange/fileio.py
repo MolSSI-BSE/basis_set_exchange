@@ -74,15 +74,32 @@ def _sort_basis_dict(bs):
     This is purely for cosmetic reasons.
     """
 
+    # yapf: disable
     _keyorder = [
-        'molssi_bse_schema', 'schema_type', 'schema_version', 'basis_set_name', 'basis_set_family',
-        'basis_set_description', 'basis_set_revision_description', 'basis_set_role', 'basis_set_auxiliaries',
-        'basis_set_references', 'basis_set_notes', 'basis_set_elements', 'element_references', 'element_ecp_electrons',
-        'element_electron_shells', 'element_ecp', 'element_components', 'element_entry', 'shell_function_type',
-        'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents', 'shell_coefficients',
+        # Schema stuff
+        'molssi_bse_schema', 'schema_type', 'schema_version',
+
+        # Auxiliary block
+         'jkfit', 'jfit', 'rifit', 'admmfit',
+
+        # Basis set metadata
+        'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_role', 'basis_set_auxiliaries',
+        'basis_set_references', 'basis_set_notes',
+
+        # Version metadata
+        'basis_set_revision_description',
+
+        # Elements and data
+        'basis_set_elements', 'element_references', 'element_ecp_electrons',
+        'element_electron_shells', 'element_ecp', 'element_components', 'element_entry',
+
+        # Shell information
+        'shell_function_type', 'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents',
+        'shell_coefficients',
         'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients', 'rifit'
+        'potential_coefficients'
     ]
+    # yapf: enable
 
     # Add integers for the elements (being optimistic that element 150 will be found someday)
     _keyorder.extend([str(x) for x in range(150)])
