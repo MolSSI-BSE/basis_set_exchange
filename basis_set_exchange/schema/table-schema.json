@@ -8,13 +8,8 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_schema",
-        "basis_set_name",
-        "basis_set_family",
-        "basis_set_description",
         "basis_set_revision_description",
-        "basis_set_role",
-        "basis_set_elements",
-        "basis_set_auxiliaries"
+        "basis_set_elements"
     ],
     "properties":
     {
@@ -38,41 +33,9 @@
                 }
             }
         },
-        "basis_set_name": {
-            "description": "Common name for the basis set",
-            "type": "string"
-        },
-        "basis_set_family": {
-            "description": "Broad family that the basis set is from",
-            "type": "string"
-        },
-        "basis_set_description": {
-            "description": "Brief description of the basis set",
-            "type": "string"
-        },
-        "basis_set_notes": {
-            "description": "Any notes pertaining to this basis set",
-            "type": "string"
-        },
         "basis_set_revision_description": {
             "description": "Brief description of the difference between this revision and the last",
             "type": "string"
-        },
-        "basis_set_role": {
-            "description": "Role that this basis plays in a calculation",
-            "type": "string",
-            "enum": [ "orbital", "rifit", "jkfit", "jfit", "admmfit" ]
-        },
-        "basis_set_auxiliaries": {
-            "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "jfit" : { "type": "string" },
-                "jkfit" : { "type": "string" },
-                "rifit" : { "type": "string" },
-                "admmfit" : { "type": "string" }
-            }
         },
         "basis_set_elements": {
             "description": "Data for the elements of the basis set",

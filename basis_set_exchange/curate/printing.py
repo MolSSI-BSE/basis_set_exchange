@@ -142,9 +142,7 @@ def print_table_basis(basis, elements=None):
     (list of integers)
     '''
 
-    print("Basis set: " + basis['basis_set_name'])
-    print("Description: " + basis['basis_set_description'])
-    print("Role: " + basis['basis_set_role'])
+    print("Revision Description: " + basis['basis_set_revision_description'])
     print()
 
     eldata = basis['basis_set_elements']

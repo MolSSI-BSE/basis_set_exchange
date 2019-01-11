@@ -231,19 +231,11 @@ def write_references(file_path, refs):
     _write_plain_json(file_path, _sort_references_dict(refs))
 
 
-def get_basis_filelist(data_dir):
-    """
-    Returns the relative paths to all the table basis sets contained
-    in the given data directory
-    """
-
-    return get_all_filelist(data_dir)[0]
-
-
 def get_all_filelist(data_dir):
     """
     Returns a tuple containing the following (as lists)
 
+    0. All metadata files
     1. All table basis files
     2. All element basis files
     3. All component basis files
@@ -251,6 +243,7 @@ def get_all_filelist(data_dir):
     The paths to all the files are returned as paths relative to data_dir
     """
 
+    all_meta = []
     all_table = []
     all_element = []
     all_component = []
@@ -265,14 +258,16 @@ def get_all_filelist(data_dir):
             fpath = os.path.join(root, basename)
             fpath = os.path.relpath(fpath, data_dir)
 
-            if basename.endswith('.table.json'):
+            if basename.endswith('.metadata.json'):
+                all_meta.append(fpath)
+            elif basename.endswith('.table.json'):
                 all_table.append(fpath)
             elif basename.endswith('.element.json'):
                 all_element.append(fpath)
             elif basename.endswith('.json'):
                 all_component.append(fpath)
 
-    return (all_table, all_element, all_component)
+    return (all_meta, all_table, all_element, all_component)
 
 
 def read_notes_file(file_path):

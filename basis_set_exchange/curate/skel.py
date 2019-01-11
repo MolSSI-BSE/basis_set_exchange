@@ -28,13 +28,19 @@ _skeletons = {
             "schema_type": "table",
             "schema_version": "0.1"
         },
+        "basis_set_revision_description": "",
+        "basis_set_elements": {}
+    },
+    "metadata": {
+        "molssi_bse_schema": {
+            "schema_type": "metadata",
+            "schema_version": "0.1"
+        },
         "basis_set_name": "",
         "basis_set_family": "",
         "basis_set_description": "",
-        "basis_set_revision_description": "",
         "basis_set_role": "",
-        "basis_set_auxiliaries": {},
-        "basis_set_elements": {}
+        "basis_set_auxiliaries": {}
     }
 }
 
@@ -51,6 +57,6 @@ def create_skel(role):
 
     role = role.lower()
     if not role in _skeletons:
-        raise RuntimeError("Role {} not found. Should be 'component', 'element', or 'table'")
+        raise RuntimeError("Role {} not found. Should be 'component', 'element', 'table', or 'metadata'")
 
     return copy.deepcopy(_skeletons[role])

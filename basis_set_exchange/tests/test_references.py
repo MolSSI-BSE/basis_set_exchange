@@ -10,7 +10,7 @@ import pytest
 from basis_set_exchange import api, validator, fileio
 
 _data_dir = api._default_data_dir
-_all_component_files = fileio.get_all_filelist(_data_dir)[2]
+_all_component_files = fileio.get_all_filelist(_data_dir)[3]
 
 @pytest.mark.parametrize('file_path', _all_component_files)
 def test_filenames(file_path):

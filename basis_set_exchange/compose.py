@@ -62,7 +62,6 @@ def compose_elemental_basis(file_relpath, data_dir):
                 if 'element_ecp' in el_data:
                     for sh in el_data['element_ecp']:
                         sh['data_source'] = os.path.join(data_dir, k)
-                el_data['lkjasd'] = 'lakjsdlkajs;ldkjal;sdkjasd'
 
     # Broadcast the basis_set_references to each element
     # Use the basis_set_description for the reference description
@@ -103,19 +102,20 @@ def compose_table_basis(file_relpath, data_dir):
     table_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all elemental files to read
-    component_files = set()
-    for k, v in table_bs['basis_set_elements'].items():
-        component_files.add(v['element_entry'])
+    element_files = set()
+    for v in table_bs['basis_set_elements'].values():
+        element_files.add(v['element_entry'])
 
     # Create a map of the elemental basis data
-    element_map = {k: compose_elemental_basis(k, data_dir) for k in component_files}
+    # (maps file path to data contained in that file)
+    element_map = {k: compose_elemental_basis(k, data_dir) for k in element_files}
 
+    # Replace the basis set for all elements in the table basis with the data
+    # from the elemental basis
     for k, v in table_bs['basis_set_elements'].items():
         entry = v['element_entry']
         data = element_map[entry]
 
-        # Replace the basis set for this element with the one
-        # from the elemental basis
         table_bs['basis_set_elements'][k] = data['basis_set_elements'][k]
 
     # Add the version to the dictionary
@@ -124,5 +124,16 @@ def compose_table_basis(file_relpath, data_dir):
 
     # Add whether the entire basis is spherical or cartesian
     table_bs['basis_set_harmonic_type'] = _whole_basis_harmonic(table_bs)
+
+    # Read and merge in the metadata
+    # This file must be in the same location as the table file
+    meta_dirpath, table_filename = os.path.split(file_path)
+    meta_filename = table_filename.split('.')[0] + '.metadata.json'
+    meta_filepath = os.path.join(meta_dirpath, meta_filename)
+    bs_meta = fileio.read_json_basis(meta_filepath)
+    table_bs.update(bs_meta)
+
+    # Remove the molssi schema (which isn't needed here)
+    table_bs.pop('molssi_bse_schema')
 
     return table_bs

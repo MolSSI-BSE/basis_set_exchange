@@ -28,7 +28,8 @@ def add_basis(bs_file,
 
     This takes in a single file containing the basis set is some format, parses it, and
     create the component, element, and table basis set files in the given data_dir (and subdir).
-    The metadata file is also updated.
+    The metadata file for the basis is created if it doesn't exist, and the main metadata file is
+    also updated.
     
     Parameters
     ----------
@@ -131,15 +132,20 @@ def add_basis(bs_file,
     element_file_path = os.path.join(data_dir, element_file_relpath)
 
     table_file_data = create_skel('table')
-    table_file_data['basis_set_name'] = name
-    table_file_data['basis_set_family'] = family
-    table_file_data['basis_set_description'] = description
     table_file_data['basis_set_revision_description'] = revision_description
-    table_file_data['basis_set_role'] = role
     table_file_name = '{}.{}.table.json'.format(file_base, version)
 
-    # This gets created directly in the data directory
+    # and the metadata file
+    meta_file_data = create_skel('metadata')
+    meta_file_data['basis_set_name'] = name
+    meta_file_data['basis_set_family'] = family
+    meta_file_data['basis_set_description'] = description
+    meta_file_data['basis_set_role'] = role
+    meta_file_name = '{}.metadata.json'.format(file_base, version)
+
+    # These get created directly in the top-level data directory
     table_file_path = os.path.join(data_dir, table_file_name)
+    meta_file_path = os.path.join(data_dir, meta_file_name)
 
     # Can just make all the entries for the table file pretty easily
     table_file_entry = {'element_entry': element_file_relpath}
@@ -176,6 +182,8 @@ def add_basis(bs_file,
     # Yes, there is technically a race condition (files could be created between the
     # check and then actually writing out), but if that happens, you are probably using
     # this library wrong
+    #
+    # Note that the metadata file may exist already. That is ok
     ######################################################################################
     for file_path in component_file_map.keys():
         if os.path.exists(file_path):
@@ -193,6 +201,10 @@ def add_basis(bs_file,
 
     write_json_basis(element_file_path, element_file_data)
     write_json_basis(table_file_path, table_file_data)
+
+    # Create the metadata file if it doesn't exist already
+    if not os.path.exists(meta_file_path):
+        write_json_basis(meta_file_path, meta_file_data)
 
     # Update the metadata file
     metadata_file = os.path.join(data_dir, 'METADATA.json')

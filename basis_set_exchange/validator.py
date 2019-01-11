@@ -29,7 +29,7 @@ def validate_data(file_type, bs_data):
         If the file given by file_path doesn't exist
     """
 
-    _valid_schema = ['component', 'element', 'table', 'references']
+    _valid_schema = ['component', 'element', 'table', 'metadata', 'references']
     if file_type not in _valid_schema:
         raise RuntimeError("{} is not a valid file_type".format(file_type))
 

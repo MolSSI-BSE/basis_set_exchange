@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-07/#",
+    "name": "bse_basis_metadata",
+    "version": "0.1",
+    "url": "TODO",
+    "description": "JSON for describing metadata for a single basis set",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "molssi_bse_schema",
+        "basis_set_name",
+        "basis_set_family",
+        "basis_set_description",
+        "basis_set_role",
+        "basis_set_auxiliaries"
+    ],
+    "properties":
+    {
+        "molssi_bse_schema": {
+            "description": "Info about which schema the file follows",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "schema_type",
+                "schema_version"
+            ],
+            "properties": {
+                "schema_type" : {
+                    "description": "What type of BSE JSON file this is",
+                    "type": "string",
+                    "enum": [ "metadata" ]
+                },
+                "schema_version": {
+                    "description": "Version of the BSE table basis set schema being used",
+                    "type": "string"
+                }
+            }
+        },
+        "basis_set_name": {
+            "description": "Common name for the basis set",
+            "type": "string"
+        },
+        "basis_set_family": {
+            "description": "Broad family that the basis set is from",
+            "type": "string"
+        },
+        "basis_set_description": {
+            "description": "Brief description of the basis set",
+            "type": "string"
+        },
+        "basis_set_role": {
+            "description": "Role that this basis plays in a calculation",
+            "type": "string",
+            "enum": [ "orbital", "rifit", "jkfit", "jfit", "admmfit" ]
+        },
+        "basis_set_auxiliaries": {
+            "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jfit" : { "type": "string" },
+                "jkfit" : { "type": "string" },
+                "rifit" : { "type": "string" },
+                "admmfit" : { "type": "string" }
+            }
+        }
+    }
+}
