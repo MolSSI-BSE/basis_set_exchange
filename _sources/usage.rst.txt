@@ -194,7 +194,7 @@ and can be obtained via :func:`basis_set_exchange.get_roles`
    >>> # Available roles are available via get_roles
    >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_roles()
-   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting')])
+   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting'), ('admmfit', 'Auxiliary-Density Matrix Method Fitting')])
 
 
 
