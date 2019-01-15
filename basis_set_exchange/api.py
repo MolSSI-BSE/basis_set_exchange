@@ -393,7 +393,10 @@ def get_families(data_dir=None):
 
 
 def get_basis_names_by_family(family, data_dir=None):
-    '''Return the names of all basis sets for a given family'''
+    '''Return the names of all basis sets for a given family
+
+    The family name is not case sensitive
+    '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
     metadata = get_metadata(data_dir)
