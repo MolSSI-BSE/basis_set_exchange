@@ -89,7 +89,6 @@ def create_metadata_file(output_path, data_dir):
     # sort the versions and find the max version
     for k, v in metadata.items():
         latest = max(v['versions'].keys())
-        latest_data = v['versions'][latest]
         metadata[k]['latest_version'] = latest
 
         # Reorder the versions (may have been read out of order)

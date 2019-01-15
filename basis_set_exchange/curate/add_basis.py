@@ -141,7 +141,7 @@ def add_basis(bs_file,
     meta_file_data['basis_set_family'] = family
     meta_file_data['basis_set_description'] = description
     meta_file_data['basis_set_role'] = role
-    meta_file_name = '{}.metadata.json'.format(file_base, version)
+    meta_file_name = '{}.metadata.json'.format(file_base)
 
     # These get created directly in the top-level data directory
     table_file_path = os.path.join(data_dir, table_file_name)
