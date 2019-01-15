@@ -194,7 +194,7 @@ and can be obtained via :func:`basis_set_exchange.get_roles`
    >>> # Available roles are available via get_roles
    >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_roles()
-   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'), ('rifit', 'RI-fitting'), ('admmfit', 'Auxiliary-Density Matrix Method Fitting')])
+   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ...
 
 
 
@@ -207,7 +207,9 @@ This information can be accessed by the :func:`basis_set_exchange.get_metadata` 
 .. note:: Note that the key is the name of the basis set that has been transformed
           into some internal name (see :func:`basis_set_exchange.transform_basis_name`)
 
-A simple list containing all the basis set names can be obtained via :func:`basis_set_exchange.get_all_basis_names`
+A simple list containing all the basis set names can be obtained via :func:`basis_set_exchange.get_all_basis_names`.
+A list of families can be obtained with :func:`basis_set_exchange.get_families` and all the basis
+sets contained in that family with :func:`basis_set_exchange.get_basis_names_by_family`
 
 .. doctest::
 
@@ -230,6 +232,16 @@ A simple list containing all the basis set names can be obtained via :func:`basi
    >>> all_bs = basis_set_exchange.get_all_basis_names()
    >>> print(all_bs)
    ['3-21g', '4-31g', '5-21g', ...
+
+   >>> # A list of all families
+   >>> all_fam = basis_set_exchange.get_families()
+   >>> print(all_fam)
+   ['ahlrichs', 'ahlrichs_fit', 'crenb', 'dunning', ...
+
+   >>> # All basis sets in the STO family
+   >>> sto_bs = basis_set_exchange.get_basis_names_by_family('sto')
+   >>> print(sto_bs)
+   ['sto-2g', 'sto-3g', 'sto-4g', 'sto-5g', ...
 
 
 Basis set and family notes
