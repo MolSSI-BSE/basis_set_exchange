@@ -6,9 +6,10 @@ import random
 
 import basis_set_exchange as bse
 import pytest
-from basis_set_exchange import lut
 
-from .common_testvars import *
+from basis_set_exchange import lut
+from .common_testvars import bs_formats, ref_formats
+
 
 @pytest.mark.parametrize('fmt', bs_formats)
 def test_get_format_extensions(fmt):
@@ -22,5 +23,3 @@ def test_get_refformat_extensions(fmt):
     """For all basis set formats, get the extension
     """
     bse.refconverters.get_format_extension(fmt)
-
-

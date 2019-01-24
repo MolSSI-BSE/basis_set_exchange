@@ -4,8 +4,8 @@ Tests BSE curation functions
 
 import os
 import tempfile
-
 import pytest
+
 from basis_set_exchange import api, curate, manip
 from .common_testvars import bs_names_sample
 

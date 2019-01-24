@@ -5,12 +5,13 @@ Tests for lookups of elemental data
 import pytest
 from basis_set_exchange import lut
 
-_all_elements = list(range(1,119))
+_all_elements = list(range(1, 119))
 _all_am = list(range(1, 13))
+
 
 @pytest.mark.parametrize('Z', _all_elements)
 def test_element_data(Z):
-    # Cycle through the elements and check that 
+    # Cycle through the elements and check that
     # the info returned from the functions is consistent
     data = lut.element_data_from_Z(Z)
     assert data[1] == Z
@@ -34,6 +35,6 @@ def test_amchar(am):
     s = lut.amint_to_char([am])
     assert am == lut.amchar_to_int(s)[0]
 
-    combined = list(range(am+1))
+    combined = list(range(am + 1))
     s = lut.amint_to_char(combined)
     assert combined == lut.amchar_to_int(s)

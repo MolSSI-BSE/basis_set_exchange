@@ -5,18 +5,20 @@ Tests for reference handling
 import glob
 import json
 import os
-
 import pytest
+
 from basis_set_exchange import api, validator, fileio
+from .common_testvars import data_dir, all_component_files
 
-_data_dir = api._default_data_dir
-_all_component_files = fileio.get_all_filelist(_data_dir)[3]
 
-@pytest.mark.parametrize('file_path', _all_component_files)
+@pytest.mark.parametrize('file_path', all_component_files)
 def test_filenames(file_path):
-    full_path = os.path.join(_data_dir, file_path)
+    '''
+    Test that component filenames end with the correct reference
+    '''
+    full_path = os.path.join(data_dir, file_path)
     with open(full_path, 'r') as f:
-        file_refs = json.load(f)['basis_set_references'] 
+        file_refs = json.load(f)['basis_set_references']
         if len(file_refs) > 0:
             ref_str = '_'.join(file_refs)
         else:
@@ -33,7 +35,9 @@ def test_filenames(file_path):
         assert base_name.endswith(ref_str)
 
 
-# Test to make sure the references file is valid
 def test_valid_reffile():
-    full_path = os.path.join(_data_dir, "REFERENCES.json")
+    '''
+    Test to make sure the references file is valid
+    '''
+    full_path = os.path.join(data_dir, "REFERENCES.json")
     validator.validate_file('references', full_path)

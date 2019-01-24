@@ -2,15 +2,12 @@
 Tests for the BSE main API
 """
 
-import random
+import pytest
 
 import basis_set_exchange as bse
-import pytest
 
 from .common_testvars import *
 
-# Use random for getting sets of elements
-random.seed(rand_seed, version=2)
 
 @pytest.mark.slow
 @pytest.mark.parametrize('basis_name', bs_names)
@@ -29,20 +26,26 @@ def test_slow_get_basis_1(basis_name, fmt, unc_gen, unc_seg, unc_spdf, make_gen,
 
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bs1 = bse.get_basis(basis_name, fmt=fmt, version=ver,
-                            uncontract_general=unc_gen,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            make_general=make_gen,
-                            optimize_general=opt_gen,
-                            header=False)
+        bs1 = bse.get_basis(
+            basis_name,
+            fmt=fmt,
+            version=ver,
+            uncontract_general=unc_gen,
+            uncontract_segmented=unc_seg,
+            uncontract_spdf=unc_spdf,
+            make_general=make_gen,
+            optimize_general=opt_gen,
+            header=False)
 
-        bs2 = bse.get_basis(basis_name, fmt=fmt, version=ver,
-                            uncontract_general=unc_gen,
-                            uncontract_segmented=unc_seg,
-                            uncontract_spdf=unc_spdf,
-                            make_general=make_gen,
-                            optimize_general=opt_gen,
-                            header=False)
+        bs2 = bse.get_basis(
+            basis_name,
+            fmt=fmt,
+            version=ver,
+            uncontract_general=unc_gen,
+            uncontract_segmented=unc_seg,
+            uncontract_spdf=unc_spdf,
+            make_general=make_gen,
+            optimize_general=opt_gen,
+            header=False)
 
         assert bs1 == bs2

@@ -3,15 +3,24 @@ Tests for the BSE main API
 """
 
 import random
+import pytest
 
 import basis_set_exchange as bse
-import pytest
-from basis_set_exchange import lut
 
 from .common_testvars import *
 
 # Use random for getting sets of elements
 random.seed(rand_seed, version=2)
+
+# To test role lookup
+# yapf: disable
+role_tests = [('cc-pvdz', 'rifit', 'cc-pvdz-rifit'),
+              ('def2-tzvp', 'jfit', 'def2-universal-jfit'),
+              ('aug-cc-pv5z', 'jkfit', 'cc-pv5z-jkfit'),
+              ('aug-cc-pv5z', 'jkfit', 'cc-pv5z-jkfit'),
+              ('aug-pcseg-1', 'admmfit', 'aug-admm-1')]
+# yapf: enable
+
 
 @pytest.mark.parametrize('basis_name', bs_names)
 def test_get_basis_1(basis_name):
@@ -33,10 +42,10 @@ def test_get_basis_2(basis_name):
     nelements = random.randint(1, len(avail_elements))
     selected_elements = random.sample(avail_elements, nelements)
 
-    # Change some selected elements to strings 
+    # Change some selected elements to strings
     for idx in range(len(selected_elements)):
         if idx % 3 == 1:
-            selected_elements[idx] = lut.element_sym_from_Z(selected_elements[idx])
+            selected_elements[idx] = bse.lut.element_sym_from_Z(selected_elements[idx])
         elif idx % 3 == 2:
             selected_elements[idx] = str(selected_elements[idx])
 
@@ -49,12 +58,13 @@ def test_get_basis_2(basis_name):
 def test_get_basis_3(basis_name, bool_opts):
     """For a sample of basis sets, test different options
     """
-    bse.get_basis(basis_name,
-                  uncontract_general=bool_opts[0],
-                  uncontract_segmented=bool_opts[1],
-                  uncontract_spdf=bool_opts[2],
-                  make_general=bool_opts[3],
-                  optimize_general=bool_opts[4])
+    bse.get_basis(
+        basis_name,
+        uncontract_general=bool_opts[0],
+        uncontract_segmented=bool_opts[1],
+        uncontract_spdf=bool_opts[2],
+        make_general=bool_opts[3],
+        optimize_general=bool_opts[4])
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)
@@ -82,6 +92,8 @@ def test_get_basis_memo(basis_name):
 @pytest.mark.parametrize('fmt', ref_formats)
 def test_get_references_1(basis_name, fmt):
     """ Tests getting references for all basis sets
+
+    Also test getting references for a random selection of elements
     """
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
