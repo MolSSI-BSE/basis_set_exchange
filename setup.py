@@ -33,8 +33,12 @@ if __name__ == "__main__":
         url="https://github.com/MolSSI-BSE/basis_set_exchange",
         license='BSD-3C',
         packages=my_packages,
+        entry_points={
+            "console_scripts": ["bse=basis_set_exchange.cli:run_bse_cli"]
+        },
         install_requires=[
             'jsonschema',
+            'argcomplete'
         ],
         extras_require={
             'docs': [

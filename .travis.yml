@@ -23,6 +23,7 @@ before_script:
 script:
   - cd /tmp # Move to an unrelated dir
   - pytest --pyargs --cov=basis_set_exchange basis_set_exchange
+  - bse -V # Quick test of the cli
 
 notifications:
   email:
