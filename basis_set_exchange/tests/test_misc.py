@@ -22,3 +22,13 @@ def test_compact_string(elements, expected):
 
     expanded = misc.expand_elements(compacted, True)
     assert expanded == [str(x) for x in elements]
+
+
+# yapf disable
+@pytest.mark.parametrize("compact_el, expected",
+                         [("H-Li,C-O,Ne", [1, 2, 3, 6, 7, 8, 10]), ("H-N,8,Na-12", [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]),
+                          (['C', 'Al-15,S', 17, '18'], [6, 13, 14, 15, 16, 17, 18])])
+# yapf enable
+def test_expand_elements(compact_el, expected):
+    expanded = misc.expand_elements(compact_el)
+    assert expanded == expected

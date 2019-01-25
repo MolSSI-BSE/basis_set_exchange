@@ -5,6 +5,13 @@ Miscellaneous helper functions
 from . import lut
 
 
+def _Z_from_str(s):
+    if s.isdecimal():
+        return int(s)
+    else:
+        return lut.element_Z_from_sym(s)
+
+
 def compact_elements(elements):
     """
     Create a string (with ranges) given a list of element numbers
@@ -57,34 +64,50 @@ def compact_elements(elements):
     return ",".join(range_strs)
 
 
-def expand_elements(compact_str, as_str=False):
+def expand_elements(compact_el, as_str=False):
     """
-    Create a list of integers given a string of compacted elements
+    Create a list of integers given a string or list of compacted elements
 
-    This is the opposite of compact_elements
+    This is partly the opposite of compact_elements, but is more flexible.
 
-    For example, "H-Li,C-O,Ne" will return [1, 2, 3, 6, 7, 8, 10]
+    compact_el can be a list or a string. If compact_el is a list, each element is processed individually
+    as a string (meaning list elements can contain commas, ranges, etc)
+    If compact_el is a string, it is split by commas and then each section is processed.
+
+    In all cases, element symbols (case insensitive) and Z numbers (as integers or strings)
+    can be used interchangeably. Ranges are also allowed in both lists and strings.
+
+    Some examples:
+        "H-Li,C-O,Ne" will return [1, 2, 3, 6, 7, 8, 10]
+        "H-N,8,Na-12" will return [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+        ['C', 'Al-15,S', 17, '18'] will return [6, 13, 14, 15, 16, 17, 18]
 
     If as_str is True, the list will contain strings of the integers
-    (ie, the above example will return ['1', '2', '3', '6', '7', '8', '10']
+    (ie, the first example above will return ['1', '2', '3', '6', '7', '8', '10']
     """
 
-    if len(compact_str) == 0:
-        return
+    # Works for both strings and lists
+    if len(compact_el) == 0:
+        return []
+
+    # If compact_el is a list, make it a comma-separated string
+    if isinstance(compact_el, list):
+        compact_el = [str(x) for x in compact_el]
+        compact_el = ','.join(compact_el)
 
     # Split on commas
-    tmp_list = compact_str.split(',')
+    tmp_list = compact_el.split(',')
 
     # Now go over each one and replace elements with ints
     el_list = []
     for el in tmp_list:
         if not '-' in el:
-            el_list.append(lut.element_Z_from_sym(el))
+            el_list.append(_Z_from_str(el))
         else:
             begin, end = el.split('-')
-            begin = lut.element_Z_from_sym(begin)
-            end = lut.element_Z_from_sym(end)
-            el_list.extend(list(range(int(begin), int(end) + 1)))
+            begin = _Z_from_str(begin)
+            end = _Z_from_str(end)
+            el_list.extend(list(range(begin, end + 1)))
 
     if as_str is True:
         return [str(x) for x in el_list]

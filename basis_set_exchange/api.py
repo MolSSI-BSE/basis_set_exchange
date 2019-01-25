@@ -29,38 +29,6 @@ _default_schema_dir = os.path.join(_my_dir, 'schema')
 _main_url = 'http://bse.pnl.gov'
 
 
-def _convert_element_list(elements):
-    '''Convert a list of elements to an internal list
-
-    A list of elements can contain both integers and strings.
-    This converts the list entirely to strings containing integer
-    Z-numbers
-    '''
-
-    ret = []
-    for el in elements:
-        if isinstance(el, int):
-            ret.append(str(el))
-        elif isinstance(el, str) and not el.isdecimal():
-            ret.append(str(lut.element_Z_from_sym(el)))
-        else:
-            ret.append(el)
-
-    return ret
-
-
-def _convert_version(ver):
-    '''Convert a version to a string
-
-    Versions can be either integers or strings.
-    '''
-
-    if isinstance(ver, int):
-        return str(ver)
-    else:
-        return ver
-
-
 def _get_basis_metadata(name, data_dir):
     '''Get metadata for a single basis set
 
@@ -126,10 +94,13 @@ def get_basis(name,
     ----------
     name : str
         Name of the basis set. This is not case sensitive.
-    elements : list
+    elements : str or list
         List of elements that you want the basis set for. By default,
         all elements for which the basis set is defined are included.
-        Elements can be specified by Z-number (int or str) or by symbol (str)
+        Elements can be specified by Z-number (int or str) or by symbol (str).
+        If this argument is a str (ie, '1-3,7-10'), it is expanded into a list.
+        Z numbers and symbols (case insensitive) can be used interchangeably
+        (see :func:`bse.misc.expand_elements`)
     version : int or str
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
@@ -184,7 +155,7 @@ def get_basis(name,
     if version is None:
         version = bs_data['latest_version']
     else:
-        version = _convert_version(version)
+        version = str(version)  # Version may be an int
 
     # Compose the entire basis set (all elements)
     file_relpath = bs_data['versions'][version]['file_relpath']
@@ -193,7 +164,7 @@ def get_basis(name,
     # Handle optional arguments
     if elements is not None:
         # Convert to purely a list of strings that represent integers
-        elements = _convert_element_list(elements)
+        elements = misc.expand_elements(elements, True)
 
         bs_elements = basis_dict['basis_set_elements']
 
