@@ -16,3 +16,7 @@ versions = get_versions()
 __version__ = versions['version']
 __git_revision__ = versions['full-revisionid']
 del get_versions, versions
+
+def version():
+    '''Obtain the version of the basis set exchange library'''
+    return __version__
