@@ -208,10 +208,13 @@ as a string or as a python dictionary.</p>
 <dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
 </dd>
-<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list</span></dt>
 <dd><p class="first last">List of elements that you want the basis set for. By default,
 all elements for which the basis set is defined are included.
-Elements can be specified by Z-number (int or str) or by symbol (str)</p>
+Elements can be specified by Z-number (int or str) or by symbol (str).
+If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
+Z numbers and symbols (case insensitive) can be used interchangeably
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
 </dd>
 <dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or str</span></dt>
 <dd><p class="first last">Obtain a specific version of this basis set. By default,
