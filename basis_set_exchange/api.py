@@ -26,7 +26,7 @@ _default_data_dir = os.path.join(_my_dir, 'data')
 _default_schema_dir = os.path.join(_my_dir, 'schema')
 
 # Main URL of the project
-_main_url = 'http://bse.pnl.gov'
+_main_url = 'https://www.basissetexchange.org'
 
 
 def _get_basis_metadata(name, data_dir):
