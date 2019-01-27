@@ -414,6 +414,10 @@ def get_family_notes(family, data_dir=None):
     If the notes are not found, a string saying so is returned
     '''
 
+    family = family.lower()
+    if not family in get_families():
+        raise RuntimeError("Family '{}' does not exist".format(family))
+
     data_dir = _default_data_dir if data_dir is None else data_dir
     file_name = 'NOTES.' + family.lower()
     file_path = os.path.join(data_dir, file_name)
