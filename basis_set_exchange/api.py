@@ -217,6 +217,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
             * jfit
             * jkfit
             * rifit
+            * admmfit
 
     data_dir : str
         Data directory with all the basis set information. By default,
@@ -392,12 +393,12 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
     if family:
         family = family.lower()
         if not family in get_families():
-            raise RuntimeError("Family {} is not a valid family".format(family))
+            raise RuntimeError("Family '{}' is not a valid family".format(family))
         metadata = {k: v for k, v in metadata.items() if v['family'] == family}
     if role:
         role = role.lower()
         if not role in get_roles():
-            raise RuntimeError("Role {} is not a valid role".format(family))
+            raise RuntimeError("Role '{}' is not a valid role".format(role))
         metadata = {k: v for k, v in metadata.items() if v['role'] == role}
     if substr:
         substr = substr.lower()
