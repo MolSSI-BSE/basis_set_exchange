@@ -17,6 +17,7 @@ from . import notes
 from . import refconverters
 from . import references
 from . import misc
+from . import lut
 
 # Determine the path to the data directory that is part
 # of this installation
@@ -170,7 +171,8 @@ def get_basis(name,
         # Are elements part of this basis set?
         for el in elements:
             if not el in bs_elements:
-                raise KeyError("Element {} not found in basis {}".format(el, name))
+                elsym = lut.element_sym_from_Z(el)
+                raise KeyError("Element {} (Z={}) not found in basis {}".format(elsym, el, name))
 
             # Set to only the elements we want
             basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
