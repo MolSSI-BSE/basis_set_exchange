@@ -120,12 +120,3 @@ def test_notes(basis_name):
     bse.get_basis_notes(basis_name)
     fam = bse.get_basis_family(basis_name)
     bse.get_family_notes(fam)
-
-
-@pytest.mark.parametrize('family', all_families)
-def test_families(family):
-    """Test getting basis sets by family
-    """
-
-    bsfam = bse.get_basis_names_by_family(family)
-    assert len(bsfam) > 0

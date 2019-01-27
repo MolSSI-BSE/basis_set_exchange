@@ -362,25 +362,48 @@ def get_families(data_dir=None):
     return sorted(list(families))
 
 
-def get_basis_names_by_family(family, data_dir=None):
-    '''Return the names of all basis sets for a given family
+def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
+    '''Filter basis sets by some criteria
 
-    The family name is not case sensitive
+    All parameters are ANDed together and are not case sensitive.
+
+    Parameters
+    ----------
+    substr : str
+        Substring to search for in the basis set name
+    family : str
+        Family the basis set belongs to
+    role : str
+        Role of the basis set
+    data_dir : str
+        Data directory with all the basis set information. By default,
+        it is in the 'data' subdirectory of this project.
+
+    Returns
+    -------
+    Basis set metadata that matches the search criteria
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
     metadata = get_metadata(data_dir)
-    family = family.lower()
-    bs_lst = []
 
-    for k, v in metadata.items():
-        if v['family'] == family:
-            bs_lst.append(k)
+    # family and role are required to be lowercase (via schema and validation functions)
 
-    if len(bs_lst) == 0:
-        raise RuntimeError("There are no basis sets for family {}".format(family))
+    if family:
+        family = family.lower()
+        if not family in get_families():
+            raise RuntimeError("Family {} is not a valid family".format(family))
+        metadata = {k: v for k, v in metadata.items() if v['family'] == family}
+    if role:
+        role = role.lower()
+        if not role in get_roles():
+            raise RuntimeError("Role {} is not a valid role".format(family))
+        metadata = {k: v for k, v in metadata.items() if v['role'] == role}
+    if substr:
+        substr = substr.lower()
+        metadata = {k: v for k, v in metadata.items() if substr in k or substr in v['display_name']}
 
-    return sorted(bs_lst)
+    return metadata
 
 
 @memo.BSEMemoize

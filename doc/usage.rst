@@ -208,8 +208,7 @@ This information can be accessed by the :func:`basis_set_exchange.get_metadata` 
           into some internal name (see :func:`basis_set_exchange.transform_basis_name`)
 
 A simple list containing all the basis set names can be obtained via :func:`basis_set_exchange.get_all_basis_names`.
-A list of families can be obtained with :func:`basis_set_exchange.get_families` and all the basis
-sets contained in that family with :func:`basis_set_exchange.get_basis_names_by_family`
+A list of families can be obtained with :func:`basis_set_exchange.get_families`.
 
 .. doctest::
 
@@ -238,10 +237,29 @@ sets contained in that family with :func:`basis_set_exchange.get_basis_names_by_
    >>> print(all_fam)
    ['ahlrichs', 'ahlrichs_fit', 'crenb', 'dunning', ...
 
-   >>> # All basis sets in the STO family
-   >>> sto_bs = basis_set_exchange.get_basis_names_by_family('sto')
-   >>> print(sto_bs)
-   ['sto-2g', 'sto-3g', 'sto-4g', 'sto-5g', ...
+
+Filtering basis sets
+--------------------------------
+
+Basis sets can be searched for via simple filtering with :func:`basis_set_exchange.filter_basis_sets`. All
+search parameters are case insensitive. Basis sets match if all criteria are true.
+   
+.. doctest::
+
+   >>> # Find all basis sets with '31g' in the name
+   >>> md = basis_set_exchange.filter_basis_sets('31g')
+   >>> md.keys()
+   dict_keys(['4-31g', '6-31g', '6-31g*', '6-31g**'])
+
+   >>> # Find all basis sets with 'aug' in the name that can be used for RI fitting
+   >>> md = basis_set_exchange.filter_basis_sets('aug', role='rifit')
+   >>> md.keys()
+   dict_keys(['aug-cc-pv5z-rifit', 'aug-cc-pv6z-rifit', 'aug-cc-pvdz-rifit', 'aug-cc-pvqz-rifit', 'aug-cc-pvtz-rifit'])
+
+   >>> # All basis sets of the dunning family that have '5z' in the name
+   >>> md = basis_set_exchange.filter_basis_sets('5z', family='dunning')
+   >>> md.keys()
+   dict_keys(['aug-cc-pv5z', 'cc-pv5z'])
 
 
 Basis set and family notes
