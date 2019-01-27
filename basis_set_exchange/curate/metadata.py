@@ -64,6 +64,7 @@ def create_metadata_file(output_path, data_dir):
             # yapf: disable
             metadata[tr_name] = OrderedDict([
                                  ('display_name', bs['basis_set_name']),
+                                 ('description', bs['basis_set_description']),
                                  ('latest_version', None),
                                  ('basename', table_filebase),
                                  ('relpath', table_relpath),
