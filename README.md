@@ -35,6 +35,11 @@ https://molssi-bse.github.io/basis_set_exchange
 An overview of the project and its design is also available at
 https://molssi-bse.github.io/basis_set_exchange/project_doc.html
 
+## Command line interface
+
+This library also includes a command line interface.
+See https://molssi-bse.github.io/basis_set_exchange/bse_cli.html for how to use it.
+
 ## Installation
 This project can be installed via pip/PyPI.
 ```
@@ -64,6 +69,15 @@ bse.get_references('STO-3G', elements=[1,6], fmt='txt')
 ```
 
 For more documentation, see https://molssi-bse.github.io/basis_set_exchange
+
+
+## Command line
+
+Same as above, but using the command line
+
+``$ bse bse get-basis sto-3g nwchem --elements=1,6``
+
+``$ bse get-refs sto-3g txt --elements=1,6``
 
 ## License
 
