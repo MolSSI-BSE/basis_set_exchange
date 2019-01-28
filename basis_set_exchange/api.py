@@ -192,7 +192,6 @@ def get_basis(name,
     if fmt is None:
         return basis_dict
 
-    # make converters case insensitive
     if header:
         header_str = _header_string(basis_dict)
     else:
@@ -233,6 +232,12 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
+
+    role = role.lower()
+
+    if not role in get_roles():
+        raise RuntimeError("Role {} is not a valid role".format(role))
+
     bs_data = _get_basis_metadata(primary_basis, data_dir)
     auxdata = bs_data['auxiliaries']
 
@@ -384,7 +389,8 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
 
     Returns
     -------
-    Basis set metadata that matches the search criteria
+    dict
+        Basis set metadata that matches the search criteria
     '''
 
     data_dir = _default_data_dir if data_dir is None else data_dir
@@ -394,7 +400,7 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
 
     if family:
         family = family.lower()
-        if not family in get_families():
+        if not family in get_families(data_dir):
             raise RuntimeError("Family '{}' is not a valid family".format(family))
         metadata = {k: v for k, v in metadata.items() if v['family'] == family}
     if role:
@@ -416,11 +422,12 @@ def get_family_notes(family, data_dir=None):
     If the notes are not found, a string saying so is returned
     '''
 
+    data_dir = _default_data_dir if data_dir is None else data_dir
+
     family = family.lower()
-    if not family in get_families():
+    if not family in get_families(data_dir):
         raise RuntimeError("Family '{}' does not exist".format(family))
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
     file_name = 'NOTES.' + family.lower()
     file_path = os.path.join(data_dir, file_name)
 
@@ -463,7 +470,7 @@ def get_schema(schema_type):
     '''Get a schema that can validate BSE JSON files
 
        The schema_type represents the type of BSE JSON file to be validated,
-       and can be 'component', 'element', 'table', or 'references'.
+       and can be 'component', 'element', 'table', 'metadata', or 'references'.
     '''
 
     schema_file = "{}-schema.json".format(schema_type)
