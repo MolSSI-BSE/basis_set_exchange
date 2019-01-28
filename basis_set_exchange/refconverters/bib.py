@@ -52,9 +52,10 @@ def write_bib(refs):
             if len(refdata) == 0:
                 full_str += u'%     (...no reference...)\n%\n'
             else:
-                full_str += u'%         {}\n%\n'.format(' '.join(ri['reference_keys']))
+                rkeys = [x[0] for x in ri['reference_data']]
+                full_str += u'%         {}\n%\n'.format(' '.join(rkeys))
 
-            for k, r in refdata.items():
+            for k, r in refdata:
                 unique_refs[k] = r
 
     full_str += u'\n\n'

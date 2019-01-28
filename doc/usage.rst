@@ -35,6 +35,7 @@ The available formats are listed at the documentation for :func:`basis_set_excha
 and can be obtained via :func:`basis_set_exchange.get_formats`
 
 .. doctest::
+   :pyversion: >= 3.6
 
    >>> # Get a basis set as a python dictionary
    >>> bs_dict = basis_set_exchange.get_basis('6-31G*')
@@ -58,9 +59,8 @@ and can be obtained via :func:`basis_set_exchange.get_formats`
 
 
    >>> # Available formats are available via get_formats
-   >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_formats()
-   OrderedDict([('nwchem', 'NWChem'), ('gaussian94', 'Gaussian94'), ('psi4', 'Psi4'), ('gamess_us', 'GAMESS US'), ('turbomole', 'Turbomole'), ('json', 'JSON')])
+   {'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'psi4': 'Psi4', 'gamess_us': 'GAMESS US', 'turbomole': 'Turbomole', 'json': 'JSON'}
 
 
 By default, all elements for which the basis set is defined are included - this
@@ -101,6 +101,8 @@ The available formats are listed at the documentation for :func:`basis_set_excha
 and can be obtained via :func:`basis_set_exchange.get_reference_formats`
 
 .. doctest::
+   :pyversion: >= 3.6
+
    >>> # Get references for 6-31G*, all elements, as a list of dictionaries
    >>> refs = basis_set_exchange.get_references('6-31G*')
    >>> print(refs[0])
@@ -135,9 +137,8 @@ and can be obtained via :func:`basis_set_exchange.get_reference_formats`
 
 
    >>> # Available formats are available via get_reference_formats
-   >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_reference_formats()
-   OrderedDict([('bib', 'BibTeX'), ('txt', 'Plain Text'), ('json', 'JSON')])
+   {'txt': 'Plain Text', 'bib': 'BibTeX', 'json': 'JSON'}
 
 
 Versioning
@@ -182,6 +183,7 @@ The available roles are listed at the documentation for :func:`basis_set_exchang
 and can be obtained via :func:`basis_set_exchange.get_roles`
 
 .. doctest::
+   :pyversion: >= 3.6
 
    >>> # Find the MP2-fit basis set for cc-pvtz
    >>> basis_set_exchange.lookup_basis_by_role('cc-pvtz', 'rifit')
@@ -192,9 +194,8 @@ and can be obtained via :func:`basis_set_exchange.get_roles`
    'def2-universal-jfit'
 
    >>> # Available roles are available via get_roles
-   >>> # (returned as an OrderedDict)
    >>> basis_set_exchange.get_roles()
-   OrderedDict([('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ...
+   {'orbital': 'Orbital basis', 'jfit': 'J-fitting', 'jkfit': 'JK-fitting', 'rifit': 'RI-fitting',...
 
 
 
@@ -211,6 +212,7 @@ A simple list containing all the basis set names can be obtained via :func:`basi
 A list of families can be obtained with :func:`basis_set_exchange.get_families`.
 
 .. doctest::
+   :pyversion: >= 3.6
 
    >>> # Get the metadata
    >>> md = basis_set_exchange.get_metadata()
@@ -245,6 +247,7 @@ Basis sets can be searched for via simple filtering with :func:`basis_set_exchan
 search parameters are case insensitive. Basis sets match if all criteria are true.
    
 .. doctest::
+   :pyversion: >= 3.6
 
    >>> # Find all basis sets with '31g' in the name
    >>> md = basis_set_exchange.filter_basis_sets('31g')

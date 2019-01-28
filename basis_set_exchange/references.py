@@ -9,7 +9,7 @@ def compact_references(basis_dict, ref_data):
     """
     Creates a mapping of elements to reference keys
 
-    A list is returned, with each element being a dictionary
+    A list is returned, with each element of the list being a dictionary
     with entries 'reference_info' containing data for (possibly) multiple references,
     and 'elements' which is a list of element Z numbers
     that those references apply to
@@ -25,7 +25,10 @@ def compact_references(basis_dict, ref_data):
     element_refs = []
 
     # Create a mapping of elements -> reference information
-    for el, eldata in basis_dict['basis_set_elements'].items():
+    # (sort by Z first, keeping in mind Z is a string)
+    sorted_el = sorted(basis_dict['basis_set_elements'].items(), key=lambda x: int(x[0]))
+
+    for el, eldata in sorted_el:
 
         # elref is a list of dict
         # dict is { 'reference_description': str, 'reference_keys': [keys] }
@@ -39,11 +42,12 @@ def compact_references(basis_dict, ref_data):
             element_refs.append({'reference_info': elref, 'elements': [el]})
 
     for item in element_refs:
-
-        # Loop over a list of dictionaries for this group of elements
-        # Note that reference_data needs to be in the same order as the reference_keys
+        # Loop over a list of dictionaries for this group of elements and add the
+        # actual reference data
+        # Since we store the keys with the data, we don't need it anymore
         for elref in item['reference_info']:
-            elref['reference_data'] = {k: ref_data[k] for k in elref['reference_keys']}
+            elref['reference_data'] = [(k, ref_data[k]) for k in elref['reference_keys']]
+            elref.pop('reference_keys')
 
     return element_refs
 

@@ -4,9 +4,10 @@ basis set format
 """
 
 import codecs
-import collections
 import json
 import os
+
+from .sort import sort_basis_dict, sort_references_dict
 
 
 def _read_plain_json(file_path, check_bse):
@@ -64,86 +65,6 @@ def _write_plain_json(file_path, js):
     # from escaping everything
     with codecs.open(file_path, 'w', 'utf-8') as f:
         json.dump(js, f, indent=4, ensure_ascii=False)
-
-
-def _sort_basis_dict(bs):
-    """Sorts a basis set dictionary into a standard order
-
-    This allows the written file to be more easily read by humans by,
-    for example, putting the name and description before more detailed fields.
-    This is purely for cosmetic reasons.
-    """
-
-    # yapf: disable
-    _keyorder = [
-        # Schema stuff
-        'molssi_bse_schema', 'schema_type', 'schema_version',
-
-        # Auxiliary block
-         'jkfit', 'jfit', 'rifit', 'admmfit',
-
-        # Basis set metadata
-        'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_role', 'basis_set_auxiliaries',
-        'basis_set_references', 'basis_set_notes',
-
-        # Version metadata
-        'basis_set_revision_description',
-
-        # Elements and data
-        'basis_set_elements', 'element_references', 'element_ecp_electrons',
-        'element_electron_shells', 'element_ecp', 'element_components', 'element_entry',
-
-        # Shell information
-        'shell_function_type', 'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents',
-        'shell_coefficients',
-        'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients'
-    ]
-    # yapf: enable
-
-    # Add integers for the elements (being optimistic that element 150 will be found someday)
-    _keyorder.extend([str(x) for x in range(150)])
-
-    bs_sorted = sorted(bs.items(), key=lambda x: _keyorder.index(x[0]))
-    bs_sorted = collections.OrderedDict(bs_sorted)
-
-    for k, v in bs_sorted.items():
-        # If this is a dictionary, sort recursively
-        # If this is a list, sort each element but DO NOT sort the list itself.
-        if isinstance(v, dict):
-            bs_sorted[k] = _sort_basis_dict(v)
-        elif isinstance(v, list):
-            # Note - the only nested list is with coeffs, which shouldn't be sorted
-            #        (so we don't have to recurse into lists of lists)
-            bs_sorted[k] = [_sort_basis_dict(x) if isinstance(x, dict) else x for x in v]
-
-    return bs_sorted
-
-
-def _sort_references_dict(refs):
-    """Sorts a references dictionary into a standard order
-
-    The keys of the references are also sorted, and the keys for the data for each
-    reference are put in a more canonical order.
-
-    This allows the written file to be more easily read by humans by,
-    for example, putting the the title and authos first, followed by more detailed information.
-    This is purely for cosmetic reasons.
-    """
-
-    _keyorder = [
-        'schema_type', 'schema_version', 'type', 'authors', 'title', 'booktitle', 'series', 'editors', 'journal',
-        'institution', 'volume', 'number', 'page', 'year', 'note', 'publisher', 'address', 'isbn', 'doi'
-    ]
-
-    refs_sorted = collections.OrderedDict()
-
-    refs_sorted['molssi_bse_schema'] = refs['molssi_bse_schema']
-    for k in sorted(refs.keys()):
-        sorted_entry = sorted(refs[k].items(), key=lambda x: _keyorder.index(x[0]))
-        refs_sorted[k] = collections.OrderedDict(sorted_entry)
-
-    return refs_sorted
 
 
 def read_json_basis(file_path):
@@ -213,7 +134,7 @@ def write_json_basis(file_path, bs):
         Basis set information to write
     """
 
-    _write_plain_json(file_path, _sort_basis_dict(bs))
+    _write_plain_json(file_path, sort_basis_dict(bs))
 
 
 def write_references(file_path, refs):
@@ -228,7 +149,7 @@ def write_references(file_path, refs):
         Reference information to write
     """
 
-    _write_plain_json(file_path, _sort_references_dict(refs))
+    _write_plain_json(file_path, sort_references_dict(refs))
 
 
 def get_all_filelist(data_dir):

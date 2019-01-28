@@ -508,5 +508,11 @@ def get_roles():
     can be passed as the role argument to fmt argument to :func:`lookup_basis_by_role`
     '''
 
-    return OrderedDict((('orbital', 'Orbital basis'), ('jfit', 'J-fitting'), ('jkfit', 'JK-fitting'),
-                        ('rifit', 'RI-fitting'), ('admmfit', 'Auxiliary-Density Matrix Method Fitting')))
+    # yapf: disable
+    return { 'orbital': 'Orbital basis',
+             'jfit': 'J-fitting',
+             'jkfit': 'JK-fitting',
+             'rifit': 'RI-fitting',
+             'admmfit': 'Auxiliary-Density Matrix Method Fitting'
+            }
+    # yapf: enable

@@ -2,17 +2,17 @@
 Converts basis set data to a specified output format
 '''
 
-from collections import OrderedDict
+from .. import sort
 from .bib import write_bib
 from .txt import write_txt
 from .bsejson import write_json
 
 _converter_map = {
-    'json': {
-        'display': 'JSON',
-        'extension': '.json',
-        'comment': None,
-        'function': write_json
+    'txt': {
+        'display': 'Plain Text',
+        'extension': '.txt',
+        'comment': '',
+        'function': write_txt
     },
     'bib': {
         'display': 'BibTeX',
@@ -20,16 +20,16 @@ _converter_map = {
         'comment': '%',
         'function': write_bib
     },
-    'txt': {
-        'display': 'Plain Text',
-        'extension': '.txt',
-        'comment': '',
-        'function': write_txt
+    'json': {
+        'display': 'JSON',
+        'extension': '.json',
+        'comment': None,
+        'function': write_json
     }
 }
 
 
-def convert_references(ref_dict, fmt, header=None):
+def convert_references(ref_data, fmt, header=None):
     '''
     Returns the basis set references as a string representing
     the data in the specified output format
@@ -40,7 +40,15 @@ def convert_references(ref_dict, fmt, header=None):
     if fmt not in _converter_map:
         raise RuntimeError('Unknown reference format "{}"'.format(fmt))
 
-    ret_str = _converter_map[fmt]['function'](ref_dict)
+    # Sort the data for all references
+    for elref in ref_data:
+        for rinfo in elref['reference_info']:
+            rdata = rinfo['reference_data']
+            rinfo['reference_data'] = [(k, sort.sort_single_reference(v)) for k, v in rdata]
+
+    # Actually do the conversion
+    ret_str = _converter_map[fmt]['function'](ref_data)
+
     if header is not None and fmt != 'json':
         comment_str = _converter_map[fmt]['comment']
         header_str = comment_str + comment_str.join(header.splitlines(True))
@@ -57,17 +65,7 @@ def get_formats():
     at the top, followed by the rest in alphabetical order
     '''
 
-    at_top = ['bib', 'txt']
-    ret = [(k, v['display']) for k, v in _converter_map.items()]
-    ret = OrderedDict(sorted(ret))
-
-    for x in reversed(at_top):
-        ret.move_to_end(x, False)
-
-    # Move JSON to the end
-    ret.move_to_end('json', True)
-
-    return ret
+    return {k: v['display'] for k, v in _converter_map.items()}
 
 
 def get_format_extension(fmt):
