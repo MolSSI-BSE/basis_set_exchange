@@ -43,7 +43,7 @@ if __name__ == "__main__":
         extras_require={
             'docs': [
                 'sphinx',
-                'sphinxcontrib-napoleon',
+                'sphinxcontrib-programoutput',
                 'sphinx_rtd_theme',
                 'numpydoc',
             ],

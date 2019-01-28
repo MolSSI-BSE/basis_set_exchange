@@ -41,6 +41,7 @@ release = ''
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
+    'sphinxcontrib.programoutput',
     'numpydoc'
 ]
 

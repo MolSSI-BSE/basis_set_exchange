@@ -23,6 +23,7 @@ https://github.com/MolSSI-BSE/basis_set_exchange
    :caption: Contents:
 
    usage
+   bse_cli
    user_api
    developer
    project_doc
