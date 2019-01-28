@@ -1,0 +1,48 @@
+{
+    "bppfakebasis": {
+        "display_name": "bppfakebasis",
+        "description": "A fake basis set for testing the BSE",
+        "latest_version": "0",
+        "basename": "bppfakebasis",
+        "relpath": "",
+        "family": "bppfake",
+        "role": "orbital",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {
+            "jkfit": "bppfakebasis-jkfit"
+        },
+        "versions": {
+            "0": {
+                "file_relpath": "bppfakebasis.0.table.json",
+                "revdesc": "bppfake basis made up by Ben :)",
+                "elements": [
+                    "1"
+                ]
+            }
+        }
+    },
+    "bppfakebasis-jkfit": {
+        "display_name": "bppfakebasis-jkfit",
+        "description": "A fake jkfit basis set for testing the BSE",
+        "latest_version": "0",
+        "basename": "bppfakebasis-jkfit",
+        "relpath": "",
+        "family": "bppfake",
+        "role": "jkfit",
+        "functiontypes": [
+            "gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "file_relpath": "bppfakebasis-jkfit.0.table.json",
+                "revdesc": "bppfake basis made up by Ben :)",
+                "elements": [
+                    "1"
+                ]
+            }
+        }
+    }
+}

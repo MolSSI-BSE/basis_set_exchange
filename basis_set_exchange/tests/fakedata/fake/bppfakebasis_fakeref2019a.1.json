@@ -1,0 +1,32 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "A fake basis set for testing the BSE",
+    "basis_set_references": [
+        "fakeref2019a"
+    ],
+    "basis_set_elements": {
+        "1": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "1.0000000000E+00"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.0000000000E+00"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
