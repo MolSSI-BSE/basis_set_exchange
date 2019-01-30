@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The bse command line interface &mdash; Basis Set Exchange  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Main User API" href="user_api.html" />
+    <link rel="prev" title="Quickstart and Basic Usage" href="usage.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The bse command line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tab-completion">TAB completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#element-strings">Element strings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#subcommands">Subcommands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-formats">list-formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-ref-formats">list-ref-formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-roles">list-roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-basis-sets">list-basis-sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-families">list-families</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lookup-by-role">lookup-by-role</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-basis">get-basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-refs">get-refs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-info">get-info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-notes">get-notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-family">get-family</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-versions">get-versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-family-notes">get-family-notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>The bse command line interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/bse_cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-bse-command-line-interface">
+<h1>The bse command line interface<a class="headerlink" href="#the-bse-command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>The basis set exchange package contains a command-line interface
+called <code class="docutils literal notranslate"><span class="pre">bse</span></code>. This command can be used to obtain basis sets and references,
+as well as query the library for information and metadata.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The command line is automatically installed when the library is installed
+via <code class="docutils literal notranslate"><span class="pre">pip</span></code> or similar python package managers.</p>
+<p>Depending on how packages are installed, you may need to add the path to
+the <code class="docutils literal notranslate"><span class="pre">bse</span></code> program to the PATH environment variable.</p>
+</div>
+<div class="section" id="tab-completion">
+<h2>TAB completion<a class="headerlink" href="#tab-completion" title="Permalink to this headline">¶</a></h2>
+<p>Tab completion is available for the bash interpreter and is tremendously useful.
+If enabled, TAB autocompletion will be enabled for</p>
+<blockquote>
+<div><ul class="simple">
+<li>Directories</li>
+<li>Arguments (<code class="docutils literal notranslate"><span class="pre">--elements</span></code>, etc)</li>
+<li>Basis set names</li>
+<li>Basis set families</li>
+<li>Roles</li>
+<li>Basis set formats and reference formats</li>
+</ul>
+</div></blockquote>
+<p>Autocompletion is implemented via the <strong>argcomplete</strong> library (<a class="reference external" href="https://argcomplete.readthedocs.io">https://argcomplete.readthedocs.io</a>).
+TAB completion can be enabled one of two ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">&quot;$(register-python-argcomplete</span> <span class="pre">bse)&quot;</span></code> on the command line</li>
+<li>Enable globally by running <code class="docutils literal notranslate"><span class="pre">activate-global-python-argcomplete</span></code> and
+then sourcing <code class="docutils literal notranslate"><span class="pre">~/.bash_completion.d/python-argcomplete.sh</span></code> manually or in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>The first method must be run every time a new terminal is opened.
+For the second method, you can change the path where the <code class="docutils literal notranslate"><span class="pre">python-argcomplete.sh</span></code> script is installed.</p>
+<p>For more details, see the documentation for <strong>argcomplete</strong>
+(particularly <a class="reference external" href="https://argcomplete.readthedocs.io/en/latest/#synopsis">here</a>
+and <a class="reference external" href="https://argcomplete.readthedocs.io/en/latest/#global-completion">here</a>)</p>
+<p>Note that both the <code class="docutils literal notranslate"><span class="pre">register-python-argcomplete</span></code> and <code class="docutils literal notranslate"><span class="pre">activate-global-python-argcomplete</span></code> are part
+of the python <strong>argcomplete</strong> package and you may need to add the path manually to the PATH
+environment variable.</p>
+</div>
+<div class="section" id="general-usage">
+<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">bse</span></code> command is generally followed by a subcommand (see below). <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-h</span></code> will display help
+and <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-V</span></code> will display the version and exit.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -h
+usage: bse [-h] [-V] [-d PATH] [-o PATH] subcommand ...
+
+Description of your program
+
+positional arguments:
+  subcommand
+    list-formats        Output a list all available basis set formats and
+                        descriptions
+    list-ref-formats    Output a list all available reference formats and
+                        descriptions
+    list-roles          Output a list all available roles and descriptions
+    list-basis-sets     Output a list all available basis sets and
+                        descriptions
+    list-families       Output a list all available basis set families
+    lookup-by-role      Lookup a companion/auxiliary basis by primary basis
+                        and role
+    get-basis           Output a formatted basis set
+    get-refs            Output references for a basis set
+    get-info            Output general info and metadata for a basis set
+    get-notes           Output the notes for a basis set
+    get-family          Output the family of a basis set
+    get-versions        Output a list all available versions of a basis set
+    get-family-notes    Get the notes of a family of basis sets
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -V                    show program&#39;s version number and exit
+  -d PATH, --data-dir PATH
+                        Override which data directory to use
+  -o PATH, --output PATH
+                        Output to given file rather than stdout
+</pre></div>
+</div>
+<p>In general, values provided to options (such as basis set names, formats, and elements) are
+not case sensitive.</p>
+<p>There are two global options available to all subcommands: an alternate
+data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d /home/ben/my_data_dir list-basis-sets
+bppfakebasis        A fake basis set for testing the BSE
+bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
+</pre></div>
+</div>
+<p>Also, output can be written to a file rather than to the terminal</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -o /tmp/my_out_file list-basis-sets
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat /tmp/my_out_file
+3-21g                 3-21G
+4-31g                 4-31G valence double-zeta basis set
+5-21g                 5-21G valence double-zeta basis set
+...
+</pre></div>
+</div>
+<div class="section" id="element-strings">
+<h3>Element strings<a class="headerlink" href="#element-strings" title="Permalink to this headline">¶</a></h3>
+<p>Some subcommands take a string specifying which elements the subcommand will work with. This
+string is a comma-separated list of element symbols and/or Z numbers. Ranges can also be used.</p>
+<p>Symbols are not case sensitive and can be mixed with Z-numbers.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">H-Ne</span></code> - for hydrogen through neon (inclusive)</li>
+<li><code class="docutils literal notranslate"><span class="pre">1-10</span></code> - same as above</li>
+<li><code class="docutils literal notranslate"><span class="pre">C,8,p-17</span></code> - carbon, oxygen, phosphorus through chlorine</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="subcommands">
+<h2>Subcommands<a class="headerlink" href="#subcommands" title="Permalink to this headline">¶</a></h2>
+<p>Below is a list of the available subcommands. All subcommands
+can take the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to display help for that subcommand.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis -h
+usage: bse get-basis [-h] [--elements ELEMENTS] [--version VERSION]
+                     [--noheader] [--unc-gen] [--unc-spdf] [--unc-seg]
+                     [--opt-gen] [--make-gen]
+                     basis fmt
+
+positional arguments:
+  basis                Name of the basis set to output
+  fmt                  Which format to output the basis set as
+...
+</pre></div>
+</div>
+<div class="section" id="list-formats">
+<h3>list-formats<a class="headerlink" href="#list-formats" title="Permalink to this headline">¶</a></h3>
+<p>Lists the available output formats of basis sets.
+With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats
+nwchem      NWChem
+gaussian94  Gaussian94
+psi4        Psi4
+gamess_us   GAMESS US
+turbomole   Turbomole
+json        JSON
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats -n
+nwchem
+gaussian94
+psi4
+gamess_us
+turbomole
+json
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-ref-formats">
+<h3>list-ref-formats<a class="headerlink" href="#list-ref-formats" title="Permalink to this headline">¶</a></h3>
+<p>Lists the available output formats of references.
+With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats
+txt   Plain Text
+bib   BibTeX
+json  JSON
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats -n
+txt
+bib
+json
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-roles">
+<h3>list-roles<a class="headerlink" href="#list-roles" title="Permalink to this headline">¶</a></h3>
+<p>Lists the available basis set roles. Takes no arguments</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-roles
+orbital  Orbital basis
+jfit     J-fitting
+jkfit    JK-fitting
+rifit    RI-fitting
+admmfit  Auxiliary-Density Matrix Method Fitting
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-basis-sets">
+<h3>list-basis-sets<a class="headerlink" href="#list-basis-sets" title="Permalink to this headline">¶</a></h3>
+<p>Lists the available basis sets.
+This command respects the <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code> option.
+With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the basis set.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets
+3-21g                 3-21G
+4-31g                 4-31G valence double-zeta basis set
+5-21g                 5-21G valence double-zeta basis set
+...
+</pre></div>
+</div>
+<p>Basis sets can be filtered by role, family, or by arbitrary search string (case insensitive).
+See <a class="reference internal" href="#list-roles">list-roles</a> and <cite>list-families</cite>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -r jfit
+def2-universal-jfit  Coulomb fitting auxiliary basis for def2 basis sets
+...
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -f pople -s &#39;31g&#39;
+4-31g    4-31G valence double-zeta basis set
+6-31g    6-31G valence double-zeta
+6-31g*   6-31G
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-families">
+<h3>list-families<a class="headerlink" href="#list-families" title="Permalink to this headline">¶</a></h3>
+<p>List all basis set families.
+This command respects the <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code> option.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-families
+ahlrichs
+ahlrichs_fit
+crenb
+dunning
+dunning_fit
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="lookup-by-role">
+<h3>lookup-by-role<a class="headerlink" href="#lookup-by-role" title="Permalink to this headline">¶</a></h3>
+<p>Find the name of an auxiliary basis set given the primary basis and the desired role.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse lookup-by-role def2-tzvp jfit
+def2-universal-jfit
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-basis">
+<h3>get-basis<a class="headerlink" href="#get-basis" title="Permalink to this headline">¶</a></h3>
+<p>Obtain a formatted basis set.
+This command has several options. See <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">get-basis</span> <span class="pre">-h</span></code> for a complete list.</p>
+<p>This subcommand takes two required arguments: the name of the basis set
+and the format. See <a class="reference internal" href="#list-basis-sets">list-basis-sets</a> and <a class="reference internal" href="#list-formats">list-formats</a>.</p>
+<p>The main popular option is <code class="docutils literal notranslate"><span class="pre">--elements</span></code> which takes an element string.
+See <a class="reference internal" href="#element-strings">Element strings</a>.
+By default, all elements for which the basis set is defined are included.</p>
+<p>A version of the basis set can be specified with <code class="docutils literal notranslate"><span class="pre">--version</span></code>.
+See <a class="reference internal" href="#get-versions">get-versions</a> for how to list versions available for a basis set.</p>
+<p>By default, a descriptive header is included. This may be disabled with <code class="docutils literal notranslate"><span class="pre">--noheader</span></code></p>
+<p>Some examples:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
+#----------------------------------------------------------------------
+# Basis Set Exchange
+# https://www.basissetexchange.org
+# Accessed 2019-01-30 16:38:58 UTC
+#----------------------------------------------------------------------
+#   Basis set: STO-3G
+# Description: STO-3G Minimal Basis (3 functions/AO)
+#        Role: orbital
+#     Version: 1  (Values from Gaussian09)
+#----------------------------------------------------------------------
+
+
+BASIS &quot;ao basis&quot; PRINT
+#BASIS SET: (3s) -&gt; [1s]
+H    S
+      0.3425250914E+01       0.1543289673E+00
+      0.6239137298E+00       0.5353281423E+00
+      0.1688554040E+00       0.4446345422E+00
+#BASIS SET: (3s) -&gt; [1s]
+He    S
+...
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g gaussian94 --noheader
+H     0
+S   3   1.00
+      0.3425250914D+01       0.1543289673D+00
+      0.6239137298D+00       0.5353281423D+00
+      0.1688554040D+00       0.4446345422D+00
+****
+He     0
+S   3   1.00
+      0.6362421394D+01       0.1543289673D+00
+      0.1158922999D+01       0.5353281423D+00
+      0.3136497915D+00       0.4446345422D+00
+****
+Li     0
+S   3   1.00
+      0.1611957475D+02       0.1543289673D+00
+      0.2936200663D+01       0.5353281423D+00
+      0.7946504870D+00       0.4446345422D+00
+SP   3   1.00
+      0.6362897469D+00      -0.9996722919D-01       0.1559162750D+00
+      0.1478600533D+00       0.3995128261D+00       0.6076837186D+00
+...
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g gaussian94 --elements C,7,11-13 --noheader
+C     0
+S   3   1.00
+      0.7161683735D+02       0.1543289673D+00
+      0.1304509632D+02       0.5353281423D+00
+      0.3530512160D+01       0.4446345422D+00
+SP   3   1.00
+      0.2941249355D+01      -0.9996722919D-01       0.1559162750D+00
+      0.6834830964D+00       0.3995128261D+00       0.6076837186D+00
+      0.2222899159D+00       0.7001154689D+00       0.3919573931D+00
+****
+...
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis cc-pvtz nwchem --noheader --version 0 --elements C --make-gen
+BASIS &quot;ao basis&quot; PRINT
+#BASIS SET: (10s,5p,2d,1f) -&gt; [4s,3p,2d,1f]
+C    S
+   8236.0000000              0.0005310             -0.0001130              0.0000000              0.0000000
+   1235.0000000              0.0041080             -0.0008780              0.0000000              0.0000000
+    280.8000000              0.0210870             -0.0045400              0.0000000              0.0000000
+     79.2700000              0.0818530             -0.0181330              0.0000000              0.0000000
+     25.5900000              0.2348170             -0.0557600              0.0000000              0.0000000
+      8.9970000              0.4344010             -0.1268950              0.0000000              0.0000000
+      3.3190000              0.3461290             -0.1703520              0.0000000              0.0000000
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-refs">
+<h3>get-refs<a class="headerlink" href="#get-refs" title="Permalink to this headline">¶</a></h3>
+<p>Obtain formatted reference for a basis set.</p>
+<p>This subcommand takes two required arguments: the name of the basis set,
+and the desired reference format. See <a class="reference internal" href="#list-basis-sets">list-basis-sets</a> and <a class="reference internal" href="#list-ref-formats">list-ref-formats</a>.</p>
+<p>Elements can be restricted with <code class="docutils literal notranslate"><span class="pre">--elements</span></code>. See <a class="reference internal" href="#element-strings">Element strings</a>.
+By default, all elements for which the basis set is defined are included.</p>
+<p>A version of the basis set can be specified with <code class="docutils literal notranslate"><span class="pre">--version</span></code>.
+See <a class="reference internal" href="#get-versions">get-versions</a> for how to list versions available for a basis set.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-refs def2-tzvp --elements 1 bib
+% H
+%     Common base shells for def2-TZV*
+%         weigend2005a
+%
+%     Additional functions to form def2-TZVP
+%         weigend2005a
+%
+
+
+@article{weigend2005a,
+    author = {Weigend, Florian and Ahlrichs, Reinhart},
+    title = {Balanced basis sets of split valence, triple zeta valence and quadruple zeta valence quality for H to Rn: Design and assessment of accuracy},
+    journal = {Phys. Chem. Chem. Phys.},
+    volume = {7},
+    page = {3297},
+    year = {2005},
+    doi = {10.1039/b508541a}
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-info">
+<h3>get-info<a class="headerlink" href="#get-info" title="Permalink to this headline">¶</a></h3>
+<p>Obtain some metadata about a basis set.
+This takes only one required argument (the name of the basis set).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-info cc-pvdz
+--------------------------------------------------------------------------------
+cc-pvdz
+--------------------------------------------------------------------------------
+    Display Name: cc-pVDZ
+     Description: cc-pVDZ
+            Role: orbital
+          Family: dunning
+  Function Types: gto
+  Latest Version: 1
+
+Auxiliary Basis Sets:
+    rifit  cc-pvdz-rifit
+
+Versions:
+    0  H-Ar,Ca-Kr  Values from original Basis Set Exchange
+    1  H-Ar,Ca-Kr  Values from ccRepo
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-notes">
+<h3>get-notes<a class="headerlink" href="#get-notes" title="Permalink to this headline">¶</a></h3>
+<p>Obtain the notes about a basis set.
+This takes only one required argument (the name of the basis set).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-notes sto-3g
+Notes are not available for the STO-3G basis
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-family">
+<h3>get-family<a class="headerlink" href="#get-family" title="Permalink to this headline">¶</a></h3>
+<p>Get the family of the basis set.
+This takes only one required argument (the name of the basis set).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-family cc-pvtz-rifit
+dunning_fit
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-versions">
+<h3>get-versions<a class="headerlink" href="#get-versions" title="Permalink to this headline">¶</a></h3>
+<p>Get the available versions of a basis set.
+This takes only one required argument (the name of the basis set).</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the version.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-versions aug-cc-pvtz
+0  Values from original Basis Set Exchange
+1  Values from ccRepo
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-versions aug-cc-pvtz -n
+0
+1
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-family-notes">
+<h3>get-family-notes<a class="headerlink" href="#get-family-notes" title="Permalink to this headline">¶</a></h3>
+<p>Obtain the notes about a basis set family. This takes only one required argument (the basis set family).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-family-notes sto
+Notes about STO basis sets
+============================
+
+STO basis sets are formed by fitting a set of 2/3/4/5/6 exponents/coefficients to
+a corresponding Slater function. A set of elements (first row main group, for example)
+will share a set of coefficients and a common set of base exponents which are
+multiplied by the square of an element-specific scaling factor.
+
+The data in this library corresponds to that found in Gaussian09. Scaling
+factors were taken from the literature and verified by dividing them out
+...
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_api.html" class="btn btn-neutral float-right" title="Main User API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="usage.html" class="btn btn-neutral" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Benjamin Pritchard
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

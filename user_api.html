@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer Documentation" href="developer.html" />
-    <link rel="prev" title="Quickstart and Basic Usage" href="usage.html" /> 
+    <link rel="prev" title="The bse command line interface" href="bse_cli.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,6 +81,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
@@ -153,6 +154,43 @@
 <p>Basis Set Exchange</p>
 <p>Contains utilities for reading, writing, and converting
 basis set information</p>
+<dl class="function">
+<dt id="basis_set_exchange.filter_basis_sets">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">filter_basis_sets</code><span class="sig-paren">(</span><em>substr=None</em>, <em>family=None</em>, <em>role=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter basis sets by some criteria</p>
+<p>All parameters are ANDed together and are not case sensitive.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>substr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Substring to search for in the basis set name</p>
+</dd>
+<dt><strong>family</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Family the basis set belongs to</p>
+</dd>
+<dt><strong>role</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Role of the basis set</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dict</strong></dt>
+<dd><p class="first last">Basis set metadata that matches the search criteria</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="basis_set_exchange.get_all_basis_names">
 <code class="descclassname">basis_set_exchange.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
@@ -268,13 +306,6 @@ dictionary. Otherwise, it will be a string.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.get_basis_names_by_family">
-<code class="descclassname">basis_set_exchange.</code><code class="descname">get_basis_names_by_family</code><span class="sig-paren">(</span><em>family</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_basis_names_by_family" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the names of all basis sets for a given family</p>
-<p>The family name is not case sensitive</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="basis_set_exchange.get_families">
 <code class="descclassname">basis_set_exchange.</code><code class="descname">get_families</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_families" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of all basis set families</p>
@@ -362,7 +393,7 @@ can be passed as the role argument to fmt argument to <a class="reference intern
 <code class="descclassname">basis_set_exchange.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a schema that can validate BSE JSON files</p>
 <p>The schema_type represents the type of BSE JSON file to be validated,
-and can be ‘component’, ‘element’, ‘table’, or ‘references’.</p>
+and can be ‘component’, ‘element’, ‘table’, ‘metadata’, or ‘references’.</p>
 </dd></dl>
 
 <dl class="function">
@@ -388,6 +419,7 @@ formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <li>jfit</li>
 <li>jkfit</li>
 <li>rifit</li>
+<li>admmfit</li>
 </ul>
 </div></blockquote>
 </dd>
@@ -410,6 +442,12 @@ and role.</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="basis_set_exchange.version">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the version of the basis set exchange library</p>
+</dd></dl>
+
 </div>
 
 
@@ -423,7 +461,7 @@ and role.</p>
         <a href="developer.html" class="btn btn-neutral float-right" title="Developer Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="usage.html" class="btn btn-neutral" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bse_cli.html" class="btn btn-neutral" title="The bse command line interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -432,7 +470,7 @@ and role.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Benjamin Pritchard.
+        &copy; Copyright 2018, Benjamin Pritchard
 
     </p>
   </div>
@@ -451,20 +489,14 @@ and role.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
 
   
 
