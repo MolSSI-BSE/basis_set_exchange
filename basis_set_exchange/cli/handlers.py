@@ -2,11 +2,7 @@
 Handlers for command line subcommands
 '''
 
-import os
-import argparse
-import argcomplete
 from .. import api
-from .. import version
 from ..misc import compact_elements
 
 
@@ -48,7 +44,7 @@ def _format_columns(lines, prefix=''):
     return [fmtstr.format(*l) for l in lines]
 
 
-def cli_list_basis_sets(args):
+def _cli_list_basis_sets(args):
     '''Handles the list-basis-sets subcommand'''
     metadata = api.filter_basis_sets(args.substr, args.family, args.role, args.data_dir)
 
@@ -60,13 +56,13 @@ def cli_list_basis_sets(args):
     return '\n'.join(liststr)
 
 
-def cli_list_families(args):
+def _cli_list_families(args):
     '''Handles the list-families subcommand'''
     families = api.get_families(args.data_dir)
     return '\n'.join(families)
 
 
-def cli_list_formats(args):
+def _cli_list_formats(args):
     '''Handles the list-formats subcommand'''
     all_formats = api.get_formats()
 
@@ -78,7 +74,7 @@ def cli_list_formats(args):
     return '\n'.join(liststr)
 
 
-def cli_list_ref_formats(args):
+def _cli_list_ref_formats(args):
     '''Handles the list-ref-formats subcommand'''
     all_refformats = api.get_reference_formats()
 
@@ -90,7 +86,7 @@ def cli_list_ref_formats(args):
     return '\n'.join(liststr)
 
 
-def cli_list_roles(args):
+def _cli_list_roles(args):
     '''Handles the list-roles subcommand'''
     all_roles = api.get_roles()
 
@@ -102,12 +98,12 @@ def cli_list_roles(args):
     return '\n'.join(liststr)
 
 
-def cli_lookup_by_role(args):
+def _cli_lookup_by_role(args):
     '''Handles the lookup-by-role subcommand'''
     return api.lookup_basis_by_role(args.basis, args.role, args.data_dir)
 
 
-def cli_get_basis(args):
+def _cli_get_basis(args):
     '''Handles the get-basis subcommand'''
 
     return api.get_basis(
@@ -124,12 +120,13 @@ def cli_get_basis(args):
         header=not args.noheader)
 
 
-def cli_get_refs(args):
+def _cli_get_refs(args):
     '''Handles the get-refs subcommand'''
-    return api.get_references(basis_name=args.basis, elements=args.elements, version=args.version, fmt=args.reffmt, data_dir=args.data_dir)
+    return api.get_references(
+        basis_name=args.basis, elements=args.elements, version=args.version, fmt=args.reffmt, data_dir=args.data_dir)
 
 
-def cli_get_info(args):
+def _cli_get_info(args):
     '''Handles the get-info subcommand'''
 
     bs_meta = api.get_metadata(args.data_dir)[args.basis]
@@ -164,17 +161,17 @@ def cli_get_info(args):
     return '\n'.join(ret)
 
 
-def cli_get_notes(args):
+def _cli_get_notes(args):
     '''Handles the get-notes subcommand'''
     return api.get_basis_notes(args.basis, args.data_dir)
 
 
-def cli_get_family(args):
+def _cli_get_family(args):
     '''Handles the get-family subcommand'''
     return api.get_basis_family(args.basis, args.data_dir)
 
 
-def cli_get_versions(args):
+def _cli_get_versions(args):
     '''Handles the get-versions subcommand'''
     name = args.basis.lower()
     metadata = api.get_metadata(args.data_dir)
@@ -193,6 +190,26 @@ def cli_get_versions(args):
     return '\n'.join(liststr)
 
 
-def cli_get_family_notes(args):
+def _cli_get_family_notes(args):
     '''Handles the get-family-notes subcommand'''
     return api.get_family_notes(args.family, args.data_dir)
+
+
+def cli_handle_bse_subcmd(args):
+    handler_map = {
+        'list-formats': _cli_list_formats,
+        'list-ref-formats': _cli_list_ref_formats,
+        'list-roles': _cli_list_roles,
+        'list-basis-sets': _cli_list_basis_sets,
+        'list-families': _cli_list_families,
+        'lookup-by-role': _cli_lookup_by_role,
+        'get-basis': _cli_get_basis,
+        'get-refs': _cli_get_refs,
+        'get-info': _cli_get_info,
+        'get-notes': _cli_get_notes,
+        'get-family': _cli_get_family,
+        'get-versions': _cli_get_versions,
+        'get-family-notes': _cli_get_family_notes,
+    }
+
+    return handler_map[args.subcmd](args)

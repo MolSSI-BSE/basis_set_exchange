@@ -6,8 +6,6 @@ import datetime
 import os
 import textwrap
 
-from collections import OrderedDict
-
 from . import compose
 from . import converters
 from . import fileio

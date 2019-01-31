@@ -2,14 +2,14 @@
 Command line interface for the basis set exchange
 '''
 
-import os
 import argparse
 import argcomplete
-from .. import api
 from .. import version
-from .handlers import *
-from .complete import *
-from .check import *
+from .handlers import cli_handle_bse_subcmd
+from .check import cli_check_normalize_args
+from .complete import (cli_case_insensitive_validator,
+                       cli_family_completer, cli_role_completer, cli_bsname_completer,
+                       cli_fmt_completer, cli_reffmt_completer)
 
 
 def run_bse_cli():
@@ -117,39 +117,11 @@ def run_bse_cli():
     # Now parse and handle the args
     args = parser.parse_args()
 
-    # Normalize the arguments. I keep all metavars
-    # the same for what they represent
-    args_keys = vars(args).keys() # What args we have
-    if 'data_dir' in args_keys:
-        args.data_dir = check_data_dir(args.data_dir)
-    if 'basis' in args:
-        args.basis = check_basis(args.basis, args.data_dir)
-    if 'fmt' in args_keys:
-        args.fmt = check_format(args.fmt)
-    if 'reffmt' in args_keys:
-        args.reffmt = check_ref_format(args.reffmt)
-    if 'role' in args_keys:
-        args.role = check_role(args.role)
-    if 'family' in args_keys:
-        args.family = check_family(args.family, args.data_dir)
+    # Check and make sure basis sets, roles, etc, are valid
+    args = cli_check_normalize_args(args)
 
-    handler_map = {
-        'list-formats': cli_list_formats,
-        'list-ref-formats': cli_list_ref_formats,
-        'list-roles': cli_list_roles,
-        'list-basis-sets': cli_list_basis_sets,
-        'list-families': cli_list_families,
-        'lookup-by-role': cli_lookup_by_role,
-        'get-basis': cli_get_basis,
-        'get-refs': cli_get_refs,
-        'get-info': cli_get_info,
-        'get-notes': cli_get_notes,
-        'get-family': cli_get_family,
-        'get-versions': cli_get_versions,
-        'get-family-notes': cli_get_family_notes,
-    }
-
-    output = handler_map[args.subcmd](args)
+    # Actually generate the output
+    output = cli_handle_bse_subcmd(args)
 
     if args.output:
         with open(args.output, 'w') as outfile:

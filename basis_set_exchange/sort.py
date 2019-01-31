@@ -109,11 +109,6 @@ def sort_references_dict(refs):
     reference are put in a more canonical order.
     """
 
-    # yapf: disable
-    _keyorder = [
-    ]
-    # yapf: enable
-
     if _use_odict:
         refs_sorted = OrderedDict()
     else:
