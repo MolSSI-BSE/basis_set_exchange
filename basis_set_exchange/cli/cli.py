@@ -56,7 +56,7 @@ def run_bse_cli():
     subp.add_argument('-s', '--substr', help='Limit the basis set list to only basis sets whose name contains the specified substring')
 
     # list-families subcommand
-    subp = subparsers.add_parser('list-families', help='Output a list all available basis set families')
+    subparsers.add_parser('list-families', help='Output a list all available basis set families')
 
     # lookup-by-role
     subp = subparsers.add_parser('lookup-by-role', help='Lookup a companion/auxiliary basis by primary basis and role')
