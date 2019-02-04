@@ -86,6 +86,13 @@ def expand_elements(compact_el, as_str=False):
     (ie, the first example above will return ['1', '2', '3', '6', '7', '8', '10']
     """
 
+    # If an integer, just return it
+    if isinstance(compact_el, int):
+        if as_str is True:
+            return [str(compact_el)]
+        else:
+            return [compact_el]
+
     # Works for both strings and lists
     if len(compact_el) == 0:
         return []

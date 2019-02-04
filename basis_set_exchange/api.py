@@ -93,12 +93,14 @@ def get_basis(name,
     name : str
         Name of the basis set. This is not case sensitive.
     elements : str or list
-        List of elements that you want the basis set for. By default,
-        all elements for which the basis set is defined are included.
+        List of elements that you want the basis set for.
         Elements can be specified by Z-number (int or str) or by symbol (str).
         If this argument is a str (ie, '1-3,7-10'), it is expanded into a list.
         Z numbers and symbols (case insensitive) can be used interchangeably
         (see :func:`bse.misc.expand_elements`)
+
+        If an empty string or list is passed, or if None is passed (the default),
+        all elements for which the basis set is defined are included.
     version : int or str
         Obtain a specific version of this basis set. By default,
         the latest version is returned.
@@ -164,13 +166,16 @@ def get_basis(name,
         # Convert to purely a list of strings that represent integers
         elements = misc.expand_elements(elements, True)
 
-        bs_elements = basis_dict['basis_set_elements']
+        # Did the user pass an empty string or empty list? If so, include
+        # all elements
+        if len(elements) != 0:
+            bs_elements = basis_dict['basis_set_elements']
 
-        # Are elements part of this basis set?
-        for el in elements:
-            if not el in bs_elements:
-                elsym = lut.element_sym_from_Z(el)
-                raise KeyError("Element {} (Z={}) not found in basis {}".format(elsym, el, name))
+            # Are elements part of this basis set?
+            for el in elements:
+                if not el in bs_elements:
+                    elsym = lut.element_sym_from_Z(el)
+                    raise KeyError("Element {} (Z={}) not found in basis {}".format(elsym, el, name))
 
             # Set to only the elements we want
             basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
