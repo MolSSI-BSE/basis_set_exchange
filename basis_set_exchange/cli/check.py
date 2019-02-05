@@ -4,7 +4,7 @@ Validators for command line options
 
 import os
 import copy
-from .. import api
+from .. import api, misc
 
 
 def _cli_check_data_dir(data_dir):
@@ -74,7 +74,7 @@ def _cli_check_basis(name, data_dir):
     if name is None:
         return None
 
-    name = name.lower()
+    name = misc.transform_basis_name(name)
     metadata = api.get_metadata(data_dir)
     if not name in metadata:
         errstr = "Basis set '" + name + "' does not exist.\n"
