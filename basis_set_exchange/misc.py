@@ -2,6 +2,7 @@
 Miscellaneous helper functions
 '''
 
+import re
 from . import lut
 
 
@@ -93,14 +94,39 @@ def expand_elements(compact_el, as_str=False):
         else:
             return [compact_el]
 
-    # Works for both strings and lists
-    if len(compact_el) == 0:
-        return []
-
     # If compact_el is a list, make it a comma-separated string
     if isinstance(compact_el, list):
         compact_el = [str(x) for x in compact_el]
+        compact_el = [x for x in compact_el if len(x) > 0]
         compact_el = ','.join(compact_el)
+
+    # Find multiple - or ,
+    # Also replace all whitespace with spaces
+    compact_el = re.sub(r',+', ',', compact_el)
+    compact_el = re.sub(r'-+', '-', compact_el)
+    compact_el = re.sub(r'\s+', '', compact_el)
+
+    # Find starting with or ending with comma and strip them
+    compact_el = compact_el.strip(',')
+
+    # Check if I was passed an empty string or list
+    if len(compact_el) == 0:
+        return []
+
+    # Find some erroneous patterns
+    # -, and ,-
+    if '-,' in compact_el:
+        raise RuntimeError("Malformed element string")
+    if ',-' in compact_el:
+        raise RuntimeError("Malformed element string")
+
+    # Strings ends or begins with -
+    if compact_el.startswith('-') or compact_el.endswith('-'):
+        raise RuntimeError("Malformed element string")
+
+    # x-y-z
+    if re.search(r'\w+-\w+-\w+', compact_el):
+        raise RuntimeError("Malformed element string")
 
     # Split on commas
     tmp_list = compact_el.split(',')
