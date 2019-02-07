@@ -22,6 +22,10 @@ Importing
 
 All end-user functionality is available by importing the `basis_set_exchange` module.
 
+Determining the library version
+-------------------------------
+
+The library version can be determined with :func:`basis_set_exchange.version()`
 
 Getting a basis set
 -------------------
