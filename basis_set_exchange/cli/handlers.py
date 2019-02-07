@@ -3,6 +3,7 @@ Handlers for command line subcommands
 '''
 
 from .. import api
+from .. import bundle
 from ..misc import compact_elements
 
 
@@ -195,6 +196,12 @@ def _cli_get_family_notes(args):
     return api.get_family_notes(args.family, args.data_dir)
 
 
+def _cli_create_bundle(args):
+    '''Handles the create-bundle subcommand'''
+    bundle.create_bundle(args.bundle_file, args.fmt, args.reffmt, args.archive_type, args.data_dir)
+    return "Created " + args.bundle_file
+
+
 def cli_handle_bse_subcmd(args):
     handler_map = {
         'list-formats': _cli_list_formats,
@@ -210,6 +217,7 @@ def cli_handle_bse_subcmd(args):
         'get-family': _cli_get_family,
         'get-versions': _cli_get_versions,
         'get-family-notes': _cli_get_family_notes,
+        'create-bundle': _cli_create_bundle
     }
 
     return handler_map[args.subcmd](args)

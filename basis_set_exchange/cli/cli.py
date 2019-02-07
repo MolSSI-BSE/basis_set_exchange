@@ -107,6 +107,16 @@ def run_bse_cli():
     subp = subparsers.add_parser('get-family-notes', help='Get the notes of a family of basis sets')
     subp.add_argument('family', type=str.lower, help='The basis set family to the get the notes of').completer = cli_family_completer
 
+    #################################
+    # Creating bundles
+    #################################
+    subp = subparsers.add_parser('create-bundle', help='Create a bundle of basis sets')
+    subp.add_argument('fmt', help='Which format to output the basis set as').completer = cli_fmt_completer
+    subp.add_argument('reffmt', help='Which format to output the references as').completer = cli_reffmt_completer
+    subp.add_argument('bundle_file', help='Bundle/Archive file to create')
+    subp.add_argument('--archive-type', help='Override the type of archive to create (zip or tbz)')
+
+
     #############################
     # DONE WITH SUBCOMMANDS
     #############################
