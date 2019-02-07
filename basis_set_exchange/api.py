@@ -2,7 +2,6 @@
 Main interface to Basis Set Exchange functionality
 '''
 
-import datetime
 import os
 import textwrap
 
@@ -16,6 +15,15 @@ from . import refconverters
 from . import references
 from . import misc
 from . import lut
+from ._version import get_versions
+
+__version__ = get_versions()['version']
+
+
+def version():
+    '''Obtain the version of the basis set exchange library (as a string)'''
+    return __version__
+
 
 # Determine the path to the data directory that is part
 # of this installation
@@ -51,15 +59,12 @@ def _header_string(basis_dict):
     Information includes description, revision, etc, but not references
     '''
 
-    dt = datetime.datetime.utcnow()
-    timestamp = dt.strftime('%Y-%m-%d %H:%M:%S UTC')
-
     tw = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 20)
 
     header = '-' * 70 + '\n'
     header += ' Basis Set Exchange\n'
+    header += ' Version ' + version() + '\n'
     header += ' ' + _main_url + '\n'
-    header += ' Accessed ' + timestamp + '\n'
     header += '-' * 70 + '\n'
     header += '   Basis set: ' + basis_dict['basis_set_name'] + '\n'
     header += tw.fill(' Description: ' + basis_dict['basis_set_description']) + '\n'
