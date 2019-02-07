@@ -436,7 +436,7 @@ def get_family_notes(family, data_dir=None):
 
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:
-        notes_str = "Notes are not available for the {} family".format(family)
+        notes_str = ""
 
     ref_data = get_reference_data(data_dir)
     return notes.process_notes(notes_str, ref_data)
@@ -463,7 +463,7 @@ def get_basis_notes(name, data_dir=None):
 
     notes_str = fileio.read_notes_file(file_path)
     if notes_str is None:
-        notes_str = "Notes are not available for the {} basis".format(bs_data['display_name'])
+        return ""
 
     ref_data = get_reference_data(data_dir)
     return notes.process_notes(notes_str, ref_data)
