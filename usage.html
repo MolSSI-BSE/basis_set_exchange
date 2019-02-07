@@ -94,6 +94,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
@@ -388,7 +389,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 <p>Notes about a basis set or a basis set family can be obtained, also.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notes from a basis (name is case insensitive)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_notes</span><span class="p">(</span><span class="s1">&#39;6-31g&#39;</span><span class="p">)</span>
-<span class="go">&#39;Notes are not available for the 6-31G basis&#39;</span>
+<span class="go">&#39;&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the family of a basis set from the metadata</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fam</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_family</span><span class="p">(</span><span class="s1">&#39;6-31G**&#39;</span><span class="p">)</span>

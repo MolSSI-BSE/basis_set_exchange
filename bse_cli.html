@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Main User API" href="user_api.html" />
+    <link rel="next" title="Creating Basis Set Bundles" href="bundling.html" />
     <link rel="prev" title="Quickstart and Basic Usage" href="usage.html" /> 
 
   
@@ -102,10 +102,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#get-family">get-family</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-versions">get-versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-family-notes">get-family-notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-bundle">create-bundle</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
@@ -245,6 +247,7 @@ positional arguments:
     get-family          Output the family of a basis set
     get-versions        Output a list all available versions of a basis set
     get-family-notes    Get the notes of a family of basis sets
+    create-bundle       Create a bundle of basis sets
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -425,7 +428,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 #----------------------------------------------------------------------
 # Basis Set Exchange
 # https://www.basissetexchange.org
-# Accessed 2019-02-05 01:32:56 UTC
+# Accessed 2019-02-07 20:03:43 UTC
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
 # Description: STO-3G Minimal Basis (3 functions/AO)
@@ -558,7 +561,6 @@ Versions:
 <p>Obtain the notes about a basis set.
 This takes only one required argument (the name of the basis set).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-notes sto-3g
-Notes are not available for the STO-3G basis
 </pre></div>
 </div>
 </div>
@@ -605,6 +607,10 @@ factors were taken from the literature and verified by dividing them out
 </pre></div>
 </div>
 </div>
+<div class="section" id="create-bundle">
+<h3>create-bundle<a class="headerlink" href="#create-bundle" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="bundling.html#bundles"><span class="std std-ref">Creating Basis Set Bundles</span></a></p>
+</div>
 </div>
 </div>
 
@@ -616,7 +622,7 @@ factors were taken from the literature and verified by dividing them out
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="user_api.html" class="btn btn-neutral float-right" title="Main User API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bundling.html" class="btn btn-neutral float-right" title="Creating Basis Set Bundles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="usage.html" class="btn btn-neutral" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

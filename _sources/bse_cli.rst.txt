@@ -262,3 +262,7 @@ Obtain the notes about a basis set family. This takes only one required argument
    :ellipsis: 10
 
 
+create-bundle
+*******************
+
+See :ref:`bundles`

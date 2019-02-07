@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer Documentation" href="developer.html" />
-    <link rel="prev" title="The bse command line interface" href="bse_cli.html" /> 
+    <link rel="prev" title="Creating Basis Set Bundles" href="bundling.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -82,6 +82,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
@@ -154,6 +155,40 @@
 <p>Basis Set Exchange</p>
 <p>Contains utilities for reading, writing, and converting
 basis set information</p>
+<dl class="function">
+<dt id="basis_set_exchange.create_bundle">
+<code class="descclassname">basis_set_exchange.</code><code class="descname">create_bundle</code><span class="sig-paren">(</span><em>outfile</em>, <em>fmt</em>, <em>reffmt</em>, <em>archive_type=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.create_bundle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a single archive file containing all basis
+sets in a given format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>outfile</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Path to the file to create. Existing files will be overwritten</p>
+</dd>
+<dt><strong>fmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Format of the basis set to archive (nwchem, turbomole, …)</p>
+</dd>
+<dt><strong>reffmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Format of the basis set references to archive (nwchem, turbomole, …)</p>
+</dd>
+<dt><strong>archive_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
+None, which will autodetect based on the outfile name</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="basis_set_exchange.filter_basis_sets">
 <code class="descclassname">basis_set_exchange.</code><code class="descname">filter_basis_sets</code><span class="sig-paren">(</span><em>substr=None</em>, <em>family=None</em>, <em>role=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
@@ -462,7 +497,7 @@ and role.</p>
         <a href="developer.html" class="btn btn-neutral float-right" title="Developer Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bse_cli.html" class="btn btn-neutral" title="The bse command line interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bundling.html" class="btn btn-neutral" title="Creating Basis Set Bundles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
