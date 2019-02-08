@@ -80,18 +80,6 @@ def test_get_basis_4(basis_name, fmt):
     bse.get_basis(basis_name, fmt=fmt)
 
 
-@pytest.mark.parametrize('basis_name', bs_names_sample)
-def test_get_basis_memo(basis_name):
-    """For a sample of basis sets, test memoization
-    """
-    bs1 = bse.get_basis(basis_name)
-    bs2 = bse.get_basis(basis_name)
-
-    # Should be equal, but not aliased
-    assert bs1 == bs2
-    assert bs1['basis_set_elements'] is not bs2['basis_set_elements']
-
-
 @pytest.mark.parametrize('basis_name', bs_names)
 @pytest.mark.parametrize('fmt', ref_formats)
 def test_get_references_1(basis_name, fmt):
@@ -123,4 +111,9 @@ def test_notes(basis_name):
     """
     bse.get_basis_notes(basis_name)
     fam = bse.get_basis_family(basis_name)
-    bse.get_family_notes(fam)
+
+
+@pytest.mark.parametrize('family', all_families)
+def test_family_notes(family):
+    """Test getting family notes"""
+    bse.get_family_notes(family)
