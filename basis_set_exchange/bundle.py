@@ -22,30 +22,7 @@ def _basis_data_iter(fmt, reffmt, data_dir):
         yield (n, data, refdata, notes)
 
 
-def _bundle_zip(outfile, fmt, reffmt, data_dir):
-    ext = converters.get_format_extension(fmt)
-    refext = refconverters.get_format_extension(reffmt)
-
-    with zipfile.ZipFile(outfile, 'w') as zf:
-        for name, data, refdata, notes in _basis_data_iter(fmt, reffmt, data_dir):
-            basis_filename = name + ext
-            ref_filename = name + '.ref' + refext
-            notes_filename = name + '.notes'
-            zf.writestr(basis_filename, data)
-            zf.writestr(ref_filename, refdata)
-
-            if len(notes) > 0:
-                zf.writestr(notes_filename, notes)
-
-        for fam in api.get_families(data_dir):
-            fam_notes = api.get_family_notes(fam, data_dir)
-
-            if len(fam_notes) > 0:
-                fam_notes_filename = 'family_' + fam + '.notes'
-                zf.writestr(fam_notes_filename, fam_notes)
-
-
-def _add_tbz_file(tfile, filename, data_str):
+def _add_to_tbz(tfile, filename, data_str):
     '''
     Adds string data to a tarfile
     '''
@@ -59,36 +36,66 @@ def _add_tbz_file(tfile, filename, data_str):
     tfile.addfile(tarinfo=ti, fileobj=io.BytesIO(encoded_data))
 
 
+def _add_to_zip(zfile, filename, data_str):
+    '''
+    Adds string data to a zipfile
+    '''
+    zfile.writestr(filename, data_str)
+
+
 def _bundle_tbz(outfile, fmt, reffmt, data_dir):
+    with tarfile.open(outfile, 'w:bz2') as tf:
+        _bundle_generic(tf, _add_to_tbz, fmt, reffmt, data_dir)
+
+
+def _bundle_zip(outfile, fmt, reffmt, data_dir):
+    with zipfile.ZipFile(outfile, 'w') as zf:
+        _bundle_generic(zf, _add_to_zip, fmt, reffmt, data_dir)
+
+
+def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
+    '''
+    Loop over all basis sets and add data to an archive
+
+    Parameters
+    ----------
+    bfile : object
+        An object that gets passed through to the addhelper function
+    addhelper : function
+        A function that takes bfile and adds data to the bfile
+    fmt : str
+        Format of the basis set to create
+    reffmt : str
+        Format to use for the references
+    data_dir : str
+        Data directory with all the basis set information.
+
+    Returns
+    -------
+    None
+    '''
+
     ext = converters.get_format_extension(fmt)
     refext = refconverters.get_format_extension(reffmt)
+    subdir = 'basis_set_bundle-' + fmt + '-' + reffmt
 
-    with tarfile.open(outfile, 'w:bz2') as tf:
-        for name, data, refdata, notes in _basis_data_iter(fmt, reffmt, data_dir):
-            basis_filename = name + ext
-            ref_filename = name + '.ref' + refext
+    for name, data, refdata, notes in _basis_data_iter(fmt, reffmt, data_dir):
+        basis_filename = os.path.join(subdir, name + ext)
+        ref_filename = os.path.join(subdir, name + '.ref' + refext)
 
-            _add_tbz_file(tf, basis_filename, data)
-            _add_tbz_file(tf, ref_filename, refdata)
+        addhelper(bfile, basis_filename, data)
+        addhelper(bfile, ref_filename, refdata)
 
-            if len(notes) > 0:
-                notes_filename = name + '.notes'
-                _add_tbz_file(tf, notes_filename, notes)
+        if len(notes) > 0:
+            notes_filename = os.path.join(subdir, name + '.notes')
+            addhelper(bfile, notes_filename, notes)
 
-        for fam in api.get_families(data_dir):
-            fam_notes = api.get_family_notes(fam, data_dir)
+    for fam in api.get_families(data_dir):
+        fam_notes = api.get_family_notes(fam, data_dir)
 
-            if len(fam_notes) > 0:
-                fam_notes_filename = 'family_' + fam + '.notes'
-                _add_tbz_file(tf, fam_notes_filename, fam_notes)
-
-
-_archive_handlers = {
-    'zip': _bundle_zip,
-    'tbz': _bundle_tbz,
-}
-
-_valid_archive_types = _archive_handlers.keys()
+        if len(fam_notes) > 0:
+            fam_notes_filename = os.path.join(subdir, fam + '.family_notes')
+            addhelper(bfile, fam_notes_filename, fam_notes)
 
 
 def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
@@ -110,7 +117,18 @@ def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
+
+    Returns
+    -------
+    None
     '''
+
+    _archive_handlers = {
+        'zip': _bundle_zip,
+        'tbz': _bundle_tbz,
+    }
+
+    _valid_archive_types = _archive_handlers.keys()
 
     if archive_type is None:
         outfile_lower = outfile.lower()

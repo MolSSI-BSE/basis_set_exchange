@@ -2,7 +2,6 @@
 Tests for reference handling
 """
 
-import glob
 import json
 import os
 import pytest

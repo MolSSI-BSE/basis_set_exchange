@@ -10,11 +10,11 @@ import pytest
 import shutil
 import glob
 
-from basis_set_exchange import bundle, converters, refconverters, get_basis, get_references
+import basis_set_exchange as bse
 from .common_testvars import bs_names
 
 
-def _extract_file(filepath, extract_dir):
+def _extract_all(filepath, extract_dir):
     if filepath.endswith('.zip'):
         with zipfile.ZipFile(filepath, 'r') as zf:
             zf.extractall(extract_dir)
@@ -35,8 +35,8 @@ def test_bundles(fmt, reffmt, ext):
 
     exts = ['.zip', '.tar.bz2']
 
-    bs_ext = converters.get_format_extension(fmt)
-    ref_ext = refconverters.get_format_extension(reffmt)
+    bs_ext = bse.converters.get_format_extension(fmt)
+    ref_ext = bse.refconverters.get_format_extension(reffmt)
     nbasis = len(bs_names)
 
     tdir = tempfile.mkdtemp()
@@ -44,30 +44,38 @@ def test_bundles(fmt, reffmt, ext):
     filename = "bundletest_" + fmt + "_" + reffmt + ext
     filepath = os.path.join(tdir, filename)
 
-    bundle.create_bundle(filepath, fmt, reffmt)
+    bse.create_bundle(filepath, fmt, reffmt)
     extract_dir = "extract_" + filename
     extract_path = os.path.join(tdir, extract_dir)
-    _extract_file(filepath, extract_path)
+    _extract_all(filepath, extract_path)
 
-    bs_flist = glob.glob(os.path.join(extract_path, '*' + bs_ext))
-    bs_flist = [x for x in bs_flist if not '.ref.' in x]
-    ref_flist = glob.glob(os.path.join(extract_path, '*.ref' + ref_ext))
+    # Keep track of all the basis sets we have found
+    # Start with all found in the data dir, and remove
+    # each time we process one
+    all_bs_names = bs_names.copy()
+    all_ref_names = bs_names.copy()
 
-    for bs in bs_flist:
-        bs_name = os.path.basename(bs)
-        bs_name = os.path.splitext(bs_name)[0]
-        bs_str = get_basis(bs_name, fmt=fmt)
+    for root, dirs, files in os.walk(extract_path):
+        for basename in files:
+            fpath = os.path.join(root, basename)
+            name = basename.split('.')[0]
+            if basename.endswith('.ref' + ref_ext):
+                compare_data = bse.get_references(name, fmt=reffmt)
+                all_bs_names.remove(name)
+            elif basename.endswith(bs_ext):
+                compare_data = bse.get_basis(name, fmt=fmt)
+                all_ref_names.remove(name)
+            elif basename.endswith('.family_notes'):
+                compare_data = bse.get_family_notes(name)
+            elif basename.endswith('.notes'):
+                compare_data = bse.get_basis_notes(name)
+            else:
+                raise RuntimeError("Unknown file found: " + fpath)
 
-        with open(bs, 'r') as bsf:
-            assert bs_str == bsf.read()
+            with open(fpath, 'r') as ftmp:
+                assert compare_data == ftmp.read()
 
-    for ref in ref_flist:
-        bs_name = os.path.basename(ref)
-        bs_name = os.path.splitext(bs_name)[0]
-        bs_name = os.path.splitext(bs_name)[0]  # remove .ref.
-        ref_str = get_references(bs_name, fmt=reffmt)
-
-        with open(ref, 'r') as rf:
-            assert ref_str == rf.read()
+    assert len(all_bs_names) == 0
+    assert len(all_ref_names) == 0
 
     shutil.rmtree(tdir)
