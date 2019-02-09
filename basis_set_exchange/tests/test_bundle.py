@@ -3,7 +3,6 @@ Tests for creating bundles/archives of formatted data
 """
 
 import os
-import tempfile
 import zipfile
 import tarfile
 import pytest
@@ -30,7 +29,7 @@ def _extract_all(filepath, extract_dir):
 @pytest.mark.parametrize('fmt, reffmt', [('nwchem', 'bib'),
                                          ('psi4', 'txt')])
 # yapf: enable
-def test_bundles(fmt, reffmt, ext):
+def test_bundles(tmp_path, fmt, reffmt, ext):
     '''Test functionality related to creating archive of basis set'''
 
     exts = ['.zip', '.tar.bz2']
@@ -39,14 +38,12 @@ def test_bundles(fmt, reffmt, ext):
     ref_ext = bse.refconverters.get_format_extension(reffmt)
     nbasis = len(bs_names)
 
-    tdir = tempfile.mkdtemp()
-
     filename = "bundletest_" + fmt + "_" + reffmt + ext
-    filepath = os.path.join(tdir, filename)
+    filepath = os.path.join(tmp_path, filename)
 
     bse.create_bundle(filepath, fmt, reffmt)
     extract_dir = "extract_" + filename
-    extract_path = os.path.join(tdir, extract_dir)
+    extract_path = os.path.join(tmp_path, extract_dir)
     _extract_all(filepath, extract_path)
 
     # Keep track of all the basis sets we have found
@@ -77,5 +74,3 @@ def test_bundles(fmt, reffmt, ext):
 
     assert len(all_bs_names) == 0
     assert len(all_ref_names) == 0
-
-    shutil.rmtree(tdir)

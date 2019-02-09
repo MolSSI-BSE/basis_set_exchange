@@ -3,7 +3,6 @@ Tests BSE curation functions
 """
 
 import os
-import tempfile
 import pytest
 
 from basis_set_exchange import api, curate, manip
@@ -14,7 +13,7 @@ roundtrip_formats = ['turbomole', 'gaussian94', 'nwchem']
 
 @pytest.mark.parametrize('basis', bs_names_sample)
 @pytest.mark.parametrize('fmt', roundtrip_formats)
-def test_curate_roundtrip(basis, fmt):
+def test_curate_roundtrip(tmp_path, basis, fmt):
 
     # Many formats have limitations on general contractions
     if fmt == 'gaussian94':
@@ -31,13 +30,11 @@ def test_curate_roundtrip(basis, fmt):
     bse_dict = api.get_basis(basis, uncontract_general=uncontract_general)
     bse_dict = manip.uncontract_spdf(bse_dict, uncontract_spdf)
 
-    outfile = tempfile.NamedTemporaryFile(mode='w', delete=False)
-    outfile_path = outfile.name
-    outfile.write(bse_formatted)
-    outfile.close()
+    outfile_path = os.path.join(tmp_path, 'roundtrip.txt')
+    with open(outfile_path, 'w') as outfile:
+        outfile.write(bse_formatted)
 
     test_dict = curate.read_formatted_basis(outfile_path, fmt)
-    os.remove(outfile_path)
 
     test_dict = manip.sort_basis(test_dict)
     bse_dict = manip.sort_basis(bse_dict)

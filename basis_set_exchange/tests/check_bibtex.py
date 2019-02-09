@@ -9,7 +9,6 @@ missing fields)
 import os
 import shutil
 import subprocess
-import tempfile
 
 # Other modules should query this variable
 available = bool(shutil.which('bibtex')) and bool(shutil.which('latex'))
@@ -25,22 +24,21 @@ test_txt = r"""
 """
 
 
-def validate_bibtex(bib_str):
-    with tempfile.TemporaryDirectory(prefix='bsebibtextest') as d:
-        texfile = os.path.join(d, 'bse.tex')
-        bibfile = os.path.join(d, 'bse_test.bib')
+def validate_bibtex(tmp_path, bib_str):
+    texfile = os.path.join(tmp_path, 'bse.tex')
+    bibfile = os.path.join(tmp_path, 'bse_test.bib')
 
-        with open(texfile, 'w') as tf:
-            tf.write(test_txt)
+    with open(texfile, 'w') as tf:
+        tf.write(test_txt)
 
-        with open(bibfile, 'w') as bf:
-            bf.write(bib_str)
+    with open(bibfile, 'w') as bf:
+        bf.write(bib_str)
 
-        res = subprocess.check_output(['latex', 'bse'], cwd=d)
+    res = subprocess.check_output(['latex', 'bse'], cwd=tmp_path)
 
-        # Run bibtex. Then check return code and scan the output for "Warning"
-        res = subprocess.run(
-            ['bibtex', 'bse'], universal_newlines=True, cwd=d, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    # Run bibtex. Then check return code and scan the output for "Warning"
+    res = subprocess.run(
+        ['bibtex', 'bse'], universal_newlines=True, cwd=tmp_path, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 
-        if "Warning" in res.stdout:
-            raise RuntimeError("Warning found in output. Output is:\n" + res.stdout)
+    if "Warning" in res.stdout:
+        raise RuntimeError("Warning found in output. Output is:\n" + res.stdout)

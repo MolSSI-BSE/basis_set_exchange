@@ -61,5 +61,3 @@ def test_get_basis_memo(basis_name):
 def test_get_family_notes_memo(family):
     """Test memoization of get_family_notes"""
     _test_memo_helper(bse.get_family_notes, family)
-
-

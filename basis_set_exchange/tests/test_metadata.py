@@ -2,7 +2,6 @@
 Tests for BSE metadata
 """
 
-import tempfile
 import json
 import os
 import pytest
@@ -18,24 +17,20 @@ def test_get_metadata():
     api.get_metadata(data_dir)
 
 
-def test_metadata_uptodate():
+def test_metadata_uptodate(tmp_path):
     '''Tests that the METADATA.json file is up to date'''
 
     old_metadata = os.path.join(data_dir, 'METADATA.json')
 
     # Create a temporary file
-    new_metadata_tmp = tempfile.NamedTemporaryFile(mode='w', delete=False)
-    new_metadata = new_metadata_tmp.name
-    new_metadata_tmp.close()
+    new_metadata = tmp_path / 'NEW_METADATA.json'
 
-    curate.create_metadata_file(new_metadata, data_dir)
+    curate.create_metadata_file(str(new_metadata), data_dir)
 
     with open(old_metadata, 'r') as f:
         old_data = json.load(f)
     with open(new_metadata, 'r') as f:
         new_data = json.load(f)
-
-    os.remove(new_metadata)
 
     assert old_data == new_data
 
