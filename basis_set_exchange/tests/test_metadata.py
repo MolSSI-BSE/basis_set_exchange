@@ -20,10 +20,11 @@ def test_get_metadata():
 def test_metadata_uptodate(tmp_path):
     '''Tests that the METADATA.json file is up to date'''
 
+    tmp_path = str(tmp_path)  # Needed for python 3.5
     old_metadata = os.path.join(data_dir, 'METADATA.json')
 
     # Create a temporary file
-    new_metadata = tmp_path / 'NEW_METADATA.json'
+    new_metadata = os.path.join(tmp_path, 'NEW_METADATA.json')
 
     curate.create_metadata_file(str(new_metadata), data_dir)
 

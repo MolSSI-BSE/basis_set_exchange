@@ -48,7 +48,8 @@ if __name__ == "__main__":
                 'numpydoc',
             ],
             'tests': [
-                'pytest-cov' # Also pulls in pytest
+                'pytest>=4.0',
+                'pytest-cov'
             ],
         },
 

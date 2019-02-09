@@ -14,6 +14,7 @@ roundtrip_formats = ['turbomole', 'gaussian94', 'nwchem']
 @pytest.mark.parametrize('basis', bs_names_sample)
 @pytest.mark.parametrize('fmt', roundtrip_formats)
 def test_curate_roundtrip(tmp_path, basis, fmt):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
 
     # Many formats have limitations on general contractions
     if fmt == 'gaussian94':

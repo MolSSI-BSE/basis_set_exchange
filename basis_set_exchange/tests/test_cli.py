@@ -43,6 +43,7 @@ def test_cli_datadir(bse_cmd):
 
 
 def test_cli_createbundle(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
     bfile_path = os.path.join(tmp_path, 'test_bundle.tar.bz2')
     output = _test_cli_cmd('bse create-bundle gaussian94 bib ' + bfile_path)
     assert os.path.isfile(bfile_path)
@@ -50,6 +51,7 @@ def test_cli_createbundle(tmp_path):
 
 
 def test_cli_createbundle_datadir(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
     bfile_path = os.path.join(tmp_path, 'test_bundle_datadir.tar.bz2')
     output = _test_cli_cmd('bse -d ' + fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_path)
     assert os.path.isfile(bfile_path)

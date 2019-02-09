@@ -32,6 +32,7 @@ def _extract_all(filepath, extract_dir):
 def test_bundles(tmp_path, fmt, reffmt, ext):
     '''Test functionality related to creating archive of basis set'''
 
+    tmp_path = str(tmp_path)  # Needed for python 3.5
     exts = ['.zip', '.tar.bz2']
 
     bs_ext = bse.converters.get_format_extension(fmt)
