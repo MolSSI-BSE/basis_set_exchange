@@ -7,9 +7,7 @@ import subprocess
 import tempfile
 import pytest
 
-# Find the dir with the fake data
-_my_dir = os.path.dirname(os.path.abspath(__file__))
-_fake_data_dir = os.path.join(_my_dir, 'fakedata')
+from .common_testvars import fake_data_dir
 
 
 def _test_cli_cmd(cmd):
@@ -41,7 +39,7 @@ def test_cli(bse_cmd):
 
 @pytest.mark.parametrize('bse_cmd', fakebse_cmds)
 def test_cli_datadir(bse_cmd):
-    output = _test_cli_cmd('bse -d ' + _fake_data_dir + ' ' + bse_cmd)
+    output = _test_cli_cmd('bse -d ' + fake_data_dir + ' ' + bse_cmd)
     assert 'bppfake' in output
 
 
@@ -60,7 +58,7 @@ def test_cli_createbundle_datadir():
     bfile_tmp = tempfile.NamedTemporaryFile(mode='w', suffix='.tar.bz2', delete=False)
     bfile_name = bfile_tmp.name
 
-    output = _test_cli_cmd('bse -d ' + _fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_name)
+    output = _test_cli_cmd('bse -d ' + fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_name)
     assert os.path.isfile(bfile_name)
     os.remove(bfile_name)
 

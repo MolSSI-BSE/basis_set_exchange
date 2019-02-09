@@ -6,15 +6,11 @@ import os
 import pytest
 
 from basis_set_exchange import misc, curate
-from .common_testvars import bs_metadata, bs_names
-
-# Find the dir with all the bse files
-_my_dir = os.path.dirname(os.path.abspath(__file__))
-_auth_data_dir = os.path.join(_my_dir, 'sources')
+from .common_testvars import bs_metadata, bs_names, auth_data_dir
 
 # create a map of the sources dir
 _basis_src_map = {}
-for x in os.listdir(_auth_data_dir):
+for x in os.listdir(auth_data_dir):
     # remove .fmt.bz2
     base, _ = os.path.splitext(x)
     base, _ = os.path.splitext(base)
@@ -22,7 +18,7 @@ for x in os.listdir(_auth_data_dir):
     if base in _basis_src_map:
         raise RuntimeError("Duplicate basis set in authoritative sources: {}".format(base))
 
-    _basis_src_map[base] = os.path.join(_auth_data_dir, x)
+    _basis_src_map[base] = os.path.join(auth_data_dir, x)
 
 
 @pytest.mark.parametrize('basis_name_ver', list(_basis_src_map.keys()))

@@ -2,7 +2,11 @@
 Some data common to all tests
 '''
 
+import os
 import basis_set_exchange as bse
+
+# The directory containing this file
+_my_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Use random for getting sets of elements
 rand_seed = 39466  # from random.org
@@ -16,6 +20,12 @@ ref_formats = list(bse.get_reference_formats().keys())
 all_families = bse.get_families()
 all_roles = bse.get_roles()
 true_false = [True, False]
+
+# Directory with some fake data
+fake_data_dir = os.path.join(_my_dir, 'fakedata')
+
+# Directory with authoritative sources
+auth_data_dir = os.path.join(_my_dir, 'sources')
 
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)
