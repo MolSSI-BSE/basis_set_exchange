@@ -196,6 +196,12 @@ def add_basis(bs_file,
     #############################################
     # Actually create all the files
     #############################################
+
+    # First, create the subdirectory
+    subdir_path = os.path.join(data_dir, subdir)
+    if not os.path.exists(subdir_path):
+        os.makedirs(subdir_path)
+
     for file_path, file_data in component_file_map.items():
         write_json_basis(file_path, file_data)
 
