@@ -32,3 +32,7 @@ def test_valid_element(file_path):
 def test_valid_component(file_path):
     full_path = os.path.join(data_dir, file_path)
     validator.validate_file('component', full_path)
+
+
+def test_valid_data_dir():
+    validator.validate_data_dir(data_dir)

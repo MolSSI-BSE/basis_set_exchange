@@ -2,6 +2,7 @@
 Functions related to validating JSON files (including against schema)
 """
 
+import os
 import jsonschema
 
 from . import api
@@ -121,3 +122,24 @@ def validate_file(file_type, file_path):
 
     file_data = fileio._read_plain_json(file_path, False)
     validate_data(file_type, file_data)
+
+
+def validate_data_dir(data_dir):
+    """
+    Validates all files in a data_dir
+    """
+
+    all_meta, all_table, all_element, all_component = fileio.get_all_filelist(data_dir)
+
+    for f in all_meta:
+        full_path = os.path.join(data_dir, f)
+        validate_file('metadata', full_path)
+    for f in all_table:
+        full_path = os.path.join(data_dir, f)
+        validate_file('table', full_path)
+    for f in all_element:
+        full_path = os.path.join(data_dir, f)
+        validate_file('element', full_path)
+    for f in all_component:
+        full_path = os.path.join(data_dir, f)
+        validate_file('component', full_path)
