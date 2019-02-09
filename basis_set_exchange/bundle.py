@@ -5,7 +5,6 @@ Functions for creating archives of all basis sets
 import os
 import zipfile
 import tarfile
-import bz2
 import io
 from . import api, converters, refconverters
 
@@ -30,7 +29,6 @@ def _add_to_tbz(tfile, filename, data_str):
     # Create a bytesio object for adding to a tarfile
     # https://stackoverflow.com/a/52724508
     encoded_data = data_str.encode('utf-8')
-    data_len = len(encoded_data)
     ti = tarfile.TarInfo(name=filename)
     ti.size = len(encoded_data)
     tfile.addfile(tarinfo=ti, fileobj=io.BytesIO(encoded_data))
@@ -147,5 +145,4 @@ def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
             raise RuntimeError("Archive type '{}' is not valid. Must be one of: {}".format(
                 archive_type, ','.join(_valid_archive_types)))
 
-    basis_names = api.get_all_basis_names()
     _archive_handlers[archive_type](outfile, fmt, reffmt, data_dir)
