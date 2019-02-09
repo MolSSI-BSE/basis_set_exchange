@@ -88,12 +88,16 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.api">api - The main API Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.bundle">bundle - Creation of bundles/archives</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.compose">compose - Composition of basis set information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.fileio">fileio - Input/Output of files (including json)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.lut">lut - Lookup tables element information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.references">references - Handling of reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.memo">memo - Custom memoization decorator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.misc">misc - Miscellaneous helper functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.notes">notes - Handling of notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.references">references - Handling of reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.sort">sort - Sorting of basis set data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.validator">validator - Validation of basis sets</a></li>
 </ul>
 </li>
@@ -469,6 +473,50 @@ and role.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-basis_set_exchange.bundle">
+<span id="bundle-creation-of-bundles-archives"></span><h2>bundle - Creation of bundles/archives<a class="headerlink" href="#module-basis_set_exchange.bundle" title="Permalink to this headline">¶</a></h2>
+<p>Functions for creating archives of all basis sets</p>
+<dl class="function">
+<dt id="basis_set_exchange.bundle.create_bundle">
+<code class="descclassname">basis_set_exchange.bundle.</code><code class="descname">create_bundle</code><span class="sig-paren">(</span><em>outfile</em>, <em>fmt</em>, <em>reffmt</em>, <em>archive_type=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.bundle.create_bundle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a single archive file containing all basis
+sets in a given format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>outfile</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Path to the file to create. Existing files will be overwritten</p>
+</dd>
+<dt><strong>fmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Format of the basis set to archive (nwchem, turbomole, …)</p>
+</dd>
+<dt><strong>reffmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Format of the basis set references to archive (nwchem, turbomole, …)</p>
+</dd>
+<dt><strong>archive_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
+None, which will autodetect based on the outfile name</p>
+</dd>
+<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>None</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="module-basis_set_exchange.compose">
 <span id="compose-composition-of-basis-set-information"></span><h2>compose - Composition of basis set information<a class="headerlink" href="#module-basis_set_exchange.compose" title="Permalink to this headline">¶</a></h2>
 <p>Functions related to composing basis sets from individual components</p>
@@ -479,115 +527,6 @@ and role.</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
 information together into one ‘elemental’ basis dictionary</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-basis_set_exchange.manip">
-<span id="manip-manipulation-of-basis-sets"></span><h2>manip - Manipulation of basis sets<a class="headerlink" href="#module-basis_set_exchange.manip" title="Permalink to this headline">¶</a></h2>
-<p>Common basis set manipulations</p>
-<p>This module contains functions for uncontracting and merging basis set
-data, as well as some other small functions.</p>
-<dl class="function">
-<dt id="basis_set_exchange.manip.contraction_string">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forms a string specifying the contractions for an element</p>
-<p>ie, (16s,10p) -&gt; [4s,3p]</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.make_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
-<dd><p>Makes one large general contraction for each angular momentum</p>
-<p>If split_spdf is True, sp… orbitals will be split apary</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.merge_element_data">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Merges the basis set data for an element from multiple sources
-into dest.</p>
-<p>The destination is not modified, and a (shallow) copy of dest is returned
-with the data from sources added.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.optimize_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<div class="last line-block">
-<div class="line">T. Hashimoto, K. Hirao, H. Tatewaki</div>
-<div class="line">‘Comment on Dunning’s correlation-consistent basis set’</div>
-<div class="line">Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)</div>
-<div class="line"><a class="reference external" href="https://doi.org/10.1016/0009-2614(95)00807-G">https://doi.org/10.1016/0009-2614(95)00807-G</a></div>
-</div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.prune_basis">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes primitives that have a zero coefficient, and
-removes duplicate shells</p>
-<p>This only finds EXACT duplicates, and is meant to be used
-after uncontracting</p>
-<p>The input basis set is not modified.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.sort_basis">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_basis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sorts all the information in a basis set into a standard order</p>
-<p>The original data is not modified.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.sort_potentials">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_potentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sort a list of ECP potentials into a standard order</p>
-<p>The order within a potential is not modified.</p>
-<p>The order of the shell list is in increasing angular momentum, with the largest
-angular momentum being moved to the front.</p>
-<p>The original data is not modified, and a deep copy is returned.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.sort_shells">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_shells" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sort a list of basis set shells into a standard order</p>
-<p>The order within a shell is by decreasing value of the exponent.</p>
-<p>The order of the shell list is in increasing angular momentum, and then
-by decreasing number of primitives, then decreasing value of the largest exponent.</p>
-<p>The original data is not modified.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.uncontract_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes the general contractions from a basis set</p>
-<p>The input basis set is not modified, and any primitives with all
-zero coefficients are removed</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.uncontract_segmented">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes the segmented contractions from a basis set</p>
-<p>This implicitly removes general contractions as well,
-but will leave sp, spd, … orbitals alone</p>
-<p>The input basis set is not modified.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.manip.uncontract_spdf">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
-<p>The general contractions are replaced by uncontracted versions</p>
-<p>Contractions up to max_am will be left in place. For example,
-if max_am = 1, spd will be split into sp and d</p>
-<p>The input basis set is not modified, and any primitives with all
-zero coefficients are removed</p>
 </dd></dl>
 
 </div>
@@ -814,6 +753,169 @@ ordering will be spdfghikl (skipping j)</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-basis_set_exchange.manip">
+<span id="manip-manipulation-of-basis-sets"></span><h2>manip - Manipulation of basis sets<a class="headerlink" href="#module-basis_set_exchange.manip" title="Permalink to this headline">¶</a></h2>
+<p>Common basis set manipulations</p>
+<p>This module contains functions for uncontracting and merging basis set
+data, as well as some other small functions.</p>
+<dl class="function">
+<dt id="basis_set_exchange.manip.contraction_string">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.contraction_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forms a string specifying the contractions for an element</p>
+<p>ie, (16s,10p) -&gt; [4s,3p]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.make_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes one large general contraction for each angular momentum</p>
+<p>If split_spdf is True, sp… orbitals will be split apary</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.merge_element_data">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merges the basis set data for an element from multiple sources
+into dest.</p>
+<p>The destination is not modified, and a (shallow) copy of dest is returned
+with the data from sources added.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.optimize_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<div class="last line-block">
+<div class="line">T. Hashimoto, K. Hirao, H. Tatewaki</div>
+<div class="line">‘Comment on Dunning’s correlation-consistent basis set’</div>
+<div class="line">Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)</div>
+<div class="line"><a class="reference external" href="https://doi.org/10.1016/0009-2614(95)00807-G">https://doi.org/10.1016/0009-2614(95)00807-G</a></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.prune_basis">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes primitives that have a zero coefficient, and
+removes duplicate shells</p>
+<p>This only finds EXACT duplicates, and is meant to be used
+after uncontracting</p>
+<p>The input basis set is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.sort_basis">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts all the information in a basis set into a standard order</p>
+<p>The original data is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.sort_potentials">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_potentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort a list of ECP potentials into a standard order</p>
+<p>The order within a potential is not modified.</p>
+<p>The order of the shell list is in increasing angular momentum, with the largest
+angular momentum being moved to the front.</p>
+<p>The original data is not modified, and a deep copy is returned.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.sort_shells">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.sort_shells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort a list of basis set shells into a standard order</p>
+<p>The order within a shell is by decreasing value of the exponent.</p>
+<p>The order of the shell list is in increasing angular momentum, and then
+by decreasing number of primitives, then decreasing value of the largest exponent.</p>
+<p>The original data is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.uncontract_general">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the general contractions from a basis set</p>
+<p>The input basis set is not modified, and any primitives with all
+zero coefficients are removed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.uncontract_segmented">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the segmented contractions from a basis set</p>
+<p>This implicitly removes general contractions as well,
+but will leave sp, spd, … orbitals alone</p>
+<p>The input basis set is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.uncontract_spdf">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
+<p>The general contractions are replaced by uncontracted versions</p>
+<p>Contractions up to max_am will be left in place. For example,
+if max_am = 1, spd will be split into sp and d</p>
+<p>The input basis set is not modified, and any primitives with all
+zero coefficients are removed</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-basis_set_exchange.memo">
+<span id="memo-custom-memoization-decorator"></span><h2>memo - Custom memoization decorator<a class="headerlink" href="#module-basis_set_exchange.memo" title="Permalink to this headline">¶</a></h2>
+<p>Class/decorator for memoizing BSE functionality</p>
+</div>
+<div class="section" id="module-basis_set_exchange.misc">
+<span id="misc-miscellaneous-helper-functions"></span><h2>misc - Miscellaneous helper functions<a class="headerlink" href="#module-basis_set_exchange.misc" title="Permalink to this headline">¶</a></h2>
+<p>Miscellaneous helper functions</p>
+<dl class="function">
+<dt id="basis_set_exchange.misc.compact_elements">
+<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">compact_elements</code><span class="sig-paren">(</span><em>elements</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.compact_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a string (with ranges) given a list of element numbers</p>
+<p>For example, [1, 2, 3, 6, 7, 8, 10] will return “H-Li,C-O,Ne”</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.misc.expand_elements">
+<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">expand_elements</code><span class="sig-paren">(</span><em>compact_el</em>, <em>as_str=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.expand_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a list of integers given a string or list of compacted elements</p>
+<p>This is partly the opposite of compact_elements, but is more flexible.</p>
+<p>compact_el can be a list or a string. If compact_el is a list, each element is processed individually
+as a string (meaning list elements can contain commas, ranges, etc)
+If compact_el is a string, it is split by commas and then each section is processed.</p>
+<p>In all cases, element symbols (case insensitive) and Z numbers (as integers or strings)
+can be used interchangeably. Ranges are also allowed in both lists and strings.</p>
+<dl class="docutils">
+<dt>Some examples:</dt>
+<dd>“H-Li,C-O,Ne” will return [1, 2, 3, 6, 7, 8, 10]
+“H-N,8,Na-12” will return [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+[‘C’, ‘Al-15,S’, 17, ‘18’] will return [6, 13, 14, 15, 16, 17, 18]</dd>
+</dl>
+<p>If as_str is True, the list will contain strings of the integers
+(ie, the first example above will return [‘1’, ‘2’, ‘3’, ‘6’, ‘7’, ‘8’, ‘10’]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.misc.transform_basis_name">
+<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the name of a basis set to an internal representation</p>
+<p>This makes comparison of basis set names easier by, for example,
+converting the name to all lower case.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-basis_set_exchange.notes">
+<span id="notes-handling-of-notes"></span><h2>notes - Handling of notes<a class="headerlink" href="#module-basis_set_exchange.notes" title="Permalink to this headline">¶</a></h2>
+<p>Functionality for handling basis set and family notes</p>
+<dl class="function">
+<dt id="basis_set_exchange.notes.process_notes">
+<code class="descclassname">basis_set_exchange.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.notes.process_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add reference information to the bottom of a notes file</p>
+<p><cite>:ref:</cite> tags are removed and the actual reference data is appended</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-basis_set_exchange.references">
 <span id="references-handling-of-reference-data"></span><h2>references - Handling of reference data<a class="headerlink" href="#module-basis_set_exchange.references" title="Permalink to this headline">¶</a></h2>
 <p>Some helper functions related to handling of references/citations</p>
@@ -863,14 +965,31 @@ that those references apply to</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-basis_set_exchange.notes">
-<span id="notes-handling-of-notes"></span><h2>notes - Handling of notes<a class="headerlink" href="#module-basis_set_exchange.notes" title="Permalink to this headline">¶</a></h2>
-<p>Functionality for handling basis set and family notes</p>
+<div class="section" id="module-basis_set_exchange.sort">
+<span id="sort-sorting-of-basis-set-data"></span><h2>sort - Sorting of basis set data<a class="headerlink" href="#module-basis_set_exchange.sort" title="Permalink to this headline">¶</a></h2>
+<p>Sorting of BSE related dictionaries and data</p>
 <dl class="function">
-<dt id="basis_set_exchange.notes.process_notes">
-<code class="descclassname">basis_set_exchange.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.notes.process_notes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add reference information to the bottom of a notes file</p>
-<p><cite>:ref:</cite> tags are removed and the actual reference data is appended</p>
+<dt id="basis_set_exchange.sort.sort_basis_dict">
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_basis_dict</code><span class="sig-paren">(</span><em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts a basis set dictionary into a standard order</p>
+<p>This, for example, allows the written file to be more easily read by humans by,
+for example, putting the name and description before more detailed fields.</p>
+<p>This is generally for cosmetic reasons. However, users will generally like things
+in a consistent order</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.sort.sort_references_dict">
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_references_dict</code><span class="sig-paren">(</span><em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_references_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts a reference dictionary into a standard order</p>
+<p>The keys of the references are also sorted, and the keys for the data for each
+reference are put in a more canonical order.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.sort.sort_single_reference">
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_single_reference</code><span class="sig-paren">(</span><em>ref_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_single_reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts a dictionary containing data for a single reference into a standard order</p>
 </dd></dl>
 
 </div>
