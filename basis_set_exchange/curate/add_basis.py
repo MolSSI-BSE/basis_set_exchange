@@ -71,16 +71,17 @@ def add_basis(bs_file,
     bs_data = read_formatted_basis(bs_file, file_fmt)
     bs_data['basis_set_description'] = description
 
-    # Split out the component data into files based on the reference
-    # information. We keep track of which elements we've done so that
-    # we can detect dupliates in the references (which would be an error)
-    # (and also handle elements with no reference)
-    component_data = []
-    done_elements = []
+    if refs is None:
+        component_data = [bs_data]
+    else:
+        # Split out the component data into files based on the reference
+        # information. We keep track of which elements we've done so that
+        # we can detect dupliates in the references (which would be an error)
+        # (and also handle elements with no reference)
+        orig_elements = bs_data['basis_set_elements']
+        component_data = []
+        done_elements = []
 
-    orig_elements = bs_data['basis_set_elements']
-
-    if refs is not None:
         # If a string or list of strings, use that as a reference for all elements
         if isinstance(refs, str):
             bs_data['basis_set_references'] = [refs]
