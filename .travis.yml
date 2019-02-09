@@ -9,7 +9,7 @@ matrix:
     - python: 3.7
       dist: xenial
       after_success:
-        - codecov
+        - cd /tmp && codecov
 
 before_install:
   - uname -a
