@@ -12,7 +12,12 @@ with open(_readme_path, 'r') as readme_file:
 
 # Find the json files in the data dir and the schema dir
 bse_package_data = []
-for data_dir in 'data', 'schema', os.path.join('tests', 'sources'), os.path.join('tests', 'fakedata'):
+data_dirs = ['data', 'schema',
+             os.path.join('tests', 'sources'),
+             os.path.join('tests', 'fakedata')
+]
+
+for data_dir in data_dirs:
     for (path, _, filenames) in os.walk(os.path.join('basis_set_exchange', data_dir)):
         for filename in filenames:
             filepath = os.path.join(path, filename)
