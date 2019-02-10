@@ -73,6 +73,9 @@ def get_format_extension(fmt):
     Returns the recommended extension for a given format
     '''
 
+    if fmt is None:
+        return 'dict'
+
     fmt = fmt.lower()
     if fmt not in _converter_map:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
