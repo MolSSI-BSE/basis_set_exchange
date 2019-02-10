@@ -48,7 +48,10 @@ def sort_basis_dict(bs):
         'shell_function_type', 'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents',
         'shell_coefficients',
         'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients'
+        'potential_coefficients',
+
+        # Debug fields
+        'data_source'
     ]
     # yapf: enable
 
