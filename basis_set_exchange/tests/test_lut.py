@@ -46,13 +46,13 @@ def test_amchar(am):
 
 
 def test_amchar_special():
-    s = lut.amint_to_char([5,6,7])
+    s = lut.amint_to_char([5, 6, 7])
     assert s == 'hik'
-    s = lut.amint_to_char([5,6,7], hij=True)
+    s = lut.amint_to_char([5, 6, 7], hij=True)
     assert s == 'hij'
-    s = lut.amint_to_char([0,1])
+    s = lut.amint_to_char([0, 1])
     assert s == 'sp'
-    s = lut.amint_to_char([0,1], use_L=True)
+    s = lut.amint_to_char([0, 1], use_L=True)
     assert s == 'l'
 
 
@@ -61,12 +61,14 @@ def test_amchar_special():
 def test_element_data_fail(Z):
     data = lut.element_data_from_Z(Z)
 
+
 @pytest.mark.xfail
 @pytest.mark.parametrize('Z', [150, '150'])
 def test_element_data_fail(Z):
     data = lut.element_data_from_Z(Z)
 
+
 @pytest.mark.xfail
-@pytest.mark.parametrize('am', [[1,-1], [1,100]])
+@pytest.mark.parametrize('am', [[1, -1], [1, 100]])
 def test_amint_to_char_fail(am):
     amint_to_char(am)

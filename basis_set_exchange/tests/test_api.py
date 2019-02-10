@@ -117,3 +117,26 @@ def test_notes(basis_name):
 def test_family_notes(family):
     """Test getting family notes"""
     bse.get_family_notes(family)
+
+
+# yapf: disable
+@pytest.mark.parametrize('substr,family,role', [['def2', 'ahlrichs', 'orbital'],
+                                                ['pVDz', None, None],
+                                                [None, None, 'jkfit'],
+                                                [None, 'pople', None]])
+# yapf: enable
+def test_filter(substr, family, role):
+    """Test filtering basis set"""
+    md = bse.filter_basis_sets(substr, family, role)
+    assert len(md) > 0
+
+
+# yapf: disable
+@pytest.mark.parametrize('substr,family,role', [['def2', 'ahlrichs', 'jkfit'],
+                                                ['qqqqq', None, None],
+                                                ['6-31', None, 'admmfit']])
+# yapf: enable
+def test_filter_0(substr, family, role):
+    """Test filtering basis set (returning zero results)"""
+    md = bse.filter_basis_sets(substr, family, role)
+    assert len(md) == 0

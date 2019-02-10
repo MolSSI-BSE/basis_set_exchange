@@ -7,8 +7,8 @@ import pytest
 
 import basis_set_exchange as bse
 
-
 pytestmark = pytest.mark.xfail
+
 
 @pytest.mark.parametrize('basis_name', ['cc-pv0z', 'madeup_name'])
 def test_get_basis_fail_name(basis_name):
@@ -72,3 +72,12 @@ def test_lookup_role_fail_role(role):
 
     bse.lookup_basis_by_role('def2-tzvp', role)
 
+
+# yapf: disable
+@pytest.mark.parametrize('substr,family,role', [['def2', 'ahlrichsx', 'jkfit'],
+                                                ['qqqqq', None, 'notarole'],
+                                                ['6-31', 'poplexx,', 'admmfit']])
+# yapf: enable
+def test_filter_fail(substr, family, role):
+    """Test filtering basis set (returning zero results)"""
+    md = bse.filter_basis_sets(substr, family, role)
