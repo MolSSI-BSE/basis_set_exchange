@@ -2,8 +2,6 @@
 Comparison of basis data against authoritative sources
 '''
 
-import copy
-from ..fileio import read_json_basis, write_json_basis
 from ..api import get_basis
 from ..misc import compact_elements
 from .readers import read_formatted_basis
