@@ -3,7 +3,6 @@ import setuptools
 import versioneer
 
 _my_dir = os.path.dirname(os.path.abspath(__file__))
-_bse_dir = os.path.join(_my_dir, 'basis_set_exchange')
 _readme_path = os.path.join(_my_dir, "README.md")
 
 # Use the readme file for a description
