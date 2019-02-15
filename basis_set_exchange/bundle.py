@@ -3,6 +3,7 @@ Functions for creating archives of all basis sets
 '''
 
 import os
+import copy
 import zipfile
 import tarfile
 import io
@@ -96,6 +97,20 @@ def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
             addhelper(bfile, fam_notes_filename, fam_notes)
 
 
+_bundle_types = {
+    'zip': {
+        'display': 'ZIP file',
+        'handler': _bundle_zip,
+        'extension': '.zip'
+    },
+    'tbz': {
+        'display': 'Tar + bzip2',
+        'handler': _bundle_tbz,
+        'extension': '.tar.bz2'
+    }
+}
+
+
 def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
     '''
     Create a single archive file containing all basis
@@ -121,28 +136,29 @@ def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
     None
     '''
 
-    _archive_handlers = {
-        'zip': _bundle_zip,
-        'tbz': _bundle_tbz,
-    }
-
-    _valid_archive_types = _archive_handlers.keys()
-
     if archive_type is None:
         outfile_lower = outfile.lower()
-        if outfile_lower.endswith('.zip'):
-            archive_type = 'zip'
-        elif outfile_lower.endswith('.tar.bz2'):
-            archive_type = 'tbz'
-        elif outfile_lower.endswith('.tbz'):
-            archive_type = 'tbz'
+
+        for k, v in _bundle_types.items():
+            if outfile_lower.endswith(v['extension']):
+                archive_type = k
+                break
         else:
             raise RuntimeError("Cannot autodetect archive type from file name: {}".format(os.path.basename(outfile)))
 
     else:
         archive_type = archive_type.lower()
-        if not archive_type in _valid_archive_types:
-            raise RuntimeError("Archive type '{}' is not valid. Must be one of: {}".format(
-                archive_type, ','.join(_valid_archive_types)))
+        if not archive_type in _bundle_types:
+            raise RuntimeError("Archive type '{}' is not valid.")
 
-    _archive_handlers[archive_type](outfile, fmt, reffmt, data_dir)
+    _bundle_types[archive_type]['handler'](outfile, fmt, reffmt, data_dir)
+
+
+def get_archive_types():
+    '''
+    Return information related to the types of archives available
+    '''
+    ret = copy.deepcopy(_bundle_types)
+    for k, v in ret.items():
+        v.pop('handler')
+    return ret

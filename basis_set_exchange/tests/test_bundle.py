@@ -12,6 +12,8 @@ import glob
 import basis_set_exchange as bse
 from .common_testvars import bs_names
 
+_bundle_types = bse.bundle.get_archive_types()
+_bundle_exts = [v['extension'] for v in _bundle_types.values()]
 
 def _extract_all(filepath, extract_dir):
     if filepath.endswith('.zip'):
@@ -25,7 +27,7 @@ def _extract_all(filepath, extract_dir):
 
 
 # yapf: disable
-@pytest.mark.parametrize('ext', ['.zip', '.tar.bz2'])
+@pytest.mark.parametrize('ext', _bundle_exts)
 @pytest.mark.parametrize('fmt, reffmt', [('nwchem', 'bib'),
                                          ('psi4', 'txt')])
 # yapf: enable
@@ -33,7 +35,6 @@ def test_bundles(tmp_path, fmt, reffmt, ext):
     '''Test functionality related to creating archive of basis set'''
 
     tmp_path = str(tmp_path)  # Needed for python 3.5
-    exts = ['.zip', '.tar.bz2']
 
     bs_ext = bse.converters.get_format_extension(fmt)
     ref_ext = bse.refconverters.get_format_extension(reffmt)
