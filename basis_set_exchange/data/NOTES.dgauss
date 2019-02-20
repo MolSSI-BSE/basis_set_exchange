@@ -1,0 +1,16 @@
+DGauss DFT Orbitals and DFT Fitting
+===================================
+
+Note that the fitting orbitals do not correspond to the fitting methods that
+are common nowadays (RIFIT, JKFIT, etc). They should only be used with software
+supporting DFT XC fitting, which is an uncommon feature nowadays.
+
+The original BSE included a duplicated D shell in A1 exchange fitting on Neon with an exponent of 0.2.
+This is fixed in v1 to be an exponent of 0.8, following the pattern of nearby elements.
+This error seems to have been propagated to Molpro.
+
+In the original BSE, these were named with the suffix "DFT ORBITAL". They have been
+slightly renamed in the new BSE so as not to confuse people.
+
+
+The source of some data is marked as coming courtesy of Cray, Inc.
