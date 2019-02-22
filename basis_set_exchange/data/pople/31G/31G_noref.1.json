@@ -1,0 +1,50 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "31G Split-valence basis set for He",
+    "basis_set_references": [],
+    "basis_set_elements": {
+        "2": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "0.3842163400E+02",
+                        "0.5778030000E+01",
+                        "0.1241774000E+01"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "0.4013973935E-01",
+                            "0.2612460970E+00",
+                            "0.7931846246E+00"
+                        ]
+                    ]
+                },
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "0.2979640000E+00"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}

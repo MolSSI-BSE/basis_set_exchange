@@ -1,0 +1,52 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "component",
+        "schema_version": "0.1"
+    },
+    "basis_set_description": "31G Split-valence basis set for H",
+    "basis_set_references": [
+        "ditchfield1971a"
+    ],
+    "basis_set_elements": {
+        "1": {
+            "element_electron_shells": [
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "0.1873113696E+02",
+                        "0.2825394365E+01",
+                        "0.6401216923E+00"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "0.3349460434E-01",
+                            "0.2347269535E+00",
+                            "0.8137573261E+00"
+                        ]
+                    ]
+                },
+                {
+                    "shell_function_type": "gto",
+                    "shell_harmonic_type": "spherical",
+                    "shell_region": "valence",
+                    "shell_angular_momentum": [
+                        0
+                    ],
+                    "shell_exponents": [
+                        "0.1612777588E+00"
+                    ],
+                    "shell_coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ]
+        }
+    }
+}
