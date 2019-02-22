@@ -91,6 +91,13 @@ def reference_text(ref):
         s += u'\n{}'.format(ref['year'])
         if 'doi' in ref:
             s += u'\n' + ref['doi']
+    elif ref['type'] == 'misc':
+        s += ref_wrap.fill(u', '.join(ref['authors'])) + '\n'
+        s += ref_wrap.fill(ref['title'])
+        if 'note' in ref:
+            s += u'\n' + ref['note']
+        if 'doi' in ref:
+            s += u'\n' + ref['doi']
     else:
         raise RuntimeError('Cannot handle reference type {}'.format(ref['type']))
     return s
