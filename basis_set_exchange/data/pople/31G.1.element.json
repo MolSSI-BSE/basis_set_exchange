@@ -1,0 +1,20 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "element",
+        "schema_version": "0.1"
+    },
+    "basis_set_name": "31G",
+    "basis_set_description": "31G Split-valence basis set for H,He",
+    "basis_set_elements": {
+        "1": {
+            "element_components": [
+                "pople/31G/31G_ditchfield1971a.1.json"
+            ]
+        },
+        "2": {
+            "element_components": [
+                "pople/31G/31G_gaussian09e01.1.json"
+            ]
+        }
+    }
+}
