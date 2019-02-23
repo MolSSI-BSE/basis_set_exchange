@@ -38,7 +38,8 @@ if __name__ == "__main__":
         license='BSD-3C',
         packages=my_packages,
         entry_points={
-            "console_scripts": ["bse=basis_set_exchange.cli:run_bse_cli"]
+            "console_scripts": ["bse=basis_set_exchange.cli:run_bse_cli",
+                                "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
         },
         install_requires=[
             'jsonschema',
