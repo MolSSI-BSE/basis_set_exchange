@@ -5,7 +5,7 @@ Command line interface for the basis set exchange
 import argparse
 import argcomplete
 from .. import version
-from .handlers import cli_handle_bse_subcmd
+from .bse_handlers import bse_cli_handle_subcmd
 from .check import cli_check_normalize_args
 from .complete import (cli_case_insensitive_validator,
                        cli_family_completer, cli_role_completer, cli_bsname_completer,
@@ -131,7 +131,7 @@ def run_bse_cli():
     args = cli_check_normalize_args(args)
 
     # Actually generate the output
-    output = cli_handle_bse_subcmd(args)
+    output = bse_cli_handle_subcmd(args)
 
     if args.output:
         with open(args.output, 'w') as outfile:

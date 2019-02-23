@@ -2,4 +2,4 @@
 # it enables autocompletion
 # PYTHON_ARGCOMPLETE_OK
 
-from .cli import run_bse_cli
+from .bse_cli import run_bse_cli
