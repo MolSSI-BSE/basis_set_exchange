@@ -76,6 +76,15 @@ def _header_string(basis_dict):
     return header
 
 
+def fix_data_dir(data_dir):
+    '''
+    If data_dir is None, returns the default data_dir. Otherwise,
+    returns the data_dir parameter unmodified
+    '''
+
+    return _default_data_dir if data_dir is None else data_dir
+
+
 def get_basis(name,
               elements=None,
               version=None,
@@ -153,7 +162,7 @@ def get_basis(name,
         dictionary. Otherwise, it will be a string.
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(name, data_dir)
 
     # If version is not specified, use the latest
@@ -239,7 +248,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
         and role.
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
 
     role = role.lower()
 
@@ -271,7 +280,7 @@ def get_metadata(data_dir=None):
         it is in the 'data' subdirectory of this project.
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     metadata_file = os.path.join(data_dir, "METADATA.json")
     return fileio.read_metadata(metadata_file)
 
@@ -286,7 +295,7 @@ def get_reference_data(data_dir=None):
     `data_dir` directory.
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     reffile_path = os.path.join(data_dir, 'REFERENCES.json')
 
     return fileio.read_references(reffile_path)
@@ -345,7 +354,7 @@ def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=N
         dictionary. Otherwise, it will be a string.
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     basis_dict = get_basis(basis_name, elements=elements, version=version, data_dir=data_dir)
 
     all_ref_data = get_reference_data(data_dir)
@@ -361,14 +370,14 @@ def get_basis_family(basis_name, data_dir=None):
     '''Lookup a family by a basis set name
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(basis_name, data_dir)
     return bs_data['family']
 
 
 def get_families(data_dir=None):
     '''Return a list of all basis set families'''
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     metadata = get_metadata(data_dir)
 
     families = set()
@@ -401,7 +410,7 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
         Basis set metadata that matches the search criteria
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     metadata = get_metadata(data_dir)
 
     # family and role are required to be lowercase (via schema and validation functions)
@@ -430,7 +439,7 @@ def get_family_notes(family, data_dir=None):
     If the notes are not found, a string saying so is returned
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
 
     family = family.lower()
     if not family in get_families(data_dir):
@@ -454,7 +463,7 @@ def get_basis_notes(name, data_dir=None):
     If the notes are not found, a string saying so is returned
     '''
 
-    data_dir = _default_data_dir if data_dir is None else data_dir
+    data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension

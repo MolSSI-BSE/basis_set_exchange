@@ -12,7 +12,7 @@ def _make_graph(bsname, version=None, data_dir=None):
     Create a DOT graph file of the files included in a basis set
     '''
 
-    data_dir = api._default_data_dir if data_dir is None else data_dir
+    data_dir = api.fix_data_dir(data_dir)
 
     md = api._get_basis_metadata(bsname, data_dir)
 
