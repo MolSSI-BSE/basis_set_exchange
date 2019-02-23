@@ -48,6 +48,9 @@ def run_bse_cli():
     ########################################
     # Listing of general info and metadata
     ########################################
+    # get-data-dir
+    subparsers.add_parser('get-data-dir', help='Output the default data directory of this package')
+
     # list-basis-sets subcommand
     subp = subparsers.add_parser('list-basis-sets', help='Output a list all available basis sets and descriptions')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the basis set names')

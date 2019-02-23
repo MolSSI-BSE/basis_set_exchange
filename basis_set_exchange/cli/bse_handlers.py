@@ -61,6 +61,12 @@ def _bse_cli_list_roles(args):
     return '\n'.join(liststr)
 
 
+def _bse_cli_get_data_dir(args):
+    '''Handles the get-data-dir subcommand'''
+
+    return api.get_data_dir()
+
+
 def _bse_cli_lookup_by_role(args):
     '''Handles the lookup-by-role subcommand'''
     return api.lookup_basis_by_role(args.basis, args.role, args.data_dir)
@@ -169,6 +175,7 @@ def bse_cli_handle_subcmd(args):
         'list-formats': _bse_cli_list_formats,
         'list-ref-formats': _bse_cli_list_ref_formats,
         'list-roles': _bse_cli_list_roles,
+        'get-data-dir': _bse_cli_get_data_dir,
         'list-basis-sets': _bse_cli_list_basis_sets,
         'list-families': _bse_cli_list_families,
         'lookup-by-role': _bse_cli_lookup_by_role,

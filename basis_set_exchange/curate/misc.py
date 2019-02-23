@@ -9,6 +9,8 @@ from .. import misc
 def elements_in_files(filelist):
     '''Get a list of what elements exist in JSON files
 
+    This works on table, element, and component data files
+
     Parameters
     ----------
     filelist : list
