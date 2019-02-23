@@ -38,6 +38,22 @@ def run_bsecurate_cli():
     subp.add_argument('files', nargs='+', help='List of files to inspect')
 
 
+    ########################################
+    # Making graphs
+    ########################################
+    # view-graph
+    subp = subparsers.add_parser('view-graph', help='View a file graph for a basis set')
+    subp.add_argument('basis', help='Name of the basis set inspect').completer = cli_bsname_completer
+    subp.add_argument('--version', help='Which version of the basis set to inspect. Default is the latest version')
+
+    # make-graph-file
+    subp = subparsers.add_parser('make-graph-file', help='Make a dot file (and png file) ofr a basis set file graph')
+    subp.add_argument('basis', help='Name of the basis set inspect').completer = cli_bsname_completer
+    subp.add_argument('outfile', help='Output DOT file to create')
+    subp.add_argument('--render', action='store_true', help='Render the DOT file into a corresponding png file')
+    subp.add_argument('--version', help='Which version of the basis set to inspect. Default is the latest version')
+
+
     #############################
     # DONE WITH SUBCOMMANDS
     #############################

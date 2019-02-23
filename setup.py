@@ -56,6 +56,9 @@ if __name__ == "__main__":
                 'pytest>=4.0',
                 'pytest-cov'
             ],
+            'curate': [
+                'graphviz'
+            ]
         },
 
         classifiers=[
