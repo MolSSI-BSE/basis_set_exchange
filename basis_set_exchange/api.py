@@ -524,3 +524,8 @@ def get_roles():
              'admmfit': 'Auxiliary-Density Matrix Method Fitting'
             }
     # yapf: enable
+
+
+def get_data_dir():
+    '''Get the default data directory of this installation'''
+    return _default_data_dir
