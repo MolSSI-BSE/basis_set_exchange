@@ -35,6 +35,8 @@ def test_curatecli_datadir(bsecurate_cmd):
 
 
 def test_curatecli_makediff(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
+
     filename1 = '6-31G**-full.json.bz2' 
     filename2 = '6-31G-full.json.bz2' 
 
