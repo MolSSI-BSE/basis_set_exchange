@@ -5,6 +5,7 @@ basis set format
 
 import codecs
 import json
+import bz2
 import os
 
 from .sort import sort_basis_dict, sort_references_dict
@@ -34,8 +35,13 @@ def _read_plain_json(file_path, check_bse):
                                 'readable, or is not a file'.format(file_path))
 
     try:
-        with open(file_path, 'r') as f:
-            js = json.load(f)
+        if file_path.endswith('.bz2'):
+            with bz2.open(file_path, 'rt') as f:
+                js = json.load(f)
+        else:
+            with open(file_path, 'r') as f:
+                js = json.load(f)
+
     except json.decoder.JSONDecodeError as ex:
         raise RuntimeError("File {} contains JSON errors".format(file_path)) from ex
 
