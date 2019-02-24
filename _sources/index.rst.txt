@@ -27,6 +27,7 @@ https://github.com/MolSSI-BSE/basis_set_exchange
    bundling
    user_api
    developer
+   bsecurate_cli
    project_doc
 
 

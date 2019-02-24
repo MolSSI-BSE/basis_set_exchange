@@ -6,6 +6,8 @@ called ``bse``. This command can be used to obtain basis sets and references,
 as well as query the library for information and metadata.
 
 
+.. _cliinstall:
+
 Installation
 -------------------
 
@@ -49,7 +51,7 @@ environment variable.
 
 
 General usage
--------------------
+--------------
 
 The ``bse`` command is generally followed by a subcommand (see below). ``bse -h`` will display help
 and ``bse -V`` will display the version and exit.
@@ -60,8 +62,9 @@ and ``bse -V`` will display the version and exit.
 In general, values provided to options (such as basis set names, formats, and elements) are
 not case sensitive.
 
-There are two global options available to all subcommands: an alternate
-data directory can be specified with ``-d`` or ``--data-dir``.
+There are two global options available to all subcommands. The first is an alternate
+data directory can be specified with ``-d`` or ``--data-dir``. By default, the built-in
+data directory will be used.
 
 .. command-output:: bse -d /home/ben/my_data_dir list-basis-sets
 
@@ -124,6 +127,13 @@ Lists the available basis set roles. Takes no arguments
 
 .. command-output:: bse list-roles
 
+
+get-data-dir
+*******************
+
+Obtains the default data directory (built into the BSE package)
+
+.. command-output:: bse get-data-dir
 
 
 list-basis-sets

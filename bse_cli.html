@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Creating Basis Set Bundles" href="bundling.html" />
     <link rel="prev" title="Quickstart and Basic Usage" href="usage.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -92,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#list-formats">list-formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-ref-formats">list-ref-formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-roles">list-roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-data-dir">get-data-dir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-basis-sets">list-basis-sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-families">list-families</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lookup-by-role">lookup-by-role</a></li>
@@ -110,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
 </ul>
 
@@ -181,7 +185,7 @@
 called <code class="docutils literal notranslate"><span class="pre">bse</span></code>. This command can be used to obtain basis sets and references,
 as well as query the library for information and metadata.</p>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<span id="cliinstall"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>The command line is automatically installed when the library is installed
 via <code class="docutils literal notranslate"><span class="pre">pip</span></code> or similar python package managers.</p>
 <p>Depending on how packages are installed, you may need to add the path to
@@ -235,6 +239,7 @@ positional arguments:
     list-ref-formats    Output a list all available reference formats and
                         descriptions
     list-roles          Output a list all available roles and descriptions
+    get-data-dir        Output the default data directory of this package
     list-basis-sets     Output a list all available basis sets and
                         descriptions
     list-families       Output a list all available basis set families
@@ -260,8 +265,9 @@ optional arguments:
 </div>
 <p>In general, values provided to options (such as basis set names, formats, and elements) are
 not case sensitive.</p>
-<p>There are two global options available to all subcommands: an alternate
-data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>.</p>
+<p>There are two global options available to all subcommands. The first is an alternate
+data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>. By default, the built-in
+data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d /home/ben/my_data_dir list-basis-sets
 bppfakebasis        A fake basis set for testing the BSE
 bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
@@ -362,6 +368,14 @@ admmfit  Auxiliary-Density Matrix Method Fitting
 </pre></div>
 </div>
 </div>
+<div class="section" id="get-data-dir">
+<h3>get-data-dir<a class="headerlink" href="#get-data-dir" title="Permalink to this headline">¶</a></h3>
+<p>Obtains the default data directory (built into the BSE package)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-data-dir
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data
+</pre></div>
+</div>
+</div>
 <div class="section" id="list-basis-sets">
 <h3>list-basis-sets<a class="headerlink" href="#list-basis-sets" title="Permalink to this headline">¶</a></h3>
 <p>Lists the available basis sets.
@@ -427,7 +441,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.5.8
+# Version v0.5.8+9.gbbc46ae.dirty
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -625,7 +639,7 @@ factors were taken from the literature and verified by dividing them out
         <a href="bundling.html" class="btn btn-neutral float-right" title="Creating Basis Set Bundles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="usage.html" class="btn btn-neutral" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-left" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -651,26 +665,16 @@ factors were taken from the literature and verified by dividing them out
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

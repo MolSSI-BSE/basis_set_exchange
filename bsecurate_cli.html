@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The bsecurate command line interface &mdash; Basis Set Exchange  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Project Planning and Documents" href="project_doc.html" />
+    <link rel="prev" title="Output converters" href="developer_converters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The bsecurate command line interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-and-tab-completion">Installation and TAB completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subcommands">Subcommands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#elements-in-files">elements-in-files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-graph-file">make-graph-file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#view-graph-file">view-graph-file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-diff">make-diff</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>The bsecurate command line interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/bsecurate_cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-bsecurate-command-line-interface">
+<h1>The bsecurate command line interface<a class="headerlink" href="#the-bsecurate-command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>In addition to the user-oriented command-line interface, the BSE also
+contains a command-line interface for curation functions <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code>.
+This can be used to query, add, or modify basis set data.</p>
+<div class="section" id="installation-and-tab-completion">
+<h2>Installation and TAB completion<a class="headerlink" href="#installation-and-tab-completion" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="bse_cli.html#cliinstall"><span class="std std-ref">Installation</span></a></p>
+<p>Note that some functionality will require installing the <code class="docutils literal notranslate"><span class="pre">curate</span></code> section
+(ie, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">basis_set_exchange[docs,tests,curate]</span></code>).</p>
+<p>Rendering/Viewing graphs will require graphviz.</p>
+</div>
+<div class="section" id="general-usage">
+<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code> command is generally followed by a subcommand (see below). <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-h</span></code> will display help
+and <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-V</span></code> will display the version and exit.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate -h
+usage: bsecurate [-h] [-V] [-d PATH] [-o PATH] subcommand ...
+
+Description of your program
+
+positional arguments:
+  subcommand
+    elements-in-files   For a list of JSON files, output what elements are in
+                        each file
+    make-diff           Find/Store the differences between two groups of files
+    view-graph          View a file graph for a basis set
+    make-graph-file     Make a dot file (and png file) ofr a basis set file
+                        graph
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -V                    show program&#39;s version number and exit
+  -d PATH, --data-dir PATH
+                        Override which data directory to use
+  -o PATH, --output PATH
+                        Output to given file rather than stdout
+</pre></div>
+</div>
+<p>In general, values provided to options (such as basis set names, formats, and elements) are
+not case sensitive.</p>
+<p>There are two global options available to all subcommands. The first is an alternate
+data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>.
+Also, output can be written to a file rather than to the terminal with <code class="docutils literal notranslate"><span class="pre">-o</span></code>.
+This is similar to the <code class="docutils literal notranslate"><span class="pre">bse</span></code> command line program.</p>
+</div>
+<div class="section" id="subcommands">
+<h2>Subcommands<a class="headerlink" href="#subcommands" title="Permalink to this headline">¶</a></h2>
+<p>Below is a list of the available subcommands. All subcommands
+can take the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to display help for that subcommand.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate elements-in-files -h
+usage: bsecurate elements-in-files [-h] files [files ...]
+
+positional arguments:
+  files       List of files to inspect
+
+optional arguments:
+  -h, --help  show this help message and exit
+...
+</pre></div>
+</div>
+<div class="section" id="elements-in-files">
+<h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Permalink to this headline">¶</a></h3>
+<p>For a list of BSE JSON files, determine what elements the file contains data for.
+This works on table, element, and component data files.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/6-31G.0.table.json                    H-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json    H,He,B-Ne,Al-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVD+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVDZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQ+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVT+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVTZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5Z.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV6Z.1.element.json        H,He,Be-Ne,Al-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVD+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVDZ.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQ+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQZ.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVT+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVTZ.1.element.json        H-Ar,Ca-Kr
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-graph-file">
+<h3>make-graph-file<a class="headerlink" href="#make-graph-file" title="Permalink to this headline">¶</a></h3>
+<p>Make a graphviz DOT file (<a class="reference external" href="https://graphviz.org/documentation/">https://graphviz.org/documentation/</a>) containing a graph
+that describes what files go into a basis set. Optionally takes a version of the basis
+set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">--render</span></code> is passed, a PNG file will also be created.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate make-graph-file 6-31g graph_631g.dot
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat graph_631g.dot
+// Basis Set Graph: 6-31g
+digraph {
+	&quot;6-31g&quot; -&gt; &quot;pople/31G.0.element.json&quot; [label=&quot;H,He&quot;]
+	&quot;6-31g&quot; -&gt; &quot;pople/6-31G.0.element.json&quot; [label=&quot;Li-Kr&quot;]
+	&quot;pople/31G.0.element.json&quot; -&gt; &quot;pople/31G_ditchfield1971a.0.json&quot; [label=H]
+	&quot;pople/31G.0.element.json&quot; -&gt; &quot;pople/31G_noref.0.json&quot; [label=He]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_dill1975a.0.json&quot; [label=&quot;Li,B&quot;]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_binkley1977a.0.json&quot; [label=Be]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_hehre1972a.0.json&quot; [label=&quot;C-F&quot;]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_noref.0.json&quot; [label=Ne]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-21G-core_gordon1982a.0.json
+pople/6-31G-valence_francl1982a.0.json&quot; [label=&quot;Na-Ar&quot;]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_rassolov1998a.0.json&quot; [label=&quot;K-Zn&quot;]
+	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_rassolov2001a.0.json&quot; [label=&quot;Ga-Kr&quot;]
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="view-graph-file">
+<h3>view-graph-file<a class="headerlink" href="#view-graph-file" title="Permalink to this headline">¶</a></h3>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">make-graph-file</span></code>, but will instead create a temporary file,
+render the PNG, and then call the default viewer.</p>
+<p>Requires graphviz and a graphical viewer to be installed.</p>
+</div>
+<div class="section" id="make-diff">
+<h3>make-diff<a class="headerlink" href="#make-diff" title="Permalink to this headline">¶</a></h3>
+<p>Compute the difference between two groups of JSON files and store them in ‘.diff’ files.</p>
+<p>For each file specified with the <code class="docutils literal notranslate"><span class="pre">-l</span></code>, subtract all the common shells in files specified
+with <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
+<p>Multiple files are specified after the <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag. For example, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">file1</span> <span class="pre">file2</span> <span class="pre">-r</span> <span class="pre">file3</span> <span class="pre">file3</span></code>.</p>
+<p>For each file specified with <code class="docutils literal notranslate"><span class="pre">-l</span></code>, an output file is created with the same name but with <cite>.diff</cite> appended to the filename.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="project_doc.html" class="btn btn-neutral float-right" title="Project Planning and Documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="developer_converters.html" class="btn btn-neutral float-left" title="Output converters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Benjamin Pritchard
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

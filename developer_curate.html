@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Output converters" href="developer_converters.html" />
     <link rel="prev" title="Developer API" href="developer_api.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -94,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
 </ul>
 
@@ -324,6 +327,77 @@ key and other required keys, depending on the role</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.curate.diff_basis_dict">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">diff_basis_dict</code><span class="sig-paren">(</span><em>left_list</em>, <em>right_list</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the difference between two sets of basis set dictionaries</p>
+<p>The result is a list of dictionaries that correspond to each dictionary in
+<cite>left_list</cite>. Each resulting dictionary will contain only the elements/shells
+that exist in that entry and not in any of the dictionaries in <cite>right_list</cite>.</p>
+<p>This only works on the shell level, and will only subtract entire shells
+that are identical. ECP potentials are not affected.</p>
+<p>The return value contains deep copies of the input data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>left_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
+<dd><p class="first last">Dictionaries to use as the base</p>
+</dd>
+<dt><strong>right_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
+<dd><p class="first last">Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>list</strong></dt>
+<dd><p class="first last">Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.diff_json_files">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">diff_json_files</code><span class="sig-paren">(</span><em>left_files</em>, <em>right_files</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_json_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the difference between two sets of basis set JSON files</p>
+<p>The output is a set of files that correspond to each file in
+<cite>left_files</cite>. Each resulting dictionary will contain only the elements/shells
+that exist in that entry and not in any of the files in <cite>right_files</cite>.</p>
+<p>This only works on the shell level, and will only subtract entire shells
+that are identical. ECP potentials are not affected.</p>
+<p><cite>left_files</cite> and <cite>right_files</cite> are lists of file paths. The output
+is written to files with the same names as those in <cite>left_files</cite>,
+but with <cite>.diff</cite> added to the end. If those files exist, they are overwritten.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>left_files</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
+<dd><p class="first last">Paths to JSON files to use as the base</p>
+</dd>
+<dt><strong>right_files</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
+<dd><p class="first last">Paths to JSON files to subtract from each file of <cite>left_files</cite></p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>None</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.curate.ecp_pots_are_equal">
 <code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
@@ -359,6 +433,34 @@ within a tolerance)</p>
 <p>The shells are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.elements_in_files">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">elements_in_files</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.elements_in_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of what elements exist in JSON files</p>
+<p>This works on table, element, and component data files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filelist</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of paths to json files</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dict</strong></dt>
+<dd><p class="first last">Keys are the file path, value is a compacted element string of
+what elements are in that file</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -459,7 +561,7 @@ Otherwise, the maximum relative difference is returned.</p>
         <a href="developer_converters.html" class="btn btn-neutral float-right" title="Output converters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="developer_api.html" class="btn btn-neutral" title="Developer API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="developer_api.html" class="btn btn-neutral float-left" title="Developer API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -485,26 +587,16 @@ Otherwise, the maximum relative difference is returned.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

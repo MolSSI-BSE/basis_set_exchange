@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer Curation API" href="developer_curate.html" />
     <link rel="prev" title="Developer FAQ" href="developer_faq.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -105,6 +107,7 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
 </ul>
 
@@ -212,6 +215,13 @@ it is in the ‘data’ subdirectory of this project.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.api.fix_data_dir">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">fix_data_dir</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.fix_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>If data_dir is None, returns the default data_dir. Otherwise,
+returns the data_dir parameter unmodified</p>
 </dd></dl>
 
 <dl class="function">
@@ -327,6 +337,12 @@ dictionary. Otherwise, it will be a string.</p>
 <dt id="basis_set_exchange.api.get_basis_family">
 <code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>basis_name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup a family by a basis set name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.api.get_data_dir">
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_data_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default data directory of this installation</p>
 </dd></dl>
 
 <dl class="function">
@@ -1092,7 +1108,7 @@ reference are put in a more canonical order.</p>
         <a href="developer_curate.html" class="btn btn-neutral float-right" title="Developer Curation API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="developer_faq.html" class="btn btn-neutral" title="Developer FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="developer_faq.html" class="btn btn-neutral float-left" title="Developer FAQ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1118,26 +1134,16 @@ reference are put in a more canonical order.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
