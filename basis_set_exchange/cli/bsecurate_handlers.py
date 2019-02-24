@@ -3,7 +3,6 @@ Handlers for command line subcommands
 '''
 
 from .. import curate
-from ..misc import compact_elements
 from .common import format_columns
 
 

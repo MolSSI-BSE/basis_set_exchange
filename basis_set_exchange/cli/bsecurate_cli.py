@@ -7,9 +7,7 @@ import argcomplete
 from .. import version
 from .bsecurate_handlers import bsecurate_cli_handle_subcmd
 from .check import cli_check_normalize_args
-from .complete import (cli_case_insensitive_validator,
-                       cli_family_completer, cli_role_completer, cli_bsname_completer,
-                       cli_fmt_completer, cli_reffmt_completer)
+from .complete import cli_case_insensitive_validator, cli_bsname_completer
 
 
 def run_bsecurate_cli():
