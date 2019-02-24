@@ -75,3 +75,16 @@ Similar to ``make-graph-file``, but will instead create a temporary file,
 render the PNG, and then call the default viewer.
 
 Requires graphviz and a graphical viewer to be installed.
+
+
+make-diff
+***************
+
+Compute the difference between two groups of JSON files and store them in '.diff' files.
+
+For each file specified with the ``-l``, subtract all the common shells in files specified
+with ``-r``.
+
+Multiple files are specified after the ``-r`` or ``-l`` flag. For example, ``-l file1 file2 -r file3 file3``.
+
+For each file specified with ``-l``, an output file is created with the same name but with `.diff` appended to the filename.
