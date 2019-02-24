@@ -13,7 +13,8 @@ with open(_readme_path, 'r') as readme_file:
 bse_package_data = []
 data_dirs = ['data', 'schema',
              os.path.join('tests', 'sources'),
-             os.path.join('tests', 'fakedata')
+             os.path.join('tests', 'fakedata'),
+             os.path.join('tests', 'test_data')
 ]
 
 for data_dir in data_dirs:
