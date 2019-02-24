@@ -334,7 +334,7 @@ def compare_basis(bs1,
                 compare_ecp_pots_meta=compare_ecp_pots_meta,
                 compare_meta=compare_elements_meta,
                 rel_tol=rel_tol):
-            print("Elements failed: ", bs1['basis_set_name'], el)
+            print("Elements failed", el)
             return False
     if compare_meta:
         for k in [
