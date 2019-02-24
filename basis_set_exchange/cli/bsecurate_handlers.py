@@ -13,6 +13,13 @@ def _bsecurate_cli_elements_in_files(args):
     return '\n'.join(format_columns(data.items()))
 
 
+def _bsecurate_cli_make_diff(args):
+    '''Handles the view-graph subcommand'''
+
+    curate.diff_json_files(args.left, args.right)
+    return ''
+
+
 def _bsecurate_cli_view_graph(args):
     '''Handles the view-graph subcommand'''
 
@@ -30,6 +37,7 @@ def _bsecurate_cli_make_graph_file(args):
 def bsecurate_cli_handle_subcmd(args):
     handler_map = {
         'elements-in-files': _bsecurate_cli_elements_in_files,
+        'make-diff': _bsecurate_cli_make_diff,
         'view-graph': _bsecurate_cli_view_graph,
         'make-graph-file': _bsecurate_cli_make_graph_file
     }

@@ -4,9 +4,11 @@ Tests BSE curation functions
 
 import os
 import pytest
+import shutil
+import bz2
 
 from basis_set_exchange import api, curate, fileio
-from .common_testvars import data_dir
+from .common_testvars import data_dir, test_data_dir
 
 
 # yapf: disable
@@ -144,3 +146,51 @@ def test_print_table_basis(file_path):
     full_path = os.path.join(data_dir, file_path)
     tab = fileio.read_json_basis(full_path)
     curate.print_table_basis(tab)
+
+
+def test_diff_json_files_same(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
+
+    filename = 'def2-SV-base_gulde2012a.1.json'
+    file1 = os.path.join(data_dir, 'ahlrichs', 'SV', filename)
+    tmpfile = os.path.join(tmp_path, filename)
+    shutil.copyfile(file1, tmpfile)
+
+    curate.diff_json_files([tmpfile], [tmpfile])
+
+    diff_file = tmpfile + '.diff'
+    assert os.path.isfile(diff_file)
+
+    diff_data = fileio.read_json_basis(diff_file)
+    assert len(diff_data['basis_set_elements']) == 0
+
+
+def test_diff_json_files(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
+
+    filename1 = '6-31G**-full.json.bz2' 
+    filename2 = '6-31G-full.json.bz2' 
+
+    file1 = os.path.join(test_data_dir, filename1)
+    file2 = os.path.join(test_data_dir, filename2)
+
+    tmpfile1 = os.path.join(tmp_path, filename1)
+    tmpfile2 = os.path.join(tmp_path, filename2)
+
+    shutil.copyfile(file1, tmpfile1)
+    shutil.copyfile(file2, tmpfile2)
+
+    curate.diff_json_files([tmpfile1], [tmpfile2])
+    curate.diff_json_files([tmpfile2], [tmpfile1])
+
+    diff1 = fileio.read_json_basis(tmpfile1 + '.diff')
+    diff2 = fileio.read_json_basis(tmpfile2 + '.diff')
+
+    assert len(diff1['basis_set_elements']) == 36
+    assert len(diff2['basis_set_elements']) == 0
+
+    reffilename = '6-31G**-valence.json.bz2' 
+    reffile = os.path.join(test_data_dir, reffilename)
+    refdata = fileio.read_json_basis(reffile)
+
+    assert curate.compare_basis(diff1, refdata, rel_tol=0.0)

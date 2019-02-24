@@ -39,6 +39,15 @@ def run_bsecurate_cli():
 
 
     ########################################
+    # Manipulating basis set data
+    ########################################
+    # make-diff
+    subp = subparsers.add_parser('make-diff', help='Find/Store the differences between two groups of files')
+    subp.add_argument('-l', '--left', nargs='+', required=True, help='Base JSON files')
+    subp.add_argument('-r', '--right', nargs='+', required=True, help='JSON files with data to subtract from the base files')
+
+
+    ########################################
     # Making graphs
     ########################################
     # view-graph

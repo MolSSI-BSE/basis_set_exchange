@@ -14,3 +14,4 @@ from .compare import (compare_electron_shells, electron_shells_are_subset, elect
                       potentials_difference, subtract_electron_shells)
 from .misc import elements_in_files
 from .graph import view_graph, make_graph_file
+from .diff import diff_basis_dict, diff_json_files

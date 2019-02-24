@@ -27,6 +27,9 @@ fake_data_dir = os.path.join(_my_dir, 'fakedata')
 # Directory with authoritative sources
 auth_data_dir = os.path.join(_my_dir, 'sources')
 
+# Directory with other testing data
+test_data_dir = os.path.join(_my_dir, 'test_data')
+
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)
 all_metadata_files = all_files[0]
