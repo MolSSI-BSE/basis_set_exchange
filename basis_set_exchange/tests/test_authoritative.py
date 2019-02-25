@@ -11,6 +11,9 @@ from .common_testvars import bs_metadata, bs_names, auth_data_dir
 # create a map of the sources dir
 _basis_src_map = {}
 for x in os.listdir(auth_data_dir):
+    if not x.endswith('.bz2'):
+        continue
+
     # remove .fmt.bz2
     base, _ = os.path.splitext(x)
     base, _ = os.path.splitext(base)
