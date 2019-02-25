@@ -91,7 +91,11 @@ def read_formatted_basis(file_path, file_type=None):
             basis_lines = [l.strip() for l in f.readlines()]
 
     data = _type_readers[file_type]['reader'](basis_lines, fname)
-    return _fix_uncontracted(data)
+
+    # It's debateable if I want to do this
+    #return _fix_uncontracted(data)
+
+    return data
 
 
 def get_reader_formats():
