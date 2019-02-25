@@ -21,9 +21,9 @@ for s in auth_sources:
     bsname,ver,_,_ = s.split('.')
 
     if not bsname in missing:
-        raise RuntimeError("Source {} does not correspond to a basis set in the library")
+        raise RuntimeError("Source {} does not correspond to a basis set in the library".format(bsname))
     if not ver in missing[bsname]:
-        raise RuntimeError("Source {} does not correspond to a basis set version in the library")
+        raise RuntimeError("Source {} version {} does not correspond to a basis set version in the library".format(bsname, ver))
 
     missing[bsname].remove(ver) 
 
