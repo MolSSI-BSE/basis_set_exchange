@@ -6,11 +6,41 @@ from .. import curate
 from .common import format_columns
 
 
+def _bsecurate_cli_get_reader_formats(args):
+    '''Handles the get-file-types subcommand'''
+
+    all_formats = curate.get_reader_formats()
+
+    if args.no_description:
+        liststr = all_formats.keys()
+    else:
+        liststr = format_columns(all_formats.items())
+
+    return '\n'.join(liststr)
+
+
 def _bsecurate_cli_elements_in_files(args):
     '''Handles the elements-in-files subcommand'''
     data = curate.elements_in_files(args.files)
     return '\n'.join(format_columns(data.items()))
 
+
+def _bsecurate_cli_compare_basis_sets(args):
+    '''Handles compare-basis-sets subcommand'''
+    ret = curate.compare_basis_sets(args.basis1, args.basis2, args.version1, args.version2, args.uncontract_general)
+    if ret:
+        return "No difference found"
+    else:
+        return "DIFFERENCES FOUND. SEE ABOVE"
+
+def _bsecurate_cli_compare_basis_files(args):
+    '''Handles compare-basis-files subcommand'''
+    ret = curate.compare_basis_files(args.file1, args.file2, args.readfmt1, args.readfmt2, args.uncontract_general)
+
+    if ret:
+        return "No difference found"
+    else:
+        return "DIFFERENCES FOUND. SEE ABOVE"
 
 def _bsecurate_cli_make_diff(args):
     '''Handles the view-graph subcommand'''
@@ -35,7 +65,10 @@ def _bsecurate_cli_make_graph_file(args):
 
 def bsecurate_cli_handle_subcmd(args):
     handler_map = {
+        'get-reader-formats': _bsecurate_cli_get_reader_formats,
         'elements-in-files': _bsecurate_cli_elements_in_files,
+        'compare-basis-sets': _bsecurate_cli_compare_basis_sets,
+        'compare-basis-files': _bsecurate_cli_compare_basis_files,
         'make-diff': _bsecurate_cli_make_diff,
         'view-graph': _bsecurate_cli_view_graph,
         'make-graph-file': _bsecurate_cli_make_graph_file

@@ -368,6 +368,10 @@ def shells_difference(s1, s2):
         sh1 = shells1[n]
         sh2 = shells2[n]
 
+        if sh1['shell_angular_momentum'] != sh2['shell_angular_momentum']:
+            print("Different angular momentum for shell {}".format(n))
+            return float('inf')
+
         nprim = len(sh1['shell_exponents'])
         if len(sh2['shell_exponents']) != nprim:
             print("Different number of primitives for shell {}".format(n))
@@ -421,6 +425,10 @@ def potentials_difference(p1, p2):
         pot1 = pots1[n]
         pot2 = pots2[n]
 
+        if pot1['potential_angular_momentum'] != pot2['potential_angular_momentum']:
+            print("Different angular momentum for potential {}".format(n))
+            return float('inf')
+
         nprim = len(pot1['potential_gaussian_exponents'])
         if len(pot2['potential_gaussian_exponents']) != nprim:
             print("Different number of primitives for potential {}".format(n))
@@ -437,6 +445,7 @@ def potentials_difference(p1, p2):
             r = _reldiff(e1, e2)
             if r > 0.0:
                 print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
+            max_rdiff = max(max_rdiff, r)
 
             e1 = pot1['potential_r_exponents'][p]
             e2 = pot2['potential_r_exponents'][p]

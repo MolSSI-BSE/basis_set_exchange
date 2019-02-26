@@ -58,7 +58,7 @@ def test_add_basis(tmp_path):
 
         # Compare against the file we created from
         sf_path = os.path.join(auth_data_dir, sf)
-        assert curate.compare_basis_against_ref(name, sf_path, data_dir=tmp_path) == True
+        assert curate.compare_basis_against_file(name, sf_path, data_dir=tmp_path) == True
 
         # Check that all the files exist and contain the right elements
         for fpath, elements in _expected_files.items():

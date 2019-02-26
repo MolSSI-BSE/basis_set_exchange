@@ -12,24 +12,29 @@ from .dalton import read_dalton
 
 _type_readers = {
     'turbomole': {
-        'reader': read_turbomole,
+        'display': 'Turbomole',
         'extension': '.tm',
+        'reader': read_turbomole
     },
     'gaussian94': {
-        'reader': read_g94,
-        'extension': '.gbs'
+        'display': 'Gaussian94',
+        'extension': '.gbs',
+        'reader': read_g94
     },
     'nwchem': {
-        'reader': read_nwchem,
-        'extension': '.nw'
+        'display': 'NWChem',
+        'extension': '.nw',
+        'reader': read_nwchem
     },
     'dalton': {
-        'reader': read_dalton,
-        'extension': '.mol'
+        'display': 'Dalton',
+        'extension': '.mol',
+        'reader': read_dalton
     },
     'gbasis': {
-        'reader': read_gbasis,
-        'extension': '.gbasis'
+        'display': 'GBasis',
+        'extension': '.gbasis',
+        'reader': read_gbasis
     }
 }
 
@@ -87,3 +92,14 @@ def read_formatted_basis(file_path, file_type=None):
 
     data = _type_readers[file_type]['reader'](basis_lines, fname)
     return _fix_uncontracted(data)
+
+
+def get_reader_formats():
+    '''
+    Returns the available formats mapped to display name.
+
+    This is returned as an ordered dictionary, with the most common
+    at the top, followed by the rest in alphabetical order
+    '''
+
+    return {k: v['display'] for k, v in _type_readers.items()}

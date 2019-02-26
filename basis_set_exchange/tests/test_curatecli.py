@@ -8,7 +8,7 @@ import pytest
 import shutil
 
 from basis_set_exchange import fileio, curate
-from .common_testvars import fake_data_dir, data_dir, test_data_dir
+from .common_testvars import fake_data_dir, data_dir, test_data_dir, auth_data_dir
 
 def _test_curatecli_cmd(cmd):
     return subprocess.check_output(cmd, shell=True, cwd='/tmp', universal_newlines=True, stderr=subprocess.STDOUT)
@@ -19,7 +19,8 @@ test_files1 = [os.path.join(data_dir, x) for x in test_files1]
 
 bsecurate_cmds = [
     '-V', '-h', '--help',
-    'elements-in-files ' + ' '.join(test_files1)
+    'elements-in-files ' + ' '.join(test_files1),
+    'get-reader-formats'
 ]
 
 fakebsecurate_cmds = []
@@ -63,3 +64,43 @@ def test_curatecli_makediff(tmp_path):
     refdata = fileio.read_json_basis(reffile)
 
     assert curate.compare_basis(diff1, refdata, rel_tol=0.0)
+
+
+def test_curatecli_compare_1():
+    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0')
+    assert "No difference found" in output
+
+    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general')
+    assert "No difference found" in output
+
+    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 1')
+    assert "DIFFERENCES FOUND" in output
+
+
+# yapf: disable
+@pytest.mark.parametrize('filename1,filename2,expected', 
+                           [('6-31g-bse.gbs.bz2', '6-31g-bse.gbs.bz2', True),
+                            ('6-31g-bse.gbs.bz2', '6-31g-bse.nw.bz2', True),
+                            ('6-31g-bse.nw.bz2', '6-31g-bse-BAD1.gbs.bz2', False),
+                            ('6-31g-bse.nw.bz2', '6-31g-bse-BAD2.gbs.bz2', False),
+                            ('6-31g-bse.nw.bz2', '6-31g-bse-BAD3.gbs.bz2', False),
+                            ('6-31g-bse.nw.bz2', '6-31g-bse-BAD4.gbs.bz2', False),
+                            ('6-31g-bse.nw.bz2', '6-31g-bse-BAD5.gbs.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp.gbs.bz2', True),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp.nw.bz2', True),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD1.nw.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD2.nw.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD3.nw.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD4.nw.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD5.nw.bz2', False),
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD6.gbs.bz2', False)])
+# yapf: enable
+def test_curatecli_compare_files(filename1, filename2, expected):
+    file1 = os.path.join(test_data_dir, filename1)
+    file2 = os.path.join(test_data_dir, filename2)
+
+    output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file1, file2))
+    if expected:
+        assert "No difference found" in output
+    else:
+        assert "DIFFERENCES FOUND" in output

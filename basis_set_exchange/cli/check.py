@@ -32,7 +32,7 @@ def _cli_check_format(fmt):
     fmt = fmt.lower()
     if not fmt in api.get_formats():
         errstr = "Format '" + fmt + "' does not exist.\n"
-        errstr += "For a complete list of formats, use the 'list-formats' subcommand"
+        errstr += "For a complete list of formats, use the 'bse list-formats' command"
         raise RuntimeError(errstr)
 
     return fmt
@@ -47,7 +47,7 @@ def _cli_check_ref_format(fmt):
     fmt = fmt.lower()
     if not fmt in api.get_reference_formats():
         errstr = "Reference format '" + fmt + "' does not exist.\n"
-        errstr += "For a complete list of formats, use the 'list-ref-formats' subcommand"
+        errstr += "For a complete list of formats, use the 'bse list-ref-formats' command"
         raise RuntimeError(errstr)
 
     return fmt
@@ -62,7 +62,7 @@ def _cli_check_role(role):
     role = role.lower()
     if not role in api.get_roles():
         errstr = "Role format '" + role + "' does not exist.\n"
-        errstr += "For a complete list of roles, use the 'list-roles' subcommand"
+        errstr += "For a complete list of roles, use the 'bse list-roles' command"
         raise RuntimeError(errstr)
 
     return role
@@ -78,7 +78,7 @@ def _cli_check_basis(name, data_dir):
     metadata = api.get_metadata(data_dir)
     if not name in metadata:
         errstr = "Basis set '" + name + "' does not exist.\n"
-        errstr += "For a complete list of basis sets, use the 'list-basis-sets' subcommand"
+        errstr += "For a complete list of basis sets, use the 'bse list-basis-sets' command"
         raise RuntimeError(errstr)
 
     return name
@@ -93,10 +93,25 @@ def _cli_check_family(family, data_dir):
     family = family.lower()
     if not family in api.get_families(data_dir):
         errstr = "Basis set family '" + family + "' does not exist.\n"
-        errstr += "For a complete list of families, use the 'list-families' subcommand"
+        errstr += "For a complete list of families, use the 'bse list-families' command"
         raise RuntimeError(errstr)
 
     return family
+
+
+def _cli_check_readfmt(readfmt):
+    '''Checks that a file type exists and if not, raises a helpful exception'''
+
+    if readfmt is None:
+        return None
+
+    readfmt = readfmt.lower()
+    if not readfmt in curate.get_reader_formats():
+        errstr = "Reader for file type '" + readfmt + "' does not exist.\n"
+        errstr += "For a complete list of file types, use the 'bsecurate get-reader-formats' command"
+        raise RuntimeError(errstr)
+
+    return readfmt
 
 
 def cli_check_normalize_args(args):
@@ -114,6 +129,10 @@ def cli_check_normalize_args(args):
         args_copy.data_dir = _cli_check_data_dir(args.data_dir)
     if 'basis' in args:
         args_copy.basis = _cli_check_basis(args.basis, args.data_dir)
+    if 'basis1' in args_keys:
+        args_copy.basis1 = _cli_check_basis(args.basis1, args.data_dir)
+    if 'basis2' in args_keys:
+        args_copy.basis2 = _cli_check_basis(args.basis2, args.data_dir)
     if 'fmt' in args_keys:
         args_copy.fmt = _cli_check_format(args.fmt)
     if 'reffmt' in args_keys:
@@ -122,5 +141,9 @@ def cli_check_normalize_args(args):
         args_copy.role = _cli_check_role(args.role)
     if 'family' in args_keys:
         args_copy.family = _cli_check_family(args.family, args.data_dir)
+    if 'readfmt1' in args_keys:
+        args_copy.readfmt1 = _cli_check_readfmt(args.readfmt1)
+    if 'readfmt2' in args_keys:
+        args_copy.readfmt2 = _cli_check_readfmt(args.readfmt2)
 
     return args_copy

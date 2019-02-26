@@ -7,7 +7,7 @@ import argcomplete
 from .. import version
 from .bsecurate_handlers import bsecurate_cli_handle_subcmd
 from .check import cli_check_normalize_args
-from .complete import cli_case_insensitive_validator, cli_bsname_completer
+from .complete import cli_case_insensitive_validator, cli_bsname_completer, cli_readerfmt_completer
 
 
 def run_bsecurate_cli():
@@ -31,6 +31,10 @@ def run_bsecurate_cli():
     ########################################
     # Listing of general info and metadata
     ########################################
+    # get-file-types
+    subp = subparsers.add_parser('get-reader-formats', help='A list of file formats that can be read')
+    subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
+
     # elements-in-files
     subp = subparsers.add_parser('elements-in-files', help='For a list of JSON files, output what elements are in each file')
     subp.add_argument('files', nargs='+', help='List of files to inspect')
@@ -43,6 +47,26 @@ def run_bsecurate_cli():
     subp = subparsers.add_parser('make-diff', help='Find/Store the differences between two groups of files')
     subp.add_argument('-l', '--left', nargs='+', required=True, help='Base JSON files')
     subp.add_argument('-r', '--right', nargs='+', required=True, help='JSON files with data to subtract from the base files')
+
+
+    ########################################
+    # Comparing
+    ########################################
+    # compare-basis-sets
+    subp = subparsers.add_parser('compare-basis-sets', help='Compare two basis sets in the data directory')
+    subp.add_argument('basis1', help='First basis set to compare').completer = cli_bsname_completer
+    subp.add_argument('basis2', help='Second basis set to compare').completer = cli_bsname_completer
+    subp.add_argument('--version1', help='Version of the first basis set to compare with. Default is latest')
+    subp.add_argument('--version2', help='Version of the second basis set to compare with. Default is latest')
+    subp.add_argument('--uncontract-general', action='store_true', help='Remove general contractions before comparing')
+
+    # compare-basis-files
+    subp = subparsers.add_parser('compare-basis-files', help='Compare two formatted basis set files')
+    subp.add_argument('file1', help='First basis set file to compare')
+    subp.add_argument('file2', help='Second basis set file to compare')
+    subp.add_argument('--readfmt1', help='Override the file format of file 1').completer = cli_readerfmt_completer
+    subp.add_argument('--readfmt2', help='Override the file format of file 2').completer = cli_readerfmt_completer
+    subp.add_argument('--uncontract-general', action='store_true', help='Remove general contractions before comparing')
 
 
     ########################################
