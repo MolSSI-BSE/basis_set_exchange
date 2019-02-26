@@ -254,9 +254,21 @@ usual ‘noref’ extension and the references entry is empty.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.curate.compare_basis_against_ref">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_ref</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type=None</em>, <em>version=None</em>, <em>uncontract_general=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_ref" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compares basis set data from an authoritative source against bse data</p>
+<dt id="basis_set_exchange.curate.compare_basis_against_file">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_file</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type=None</em>, <em>version=None</em>, <em>uncontract_general=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare a basis set in the BSE against a reference file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.compare_basis_files">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_files</code><span class="sig-paren">(</span><em>file_path_1</em>, <em>file_path_2</em>, <em>file_type_1=None</em>, <em>file_type_2=None</em>, <em>uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare two files containing formatted basis sets</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.compare_basis_sets">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_sets</code><span class="sig-paren">(</span><em>basis_name_1</em>, <em>basis_name_2</em>, <em>version_1=None</em>, <em>version_2=None</em>, <em>uncontract_general=False</em>, <em>data_dir_1=None</em>, <em>data_dir_2=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_sets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare two files containing formatted basis sets</p>
 </dd></dl>
 
 <dl class="function">
@@ -461,6 +473,14 @@ what elements are in that file</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.get_reader_formats">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">get_reader_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.get_reader_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the available formats mapped to display name.</p>
+<p>This is returned as an ordered dictionary, with the most common
+at the top, followed by the rest in alphabetical order</p>
 </dd></dl>
 
 <dl class="function">

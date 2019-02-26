@@ -91,6 +91,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation-and-tab-completion">Installation and TAB completion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#subcommands">Subcommands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-reader-formats">get-reader-formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compare-basis-sets">compare-basis-sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compare-basis-files">compare-basis-files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#elements-in-files">elements-in-files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#make-graph-file">make-graph-file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#view-graph-file">view-graph-file</a></li>
@@ -187,9 +190,13 @@ Description of your program
 
 positional arguments:
   subcommand
+    get-reader-formats  A list of file formats that can be read
     elements-in-files   For a list of JSON files, output what elements are in
                         each file
     make-diff           Find/Store the differences between two groups of files
+    compare-basis-sets  Compare two basis sets in the data directory
+    compare-basis-files
+                        Compare two formatted basis set files
     view-graph          View a file graph for a basis set
     make-graph-file     Make a dot file (and png file) ofr a basis set file
                         graph
@@ -225,12 +232,53 @@ optional arguments:
 ...
 </pre></div>
 </div>
+<div class="section" id="get-reader-formats">
+<h3>get-reader-formats<a class="headerlink" href="#get-reader-formats" title="Permalink to this headline">¶</a></h3>
+<p>Obtain a list of the formats that can be read by the library</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate get-reader-formats
+turbomole   Turbomole
+gaussian94  Gaussian94
+nwchem      NWChem
+dalton      Dalton
+gbasis      GBasis
+</pre></div>
+</div>
+</div>
+<div class="section" id="compare-basis-sets">
+<h3>compare-basis-sets<a class="headerlink" href="#compare-basis-sets" title="Permalink to this headline">¶</a></h3>
+<p>Compare two basis sets and print a report.
+These are read/composed from a data directory. Versions can be specified</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate compare-basis-sets 6-31G 6-31G --version1 1 --version2 0
+
+-------------------------------------
+ Element  1
+   Exponent   0: 18.7311370           0.1873113696E+02     -&gt;   2.13548168e-09
+Coefficient   0: 0.03349460           0.3349460434E-01     -&gt;   1.29573125e-07
+   Exponent   1: 2.8253937            0.2825394365E+01     -&gt;   2.35365429e-07
+Coefficient   1: 0.23472695           0.2347269535E+00     -&gt;   1.49109423e-08
+   Exponent   2: 0.6401217            0.6401216923E+00     -&gt;   1.20289627e-08
+...
+
+     Not in bs1:  
+     Not in bs2:  Ga-Kr
+  No difference:  
+Some difference:  H-Ar,Sc-Zn
+ BIG difference:  K,Ca
+
+DIFFERENCES FOUND. SEE ABOVE
+</pre></div>
+</div>
+</div>
+<div class="section" id="compare-basis-files">
+<h3>compare-basis-files<a class="headerlink" href="#compare-basis-files" title="Permalink to this headline">¶</a></h3>
+<p>Compare two formatted basis sets files and print a report. For valid formats, use <code class="docutils literal notranslate"><span class="pre">get-reader-formats</span></code></p>
+</div>
 <div class="section" id="elements-in-files">
 <h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Permalink to this headline">¶</a></h3>
 <p>For a list of BSE JSON files, determine what elements the file contains data for.
 This works on table, element, and component data files.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/6-31G.0.table.json                    H-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/6-31G.0.table.json                    H-Zn
 /home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json  Na-Ar
 /home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json    H-Ar,Sc-Kr
 /home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json    H,He,B-Ne,Al-Ar
@@ -264,18 +312,18 @@ set.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat graph_631g.dot
 // Basis Set Graph: 6-31g
 digraph {
-	&quot;6-31g&quot; -&gt; &quot;pople/31G.0.element.json&quot; [label=&quot;H,He&quot;]
-	&quot;6-31g&quot; -&gt; &quot;pople/6-31G.0.element.json&quot; [label=&quot;Li-Kr&quot;]
-	&quot;pople/31G.0.element.json&quot; -&gt; &quot;pople/31G_ditchfield1971a.0.json&quot; [label=H]
-	&quot;pople/31G.0.element.json&quot; -&gt; &quot;pople/31G_noref.0.json&quot; [label=He]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_dill1975a.0.json&quot; [label=&quot;Li,B&quot;]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_binkley1977a.0.json&quot; [label=Be]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_hehre1972a.0.json&quot; [label=&quot;C-F&quot;]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_noref.0.json&quot; [label=Ne]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-21G-core_gordon1982a.0.json
-pople/6-31G-valence_francl1982a.0.json&quot; [label=&quot;Na-Ar&quot;]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_rassolov1998a.0.json&quot; [label=&quot;K-Zn&quot;]
-	&quot;pople/6-31G.0.element.json&quot; -&gt; &quot;pople/6-31G_rassolov2001a.0.json&quot; [label=&quot;Ga-Kr&quot;]
+	&quot;6-31g&quot; -&gt; &quot;pople/31G.1.element.json&quot; [label=&quot;H,He&quot;]
+	&quot;6-31g&quot; -&gt; &quot;pople/6-31G.1.element.json&quot; [label=&quot;Li-Kr&quot;]
+	&quot;pople/31G.1.element.json&quot; -&gt; &quot;pople/31G/31G_ditchfield1971a.1.json&quot; [label=H]
+	&quot;pople/31G.1.element.json&quot; -&gt; &quot;pople/31G/31G_gaussian09e01.1.json&quot; [label=He]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_dill1975a.1.json&quot; [label=&quot;Li,B&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_binkley1977a.1.json&quot; [label=Be]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_hehre1972a.1.json&quot; [label=&quot;C-F&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_gaussian09e01.1.json&quot; [label=Ne]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/21G/6-21G-core_gordon1982a.1.json
+pople/6-31G/6-31G-valence_francl1982a.1.json&quot; [label=&quot;Na-Ar&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_rassolov2001a.1.json&quot; [label=&quot;K,Ca,Ga-Kr&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_rassolov1998a.1.json&quot; [label=&quot;Sc-Zn&quot;]
 }
 </pre></div>
 </div>

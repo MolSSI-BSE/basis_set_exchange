@@ -57,8 +57,9 @@ and can be obtained via :func:`basis_set_exchange.get_formats`
    >>> print(bs_str)
    H     0
    S   3   1.00
-        18.731137               0.0334946
-         2.8253944              0.2347269
+         0.1873113696D+02       0.3349460434D-01
+         0.2825394365D+01       0.2347269535D+00
+         0.6401216923D+00       0.8137573261D+00
    ...
 
 
@@ -116,14 +117,14 @@ and can be obtained via :func:`basis_set_exchange.get_reference_formats`
    >>> bib = basis_set_exchange.get_references('6-31G*', fmt='bib', elements=[1,9])
    >>> print(bib)
    % H
-   %     31G valence double-zeta
+   %     31G Split-valence basis set for H
    %         ditchfield1971a
    %
    % F
-   %     6-31G valence double-zeta
+   %     6-31G Split-valence basis set
    %         hehre1972a
    %
-   %     Polarization functions associated with 6-31G
+   %     Polarization for 6-31G split-valence basis set
    %         hariharan1973a
    %
    <BLANKLINE>

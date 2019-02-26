@@ -45,6 +45,30 @@ can take the ``-h`` option to display help for that subcommand.
    :ellipsis: 8
 
 
+get-reader-formats
+*******************
+
+Obtain a list of the formats that can be read by the library
+
+.. command-output:: bsecurate get-reader-formats
+
+
+compare-basis-sets
+*******************
+
+Compare two basis sets and print a report.
+These are read/composed from a data directory. Versions can be specified
+
+.. command-output:: bsecurate compare-basis-sets 6-31G 6-31G --version1 1 --version2 0
+   :ellipsis: 8,-8
+
+
+compare-basis-files
+*******************
+
+Compare two formatted basis sets files and print a report. For valid formats, use ``get-reader-formats``
+
+
 elements-in-files
 *******************
 
