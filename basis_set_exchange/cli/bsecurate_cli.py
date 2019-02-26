@@ -31,7 +31,7 @@ def run_bsecurate_cli():
     ########################################
     # Listing of general info and metadata
     ########################################
-    # get-file-types
+    # get-reader-formats
     subp = subparsers.add_parser('get-reader-formats', help='A list of file formats that can be read')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
 
