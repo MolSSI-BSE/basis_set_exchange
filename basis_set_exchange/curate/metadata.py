@@ -40,15 +40,7 @@ def create_metadata_file(output_path, data_dir):
 
         # Determine the types of functions contained in the basis
         # (gto, ecp, etc)
-        function_types = set()
-        for e in bs['basis_set_elements'].values():
-            if 'element_electron_shells' in e:
-                for s in e['element_electron_shells']:
-                    function_types.add(s['shell_function_type'])
-            if 'element_ecp' in e:
-                function_types.add('ecp')
-
-        function_types = sorted(list(function_types))
+        function_types = bs['basis_set_function_types']
 
         # Create the metadata for this specific version
         # yapf: disable
@@ -79,6 +71,7 @@ def create_metadata_file(output_path, data_dir):
             # There is an existing entry. Make sure
             # file basename, filename, and functiontypes match
             if metadata[tr_name]['functiontypes'] != function_types:
+                print(metadata[tr_name]['functiontypes'], function_types)
                 raise RuntimeError("Function types do not match across versions for " + tr_name)
             if metadata[tr_name]['basename'] != table_filebase:
                 raise RuntimeError("File basenames do not match across versions for " + tr_name)

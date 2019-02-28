@@ -32,7 +32,7 @@ def sort_basis_dict(bs):
 
         # Basis set metadata
         'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_role', 'basis_set_auxiliaries',
-        'basis_set_references', 'basis_set_notes', 'basis_set_harmonic_type',
+        'basis_set_references', 'basis_set_notes', 'basis_set_function_types',
 
         # Reference stuff
         'reference_description', 'reference_keys',

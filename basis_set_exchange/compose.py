@@ -11,25 +11,29 @@ from . import fileio, manip, memo
 debug_data_sources = False
 
 
-def _whole_basis_harmonic(basis):
-    '''
-    Find whether an entire basis is cartesian, spherical, or if it is mixed
+def _all_or_mixed(s):
+    if len(s) == 0:
+        return ','.join(s)
 
-    May also return 'none' (as a string) if there are no electron shells (ie, ECP only)
+def _whole_basis_types(basis):
+    '''
+    Get a list of all the types of features in this basis set.
+
     '''
 
-    all_harm = set()
+    all_types = set()
 
     for v in basis['basis_set_elements'].values():
-        if not 'element_electron_shells' in v:
-            return "none"
-        for sh in v['element_electron_shells']:
-            all_harm.add(sh['shell_harmonic_type'])
+        if 'element_electron_shells' in v:
+            for sh in v['element_electron_shells']:
+                tstr = '{}_{}'.format(sh['shell_harmonic_type'], sh['shell_function_type'])
+                all_types.add(tstr)
 
-    if len(all_harm) > 1:
-        return 'mixed'
-    else:
-        return all_harm.pop()
+        if 'element_ecp' in v:
+            for pot in v['element_ecp']:
+                all_types.add(pot['potential_ecp_type'] + '_ecp')
+
+    return sorted(list(all_types))
 
 
 def compose_elemental_basis(file_relpath, data_dir):
@@ -123,7 +127,7 @@ def compose_table_basis(file_relpath, data_dir):
     table_bs['basis_set_version'] = file_base.split('.')[-3]
 
     # Add whether the entire basis is spherical or cartesian
-    table_bs['basis_set_harmonic_type'] = _whole_basis_harmonic(table_bs)
+    table_bs['basis_set_function_types'] = _whole_basis_types(table_bs)
 
     # Read and merge in the metadata
     # This file must be in the same location as the table file
