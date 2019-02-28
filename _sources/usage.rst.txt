@@ -172,40 +172,8 @@ which is a string. If `version` is not specified, the latest version is used.
    >>> bs_str = basis_set_exchange.get_basis('6-31G*', version=0, fmt='gaussian94')
 
 
-Lookup by Role
---------------
-
-Many basis sets have auxiliary basis sets for different purposes (density fitting,
-for example). These auxiliary basis sets can be queried in the BSE
-using the :func:`basis_set_exchange.lookup_basis_by_role`. This function takes the
-primary basis set and the role you wish to look up. The function
-returns the name of the basis set.
-
-Like the other functions, the basis name and role are not
-case sensitive.
-
-The available roles are listed at the documentation for :func:`basis_set_exchange.lookup_basis_by_role`
-and can be obtained via :func:`basis_set_exchange.get_roles`
-
-.. doctest::
-   :pyversion: >= 3.6
-
-   >>> # Find the MP2-fit basis set for cc-pvtz
-   >>> basis_set_exchange.lookup_basis_by_role('cc-pvtz', 'rifit')
-   'cc-pvtz-rifit'
-
-   >>> # Find the J-fit basis set for def2-TZVP
-   >>> basis_set_exchange.lookup_basis_by_role('def2-tzvp', 'jfit')
-   'def2-universal-jfit'
-
-   >>> # Available roles are available via get_roles
-   >>> basis_set_exchange.get_roles()
-   {'orbital': 'Orbital basis', 'jfit': 'J-fitting', 'jkfit': 'JK-fitting', 'rifit': 'RI-fitting',...
-
-
-
-Metadata
--------------------
+Listing Basis Sets and Getting Metadata
+---------------------------------------
 
 The BSE contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the :func:`basis_set_exchange.get_metadata` function
@@ -243,6 +211,38 @@ A list of families can be obtained with :func:`basis_set_exchange.get_families`.
    >>> all_fam = basis_set_exchange.get_families()
    >>> print(all_fam)
    ['ahlrichs', 'ahlrichs_fit', 'crenb', 'dunning', ...
+
+
+Lookup by Role
+--------------
+
+Many basis sets have auxiliary basis sets for different purposes (density fitting,
+for example). These auxiliary basis sets can be queried in the BSE
+using the :func:`basis_set_exchange.lookup_basis_by_role`. This function takes the
+primary basis set and the role you wish to look up. The function
+returns the name of the basis set.
+
+Like the other functions, the basis name and role are not
+case sensitive.
+
+The available roles are listed at the documentation for :func:`basis_set_exchange.lookup_basis_by_role`
+and can be obtained via :func:`basis_set_exchange.get_roles`
+
+.. doctest::
+   :pyversion: >= 3.6
+
+   >>> # Find the MP2-fit basis set for cc-pvtz
+   >>> basis_set_exchange.lookup_basis_by_role('cc-pvtz', 'rifit')
+   'cc-pvtz-rifit'
+
+   >>> # Find the J-fit basis set for def2-TZVP
+   >>> basis_set_exchange.lookup_basis_by_role('def2-tzvp', 'jfit')
+   'def2-universal-jfit'
+
+   >>> # Available roles are available via get_roles
+   >>> basis_set_exchange.get_roles()
+   {'orbital': 'Orbital basis', 'jfit': 'J-fitting', 'jkfit': 'JK-fitting', 'rifit': 'RI-fitting',...
+
 
 
 Filtering basis sets

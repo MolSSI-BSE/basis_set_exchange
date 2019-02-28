@@ -89,8 +89,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#getting-a-basis-set">Getting a basis set</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-references">Getting references</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listing-basis-sets-and-getting-metadata">Listing Basis Sets and Getting Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lookup-by-role">Lookup by Role</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filtering-basis-sets">Filtering basis sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basis-set-and-family-notes">Basis set and family notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#memoization">Memoization</a></li>
@@ -309,33 +309,8 @@ which is a string. If <cite>version</cite> is not specified, the latest version 
 </pre></div>
 </div>
 </div>
-<div class="section" id="lookup-by-role">
-<h2>Lookup by Role<a class="headerlink" href="#lookup-by-role" title="Permalink to this headline">¶</a></h2>
-<p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
-for example). These auxiliary basis sets can be queried in the BSE
-using the <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>. This function takes the
-primary basis set and the role you wish to look up. The function
-returns the name of the basis set.</p>
-<p>Like the other functions, the basis name and role are not
-case sensitive.</p>
-<p>The available roles are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>
-and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;cc-pvtz&#39;</span><span class="p">,</span> <span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
-<span class="go">&#39;cc-pvtz-rifit&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the J-fit basis set for def2-TZVP</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;def2-tzvp&#39;</span><span class="p">,</span> <span class="s1">&#39;jfit&#39;</span><span class="p">)</span>
-<span class="go">&#39;def2-universal-jfit&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available roles are available via get_roles</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_roles</span><span class="p">()</span>
-<span class="go">{&#39;orbital&#39;: &#39;Orbital basis&#39;, &#39;jfit&#39;: &#39;J-fitting&#39;, &#39;jkfit&#39;: &#39;JK-fitting&#39;, &#39;rifit&#39;: &#39;RI-fitting&#39;,...</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="metadata">
-<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="listing-basis-sets-and-getting-metadata">
+<h2>Listing Basis Sets and Getting Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-metadata" title="Permalink to this headline">¶</a></h2>
 <p>The BSE contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_metadata()</span></code> function</p>
 <div class="admonition note">
@@ -369,6 +344,31 @@ A list of families can be obtained with <a class="reference internal" href="user
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_fam</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_families</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">all_fam</span><span class="p">)</span>
 <span class="go">[&#39;ahlrichs&#39;, &#39;ahlrichs_fit&#39;, &#39;crenb&#39;, &#39;dunning&#39;, ...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lookup-by-role">
+<h2>Lookup by Role<a class="headerlink" href="#lookup-by-role" title="Permalink to this headline">¶</a></h2>
+<p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
+for example). These auxiliary basis sets can be queried in the BSE
+using the <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>. This function takes the
+primary basis set and the role you wish to look up. The function
+returns the name of the basis set.</p>
+<p>Like the other functions, the basis name and role are not
+case sensitive.</p>
+<p>The available roles are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>
+and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;cc-pvtz&#39;</span><span class="p">,</span> <span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
+<span class="go">&#39;cc-pvtz-rifit&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the J-fit basis set for def2-TZVP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;def2-tzvp&#39;</span><span class="p">,</span> <span class="s1">&#39;jfit&#39;</span><span class="p">)</span>
+<span class="go">&#39;def2-universal-jfit&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available roles are available via get_roles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_roles</span><span class="p">()</span>
+<span class="go">{&#39;orbital&#39;: &#39;Orbital basis&#39;, &#39;jfit&#39;: &#39;J-fitting&#39;, &#39;jkfit&#39;: &#39;JK-fitting&#39;, &#39;rifit&#39;: &#39;RI-fitting&#39;,...</span>
 </pre></div>
 </div>
 </div>
