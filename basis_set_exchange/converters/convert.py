@@ -96,15 +96,28 @@ def convert_basis(basis_dict, fmt, header=None):
     return ret_str
 
 
-def get_formats():
+def get_formats(function_types=None):
     '''
     Returns the available formats mapped to display name.
 
     This is returned as an ordered dictionary, with the most common
     at the top, followed by the rest in alphabetical order
+
+    If a list is specified for function_types, only those formats
+    supporting the given function types will be returned.
     '''
 
-    return {k: v['display'] for k, v in _converter_map.items()}
+    if function_types is None:
+        return {k: v['display'] for k, v in _converter_map.items()}
+
+    ftypes = [x.lower() for x in function_types]
+    ftypes = set(function_types)
+    ret = []
+
+    for fmt,v in _converter_map.items():
+        if v['valid'] is None or ftypes <= v['valid']:
+           ret.append(fmt) 
+    return ret
 
 
 def get_format_extension(fmt):
@@ -120,16 +133,3 @@ def get_format_extension(fmt):
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
     return _converter_map[fmt]['extension']
-
-
-def get_valid_formats(function_types):
-    '''Return a list of valid formats given a list of function types'''
-
-    ftypes = [x.lower() for x in function_types]
-    ftypes = set(function_types)
-    ret = []
-
-    for fmt,v in _converter_map.items():
-        if v['valid'] is None or ftypes <= v['valid']:
-           ret.append(fmt) 
-    return ret

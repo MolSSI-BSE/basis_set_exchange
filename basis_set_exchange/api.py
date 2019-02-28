@@ -499,14 +499,17 @@ def get_schema(schema_type):
     return fileio.read_schema(file_path)
 
 
-def get_formats():
+def get_formats(function_types=None):
     '''Return information about the basis set formats available
 
     The returned data is a map of format to display name. The format
     can be passed as the fmt argument to :func:`get_basis()`
+
+    If a list is specified for function_types, only those formats
+    supporting the given function types will be returned.
     '''
 
-    return converters.get_formats()
+    return converters.get_formats(function_types)
 
 
 def get_reference_formats():
