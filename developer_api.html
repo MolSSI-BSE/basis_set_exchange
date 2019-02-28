@@ -353,10 +353,12 @@ dictionary. Otherwise, it will be a string.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_formats">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_formats" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><em>function_types=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
 can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.api.get_basis" title="basis_set_exchange.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
+<p>If a list is specified for function_types, only those formats
+supporting the given function types will be returned.</p>
 </dd></dl>
 
 <dl class="function">

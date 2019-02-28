@@ -185,10 +185,12 @@ the data in the specified output format</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.converters.get_formats">
-<code class="descclassname">basis_set_exchange.converters.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.converters.get_formats" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.converters.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><em>function_types=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.converters.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the available formats mapped to display name.</p>
 <p>This is returned as an ordered dictionary, with the most common
 at the top, followed by the rest in alphabetical order</p>
+<p>If a list is specified for function_types, only those formats
+supporting the given function types will be returned.</p>
 </dd></dl>
 
 </div>
