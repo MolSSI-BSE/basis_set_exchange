@@ -2,10 +2,10 @@ Notes about Pople basis sets
 ============================
 
 There are a few types - 3-21G, 4-31G, 5-21G, 5-31G, 6-21G, 6-31G. Of
-these, only 3-21G and 6-31G are regularly used.
+these, only 3-21G and the 6-31G subfamily are regularly used.
 
 5-21G is only included in the original BSE due to Gaussian using it for
-Li and B for the "4-31G" basis set. I believe they are rarely used.
+Li and B for the 4-31G basis set. I believe they are rarely used.
 
 For hydrogen and helium, there is no split core/valence. Therefore,
 4-31G, 5-31G, and 6-31G are all equivalent for H and He. These basis
@@ -29,7 +29,33 @@ with a different valence (francl1982a).
 
 For Li-Ne (Z=3-10), 3-21G uses the same valence as 6-21G (binkley1980a).
 
-TODO: INSERT NOTE ABOUT HE,NE COMING FROM GAUSSIAN
+6-31G for helium/neon do not appear to be published. For v1, I have taken the data
+from Gaussian 09.
+
+
+Data sources
+------------
+
+v1 of the data comes from Gaussian09 and GAMESS. Both generally match the old BSE,
+however it looks like GAUSSIAN as re-normalized contraction coefficients, so they
+have more decimal places.
+
+I have chosen GAMESS for the data for Ga-Kr, due to Gaussian using a different
+basis set for Ga-Kr. See below for the reason.
+
+
+Differences with Gaussian
+-------------------------
+
+Gaussian does not included the added d shell found in rassolov2001. I have added them
+directly from the paper.
+
+Gaussian choses a different basis set for Ga-Kr. They have chosen the basis sets
+found in blaudeau1997a. This basis is not consistent with the typical terminology,
+and therefore moved to 6-31G(C), as recommended in rassolov2001a.
+
+The original BSE had the data for Ga-Kr, but only for the 6-31G*. The basis sets there
+are consistent with my interpretation, and therefore differed from Gaussian.
 
 
 3-21G basis
@@ -51,4 +77,3 @@ GAMESS and Gaussion both agree with the basis set given in 4-31G in the
 original BSE.
 
 The original BSE was missing the modified potassium and calcium given in rassolov2001a.
-
