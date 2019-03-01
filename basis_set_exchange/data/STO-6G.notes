@@ -1,0 +1,38 @@
+Notes from the original BSE
+===========================
+
+The exponents and contraction coefficients for the STO-6G basis sets were
+obtained by least-squares fitting of Slater-type AO's, with scaling factors
+based on optimal values for a variety of molecules.  The s and p exponents for
+the valence shell were constrained to be equal.
+The original scaling factors for Li, Be and B were superceded by values given
+in the paper on second row basis sets.
+Note: Whenever the exponents for transition metals differed between programs
+      such as Gaussian and GAMESS or HONDO, the Gaussian exponents were used.
+      Attempts to obtain information from W. J. Hehre to arbitrate the
+      differences proved unsuccessful. The Gaussian 5d convention was used.
+                       STO-6G Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.471039    -0.471039    -0.471039     -0.50000
+He  1-S    -2.846292    -2.846292    -2.846292     -2.86168
+Li  2-S    -7.399931    -7.399931    -7.399931     -7.43273
+Be  1-S   -14.503361   -14.503361   -14.503361    -14.57302
+B   2-P   -24.394295   -24.394295   -24.394295    -24.52906
+C   3-P   -37.572364   -37.572364   -37.572364    -37.68862
+N   4-S   -54.249112   -54.249112   -54.249112    -54.40094
+O   3-P   -74.516816   -74.516816   -74.516816    -74.80940
+F   2-P   -98.913253   -98.913253   -98.913253    -99.40935
+Ne  1-S  -127.776738  -127.776738  -127.776738   -128.54710
+Na  2-S  -161.034116  -161.033938  -161.033938   -161.85891
+Mg  1-S  -198.660064  -198.660064  -198.660064   -199.61463
+Al  2-P  -240.813267  -240.813264  -240.813264   -241.87671
+Si  3-P  -287.744636  -287.744631  -287.744631   -288.85436
+P   4-S  -339.489640  -339.489640  -339.489640   -340.71878
+S   3-P  -396.122286  -396.122286  -396.122286   -397.50490
+Cl  2-P  -457.950417  -457.950417  -457.950417   -459.48207
+Ar  1-S  -525.054179  -525.054179  -525.054179   -526.81751
+K   2-S  -597.207625                             -599.16479
+HF Limit values are taken from C. Froese Fischer, The Hartree-Fock Method for
+Atoms, A numerical Approach.  (John Wylie and Sons, N.Y., 1977)
