@@ -32,6 +32,10 @@ For Li-Ne (Z=3-10), 3-21G uses the same valence as 6-21G (binkley1980a).
 6-31G for helium/neon do not appear to be published. For v1, I have taken the data
 from Gaussian 09.
 
+In Gaussian, the added polarization function for He is the same as for H.
+Neon uses the same as for C-F. The polarization functions for Li-B are of unknown
+origin, but appear to be evenly-spaced.
+
 
 Data sources
 ------------
@@ -47,8 +51,9 @@ basis set for Ga-Kr. See below for the reason.
 Differences with Gaussian
 -------------------------
 
-Gaussian does not included the added d shell found in rassolov2001. I have added them
-directly from the paper.
+Gaussian does not included the added d shell for K,Ca found in rassolov2001. I have added them
+directly from the paper. The polarization functions for K,Ca that are in gaussian are of unknown
+origin.
 
 Gaussian choses a different basis set for Ga-Kr. They have chosen the basis sets
 found in blaudeau1997a. This basis is not consistent with the typical terminology,
