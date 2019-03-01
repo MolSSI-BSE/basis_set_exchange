@@ -110,12 +110,21 @@ def test_notes(basis_name):
     """Test getting family, family notes, and basis set notes
     """
     bse.get_basis_notes(basis_name)
+    bse.has_basis_notes(basis_name)
+
+
+@pytest.mark.parametrize('basis_name', bs_names)
+def test_get_family(basis_name):
+    """Test getting family"""
+
     fam = bse.get_basis_family(basis_name)
+    assert fam in all_families
 
 
 @pytest.mark.parametrize('family', all_families)
 def test_family_notes(family):
     """Test getting family notes"""
+    bse.has_family_notes(family)
     bse.get_family_notes(family)
 
 
