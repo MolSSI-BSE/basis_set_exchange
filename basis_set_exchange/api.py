@@ -375,6 +375,7 @@ def get_basis_family(basis_name, data_dir=None):
     return bs_data['family']
 
 
+@memo.BSEMemoize
 def get_families(data_dir=None):
     '''Return a list of all basis set families'''
     data_dir = fix_data_dir(data_dir)
@@ -433,11 +434,8 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
 
 
 @memo.BSEMemoize
-def get_family_notes(family, data_dir=None):
-    '''Return a string representing the notes about a basis set family
-
-    If the notes are not found, a string saying so is returned
-    '''
+def _family_notes_path(family, data_dir):
+    '''Form a path to the notes for a family'''
 
     data_dir = fix_data_dir(data_dir)
 
@@ -447,21 +445,12 @@ def get_family_notes(family, data_dir=None):
 
     file_name = 'NOTES.' + family.lower()
     file_path = os.path.join(data_dir, file_name)
-
-    notes_str = fileio.read_notes_file(file_path)
-    if notes_str is None:
-        notes_str = ""
-
-    ref_data = get_reference_data(data_dir)
-    return notes.process_notes(notes_str, ref_data)
+    return file_path
 
 
 @memo.BSEMemoize
-def get_basis_notes(name, data_dir=None):
-    '''Return a string representing the notes about a specific basis set
-
-    If the notes are not found, a string saying so is returned
-    '''
+def _basis_notes_path(name, data_dir):
+    '''Form a path to the notes for a basis set'''
 
     data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(name, data_dir)
@@ -474,13 +463,63 @@ def get_basis_notes(name, data_dir=None):
     filebase = os.path.splitext(filebase)[0]  # remove .tablejson
     filebase = os.path.splitext(filebase)[0]  # remove .[version]
     file_path = os.path.join(data_dir, filebase + '.notes')
+    return file_path
 
+
+@memo.BSEMemoize
+def get_family_notes(family, data_dir=None):
+    '''Return a string representing the notes about a basis set family
+
+    If the notes are not found, an empty string is returned
+    '''
+
+    file_path = _family_notes_path(family, data_dir)
     notes_str = fileio.read_notes_file(file_path)
+
+    if notes_str is None:
+        notes_str = ""
+
+    ref_data = get_reference_data(data_dir)
+    return notes.process_notes(notes_str, ref_data)
+
+
+@memo.BSEMemoize
+def has_family_notes(family, data_dir=None):
+    '''Check if notes exist for a given family
+
+    Returns True if they exist, false otherwise
+    '''
+
+    file_path = _family_notes_path(family, data_dir)
+    return os.path.isfile(file_path)
+
+
+@memo.BSEMemoize
+def get_basis_notes(name, data_dir=None):
+    '''Return a string representing the notes about a specific basis set
+
+    If the notes are not found, an empty string is returned
+    '''
+
+    file_path = _basis_notes_path(name, data_dir)
+    notes_str = fileio.read_notes_file(file_path)
+
     if notes_str is None:
         return ""
 
     ref_data = get_reference_data(data_dir)
     return notes.process_notes(notes_str, ref_data)
+
+
+@memo.BSEMemoize
+def has_basis_notes(family, data_dir=None):
+    '''Check if notes exist for a given basis set
+
+    Returns True if they exist, false otherwise
+    '''
+
+    file_path = _basis_notes_path(family, data_dir)
+    return os.path.isfile(file_path)
 
 
 def get_schema(schema_type):
