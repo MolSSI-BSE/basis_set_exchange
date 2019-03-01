@@ -23,9 +23,7 @@ Bundles can be created with the :func:`bundle.create_bundle` function.
 By default, the type of archive will be deduced from the extension, although
 this can be overridden with the `archive_type` option. 
 
-An alternate location of data to export can be specified with `data_dir`.
-
-.. doctest::
+An alternate location of data to export can be specified with `data_dir`::
 
    >>> # Create /tmp/all_nwchem.zip from all basis sets
    >>> # in nwchem format. All references will be in bibtex
@@ -40,6 +38,6 @@ An alternate location of data to export can be specified with `data_dir`.
 Creating via the command line
 -----------------------------
 
-The same functionality can be accessed via the command-line interface
+The same functionality can be accessed via the command-line interface::
 
-.. command-output:: bse create-bundle nwchem bib /tmp/all_nwchem.zip
+   bse create-bundle nwchem bib /tmp/all_nwchem.zip

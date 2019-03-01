@@ -171,8 +171,8 @@ set, as well as notes for each basis set family.</p>
 <p>Bundles can be created with the <code class="xref py py-func docutils literal notranslate"><span class="pre">bundle.create_bundle()</span></code> function.
 By default, the type of archive will be deduced from the extension, although
 this can be overridden with the <cite>archive_type</cite> option.</p>
-<p>An alternate location of data to export can be specified with <cite>data_dir</cite>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create /tmp/all_nwchem.zip from all basis sets</span>
+<p>An alternate location of data to export can be specified with <cite>data_dir</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create /tmp/all_nwchem.zip from all basis sets</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># in nwchem format. All references will be in bibtex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">create_bundle</span><span class="p">(</span><span class="s1">&#39;/tmp/all_nwchem.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="s1">&#39;bib&#39;</span><span class="p">)</span>
 
@@ -184,9 +184,8 @@ this can be overridden with the <cite>archive_type</cite> option.</p>
 </div>
 <div class="section" id="creating-via-the-command-line">
 <h2>Creating via the command line<a class="headerlink" href="#creating-via-the-command-line" title="Permalink to this headline">¶</a></h2>
-<p>The same functionality can be accessed via the command-line interface</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse create-bundle nwchem bib /tmp/all_nwchem.zip
-Created /tmp/all_nwchem.zip
+<p>The same functionality can be accessed via the command-line interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bse</span> <span class="n">create</span><span class="o">-</span><span class="n">bundle</span> <span class="n">nwchem</span> <span class="n">bib</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">all_nwchem</span><span class="o">.</span><span class="n">zip</span>
 </pre></div>
 </div>
 </div>
