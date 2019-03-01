@@ -42,6 +42,7 @@ def test_cli_datadir(bse_cmd):
     assert 'bppfake' in output
 
 
+@pytest.mark.slow
 def test_cli_createbundle(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
     bfile_path = os.path.join(tmp_path, 'test_bundle.tar.bz2')
