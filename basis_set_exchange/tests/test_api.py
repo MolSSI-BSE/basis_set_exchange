@@ -149,3 +149,15 @@ def test_filter_0(substr, family, role):
     """Test filtering basis set (returning zero results)"""
     md = bse.filter_basis_sets(substr, family, role)
     assert len(md) == 0
+
+# yapf: disable
+@pytest.mark.parametrize('fmts', [None,
+                                  ['spherical_gto', 'scalar_ecp'],
+                                  ['CARTESIAN_gto']])
+# yapf: enable
+def test_get_formats(fmts):
+    '''Test the get_formats function'''
+    ret = bse.get_formats(fmts)
+
+    # JSON is always supported
+    assert len(ret) > 1

@@ -111,7 +111,7 @@ def get_formats(function_types=None):
         return {k: v['display'] for k, v in _converter_map.items()}
 
     ftypes = [x.lower() for x in function_types]
-    ftypes = set(function_types)
+    ftypes = set(ftypes)
     ret = []
 
     for fmt,v in _converter_map.items():
