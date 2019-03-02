@@ -51,19 +51,25 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
     # Keep track of all the basis sets we have found
     # Start with all found in the data dir, and remove
     # each time we process one
-    all_bs_names = bse.get_all_basis_names(data_dir)
-    all_ref_names = all_bs_names.copy()
+    all_bs = []
+    for k,v in bse.get_metadata(data_dir).items():
+        for ver in v['versions'].keys():
+            all_bs.append((k,ver))
+
+    all_ref = all_bs.copy()
 
     for root, dirs, files in os.walk(extract_path):
         for basename in files:
             fpath = os.path.join(root, basename)
-            name = basename.split('.')[0]
+            name,ver = basename.split('.')[:2]
+            if name == 'README':
+                continue
             if basename.endswith('.ref' + ref_ext):
-                compare_data = bse.get_references(name, fmt=reffmt, data_dir=data_dir)
-                all_bs_names.remove(name)
+                compare_data = bse.get_references(name, fmt=reffmt, version=ver, data_dir=data_dir)
+                all_ref.remove((name,ver))
             elif basename.endswith(bs_ext):
-                compare_data = bse.get_basis(name, fmt=fmt, data_dir=data_dir)
-                all_ref_names.remove(name)
+                compare_data = bse.get_basis(name, fmt=fmt, version=ver, data_dir=data_dir)
+                all_bs.remove((name,ver))
             elif basename.endswith('.family_notes'):
                 compare_data = bse.get_family_notes(name, data_dir)
             elif basename.endswith('.notes'):
@@ -74,8 +80,8 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
             with open(fpath, 'r') as ftmp:
                 assert compare_data == ftmp.read()
 
-    assert len(all_bs_names) == 0
-    assert len(all_ref_names) == 0
+    assert len(all_bs) == 0
+    assert len(all_ref) == 0
 
 
 # yapf: disable

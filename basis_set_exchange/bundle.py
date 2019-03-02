@@ -7,19 +7,73 @@ import copy
 import zipfile
 import tarfile
 import io
+import datetime
 from . import api, converters, refconverters
+
+_readme_str = '''Basis set exchange: Basis set bundle
+==========================================
+
+Basis Set Exchange: {bsever}
+Created {timestamp}
+Format: {fmt}
+Reference format: {reffmt}
+
+This directory contains all the basis sets in the library
+in {fmt} format. 
+
+Filenames of the basis sets are in the format
+{{name}}.{{version}}.{{extension}} where the version represents
+the version of the basis set.
+
+Filenames of the references are similar, except they
+contain .ref before the final extension.
+
+Basis set notes have a .notes extension, and family
+notes have a .family_notes extension.
+
+-------------------------------------------------
+https://wwww.basissetexchange.org
+https://github.com/MolSSI-BSE/basis_set_exchange
+bse@molssi.org
+-------------------------------------------------
+'''
+
+
+def _create_readme(fmt, reffmt):
+    '''
+    Creates the readme file for the bundle
+
+    Returns a str representing the readme file
+    '''
+
+    now = datetime.datetime.utcnow()
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S UTC')
+
+    # yapf: disable
+    outstr = _readme_str.format(timestamp=timestamp,
+                                bsever=api.version(),
+                                fmt=fmt, reffmt=reffmt)
+    # yapf: enable
+
+    return outstr
 
 
 def _basis_data_iter(fmt, reffmt, data_dir):
     '''Iterate over all basis set names, and return a tuple of
        (name, data) where data is the basis set in the given format
     '''
-    names = iter(api.get_all_basis_names(data_dir=data_dir))
-    for n in names:
-        data = api.get_basis(n, fmt=fmt, data_dir=data_dir)
-        refdata = api.get_references(n, fmt=reffmt, data_dir=data_dir)
-        notes = api.get_basis_notes(n, data_dir)
-        yield (n, data, refdata, notes)
+    md = api.get_metadata(data_dir)
+    for bs, bs_md in md.items():
+        versions = bs_md['versions'].keys()
+
+        data = {}
+        for v in versions:
+            bsdata = api.get_basis(bs, fmt=fmt, version=v, data_dir=data_dir)
+            refdata = api.get_references(bs, fmt=reffmt, version=v, data_dir=data_dir)
+            data[v] = (bsdata, refdata)
+
+        notes = api.get_basis_notes(bs, data_dir)
+        yield (bs, data, notes)
 
 
 def _add_to_tbz(tfile, filename, data_str):
@@ -78,12 +132,17 @@ def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
     refext = refconverters.get_format_extension(reffmt)
     subdir = 'basis_set_bundle-' + fmt + '-' + reffmt
 
-    for name, data, refdata, notes in _basis_data_iter(fmt, reffmt, data_dir):
-        basis_filename = os.path.join(subdir, name + ext)
-        ref_filename = os.path.join(subdir, name + '.ref' + refext)
+    readme_path = os.path.join(subdir, 'README.txt')
+    addhelper(bfile, readme_path, _create_readme(fmt, reffmt))
 
-        addhelper(bfile, basis_filename, data)
-        addhelper(bfile, ref_filename, refdata)
+    for name, data, notes in _basis_data_iter(fmt, reffmt, data_dir):
+        for ver, verdata in data.items():
+            basis_filename = os.path.join(subdir, '{}.{}{}'.format(name, ver, ext))
+            ref_filename = os.path.join(subdir, '{}.{}.ref{}'.format(name, ver, refext))
+
+            bsdata, refdata = verdata
+            addhelper(bfile, basis_filename, bsdata)
+            addhelper(bfile, ref_filename, refdata)
 
         if len(notes) > 0:
             notes_filename = os.path.join(subdir, name + '.notes')
