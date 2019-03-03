@@ -572,7 +572,9 @@ def get_roles():
              'jfit': 'J-fitting',
              'jkfit': 'JK-fitting',
              'rifit': 'RI-fitting',
-             'admmfit': 'Auxiliary-Density Matrix Method Fitting'
+             'admmfit': 'Auxiliary-Density Matrix Method Fitting',
+             'dftxfit': 'DFT Exchange Fitting',
+             'dftcfit': 'DFT Correlation Fitting'
             }
     # yapf: enable
 
