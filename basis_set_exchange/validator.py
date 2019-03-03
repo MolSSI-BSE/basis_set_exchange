@@ -26,6 +26,8 @@ def _validate_extra_metadata(bs_data):
 def _validate_extra_component(bs_data):
     '''Extra checks for component basis files'''
 
+    assert len(bs_data['basis_set_elements']) > 0
+
     # Make sure size of the coefficient matrix matches the number of exponents
     for el in bs_data['basis_set_elements'].values():
         if not 'element_electron_shells' in el:
@@ -53,12 +55,14 @@ def _validate_extra_component(bs_data):
 
 def _validate_extra_element(bs_data):
     '''Extra checks for basis metadata files'''
-    pass
+
+    assert len(bs_data['basis_set_elements']) > 0
 
 
 def _validate_extra_table(bs_data):
     '''Extra checks for table basis files'''
-    pass
+
+    assert len(bs_data['basis_set_elements']) > 0
 
 
 _validate_map = {
