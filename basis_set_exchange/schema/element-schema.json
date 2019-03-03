@@ -57,15 +57,6 @@
                     "additionalProperties": false,
                     "required": [ "element_components" ],
                     "properties": {
-                        "element_references": {
-                            "description": "Citation/Reference information for this element",
-                            "type": "array",
-                            "minItems": 1,
-                            "uniqueItems": true,
-                            "items": {
-                                "type": "string"
-                            }
-                        },
                         "element_components": {
                             "description": "Component files for this element",
                             "type": "array",

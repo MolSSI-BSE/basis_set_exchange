@@ -48,15 +48,6 @@
                     "additionalProperties": false,
                     "required": [ "element_entry" ],
                     "properties": {
-                        "element_references": {
-                            "description": "Citation/Reference information for this element",
-                            "type": "array",
-                            "minItems": 1,
-                            "uniqueItems": true,
-                            "items": {
-                                "type": "string"
-                            }
-                        },
                         "element_entry": {
                             "description": "Elemental basis set for this element",
                             "type": "string"
