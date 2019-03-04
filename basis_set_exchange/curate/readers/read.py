@@ -9,6 +9,7 @@ from .g94 import read_g94
 from .nwchem import read_nwchem
 from .gbasis import read_gbasis
 from .dalton import read_dalton
+from .molcas import read_molcas
 
 _type_readers = {
     'turbomole': {
@@ -30,6 +31,11 @@ _type_readers = {
         'display': 'Dalton',
         'extension': '.mol',
         'reader': read_dalton
+    },
+    'molcas': {
+        'display': 'MolCAS',
+        'extension': '.molcas',
+        'reader': read_molcas
     },
     'gbasis': {
         'display': 'GBasis',
