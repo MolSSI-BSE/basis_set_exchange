@@ -21,6 +21,12 @@ all_families = bse.get_families()
 all_roles = bse.get_roles()
 true_false = [True, False]
 
+# All basis names/versions combinations
+bs_names_vers = []
+for k, v in bs_metadata.items():
+    for ver in v['versions'].keys():
+        bs_names_vers.append((k, ver))
+
 # Directory with some fake data
 fake_data_dir = os.path.join(_my_dir, 'fakedata')
 
