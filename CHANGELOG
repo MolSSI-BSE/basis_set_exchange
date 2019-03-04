@@ -1,3 +1,15 @@
+v0.6.3
+--------------------
+  * Removes duplicate and unused data
+    * Duplicate data def2-SVPD-RIFIT
+    * Unused data in CRENBL, 3-21G, 6-21G, 6-31G
+  * Adds tests for the above
+  * Better handling of pruning basis sets
+  * Bundles include all versions
+  * Added dftxfit and dftcfit roles
+  * Add dgauss basis sets from BSE
+
+
 v0.6.2
 --------------------
   * Adds functions for detecting if notes exist
