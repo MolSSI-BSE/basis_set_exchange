@@ -148,8 +148,9 @@ def uncontract_spdf(basis, max_am=0):
     Contractions up to max_am will be left in place. For example,
     if max_am = 1, spd will be split into sp and d
 
-    The input basis set is not modified, and any primitives with all
-    zero coefficients are removed
+    The input basis set is not modified. The returned basis
+    may have functions with coefficients of zero and may have duplicate
+    shells.
     """
 
     new_basis = copy.deepcopy(basis)
@@ -190,15 +191,16 @@ def uncontract_spdf(basis, max_am=0):
 
         el['element_electron_shells'] = newshells
 
-    return prune_basis(new_basis)
+    return new_basis
 
 
 def uncontract_general(basis):
     """
     Removes the general contractions from a basis set
 
-    The input basis set is not modified, and any primitives with all
-    zero coefficients are removed
+    The input basis set is not modified. The returned basis
+    may have functions with coefficients of zero and may have duplicate
+    shells.
     """
 
     new_basis = copy.deepcopy(basis)
@@ -234,7 +236,9 @@ def uncontract_segmented(basis):
     This implicitly removes general contractions as well,
     but will leave sp, spd, ... orbitals alone
 
-    The input basis set is not modified.
+    The input basis set is not modified. The returned basis
+    may have functions with coefficients of zero and may have duplicate
+    shells.
     """
 
     new_basis = copy.deepcopy(basis)
@@ -327,7 +331,7 @@ def make_general(basis):
 
         el['element_electron_shells'] = newshells
 
-    return prune_basis(new_basis)
+    return new_basis
 
 
 def _is_single_column(col):
@@ -512,9 +516,8 @@ def sort_shells(shells):
     return list(
         sorted(
             new_shells,
-            key=
-            lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']), -float(x['shell_exponents'][0]))
-        ))
+            key=lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']),
+                           -float(x['shell_exponents'][0]))))
 
 
 def sort_potentials(potentials):

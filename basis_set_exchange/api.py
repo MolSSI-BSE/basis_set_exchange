@@ -194,16 +194,30 @@ def get_basis(name,
             # Set to only the elements we want
             basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
+    needs_pruning = False
     if optimize_general:
         basis_dict = manip.optimize_general(basis_dict)
-    if uncontract_general:
-        basis_dict = manip.uncontract_general(basis_dict)
-    if uncontract_spdf:
-        basis_dict = manip.uncontract_spdf(basis_dict)
+        needs_pruning = True
+
+    # uncontract_segmented implies uncontract_general
     if uncontract_segmented:
         basis_dict = manip.uncontract_segmented(basis_dict)
+        needs_pruning = True
+    elif uncontract_general:
+        basis_dict = manip.uncontract_general(basis_dict)
+        needs_pruning = True
+
+    if uncontract_spdf:
+        basis_dict = manip.uncontract_spdf(basis_dict)
+        needs_pruning = True
+
     if make_general:
         basis_dict = manip.make_general(basis_dict)
+        needs_pruning = True
+
+    # Remove dead and duplicate shells
+    if needs_pruning:
+        basis_dict = manip.prune_basis(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:
