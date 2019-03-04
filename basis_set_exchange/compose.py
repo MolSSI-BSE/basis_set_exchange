@@ -11,10 +11,6 @@ from . import fileio, manip, memo
 debug_data_sources = False
 
 
-def _all_or_mixed(s):
-    if len(s) == 0:
-        return ','.join(s)
-
 def _whole_basis_types(basis):
     '''
     Get a list of all the types of features in this basis set.
