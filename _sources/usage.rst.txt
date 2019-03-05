@@ -210,7 +210,7 @@ A list of families can be obtained with :func:`basis_set_exchange.get_families`.
    >>> # A list of all families
    >>> all_fam = basis_set_exchange.get_families()
    >>> print(all_fam)
-   ['ahlrichs', 'ahlrichs_fit', 'crenb', 'dunning', ...
+   ['ahlrichs', 'ahlrichs_fit', ...
 
 
 Lookup by Role

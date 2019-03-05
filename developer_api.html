@@ -855,8 +855,9 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <dt id="basis_set_exchange.manip.uncontract_general">
 <code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the general contractions from a basis set</p>
-<p>The input basis set is not modified, and any primitives with all
-zero coefficients are removed</p>
+<p>The input basis set is not modified. The returned basis
+may have functions with coefficients of zero and may have duplicate
+shells.</p>
 </dd></dl>
 
 <dl class="function">
@@ -865,7 +866,9 @@ zero coefficients are removed</p>
 <dd><p>Removes the segmented contractions from a basis set</p>
 <p>This implicitly removes general contractions as well,
 but will leave sp, spd, … orbitals alone</p>
-<p>The input basis set is not modified.</p>
+<p>The input basis set is not modified. The returned basis
+may have functions with coefficients of zero and may have duplicate
+shells.</p>
 </dd></dl>
 
 <dl class="function">
@@ -875,8 +878,9 @@ but will leave sp, spd, … orbitals alone</p>
 <p>The general contractions are replaced by uncontracted versions</p>
 <p>Contractions up to max_am will be left in place. For example,
 if max_am = 1, spd will be split into sp and d</p>
-<p>The input basis set is not modified, and any primitives with all
-zero coefficients are removed</p>
+<p>The input basis set is not modified. The returned basis
+may have functions with coefficients of zero and may have duplicate
+shells.</p>
 </dd></dl>
 
 </div>
