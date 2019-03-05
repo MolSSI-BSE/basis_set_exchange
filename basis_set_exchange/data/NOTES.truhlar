@@ -1,0 +1,14 @@
+Notes about the Truhlar family
+==============================
+
+This family is the 'calendar' basis sets - apr, may, jun, and jul. These
+are formed by progressively removing diffuse functions from 'aug-cc-pV(X+d)Z' basis
+sets to form earlier and earlier 'months'.
+
+Curator Notes
+-------------
+
+BPP: Note that the base cc-pV(X+d)Z basis sets aren't exactly the same as the other
+cc-pV(X+d)Z basis sets stored in the BSE. They have undergone optmization,
+similar to the 'optimize general contraction' option. Therefore, these different
+bases are stored in the 'base' subdir in the truhlar subdir.
