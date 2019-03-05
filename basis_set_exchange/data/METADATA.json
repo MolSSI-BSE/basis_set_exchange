@@ -7629,6 +7629,70 @@
             }
         }
     },
+    "iglo-ii": {
+        "display_name": "IGLO-II",
+        "description": "VDZP Valence Double Zeta + Polarization on All Atoms",
+        "latest_version": "0",
+        "basename": "IGLOII",
+        "relpath": "",
+        "family": "iglo",
+        "role": "orbital",
+        "functiontypes": [
+            "spherical_gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "file_relpath": "IGLOII.0.table.json",
+                "revdesc": "Original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17"
+                ]
+            }
+        }
+    },
+    "iglo-iii": {
+        "display_name": "IGLO-III",
+        "description": "VTZP Valence Triple Zeta + Polarization on All Atoms",
+        "latest_version": "0",
+        "basename": "IGLOIII",
+        "relpath": "",
+        "family": "iglo",
+        "role": "orbital",
+        "functiontypes": [
+            "spherical_gto"
+        ],
+        "auxiliaries": {},
+        "versions": {
+            "0": {
+                "file_relpath": "IGLOIII.0.table.json",
+                "revdesc": "Original Basis Set Exchange",
+                "elements": [
+                    "1",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17"
+                ]
+            }
+        }
+    },
     "lanl2dz": {
         "display_name": "LANL2DZ",
         "description": "LANL2DZ",
