@@ -44,7 +44,7 @@ all_element_files = all_files[2]
 all_component_files = all_files[3]
 
 # A representative sample of basis sets
-bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'tzp', 'sto-3g']
+bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g']
 
 
 def bool_matrix(size):
