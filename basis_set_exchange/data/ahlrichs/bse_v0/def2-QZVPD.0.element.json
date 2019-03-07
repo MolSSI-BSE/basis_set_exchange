@@ -1,0 +1,37 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "element",
+        "schema_version": "0.1"
+    },
+    "basis_set_name": "def2-QZVPD",
+    "basis_set_description": "def2-QZVPD",
+    "basis_set_elements": {
+        "25": {
+            "element_components": [
+                "ahlrichs/bse_v0/QZV/def2-QZVP-base_weigend2003a.0.json",
+                "ahlrichs/QZV/def2-QZVP-add_weigend2003a.1.json"
+            ]
+        },
+        "53": {
+            "element_components": [
+                "ahlrichs/bse_v0/QZV/def2-QZVP-base_weigend2005a.0.json",
+                "ahlrichs/QZV/def2-QZVPD-add_rappoport2010a.1.json",
+                "ahlrichs/ECP/def2-ECP_peterson2003b.1.json"
+            ]
+        },
+        "56": {
+            "element_components": [
+                "ahlrichs/bse_v0/QZV/def2-QZVPD-base_weigend2005a.0.json",
+                "ahlrichs/bse_v0/QZV/def2-QZVP-add_weigend2005a.0.json",
+                "ahlrichs/ECP/def2-ECP_kaupp1991a.1.json"
+            ]
+        },
+        "84": {
+            "element_components": [
+                "ahlrichs/bse_v0/QZV/def2-QZVP-base_weigend2005a.0.json",
+                "ahlrichs/QZV/def2-QZVPD-add_rappoport2010a.1.json",
+                "ahlrichs/ECP/def2-ECP_peterson2003b.1.json"
+            ]
+        }
+    }
+}
