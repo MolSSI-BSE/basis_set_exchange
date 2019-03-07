@@ -65,7 +65,7 @@ and can be obtained via :func:`basis_set_exchange.get_formats`
 
    >>> # Available formats are available via get_formats
    >>> basis_set_exchange.get_formats()
-   {'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'psi4': 'Psi4', 'gamess_us': 'GAMESS US', 'turbomole': 'Turbomole', 'json': 'JSON'}
+   {'nwchem': 'NWChem', 'gaussian94': 'Gaussian94', 'psi4': 'Psi4',...
 
 
 By default, all elements for which the basis set is defined are included - this
