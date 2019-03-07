@@ -9,6 +9,7 @@ from .g94 import write_g94
 from .gamess_us import write_gamess_us
 from .psi4 import write_psi4
 from .turbomole import write_turbomole
+from .molpro import write_molpro
 
 _converter_map = {
     'nwchem': {
@@ -45,6 +46,13 @@ _converter_map = {
         'comment': '#',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_turbomole
+    },
+    'molpro': {
+        'display': 'Molpro',
+        'extension': '.mpro',
+        'comment': '!',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_molpro
     },
     'json': {
         'display': 'JSON',
