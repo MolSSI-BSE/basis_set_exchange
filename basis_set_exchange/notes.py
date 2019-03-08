@@ -22,9 +22,10 @@ def process_notes(notes, ref_data):
 
     # The block to append
     reference_sec = '\n\n'
-    reference_sec += '-------------------------------------\n'
-    reference_sec += ' REFERENCES\n'
-    reference_sec += '-------------------------------------\n'
+    reference_sec += '-------------------------------------------------\n'
+    reference_sec += ' REFERENCES MENTIONED ABOVE\n'
+    reference_sec += ' (not necessarily references for the basis sets)\n'
+    reference_sec += '-------------------------------------------------\n'
 
     # Add reference data
     if len(found_refs) == 0:
