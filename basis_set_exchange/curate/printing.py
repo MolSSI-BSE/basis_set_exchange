@@ -59,6 +59,7 @@ def print_element(z, eldata, print_references=True):
 
     print()
     print('Element: {}   Contraction: {}'.format(sym, contraction_string(eldata)))
+
     if print_references:
         if 'element_references' in eldata:
             print('References:')
@@ -90,7 +91,6 @@ def print_component_basis(basis, elements=None):
     (list of integers)
     '''
     print("Description: " + basis['basis_set_description'])
-    print('References: ' + ', '.join(basis['basis_set_references']))
 
     eldata = basis['basis_set_elements']
 

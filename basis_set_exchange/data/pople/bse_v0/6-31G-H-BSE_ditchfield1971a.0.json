@@ -4,12 +4,12 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "6-31G for H taken from old BSE 6-31G ",
-    "basis_set_references": [
-        "ditchfield1971a"
-    ],
     "basis_set_notes": "The basis set for H differed from that for 4-31G in the old BSE",
     "basis_set_elements": {
         "1": {
+            "element_references": [
+                "ditchfield1971a"
+            ],
             "element_electron_shells": [
                 {
                     "shell_function_type": "gto",

@@ -4,11 +4,11 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "def2-ECP",
-    "basis_set_references": [
-        "kaupp1991a"
-    ],
     "basis_set_elements": {
         "38": {
+            "element_references": [
+                "kaupp1991a"
+            ],
             "element_ecp_electrons": 28,
             "element_ecp": [
                 {
@@ -100,6 +100,9 @@
             ]
         },
         "56": {
+            "element_references": [
+                "kaupp1991a"
+            ],
             "element_ecp_electrons": 46,
             "element_ecp": [
                 {

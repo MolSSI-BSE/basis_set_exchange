@@ -5,12 +5,12 @@ import tempfile
 from .. import api, fileio
 from ..misc import compact_elements
 
-
 try:
     import graphviz
     graphviz_avail = True
 except ImportError:
     graphviz_avail = False
+
 
 def _make_graph(bsname, version=None, data_dir=None):
     '''

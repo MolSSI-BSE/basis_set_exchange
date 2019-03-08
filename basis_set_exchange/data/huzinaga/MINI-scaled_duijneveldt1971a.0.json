@@ -4,11 +4,11 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "MB      Minimal Basis: 1 Function/AO",
-    "basis_set_references": [
-        "duijneveldt1971a"
-    ],
     "basis_set_elements": {
         "1": {
+            "element_references": [
+                "duijneveldt1971a"
+            ],
             "element_electron_shells": [
                 {
                     "shell_function_type": "gto",
@@ -33,6 +33,9 @@
             ]
         },
         "2": {
+            "element_references": [
+                "duijneveldt1971a"
+            ],
             "element_electron_shells": [
                 {
                     "shell_function_type": "gto",

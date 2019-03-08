@@ -16,22 +16,18 @@ _source_data = {'cc-pvdz.1.gbasis.bz2': None,
                 'def2-ecp.1.tm.bz2': {'rb': 'ref1', 47: 'ref2', '48': 'ref3', '49-xe': 'ref4'}
 }
 
-_expected_files = {'test_subdir/test_aug-pcj-1_ref1_ref2.1.json': 'H-Ar',
-                   'test_subdir/test_cc-pvdz_noref.1.json':       'H-Ar,Ca-Kr',
-                   'test_subdir/test_def2-ecp_noref.1.json':      'Sr-Pd,Cs-Rn',
-                   'test_subdir/test_def2-ecp_ref1.1.json':       'Rb',
-                   'test_subdir/test_def2-ecp_ref2.1.json':       'Ag',
-                   'test_subdir/test_def2-ecp_ref3.1.json':       'Cd',
-                   'test_subdir/test_def2-ecp_ref4.1.json':       'In-Xe',
-                   'test_subdir/test_def2-tzvp_myref.1.json':     'H-Rn',
-                   'test_subdir/test_def2-tzvp.1.element.json':   'H-Rn',
-                   'test_subdir/test_aug-pcj-1.1.element.json':   'H-Ar',
-                   'test_subdir/test_def2-ecp.1.element.json':    'Rb-Rn',
-                   'test_subdir/test_cc-pvdz.1.element.json':     'H-Ar,Ca-Kr',
-                   'test_aug-pcj-1.1.table.json':                 'H-Ar',
-                   'test_cc-pvdz.1.table.json':                   'H-Ar,Ca-Kr',
-                   'test_def2-ecp.1.table.json':                  'Rb-Rn',
-                   'test_def2-tzvp.1.table.json':                 'H-Rn'
+_expected_files = {'test_subdir/test_aug-pcj-1.1.json':          'H-Ar',
+                   'test_subdir/test_cc-pvdz.1.json':            'H-Ar,Ca-Kr',
+                   'test_subdir/test_def2-ecp.1.json':           'Rb-Rn',
+                   'test_subdir/test_def2-tzvp.1.json':          'H-Rn',
+                   'test_subdir/test_def2-tzvp.1.element.json':  'H-Rn',
+                   'test_subdir/test_aug-pcj-1.1.element.json':  'H-Ar',
+                   'test_subdir/test_def2-ecp.1.element.json':   'Rb-Rn',
+                   'test_subdir/test_cc-pvdz.1.element.json':    'H-Ar,Ca-Kr',
+                   'test_aug-pcj-1.1.table.json':                'H-Ar',
+                   'test_cc-pvdz.1.table.json':                  'H-Ar,Ca-Kr',
+                   'test_def2-ecp.1.table.json':                 'Rb-Rn',
+                   'test_def2-tzvp.1.table.json':                'H-Rn'
 }
 # yapf: enable
 

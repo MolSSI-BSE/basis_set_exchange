@@ -47,13 +47,13 @@ def compose_elemental_basis(file_relpath, data_dir):
     # Read all the data from these files into a big dictionary
     component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_files}
 
-    # Broadcast the basis_set_references to each element
+    # Broadcast the basis_set_description to each element
     # Use the basis_set_description for the reference description
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
             el_data['element_references'] = [{
                 'reference_description': v['basis_set_description'],
-                'reference_keys': v['basis_set_references']
+                'reference_keys': el_data['element_references']
             }]
 
     # Compose on a per-element basis

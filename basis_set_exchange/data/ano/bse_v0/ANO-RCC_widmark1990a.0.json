@@ -4,11 +4,11 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "ANO-RCC",
-    "basis_set_references": [
-        "widmark1990a"
-    ],
     "basis_set_elements": {
         "1": {
+            "element_references": [
+                "widmark1990a"
+            ],
             "element_electron_shells": [
                 {
                     "shell_function_type": "gto",
@@ -179,6 +179,9 @@
             ]
         },
         "2": {
+            "element_references": [
+                "widmark1990a"
+            ],
             "element_electron_shells": [
                 {
                     "shell_function_type": "gto",

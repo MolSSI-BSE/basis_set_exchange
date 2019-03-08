@@ -4,13 +4,13 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "def2-ECP",
-    "basis_set_references": [
-        "dolg1989a",
-        "dolg1993b"
-    ],
     "basis_set_notes": "Most values from dolg1989a. Updated f potential taken from dolg1993b",
     "basis_set_elements": {
         "57": {
+            "element_references": [
+                "dolg1989a",
+                "dolg1993b"
+            ],
             "element_ecp_electrons": 46,
             "element_ecp": [
                 {

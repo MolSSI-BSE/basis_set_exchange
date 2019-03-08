@@ -41,15 +41,6 @@
             "description": "Any notes pertaining to this basis set",
             "type": "string"
         },
-        "basis_set_references": {
-            "description": "Citation/Reference information for this basis set component",
-            "type": "array",
-            "minItems": 0,
-            "uniqueItems": true,
-            "items": {
-                "type": "string"
-            }
-        },
         "basis_set_elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
@@ -180,6 +171,15 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "element_references": {
+                    "description": "Citation/Reference information for this element component",
+                    "type": "array",
+                    "minItems": 0,
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "element_electron_shells": {
                     "description": "(Electronic) shells for this element",
                     "type": "array",

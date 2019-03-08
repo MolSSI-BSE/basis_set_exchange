@@ -11,7 +11,6 @@ _skeletons = {
             "schema_version": "0.1"
         },
         "basis_set_description": "",
-        "basis_set_references": [],
         "basis_set_elements": {}
     },
     "element": {

@@ -4,11 +4,11 @@
         "schema_version": "0.1"
     },
     "basis_set_description": "LANL2DZ ECP",
-    "basis_set_references": [
-        "ortiz1992a"
-    ],
     "basis_set_elements": {
         "93": {
+            "element_references": [
+                "ortiz1992a"
+            ],
             "element_ecp_electrons": 78,
             "element_ecp": [
                 {
@@ -192,6 +192,9 @@
             ]
         },
         "94": {
+            "element_references": [
+                "ortiz1992a"
+            ],
             "element_ecp_electrons": 78,
             "element_ecp": [
                 {

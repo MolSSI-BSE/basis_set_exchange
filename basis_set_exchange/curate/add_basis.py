@@ -72,57 +72,48 @@ def add_basis(bs_file,
     bs_data['basis_set_description'] = description
 
     if refs is None:
-        component_data = [bs_data]
+        refs = []
+
+    # Split out the component data into files based on the reference
+    # information. We keep track of which elements we've done so that
+    # we can detect duplicates in the references (which would be an error)
+    # (and also handle elements with no reference)
+    orig_elements = bs_data['basis_set_elements']
+    done_elements = []
+
+    # If a string or list of strings, use that as a reference for all elements
+    if isinstance(refs, str):
+        for k, v in bs_data['basis_set_elements'].items():
+            v['element_references'] = [refs]
+    elif isinstance(refs, list):
+        for k, v in bs_data['basis_set_elements'].items():
+            v['element_references'] = refs
     else:
-        # Split out the component data into files based on the reference
-        # information. We keep track of which elements we've done so that
-        # we can detect dupliates in the references (which would be an error)
-        # (and also handle elements with no reference)
-        orig_elements = bs_data['basis_set_elements']
-        component_data = []
-        done_elements = []
+        for k, v in refs.items():
+            # Expand the string a list of integers (as strings)
+            elements = expand_elements(k, True)
 
-        # If a string or list of strings, use that as a reference for all elements
-        if isinstance(refs, str):
-            bs_data['basis_set_references'] = [refs]
-            component_data.append(bs_data)
-        elif isinstance(refs, list):
-            bs_data['basis_set_references'] = refs
-            component_data.append(bs_data)
-        else:
-            for k, v in refs.items():
-                # Expand the string a list of integers (as strings)
-                elements = expand_elements(k, True)
-
-                # Make sure we have info for the given elements
-                # and that there are no duplicates
-                for el in elements:
-                    if not el in orig_elements:
-                        raise RuntimeError("Element {} not found in file {}".format(el, bs_file))
-                    if el in done_elements:
-                        raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
-
-                # Shallow copy, then only include the given elements.
-                # Set the ref, and keep track of the done elements
-                bs_tmp = bs_data.copy()
-                bs_tmp['basis_set_elements'] = {el: y for el, y in orig_elements.items() if el in elements}
+            # Make sure we have info for the given elements
+            # and that there are no duplicates
+            for el in elements:
+                if not el in orig_elements:
+                    raise RuntimeError("Element {} not found in file {}".format(el, bs_file))
+                if el in done_elements:
+                    raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
 
                 if isinstance(v, str):
-                    bs_tmp['basis_set_references'] = [v]
+                    bs_data['basis_set_elements'][el]['element_references'] = [v]
                 else:
-                    bs_tmp['basis_set_references'] = v
+                    bs_data['basis_set_elements'][el]['element_references'] = v
 
-                component_data.append(bs_tmp)
-                done_elements.extend(elements)
+            done_elements.extend(elements)
 
-            # Handle elements without a reference
-            noref_elements = set(orig_elements.keys()) - set(done_elements)
+        # Handle elements without a reference
+        noref_elements = set(orig_elements.keys()) - set(done_elements)
 
-            if len(noref_elements) > 0:
-                bs_tmp = bs_data.copy()
-                bs_tmp['basis_set_elements'] = {el: y for el, y in orig_elements.items() if el in noref_elements}
-                bs_tmp['basis_set_references'] = []
-                component_data.append(bs_tmp)
+        if len(noref_elements) > 0:
+            for el in noref_elements:
+                bs_data['basis_set_elements'][el]['element_references'] = []
 
     # Start the data files for the element and table json
     element_file_data = create_skel('element')
@@ -154,27 +145,18 @@ def add_basis(bs_file,
 
     # Create the filenames for the components
     # Also keep track of where data for each element is (for the element and table files)
-    component_file_map = {}
-    for cd in component_data:
-        if len(cd['basis_set_references']) > 0:
-            file_name = file_base + '_' + '_'.join(cd['basis_set_references'])
-        else:
-            file_name = file_base + '_noref'
+    component_file_name = file_base + '.' + str(version) + '.json'
+    component_file_relpath = os.path.join(subdir, component_file_name)
+    component_file_path = os.path.join(data_dir, component_file_relpath)
 
-        file_name += '.' + str(version) + '.json'
-        file_relpath = os.path.join(subdir, file_name)
-        file_path = os.path.join(data_dir, file_relpath)
-        component_file_map[file_path] = cd
-
-        # Add to the element file data
-        # (we add the relative path to the location of the element file,
-        # which resides in subdir)
-        for el in cd['basis_set_elements'].keys():
-            element_file_data['basis_set_elements'][el] = {'element_components': [file_relpath]}
+    # Add to the element file data
+    # (we add the relative path to the location of the element file,
+    # which resides in subdir)
+    for el in bs_data['basis_set_elements'].keys():
+        element_file_data['basis_set_elements'][el] = {'element_components': [component_file_relpath]}
 
     # Verify all data using the schema
-    for file_path, file_data in component_file_map.items():
-        validate_data('component', file_data)
+    validate_data('component', bs_data)
     validate_data('element', element_file_data)
     validate_data('table', table_file_data)
 
@@ -186,9 +168,8 @@ def add_basis(bs_file,
     #
     # Note that the metadata file may exist already. That is ok
     ######################################################################################
-    for file_path in component_file_map.keys():
-        if os.path.exists(file_path):
-            raise RuntimeError("Component json file {} already exists".format(file_path))
+    if os.path.exists(component_file_path):
+        raise RuntimeError("Component json file {} already exists".format(component_file_path))
     if os.path.exists(element_file_path):
         raise RuntimeError("Element json file {} already exists".format(element_file_path))
     if os.path.exists(table_file_path):
@@ -203,9 +184,7 @@ def add_basis(bs_file,
     if not os.path.exists(subdir_path):
         os.makedirs(subdir_path)
 
-    for file_path, file_data in component_file_map.items():
-        write_json_basis(file_path, file_data)
-
+    write_json_basis(component_file_path, bs_data)
     write_json_basis(element_file_path, element_file_data)
     write_json_basis(table_file_path, table_file_data)
 
