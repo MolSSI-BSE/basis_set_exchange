@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 
 import os
-import graphviz
 import tempfile
 from .. import api, fileio
 from ..misc import compact_elements
 
 
+try:
+    import graphviz
+    graphviz_avail = True
+except ImportError:
+    graphviz_avail = False
+
 def _make_graph(bsname, version=None, data_dir=None):
     '''
     Create a DOT graph file of the files included in a basis set
     '''
+
+    if not graphviz_avail:
+        raise RuntimeError("graphviz package is not installed")
 
     data_dir = api.fix_data_dir(data_dir)
 
