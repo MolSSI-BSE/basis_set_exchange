@@ -126,7 +126,13 @@ def read_molcas(basis_lines, fname):
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()
+                    if len(lsplt) != ngen:
+                        print(fname)
+                        print(line)
+                        raise RuntimeError("Unexpected number of coefficients")
                     coefficients.append(lsplt)
+
+
                     i += 1
 
                 shell['shell_exponents'] = exponents
