@@ -13,7 +13,7 @@ from .common_testvars import fake_data_dir, data_dir, test_data_dir, auth_data_d
 def _test_curatecli_cmd(cmd):
     return subprocess.check_output(cmd, shell=True, cwd='/tmp', universal_newlines=True, stderr=subprocess.STDOUT)
 
-test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add_prascher2011a.1.json']
+test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
 test_files1 = [os.path.join(data_dir, x) for x in test_files1]
 
 

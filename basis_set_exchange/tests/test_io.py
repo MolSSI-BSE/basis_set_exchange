@@ -17,9 +17,9 @@ from .common_testvars import data_dir
                                        'CRENBL.0.table.json',
                                        'dunning/cc-pVDZ.1.element.json',
                                        'crenb/CRENBL.0.element.json',
-                                       'dunning/cc-pVDZ_dunning1989a.1.json',
-                                       'crenb/CRENBL_ross1994a.0.json',
-                                       'crenb/CRENBL-ECP_ross1994a.0.json'])
+                                       'dunning/cc-pVDZ.1.json',
+                                       'crenb/CRENBL.0.json',
+                                       'crenb/CRENBL-ECP.0.json'])
 # yapf: enable
 def test_read_write_basis(file_path):
     # needed to be tested to make sure something isn't left

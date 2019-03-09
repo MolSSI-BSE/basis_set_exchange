@@ -113,9 +113,9 @@ def test_printing(basis, element):
 
 # yapf: disable
 @pytest.mark.parametrize('file_path', [
-                              'dunning/cc-pVDZ_dunning1989a.1.json',
-                              'crenb/CRENBL_ross1994a.0.json',
-                              'crenb/CRENBL-ECP_ross1994a.0.json'
+                              'dunning/cc-pVDZ.1.json',
+                              'crenb/CRENBL.0.json',
+                              'crenb/CRENBL-ECP.0.json'
                          ])
 # yapf: enable
 def test_print_component_basis(file_path):
@@ -151,7 +151,7 @@ def test_print_table_basis(file_path):
 def test_diff_json_files_same(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
 
-    filename = 'def2-SV-base_gulde2012a.1.json'
+    filename = 'def2-SV-base.1.json'
     file1 = os.path.join(data_dir, 'ahlrichs', 'SV', filename)
     tmpfile = os.path.join(tmp_path, filename)
     shutil.copyfile(file1, tmpfile)
