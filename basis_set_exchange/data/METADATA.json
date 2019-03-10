@@ -9267,14 +9267,14 @@
             }
         }
     },
-    "dgauss-a1-dftcfit": {
-        "display_name": "dgauss-a1-dftcfit",
+    "dgauss-a1-dftjfit": {
+        "display_name": "dgauss-a1-dftjfit",
         "description": "DGauss A1 DFT Columb Fitting",
         "latest_version": "0",
         "basename": "DGAUSS-A1COULOMB",
         "relpath": "",
         "family": "dgauss",
-        "role": "dftcfit",
+        "role": "dftjfit",
         "functiontypes": [
             "spherical_gto"
         ],
@@ -9417,14 +9417,14 @@
             }
         }
     },
-    "dgauss-a2-dftcfit": {
-        "display_name": "dgauss-a2-dftcfit",
+    "dgauss-a2-dftjfit": {
+        "display_name": "dgauss-a2-dftjfit",
         "description": "DGauss A2 DFT Columb Fitting",
         "latest_version": "0",
         "basename": "DGAUSS-A2COULOMB",
         "relpath": "",
         "family": "dgauss",
-        "role": "dftcfit",
+        "role": "dftjfit",
         "functiontypes": [
             "spherical_gto"
         ],
@@ -9530,7 +9530,7 @@
         ],
         "auxiliaries": {
             "dftxfit": "dgauss-a1-dftxfit",
-            "dftcfit": "dgauss-a1-dftcfit"
+            "dftjfit": "dgauss-a1-dftjfit"
         },
         "versions": {
             "0": {
@@ -9608,7 +9608,7 @@
         ],
         "auxiliaries": {
             "dftxfit": "dgauss-a2-dftxfit",
-            "dftcfit": "dgauss-a2-dftcfit"
+            "dftjfit": "dgauss-a2-dftjfit"
         },
         "versions": {
             "0": {
@@ -9657,7 +9657,7 @@
         ],
         "auxiliaries": {
             "dftxfit": "dgauss-a2-dftxfit",
-            "dftcfit": "dgauss-a2-dftcfit"
+            "dftjfit": "dgauss-a2-dftjfit"
         },
         "versions": {
             "0": {

@@ -28,7 +28,7 @@ def sort_basis_dict(bs):
         'molssi_bse_schema', 'schema_type', 'schema_version',
 
         # Auxiliary block
-         'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftcfit',
+         'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftjfit',
 
         # Basis set metadata
         'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_role', 'basis_set_auxiliaries',
