@@ -47,7 +47,6 @@ def compose_elemental_basis(file_relpath, data_dir):
     # Read all the data from these files into a big dictionary
     component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_files}
 
-    # Broadcast the basis_set_description to each element
     # Use the basis_set_description for the reference description
     for k, v in component_map.items():
         for el, el_data in v['basis_set_elements'].items():
@@ -65,7 +64,7 @@ def compose_elemental_basis(file_relpath, data_dir):
         el_comp_data = [component_map[c]['basis_set_elements'][k] for c in components]
 
         # merge all the data
-        v = manip.merge_element_data(v, el_comp_data)
+        v = manip.merge_element_data(None, el_comp_data)
         el_bs['basis_set_elements'][k] = v
 
     return el_bs

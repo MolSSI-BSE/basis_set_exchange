@@ -9,6 +9,7 @@
     "required": [
         "molssi_bse_schema",
         "basis_set_description",
+        "basis_set_data_source",
         "basis_set_elements"
     ],
     "properties":
@@ -35,6 +36,10 @@
         },
         "basis_set_description": {
             "description": "Brief description of the basis set",
+            "type": "string"
+        },
+        "basis_set_data_source": {
+            "description": "Where the actual numbers in this file came from",
             "type": "string"
         },
         "basis_set_notes": {

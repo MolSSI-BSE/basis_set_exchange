@@ -40,6 +40,9 @@ def sort_basis_dict(bs):
         # Version metadata
         'basis_set_version', 'basis_set_revision_description',
 
+        # Sources of components
+        'basis_set_data_source',
+
         # Elements and data
         'basis_set_elements', 'element_references', 'element_ecp_electrons',
         'element_electron_shells', 'element_ecp', 'element_components', 'element_entry',

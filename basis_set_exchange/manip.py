@@ -61,8 +61,12 @@ def merge_element_data(dest, sources):
     with the data from sources added.
     """
 
-    ret = dest.copy()
+    if dest is not None:
+        ret = dest.copy()
+    else:
+        ret = {}
 
+    # Note that we are not copying notes/data_sources
     for s in sources:
         if 'element_electron_shells' in s:
             if 'element_electron_shells' not in ret:
