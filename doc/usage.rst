@@ -117,7 +117,7 @@ and can be obtained via :func:`basis_set_exchange.get_reference_formats`
    >>> bib = basis_set_exchange.get_references('6-31G*', fmt='bib', elements=[1,9])
    >>> print(bib)
    % H
-   %     31G Split-valence basis set for H
+   %     31G Split-valence basis set for H,He
    %         ditchfield1971a
    %
    % F
