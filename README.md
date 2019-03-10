@@ -3,6 +3,13 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/MolSSI-BSE/basis_set_exchange.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MolSSI-BSE/basis_set_exchange/context:python)
 [![PyPI version](https://img.shields.io/pypi/v/basis_set_exchange.svg)](https://pypi.org/project/basis_set_exchange/)
 
+## Basis Set Exchange Website
+
+If you are looking for the Basis Set Exchange website (which can be
+used to browse and download this data in a more user-friendly way),
+visit https://wwww.basissetexchange.org
+
+
 ## Overview
 
 This project is a library containing basis sets for use in quantum
