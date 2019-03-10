@@ -4,7 +4,6 @@ Conversion of basis sets to Molpro format
 
 from .. import lut
 from .. import manip
-from .common import write_matrix
 
 
 def _find_range(coeffs):
