@@ -368,7 +368,7 @@ jkfit    JK-fitting
 rifit    RI-fitting
 admmfit  Auxiliary-Density Matrix Method Fitting
 dftxfit  DFT Exchange Fitting
-dftcfit  DFT Correlation Fitting
+dftjfit  DFT Correlation Fitting
 </pre></div>
 </div>
 </div>
@@ -445,13 +445,13 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.6.3+13.g53cd164
+# Version v0.6.4+14.gd235e1c8
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
 # Description: STO-3G Minimal Basis (3 functions/AO)
 #        Role: orbital
-#     Version: 1  (Values from Gaussian09)
+#     Version: 1  (Data from Gaussian09)
 #----------------------------------------------------------------------
 
 
@@ -569,8 +569,8 @@ Auxiliary Basis Sets:
     rifit  cc-pvdz-rifit
 
 Versions:
-    0  H-Ar,Ca-Kr  Values from original Basis Set Exchange
-    1  H-Ar,Ca-Kr  Values from ccRepo
+    0  H-Ar,Ca-Kr  Data from the Original Basis Set Exchange
+    1  H-Ar,Ca-Kr  Data from ccRepo/Grant Hill
 </pre></div>
 </div>
 </div>
@@ -668,8 +668,8 @@ dunning_fit
 This takes only one required argument (the name of the basis set).</p>
 <p>With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the version.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-versions aug-cc-pvtz
-0  Values from original Basis Set Exchange
-1  Values from ccRepo
+0  Data from the Original Basis Set Exchange
+1  Data from ccRepo/Grant Hill
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-versions aug-cc-pvtz -n

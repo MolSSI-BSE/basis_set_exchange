@@ -193,6 +193,9 @@ positional arguments:
     get-reader-formats  A list of file formats that can be read
     elements-in-files   For a list of JSON files, output what elements are in
                         each file
+    component-file-refs
+                        For a list of component JSON files, output what
+                        elements/references are in each file
     make-diff           Find/Store the differences between two groups of files
     compare-basis-sets  Compare two basis sets in the data directory
     compare-basis-files
@@ -315,16 +318,10 @@ set.</p>
 digraph {
 	&quot;6-31g&quot; -&gt; &quot;pople/31G.1.element.json&quot; [label=&quot;H,He&quot;]
 	&quot;6-31g&quot; -&gt; &quot;pople/6-31G.1.element.json&quot; [label=&quot;Li-Kr&quot;]
-	&quot;pople/31G.1.element.json&quot; -&gt; &quot;pople/31G/31G_ditchfield1971a.1.json&quot; [label=H]
-	&quot;pople/31G.1.element.json&quot; -&gt; &quot;pople/31G/31G_gaussian09e01.1.json&quot; [label=He]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_dill1975a.1.json&quot; [label=&quot;Li,B&quot;]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_binkley1977a.1.json&quot; [label=Be]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_hehre1972a.1.json&quot; [label=&quot;C-F&quot;]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_gaussian09e01.1.json&quot; [label=Ne]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/21G/6-21G-core_gordon1982a.1.json
-pople/6-31G/6-31G-valence_francl1982a.1.json&quot; [label=&quot;Na-Ar&quot;]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_rassolov2001a.1.json&quot; [label=&quot;K,Ca,Ga-Kr&quot;]
-	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G_rassolov1998a.1.json&quot; [label=&quot;Sc-Zn&quot;]
+	&quot;pople/31G.1.element.json&quot; -&gt; &quot;pople/31G/31G.1.json&quot; [label=&quot;H,He&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/6-31G/6-31G.1.json&quot; [label=&quot;Li-Ne,K-Kr&quot;]
+	&quot;pople/6-31G.1.element.json&quot; -&gt; &quot;pople/21G/6-21G-core.1.json
+pople/6-31G/6-31G-valence.1.json&quot; [label=&quot;Na-Ar&quot;]
 }
 </pre></div>
 </div>

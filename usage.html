@@ -193,12 +193,12 @@ instread.</p>
 and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_formats" title="basis_set_exchange.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_formats()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get a basis set as a python dictionary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;basis_set_name&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
 <span class="go">&#39;6-31G*&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Basis set names are case insensitive</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;basis_set_name&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
 <span class="go">&#39;6-31G*&#39;</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, but in gaussian format (as a string)</span>
@@ -258,7 +258,7 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bib</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_references</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;bib&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bib</span><span class="p">)</span>
 <span class="go">% H</span>
-<span class="go">%     31G Split-valence basis set for H</span>
+<span class="go">%     31G Split-valence basis set for H,He</span>
 <span class="go">%         ditchfield1971a</span>
 <span class="go">%</span>
 <span class="go">% F</span>

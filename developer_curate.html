@@ -171,7 +171,7 @@
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
 <dt id="basis_set_exchange.curate.add_basis">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">add_basis</code><span class="sig-paren">(</span><em>bs_file</em>, <em>data_dir</em>, <em>subdir</em>, <em>file_base</em>, <em>name</em>, <em>family</em>, <em>role</em>, <em>description</em>, <em>version</em>, <em>revision_description</em>, <em>refs=None</em>, <em>file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">add_basis</code><span class="sig-paren">(</span><em>bs_file</em>, <em>data_dir</em>, <em>subdir</em>, <em>file_base</em>, <em>name</em>, <em>family</em>, <em>role</em>, <em>description</em>, <em>version</em>, <em>revision_description</em>, <em>data_source</em>, <em>refs=None</em>, <em>file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a basis set to this library</p>
 <p>This takes in a single file containing the basis set is some format, parses it, and
 create the component, element, and table basis set files in the given data_dir (and subdir).
@@ -211,6 +211,9 @@ also updated.</p>
 </dd>
 <dt><strong>revision_description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Description of this version of the basis set</p>
+</dd>
+<dt><strong>data_source</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Description of where this data came from</p>
 </dd>
 <dt><strong>refs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict or str</span></dt>
 <dd><p class="first">Mapping of references to elements. This can be a dictionary with a compressed
@@ -314,6 +317,32 @@ usual ‘noref’ extension and the references entry is empty.</p>
 </dd>
 <dt><strong>rel_tol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
 <dd><p class="first last">Maximum relative error that is considered equal</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.curate.component_file_refs">
+<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">component_file_refs</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of what elements/refrences exist in component JSON files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>filelist</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of paths to json files</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dict</strong></dt>
+<dd><p class="first last">Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
 </dd>
 </dl>
 </td>
