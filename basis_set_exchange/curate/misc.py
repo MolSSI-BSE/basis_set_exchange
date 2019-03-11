@@ -30,3 +30,38 @@ def elements_in_files(filelist):
         ret[fpath] = misc.compact_elements(els)
 
     return ret
+
+
+def component_file_refs(filelist):
+    '''Get a list of what elements/refrences exist in component JSON files
+
+    Parameters
+    ----------
+    filelist : list
+        A list of paths to json files
+
+    Returns
+    -------
+    dict
+        Keys are the file path, value is a list of tuples (compacted element string, refs tuple)
+    '''
+
+    ret = {}
+    for fpath in filelist:
+        filedata = fileio.read_json_basis(fpath)
+
+        refdict = {}
+        for el, eldata in filedata['elements'].items():
+            refs = tuple(eldata['references'])
+            if not refs in refdict:
+                refdict[refs] = [el]
+            else:
+                refdict[refs].append(el)
+
+        entry = []
+        for k, v in refdict.items():
+            entry.append((misc.compact_elements(v), k))
+
+        ret[fpath] = entry
+
+    return ret

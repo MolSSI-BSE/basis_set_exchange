@@ -25,6 +25,22 @@ def _bsecurate_cli_elements_in_files(args):
     return '\n'.join(format_columns(data.items()))
 
 
+def _bsecurate_cli_component_file_refs(args):
+    '''Handles the component-file-refs subcommand'''
+    data = curate.component_file_refs(args.files)
+
+    s = ''
+
+    for cfile, cdata in data.items():
+        s += cfile + '\n'
+        rows = []
+        for el, refs in cdata:
+            rows.append(('    ' + el, ' '.join(refs)))
+        s += '\n'.join(format_columns(rows)) + '\n\n'
+
+    return s
+
+
 def _bsecurate_cli_compare_basis_sets(args):
     '''Handles compare-basis-sets subcommand'''
     ret = curate.compare_basis_sets(args.basis1, args.basis2, args.version1, args.version2, args.uncontract_general)
@@ -32,6 +48,7 @@ def _bsecurate_cli_compare_basis_sets(args):
         return "No difference found"
     else:
         return "DIFFERENCES FOUND. SEE ABOVE"
+
 
 def _bsecurate_cli_compare_basis_files(args):
     '''Handles compare-basis-files subcommand'''
@@ -41,6 +58,7 @@ def _bsecurate_cli_compare_basis_files(args):
         return "No difference found"
     else:
         return "DIFFERENCES FOUND. SEE ABOVE"
+
 
 def _bsecurate_cli_make_diff(args):
     '''Handles the view-graph subcommand'''
@@ -67,6 +85,7 @@ def bsecurate_cli_handle_subcmd(args):
     handler_map = {
         'get-reader-formats': _bsecurate_cli_get_reader_formats,
         'elements-in-files': _bsecurate_cli_elements_in_files,
+        'component-file-refs': _bsecurate_cli_component_file_refs,
         'compare-basis-sets': _bsecurate_cli_compare_basis_sets,
         'compare-basis-files': _bsecurate_cli_compare_basis_files,
         'make-diff': _bsecurate_cli_make_diff,

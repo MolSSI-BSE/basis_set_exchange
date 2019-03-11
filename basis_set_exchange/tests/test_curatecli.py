@@ -16,10 +16,14 @@ def _test_curatecli_cmd(cmd):
 test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
 test_files1 = [os.path.join(data_dir, x) for x in test_files1]
 
+test_files2 = [ 'dunning/cc-pV5+dZ-add.1.json', 'dunning/cc-pVDZ.1.json' ]
+test_files2 = [os.path.join(data_dir, x) for x in test_files2]
+
 
 bsecurate_cmds = [
     '-V', '-h', '--help',
     'elements-in-files ' + ' '.join(test_files1),
+    'component-file-refs ' + ' '.join(test_files2),
     'get-reader-formats'
 ]
 

@@ -39,6 +39,10 @@ def run_bsecurate_cli():
     subp = subparsers.add_parser('elements-in-files', help='For a list of JSON files, output what elements are in each file')
     subp.add_argument('files', nargs='+', help='List of files to inspect')
 
+    # elements-in-files
+    subp = subparsers.add_parser('component-file-refs', help='For a list of component JSON files, output what elements/references are in each file')
+    subp.add_argument('files', nargs='+', help='List of files to inspect')
+
 
     ########################################
     # Manipulating basis set data
