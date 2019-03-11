@@ -69,8 +69,13 @@ def _write_plain_json(file_path, js):
 
     # Disable ascii in the json - this prevents the json writer
     # from escaping everything
-    with codecs.open(file_path, 'w', 'utf-8') as f:
-        json.dump(js, f, indent=4, ensure_ascii=False)
+
+    if file_path.endswith('.bz2'):
+        with bz2.open(file_path, 'wt') as f:
+            json.dump(js, f, indent=2, ensure_ascii=False)
+    else:
+        with codecs.open(file_path, 'w', 'utf-8') as f:
+            json.dump(js, f, indent=2, ensure_ascii=False)
 
 
 def read_json_basis(file_path):
