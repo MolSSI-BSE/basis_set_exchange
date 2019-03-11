@@ -1,0 +1,56 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "Diffuse functions for 6-31G split-valence basis set",
+  "data_source": "Data from Gaussian 09",
+  "elements": {
+    "1": {
+      "references": [
+        "clark1983a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.3600000000E-01"
+          ],
+          "coefficients": [
+            [
+              "0.1000000000E+01"
+            ]
+          ]
+        }
+      ]
+    },
+    "2": {
+      "references": [
+        "gaussian09e01"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.8600000000E-01"
+          ],
+          "coefficients": [
+            [
+              "0.1000000000E+01"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
