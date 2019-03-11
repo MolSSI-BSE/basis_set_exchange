@@ -17,7 +17,7 @@ def test_unused_data():
     for cf in all_component_files:
         cpath = os.path.join(data_dir, cf)
         cdata = bse.fileio.read_json_basis(cpath)
-        all_component_elements[cpath] = list(cdata['basis_set_elements'].keys())
+        all_component_elements[cpath] = list(cdata['elements'].keys())
 
     # All elements contained in all element files
     # And all element data as read from the file
@@ -26,8 +26,8 @@ def test_unused_data():
     for ef in all_element_files:
         efpath = os.path.join(data_dir, ef)
         efdata = bse.fileio.read_json_basis(efpath)
-        all_element_elements[efpath] = list(efdata['basis_set_elements'].keys())
-        all_element_data[efpath] = efdata['basis_set_elements']
+        all_element_elements[efpath] = list(efdata['elements'].keys())
+        all_element_data[efpath] = efdata['elements']
 
     # Now go through what is reachable through a table file
     for tfile in all_table_files:
@@ -35,7 +35,7 @@ def test_unused_data():
         table_data = bse.fileio.read_json_basis(table_path)
 
         # What element files are linked to this table file
-        el_files = [(k, v['element_entry']) for k, v in table_data['basis_set_elements'].items()]
+        el_files = [(k, v['element_entry']) for k, v in table_data['elements'].items()]
 
         # Loop over the element files, and remove the corresponding entry
         # from all_component_elements

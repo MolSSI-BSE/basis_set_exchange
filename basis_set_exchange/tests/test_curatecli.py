@@ -56,8 +56,8 @@ def test_curatecli_makediff(tmp_path):
     diff1 = fileio.read_json_basis(tmpfile1 + '.diff')
     diff2 = fileio.read_json_basis(tmpfile2 + '.diff')
 
-    assert len(diff1['basis_set_elements']) == 36
-    assert len(diff2['basis_set_elements']) == 0
+    assert len(diff1['elements']) == 36
+    assert len(diff2['elements']) == 0
 
     reffilename = '6-31G**-polarization.json.bz2' 
     reffile = os.path.join(test_data_dir, reffilename)

@@ -50,7 +50,7 @@ def test_add_basis(tmp_path):
         name = 'test_basis_' + name
         bse_dict = api.get_basis(name, data_dir=tmp_path)
 
-        assert bse_dict['basis_set_family'] == 'test_family'
+        assert bse_dict['family'] == 'test_family'
 
         # Compare against the file we created from
         sf_path = os.path.join(auth_data_dir, sf)
@@ -63,7 +63,7 @@ def test_add_basis(tmp_path):
 
             fdata = fileio.read_json_basis(fpath)
             expect_elements = set(misc.expand_elements(elements, True))
-            assert set(fdata['basis_set_elements'].keys()) == expect_elements
+            assert set(fdata['elements'].keys()) == expect_elements
 
     # Validate the new data dir
     validator.validate_data_dir(tmp_path)

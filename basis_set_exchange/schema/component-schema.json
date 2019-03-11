@@ -8,9 +8,9 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_schema",
-        "basis_set_description",
-        "basis_set_data_source",
-        "basis_set_elements"
+        "description",
+        "data_source",
+        "elements"
     ],
     "properties":
     {
@@ -34,19 +34,19 @@
                 }
             }
         },
-        "basis_set_description": {
+        "description": {
             "description": "Brief description of the basis set",
             "type": "string"
         },
-        "basis_set_data_source": {
+        "data_source": {
             "description": "Where the actual numbers in this file came from",
             "type": "string"
         },
-        "basis_set_notes": {
+        "notes": {
             "description": "Any notes pertaining to this basis set",
             "type": "string"
         },
-        "basis_set_elements": {
+        "elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
             "additionalProperties": false,
@@ -62,30 +62,30 @@
             "description": "Information for a single electronic shell",
             "additionalProperties": false,
             "required": [
-                "shell_function_type",
-                "shell_harmonic_type",
-                "shell_region",
-                "shell_angular_momentum",
-                "shell_exponents",
-                "shell_coefficients"
+                "function_type",
+                "harmonic_type",
+                "region",
+                "angular_momentum",
+                "exponents",
+                "coefficients"
             ],
             "properties": {
-                "shell_function_type": {
+                "function_type": {
                     "description": "Type of function for this shell",
                     "type": "string",
                     "enum": [ "gto", "sto" ]
                 },
-                "shell_harmonic_type": {
+                "harmonic_type": {
                     "description": "Harmonic type (spherical, cartesian)",
                     "type": "string",
                     "enum": [ "spherical", "cartesian" ]
                 },
-                "shell_region": {
+                "region": {
                     "description": "The region this shell describes",
                     "type": "string",
                     "enum": [ "", "valence", "polarization", "core", "tight", "diffuse" ]
                 },
-                "shell_angular_momentum": {
+                "angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",
                     "type": "array",
                     "minItems": 1,
@@ -95,7 +95,7 @@
                         "minimum": 0
                     }
                 },
-                "shell_exponents": {
+                "exponents": {
                     "description": "Exponents for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -103,7 +103,7 @@
                         "type": "string"
                     }
                 },
-                "shell_coefficients": {
+                "coefficients": {
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -120,19 +120,19 @@
             "description": "ECP potential",
             "additionalProperties": false,
             "required": [
-                "potential_ecp_type",
-                "potential_angular_momentum",
-                "potential_r_exponents",
-                "potential_gaussian_exponents",
-                "potential_coefficients"
+                "ecp_type",
+                "angular_momentum",
+                "r_exponents",
+                "gaussian_exponents",
+                "coefficients"
             ],
             "properties": {
-                "potential_ecp_type": {
+                "ecp_type": {
                     "description": "Type of the ECP Potential",
                     "type": "string",
                     "enum": [ "scalar", "spinorbit" ]
                 },
-                "potential_angular_momentum": {
+                "angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",
                     "type": "array",
                     "minItems": 1,
@@ -142,7 +142,7 @@
                         "minimum": 0
                     }
                 },
-                "potential_r_exponents": {
+                "r_exponents": {
                     "description": "Exponents of the r term",
                     "type": "array",
                     "minItems": 1,
@@ -150,7 +150,7 @@
                         "type": "integer"
                     }
                 },
-                "potential_gaussian_exponents": {
+                "gaussian_exponents": {
                     "description": "Exponents of the gaussian term",
                     "type": "array",
                     "minItems": 1,
@@ -158,7 +158,7 @@
                         "type": "string"
                     }
                 },
-                "potential_coefficients": {
+                "coefficients": {
                     "description": "General contraction coefficients for this contracted shell",
                     "type": "array",
                     "minItems": 1,
@@ -176,7 +176,7 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "element_references": {
+                "references": {
                     "description": "Citation/Reference information for this element component",
                     "type": "array",
                     "minItems": 0,
@@ -185,7 +185,7 @@
                         "type": "string"
                     }
                 },
-                "element_electron_shells": {
+                "electron_shells": {
                     "description": "(Electronic) shells for this element",
                     "type": "array",
                     "minItems": 1,
@@ -200,7 +200,7 @@
                     "type": "integer",
                     "minimum": 1
                 },
-                "element_ecp": {
+                "ecp_potentials": {
                     "description": "Effective Core Potential for this element",
                     "type": "array",
                     "minItems": 1,

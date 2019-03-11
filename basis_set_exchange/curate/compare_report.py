@@ -26,7 +26,7 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
     Compares two basis set dictionaries and prints a report about their differences
     '''
 
-    all_bs1 = list(bs1['basis_set_elements'].keys())
+    all_bs1 = list(bs1['elements'].keys())
 
     if uncontract_general:
         bs1 = manip.uncontract_general(bs1)
@@ -38,7 +38,7 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
     some_diff = []  # Elements that are different
     big_diff = []  # Elements that are substantially different
 
-    for k, v in bs2['basis_set_elements'].items():
+    for k, v in bs2['elements'].items():
         if k not in all_bs1:
             not_in_bs1.append(k)
             continue
@@ -46,22 +46,22 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
         print()
         print("-------------------------------------")
         print(" Element ", k)
-        bs1_el = bs1['basis_set_elements'][k]
+        bs1_el = bs1['elements'][k]
 
         max_rdiff_el = 0.0
         max_rdiff_ecp = 0.0
 
-        if 'element_electron_shells' in v:
-            max_rdiff_el = shells_difference(v['element_electron_shells'], bs1_el['element_electron_shells'])
-        if 'element_ecp' in v:
+        if 'electron_shells' in v:
+            max_rdiff_el = shells_difference(v['electron_shells'], bs1_el['electron_shells'])
+        if 'ecp_potentials' in v:
             nel1 = v['element_ecp_electrons']
             nel2 = bs1_el['element_ecp_electrons']
             if int(nel1) != int(nel2):
                 print('Different number of electrons replaced by ECP ({} vs {})'.format(nel1, nel2))
                 max_rdiff_ecp = float('inf')
             else:
-                max_rdiff_ecp = potentials_difference(v['element_ecp'], bs1_el['element_ecp'])
-                v['element_ecp'] = bs1_el['element_ecp']
+                max_rdiff_ecp = potentials_difference(v['ecp_potentials'], bs1_el['ecp_potentials'])
+                v['ecp_potentials'] = bs1_el['ecp_potentials']
 
         max_rdiff = max(max_rdiff_el, max_rdiff_ecp)
 

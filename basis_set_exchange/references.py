@@ -26,13 +26,13 @@ def compact_references(basis_dict, ref_data):
 
     # Create a mapping of elements -> reference information
     # (sort by Z first, keeping in mind Z is a string)
-    sorted_el = sorted(basis_dict['basis_set_elements'].items(), key=lambda x: int(x[0]))
+    sorted_el = sorted(basis_dict['elements'].items(), key=lambda x: int(x[0]))
 
     for el, eldata in sorted_el:
 
         # elref is a list of dict
         # dict is { 'reference_description': str, 'reference_keys': [keys] }
-        elref = eldata['element_references']
+        elref = eldata['references']
 
         for x in element_refs:
             if x['reference_info'] == elref:

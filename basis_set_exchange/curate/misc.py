@@ -26,7 +26,7 @@ def elements_in_files(filelist):
     ret = {}
     for fpath in filelist:
         filedata = fileio.read_json_basis(fpath)
-        els = list(filedata['basis_set_elements'].keys())
+        els = list(filedata['elements'].keys())
         ret[fpath] = misc.compact_elements(els)
 
     return ret

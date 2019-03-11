@@ -10,37 +10,37 @@ _skeletons = {
             "schema_type": "component",
             "schema_version": "0.1"
         },
-        "basis_set_description": "",
-        "basis_set_data_source": "",
-        "basis_set_elements": {}
+        "description": "",
+        "data_source": "",
+        "elements": {}
     },
     "element": {
         "molssi_bse_schema": {
             "schema_type": "element",
             "schema_version": "0.1"
         },
-        "basis_set_name": "",
-        "basis_set_description": "",
-        "basis_set_elements": {}
+        "name": "",
+        "description": "",
+        "elements": {}
     },
     "table": {
         "molssi_bse_schema": {
             "schema_type": "table",
             "schema_version": "0.1"
         },
-        "basis_set_revision_description": "",
-        "basis_set_elements": {}
+        "revision_description": "",
+        "elements": {}
     },
     "metadata": {
         "molssi_bse_schema": {
             "schema_type": "metadata",
             "schema_version": "0.1"
         },
-        "basis_set_name": "",
-        "basis_set_family": "",
-        "basis_set_description": "",
-        "basis_set_role": "",
-        "basis_set_auxiliaries": {}
+        "name": "",
+        "family": "",
+        "description": "",
+        "role": "",
+        "auxiliaries": {}
     }
 }
 

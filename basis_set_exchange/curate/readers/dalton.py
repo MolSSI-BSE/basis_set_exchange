@@ -30,18 +30,18 @@ def read_dalton(basis_lines, fname):
                 line = basis_lines[i]
                 nprim, ngen = line.split()
 
-                if not element_Z in bs_data['basis_set_elements']:
-                    bs_data['basis_set_elements'][element_Z] = {}
-                if not 'element_electron_shells' in bs_data['basis_set_elements'][element_Z]:
-                    bs_data['basis_set_elements'][element_Z]['element_electron_shells'] = []
+                if not element_Z in bs_data['elements']:
+                    bs_data['elements'][element_Z] = {}
+                if not 'electron_shells' in bs_data['elements'][element_Z]:
+                    bs_data['elements'][element_Z]['electron_shells'] = []
 
-                element_data = bs_data['basis_set_elements'][element_Z]
+                element_data = bs_data['elements'][element_Z]
 
                 shell = {
-                    'shell_function_type': 'gto',
-                    'shell_harmonic_type': 'spherical',
-                    'shell_region': '',
-                    'shell_angular_momentum': [shell_am]
+                    'function_type': 'gto',
+                    'harmonic_type': 'spherical',
+                    'region': '',
+                    'angular_momentum': [shell_am]
                 }
 
                 exponents = []
@@ -56,12 +56,12 @@ def read_dalton(basis_lines, fname):
                     coefficients.append(lsplt[1:])
                     i += 1
 
-                shell['shell_exponents'] = exponents
+                shell['exponents'] = exponents
 
                 # We need to transpose the coefficient matrix
                 # (we store a matrix with primitives being the column index and
                 # general contraction being the row index)
-                shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
+                shell['coefficients'] = list(map(list, zip(*coefficients)))
 
                 # Make sure the number of general contractions is >0
                 # (This error was found in some bad files)
@@ -69,10 +69,10 @@ def read_dalton(basis_lines, fname):
                     raise RuntimeError("Number of general contractions is not greater than zero for element " + str(element_Z))
 
                 # Make sure the number of general contractions match the heading line
-                if len(shell['shell_coefficients']) != int(ngen):
+                if len(shell['coefficients']) != int(ngen):
                     raise RuntimeError("Number of general contractions does not equal what was given for element " + str(element_Z))
 
-                element_data['element_electron_shells'].append(shell)
+                element_data['electron_shells'].append(shell)
                 shell_am += 1
 
     return bs_data

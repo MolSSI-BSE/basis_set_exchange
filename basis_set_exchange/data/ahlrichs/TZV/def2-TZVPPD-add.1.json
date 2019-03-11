@@ -1,33 +1,33 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "component",
-        "schema_version": "0.1"
-    },
-    "basis_set_description": "Additional functions to form def2-TZVPPD",
-    "basis_set_data_source": "TODO",
-    "basis_set_elements": {
-        "55": {
-            "element_references": [
-                "rappoport2010a"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "",
-                    "shell_angular_momentum": [
-                        3
-                    ],
-                    "shell_exponents": [
-                        "0.5877700"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.0000000"
-                        ]
-                    ]
-                }
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "Additional functions to form def2-TZVPPD",
+  "data_source": "TODO",
+  "elements": {
+    "55": {
+      "references": [
+        "rappoport2010a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.5877700"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
             ]
+          ]
         }
+      ]
     }
+  }
 }

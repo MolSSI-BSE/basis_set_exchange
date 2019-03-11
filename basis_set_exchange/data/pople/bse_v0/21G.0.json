@@ -1,92 +1,92 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "component",
-        "schema_version": "0.1"
-    },
-    "basis_set_description": "21G basis for H and He",
-    "basis_set_data_source": "Original Basis Set Exchange",
-    "basis_set_elements": {
-        "1": {
-            "element_references": [
-                "binkley1980a"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "5.4471780",
-                        "0.8245470"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "0.1562850",
-                            "0.9046910"
-                        ]
-                    ]
-                },
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.1831920"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.0000000"
-                        ]
-                    ]
-                }
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "21G basis for H and He",
+  "data_source": "Original Basis Set Exchange",
+  "elements": {
+    "1": {
+      "references": [
+        "binkley1980a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "5.4471780",
+            "0.8245470"
+          ],
+          "coefficients": [
+            [
+              "0.1562850",
+              "0.9046910"
             ]
+          ]
         },
-        "2": {
-            "element_references": [
-                "binkley1980a"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "13.6267000",
-                        "1.9993500"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "0.1752300",
-                            "0.8934830"
-                        ]
-                    ]
-                },
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.3829930"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.0000000"
-                        ]
-                    ]
-                }
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.1831920"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
             ]
+          ]
         }
+      ]
+    },
+    "2": {
+      "references": [
+        "binkley1980a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "13.6267000",
+            "1.9993500"
+          ],
+          "coefficients": [
+            [
+              "0.1752300",
+              "0.8934830"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.3829930"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
     }
+  }
 }

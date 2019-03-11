@@ -30,13 +30,13 @@ def read_gbasis(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        if not element_Z in bs_data['basis_set_elements']:
-            bs_data['basis_set_elements'][element_Z] = {}
+        if not element_Z in bs_data['elements']:
+            bs_data['elements'][element_Z] = {}
 
-        element_data = bs_data['basis_set_elements'][element_Z]
+        element_data = bs_data['elements'][element_Z]
 
-        if not 'element_electron_shells' in element_data:
-            element_data['element_electron_shells'] = []
+        if not 'electron_shells' in element_data:
+            element_data['electron_shells'] = []
 
         i += 1
 
@@ -53,10 +53,10 @@ def read_gbasis(basis_lines, fname):
                 raise RuntimeError("AM out of order in gbasis?")
 
             shell = {
-                'shell_function_type': 'gto',
-                'shell_harmonic_type': 'spherical',
-                'shell_region': 'valence',
-                'shell_angular_momentum': shell_am
+                'function_type': 'gto',
+                'harmonic_type': 'spherical',
+                'region': 'valence',
+                'angular_momentum': shell_am
             }
 
             exponents = []
@@ -75,13 +75,13 @@ def read_gbasis(basis_lines, fname):
                 coefficients.append(lsplt[1:])
                 i += 1
 
-            shell['shell_exponents'] = exponents
+            shell['exponents'] = exponents
 
             # We need to transpose the coefficient matrix
             # (we store a matrix with primitives being the column index and
             # general contraction being the row index)
-            shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
+            shell['coefficients'] = list(map(list, zip(*coefficients)))
 
-            element_data['element_electron_shells'].append(shell)
+            element_data['electron_shells'].append(shell)
 
     return bs_data

@@ -1,20 +1,20 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "element",
-        "schema_version": "0.1"
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "5-21G",
+  "description": "5-21G Split-valence basis set",
+  "elements": {
+    "3": {
+      "element_components": [
+        "pople/21G/5-21G.1.json"
+      ]
     },
-    "basis_set_name": "5-21G",
-    "basis_set_description": "5-21G Split-valence basis set",
-    "basis_set_elements": {
-        "3": {
-            "element_components": [
-                "pople/21G/5-21G.1.json"
-            ]
-        },
-        "4": {
-            "element_components": [
-                "pople/21G/5-21G.1.json"
-            ]
-        }
+    "4": {
+      "element_components": [
+        "pople/21G/5-21G.1.json"
+      ]
     }
+  }
 }

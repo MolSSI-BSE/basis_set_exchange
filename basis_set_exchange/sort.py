@@ -31,27 +31,27 @@ def sort_basis_dict(bs):
          'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftjfit',
 
         # Basis set metadata
-        'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_role', 'basis_set_auxiliaries',
-        'basis_set_notes', 'basis_set_function_types',
+        'name', 'family', 'description', 'role', 'auxiliaries',
+        'notes', 'basis_set_function_types',
 
         # Reference stuff
         'reference_description', 'reference_keys',
 
         # Version metadata
-        'basis_set_version', 'basis_set_revision_description',
+        'basis_set_version', 'revision_description',
 
         # Sources of components
-        'basis_set_data_source',
+        'data_source',
 
         # Elements and data
-        'basis_set_elements', 'element_references', 'element_ecp_electrons',
-        'element_electron_shells', 'element_ecp', 'element_components', 'element_entry',
+        'elements', 'references', 'element_ecp_electrons',
+        'electron_shells', 'ecp_potentials', 'element_components', 'element_entry',
 
         # Shell information
-        'shell_function_type', 'shell_harmonic_type', 'shell_region', 'shell_angular_momentum', 'shell_exponents',
-        'shell_coefficients',
-        'potential_ecp_type', 'potential_angular_momentum', 'potential_r_exponents', 'potential_gaussian_exponents',
-        'potential_coefficients'
+        'function_type', 'harmonic_type', 'region', 'angular_momentum', 'exponents',
+        'coefficients',
+        'ecp_type', 'angular_momentum', 'r_exponents', 'gaussian_exponents',
+        'coefficients'
     ]
     # yapf: enable
 

@@ -122,9 +122,9 @@ def get_formats(function_types=None):
     ftypes = set(ftypes)
     ret = []
 
-    for fmt,v in _converter_map.items():
+    for fmt, v in _converter_map.items():
         if v['valid'] is None or ftypes <= v['valid']:
-           ret.append(fmt) 
+            ret.append(fmt)
     return ret
 
 

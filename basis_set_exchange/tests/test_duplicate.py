@@ -15,10 +15,10 @@ def _test_duplicates(bs_dict):
     '''
 
     found_dupe = False
-    for el, eldata in bs_dict['basis_set_elements'].items():
-        if 'element_electron_shells' in eldata:
+    for el, eldata in bs_dict['elements'].items():
+        if 'electron_shells' in eldata:
             # Quick and dirty
-            shells = eldata['element_electron_shells']
+            shells = eldata['electron_shells']
 
             for sh in shells:
                 if shells.count(sh) != 1:
@@ -26,8 +26,8 @@ def _test_duplicates(bs_dict):
                     found_dupe = True
                     break
 
-        if 'element_ecp' in eldata:
-            pots = eldata['element_ecp']
+        if 'ecp_potentials' in eldata:
+            pots = eldata['ecp_potentials']
 
             for pot in pots:
                 if pots.count(pot) != 1:

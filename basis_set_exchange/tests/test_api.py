@@ -50,11 +50,11 @@ def test_get_basis_2(basis_name):
             selected_elements[idx] = str(selected_elements[idx])
 
     bs = bse.get_basis(basis_name, elements=selected_elements)
-    assert len(bs['basis_set_elements']) == len(selected_elements)
+    assert len(bs['elements']) == len(selected_elements)
 
     # Try to get as an integer
     bs = bse.get_basis(basis_name, elements=int(selected_elements[0]))
-    assert len(bs['basis_set_elements']) == 1
+    assert len(bs['elements']) == 1
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)

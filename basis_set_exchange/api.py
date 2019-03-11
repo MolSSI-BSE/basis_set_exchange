@@ -66,11 +66,11 @@ def _header_string(basis_dict):
     header += ' Version ' + version() + '\n'
     header += ' ' + _main_url + '\n'
     header += '-' * 70 + '\n'
-    header += '   Basis set: ' + basis_dict['basis_set_name'] + '\n'
-    header += tw.fill(' Description: ' + basis_dict['basis_set_description']) + '\n'
-    header += '        Role: ' + basis_dict['basis_set_role'] + '\n'
+    header += '   Basis set: ' + basis_dict['name'] + '\n'
+    header += tw.fill(' Description: ' + basis_dict['description']) + '\n'
+    header += '        Role: ' + basis_dict['role'] + '\n'
     header += tw.fill('     Version: {}  ({})'.format(basis_dict['basis_set_version'],
-                                                      basis_dict['basis_set_revision_description'])) + '\n'
+                                                      basis_dict['revision_description'])) + '\n'
     header += '-' * 70 + '\n'
 
     return header
@@ -183,7 +183,7 @@ def get_basis(name,
         # Did the user pass an empty string or empty list? If so, include
         # all elements
         if len(elements) != 0:
-            bs_elements = basis_dict['basis_set_elements']
+            bs_elements = basis_dict['elements']
 
             # Are elements part of this basis set?
             for el in elements:
@@ -192,7 +192,7 @@ def get_basis(name,
                     raise KeyError("Element {} (Z={}) not found in basis {}".format(elsym, el, name))
 
             # Set to only the elements we want
-            basis_dict['basis_set_elements'] = {k: v for k, v in bs_elements.items() if k in elements}
+            basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
     needs_pruning = False
     if optimize_general:

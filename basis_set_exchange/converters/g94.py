@@ -18,26 +18,26 @@ def write_g94(basis):
     basis = manip.sort_basis(basis)
 
     # Elements for which we have electron basis
-    electron_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_electron_shells' in v]
+    electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]
 
     # Elements for which we have ECP
-    ecp_elements = [k for k, v in basis['basis_set_elements'].items() if 'element_ecp' in v]
+    ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
     if len(electron_elements) > 0:
         for z in electron_elements:
-            data = basis['basis_set_elements'][z]
+            data = basis['elements'][z]
 
             sym = lut.element_sym_from_Z(z, True)
             s += '{}     0\n'.format(sym)
 
-            for shell in data['element_electron_shells']:
-                exponents = shell['shell_exponents']
-                coefficients = shell['shell_coefficients']
+            for shell in data['electron_shells']:
+                exponents = shell['exponents']
+                coefficients = shell['coefficients']
                 ncol = len(coefficients) + 1
                 nprim = len(exponents)
 
-                am = shell['shell_angular_momentum']
+                am = shell['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True).upper()
                 s += '{}   {}   1.00\n'.format(amchar, nprim)
 
@@ -49,25 +49,25 @@ def write_g94(basis):
     # Write out ECP
     if len(ecp_elements) > 0:
         for z in ecp_elements:
-            data = basis['basis_set_elements'][z]
+            data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z).upper()
-            max_ecp_am = max([x['potential_angular_momentum'][0] for x in data['element_ecp']])
+            max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
             max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
 
             # Sort lowest->highest, then put the highest at the beginning
-            ecp_list = sorted(data['element_ecp'], key=lambda x: x['potential_angular_momentum'])
+            ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
             s += '{}     0\n'.format(sym)
             s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
 
             for pot in ecp_list:
-                rexponents = pot['potential_r_exponents']
-                gexponents = pot['potential_gaussian_exponents']
-                coefficients = pot['potential_coefficients']
+                rexponents = pot['r_exponents']
+                gexponents = pot['gaussian_exponents']
+                coefficients = pot['coefficients']
                 nprim = len(rexponents)
 
-                am = pot['potential_angular_momentum']
+                am = pot['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True)
 
                 if am[0] == max_ecp_am:

@@ -12,19 +12,19 @@ def print_electron_shell(shell, shellidx=None):
 
     If shellidx (index of the shell) is not None, it will also be printed
     '''
-    am = shell['shell_angular_momentum']
+    am = shell['angular_momentum']
     amchar = lut.amint_to_char(am)
     amchar = amchar.upper()
 
     if shellidx is not None:
         shellidx = ''
 
-    exponents = shell['shell_exponents']
-    coefficients = shell['shell_coefficients']
+    exponents = shell['exponents']
+    coefficients = shell['coefficients']
     ncol = len(coefficients) + 1
 
     point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
-    print("Shell {} '{}': AM {} ({})".format(shellidx, shell['shell_region'], am, amchar))
+    print("Shell {} '{}': AM {} ({})".format(shellidx, shell['region'], am, amchar))
     print(write_matrix([exponents, *coefficients], point_places))
 
 
@@ -32,12 +32,12 @@ def print_ecp_pot(pot):
     '''Print the data for an ECP potential
     '''
 
-    am = pot['potential_angular_momentum']
+    am = pot['angular_momentum']
     amchar = lut.amint_to_char(am)
 
-    rexponents = pot['potential_r_exponents']
-    gexponents = pot['potential_gaussian_exponents']
-    coefficients = pot['potential_coefficients']
+    rexponents = pot['r_exponents']
+    gexponents = pot['gaussian_exponents']
+    coefficients = pot['coefficients']
 
     point_places = [0, 10, 33]
     print('Potential: {} potential'.format(amchar))
@@ -61,23 +61,23 @@ def print_element(z, eldata, print_references=True):
     print('Element: {}   Contraction: {}'.format(sym, contraction_string(eldata)))
 
     if print_references:
-        if 'element_references' in eldata:
+        if 'references' in eldata:
             print('References:')
-            for x in eldata['element_references']:
+            for x in eldata['references']:
                 print('    ' + ', '.join(x['reference_keys']))
                 print('        ' + x['reference_description'])
         else:
             print('References: NONE')
 
-    if 'element_electron_shells' in eldata:
-        for shellidx, shell in enumerate(eldata['element_electron_shells']):
+    if 'electron_shells' in eldata:
+        for shellidx, shell in enumerate(eldata['electron_shells']):
             print_electron_shell(shell, shellidx)
 
-    if 'element_ecp' in eldata:
+    if 'ecp_potentials' in eldata:
         print('ECP: Element: {}   Number of electrons: {}'.format(sym, eldata['element_ecp_electrons']))
 
         # Sort lowest->highest, then put the highest at the beginning
-        ecp_list = sorted(eldata['element_ecp'], key=lambda x: x['potential_angular_momentum'])
+        ecp_list = sorted(eldata['ecp_potentials'], key=lambda x: x['angular_momentum'])
         ecp_list.insert(0, ecp_list.pop())
 
         for pot in ecp_list:
@@ -90,9 +90,9 @@ def print_component_basis(basis, elements=None):
     If elements is not None, only the specified elements will be printed
     (list of integers)
     '''
-    print("Description: " + basis['basis_set_description'])
+    print("Description: " + basis['description'])
 
-    eldata = basis['basis_set_elements']
+    eldata = basis['elements']
 
     # Filter to the given elements
     if elements is None:
@@ -111,10 +111,10 @@ def print_element_basis(basis, elements=None):
     If elements is not None, only the specified elements will be printed
     (list of integers)
     '''
-    print("Basis set: " + basis['basis_set_name'])
-    print("Description: " + basis['basis_set_description'])
+    print("Basis set: " + basis['name'])
+    print("Description: " + basis['description'])
 
-    eldata = basis['basis_set_elements']
+    eldata = basis['elements']
 
     if elements is None:
         elements = list(eldata.keys())
@@ -142,10 +142,10 @@ def print_table_basis(basis, elements=None):
     (list of integers)
     '''
 
-    print("Revision Description: " + basis['basis_set_revision_description'])
+    print("Revision Description: " + basis['revision_description'])
     print()
 
-    eldata = basis['basis_set_elements']
+    eldata = basis['elements']
 
     if elements is None:
         elements = list(eldata.keys())

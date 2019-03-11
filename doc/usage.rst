@@ -43,12 +43,12 @@ and can be obtained via :func:`basis_set_exchange.get_formats`
 
    >>> # Get a basis set as a python dictionary
    >>> bs_dict = basis_set_exchange.get_basis('6-31G*')
-   >>> bs_dict['basis_set_name']
+   >>> bs_dict['name']
    '6-31G*'
 
    >>> # Basis set names are case insensitive
    >>> bs_dict = basis_set_exchange.get_basis('6-31g*')
-   >>> bs_dict['basis_set_name']
+   >>> bs_dict['name']
    '6-31G*'
 
    >>> # Same as above, but in gaussian format (as a string)

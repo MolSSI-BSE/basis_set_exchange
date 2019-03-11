@@ -37,22 +37,19 @@ def diff_basis_dict(left_list, right_list):
     for bs1 in left_list:
         res = copy.deepcopy(bs1)
         for bs2 in right_list:
-            for el in res['basis_set_elements'].keys():
-                if not el in bs2['basis_set_elements']:
+            for el in res['elements'].keys():
+                if not el in bs2['elements']:
                     continue  # Element only exist in left
 
-                eldata1 = res['basis_set_elements'][el]
-                eldata2 = bs2['basis_set_elements'][el]
+                eldata1 = res['elements'][el]
+                eldata2 = bs2['elements'][el]
 
-                s1 = eldata1['element_electron_shells']
-                s2 = eldata2['element_electron_shells']
-                eldata1['element_electron_shells'] = subtract_electron_shells(s1, s2)
+                s1 = eldata1['electron_shells']
+                s2 = eldata2['electron_shells']
+                eldata1['electron_shells'] = subtract_electron_shells(s1, s2)
 
         # Remove any empty elements
-        res['basis_set_elements'] = {
-            k: v
-            for k, v in res['basis_set_elements'].items() if len(v['element_electron_shells']) > 0
-        }
+        res['elements'] = {k: v for k, v in res['elements'].items() if len(v['electron_shells']) > 0}
         ret.append(res)
 
     return ret

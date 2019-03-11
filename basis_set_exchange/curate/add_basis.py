@@ -69,7 +69,7 @@ def add_basis(bs_file,
 
     # Read the basis set data into a component file, and add the description
     bs_data = read_formatted_basis(bs_file, file_fmt)
-    bs_data['basis_set_description'] = description
+    bs_data['description'] = description
 
     if refs is None:
         refs = []
@@ -78,16 +78,16 @@ def add_basis(bs_file,
     # information. We keep track of which elements we've done so that
     # we can detect duplicates in the references (which would be an error)
     # (and also handle elements with no reference)
-    orig_elements = bs_data['basis_set_elements']
+    orig_elements = bs_data['elements']
     done_elements = []
 
     # If a string or list of strings, use that as a reference for all elements
     if isinstance(refs, str):
-        for k, v in bs_data['basis_set_elements'].items():
-            v['element_references'] = [refs]
+        for k, v in bs_data['elements'].items():
+            v['references'] = [refs]
     elif isinstance(refs, list):
-        for k, v in bs_data['basis_set_elements'].items():
-            v['element_references'] = refs
+        for k, v in bs_data['elements'].items():
+            v['references'] = refs
     else:
         for k, v in refs.items():
             # Expand the string a list of integers (as strings)
@@ -102,9 +102,9 @@ def add_basis(bs_file,
                     raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
 
                 if isinstance(v, str):
-                    bs_data['basis_set_elements'][el]['element_references'] = [v]
+                    bs_data['elements'][el]['references'] = [v]
                 else:
-                    bs_data['basis_set_elements'][el]['element_references'] = v
+                    bs_data['elements'][el]['references'] = v
 
             done_elements.extend(elements)
 
@@ -113,26 +113,26 @@ def add_basis(bs_file,
 
         if len(noref_elements) > 0:
             for el in noref_elements:
-                bs_data['basis_set_elements'][el]['element_references'] = []
+                bs_data['elements'][el]['references'] = []
 
     # Start the data files for the element and table json
     element_file_data = create_skel('element')
-    element_file_data['basis_set_name'] = name
-    element_file_data['basis_set_description'] = description
+    element_file_data['name'] = name
+    element_file_data['description'] = description
     element_file_name = '{}.{}.element.json'.format(file_base, version)
     element_file_relpath = os.path.join(subdir, element_file_name)
     element_file_path = os.path.join(data_dir, element_file_relpath)
 
     table_file_data = create_skel('table')
-    table_file_data['basis_set_revision_description'] = revision_description
+    table_file_data['revision_description'] = revision_description
     table_file_name = '{}.{}.table.json'.format(file_base, version)
 
     # and the metadata file
     meta_file_data = create_skel('metadata')
-    meta_file_data['basis_set_name'] = name
-    meta_file_data['basis_set_family'] = family
-    meta_file_data['basis_set_description'] = description
-    meta_file_data['basis_set_role'] = role
+    meta_file_data['name'] = name
+    meta_file_data['family'] = family
+    meta_file_data['description'] = description
+    meta_file_data['role'] = role
     meta_file_name = '{}.metadata.json'.format(file_base)
 
     # These get created directly in the top-level data directory
@@ -141,7 +141,7 @@ def add_basis(bs_file,
 
     # Can just make all the entries for the table file pretty easily
     table_file_entry = {'element_entry': element_file_relpath}
-    table_file_data['basis_set_elements'] = {k: table_file_entry for k in bs_data['basis_set_elements'].keys()}
+    table_file_data['elements'] = {k: table_file_entry for k in bs_data['elements'].keys()}
 
     # Create the filenames for the components
     # Also keep track of where data for each element is (for the element and table files)
@@ -152,8 +152,8 @@ def add_basis(bs_file,
     # Add to the element file data
     # (we add the relative path to the location of the element file,
     # which resides in subdir)
-    for el in bs_data['basis_set_elements'].keys():
-        element_file_data['basis_set_elements'][el] = {'element_components': [component_file_relpath]}
+    for el in bs_data['elements'].keys():
+        element_file_data['elements'][el] = {'element_components': [component_file_relpath]}
 
     # Verify all data using the schema
     validate_data('component', bs_data)

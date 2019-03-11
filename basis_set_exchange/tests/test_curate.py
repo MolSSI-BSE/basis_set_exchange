@@ -23,10 +23,10 @@ from .common_testvars import data_dir, test_data_dir
                          ])
 # yapf: enable
 def test_electron_subset(basis1, basis2, element, expected):
-    el1 = api.get_basis(basis1)['basis_set_elements'][element]
-    el2 = api.get_basis(basis2)['basis_set_elements'][element]
-    shells1 = el1['element_electron_shells']
-    shells2 = el2['element_electron_shells']
+    el1 = api.get_basis(basis1)['elements'][element]
+    el2 = api.get_basis(basis2)['elements'][element]
+    shells1 = el1['electron_shells']
+    shells2 = el2['electron_shells']
     assert curate.electron_shells_are_subset(shells1, shells2, True) == expected
 
 
@@ -41,10 +41,10 @@ def test_electron_subset(basis1, basis2, element, expected):
                          ])
 # yapf: enable
 def test_electron_equal(basis1, basis2, element, expected):
-    el1 = api.get_basis(basis1)['basis_set_elements'][element]
-    el2 = api.get_basis(basis2)['basis_set_elements'][element]
-    shells1 = el1['element_electron_shells']
-    shells2 = el2['element_electron_shells']
+    el1 = api.get_basis(basis1)['elements'][element]
+    el2 = api.get_basis(basis2)['elements'][element]
+    shells1 = el1['electron_shells']
+    shells2 = el2['electron_shells']
     assert curate.electron_shells_are_equal(shells1, shells2, True) == expected
     assert curate.electron_shells_are_equal(shells2, shells1, True) == expected
 
@@ -60,10 +60,10 @@ def test_electron_equal(basis1, basis2, element, expected):
                          ])
 # yapf: enable
 def test_ecp_equal(basis1, basis2, element, expected):
-    el1 = api.get_basis(basis1)['basis_set_elements'][element]
-    el2 = api.get_basis(basis2)['basis_set_elements'][element]
-    ecps1 = el1['element_ecp']
-    ecps2 = el2['element_ecp']
+    el1 = api.get_basis(basis1)['elements'][element]
+    el2 = api.get_basis(basis2)['elements'][element]
+    ecps1 = el1['ecp_potentials']
+    ecps2 = el2['ecp_potentials']
     assert curate.ecp_pots_are_equal(ecps1, ecps2, True) == expected
 
 
@@ -84,8 +84,8 @@ def test_ecp_equal(basis1, basis2, element, expected):
                          ])
 # yapf: enable
 def test_compare_elements(basis1, basis2, element, expected):
-    el1 = api.get_basis(basis1)['basis_set_elements'][element]
-    el2 = api.get_basis(basis2)['basis_set_elements'][element]
+    el1 = api.get_basis(basis1)['elements'][element]
+    el2 = api.get_basis(basis2)['elements'][element]
     assert curate.compare_elements(el1, el2, True, True, True) == expected
     assert curate.compare_elements(el2, el1, True, True, True) == expected
 
@@ -99,13 +99,13 @@ def test_compare_elements(basis1, basis2, element, expected):
                          ])
 # yapf: enable
 def test_printing(basis, element):
-    el = api.get_basis(basis)['basis_set_elements'][element]
+    el = api.get_basis(basis)['elements'][element]
 
-    shells = el['element_electron_shells']
+    shells = el['electron_shells']
     curate.print_electron_shell(shells[0])
 
-    if 'element_ecp' in el:
-        ecps = el['element_ecp']
+    if 'ecp_potentials' in el:
+        ecps = el['ecp_potentials']
         curate.print_ecp_pot(ecps[0])
 
     curate.print_element(element, el)
@@ -162,7 +162,7 @@ def test_diff_json_files_same(tmp_path):
     assert os.path.isfile(diff_file)
 
     diff_data = fileio.read_json_basis(diff_file)
-    assert len(diff_data['basis_set_elements']) == 0
+    assert len(diff_data['elements']) == 0
 
 
 def test_diff_json_files(tmp_path):
@@ -186,8 +186,8 @@ def test_diff_json_files(tmp_path):
     diff1 = fileio.read_json_basis(tmpfile1 + '.diff')
     diff2 = fileio.read_json_basis(tmpfile2 + '.diff')
 
-    assert len(diff1['basis_set_elements']) == 36
-    assert len(diff2['basis_set_elements']) == 0
+    assert len(diff1['elements']) == 36
+    assert len(diff2['elements']) == 0
 
     reffilename = '6-31G**-polarization.json.bz2' 
     reffile = os.path.join(test_data_dir, reffilename)

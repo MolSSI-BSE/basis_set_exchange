@@ -8,8 +8,8 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_schema",
-        "basis_set_revision_description",
-        "basis_set_elements"
+        "revision_description",
+        "elements"
     ],
     "properties":
     {
@@ -33,11 +33,11 @@
                 }
             }
         },
-        "basis_set_revision_description": {
+        "revision_description": {
             "description": "Brief description of the difference between this revision and the last",
             "type": "string"
         },
-        "basis_set_elements": {
+        "elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
             "additionalProperties": false,

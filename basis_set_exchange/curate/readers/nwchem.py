@@ -35,18 +35,18 @@ def read_nwchem(basis_lines, fname):
                 element_Z = lut.element_Z_from_sym(elementsym)
                 element_Z = str(element_Z)
 
-                if not element_Z in bs_data['basis_set_elements']:
-                    bs_data['basis_set_elements'][element_Z] = {}
-                if not 'element_electron_shells' in bs_data['basis_set_elements'][element_Z]:
-                    bs_data['basis_set_elements'][element_Z]['element_electron_shells'] = []
+                if not element_Z in bs_data['elements']:
+                    bs_data['elements'][element_Z] = {}
+                if not 'electron_shells' in bs_data['elements'][element_Z]:
+                    bs_data['elements'][element_Z]['electron_shells'] = []
 
-                element_data = bs_data['basis_set_elements'][element_Z]
+                element_data = bs_data['elements'][element_Z]
 
                 shell = {
-                    'shell_function_type': 'gto',
-                    'shell_harmonic_type': 'spherical',
-                    'shell_region': 'valence',
-                    'shell_angular_momentum': shell_am
+                    'function_type': 'gto',
+                    'harmonic_type': 'spherical',
+                    'region': 'valence',
+                    'angular_momentum': shell_am
                 }
 
                 exponents = []
@@ -64,14 +64,14 @@ def read_nwchem(basis_lines, fname):
                     coefficients.append(lsplt[1:])
                     i += 1
 
-                shell['shell_exponents'] = exponents
+                shell['exponents'] = exponents
 
                 # We need to transpose the coefficient matrix
                 # (we store a matrix with primitives being the column index and
                 # general contraction being the row index)
-                shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
+                shell['coefficients'] = list(map(list, zip(*coefficients)))
 
-                element_data['element_electron_shells'].append(shell)
+                element_data['electron_shells'].append(shell)
 
         elif line.lower().startswith('ecp'):
             i += 1
@@ -85,10 +85,10 @@ def read_nwchem(basis_lines, fname):
                     element_Z = lut.element_Z_from_sym(elementsym)
                     element_Z = str(element_Z)
 
-                    if not element_Z in bs_data['basis_set_elements']:
-                        bs_data['basis_set_elements'][element_Z] = {}
-                    if not 'element_ecp_electrons' in bs_data['basis_set_elements'][element_Z]:
-                        bs_data['basis_set_elements'][element_Z]['element_ecp_electrons'] = n_elec
+                    if not element_Z in bs_data['elements']:
+                        bs_data['elements'][element_Z] = {}
+                    if not 'element_ecp_electrons' in bs_data['elements'][element_Z]:
+                        bs_data['elements'][element_Z]['element_ecp_electrons'] = n_elec
 
                     i += 1
                     continue
@@ -106,13 +106,13 @@ def read_nwchem(basis_lines, fname):
                 element_Z = lut.element_Z_from_sym(elementsym)
                 element_Z = str(element_Z)
 
-                if not element_Z in bs_data['basis_set_elements']:
-                    bs_data['basis_set_elements'][element_Z] = {}
-                if not 'element_ecp' in bs_data['basis_set_elements'][element_Z]:
-                    bs_data['basis_set_elements'][element_Z]['element_ecp'] = []
-                element_data = bs_data['basis_set_elements'][element_Z]
+                if not element_Z in bs_data['elements']:
+                    bs_data['elements'][element_Z] = {}
+                if not 'ecp_potentials' in bs_data['elements'][element_Z]:
+                    bs_data['elements'][element_Z]['ecp_potentials'] = []
+                element_data = bs_data['elements'][element_Z]
 
-                ecp_shell = {'potential_angular_momentum': shell_am, 'potential_ecp_type': 'scalar'}
+                ecp_shell = {'angular_momentum': shell_am, 'ecp_type': 'scalar'}
 
                 rexponents = []
                 gexponents = []
@@ -131,30 +131,30 @@ def read_nwchem(basis_lines, fname):
                     coefficients.append(lsplt[2:])
                     i += 1
 
-                ecp_shell['potential_r_exponents'] = rexponents
-                ecp_shell['potential_gaussian_exponents'] = gexponents
+                ecp_shell['r_exponents'] = rexponents
+                ecp_shell['gaussian_exponents'] = gexponents
 
                 # We need to transpose the coefficient matrix
                 # (we store a matrix with primitives being the column index and
                 # general contraction being the row index)
-                ecp_shell['potential_coefficients'] = list(map(list, zip(*coefficients)))
+                ecp_shell['coefficients'] = list(map(list, zip(*coefficients)))
 
-                element_data['element_ecp'].append(ecp_shell)
+                element_data['ecp_potentials'].append(ecp_shell)
         i += 1
 
         # Fix ecp angular momentum now that everything has been read
-        for el, v in bs_data['basis_set_elements'].items():
-            if not 'element_ecp' in v:
+        for el, v in bs_data['elements'].items():
+            if not 'ecp_potentials' in v:
                 continue
 
             max_ecp_am = -1
-            for s in v['element_ecp']:
-                if s['potential_angular_momentum'] == -1:
+            for s in v['ecp_potentials']:
+                if s['angular_momentum'] == -1:
                     continue
-                max_ecp_am = max(max_ecp_am, max(s['potential_angular_momentum']))
+                max_ecp_am = max(max_ecp_am, max(s['angular_momentum']))
 
-            for s in v['element_ecp']:
-                if s['potential_angular_momentum'] == -1:
-                    s['potential_angular_momentum'] = [max_ecp_am + 1]
+            for s in v['ecp_potentials']:
+                if s['angular_momentum'] == -1:
+                    s['angular_momentum'] = [max_ecp_am + 1]
 
     return bs_data

@@ -50,17 +50,17 @@ def _fix_uncontracted(basis):
     Forces the contraction coefficient of uncontracted shells to 1.0
     '''
 
-    for el in basis['basis_set_elements'].values():
-        if 'element_electron_shells' not in el:
+    for el in basis['elements'].values():
+        if 'electron_shells' not in el:
             continue
 
-        for sh in el['element_electron_shells']:
-            if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
-                sh['shell_coefficients'][0][0] = '1.0000000'
+        for sh in el['electron_shells']:
+            if len(sh['coefficients']) == 1 and len(sh['coefficients'][0]) == 1:
+                sh['coefficients'][0][0] = '1.0000000'
 
             # Some uncontracted shells don't have a coefficient
-            if len(sh['shell_coefficients']) == 0:
-                sh['shell_coefficients'].append(['1.0000000'])
+            if len(sh['coefficients']) == 0:
+                sh['coefficients'].append(['1.0000000'])
 
     return basis
 

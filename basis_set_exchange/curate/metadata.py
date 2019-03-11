@@ -35,8 +35,8 @@ def create_metadata_file(output_path, data_dir):
         bs = compose_table_basis(bs_file_relpath, data_dir)
 
         # Prepare the metadata
-        tr_name = transform_basis_name(bs['basis_set_name'])
-        defined_elements = sorted(list(bs['basis_set_elements'].keys()), key=lambda x: int(x))
+        tr_name = transform_basis_name(bs['name'])
+        defined_elements = sorted(list(bs['elements'].keys()), key=lambda x: int(x))
 
         # Determine the types of functions contained in the basis
         # (gto, ecp, etc)
@@ -45,7 +45,7 @@ def create_metadata_file(output_path, data_dir):
         # Create the metadata for this specific version
         # yapf: disable
         version_meta = OrderedDict([('file_relpath', bs_file_relpath),
-                                    ('revdesc', bs['basis_set_revision_description']),
+                                    ('revdesc', bs['revision_description']),
                                     ('elements', defined_elements)])
         # yapf: enable
 
@@ -55,15 +55,15 @@ def create_metadata_file(output_path, data_dir):
             # for this entry
             # yapf: disable
             metadata[tr_name] = OrderedDict([
-                                 ('display_name', bs['basis_set_name']),
-                                 ('description', bs['basis_set_description']),
+                                 ('display_name', bs['name']),
+                                 ('description', bs['description']),
                                  ('latest_version', None),
                                  ('basename', table_filebase),
                                  ('relpath', table_relpath),
-                                 ('family', bs['basis_set_family']),
-                                 ('role', bs['basis_set_role']),
+                                 ('family', bs['family']),
+                                 ('role', bs['role']),
                                  ('functiontypes', function_types),
-                                 ('auxiliaries', bs['basis_set_auxiliaries']),
+                                 ('auxiliaries', bs['auxiliaries']),
                                  ('versions', {ver: version_meta})])
             # yapf: enable
 

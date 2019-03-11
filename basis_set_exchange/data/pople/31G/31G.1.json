@@ -1,96 +1,96 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "component",
-        "schema_version": "0.1"
-    },
-    "basis_set_description": "31G Split-valence basis set for H,He",
-    "basis_set_data_source": "TODO",
-    "basis_set_elements": {
-        "1": {
-            "element_references": [
-                "ditchfield1971a"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.1873113696E+02",
-                        "0.2825394365E+01",
-                        "0.6401216923E+00"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "0.3349460434E-01",
-                            "0.2347269535E+00",
-                            "0.8137573261E+00"
-                        ]
-                    ]
-                },
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.1612777588E+00"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.0000000"
-                        ]
-                    ]
-                }
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "31G Split-valence basis set for H,He",
+  "data_source": "TODO",
+  "elements": {
+    "1": {
+      "references": [
+        "ditchfield1971a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.1873113696E+02",
+            "0.2825394365E+01",
+            "0.6401216923E+00"
+          ],
+          "coefficients": [
+            [
+              "0.3349460434E-01",
+              "0.2347269535E+00",
+              "0.8137573261E+00"
             ]
+          ]
         },
-        "2": {
-            "element_references": [
-                "gaussian09e01"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.3842163400E+02",
-                        "0.5778030000E+01",
-                        "0.1241774000E+01"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "0.4013973935E-01",
-                            "0.2612460970E+00",
-                            "0.7931846246E+00"
-                        ]
-                    ]
-                },
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.2979640000E+00"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.0000000"
-                        ]
-                    ]
-                }
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.1612777588E+00"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
             ]
+          ]
         }
+      ]
+    },
+    "2": {
+      "references": [
+        "gaussian09e01"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.3842163400E+02",
+            "0.5778030000E+01",
+            "0.1241774000E+01"
+          ],
+          "coefficients": [
+            [
+              "0.4013973935E-01",
+              "0.2612460970E+00",
+              "0.7931846246E+00"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.2979640000E+00"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
     }
+  }
 }

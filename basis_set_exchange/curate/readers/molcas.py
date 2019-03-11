@@ -28,16 +28,16 @@ def read_molcas(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        if not element_Z in bs_data['basis_set_elements']:
-            bs_data['basis_set_elements'][element_Z] = {}
+        if not element_Z in bs_data['elements']:
+            bs_data['elements'][element_Z] = {}
 
-        element_data = bs_data['basis_set_elements'][element_Z]
+        element_data = bs_data['elements'][element_Z]
 
         if "ecp" in line.lower():
             raise NotImplementedError("MolCAS ECPs not supported")
 
-            #if not 'element_ecp' in element_data:
-            #    element_data['element_ecp'] = []
+            #if not 'ecp_potentials' in element_data:
+            #    element_data['ecp_potentials'] = []
 
             #i += 1
             #line = basis_lines[i]
@@ -58,8 +58,8 @@ def read_molcas(basis_lines, fname):
             #    i += 1
 
             #    ecp_shell = {
-            #        'potential_ecp_type': 'scalar',
-            #        'potential_angular_momentum': [shell_am],
+            #        'ecp_type': 'scalar',
+            #        'angular_momentum': [shell_am],
             #    }
             #    ecp_exponents = []
             #    ecp_rexponents = []
@@ -72,16 +72,16 @@ def read_molcas(basis_lines, fname):
             #        ecp_coefficients.append(lsplt[0])
             #        i += 1
 
-            #    ecp_shell['potential_r_exponents'] = ecp_rexponents
-            #    ecp_shell['potential_gaussian_exponents'] = ecp_exponents
-            #    ecp_shell['potential_coefficients'] = [ecp_coefficients]
-            #    element_data['element_ecp'].append(ecp_shell)
+            #    ecp_shell['r_exponents'] = ecp_rexponents
+            #    ecp_shell['gaussian_exponents'] = ecp_exponents
+            #    ecp_shell['coefficients'] = [ecp_coefficients]
+            #    element_data['ecp_potentials'].append(ecp_shell)
 
             #element_data['element_ecp_electrons'] = n_elec
 
         else:
-            if not 'element_electron_shells' in element_data:
-                element_data['element_electron_shells'] = []
+            if not 'electron_shells' in element_data:
+                element_data['electron_shells'] = []
 
             # Skip two comment lines (usually ref)
             i += 3
@@ -104,10 +104,10 @@ def read_molcas(basis_lines, fname):
                 i += 1
 
                 shell = {
-                    'shell_function_type': 'gto',
-                    'shell_harmonic_type': 'spherical',
-                    'shell_region': '',
-                    'shell_angular_momentum': [shell_am]
+                    'function_type': 'gto',
+                    'harmonic_type': 'spherical',
+                    'region': '',
+                    'angular_momentum': [shell_am]
                 }
 
                 exponents = []
@@ -135,14 +135,14 @@ def read_molcas(basis_lines, fname):
 
                     i += 1
 
-                shell['shell_exponents'] = exponents
+                shell['exponents'] = exponents
 
                 # We need to transpose the coefficient matrix
                 # (we store a matrix with primitives being the column index and
                 # general contraction being the row index)
-                shell['shell_coefficients'] = list(map(list, zip(*coefficients)))
+                shell['coefficients'] = list(map(list, zip(*coefficients)))
 
-                element_data['element_electron_shells'].append(shell)
+                element_data['electron_shells'].append(shell)
 
                 # Skip energies?
                 to_skip = int(basis_lines[i].strip())

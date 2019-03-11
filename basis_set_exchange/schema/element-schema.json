@@ -8,9 +8,9 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_schema",
-        "basis_set_name",
-        "basis_set_description",
-        "basis_set_elements"
+        "name",
+        "description",
+        "elements"
     ],
     "properties":
     {
@@ -34,19 +34,19 @@
                 }
             }
         },
-        "basis_set_name": {
+        "name": {
             "description": "Common name for the basis set",
             "type": "string"
         },
-        "basis_set_description": {
+        "description": {
             "description": "Brief description of the basis set",
             "type": "string"
         },
-        "basis_set_notes": {
+        "notes": {
             "description": "Any notes pertaining to this basis set",
             "type": "string"
         },
-        "basis_set_elements": {
+        "elements": {
             "description": "Data for the elements of the basis set",
             "type": "object",
             "additionalProperties": false,

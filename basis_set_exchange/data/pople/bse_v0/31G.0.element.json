@@ -1,20 +1,20 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "element",
-        "schema_version": "0.1"
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "31G",
+  "description": "31G valence double-zeta basis for H and He",
+  "elements": {
+    "1": {
+      "element_components": [
+        "pople/bse_v0/31G.0.json"
+      ]
     },
-    "basis_set_name": "31G",
-    "basis_set_description": "31G valence double-zeta basis for H and He",
-    "basis_set_elements": {
-        "1": {
-            "element_components": [
-                "pople/bse_v0/31G.0.json"
-            ]
-        },
-        "2": {
-            "element_components": [
-                "pople/bse_v0/31G.0.json"
-            ]
-        }
+    "2": {
+      "element_components": [
+        "pople/bse_v0/31G.0.json"
+      ]
     }
+  }
 }

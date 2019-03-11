@@ -120,24 +120,24 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     If compare_meta is True, the metadata is also compared for exact equality. 
     '''
 
-    if shell1['shell_angular_momentum'] != shell2['shell_angular_momentum']:
+    if shell1['angular_momentum'] != shell2['angular_momentum']:
         return False
 
-    exponents1 = shell1['shell_exponents']
-    exponents2 = shell2['shell_exponents']
-    coefficients1 = shell1['shell_coefficients']
-    coefficients2 = shell2['shell_coefficients']
+    exponents1 = shell1['exponents']
+    exponents2 = shell2['exponents']
+    coefficients1 = shell1['coefficients']
+    coefficients2 = shell2['coefficients']
 
     if not _compare_vector(exponents1, exponents2, rel_tol):
         return False
     if not _compare_matrix(coefficients1, coefficients2, rel_tol):
         return False
     if compare_meta:
-        if shell1['shell_region'] != shell2['shell_region']:
+        if shell1['region'] != shell2['region']:
             return False
-        if shell1['shell_harmonic_type'] != shell2['shell_harmonic_type']:
+        if shell1['harmonic_type'] != shell2['harmonic_type']:
             return False
-        if shell1['shell_function_type'] != shell2['shell_function_type']:
+        if shell1['function_type'] != shell2['function_type']:
             return False
         return True
     else:
@@ -189,15 +189,15 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
     If compare_meta is True, the metadata is also compared for exact equality. 
     '''
 
-    if potential1['potential_angular_momentum'] != potential2['potential_angular_momentum']:
+    if potential1['angular_momentum'] != potential2['angular_momentum']:
         return False
 
-    rexponents1 = potential1['potential_r_exponents']
-    rexponents2 = potential2['potential_r_exponents']
-    gexponents1 = potential1['potential_gaussian_exponents']
-    gexponents2 = potential2['potential_gaussian_exponents']
-    coefficients1 = potential1['potential_coefficients']
-    coefficients2 = potential2['potential_coefficients']
+    rexponents1 = potential1['r_exponents']
+    rexponents2 = potential2['r_exponents']
+    gexponents1 = potential1['gaussian_exponents']
+    gexponents2 = potential2['gaussian_exponents']
+    coefficients1 = potential1['coefficients']
+    coefficients2 = potential2['coefficients']
 
     # integer comparison
     if rexponents1 != rexponents2:
@@ -207,7 +207,7 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
     if not _compare_matrix(coefficients1, coefficients2, rel_tol):
         return False
     if compare_meta:
-        if potential1['potential_ecp_type'] != potential2['potential_ecp_type']:
+        if potential1['ecp_type'] != potential2['ecp_type']:
             return False
         return True
     else:
@@ -278,18 +278,18 @@ def compare_elements(element1,
         Maximum relative error that is considered equal
     '''
 
-    if not _compare_keys(element1, element2, 'element_electron_shells', electron_shells_are_equal,
+    if not _compare_keys(element1, element2, 'electron_shells', electron_shells_are_equal,
                          compare_electron_shells_meta, rel_tol):
         return False
 
-    if not _compare_keys(element1, element2, 'element_ecp', ecp_pots_are_equal, compare_ecp_pots_meta, rel_tol):
+    if not _compare_keys(element1, element2, 'ecp_potentials', ecp_pots_are_equal, compare_ecp_pots_meta, rel_tol):
         return False
 
     if not _compare_keys(element1, element2, 'element_ecp_electrons', operator.eq):
         return False
 
     if compare_meta:
-        if not _compare_keys(element1, element2, 'element_references', operator.eq):
+        if not _compare_keys(element1, element2, 'references', operator.eq):
             return False
 
     return True
@@ -321,15 +321,15 @@ def compare_basis(bs1,
         Maximum relative error that is considered equal
     '''
 
-    els1 = sorted(list(bs1['basis_set_elements'].keys()))
-    els2 = sorted(list(bs2['basis_set_elements'].keys()))
+    els1 = sorted(list(bs1['elements'].keys()))
+    els2 = sorted(list(bs2['elements'].keys()))
     if not els1 == els2:
         return False
 
     for el in els1:
         if not compare_elements(
-                bs1['basis_set_elements'][el],
-                bs2['basis_set_elements'][el],
+                bs1['elements'][el],
+                bs2['elements'][el],
                 compare_electron_shells_meta=compare_electron_shells_meta,
                 compare_ecp_pots_meta=compare_ecp_pots_meta,
                 compare_meta=compare_elements_meta,
@@ -337,10 +337,7 @@ def compare_basis(bs1,
             print("Elements failed", el)
             return False
     if compare_meta:
-        for k in [
-                'basis_set_name', 'basis_set_family', 'basis_set_description', 'basis_set_revision_description',
-                'basis_set_role', 'basis_set_auxiliaries'
-        ]:
+        for k in ['name', 'family', 'description', 'revision_description', 'role', 'auxiliaries']:
             if not _compare_keys(bs1, bs2, k, operator.eq):
                 return False
     return True
@@ -368,31 +365,31 @@ def shells_difference(s1, s2):
         sh1 = shells1[n]
         sh2 = shells2[n]
 
-        if sh1['shell_angular_momentum'] != sh2['shell_angular_momentum']:
+        if sh1['angular_momentum'] != sh2['angular_momentum']:
             print("Different angular momentum for shell {}".format(n))
             return float('inf')
 
-        nprim = len(sh1['shell_exponents'])
-        if len(sh2['shell_exponents']) != nprim:
+        nprim = len(sh1['exponents'])
+        if len(sh2['exponents']) != nprim:
             print("Different number of primitives for shell {}".format(n))
             return float('inf')
 
-        ngen = len(sh1['shell_coefficients'])
-        if len(sh2['shell_coefficients']) != ngen:
+        ngen = len(sh1['coefficients'])
+        if len(sh2['coefficients']) != ngen:
             print("Different number of general contractions for shell {}".format(n))
             return float('inf')
 
         for p in range(nprim):
-            e1 = sh1['shell_exponents'][p]
-            e2 = sh2['shell_exponents'][p]
+            e1 = sh1['exponents'][p]
+            e2 = sh2['exponents'][p]
             r = _reldiff(e1, e2)
             if r > 0.0:
                 print("   Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
             max_rdiff = max(max_rdiff, r)
 
             for g in range(ngen):
-                c1 = sh1['shell_coefficients'][g][p]
-                c2 = sh2['shell_coefficients'][g][p]
+                c1 = sh1['coefficients'][g][p]
+                c2 = sh2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
                     print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
@@ -425,38 +422,38 @@ def potentials_difference(p1, p2):
         pot1 = pots1[n]
         pot2 = pots2[n]
 
-        if pot1['potential_angular_momentum'] != pot2['potential_angular_momentum']:
+        if pot1['angular_momentum'] != pot2['angular_momentum']:
             print("Different angular momentum for potential {}".format(n))
             return float('inf')
 
-        nprim = len(pot1['potential_gaussian_exponents'])
-        if len(pot2['potential_gaussian_exponents']) != nprim:
+        nprim = len(pot1['gaussian_exponents'])
+        if len(pot2['gaussian_exponents']) != nprim:
             print("Different number of primitives for potential {}".format(n))
             return float('inf')
 
-        ngen = len(pot1['potential_coefficients'])
-        if len(pot2['potential_coefficients']) != ngen:
+        ngen = len(pot1['coefficients'])
+        if len(pot2['coefficients']) != ngen:
             print("Different number of general contractions for potential {}".format(n))
             return float('inf')
 
         for p in range(nprim):
-            e1 = pot1['potential_gaussian_exponents'][p]
-            e2 = pot2['potential_gaussian_exponents'][p]
+            e1 = pot1['gaussian_exponents'][p]
+            e2 = pot2['gaussian_exponents'][p]
             r = _reldiff(e1, e2)
             if r > 0.0:
                 print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
             max_rdiff = max(max_rdiff, r)
 
-            e1 = pot1['potential_r_exponents'][p]
-            e2 = pot2['potential_r_exponents'][p]
+            e1 = pot1['r_exponents'][p]
+            e2 = pot2['r_exponents'][p]
             r = _reldiff(e1, e2)
             if r > 0.0:
                 print("          R Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
             max_rdiff = max(max_rdiff, r)
 
             for g in range(ngen):
-                c1 = pot1['potential_coefficients'][g][p]
-                c2 = pot2['potential_coefficients'][g][p]
+                c1 = pot1['coefficients'][g][p]
+                c2 = pot2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
                     print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))

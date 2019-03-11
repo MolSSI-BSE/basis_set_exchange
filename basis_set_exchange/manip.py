@@ -18,18 +18,18 @@ def contraction_string(element):
     """
 
     # Does not have electron shells (ECP only?)
-    if 'element_electron_shells' not in element:
+    if 'electron_shells' not in element:
         return ""
 
     cont_map = dict()
-    for sh in element['element_electron_shells']:
-        nprim = len(sh['shell_exponents'])
-        ngeneral = len(sh['shell_coefficients'])
+    for sh in element['electron_shells']:
+        nprim = len(sh['exponents'])
+        ngeneral = len(sh['coefficients'])
 
         # is a combined general contraction (sp, spd, etc)
-        is_spdf = len(sh['shell_angular_momentum']) > 1
+        is_spdf = len(sh['angular_momentum']) > 1
 
-        for am in sh['shell_angular_momentum']:
+        for am in sh['angular_momentum']:
             # If this a general contraction (and not combined am), then use that
             ncont = ngeneral if not is_spdf else 1
 
@@ -68,27 +68,27 @@ def merge_element_data(dest, sources):
 
     # Note that we are not copying notes/data_sources
     for s in sources:
-        if 'element_electron_shells' in s:
-            if 'element_electron_shells' not in ret:
-                ret['element_electron_shells'] = []
-            ret['element_electron_shells'].extend(s['element_electron_shells'])
-        if 'element_ecp' in s:
-            if 'element_ecp' in ret:
+        if 'electron_shells' in s:
+            if 'electron_shells' not in ret:
+                ret['electron_shells'] = []
+            ret['electron_shells'].extend(s['electron_shells'])
+        if 'ecp_potentials' in s:
+            if 'ecp_potentials' in ret:
                 raise RuntimeError('Cannot overwrite existing ECP')
-            ret['element_ecp'] = s['element_ecp']
+            ret['ecp_potentials'] = s['ecp_potentials']
             ret['element_ecp_electrons'] = s['element_ecp_electrons']
-        if 'element_references' in s:
-            if 'element_references' not in ret:
-                ret['element_references'] = []
-            for ref in s['element_references']:
-                if not ref in ret['element_references']:
-                    ret['element_references'].append(ref)
+        if 'references' in s:
+            if 'references' not in ret:
+                ret['references'] = []
+            for ref in s['references']:
+                if not ref in ret['references']:
+                    ret['references'].append(ref)
 
     # Sort the shells by angular momentum
     # Note that I don't sort ECP - ECP can't be composed, and
     # it should be sorted in the only source with ECP
-    if 'element_electron_shells' in ret:
-        ret['element_electron_shells'].sort(key=lambda x: x['shell_angular_momentum'])
+    if 'electron_shells' in ret:
+        ret['electron_shells'].sort(key=lambda x: x['angular_momentum'])
 
     return ret
 
@@ -106,21 +106,21 @@ def prune_basis(basis):
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
-        if not 'element_electron_shells' in el:
+    for k, el in new_basis['elements'].items():
+        if not 'electron_shells' in el:
             continue
 
-        for sh in el['element_electron_shells']:
+        for sh in el['electron_shells']:
             new_exponents = []
             new_coefficients = []
 
-            exponents = sh['shell_exponents']
+            exponents = sh['exponents']
 
             # transpose of the coefficient matrix
-            coeff_t = list(map(list, zip(*sh['shell_coefficients'])))
+            coeff_t = list(map(list, zip(*sh['coefficients'])))
 
             # only add if there is a nonzero contraction coefficient
-            for i in range(len(sh['shell_exponents'])):
+            for i in range(len(sh['exponents'])):
                 if not all([float(x) == 0.0 for x in coeff_t[i]]):
                     new_exponents.append(exponents[i])
                     new_coefficients.append(coeff_t[i])
@@ -129,16 +129,16 @@ def prune_basis(basis):
             # as the slowest index
             new_coefficients = list(map(list, zip(*new_coefficients)))
 
-            sh['shell_exponents'] = new_exponents
-            sh['shell_coefficients'] = new_coefficients
+            sh['exponents'] = new_exponents
+            sh['coefficients'] = new_coefficients
 
         # Remove any duplicates
-        shells = el.pop('element_electron_shells')
-        el['element_electron_shells'] = []
+        shells = el.pop('electron_shells')
+        el['electron_shells'] = []
 
         for sh in shells:
-            if sh not in el['element_electron_shells']:
-                el['element_electron_shells'].append(sh)
+            if sh not in el['electron_shells']:
+                el['electron_shells'].append(sh)
 
     return new_basis
 
@@ -159,41 +159,41 @@ def uncontract_spdf(basis, max_am=0):
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
+    for k, el in new_basis['elements'].items():
 
-        if not 'element_electron_shells' in el:
+        if not 'electron_shells' in el:
             continue
         newshells = []
 
-        for sh in el['element_electron_shells']:
+        for sh in el['electron_shells']:
 
             # am will be a list
-            am = sh['shell_angular_momentum']
-            coeff = sh['shell_coefficients']
+            am = sh['angular_momentum']
+            coeff = sh['coefficients']
 
             # if this is an sp, spd,...  orbital
             if len(am) > 1:
                 newsh = sh.copy()
-                newsh['shell_angular_momentum'] = []
-                newsh['shell_coefficients'] = []
+                newsh['angular_momentum'] = []
+                newsh['coefficients'] = []
 
-                ngen = len(sh['shell_coefficients'])
+                ngen = len(sh['coefficients'])
                 for g in range(ngen):
                     if am[g] > max_am:
                         newsh2 = sh.copy()
-                        newsh2['shell_angular_momentum'] = [am[g]]
-                        newsh2['shell_coefficients'] = [coeff[g]]
+                        newsh2['angular_momentum'] = [am[g]]
+                        newsh2['coefficients'] = [coeff[g]]
                         newshells.append(newsh2)
                     else:
-                        newsh['shell_angular_momentum'].append(am[g])
-                        newsh['shell_coefficients'].append(coeff[g])
+                        newsh['angular_momentum'].append(am[g])
+                        newsh['coefficients'].append(coeff[g])
 
                 newshells.insert(0, newsh)
 
             else:
                 newshells.append(sh)
 
-        el['element_electron_shells'] = newshells
+        el['electron_shells'] = newshells
 
     return new_basis
 
@@ -209,26 +209,26 @@ def uncontract_general(basis):
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
+    for k, el in new_basis['elements'].items():
 
-        if not 'element_electron_shells' in el:
+        if not 'electron_shells' in el:
             continue
 
         newshells = []
 
-        for sh in el['element_electron_shells']:
+        for sh in el['electron_shells']:
             # Don't uncontract sp, spd,.... orbitals
             # leave that to uncontract_spdf
-            if len(sh['shell_angular_momentum']) == 1:
-                for c in sh['shell_coefficients']:
-                    # copy, them replace 'shell_coefficients'
+            if len(sh['angular_momentum']) == 1:
+                for c in sh['coefficients']:
+                    # copy, them replace 'coefficients'
                     newsh = sh.copy()
-                    newsh['shell_coefficients'] = [c]
+                    newsh['coefficients'] = [c]
                     newshells.append(newsh)
             else:
                 newshells.append(sh)
 
-        el['element_electron_shells'] = newshells
+        el['electron_shells'] = newshells
 
     return prune_basis(new_basis)
 
@@ -247,28 +247,28 @@ def uncontract_segmented(basis):
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
+    for k, el in new_basis['elements'].items():
 
-        if not 'element_electron_shells' in el:
+        if not 'electron_shells' in el:
             continue
 
         newshells = []
 
-        for sh in el['element_electron_shells']:
-            exponents = sh['shell_exponents']
-            nam = len(sh['shell_angular_momentum'])
+        for sh in el['electron_shells']:
+            exponents = sh['exponents']
+            nam = len(sh['angular_momentum'])
 
             for i in range(len(exponents)):
                 newsh = sh.copy()
-                newsh['shell_exponents'] = [exponents[i]]
-                newsh['shell_coefficients'] = [["1.00000000"] * nam]
+                newsh['exponents'] = [exponents[i]]
+                newsh['coefficients'] = [["1.00000000"] * nam]
 
                 # Remember to transpose the coefficients
-                newsh['shell_coefficients'] = list(map(list, zip(*newsh['shell_coefficients'])))
+                newsh['coefficients'] = list(map(list, zip(*newsh['coefficients'])))
 
                 newshells.append(newsh)
 
-        el['element_electron_shells'] = newshells
+        el['electron_shells'] = newshells
 
     return new_basis
 
@@ -284,15 +284,15 @@ def make_general(basis):
 
     new_basis = uncontract_spdf(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
-        if not 'element_electron_shells' in el:
+    for k, el in new_basis['elements'].items():
+        if not 'electron_shells' in el:
             continue
 
         # See what we have
         all_am = []
-        for sh in el['element_electron_shells']:
-            if not sh['shell_angular_momentum'] in all_am:
-                all_am.append(sh['shell_angular_momentum'])
+        for sh in el['electron_shells']:
+            if not sh['angular_momentum'] in all_am:
+                all_am.append(sh['angular_momentum'])
 
         all_am = sorted(all_am)
 
@@ -300,40 +300,40 @@ def make_general(basis):
         for am in all_am:
             # TODO - Check all shells to make sure region and harmonic type are consistent
             newsh = {
-                'shell_angular_momentum': am,
-                'shell_exponents': [],
-                'shell_coefficients': [],
-                'shell_region': 'combined',
-                'shell_harmonic_type': 'spherical'
+                'angular_momentum': am,
+                'exponents': [],
+                'coefficients': [],
+                'region': 'combined',
+                'harmonic_type': 'spherical'
             }
 
             # Do exponents first
-            for sh in el['element_electron_shells']:
-                if sh['shell_angular_momentum'] != am:
+            for sh in el['electron_shells']:
+                if sh['angular_momentum'] != am:
                     continue
-                newsh['shell_exponents'].extend(sh['shell_exponents'])
+                newsh['exponents'].extend(sh['exponents'])
 
             # Number of primitives in the new shell
-            nprim = len(newsh['shell_exponents'])
+            nprim = len(newsh['exponents'])
 
             cur_prim = 0
-            for sh in el['element_electron_shells']:
-                if sh['shell_angular_momentum'] != am:
+            for sh in el['electron_shells']:
+                if sh['angular_momentum'] != am:
                     continue
 
-                ngen = len(sh['shell_coefficients'])
+                ngen = len(sh['coefficients'])
 
                 for g in range(ngen):
                     coef = [zero] * cur_prim
-                    coef.extend(sh['shell_coefficients'][g])
+                    coef.extend(sh['coefficients'][g])
                     coef.extend([zero] * (nprim - len(coef)))
-                    newsh['shell_coefficients'].append(coef)
+                    newsh['coefficients'].append(coef)
 
-                cur_prim += len(sh['shell_exponents'])
+                cur_prim += len(sh['exponents'])
 
             newshells.append(newsh)
 
-        el['element_electron_shells'] = newshells
+        el['electron_shells'] = newshells
 
     return new_basis
 
@@ -412,21 +412,21 @@ def optimize_general(basis):
     """
 
     new_basis = copy.deepcopy(basis)
-    for k, el in new_basis['basis_set_elements'].items():
+    for k, el in new_basis['elements'].items():
 
-        if not 'element_electron_shells' in el:
+        if not 'electron_shells' in el:
             continue
 
-        elshells = el.pop('element_electron_shells')
-        el['element_electron_shells'] = []
+        elshells = el.pop('electron_shells')
+        el['electron_shells'] = []
         for sh in elshells:
-            exponents = sh['shell_exponents']
-            coefficients = sh['shell_coefficients']
+            exponents = sh['exponents']
+            coefficients = sh['coefficients']
             nprim = len(exponents)
-            nam = len(sh['shell_angular_momentum'])
+            nam = len(sh['angular_momentum'])
 
             if nam > 1 or len(coefficients) < 2:
-                el['element_electron_shells'].append(sh)
+                el['electron_shells'].append(sh)
                 continue
 
             # First, find columns (general contractions) with a single non-zero value
@@ -447,8 +447,8 @@ def optimize_general(basis):
             new_shells_single = []
             for row_idx in single_rows:
                 newsh = copy.deepcopy(sh)
-                newsh['shell_exponents'] = [exponents[row_idx]]
-                newsh['shell_coefficients'] = [['1.00000000000']]
+                newsh['exponents'] = [exponents[row_idx]]
+                newsh['coefficients'] = [['1.00000000000']]
                 new_shells_single.append(newsh)
 
             exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
@@ -465,8 +465,8 @@ def optimize_general(basis):
 
                 # add as a new shell
                 newsh = copy.deepcopy(sh)
-                newsh['shell_exponents'] = [exponents[i] for i in block_rows]
-                newsh['shell_coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
+                newsh['exponents'] = [exponents[i] for i in block_rows]
+                newsh['coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
                 new_shells.append(newsh)
 
                 # Remove from the original exponent/coefficient set
@@ -475,13 +475,13 @@ def optimize_general(basis):
                 coefficients = [[x for idx, x in enumerate(col) if not idx in block_rows] for col in coefficients]
 
             # I do this order to mimic the output of the original BSE
-            el['element_electron_shells'].extend(new_shells)
-            el['element_electron_shells'].extend(new_shells_single)
+            el['electron_shells'].extend(new_shells)
+            el['electron_shells'].extend(new_shells_single)
 
         # Fix coefficients for completely uncontracted shells to 1.0
-        for sh in el['element_electron_shells']:
-            if len(sh['shell_coefficients']) == 1 and len(sh['shell_coefficients'][0]) == 1:
-                sh['shell_coefficients'][0][0] = '1.0000000'
+        for sh in el['electron_shells']:
+            if len(sh['coefficients']) == 1 and len(sh['coefficients'][0]) == 1:
+                sh['coefficients'][0][0] = '1.0000000'
 
     return new_basis
 
@@ -503,25 +503,25 @@ def sort_shells(shells):
     for sh in new_shells:
         # Sort primitives within a shell
         # Transpose of coefficients
-        tmp_c = list(map(list, zip(*sh['shell_coefficients'])))
+        tmp_c = list(map(list, zip(*sh['coefficients'])))
 
         # Zip together exponents and coeffs for sorting
-        tmp = zip(sh['shell_exponents'], tmp_c)
+        tmp = zip(sh['exponents'], tmp_c)
 
         # Sort by decreasing value of exponent
         tmp = sorted(tmp, key=lambda x: -float(x[0]))
 
         # Unpack, and re-transpose the coefficients
         tmp_c = [x[1] for x in tmp]
-        sh['shell_exponents'] = [x[0] for x in tmp]
-        sh['shell_coefficients'] = list(map(list, zip(*tmp_c)))
+        sh['exponents'] = [x[0] for x in tmp]
+        sh['coefficients'] = list(map(list, zip(*tmp_c)))
 
     # Sort by increasing AM, then general contraction level, then decreasing highest exponent
     return list(
         sorted(
             new_shells,
-            key=lambda x: (max(x['shell_angular_momentum']), -len(x['shell_exponents']), -len(x['shell_coefficients']),
-                           -float(x['shell_exponents'][0]))))
+            key=lambda x: (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(x[
+                'exponents'][0]))))
 
 
 def sort_potentials(potentials):
@@ -539,7 +539,7 @@ def sort_potentials(potentials):
     new_potentials = copy.deepcopy(potentials)
 
     # Sort by increasing AM, then move the last element to the front
-    new_potentials = list(sorted(new_potentials, key=lambda x: x['potential_angular_momentum']))
+    new_potentials = list(sorted(new_potentials, key=lambda x: x['angular_momentum']))
     new_potentials.insert(0, new_potentials.pop())
     return new_potentials
 
@@ -553,8 +553,8 @@ def sort_basis(basis):
 
     new_basis = copy.deepcopy(basis)
 
-    for k, el in new_basis['basis_set_elements'].items():
-        if 'element_electron_shells' in el:
-            el['element_electron_shells'] = sort_shells(el['element_electron_shells'])
+    for k, el in new_basis['elements'].items():
+        if 'electron_shells' in el:
+            el['electron_shells'] = sort_shells(el['electron_shells'])
 
     return new_basis

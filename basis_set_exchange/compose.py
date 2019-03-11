@@ -14,15 +14,15 @@ def _whole_basis_types(basis):
 
     all_types = set()
 
-    for v in basis['basis_set_elements'].values():
-        if 'element_electron_shells' in v:
-            for sh in v['element_electron_shells']:
-                tstr = '{}_{}'.format(sh['shell_harmonic_type'], sh['shell_function_type'])
+    for v in basis['elements'].values():
+        if 'electron_shells' in v:
+            for sh in v['electron_shells']:
+                tstr = '{}_{}'.format(sh['harmonic_type'], sh['function_type'])
                 all_types.add(tstr)
 
-        if 'element_ecp' in v:
-            for pot in v['element_ecp']:
-                all_types.add(pot['potential_ecp_type'] + '_ecp')
+        if 'ecp_potentials' in v:
+            for pot in v['ecp_potentials']:
+                all_types.add(pot['ecp_type'] + '_ecp')
 
     return sorted(list(all_types))
 
@@ -41,7 +41,7 @@ def compose_elemental_basis(file_relpath, data_dir):
 
     # construct a list of all files to read
     component_files = set()
-    for k, v in el_bs['basis_set_elements'].items():
+    for k, v in el_bs['elements'].items():
         component_files.update(set(v['element_components']))
 
     # Read all the data from these files into a big dictionary
@@ -49,23 +49,23 @@ def compose_elemental_basis(file_relpath, data_dir):
 
     # Use the basis_set_description for the reference description
     for k, v in component_map.items():
-        for el, el_data in v['basis_set_elements'].items():
-            el_data['element_references'] = [{
-                'reference_description': v['basis_set_description'],
-                'reference_keys': el_data['element_references']
+        for el, el_data in v['elements'].items():
+            el_data['references'] = [{
+                'reference_description': v['description'],
+                'reference_keys': el_data['references']
             }]
 
     # Compose on a per-element basis
-    for k, v in el_bs['basis_set_elements'].items():
+    for k, v in el_bs['elements'].items():
 
         components = v.pop('element_components')
 
         # all of the component data for this element
-        el_comp_data = [component_map[c]['basis_set_elements'][k] for c in components]
+        el_comp_data = [component_map[c]['elements'][k] for c in components]
 
         # merge all the data
         v = manip.merge_element_data(None, el_comp_data)
-        el_bs['basis_set_elements'][k] = v
+        el_bs['elements'][k] = v
 
     return el_bs
 
@@ -86,7 +86,7 @@ def compose_table_basis(file_relpath, data_dir):
 
     # construct a list of all elemental files to read
     element_files = set()
-    for v in table_bs['basis_set_elements'].values():
+    for v in table_bs['elements'].values():
         element_files.add(v['element_entry'])
 
     # Create a map of the elemental basis data
@@ -95,11 +95,11 @@ def compose_table_basis(file_relpath, data_dir):
 
     # Replace the basis set for all elements in the table basis with the data
     # from the elemental basis
-    for k, v in table_bs['basis_set_elements'].items():
+    for k, v in table_bs['elements'].items():
         entry = v['element_entry']
         data = element_map[entry]
 
-        table_bs['basis_set_elements'][k] = data['basis_set_elements'][k]
+        table_bs['elements'][k] = data['elements'][k]
 
     # Add the version to the dictionary
     file_base = os.path.basename(file_relpath)

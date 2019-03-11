@@ -1,54 +1,54 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "component",
-        "schema_version": "0.1"
-    },
-    "basis_set_description": "6-31G for H taken from old BSE 6-31G ",
-    "basis_set_notes": "The basis set for H differed from that for 4-31G in the old BSE",
-    "basis_set_data_source": "Original Basis Set Exchange",
-    "basis_set_elements": {
-        "1": {
-            "element_references": [
-                "ditchfield1971a"
-            ],
-            "element_electron_shells": [
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "18.7311370",
-                        "2.8253937",
-                        "0.6401217"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "0.03349460",
-                            "0.23472695",
-                            "0.81375733"
-                        ]
-                    ]
-                },
-                {
-                    "shell_function_type": "gto",
-                    "shell_harmonic_type": "spherical",
-                    "shell_region": "valence",
-                    "shell_angular_momentum": [
-                        0
-                    ],
-                    "shell_exponents": [
-                        "0.1612778"
-                    ],
-                    "shell_coefficients": [
-                        [
-                            "1.00000000"
-                        ]
-                    ]
-                }
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "6-31G for H taken from old BSE 6-31G ",
+  "notes": "The basis set for H differed from that for 4-31G in the old BSE",
+  "data_source": "Original Basis Set Exchange",
+  "elements": {
+    "1": {
+      "references": [
+        "ditchfield1971a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "18.7311370",
+            "2.8253937",
+            "0.6401217"
+          ],
+          "coefficients": [
+            [
+              "0.03349460",
+              "0.23472695",
+              "0.81375733"
             ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "valence",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.1612778"
+          ],
+          "coefficients": [
+            [
+              "1.00000000"
+            ]
+          ]
         }
+      ]
     }
+  }
 }

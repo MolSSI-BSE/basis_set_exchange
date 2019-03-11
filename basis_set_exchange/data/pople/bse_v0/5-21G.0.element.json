@@ -1,20 +1,20 @@
 {
-    "molssi_bse_schema": {
-        "schema_type": "element",
-        "schema_version": "0.1"
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "5-21G",
+  "description": "5-21G valence double-zeta basis set",
+  "elements": {
+    "3": {
+      "element_components": [
+        "pople/bse_v0/5-21G.0.json"
+      ]
     },
-    "basis_set_name": "5-21G",
-    "basis_set_description": "5-21G valence double-zeta basis set",
-    "basis_set_elements": {
-        "3": {
-            "element_components": [
-                "pople/bse_v0/5-21G.0.json"
-            ]
-        },
-        "4": {
-            "element_components": [
-                "pople/bse_v0/5-21G.0.json"
-            ]
-        }
+    "4": {
+      "element_components": [
+        "pople/bse_v0/5-21G.0.json"
+      ]
     }
+  }
 }

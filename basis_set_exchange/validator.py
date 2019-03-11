@@ -18,7 +18,7 @@ def _validate_extra_metadata(bs_data):
     '''Extra checks for metadata files'''
 
     # Check that family is lowercase
-    fam = bs_data['basis_set_family']
+    fam = bs_data['family']
     if not fam.islower():
         raise RuntimeError("Family '{}' is not lowercase".format(fam))
 
@@ -26,28 +26,28 @@ def _validate_extra_metadata(bs_data):
 def _validate_extra_component(bs_data):
     '''Extra checks for component basis files'''
 
-    assert len(bs_data['basis_set_elements']) > 0
+    assert len(bs_data['elements']) > 0
 
     # Make sure size of the coefficient matrix matches the number of exponents
-    for el in bs_data['basis_set_elements'].values():
-        if not 'element_electron_shells' in el:
+    for el in bs_data['elements'].values():
+        if not 'electron_shells' in el:
             continue
 
-        for s in el['element_electron_shells']:
-            nprim = len(s['shell_exponents'])
+        for s in el['electron_shells']:
+            nprim = len(s['exponents'])
             if nprim <= 0:
                 raise RuntimeError("Invalid number of primitives: {}".format(nprim))
 
-            for g in s['shell_coefficients']:
+            for g in s['coefficients']:
                 if nprim != len(g):
                     raise RuntimeError("Number of coefficients doesn't match number of primitives ({} vs {}".format(
                         len(g), nprim))
 
             # If more than one AM is given, that should be the number of
             # general contractions
-            nam = len(s['shell_angular_momentum'])
+            nam = len(s['angular_momentum'])
             if nam > 1:
-                ngen = len(s['shell_coefficients'])
+                ngen = len(s['coefficients'])
                 if ngen != nam:
                     raise RuntimeError("Number of general contractions doesn't match combined AM ({} vs {}".format(
                         ngen, nam))
@@ -56,13 +56,13 @@ def _validate_extra_component(bs_data):
 def _validate_extra_element(bs_data):
     '''Extra checks for basis metadata files'''
 
-    assert len(bs_data['basis_set_elements']) > 0
+    assert len(bs_data['elements']) > 0
 
 
 def _validate_extra_table(bs_data):
     '''Extra checks for table basis files'''
 
-    assert len(bs_data['basis_set_elements']) > 0
+    assert len(bs_data['elements']) > 0
 
 
 _validate_map = {
