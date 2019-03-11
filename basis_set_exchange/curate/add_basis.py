@@ -144,7 +144,7 @@ def add_basis(bs_file,
     meta_file_path = os.path.join(data_dir, meta_file_name)
 
     # Can just make all the entries for the table file pretty easily
-    table_file_entry = {'element_entry': element_file_relpath}
+    table_file_entry = element_file_relpath
     table_file_data['elements'] = {k: table_file_entry for k in bs_data['elements'].keys()}
 
     # Create the filenames for the components

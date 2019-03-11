@@ -85,9 +85,7 @@ def compose_table_basis(file_relpath, data_dir):
     table_bs = fileio.read_json_basis(file_path)
 
     # construct a list of all elemental files to read
-    element_files = set()
-    for v in table_bs['elements'].values():
-        element_files.add(v['element_entry'])
+    element_files = set(table_bs['elements'].values())
 
     # Create a map of the elemental basis data
     # (maps file path to data contained in that file)
@@ -95,10 +93,8 @@ def compose_table_basis(file_relpath, data_dir):
 
     # Replace the basis set for all elements in the table basis with the data
     # from the elemental basis
-    for k, v in table_bs['elements'].items():
-        entry = v['element_entry']
+    for k, entry in table_bs['elements'].items():
         data = element_map[entry]
-
         table_bs['elements'][k] = data['elements'][k]
 
     # Add the version to the dictionary

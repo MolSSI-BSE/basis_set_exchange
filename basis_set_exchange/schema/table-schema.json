@@ -43,16 +43,8 @@
             "additionalProperties": false,
             "patternProperties":   {
                 "^\\d+$" : {
-                    "description": "Data for a single element in the basis set",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [ "element_entry" ],
-                    "properties": {
-                        "element_entry": {
-                            "description": "Elemental basis set for this element",
-                            "type": "string"
-                        }
-                    }
+                    "description": "Elemental basis data to use for this element",
+                    "type": "string"
                 }
             }
         }

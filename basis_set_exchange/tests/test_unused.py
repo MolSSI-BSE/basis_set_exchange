@@ -35,7 +35,7 @@ def test_unused_data():
         table_data = bse.fileio.read_json_basis(table_path)
 
         # What element files are linked to this table file
-        el_files = [(k, v['element_entry']) for k, v in table_data['elements'].items()]
+        el_files = list(table_data['elements'].items())
 
         # Loop over the element files, and remove the corresponding entry
         # from all_component_elements

@@ -40,8 +40,6 @@ def _make_graph(bsname, version=None, data_dir=None):
 
     table_edges = {}
     for el, entry in table_data['elements'].items():
-        entry = entry['element_entry']
-
         if entry not in table_edges:
             table_edges[entry] = []
         table_edges[entry].append(el)
@@ -63,7 +61,7 @@ def _make_graph(bsname, version=None, data_dir=None):
             # skip if this element for the table basis doesn't come from this file
             if el not in table_data['elements']:
                 continue
-            if table_data['elements'][el]['element_entry'] != elfile:
+            if table_data['elements'][el] != elfile:
                 continue
 
             if components_str not in element_edges:

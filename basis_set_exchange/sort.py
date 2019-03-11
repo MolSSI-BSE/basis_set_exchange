@@ -45,7 +45,7 @@ def sort_basis_dict(bs):
 
         # Elements and data
         'elements', 'references', 'element_ecp_electrons',
-        'electron_shells', 'ecp_potentials', 'element_components', 'element_entry',
+        'electron_shells', 'ecp_potentials', 'element_components',
 
         # Shell information
         'function_type', 'harmonic_type', 'region', 'angular_momentum', 'exponents',
