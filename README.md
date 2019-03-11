@@ -7,7 +7,7 @@
 
 If you are looking for the Basis Set Exchange website (which can be
 used to browse and download this data in a more user-friendly way),
-visit https://wwww.basissetexchange.org
+visit https://www.basissetexchange.org
 
 
 ## Overview
