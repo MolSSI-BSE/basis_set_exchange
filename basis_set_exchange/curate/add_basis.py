@@ -21,6 +21,7 @@ def add_basis(bs_file,
               description,
               version,
               revision_description,
+              data_source,
               refs=None,
               file_fmt=None):
     '''
@@ -53,6 +54,8 @@ def add_basis(bs_file,
         Version of the basis set
     revision_description : str
         Description of this version of the basis set
+    data_source : str
+        Description of where this data came from
     refs : dict or str
         Mapping of references to elements. This can be a dictionary with a compressed
         string of elements as keys and a list of reference strings as values.
@@ -70,6 +73,7 @@ def add_basis(bs_file,
     # Read the basis set data into a component file, and add the description
     bs_data = read_formatted_basis(bs_file, file_fmt)
     bs_data['description'] = description
+    bs_data['data_source'] = data_source
 
     if refs is None:
         refs = []

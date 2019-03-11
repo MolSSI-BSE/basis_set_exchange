@@ -39,7 +39,8 @@ def test_add_basis(tmp_path):
 
         name = sf.split('.')[0]
         curate.add_basis(sf_path, tmp_path, 'test_subdir', 'test_' + name, 'test_basis_' + name, 'test_family',
-                         'orbital', 'Test Basis Description: ' + name, '1', 'Test Basis Revision Description', refs)
+                         'orbital', 'Test Basis Description: ' + name, '1', 'Test Basis Revision Description',
+                         'Test Source', refs)
 
     md = api.get_metadata(tmp_path)
     assert len(md) == len(_source_data)
