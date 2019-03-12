@@ -5,11 +5,12 @@
   },
   "name": "6-31++G**",
   "description": "6-31G valence double-zeta with diffuse and polarization functions",
+  "notes": "Includes erroneous H from old BSE",
   "elements": {
     "1": {
       "components": [
         "pople/bse_v0/6-31G-H-BSE.0.json",
-        "pople/bse_v0/6-31G-diffuse.0.json",
+        "pople/bse_v0/31G-diffuse.0.json",
         "pople/bse_v0/31G-polarization.0.json"
       ]
     },
