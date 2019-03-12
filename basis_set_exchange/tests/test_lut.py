@@ -56,13 +56,13 @@ def test_amchar_special():
     assert s == 'l'
 
 
-@pytest.mark.xfail
 @pytest.mark.parametrize('Z', [150, '150'])
 def test_element_data_fail(Z):
-    data = lut.element_data_from_Z(Z)
+    with pytest.raises(KeyError, match=r'No element data for Z'):
+        lut.element_data_from_Z(Z)
 
 
-@pytest.mark.xfail
 @pytest.mark.parametrize('am', [[1, -1], [1, 100]])
 def test_amint_to_char_fail(am):
-    amint_to_char(am)
+    with pytest.raises(IndexError, match=r'Angular momentum.*(out of range|must be a positive)'):
+        lut.amint_to_char(am)

@@ -9,7 +9,7 @@ from basis_set_exchange import curate
 from .common_testvars import bs_names_vers, test_data_dir, true_false
 
 
-def _test_duplicates(bs_dict):
+def _test_duplicates(bs_dict, expected):
     '''
     Test for any duplicate data in a basis set
     '''
@@ -35,7 +35,7 @@ def _test_duplicates(bs_dict):
                     found_dupe = True
                     break
 
-    assert found_dupe == False
+    assert found_dupe == expected
 
 
 @pytest.mark.parametrize('bs_name,bs_ver', bs_names_vers)
@@ -45,17 +45,14 @@ def test_duplicate_data(bs_name, bs_ver):
     '''
 
     bs_dict = bse.get_basis(bs_name, version=bs_ver)
+    _test_duplicates(bs_dict, False)
 
-    _test_duplicates(bs_dict)
 
-
-@pytest.mark.xfail
 @pytest.mark.parametrize('filename', ['6-31g-bse-DUPE.nw.bz2', 'def2-ecp-DUPE.nw.bz2'])
 def test_duplicate_fail(filename):
     filepath = os.path.join(test_data_dir, filename)
-
     filedata = curate.read_formatted_basis(filepath, 'nwchem')
-    _test_duplicates(filedata)
+    _test_duplicates(filedata, True)
 
 
 @pytest.mark.slow

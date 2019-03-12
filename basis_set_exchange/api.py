@@ -171,6 +171,9 @@ def get_basis(name,
     else:
         version = str(version)  # Version may be an int
 
+    if not version in bs_data['versions']:
+        raise KeyError("Version {} does not exist for basis {}".format(version, name))
+
     # Compose the entire basis set (all elements)
     file_relpath = bs_data['versions'][version]['file_relpath']
     basis_dict = compose.compose_table_basis(file_relpath, data_dir)

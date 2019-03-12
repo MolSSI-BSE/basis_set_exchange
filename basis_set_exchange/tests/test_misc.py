@@ -59,6 +59,6 @@ def test_expand_elements(compact_el, expected):
                                 '1,-2,10',
                                 ['1', '-2', '10']])
 # yapf: enable
-@pytest.mark.xfail
 def test_expand_elements_fail(compact_el):
-    misc.expand_elements(compact_el)
+    with pytest.raises(RuntimeError, match=r'Malformed element string'):
+        misc.expand_elements(compact_el)
