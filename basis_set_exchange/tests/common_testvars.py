@@ -43,6 +43,13 @@ all_table_files = all_files[1]
 all_element_files = all_files[2]
 all_component_files = all_files[3]
 
+# Full paths to all the files
+all_file_paths = [[os.path.join(data_dir, x) for x in y] for y in all_files]
+all_metadata_paths = all_file_paths[0]
+all_table_paths = all_file_paths[1]
+all_element_paths = all_file_paths[2]
+all_component_paths = all_file_paths[3]
+
 # A representative sample of basis sets
 bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g']
 

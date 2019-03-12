@@ -57,5 +57,5 @@ def test_basis_metadata_pair2(table_file_path):
 
     bsname = os.path.basename(table_file_path).split('.')[0]
     table_subdir = os.path.dirname(table_file_path)
-    test_file = os.path.join(data_dir, table_subdir, bsname) + '.metadata.json'
-    assert os.path.isfile(test_file)
+    test_file = os.path.join(table_subdir, bsname) + '.metadata.json'
+    assert test_file in all_metadata_files

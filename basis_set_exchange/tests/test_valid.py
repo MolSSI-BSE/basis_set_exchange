@@ -6,32 +6,36 @@ import glob
 import os
 import pytest
 
-from basis_set_exchange import api, validator, fileio
-from .common_testvars import all_files, data_dir
+from basis_set_exchange import validator
+from .common_testvars import all_metadata_paths, all_table_paths, all_element_paths, all_component_paths, data_dir
 
 
-@pytest.mark.parametrize('file_path', all_files[0])
+@pytest.mark.parametrize('file_path', all_metadata_paths)
 def test_valid_meta(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    validator.validate_file('metadata', full_path)
+    validator.validate_file('metadata', file_path)
 
 
-@pytest.mark.parametrize('file_path', all_files[1])
+@pytest.mark.parametrize('file_path', all_table_paths)
 def test_valid_table(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    validator.validate_file('table', full_path)
+    validator.validate_file('table', file_path)
 
 
-@pytest.mark.parametrize('file_path', all_files[2])
+@pytest.mark.parametrize('file_path', all_element_paths)
 def test_valid_element(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    validator.validate_file('element', full_path)
+    validator.validate_file('element', file_path)
 
 
-@pytest.mark.parametrize('file_path', all_files[3])
+@pytest.mark.parametrize('file_path', all_component_paths)
 def test_valid_component(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    validator.validate_file('component', full_path)
+    validator.validate_file('component', file_path)
+
+
+def test_valid_reffile():
+    '''
+    Test to make sure the references file is valid
+    '''
+    file_path = os.path.join(data_dir, "REFERENCES.json")
+    validator.validate_file('references', file_path)
 
 
 def test_valid_data_dir():
