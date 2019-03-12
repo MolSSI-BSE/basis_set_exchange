@@ -32,20 +32,20 @@ def sort_basis_dict(bs):
 
         # Basis set metadata
         'name', 'family', 'description', 'role', 'auxiliaries',
-        'notes', 'basis_set_function_types',
+        'notes', 'function_types',
 
         # Reference stuff
         'reference_description', 'reference_keys',
 
         # Version metadata
-        'basis_set_version', 'revision_description',
+        'version', 'revision_description',
 
         # Sources of components
         'data_source',
 
         # Elements and data
         'elements', 'references', 'element_ecp_electrons',
-        'electron_shells', 'ecp_potentials', 'element_components',
+        'electron_shells', 'ecp_potentials', 'components',
 
         # Shell information
         'function_type', 'harmonic_type', 'region', 'angular_momentum', 'exponents',

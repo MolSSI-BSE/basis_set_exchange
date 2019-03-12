@@ -82,7 +82,7 @@ def convert_basis(basis_dict, fmt, header=None):
 
     # Determine if the converter supports all the types in the basis_dict
     if converter['valid'] is not None:
-        ftypes = set(basis_dict['basis_set_function_types'])
+        ftypes = set(basis_dict['function_types'])
         if ftypes > converter['valid']:
             raise RuntimeError('Converter {} does not support all function types: {}'.format(fmt, str(ftypes)))
 
@@ -97,7 +97,7 @@ def convert_basis(basis_dict, fmt, header=None):
     # HACK - Psi4 requires the first non-comment line be spherical/cartesian
     #        so we have to add that before the header
     if fmt == 'psi4':
-        types = basis_dict['basis_set_function_types']
+        types = basis_dict['function_types']
         harm_type = 'spherical' if 'spherical_gto' in types else 'cartesian'
         ret_str = harm_type + '\n\n' + ret_str
 

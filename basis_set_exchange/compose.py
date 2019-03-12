@@ -42,7 +42,7 @@ def compose_elemental_basis(file_relpath, data_dir):
     # construct a list of all files to read
     component_files = set()
     for k, v in el_bs['elements'].items():
-        component_files.update(set(v['element_components']))
+        component_files.update(set(v['components']))
 
     # Read all the data from these files into a big dictionary
     component_map = {k: fileio.read_json_basis(os.path.join(data_dir, k)) for k in component_files}
@@ -58,7 +58,7 @@ def compose_elemental_basis(file_relpath, data_dir):
     # Compose on a per-element basis
     for k, v in el_bs['elements'].items():
 
-        components = v.pop('element_components')
+        components = v.pop('components')
 
         # all of the component data for this element
         el_comp_data = [component_map[c]['elements'][k] for c in components]
@@ -99,10 +99,10 @@ def compose_table_basis(file_relpath, data_dir):
 
     # Add the version to the dictionary
     file_base = os.path.basename(file_relpath)
-    table_bs['basis_set_version'] = file_base.split('.')[-3]
+    table_bs['version'] = file_base.split('.')[-3]
 
     # Add whether the entire basis is spherical or cartesian
-    table_bs['basis_set_function_types'] = _whole_basis_types(table_bs)
+    table_bs['function_types'] = _whole_basis_types(table_bs)
 
     # Read and merge in the metadata
     # This file must be in the same location as the table file

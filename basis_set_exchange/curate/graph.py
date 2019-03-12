@@ -55,7 +55,7 @@ def _make_graph(bsname, version=None, data_dir=None):
         element_edges = {}
 
         for el, components in element_data['elements'].items():
-            components = components['element_components']
+            components = components['components']
             components_str = '\n'.join(components)
 
             # skip if this element for the table basis doesn't come from this file

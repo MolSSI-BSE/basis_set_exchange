@@ -157,7 +157,7 @@ def add_basis(bs_file,
     # (we add the relative path to the location of the element file,
     # which resides in subdir)
     for el in bs_data['elements'].keys():
-        element_file_data['elements'][el] = {'element_components': [component_file_relpath]}
+        element_file_data['elements'][el] = {'components': [component_file_relpath]}
 
     # Verify all data using the schema
     validate_data('component', bs_data)

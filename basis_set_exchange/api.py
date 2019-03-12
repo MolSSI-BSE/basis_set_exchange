@@ -69,7 +69,7 @@ def _header_string(basis_dict):
     header += '   Basis set: ' + basis_dict['name'] + '\n'
     header += tw.fill(' Description: ' + basis_dict['description']) + '\n'
     header += '        Role: ' + basis_dict['role'] + '\n'
-    header += tw.fill('     Version: {}  ({})'.format(basis_dict['basis_set_version'],
+    header += tw.fill('     Version: {}  ({})'.format(basis_dict['version'],
                                                       basis_dict['revision_description'])) + '\n'
     header += '-' * 70 + '\n'
 

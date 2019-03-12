@@ -40,7 +40,7 @@ def test_unused_data():
             el_file_path = os.path.join(data_dir, el_file)
             el_file_data = all_element_data[el_file_path]
 
-            for cfile in el_file_data[el]['element_components']:
+            for cfile in el_file_data[el]['components']:
                 cfile_path = os.path.join(data_dir, cfile)
                 if el in all_component_elements[cfile_path]:
                     all_component_elements[cfile_path].remove(el)

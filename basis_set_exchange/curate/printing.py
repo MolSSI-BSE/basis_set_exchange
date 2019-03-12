@@ -122,7 +122,7 @@ def print_element_basis(basis, elements=None):
         elements = [k for k in eldata.keys() if k in elements]
 
     # strings
-    complist = {z: eldata[z]['element_components'] for z in elements}
+    complist = {z: eldata[z]['components'] for z in elements}
 
     # Header line
     print('{:4} {}'.format("El", "Components"))

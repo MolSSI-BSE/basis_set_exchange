@@ -40,7 +40,7 @@ def create_metadata_file(output_path, data_dir):
 
         # Determine the types of functions contained in the basis
         # (gto, ecp, etc)
-        function_types = bs['basis_set_function_types']
+        function_types = bs['function_types']
 
         # Create the metadata for this specific version
         # yapf: disable
