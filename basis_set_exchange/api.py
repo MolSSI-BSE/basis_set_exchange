@@ -192,7 +192,7 @@ def get_basis(name,
             for el in elements:
                 if not el in bs_elements:
                     elsym = lut.element_sym_from_Z(el)
-                    raise KeyError("Element {} (Z={}) not found in basis {}".format(elsym, el, name))
+                    raise KeyError("Element {} (Z={}) not found in basis {} version {}".format(elsym, el, name, version))
 
             # Set to only the elements we want
             basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
@@ -473,12 +473,8 @@ def _basis_notes_path(name, data_dir):
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension
-    latest_ver = bs_data['latest_version']
-    bs_ver_data = bs_data['versions'][latest_ver]
-    rel_path = bs_ver_data['file_relpath']
-    filebase = os.path.splitext(rel_path)[0]  # remove .json
-    filebase = os.path.splitext(filebase)[0]  # remove .tablejson
-    filebase = os.path.splitext(filebase)[0]  # remove .[version]
+    rel_path = bs_data['relpath']
+    filebase = bs_data['basename']
     file_path = os.path.join(data_dir, filebase + '.notes')
     return file_path
 
