@@ -74,4 +74,4 @@ def test_duplicate_slow(bs_name, bs_ver, unc_gen, unc_seg, unc_spdf, opt_gen, ma
                             make_general=make_gen,
                             optimize_general=opt_gen)
 
-    _test_duplicates(bs_dict)
+    _test_duplicates(bs_dict, False)
