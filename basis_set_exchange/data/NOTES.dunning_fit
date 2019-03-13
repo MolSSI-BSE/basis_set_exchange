@@ -1,5 +1,35 @@
-Note that some aux basis sets from weigend2002a were superceded
-by hattig2005a
+Notes about fitting basis sets for the dunning family
+=====================================================
+
+RIFIT for first row transition metals
+-------------------------------------
+
+The data in the original BSE is considered authoritative because it was
+uploaded by the authors. This data is used in v1. Note that turbomole
+obtained cc-pVTZ-RIFIT for Sc-Zn from the BSE, without obtaining the
+others. I have confirmed the data is identical.
+
+v1 also adds some missing elements, such as Ga-Kr for pV5Z-RIFIT
+
+Original BSE
+-------------
+
+The RIFIT data in the original BSE was stored in a few different basis sets.
+
+* cc-pVXZ-RI                   :  RI fitting basis
+* aug-cc-pVXZ-RI diffuse       :  Just the diffuse functions to be added to cc-pVXZ-RI
+* (aug)-cc-pVTZ MP2 Fitting    : Sc-Zn, uploaded by G. Hill
+* (aug)-cc-pVXZ-NR MP2 Fitting : Analogous to '(aug)-cc-pVXZ MP2 Fitting', but used for X=Q,5
+                                 (NR = nonrelativistic)
+
+As far as I can tell, for non-TM, the original BSE did not compose the (aug) fitting
+basis sets from the base and diffuse functions. I have done that for v0.
+
+
+General notes
+-------------
+Some aux basis sets from weigend2002a were superceded
+by hattig2005a. These changes were reflected in the original BSE data.
 
  * (aug)-cc-pVDZ for C–F
  * (aug)-cc-pVTZ and cc-pVQZ for Ne
