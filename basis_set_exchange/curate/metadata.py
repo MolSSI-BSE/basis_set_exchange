@@ -3,10 +3,9 @@ Helpers for handling BSE metadata
 '''
 
 import os
-from collections import OrderedDict
 
 from ..compose import compose_table_basis
-from ..fileio import get_all_filelist, _write_plain_json
+from ..fileio import get_all_filelist, read_json_basis, _write_plain_json
 from ..misc import transform_basis_name
 
 
@@ -16,78 +15,102 @@ def create_metadata_file(output_path, data_dir):
     The file is written to output_path
     '''
 
-    basis_filelist = get_all_filelist(data_dir)[1]
+    # Relative path to all (BASIS).metadata.json files
+    meta_filelist, table_filelist, _, _ = get_all_filelist(data_dir)
 
     metadata = {}
-    for bs_file_relpath in basis_filelist:
-        # Path to the table file (relative to data_dir)
-        # metadata files and table files for all versions should be in the
-        # same location
-        # Also obtain the filename of the table file
-        table_relpath, table_filename = os.path.split(bs_file_relpath)
+    for meta_file_relpath in meta_filelist:
 
-        # Obtain the base filename and version from the filename
-        # The base filename is the part before the first period
-        # (filebase.ver.table.json)
-        table_filebase, ver, _, _ = table_filename.split('.')
+        # Read in the metadata for a single basis set
+        meta_file_path = os.path.join(data_dir, meta_file_relpath)
+        bs_metadata = read_json_basis(meta_file_path)
 
-        # Fully compose the basis set from components
-        bs = compose_table_basis(bs_file_relpath, data_dir)
+        # Base of the filename for table basis sets
+        # Basename is something like '6-31G.', including the last period
+        base_relpath, meta_filename = os.path.split(meta_file_relpath)
+        base_filename = meta_filename.split('.')[0] + '.'
 
-        # Prepare the metadata
-        tr_name = transform_basis_name(bs['name'])
-        defined_elements = sorted(list(bs['elements'].keys()), key=lambda x: int(x))
+        # All the table files that correspond to this metadata file
+        # (relative to data_dir)
 
-        # Determine the types of functions contained in the basis
-        # (gto, ecp, etc)
-        function_types = bs['function_types']
+        this_filelist = [
+            x for x in table_filelist
+            if os.path.dirname(x) == base_relpath and os.path.basename(x).startswith(base_filename)
+        ]
 
-        # Create the metadata for this specific version
-        # yapf: disable
-        version_meta = OrderedDict([('file_relpath', bs_file_relpath),
-                                    ('revdesc', bs['revision_description']),
-                                    ('elements', defined_elements)])
-        # yapf: enable
+        # The 'versions' dict that will go into the metadata
+        version_info = {}
 
-        # Add to the full metadata dict
-        if not tr_name in metadata:
-            # Create a new entry, with all the common metadata at the top
-            # for this entry
+        # Make sure function types are the same
+        function_types = None
+
+        # For each table basis, compose it
+        for table_file in this_filelist:
+            # Obtain just the filename of the table basis
+            table_filename = os.path.basename(table_file)
+
+            # Obtain the base filename and version from the filename
+            # The base filename is the part before the first period
+            # (filebase.ver.table.json)
+            table_filebase, ver, _, _ = table_filename.split('.')
+
+            # Fully compose the basis set from components
+            bs = compose_table_basis(table_file, data_dir)
+
+            # Elements for which this basis is defined
+            defined_elements = sorted(list(bs['elements'].keys()), key=lambda x: int(x))
+
+            # Determine the types of functions contained in the basis
+            # (gto, ecp, etc)
+            if function_types == None:
+                function_types = bs['function_types']
+            elif function_types != bs['function_types']:
+                raise RuntimeError("Differing function types across versions for " + base_filename)
+
+            # Create the metadata for this specific version
             # yapf: disable
-            metadata[tr_name] = OrderedDict([
-                                 ('display_name', bs['name']),
-                                 ('description', bs['description']),
-                                 ('latest_version', None),
-                                 ('basename', table_filebase),
-                                 ('relpath', table_relpath),
-                                 ('family', bs['family']),
-                                 ('role', bs['role']),
-                                 ('functiontypes', function_types),
-                                 ('auxiliaries', bs['auxiliaries']),
-                                 ('versions', {ver: version_meta})])
+            version_info[ver] = { 'file_relpath': table_file,
+                                  'revdesc': bs['revision_description'],
+                                  'elements': defined_elements
+                                }
             # yapf: enable
 
-        else:
-            # There is an existing entry. Make sure
-            # file basename, filename, and functiontypes match
-            if metadata[tr_name]['functiontypes'] != function_types:
-                print(metadata[tr_name]['functiontypes'], function_types)
-                raise RuntimeError("Function types do not match across versions for " + tr_name)
-            if metadata[tr_name]['basename'] != table_filebase:
-                raise RuntimeError("File basenames do not match across versions for " + tr_name)
-            if metadata[tr_name]['relpath'] != table_relpath:
-                raise RuntimeError("Basis directories do not match across versions for " + tr_name)
+        # Sort the version dicts
+        version_info = dict(sorted(version_info.items()))
+        # Find the maximum version for this basis
+        latest_ver = max(version_info.keys())
 
-            metadata[tr_name]['versions'][ver] = version_meta
+        # Create the common metadata for this basis set
+        # display_name and other_names are placeholders to keep order
+        # yapf: disable
+        common_md = { 'display_name': None,
+                      'other_names': None,
+                      'description': bs['description'],
+                      'latest_version': latest_ver,
+                      'basename': base_filename[:-1], # Strip off that trailing period
+                      'relpath': base_relpath,
+                      'family': bs['family'],
+                      'role': bs['role'],
+                      'functiontypes': function_types,
+                      'auxiliaries': bs['auxiliaries'],
+                      'versions': version_info }
+        # yapf: enable
 
-    # sort the versions and find the max version
-    for k, v in metadata.items():
-        latest = max(v['versions'].keys())
-        metadata[k]['latest_version'] = latest
+        # Loop through all the common names, translate them, and then add the data
+        for bs_name in bs_metadata['names']:
+            tr_name = transform_basis_name(bs_name)
 
-        # Reorder the versions (may have been read out of order)
-        metadata[k]['versions'] = OrderedDict(sorted(v['versions'].items()))
+            if tr_name in metadata:
+                raise RuntimeError("Duplicate basis set name: " + tr_name)
+
+            # Create a new entry, with all the common metadata
+            # Also, store the other names for this basis
+            other_names = bs_metadata['names'].copy()
+            other_names.remove(bs_name)
+            metadata[tr_name] = common_md.copy()
+            metadata[tr_name]['display_name'] = bs_name
+            metadata[tr_name]['other_names'] = other_names
 
     # Write out the metadata
-    metadata = OrderedDict(sorted(list(metadata.items())))
+    metadata = dict(sorted(metadata.items()))
     _write_plain_json(output_path, metadata)

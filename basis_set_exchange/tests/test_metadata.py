@@ -59,3 +59,16 @@ def test_basis_metadata_pair2(table_file_path):
     table_subdir = os.path.dirname(table_file_path)
     test_file = os.path.join(table_subdir, bsname) + '.metadata.json'
     assert test_file in all_metadata_files
+
+
+@pytest.mark.parametrize('bs1,bs2', [('6-311g**', '6-311g(d,p)')])
+def test_basis_metadata_duplicate(bs1, bs2):
+    bsdata1 = api.get_basis(bs1)
+    bsdata2 = api.get_basis(bs2)
+
+    # The names are going to be different
+    n1 = bsdata1.pop('name')
+    n2 = bsdata2.pop('name')
+
+    assert n1 != n2
+    assert bsdata1 == bsdata2

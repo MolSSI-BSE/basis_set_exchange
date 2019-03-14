@@ -178,6 +178,10 @@ def get_basis(name,
     file_relpath = bs_data['versions'][version]['file_relpath']
     basis_dict = compose.compose_table_basis(file_relpath, data_dir)
 
+    # Set the name (from the global metadata)
+    # Only the list of all names will be returned from compose_table_basis
+    basis_dict['name'] = bs_data['display_name']
+
     # Handle optional arguments
     if elements is not None:
         # Convert to purely a list of strings that represent integers
@@ -192,7 +196,8 @@ def get_basis(name,
             for el in elements:
                 if not el in bs_elements:
                     elsym = lut.element_sym_from_Z(el)
-                    raise KeyError("Element {} (Z={}) not found in basis {} version {}".format(elsym, el, name, version))
+                    raise KeyError("Element {} (Z={}) not found in basis {} version {}".format(
+                        elsym, el, name, version))
 
             # Set to only the elements we want
             basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}

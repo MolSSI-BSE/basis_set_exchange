@@ -8,7 +8,8 @@
     "additionalProperties": false,
     "required": [
         "molssi_bse_schema",
-        "name",
+        "names",
+        "flags",
         "family",
         "description",
         "role",
@@ -36,9 +37,21 @@
                 }
             }
         },
-        "name": {
-            "description": "Common name for the basis set",
-            "type": "string"
+        "names": {
+            "description": "Common names/capitalization of the basis set",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string" }
+        },
+        "flags": {
+            "description": "Feature flags (for internal use/marking)",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": ["RESERVED"]
+            }
         },
         "family": {
             "description": "Broad family that the basis set is from",
@@ -54,7 +67,7 @@
             "enum": [ "orbital", "rifit", "jkfit", "jfit", "admmfit", "dftxfit", "dftjfit"]
         },
         "auxiliaries": {
-            "description": "Auxiliary basis sets (fitting, etc) and how their role with his basis",
+            "description": "Auxiliary basis sets (fitting, etc) and how their role with this basis",
             "type": "object",
             "additionalProperties": false,
             "properties": {

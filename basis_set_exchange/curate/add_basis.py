@@ -133,7 +133,7 @@ def add_basis(bs_file,
 
     # and the metadata file
     meta_file_data = create_skel('metadata')
-    meta_file_data['name'] = name
+    meta_file_data['names'] = [name]
     meta_file_data['family'] = family
     meta_file_data['description'] = description
     meta_file_data['role'] = role

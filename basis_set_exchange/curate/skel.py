@@ -36,7 +36,8 @@ _skeletons = {
             "schema_type": "metadata",
             "schema_version": "0.1"
         },
-        "name": "",
+        "names": [],
+        "flags": [],
         "family": "",
         "description": "",
         "role": "",
