@@ -62,7 +62,7 @@ def create_metadata_file(output_path, data_dir):
 
             # Determine the types of functions contained in the basis
             # (gto, ecp, etc)
-            if function_types == None:
+            if function_types is None:
                 function_types = bs['function_types']
             elif function_types != bs['function_types']:
                 raise RuntimeError("Differing function types across versions for " + base_filename)

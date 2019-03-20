@@ -478,7 +478,6 @@ def _basis_notes_path(name, data_dir):
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension
-    rel_path = bs_data['relpath']
     filebase = bs_data['basename']
     file_path = os.path.join(data_dir, filebase + '.notes')
     return file_path
