@@ -62,6 +62,7 @@ if __name__ == "__main__":
             ]
         },
 
+        python_requires='>=3',
         classifiers=[
             'Development Status :: 4 - Beta',
             'Intended Audience :: Science/Research',
