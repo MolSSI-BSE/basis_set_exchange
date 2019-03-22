@@ -1,3 +1,17 @@
+v0.6.5
+--------------------
+  * Major internal data reorganization
+    * Will affect you if you use JSON basis set format
+    * Adds more metadata (aliases, flags) for future use
+  * Testing is cleaned up a bit
+  * Added more basis set
+    * Rest of v0 for 6-311G family
+    * Rest of v1 for 6-31G family
+  * Friendlier error messages
+  * Enforce python3 when installing via pip
+    * Also adds better error message when trying to run with python2
+
+
 v0.6.4
 --------------------
   * New basis sets from BSE
