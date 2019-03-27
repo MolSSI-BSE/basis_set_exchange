@@ -3,6 +3,7 @@ Sorting of BSE related dictionaries and data
 '''
 
 import sys
+import copy
 
 # Dictionaries for python 3.6 and above are insertion ordered
 # For other versions, use an OrderedDict
@@ -75,6 +76,82 @@ def sort_basis_dict(bs):
             bs_sorted[k] = [sort_basis_dict(x) if isinstance(x, dict) else x for x in v]
 
     return bs_sorted
+
+
+def sort_shells(shells):
+    """
+    Sort a list of basis set shells into a standard order
+
+    The order within a shell is by decreasing value of the exponent.
+
+    The order of the shell list is in increasing angular momentum, and then
+    by decreasing number of primitives, then decreasing value of the largest exponent.
+
+    The original data is not modified.
+    """
+
+    new_shells = copy.deepcopy(shells)
+
+    for sh in new_shells:
+        # Sort primitives within a shell
+        # Transpose of coefficients
+        tmp_c = list(map(list, zip(*sh['coefficients'])))
+
+        # Zip together exponents and coeffs for sorting
+        tmp = zip(sh['exponents'], tmp_c)
+
+        # Sort by decreasing value of exponent
+        tmp = sorted(tmp, key=lambda x: -float(x[0]))
+
+        # Unpack, and re-transpose the coefficients
+        tmp_c = [x[1] for x in tmp]
+        sh['exponents'] = [x[0] for x in tmp]
+        sh['coefficients'] = list(map(list, zip(*tmp_c)))
+
+    # Sort by increasing AM, then general contraction level, then decreasing highest exponent
+    return list(
+        sorted(
+            new_shells,
+            key=lambda x: (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(x[
+                'exponents'][0]))))
+
+
+def sort_potentials(potentials):
+    """
+    Sort a list of ECP potentials into a standard order
+
+    The order within a potential is not modified.
+
+    The order of the shell list is in increasing angular momentum, with the largest
+    angular momentum being moved to the front.
+
+    The original data is not modified, and a deep copy is returned.
+    """
+
+    new_potentials = copy.deepcopy(potentials)
+
+    # Sort by increasing AM, then move the last element to the front
+    new_potentials = list(sorted(new_potentials, key=lambda x: x['angular_momentum']))
+    new_potentials.insert(0, new_potentials.pop())
+    return new_potentials
+
+
+def sort_basis(basis):
+    """
+    Sorts all the information in a basis set into a standard order
+
+    The original data is not modified.
+    """
+
+    new_basis = copy.deepcopy(basis)
+
+    for k, el in new_basis['elements'].items():
+        if 'electron_shells' in el:
+            el['electron_shells'] = sort_shells(el['electron_shells'])
+        if 'ecp_potentials' in el:
+            el['ecp_potentials'] = sort_potentials(el['ecp_potentials'])
+
+    return sort_basis_dict(new_basis)
 
 
 def sort_single_reference(ref_entry):

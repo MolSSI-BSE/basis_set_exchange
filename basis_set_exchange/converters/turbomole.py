@@ -2,8 +2,7 @@
 Conversion of basis sets to Turbomole format
 '''
 
-from .. import lut
-from .. import manip
+from .. import lut, manip, sort
 from .common import write_matrix
 
 
@@ -17,7 +16,7 @@ def write_turbomole(basis):
     # TM basis sets are completely uncontracted
     basis = manip.uncontract_general(basis)
     basis = manip.uncontract_spdf(basis)
-    basis = manip.sort_basis(basis)
+    basis = sort.sort_basis(basis)
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]

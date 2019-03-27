@@ -9,6 +9,7 @@ from . import compose
 from . import converters
 from . import fileio
 from . import manip
+from . import sort
 from . import memo
 from . import notes
 from . import refconverters
@@ -226,6 +227,9 @@ def get_basis(name,
     # Remove dead and duplicate shells
     if needs_pruning:
         basis_dict = manip.prune_basis(basis_dict)
+
+    # Sort the basis set into a more canonical form
+    basis_dict = sort.sort_basis(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

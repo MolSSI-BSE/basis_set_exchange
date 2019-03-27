@@ -4,26 +4,15 @@ Conversion of basis sets to Molpro format
 
 from .. import lut
 from .. import manip
-
-
-def _find_range(coeffs):
-    '''
-    Find the range in a list of coefficients where the coefficient is nonzero
-    '''
-
-    coeffs = [float(x) != 0 for x in coeffs]
-    first = coeffs.index(True)
-    coeffs.reverse()
-    last = len(coeffs) - coeffs.index(True) - 1
-    return first, last
+from .common import find_range
 
 
 def write_molpro(basis):
     '''Converts a basis set to Molpro format
     '''
 
-    # Uncontract all but SP
-    basis = manip.uncontract_spdf(basis, 0)
+    # Uncontract all, and make as generally-contracted as possible
+    basis = manip.uncontract_spdf(basis)
     basis = manip.make_general(basis)
 
     s = ''
@@ -53,7 +42,7 @@ def write_molpro(basis):
                 amchar = lut.amint_to_char(am).lower()
                 s += '{}, {} , {}\n'.format(amchar, sym, ', '.join(exponents))
                 for c in coefficients:
-                    first, last = _find_range(c)
+                    first, last = find_range(c)
                     s += 'c, {}.{}, {}\n'.format(first + 1, last + 1, ', '.join(c[first:last + 1]))
         s += '}\n'
 

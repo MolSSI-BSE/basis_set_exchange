@@ -5,7 +5,7 @@ Tests BSE curation functions
 import os
 import pytest
 
-from basis_set_exchange import api, curate, manip
+from basis_set_exchange import api, curate, manip, sort
 from .common_testvars import bs_names_sample
 
 roundtrip_formats = ['turbomole', 'gaussian94', 'nwchem']
@@ -37,8 +37,8 @@ def test_curate_roundtrip(tmp_path, basis, fmt):
 
     test_dict = curate.read_formatted_basis(outfile_path, fmt)
 
-    test_dict = manip.sort_basis(test_dict)
-    bse_dict = manip.sort_basis(bse_dict)
+    test_dict = sort.sort_basis(test_dict)
+    bse_dict = sort.sort_basis(bse_dict)
 
     # Compare, ignoring metadata (not stored in most formats)
     assert curate.compare_basis(bse_dict, test_dict, rel_tol=0.0)

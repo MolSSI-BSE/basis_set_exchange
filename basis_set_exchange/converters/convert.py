@@ -2,7 +2,6 @@
 Converts basis set data to a specified output format
 '''
 
-from .. import sort
 from .bsejson import write_json
 from .nwchem import write_nwchem
 from .g94 import write_g94
@@ -70,9 +69,6 @@ def convert_basis(basis_dict, fmt, header=None):
     the data in the specified output format
     '''
 
-    # Sort the basis dictionary
-    basis_dict_sorted = sort.sort_basis_dict(basis_dict)
-
     # make converters case insensitive
     fmt = fmt.lower()
     if fmt not in _converter_map:
@@ -87,7 +83,7 @@ def convert_basis(basis_dict, fmt, header=None):
             raise RuntimeError('Converter {} does not support all function types: {}'.format(fmt, str(ftypes)))
 
     # Actually do the conversion
-    ret_str = converter['function'](basis_dict_sorted)
+    ret_str = converter['function'](basis_dict)
 
     if header is not None and fmt != 'json':
         comment_str = _converter_map[fmt]['comment']

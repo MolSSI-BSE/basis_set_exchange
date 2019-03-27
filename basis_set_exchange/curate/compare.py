@@ -4,7 +4,7 @@ Functions for comparing basis sets and pieces of basis sets
 
 import operator
 import copy
-from ..manip import sort_shells, sort_potentials
+from ..sort import sort_shells, sort_potentials
 
 
 def _reldiff(a, b):
