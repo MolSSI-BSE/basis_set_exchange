@@ -285,7 +285,7 @@ def compare_elements(element1,
     if not _compare_keys(element1, element2, 'ecp_potentials', ecp_pots_are_equal, compare_ecp_pots_meta, rel_tol):
         return False
 
-    if not _compare_keys(element1, element2, 'element_ecp_electrons', operator.eq):
+    if not _compare_keys(element1, element2, 'ecp_electrons', operator.eq):
         return False
 
     if compare_meta:

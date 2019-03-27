@@ -58,7 +58,7 @@ def write_g94(basis):
             ecp_list.insert(0, ecp_list.pop())
 
             s += '{}     0\n'.format(sym)
-            s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['element_ecp_electrons'])
+            s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['ecp_electrons'])
 
             for pot in ecp_list:
                 rexponents = pot['r_exponents']

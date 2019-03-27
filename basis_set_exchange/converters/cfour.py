@@ -80,7 +80,7 @@ def write_cfour(basis):
             s += '{}:{}\n'.format(sym, basis['name'])
             s += '# ' + basis['description'] + '\n'
             s += '*\n'
-            s += '    NCORE = {}    LMAX = {}\n'.format(data['element_ecp_electrons'], max_ecp_am)
+            s += '    NCORE = {}    LMAX = {}\n'.format(data['ecp_electrons'], max_ecp_am)
 
             for pot in ecp_list:
                 rexponents = pot['r_exponents']

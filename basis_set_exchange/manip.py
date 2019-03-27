@@ -76,7 +76,7 @@ def merge_element_data(dest, sources):
             if 'ecp_potentials' in ret:
                 raise RuntimeError('Cannot overwrite existing ECP')
             ret['ecp_potentials'] = s['ecp_potentials']
-            ret['element_ecp_electrons'] = s['element_ecp_electrons']
+            ret['ecp_electrons'] = s['ecp_electrons']
         if 'references' in s:
             if 'references' not in ret:
                 ret['references'] = []

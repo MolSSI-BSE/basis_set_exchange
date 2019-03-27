@@ -45,7 +45,7 @@ def sort_basis_dict(bs):
         'data_source',
 
         # Elements and data
-        'elements', 'references', 'element_ecp_electrons',
+        'elements', 'references', 'ecp_electrons',
         'electron_shells', 'ecp_potentials', 'components',
 
         # Shell information

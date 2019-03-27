@@ -87,8 +87,8 @@ def read_nwchem(basis_lines, fname):
 
                     if not element_Z in bs_data['elements']:
                         bs_data['elements'][element_Z] = {}
-                    if not 'element_ecp_electrons' in bs_data['elements'][element_Z]:
-                        bs_data['elements'][element_Z]['element_ecp_electrons'] = n_elec
+                    if not 'ecp_electrons' in bs_data['elements'][element_Z]:
+                        bs_data['elements'][element_Z]['ecp_electrons'] = n_elec
 
                     i += 1
                     continue

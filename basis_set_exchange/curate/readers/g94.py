@@ -47,7 +47,7 @@ def read_g94(basis_lines, fname):
             lsplt = basis_lines[i].split()
             maxam = int(lsplt[1])
             n_elec = int(lsplt[2])
-            element_data['element_ecp_electrons'] = n_elec
+            element_data['ecp_electrons'] = n_elec
 
             # Highest AM first, then the rest in order
             am_list = list(range(maxam + 1))

@@ -54,8 +54,8 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
         if 'electron_shells' in v:
             max_rdiff_el = shells_difference(v['electron_shells'], bs1_el['electron_shells'])
         if 'ecp_potentials' in v:
-            nel1 = v['element_ecp_electrons']
-            nel2 = bs1_el['element_ecp_electrons']
+            nel1 = v['ecp_electrons']
+            nel2 = bs1_el['ecp_electrons']
             if int(nel1) != int(nel2):
                 print('Different number of electrons replaced by ECP ({} vs {})'.format(nel1, nel2))
                 max_rdiff_ecp = float('inf')

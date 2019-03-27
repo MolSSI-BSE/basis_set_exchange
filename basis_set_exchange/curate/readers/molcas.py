@@ -77,7 +77,7 @@ def read_molcas(basis_lines, fname):
             #    ecp_shell['coefficients'] = [ecp_coefficients]
             #    element_data['ecp_potentials'].append(ecp_shell)
 
-            #element_data['element_ecp_electrons'] = n_elec
+            #element_data['ecp_electrons'] = n_elec
 
         else:
             if not 'electron_shells' in element_data:

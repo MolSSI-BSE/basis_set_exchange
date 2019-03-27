@@ -65,7 +65,7 @@ def write_gamess_us(basis):
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            s += '{}-ECP GEN    {}    {}\n'.format(sym, data['element_ecp_electrons'], max_ecp_am)
+            s += '{}-ECP GEN    {}    {}\n'.format(sym, data['ecp_electrons'], max_ecp_am)
 
             for pot in ecp_list:
                 rexponents = pot['r_exponents']

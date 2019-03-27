@@ -74,7 +74,7 @@ def print_element(z, eldata, print_references=True):
             print_electron_shell(shell, shellidx)
 
     if 'ecp_potentials' in eldata:
-        print('ECP: Element: {}   Number of electrons: {}'.format(sym, eldata['element_ecp_electrons']))
+        print('ECP: Element: {}   Number of electrons: {}'.format(sym, eldata['ecp_electrons']))
 
         # Sort lowest->highest, then put the highest at the beginning
         ecp_list = sorted(eldata['ecp_potentials'], key=lambda x: x['angular_momentum'])
