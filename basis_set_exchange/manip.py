@@ -298,20 +298,34 @@ def make_general(basis):
 
         newshells = []
         for am in all_am:
-            # TODO - Check all shells to make sure region and harmonic type are consistent
             newsh = {
                 'angular_momentum': am,
                 'exponents': [],
                 'coefficients': [],
-                'region': 'combined',
-                'harmonic_type': 'spherical'
+                'region': '',
+                'harmonic_type': None,
+                'function_type': None,
             }
 
             # Do exponents first
+            # Get all unique exponents
+            exponents = []
+
             for sh in el['electron_shells']:
                 if sh['angular_momentum'] != am:
                     continue
-                newsh['exponents'].extend(sh['exponents'])
+                exponents.extend(sh['exponents'])
+
+            # Remove duplicates (by checking the float value)
+            done_exponents = []
+            unique_exponents = []
+            for ex in exponents:
+                fex = float(ex)
+                if not fex in done_exponents:
+                    done_exponents.append(fex)
+                    unique_exponents.append(ex)
+
+            newsh['exponents'] = unique_exponents
 
             # Number of primitives in the new shell
             nprim = len(newsh['exponents'])
@@ -321,15 +335,36 @@ def make_general(basis):
                 if sh['angular_momentum'] != am:
                     continue
 
+                if newsh['harmonic_type'] is None:
+                    newsh['harmonic_type'] = sh['harmonic_type']
+                if newsh['function_type'] is None:
+                    newsh['function_type'] = sh['function_type']
+
+                # Make sure the shells we are merging have the same harmonic types and function types
+                if newsh['harmonic_type'] != sh['harmonic_type']:
+                    raise RuntimeError("Cannot make general contraction of different harmonic types")
+                if newsh['function_type'] != sh['function_type']:
+                    raise RuntimeError("Cannot make general contraction of different harmonic types")
+
                 ngen = len(sh['coefficients'])
 
+                # Every general contraction shell should add a column to the coefficients
+                coeffs = []
                 for g in range(ngen):
-                    coef = [zero] * cur_prim
-                    coef.extend(sh['coefficients'][g])
-                    coef.extend([zero] * (nprim - len(coef)))
-                    newsh['coefficients'].append(coef)
+                    coeff_row = []
+                    for ex1 in unique_exponents:
+                        fex1 = float(ex1)
+                        for idx, ex2 in enumerate(sh['exponents']):
+                            fex2 = float(ex2)
+                            if fex1 == fex2:
+                                coeff_row.append(sh['coefficients'][g][idx])
+                                break
+                        else:
+                            coeff_row.append(zero)
 
-                cur_prim += len(sh['exponents'])
+                    coeffs.append(coeff_row)
+
+                newsh['coefficients'].extend(coeffs)
 
             newshells.append(newsh)
 

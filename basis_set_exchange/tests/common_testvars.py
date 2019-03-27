@@ -51,7 +51,7 @@ all_element_paths = all_file_paths[2]
 all_component_paths = all_file_paths[3]
 
 # A representative sample of basis sets
-bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g']
+bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g', 'fano-qz']
 
 
 def bool_matrix(size):
