@@ -1,0 +1,87 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "",
+  "data_source": "Original Basis Set Exchange",
+  "elements": {
+    "3": {
+      "references": [
+        "thompson2001a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "35.0461500",
+            "5.20169000",
+            "1.05624000"
+          ],
+          "coefficients": [
+            [
+              "0.737600000E-01",
+              "0.397471000",
+              "0.665092000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.715170000",
+            "0.705300000E-01"
+          ],
+          "coefficients": [
+            [
+              "-0.939700000E-01",
+              " 0.570100000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.273500000E-01"
+          ],
+          "coefficients": [
+            [
+              "1.000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "harmonic_type": "spherical",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "0.5"
+          ],
+          "coefficients": [
+            [
+              "1.000000"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

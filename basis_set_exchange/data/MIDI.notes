@@ -1,0 +1,35 @@
+From the Original Basis Set Exchange
+------------------------------------
+
+                    Huzinaga MIDI Split Valence Basis
+                    ---------------------------------
+
+The MIDI basis set is derived from the MINI minimal basis sets by floating
+the outermost valence primitives and renormalizing the remain 2 Gaussians.
+The MINI minimal basis sets use 3 Gaussians to expand each AO.  Exponents
+and contraction coefficients were determined by minimizing the energy
+for the resticted Hartree-Fock groundstate.
+
+                        MIDI Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.496979    -0.496979    -0.496979     -0.50000
+He  1-S    -2.835679    -2.835679    -2.835679     -2.86168
+Li  2-S    -7.380802    -7.380802    -7.380802     -7.43273
+Be  1-S   -14.481992   -14.481992   -14.481992    -14.57302
+B   2-P   -24.383095                              -24.52906
+C   3-P   -37.467717   -37.466573                 -37.68862
+N   4-S   -54.086483   -54.083501                 -54.40094
+O   3-P   -74.367846                              -74.80940
+F   2-P   -98.812816   -98.812331                 -99.40935
+Ne  1-S  -127.762410  -127.762410  -127.762410   -128.54710
+Na  2-S                                          -161.85891
+Mg  1-S                                          -199.61463
+Al  2-P  -240.558511  -240.558495                -241.87671
+Si  3-P  -287.343571  -287.343566                -288.85436
+P   4-S  -339.028352                             -340.71878
+S   3-P  -395.557114  -395.556974                -397.50490
+Cl  2-P  -457.289836  -457.289773                -459.48207
+Ar  1-S                                          -526.81751
+K   2-S  -596.424812  -596.424812  -596.424812   -599.16479
