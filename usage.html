@@ -379,7 +379,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;31g&#39; in the name</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">filter_basis_sets</span><span class="p">(</span><span class="s1">&#39;31g&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">dict_keys([&#39;4-31g&#39;, &#39;6-31g&#39;, &#39;6-31g*&#39;, &#39;6-31g**&#39;])</span>
+<span class="go">dict_keys([&#39;4-31g&#39;, &#39;6-31g&#39;, &#39;6-31g(d,p)&#39;, &#39;6-31g*&#39;, &#39;6-31g**&#39;])</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;aug&#39; in the name that can be used for RI fitting</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">filter_basis_sets</span><span class="p">(</span><span class="s1">&#39;aug&#39;</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
