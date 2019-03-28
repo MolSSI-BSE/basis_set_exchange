@@ -328,6 +328,7 @@ gamess_us   GAMESS US
 turbomole   Turbomole
 molpro      Molpro
 cfour       CFOUR
+bsedebug    BSE Debug
 json        JSON
 </pre></div>
 </div>
@@ -339,6 +340,7 @@ gamess_us
 turbomole
 molpro
 cfour
+bsedebug
 json
 </pre></div>
 </div>
@@ -447,7 +449,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.6.5+8.gdb09468b
+# Version v0.6.5+14.g448621b6.dirty
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -531,6 +533,40 @@ By default, all elements for which the basis set is defined are included.</p>
 <p>A version of the basis set can be specified with <code class="docutils literal notranslate"><span class="pre">--version</span></code>.
 See <a class="reference internal" href="#get-versions">get-versions</a> for how to list versions available for a basis set.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-refs def2-tzvp --elements 1 bib
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If you downloaded data from the basis set
+% exchange or used the basis set exchange python library, please cite:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@unpublished{pritchardXXXXa,
+    author = {Pritchard, Benjamin P. and Altarawy, Doaa and Windus, Theresa L.},
+    title = {A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community},
+    note = {Manuscript in preparation}
+}
+
+@article{feller1996a,
+    author = {Feller, David},
+    title = {The role of databases in support of computational chemistry calculations},
+    journal = {J. Comput. Chem.},
+    volume = {17},
+    page = {1571-1586},
+    year = {1996},
+    doi = {10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P}
+}
+
+@article{schuchardt2007a,
+    author = {Schuchardt, Karen L. and Didier, Brett T. and Elsethagen, Todd and Sun, Lisong and Gurumoorthi, Vidhya and Chase, Jared and Li, Jun and Windus, Theresa L.},
+    title = {Basis Set Exchange:  A Community Database for Computational Sciences},
+    journal = {J. Chem. Inf. Model.},
+    volume = {47},
+    page = {1045-1052},
+    year = {2007},
+    doi = {10.1021/ci600510j}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References for the basis set
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % H
 %     Common base shells for def2-TZV*
 %         weigend2005a
