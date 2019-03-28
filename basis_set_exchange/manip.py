@@ -285,10 +285,6 @@ def make_general(basis):
 
             newsh['exponents'] = unique_exponents
 
-            # Number of primitives in the new shell
-            nprim = len(newsh['exponents'])
-
-            cur_prim = 0
             for sh in el['electron_shells']:
                 if sh['angular_momentum'] != am:
                     continue
