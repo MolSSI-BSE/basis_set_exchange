@@ -2,8 +2,7 @@
 Conversion of basis sets to Gaussian format
 '''
 
-from .. import lut, manip, sort
-from .common import write_matrix
+from .. import lut, manip, sort, printing
 
 
 def write_g94(basis):
@@ -41,7 +40,7 @@ def write_g94(basis):
                 s += '{}   {}   1.00\n'.format(amchar, nprim)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
-                s += write_matrix([exponents, *coefficients], point_places, convert_exp=True)
+                s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=True)
 
             s += '****\n'
 
@@ -77,6 +76,6 @@ def write_g94(basis):
                 s += '  ' + str(nprim) + '\n'
 
                 point_places = [0, 9, 32]
-                s += write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=True)
+                s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=True)
 
     return s

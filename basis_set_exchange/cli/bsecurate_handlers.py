@@ -2,7 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import curate
+from .. import curate, printing, fileio
 from .common import format_columns
 
 
@@ -39,6 +39,13 @@ def _bsecurate_cli_component_file_refs(args):
         s += '\n'.join(format_columns(rows)) + '\n\n'
 
     return s
+
+
+def _bsecurate_cli_print_component_file(args):
+    '''Handles the print-component-file subcommand'''
+
+    data = fileio.read_json_basis(args.file)
+    return printing.component_basis_str(data, elements=args.elements)
 
 
 def _bsecurate_cli_compare_basis_sets(args):
@@ -86,6 +93,7 @@ def bsecurate_cli_handle_subcmd(args):
         'get-reader-formats': _bsecurate_cli_get_reader_formats,
         'elements-in-files': _bsecurate_cli_elements_in_files,
         'component-file-refs': _bsecurate_cli_component_file_refs,
+        'print-component-file': _bsecurate_cli_print_component_file,
         'compare-basis-sets': _bsecurate_cli_compare_basis_sets,
         'compare-basis-files': _bsecurate_cli_compare_basis_files,
         'make-diff': _bsecurate_cli_make_diff,

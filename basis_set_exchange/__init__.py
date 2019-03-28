@@ -17,6 +17,7 @@ from .api import (get_basis, lookup_basis_by_role, get_metadata, get_reference_d
                   has_basis_notes, has_family_notes, get_schema, get_formats, get_reference_formats, get_roles,
                   version, get_data_dir)
 from .bundle import create_bundle, get_archive_types
+from .printing import electron_shell_str, ecp_pot_str, element_data_str, component_basis_str
 
 # Handle versioneer
 from ._version import get_versions

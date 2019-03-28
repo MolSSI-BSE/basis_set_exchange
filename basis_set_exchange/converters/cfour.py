@@ -2,8 +2,7 @@
 Conversion of basis sets to cfour format
 '''
 
-from .. import lut, manip, sort
-from .common import write_matrix
+from .. import lut, manip, sort, printing
 
 
 def write_cfour(basis):
@@ -96,7 +95,7 @@ def write_cfour(basis):
                     s += '{}-{}\n'.format(amchar, max_ecp_amchar)
 
                 point_places = [6, 18, 25]
-                s += write_matrix([*coefficients, rexponents, gexponents], point_places)
+                s += printing.write_matrix([*coefficients, rexponents, gexponents], point_places)
                 #for p in range(len(rexponents)):
                 #    s += '{}  {}  {};\n'.format(gexponents[p], rexponents[p], coefficients[0][p])
             s += '*\n'

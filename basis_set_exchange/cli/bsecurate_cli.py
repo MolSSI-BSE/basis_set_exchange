@@ -45,6 +45,14 @@ def run_bsecurate_cli():
 
 
     ########################################
+    # Printing data
+    ########################################
+    subp = subparsers.add_parser('print-component-file', help='(Pretty) print the contents of a component file')
+    subp.add_argument('file', help='File to print')
+    subp.add_argument('--elements', help='Which elements of the basis set to output. Default is all defined in the given basis')
+
+
+    ########################################
     # Manipulating basis set data
     ########################################
     # make-diff

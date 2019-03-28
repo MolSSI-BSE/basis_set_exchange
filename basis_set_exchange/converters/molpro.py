@@ -2,8 +2,7 @@
 Conversion of basis sets to Molpro format
 '''
 
-from .. import lut
-from .. import manip
+from .. import lut, manip, misc
 from .common import find_range
 
 
@@ -32,7 +31,7 @@ def write_molpro(basis):
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z).upper()
             s += '!\n'
-            s += '! {:20} {}\n'.format(lut.element_name_from_Z(z), manip.contraction_string(data))
+            s += '! {:20} {}\n'.format(lut.element_name_from_Z(z), misc.contraction_string(data))
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']

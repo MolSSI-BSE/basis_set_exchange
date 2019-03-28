@@ -90,64 +90,6 @@ def test_compare_elements(basis1, basis2, element, expected):
     assert curate.compare_elements(el2, el1, True, True, True) == expected
 
 
-# yapf: disable
-@pytest.mark.parametrize('basis, element', [
-                              ['6-31g', '8'],
-                              ['CRENBL', '3'],
-                              ['CRENBL', '92'],
-                              ['LANL2DZ', '78']
-                         ])
-# yapf: enable
-def test_printing(basis, element):
-    el = api.get_basis(basis)['elements'][element]
-
-    shells = el['electron_shells']
-    curate.print_electron_shell(shells[0])
-
-    if 'ecp_potentials' in el:
-        ecps = el['ecp_potentials']
-        curate.print_ecp_pot(ecps[0])
-
-    curate.print_element(element, el)
-
-
-# yapf: disable
-@pytest.mark.parametrize('file_path', [
-                              'dunning/cc-pVDZ.1.json',
-                              'crenb/CRENBL.0.json',
-                              'crenb/CRENBL-ECP.0.json'
-                         ])
-# yapf: enable
-def test_print_component_basis(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    comp = fileio.read_json_basis(full_path)
-    curate.print_component_basis(comp)
-
-
-# yapf: disable
-@pytest.mark.parametrize('file_path', [
-                              'dunning/cc-pVDZ.1.element.json',
-                              'crenb/CRENBL.0.element.json'
-                         ])
-# yapf: enable
-def test_print_elemental_basis(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    el = fileio.read_json_basis(full_path)
-    curate.print_element_basis(el)
-
-
-# yapf: disable
-@pytest.mark.parametrize('file_path', [
-                              'cc-pVDZ.1.table.json',
-                              'CRENBL.0.table.json'
-                         ])
-# yapf: enable
-def test_print_table_basis(file_path):
-    full_path = os.path.join(data_dir, file_path)
-    tab = fileio.read_json_basis(full_path)
-    curate.print_table_basis(tab)
-
-
 def test_diff_json_files_same(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
 

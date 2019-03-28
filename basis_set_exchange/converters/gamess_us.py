@@ -2,8 +2,7 @@
 Conversion of basis sets to Gaussian format
 '''
 
-from .. import lut, manip, sort
-from .common import write_matrix
+from .. import lut, manip, sort, printing
 
 
 def write_gamess_us(basis):
@@ -47,7 +46,7 @@ def write_gamess_us(basis):
                 # 1-based indexing
                 idx_column = list(range(1, nprim + 1))
                 point_places = [0] + [4 + 8 * i + 15 * (i - 1) for i in range(1, ncol)]
-                s += write_matrix([idx_column, exponents, *coefficients], point_places)
+                s += printing.write_matrix([idx_column, exponents, *coefficients], point_places)
 
         s += "$END"
 
@@ -83,7 +82,7 @@ def write_gamess_us(basis):
                     s += '{:<5} ----- {}-{} potential -----\n'.format(nprim, amchar, max_ecp_amchar)
 
                 point_places = [8, 23, 32]
-                s += write_matrix([*coefficients, rexponents, gexponents], point_places)
+                s += printing.write_matrix([*coefficients, rexponents, gexponents], point_places)
 
         s += "$END\n"
 

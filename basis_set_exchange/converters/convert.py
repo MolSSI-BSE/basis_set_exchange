@@ -10,6 +10,7 @@ from .psi4 import write_psi4
 from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .cfour import write_cfour
+from .bsedebug import write_bsedebug
 
 _converter_map = {
     'nwchem': {
@@ -60,6 +61,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_cfour
+    },
+    'bsedebug': {
+        'display': 'BSE Debug',
+        'extension': '.bse',
+        'comment': '!',
+        'valid': None,
+        'function': write_bsedebug
     },
     'json': {
         'display': 'JSON',

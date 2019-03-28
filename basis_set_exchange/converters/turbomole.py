@@ -2,8 +2,7 @@
 Conversion of basis sets to Turbomole format
 '''
 
-from .. import lut, manip, sort
-from .common import write_matrix
+from .. import lut, manip, sort, printing
 
 
 def write_turbomole(basis):
@@ -43,7 +42,7 @@ def write_turbomole(basis):
                 s += '    {}   {}\n'.format(nprim, amchar)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
-                s += write_matrix([exponents, *coefficients], point_places, convert_exp=True)
+                s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=True)
 
             s += '*\n'
 
@@ -80,7 +79,7 @@ def write_turbomole(basis):
                     s += '{}-{}\n'.format(amchar, max_ecp_amchar)
 
                 point_places = [9, 23, 32]
-                s += write_matrix([*coefficients, rexponents, gexponents], point_places, convert_exp=True)
+                s += printing.write_matrix([*coefficients, rexponents, gexponents], point_places, convert_exp=True)
             s += '*\n'
 
     s += '$end\n'
