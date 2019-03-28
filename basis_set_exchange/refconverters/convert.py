@@ -52,10 +52,6 @@ def convert_references(ref_data, fmt):
     return ret_str
 
 
-def convert_bse_references(fmt):
-    return "HI"
-
-
 def get_formats():
     '''
     Returns the available reference formats mapped to display name.
