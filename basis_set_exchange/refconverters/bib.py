@@ -2,7 +2,9 @@
 Conversion of references to bibtex format
 '''
 
+import textwrap
 from ..misc import compact_elements
+from .common import get_library_citation
 
 
 def _ref_bib(key, ref):
@@ -36,6 +38,19 @@ def write_bib(refs):
     '''
 
     full_str = u''
+
+    lib_citation_desc, lib_citations = get_library_citation()
+
+    full_str += '%' * 80 + '\n'
+    full_str += textwrap.indent(lib_citation_desc, '% ')
+    full_str += '%' * 80 + '\n\n'
+
+    for k, r in lib_citations.items():
+        full_str += _ref_bib(k, r) + '\n\n'
+
+    full_str += '%' * 80 + '\n'
+    full_str += "% References for the basis set\n"
+    full_str += '%' * 80 + '\n'
 
     # First, write out the element, description -> key mapping
     # Also make a dict of unique reference to output

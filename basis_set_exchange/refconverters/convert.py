@@ -29,7 +29,7 @@ _converter_map = {
 }
 
 
-def convert_references(ref_data, fmt, header=None):
+def convert_references(ref_data, fmt):
     '''
     Returns the basis set references as a string representing
     the data in the specified output format
@@ -49,12 +49,11 @@ def convert_references(ref_data, fmt, header=None):
     # Actually do the conversion
     ret_str = _converter_map[fmt]['function'](ref_data)
 
-    if header is not None and fmt != 'json':
-        comment_str = _converter_map[fmt]['comment']
-        header_str = comment_str + comment_str.join(header.splitlines(True))
-        ret_str = header_str + '\n\n' + ret_str
-
     return ret_str
+
+
+def convert_bse_references(fmt):
+    return "HI"
 
 
 def get_formats():

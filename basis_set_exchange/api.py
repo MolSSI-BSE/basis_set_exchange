@@ -35,6 +35,8 @@ _default_schema_dir = os.path.join(_my_dir, 'schema')
 # Main URL of the project
 _main_url = 'https://www.basissetexchange.org'
 
+# Reference for the BSE
+
 
 def _get_basis_metadata(name, data_dir):
     '''Get metadata for a single basis set
@@ -366,7 +368,7 @@ def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=N
         Available reference formats are
 
             * bib
-            * tex
+            * txt
             * json
 
     data_dir : str
