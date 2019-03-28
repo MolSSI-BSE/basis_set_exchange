@@ -203,6 +203,9 @@ def get_basis(name,
             # Set to only the elements we want
             basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
+    # Sort the basis set into a more canonical form
+    basis_dict = sort.sort_basis(basis_dict)
+
     needs_pruning = False
     if optimize_general:
         basis_dict = manip.optimize_general(basis_dict)
@@ -227,9 +230,6 @@ def get_basis(name,
     # Remove dead and duplicate shells
     if needs_pruning:
         basis_dict = manip.prune_basis(basis_dict)
-
-    # Sort the basis set into a more canonical form
-    basis_dict = sort.sort_basis(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:
