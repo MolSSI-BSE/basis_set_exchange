@@ -127,13 +127,13 @@ def element_data_str(z, eldata):
 
     if 'electron_shells' in eldata:
         for shellidx, shell in enumerate(eldata['electron_shells']):
-            s += electron_shell_str(shell, shellidx)
+            s += electron_shell_str(shell, shellidx) + '\n'
 
     if 'ecp_potentials' in eldata:
         s += 'ECP: Element: {}   Number of electrons: {}\n'.format(sym, eldata['ecp_electrons'])
 
         for pot in eldata['ecp_potentials']:
-            s += ecp_pot_str(pot)
+            s += ecp_pot_str(pot) + '\n'
 
     return s
 
@@ -157,6 +157,6 @@ def component_basis_str(basis, elements=None):
 
     # Add the str for each element
     for z in elements:
-        s += element_data_str(z, eldata[z])
+        s += element_data_str(z, eldata[z]) + '\n'
 
     return s
