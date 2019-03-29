@@ -27,7 +27,9 @@ bsecurate_cmds = [
     'get-reader-formats'
 ]
 
-fakebsecurate_cmds = []
+fakebsecurate_cmds = [
+    '-V', 'compare-basis-sets bppfakebasis bppfakebasis'
+]
 
 @pytest.mark.parametrize('bsecurate_cmd', bsecurate_cmds)
 def test_curatecli(bsecurate_cmd):
@@ -35,8 +37,7 @@ def test_curatecli(bsecurate_cmd):
 
 @pytest.mark.parametrize('bsecurate_cmd', fakebsecurate_cmds)
 def test_curatecli_datadir(bsecurate_cmd):
-    output = _test_curatecli_cmd('bsecurate -d ' + fake_data_dir + ' ' + bsecurate_cmd)
-    assert 'bppfake' in output
+    _test_curatecli_cmd('bsecurate -d ' + fake_data_dir + ' ' + bsecurate_cmd)
 
 
 def test_curatecli_makediff(tmp_path):
