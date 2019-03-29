@@ -52,7 +52,6 @@ def write_cfour(basis):
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
-                print(exponents)
                 coefficients = shell['coefficients']
                 coefficients = list(map(list, zip(*coefficients)))
 
