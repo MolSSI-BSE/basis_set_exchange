@@ -12,10 +12,10 @@ def write_cfour(basis):
     # March 2019
     # Format determined from http://slater.chemie.uni-mainz.de/cfour/index.php?n=Main.NewFormatOfAnEntryInTheGENBASFile
 
-    # Uncontract all
-    basis = manip.uncontract_spdf(basis)
-    basis = sort.sort_basis(basis)
-    basis = manip.make_general(basis)
+    # Uncontract all, then make general
+    basis = manip.uncontract_spdf(basis, 0, True)
+    basis = sort.sort_basis(basis, False)
+    basis = manip.make_general(basis, False)
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]

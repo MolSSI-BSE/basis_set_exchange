@@ -10,7 +10,7 @@ def write_nwchem(basis):
     '''
 
     # Uncontract all but SP
-    basis = manip.uncontract_spdf(basis, 1)
+    basis = manip.uncontract_spdf(basis, 1, True)
 
     s = ''
 

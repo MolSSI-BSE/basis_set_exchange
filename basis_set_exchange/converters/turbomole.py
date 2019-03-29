@@ -13,9 +13,9 @@ def write_turbomole(basis):
     s += '*\n'
 
     # TM basis sets are completely uncontracted
-    basis = manip.uncontract_general(basis)
-    basis = manip.uncontract_spdf(basis)
-    basis = sort.sort_basis(basis)
+    basis = manip.uncontract_general(basis, True)
+    basis = manip.uncontract_spdf(basis, 0, False)
+    basis = sort.sort_basis(basis, False)
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]

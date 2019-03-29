@@ -11,8 +11,8 @@ def write_molpro(basis):
     '''
 
     # Uncontract all, and make as generally-contracted as possible
-    basis = manip.uncontract_spdf(basis)
-    basis = manip.make_general(basis)
+    basis = manip.uncontract_spdf(basis, 0, True)
+    basis = manip.make_general(basis, False)
 
     s = ''
 

@@ -205,33 +205,36 @@ def get_basis(name,
             # Set to only the elements we want
             basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
+    # Note that from now on, the pipleline is going to modify basis_dict. That is ok,
+    # since we are returned a unique instance from compose_table_basis
+
     # Sort the basis set into a more canonical form
-    basis_dict = sort.sort_basis(basis_dict)
+    basis_dict = sort.sort_basis(basis_dict, False)
 
     needs_pruning = False
     if optimize_general:
-        basis_dict = manip.optimize_general(basis_dict)
+        basis_dict = manip.optimize_general(basis_dict, False)
         needs_pruning = True
 
     # uncontract_segmented implies uncontract_general
     if uncontract_segmented:
-        basis_dict = manip.uncontract_segmented(basis_dict)
+        basis_dict = manip.uncontract_segmented(basis_dict, False)
         needs_pruning = True
     elif uncontract_general:
-        basis_dict = manip.uncontract_general(basis_dict)
+        basis_dict = manip.uncontract_general(basis_dict, False)
         needs_pruning = True
 
     if uncontract_spdf:
-        basis_dict = manip.uncontract_spdf(basis_dict)
+        basis_dict = manip.uncontract_spdf(basis_dict, 0, False)
         needs_pruning = True
 
     if make_general:
-        basis_dict = manip.make_general(basis_dict)
+        basis_dict = manip.make_general(basis_dict, False)
         needs_pruning = True
 
     # Remove dead and duplicate shells
     if needs_pruning:
-        basis_dict = manip.prune_basis(basis_dict)
+        basis_dict = manip.prune_basis(basis_dict, False)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

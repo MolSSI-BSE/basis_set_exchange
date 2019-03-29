@@ -78,6 +78,9 @@ def compose_table_basis(file_relpath, data_dir):
     This function reads the info from the given file, and reads all the elemental
     basis set information from the files listed therein. It then composes all the
     information together into one 'table' basis dictionary
+
+    Note that the data returned from this function will not be shared, even if
+    the function is called again with the same arguments.
     """
 
     # Do a simple read of the json
