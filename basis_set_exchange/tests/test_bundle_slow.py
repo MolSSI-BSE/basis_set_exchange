@@ -6,7 +6,7 @@ import pytest
 
 import basis_set_exchange as bse
 from .common_testvars import fake_data_dir
-from .test_bundles import _run_test_bundles, _bundle_exts
+from .test_bundle import _run_test_bundles, _bundle_exts
 
 # yapf: disable
 @pytest.mark.slow
