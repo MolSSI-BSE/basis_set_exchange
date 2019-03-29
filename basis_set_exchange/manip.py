@@ -7,8 +7,6 @@ data, as well as some other small functions.
 
 import copy
 
-from . import lut
-
 
 def merge_element_data(dest, sources, use_copy=True):
     """

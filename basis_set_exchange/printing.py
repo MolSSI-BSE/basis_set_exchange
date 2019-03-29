@@ -100,7 +100,7 @@ def ecp_pot_str(pot):
 
     point_places = [0, 10, 33]
     s = 'Potential: {} potential\n'.format(amchar)
-    s = 'Type: {}\n'.format(pot['ecp_type'])
+    s += 'Type: {}\n'.format(pot['ecp_type'])
     s += write_matrix([rexponents, gexponents, *coefficients], point_places)
     return s
 
