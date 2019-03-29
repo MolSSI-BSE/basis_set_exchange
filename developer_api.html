@@ -778,23 +778,27 @@ ordering will be spdfghikl (skipping j)</p>
 data, as well as some other small functions.</p>
 <dl class="function">
 <dt id="basis_set_exchange.manip.make_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes one large general contraction for each angular momentum</p>
 <p>If split_spdf is True, sp… orbitals will be split apary</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.merge_element_data">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges the basis set data for an element from multiple sources
 into dest.</p>
 <p>The destination is not modified, and a (shallow) copy of dest is returned
 with the data from sources added.</p>
+<p>If use_copy is True, then the data merged into dest will be a (deep)
+copy of that found in sources. Otherwise, data may be shared between dest
+and sources</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.optimize_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -809,37 +813,39 @@ with the data from sources added.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.prune_basis">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes primitives that have a zero coefficient, and
 removes duplicate shells</p>
 <p>This only finds EXACT duplicates, and is meant to be used
 after uncontracting</p>
-<p>The input basis set is not modified.</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the general contractions from a basis set</p>
 <p>The input basis set is not modified. The returned basis
 may have functions with coefficients of zero and may have duplicate
 shells.</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_segmented">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the segmented contractions from a basis set</p>
 <p>This implicitly removes general contractions as well,
 but will leave sp, spd, … orbitals alone</p>
 <p>The input basis set is not modified. The returned basis
 may have functions with coefficients of zero and may have duplicate
 shells.</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_spdf">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
 <p>The general contractions are replaced by uncontracted versions</p>
 <p>Contractions up to max_am will be left in place. For example,
@@ -847,6 +853,7 @@ if max_am = 1, spd will be split into sp and d</p>
 <p>The input basis set is not modified. The returned basis
 may have functions with coefficients of zero and may have duplicate
 shells.</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 </div>
@@ -965,9 +972,9 @@ that those references apply to</p>
 <p>Sorting of BSE related dictionaries and data</p>
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_basis">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sorts all the information in a basis set into a standard order</p>
-<p>The original data is not modified.</p>
+<p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
@@ -982,12 +989,12 @@ in a consistent order</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_potentials">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_potentials" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_potentials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of ECP potentials into a standard order</p>
 <p>The order within a potential is not modified.</p>
 <p>The order of the shell list is in increasing angular momentum, with the largest
 angular momentum being moved to the front.</p>
-<p>The original data is not modified, and a deep copy is returned.</p>
+<p>If use_copy is True, the input potentials are not modified.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1000,12 +1007,12 @@ reference are put in a more canonical order.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_shells">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shells" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of basis set shells into a standard order</p>
 <p>The order within a shell is by decreasing value of the exponent.</p>
 <p>The order of the shell list is in increasing angular momentum, and then
 by decreasing number of primitives, then decreasing value of the largest exponent.</p>
-<p>The original data is not modified.</p>
+<p>If use_copy is True, the input shells are not modified.</p>
 </dd></dl>
 
 <dl class="function">
