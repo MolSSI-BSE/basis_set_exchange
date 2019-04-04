@@ -4,7 +4,7 @@ Validators for command line options
 
 import os
 import copy
-from .. import api, misc
+from .. import api, misc, curate
 
 
 def _cli_check_data_dir(data_dir):
