@@ -98,13 +98,22 @@ def test_curatecli_compare_1():
                             ('def2-ecp.gbs.bz2', 'def2-ecp-BAD3.nw.bz2', False),
                             ('def2-ecp.gbs.bz2', 'def2-ecp-BAD4.nw.bz2', False),
                             ('def2-ecp.gbs.bz2', 'def2-ecp-BAD5.nw.bz2', False),
-                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD6.gbs.bz2', False)])
+                            ('def2-ecp.gbs.bz2', 'def2-ecp-BAD6.gbs.bz2', False),
+                            ('lanl2dz.nw.bz2', 'lanl2dz.nw.bz2', True),
+                            ('lanl2dz.nw.bz2', 'lanl2dz-BAD1.nw.bz2', False),
+                            ('lanl2dz.nw.bz2', 'lanl2dz-BAD2.nw.bz2', False)])
 # yapf: enable
 def test_curatecli_compare_files(filename1, filename2, expected):
     file1 = os.path.join(test_data_dir, filename1)
     file2 = os.path.join(test_data_dir, filename2)
 
     output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file1, file2))
+    if expected:
+        assert "No difference found" in output
+    else:
+        assert "DIFFERENCES FOUND" in output
+
+    output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file2, file1))
     if expected:
         assert "No difference found" in output
     else:

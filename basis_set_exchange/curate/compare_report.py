@@ -51,17 +51,31 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
         max_rdiff_el = 0.0
         max_rdiff_ecp = 0.0
 
-        if 'electron_shells' in v:
-            max_rdiff_el = shells_difference(v['electron_shells'], bs1_el['electron_shells'])
-        if 'ecp_potentials' in v:
+        # Check to make sure that neither or both have ecp/electron shells
+        if 'electron_shells' in v and 'electron_shells' not in bs1_el:
+            print("bs2 has electron_shells, but bs1 does not")
+            max_rdiff_el = float('inf')
+        if 'electron_shells' in bs1_el and 'electron_shells' not in v:
+            print("bs1 has electron_shells, but bs2 does not")
+            max_rdiff_el = float('inf')
+        if 'ecp_potentials' in v and 'ecp_potentials' not in bs1_el:
+            print("bs2 has ecp_potentials, but bs1 does not")
+            max_rdiff_ecp = float('inf')
+        if 'ecp_potentials' in bs1_el and 'ecp_potentials' not in v:
+            print("bs1 has ecp_potentials, but bs2 does not")
+            max_rdiff_ecp = float('inf')
+
+        if 'electron_shells' in v and 'electron_shells' in bs1_el:
+            max_rdiff_el = max(max_rdiff_el, shells_difference(v['electron_shells'], bs1_el['electron_shells']))
+        if 'ecp_potentials' in v and 'ecp_potentials' in bs1_el:
             nel1 = v['ecp_electrons']
             nel2 = bs1_el['ecp_electrons']
             if int(nel1) != int(nel2):
                 print('Different number of electrons replaced by ECP ({} vs {})'.format(nel1, nel2))
                 max_rdiff_ecp = float('inf')
             else:
-                max_rdiff_ecp = potentials_difference(v['ecp_potentials'], bs1_el['ecp_potentials'])
-                v['ecp_potentials'] = bs1_el['ecp_potentials']
+                max_rdiff_ecp = max(max_rdiff_ecp, potentials_difference(v['ecp_potentials'],
+                                                                         bs1_el['ecp_potentials']))
 
         max_rdiff = max(max_rdiff_el, max_rdiff_ecp)
 
