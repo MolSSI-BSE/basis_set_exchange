@@ -62,3 +62,18 @@ def test_expand_elements(compact_el, expected):
 def test_expand_elements_fail(compact_el):
     with pytest.raises(RuntimeError, match=r'Malformed element string'):
         misc.expand_elements(compact_el)
+
+
+# yapf: disable
+@pytest.mark.parametrize("name,expected",
+                              [('6-31g', '6-31g'),
+                               ('6-31G', '6-31g'),
+                               ('6-31G**', '6-31g_s_s'),
+                               ('6-31++G', '6-31++g'),
+                               ('6-31++G**', '6-31++g_s_s')])
+# yapf: enable
+def test_basis_name_to_filename(name, expected):
+    fname = misc.basis_name_to_filename(name)
+    assert fname == expected
+    name2 = misc.basis_name_from_filename(fname)
+    assert name2 == misc.transform_basis_name(name)

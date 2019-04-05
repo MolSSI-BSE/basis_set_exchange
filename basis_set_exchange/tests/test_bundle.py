@@ -56,6 +56,7 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
         for basename in files:
             fpath = os.path.join(root, basename)
             name,ver = basename.split('.')[:2]
+            name = bse.misc.basis_name_from_filename(name)
             if name == 'README':
                 continue
             if basename.endswith('.ref' + ref_ext):

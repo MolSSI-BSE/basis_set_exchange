@@ -8,7 +8,7 @@ import zipfile
 import tarfile
 import io
 import datetime
-from . import api, converters, refconverters
+from . import api, converters, refconverters, misc
 
 _readme_str = '''Basis set exchange: Basis set bundle
 ==========================================
@@ -137,15 +137,16 @@ def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
 
     for name, data, notes in _basis_data_iter(fmt, reffmt, data_dir):
         for ver, verdata in data.items():
-            basis_filename = os.path.join(subdir, '{}.{}{}'.format(name, ver, ext))
-            ref_filename = os.path.join(subdir, '{}.{}.ref{}'.format(name, ver, refext))
+            filename = misc.basis_name_to_filename(name)
+            basis_filepath = os.path.join(subdir, '{}.{}{}'.format(filename, ver, ext))
+            ref_filename = os.path.join(subdir, '{}.{}.ref{}'.format(filename, ver, refext))
 
             bsdata, refdata = verdata
-            addhelper(bfile, basis_filename, bsdata)
+            addhelper(bfile, basis_filepath, bsdata)
             addhelper(bfile, ref_filename, refdata)
 
         if len(notes) > 0:
-            notes_filename = os.path.join(subdir, name + '.notes')
+            notes_filename = os.path.join(subdir, filename + '.notes')
             addhelper(bfile, notes_filename, notes)
 
     for fam in api.get_families(data_dir):

@@ -199,3 +199,29 @@ def transform_basis_name(name):
     """
 
     return name.lower()
+
+
+def basis_name_to_filename(name):
+    '''
+    Given a basis set name, transform it into a valid filename
+
+    This makes sure filenames don't contain invalid characters
+    '''
+
+    filename = transform_basis_name(name)
+    filename = filename.replace('*', '_s')
+    return filename
+
+
+def basis_name_from_filename(filename):
+    '''
+    Given a basis set name that was part of a filename, determine the basis set name
+
+    This is opposite of :func:`transform_basis_name`
+
+    Pass only the part of the filename that contains the basis set name
+    '''
+
+    name = filename.lower()
+    name = filename.replace('_s', '*')
+    return name

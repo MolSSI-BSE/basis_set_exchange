@@ -47,7 +47,7 @@ def test_curatecli_datadir(bsecurate_cmd):
 def test_curatecli_makediff(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
 
-    filename1 = '6-31G**-full.json.bz2' 
+    filename1 = '6-31G_s_s-full.json.bz2'
     filename2 = '6-31G-full.json.bz2' 
 
     file1 = os.path.join(test_data_dir, filename1)
@@ -68,7 +68,7 @@ def test_curatecli_makediff(tmp_path):
     assert len(diff1['elements']) == 36
     assert len(diff2['elements']) == 0
 
-    reffilename = '6-31G**-polarization.json.bz2' 
+    reffilename = '6-31G_s_s-polarization.json.bz2'
     reffile = os.path.join(test_data_dir, reffilename)
     refdata = fileio.read_json_basis(reffile)
 
