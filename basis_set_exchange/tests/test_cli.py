@@ -10,7 +10,11 @@ from .common_testvars import fake_data_dir
 
 
 def _test_cli_cmd(cmd):
-    return subprocess.check_output(cmd, shell=True, cwd='/tmp', universal_newlines=True, stderr=subprocess.STDOUT)
+    # NOTE: We do not enforce any encoding here. What is returned will be a byte string
+    # For our purposes here, that is ok. We don't know what encoding is going to be
+    # used (ie, windows)
+    cmd = cmd.split(' ')
+    return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
 
 bse_cmds = [
@@ -20,8 +24,8 @@ bse_cmds = [
     'get-basis def2-tzvp turbomole --elements=H-9,11-Ar,cO', 'get-basis cc-pvqz gaussian94 --version=1 --noheader',
     'get-basis 6-31g nwchem --unc-gen --unc-spdf --unc-seg', 'get-basis 6-31g nwchem --opt-gen',
     'get-basis 6-31g nwchem --make-gen', 'get-refs 6-31g txt', 'get-refs sto-3g bib --elements=6-Ne',
-    'get-info aug-cc-pv5z', 'get-info def2-tzvp', 'get-notes sto-3g', 'get-family crenbl', 'get-versions cc-pvqz',
-    'get-family-notes sto'
+    'get-refs ano-rcc txt --elements sc', 'get-info aug-cc-pv5z', 'get-info def2-tzvp', 'get-notes sto-3g',
+    'get-family crenbl', 'get-versions cc-pvqz', 'get-family-notes sto'
 ]
 
 fakebse_cmds = [
@@ -39,7 +43,7 @@ def test_cli(bse_cmd):
 @pytest.mark.parametrize('bse_cmd', fakebse_cmds)
 def test_cli_datadir(bse_cmd):
     output = _test_cli_cmd('bse -d ' + fake_data_dir + ' ' + bse_cmd)
-    assert 'bppfake' in output
+    assert b'bppfake' in output
 
 
 def test_cli_createbundle_datadir(tmp_path):
@@ -47,4 +51,4 @@ def test_cli_createbundle_datadir(tmp_path):
     bfile_path = os.path.join(tmp_path, 'test_bundle_datadir.tar.bz2')
     output = _test_cli_cmd('bse -d ' + fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_path)
     assert os.path.isfile(bfile_path)
-    assert output.startswith('Created ')
+    assert output.startswith(b'Created ')

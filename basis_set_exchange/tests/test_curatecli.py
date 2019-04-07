@@ -11,7 +11,11 @@ from basis_set_exchange import fileio, curate
 from .common_testvars import fake_data_dir, data_dir, test_data_dir, auth_data_dir
 
 def _test_curatecli_cmd(cmd):
-    return subprocess.check_output(cmd, shell=True, cwd='/tmp', universal_newlines=True, stderr=subprocess.STDOUT)
+    # NOTE: We do not enforce any encoding here. What is returned will be a byte string
+    # For our purposes here, that is ok. We don't know what encoding is going to be
+    # used (ie, windows)
+    cmd = cmd.split(' ')
+    return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
 test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
 test_files1 = [os.path.join(data_dir, x) for x in test_files1]
@@ -73,13 +77,13 @@ def test_curatecli_makediff(tmp_path):
 
 def test_curatecli_compare_1():
     output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0')
-    assert "No difference found" in output
+    assert b"No difference found" in output
 
     output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general')
-    assert "No difference found" in output
+    assert b"No difference found" in output
 
     output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 1')
-    assert "DIFFERENCES FOUND" in output
+    assert b"DIFFERENCES FOUND" in output
 
 
 # yapf: disable
@@ -109,12 +113,12 @@ def test_curatecli_compare_files(filename1, filename2, expected):
 
     output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file1, file2))
     if expected:
-        assert "No difference found" in output
+        assert b"No difference found" in output
     else:
-        assert "DIFFERENCES FOUND" in output
+        assert b"DIFFERENCES FOUND" in output
 
     output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file2, file1))
     if expected:
-        assert "No difference found" in output
+        assert b"No difference found" in output
     else:
-        assert "DIFFERENCES FOUND" in output
+        assert b"DIFFERENCES FOUND" in output
