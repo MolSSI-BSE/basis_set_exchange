@@ -21,19 +21,15 @@ def test_metadata_uptodate(tmp_path):
     '''Tests that the METADATA.json file is up to date'''
 
     tmp_path = str(tmp_path)  # Needed for python 3.5
-    old_metadata = os.path.join(data_dir, 'METADATA.json')
+    old_path = os.path.join(data_dir, 'METADATA.json')
 
     # Create a temporary file
-    new_metadata = os.path.join(tmp_path, 'NEW_METADATA.json')
+    new_path = os.path.join(tmp_path, 'NEW_METADATA.json')
+    curate.create_metadata_file(str(new_path), data_dir)
 
-    curate.create_metadata_file(str(new_metadata), data_dir)
-
-    with open(old_metadata, 'r') as f:
-        old_data = json.load(f)
-    with open(new_metadata, 'r') as f:
-        new_data = json.load(f)
-
-    assert old_data == new_data
+    old_metadata = fileio.read_metadata(old_path)
+    new_metadata = fileio.read_metadata(new_path)
+    assert old_metadata == new_metadata
 
 
 @pytest.mark.parametrize('meta_file_path', all_metadata_files)

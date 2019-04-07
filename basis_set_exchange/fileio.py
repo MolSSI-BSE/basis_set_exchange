@@ -3,12 +3,15 @@ Functions for reading and writing the standard JSON-based
 basis set format
 """
 
-import codecs
 import json
 import bz2
 import os
 
 from .sort import sort_basis_dict, sort_references_dict
+
+# The encoding to use for reading/writing files.
+# For all the files in the project, UTF-8 is used
+_default_encoding = 'utf-8'
 
 
 def _read_plain_json(file_path, check_bse):
@@ -28,6 +31,9 @@ def _read_plain_json(file_path, check_bse):
     ----------
     file_path : str
         Full path to the file to read
+    check_bse: bool
+        If True, check to make sure the bse schema information is included.
+        If not found, an exception is raised
     """
 
     if not os.path.isfile(file_path):
@@ -36,10 +42,10 @@ def _read_plain_json(file_path, check_bse):
 
     try:
         if file_path.endswith('.bz2'):
-            with bz2.open(file_path, 'rt') as f:
+            with bz2.open(file_path, 'rt', encoding=_default_encoding) as f:
                 js = json.load(f)
         else:
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding=_default_encoding) as f:
                 js = json.load(f)
 
     except json.decoder.JSONDecodeError as ex:
@@ -71,10 +77,10 @@ def _write_plain_json(file_path, js):
     # from escaping everything
 
     if file_path.endswith('.bz2'):
-        with bz2.open(file_path, 'wt') as f:
+        with bz2.open(file_path, 'wt', encoding=_default_encoding) as f:
             json.dump(js, f, indent=2, ensure_ascii=False)
     else:
-        with codecs.open(file_path, 'w', 'utf-8') as f:
+        with open(file_path, 'w', encoding=_default_encoding) as f:
             json.dump(js, f, indent=2, ensure_ascii=False)
 
 
@@ -84,6 +90,8 @@ def read_json_basis(file_path):
 
     After reading, the MolSSI BSE schema information is searched for and if not
     found, an exception is raised.
+
+    This function works with basis set metadata, table, element, and json files.
 
     Parameters
     ----------
@@ -109,7 +117,7 @@ def read_schema(file_path):
 
 def read_references(file_path):
     """
-    Reads a references JSON file
+    Read a JSON file containing info for all references
 
     Parameters
     ----------
@@ -137,6 +145,8 @@ def write_json_basis(file_path, bs):
     """
     Write basis set information to a JSON file
 
+    This function works with basis set metadata, table, element, and json files.
+
     Parameters
     ----------
     file_path : str
@@ -150,7 +160,7 @@ def write_json_basis(file_path, bs):
 
 def write_references(file_path, refs):
     """
-    Write reference information to a JSON file
+    Write a dict containing info for all references to a JSON file
 
     Parameters
     ----------
@@ -161,6 +171,23 @@ def write_references(file_path, refs):
     """
 
     _write_plain_json(file_path, sort_references_dict(refs))
+
+
+def write_metadata(file_path, metadata):
+    """
+    Reads a file containing the metadata for all the basis sets
+
+    Parameters
+    ----------
+    file_path : str
+        Full path to the file to write to. It will be overwritten if it exists
+    metadata : dict
+        Metadata information for all basis sets
+    """
+
+    _write_plain_json(file_path, sort_basis_dict(bs))
+
+
 
 
 def get_all_filelist(data_dir):
@@ -212,5 +239,5 @@ def read_notes_file(file_path):
     if not os.path.isfile(file_path):
         return None
 
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding=_default_encoding) as f:
         return f.read()

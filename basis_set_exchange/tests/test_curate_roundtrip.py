@@ -32,7 +32,7 @@ def test_curate_roundtrip(tmp_path, basis, fmt):
     bse_dict = manip.uncontract_spdf(bse_dict, uncontract_spdf)
 
     outfile_path = os.path.join(tmp_path, 'roundtrip.txt')
-    with open(outfile_path, 'w') as outfile:
+    with open(outfile_path, 'w', encoding='utf-8') as outfile:
         outfile.write(bse_formatted)
 
     test_dict = curate.read_formatted_basis(outfile_path, fmt)

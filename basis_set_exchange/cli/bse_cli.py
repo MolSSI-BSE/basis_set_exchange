@@ -137,7 +137,7 @@ def run_bse_cli():
     output = bse_cli_handle_subcmd(args)
 
     if args.output:
-        with open(args.output, 'w') as outfile:
+        with open(args.output, 'w', encoding='utf-8') as outfile:
             outfile.write(output)
     else:
         print(output)

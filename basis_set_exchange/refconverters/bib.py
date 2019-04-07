@@ -10,9 +10,9 @@ from .common import get_library_citation
 def _ref_bib(key, ref):
     '''Convert a single reference to bibtex format
     '''
-    s = u''
+    s = ''
 
-    s += u'@{}{{{},\n'.format(ref['type'], key)
+    s += '@{}{{{},\n'.format(ref['type'], key)
 
     entry_lines = []
     for k, v in ref.items():
@@ -21,11 +21,11 @@ def _ref_bib(key, ref):
 
         # Handle authors/editors
         if k == 'authors':
-            entry_lines.append(u'    author = {{{}}}'.format(' and '.join(v)))
+            entry_lines.append('    author = {{{}}}'.format(' and '.join(v)))
         elif k == 'editors':
-            entry_lines.append(u'    editor = {{{}}}'.format(' and '.join(v)))
+            entry_lines.append('    editor = {{{}}}'.format(' and '.join(v)))
         else:
-            entry_lines.append(u'    {} = {{{}}}'.format(k, v))
+            entry_lines.append('    {} = {{{}}}'.format(k, v))
 
     s += ',\n'.join(entry_lines)
     s += '\n}'
@@ -37,7 +37,7 @@ def write_bib(refs):
     '''Converts references to bibtex
     '''
 
-    full_str = u''
+    full_str = ''
 
     lib_citation_desc, lib_citations = get_library_citation()
 
@@ -57,26 +57,26 @@ def write_bib(refs):
     unique_refs = {}
 
     for ref in refs:
-        full_str += u'% {}\n'.format(compact_elements(ref['elements']))
+        full_str += '% {}\n'.format(compact_elements(ref['elements']))
 
         for ri in ref['reference_info']:
-            full_str += u'%     {}\n'.format(ri['reference_description'])
+            full_str += '%     {}\n'.format(ri['reference_description'])
 
             refdata = ri['reference_data']
 
             if len(refdata) == 0:
-                full_str += u'%     (...no reference...)\n%\n'
+                full_str += '%     (...no reference...)\n%\n'
             else:
                 rkeys = [x[0] for x in ri['reference_data']]
-                full_str += u'%         {}\n%\n'.format(' '.join(rkeys))
+                full_str += '%         {}\n%\n'.format(' '.join(rkeys))
 
             for k, r in refdata:
                 unique_refs[k] = r
 
-    full_str += u'\n\n'
+    full_str += '\n\n'
 
     # Go through them sorted alphabetically by key
     for k, r in sorted(unique_refs.items(), key=lambda x: x[0]):
-        full_str += u'{}\n\n'.format(_ref_bib(k, r))
+        full_str += '{}\n\n'.format(_ref_bib(k, r))
 
     return full_str

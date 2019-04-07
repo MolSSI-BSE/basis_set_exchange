@@ -28,10 +28,10 @@ def validate_bibtex(tmp_path, bib_str):
     texfile = os.path.join(tmp_path, 'bse.tex')
     bibfile = os.path.join(tmp_path, 'bse_test.bib')
 
-    with open(texfile, 'w') as tf:
+    with open(texfile, 'w', encoding='utf-8') as tf:
         tf.write(test_txt)
 
-    with open(bibfile, 'w') as bf:
+    with open(bibfile, 'w', encoding='utf-8') as bf:
         bf.write(bib_str)
 
     res = subprocess.check_output(['latex', 'bse'], cwd=tmp_path)

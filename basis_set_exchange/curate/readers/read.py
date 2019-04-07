@@ -65,7 +65,7 @@ def _fix_uncontracted(basis):
     return basis
 
 
-def read_formatted_basis(file_path, file_type=None):
+def read_formatted_basis(file_path, file_type=None, encoding='utf-8'):
 
     if not os.path.isfile(file_path):
         raise RuntimeError('Basis file path \'{}\' does not exist'.format(file_path))
@@ -90,10 +90,10 @@ def read_formatted_basis(file_path, file_type=None):
 
     # Handle compressed files
     if file_path.endswith('.bz2'):
-        with bz2.open(file_path, 'rt') as f:
+        with bz2.open(file_path, 'rt', encoding=encoding) as f:
             basis_lines = [l.strip() for l in f.readlines()]
     else:
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding=encoding) as f:
             basis_lines = [l.strip() for l in f.readlines()]
 
     data = _type_readers[file_type]['reader'](basis_lines, fname)

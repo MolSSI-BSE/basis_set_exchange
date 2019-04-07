@@ -72,7 +72,7 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
             else:
                 raise RuntimeError("Unknown file found: " + fpath)
 
-            with open(fpath, 'r') as ftmp:
+            with open(fpath, 'r', encoding='utf-8') as ftmp:
                 assert compare_data == ftmp.read()
 
     assert len(all_bs) == 0
