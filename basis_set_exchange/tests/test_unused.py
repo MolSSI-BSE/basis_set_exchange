@@ -37,10 +37,15 @@ def test_unused_data():
         # Loop over the element files, and remove the corresponding entry
         # from all_component_elements
         for el, el_file in el_files:
+            # Normalize the paths (since we will be removing them later)
+            el_file = os.path.normpath(el_file)
             el_file_path = os.path.join(data_dir, el_file)
+
+
             el_file_data = all_element_data[el_file_path]
 
             for cfile in el_file_data[el]['components']:
+                cfile = os.path.normpath(cfile)
                 cfile_path = os.path.join(data_dir, cfile)
                 if el in all_component_elements[cfile_path]:
                     all_component_elements[cfile_path].remove(el)
