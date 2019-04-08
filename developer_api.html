@@ -571,6 +571,7 @@ basis set format</p>
 <dd><p>Reads generic basis set information from a JSON file</p>
 <p>After reading, the MolSSI BSE schema information is searched for and if not
 found, an exception is raised.</p>
+<p>This function works with basis set metadata, table, element, and json files.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -615,7 +616,7 @@ found, an exception is raised.</p>
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_references">
 <code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_references</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_references" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a references JSON file</p>
+<dd><p>Read a JSON file containing info for all references</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -654,6 +655,7 @@ found, an exception is raised.</p>
 <dt id="basis_set_exchange.fileio.write_json_basis">
 <code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_json_basis</code><span class="sig-paren">(</span><em>file_path</em>, <em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write basis set information to a JSON file</p>
+<p>This function works with basis set metadata, table, element, and json files.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -673,9 +675,31 @@ found, an exception is raised.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.fileio.write_metadata">
+<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_metadata</code><span class="sig-paren">(</span><em>file_path</em>, <em>metadata</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a file containing the metadata for all the basis sets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+</dd>
+<dt><strong>metadata</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Metadata information for all basis sets</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.fileio.write_references">
 <code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_references</code><span class="sig-paren">(</span><em>file_path</em>, <em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_references" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write reference information to a JSON file</p>
+<dd><p>Write a dict containing info for all references to a JSON file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -864,6 +888,21 @@ shells.</p>
 <div class="section" id="module-basis_set_exchange.misc">
 <span id="misc-miscellaneous-helper-functions"></span><h2>misc - Miscellaneous helper functions<a class="headerlink" href="#module-basis_set_exchange.misc" title="Permalink to this headline">¶</a></h2>
 <p>Miscellaneous helper functions</p>
+<dl class="function">
+<dt id="basis_set_exchange.misc.basis_name_from_filename">
+<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">basis_name_from_filename</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_from_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a basis set name that was part of a filename, determine the basis set name</p>
+<p>This is opposite of <a class="reference internal" href="#basis_set_exchange.misc.transform_basis_name" title="basis_set_exchange.misc.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">transform_basis_name()</span></code></a></p>
+<p>Pass only the part of the filename that contains the basis set name</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.misc.basis_name_to_filename">
+<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">basis_name_to_filename</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_to_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a basis set name, transform it into a valid filename</p>
+<p>This makes sure filenames don’t contain invalid characters</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="basis_set_exchange.misc.compact_elements">
 <code class="descclassname">basis_set_exchange.misc.</code><code class="descname">compact_elements</code><span class="sig-paren">(</span><em>elements</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.compact_elements" title="Permalink to this definition">¶</a></dt>
