@@ -223,5 +223,5 @@ def basis_name_from_filename(filename):
     '''
 
     name = filename.lower()
-    name = filename.replace('_s', '*')
+    name = name.replace('_s', '*')
     return name

@@ -54,11 +54,13 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
 
     for root, dirs, files in os.walk(extract_path):
         for basename in files:
+            if basename == 'README.txt':
+                continue
+
             fpath = os.path.join(root, basename)
             name,ver = basename.split('.')[:2]
             name = bse.misc.basis_name_from_filename(name)
-            if name == 'README':
-                continue
+
             if basename.endswith('.ref' + ref_ext):
                 compare_data = bse.get_references(name, fmt=reffmt, version=ver, data_dir=data_dir)
                 all_ref.remove((name,ver))
