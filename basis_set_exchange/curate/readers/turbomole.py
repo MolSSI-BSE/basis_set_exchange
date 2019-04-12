@@ -51,7 +51,7 @@ def read_turbomole(basis_lines, fname):
                 i += 1
 
                 ecp_shell = {
-                    'ecp_type': 'scalar',
+                    'ecp_type': 'scalar_ecp',
                     'angular_momentum': [shell_am],
                 }
                 ecp_exponents = []
@@ -83,8 +83,7 @@ def read_turbomole(basis_lines, fname):
                 nprim = int(lsplt[0])
 
                 shell = {
-                    'function_type': 'gto',
-                    'harmonic_type': 'spherical',
+                    'function_type': 'gto_spherical',
                     'region': '',
                     'angular_momentum': shell_am
                 }

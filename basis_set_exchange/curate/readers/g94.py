@@ -61,7 +61,7 @@ def read_g94(basis_lines, fname):
                 i += 1  # Skip title block
 
                 shell_am = am_list[j]
-                ecp_shell = {'angular_momentum': [shell_am], 'ecp_type': 'scalar'}
+                ecp_shell = {'angular_momentum': [shell_am], 'ecp_type': 'scalar_ecp'}
                 rexponents = []
                 gexponents = []
                 coefficients = []
@@ -92,8 +92,7 @@ def read_g94(basis_lines, fname):
                 nprim = int(lsplt[1])
 
                 shell = {
-                    'function_type': 'gto',
-                    'harmonic_type': 'spherical',
+                    'function_type': 'gto_spherical',
                     'region': 'valence',
                     'angular_momentum': shell_am
                 }

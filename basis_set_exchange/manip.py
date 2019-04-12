@@ -275,7 +275,6 @@ def make_general(basis, use_copy=True):
                 'exponents': [],
                 'coefficients': [],
                 'region': '',
-                'harmonic_type': None,
                 'function_type': None,
             }
 
@@ -303,16 +302,17 @@ def make_general(basis, use_copy=True):
                 if sh['angular_momentum'] != am:
                     continue
 
-                if newsh['harmonic_type'] is None:
-                    newsh['harmonic_type'] = sh['harmonic_type']
                 if newsh['function_type'] is None:
                     newsh['function_type'] = sh['function_type']
 
-                # Make sure the shells we are merging have the same harmonic types and function types
-                if newsh['harmonic_type'] != sh['harmonic_type']:
-                    raise RuntimeError("Cannot make general contraction of different harmonic types")
-                if newsh['function_type'] != sh['function_type']:
-                    raise RuntimeError("Cannot make general contraction of different harmonic types")
+                # Make sure the shells we are merging have the same function types
+                ft1 = newsh['function_type']
+                ft2 = sh['function_type']
+
+                # Check if one function type is the subset of another
+                # (should handle gto/gto_spherical, etc)
+                if ft1 not in ft2 and ft2 not in ft1:
+                    raise RuntimeError("Cannot make general contraction of different function types")
 
                 ngen = len(sh['coefficients'])
 

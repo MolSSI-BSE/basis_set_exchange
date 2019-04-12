@@ -63,7 +63,6 @@
             "additionalProperties": false,
             "required": [
                 "function_type",
-                "harmonic_type",
                 "region",
                 "angular_momentum",
                 "exponents",
@@ -73,12 +72,7 @@
                 "function_type": {
                     "description": "Type of function for this shell",
                     "type": "string",
-                    "enum": [ "gto", "sto" ]
-                },
-                "harmonic_type": {
-                    "description": "Harmonic type (spherical, cartesian)",
-                    "type": "string",
-                    "enum": [ "spherical", "cartesian" ]
+                    "enum": [ "gto", "gto_spherical", "gto_cartesian", "sto" ]
                 },
                 "region": {
                     "description": "The region this shell describes",
@@ -130,7 +124,7 @@
                 "ecp_type": {
                     "description": "Type of the ECP Potential",
                     "type": "string",
-                    "enum": [ "scalar", "spinorbit" ]
+                    "enum": [ "scalar_ecp", "spinorbit_ecp" ]
                 },
                 "angular_momentum": {
                     "description": "Angular momentum (as an array of integers)",

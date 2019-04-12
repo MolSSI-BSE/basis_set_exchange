@@ -49,7 +49,7 @@ def sort_basis_dict(bs):
         'electron_shells', 'ecp_potentials', 'components',
 
         # Shell information
-        'function_type', 'harmonic_type', 'region', 'angular_momentum', 'exponents',
+        'function_type', 'region', 'angular_momentum', 'exponents',
         'coefficients',
         'ecp_type', 'angular_momentum', 'r_exponents', 'gaussian_exponents',
         'coefficients'

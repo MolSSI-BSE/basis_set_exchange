@@ -135,8 +135,6 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     if compare_meta:
         if shell1['region'] != shell2['region']:
             return False
-        if shell1['harmonic_type'] != shell2['harmonic_type']:
-            return False
         if shell1['function_type'] != shell2['function_type']:
             return False
         return True

@@ -17,12 +17,11 @@ def _whole_basis_types(basis):
     for v in basis['elements'].values():
         if 'electron_shells' in v:
             for sh in v['electron_shells']:
-                tstr = '{}_{}'.format(sh['harmonic_type'], sh['function_type'])
-                all_types.add(tstr)
+                all_types.add(sh['function_type'])
 
         if 'ecp_potentials' in v:
             for pot in v['ecp_potentials']:
-                all_types.add(pot['ecp_type'] + '_ecp')
+                all_types.add(pot['ecp_type'])
 
     return sorted(list(all_types))
 

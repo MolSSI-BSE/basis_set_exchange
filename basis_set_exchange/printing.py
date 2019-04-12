@@ -82,7 +82,7 @@ def electron_shell_str(shell, shellidx=None):
 
     point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
     s = "Shell: {}Region: {}: AM: {}\n".format(shellidx_str, shell['region'], amchar)
-    s += "Function: {} Harmonic: {}\n".format(shell['function_type'], shell['harmonic_type'])
+    s += "Function: {}\n".format(shell['function_type'])
     s += write_matrix([exponents, *coefficients], point_places)
     return s
 

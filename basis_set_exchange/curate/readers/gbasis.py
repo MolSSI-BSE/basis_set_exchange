@@ -53,8 +53,7 @@ def read_gbasis(basis_lines, fname):
                 raise RuntimeError("AM out of order in gbasis?")
 
             shell = {
-                'function_type': 'gto',
-                'harmonic_type': 'spherical',
+                'function_type': 'gto_spherical',
                 'region': 'valence',
                 'angular_momentum': shell_am
             }

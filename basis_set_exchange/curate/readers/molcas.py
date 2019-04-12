@@ -104,8 +104,7 @@ def read_molcas(basis_lines, fname):
                 i += 1
 
                 shell = {
-                    'function_type': 'gto',
-                    'harmonic_type': 'spherical',
+                    'function_type': 'gto_spherical',
                     'region': '',
                     'angular_momentum': [shell_am]
                 }

@@ -43,8 +43,7 @@ def read_nwchem(basis_lines, fname):
                 element_data = bs_data['elements'][element_Z]
 
                 shell = {
-                    'function_type': 'gto',
-                    'harmonic_type': 'spherical',
+                    'function_type': 'gto_spherical',
                     'region': 'valence',
                     'angular_momentum': shell_am
                 }
@@ -112,7 +111,7 @@ def read_nwchem(basis_lines, fname):
                     bs_data['elements'][element_Z]['ecp_potentials'] = []
                 element_data = bs_data['elements'][element_Z]
 
-                ecp_shell = {'angular_momentum': shell_am, 'ecp_type': 'scalar'}
+                ecp_shell = {'angular_momentum': shell_am, 'ecp_type': 'scalar_ecp'}
 
                 rexponents = []
                 gexponents = []

@@ -38,8 +38,7 @@ def read_dalton(basis_lines, fname):
                 element_data = bs_data['elements'][element_Z]
 
                 shell = {
-                    'function_type': 'gto',
-                    'harmonic_type': 'spherical',
+                    'function_type': 'gto_spherical',
                     'region': '',
                     'angular_momentum': [shell_am]
                 }
