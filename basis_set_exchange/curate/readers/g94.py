@@ -91,9 +91,14 @@ def read_g94(basis_lines, fname):
                 shell_am = lut.amchar_to_int(lsplt[0])
                 nprim = int(lsplt[1])
 
+                if max(shell_am) <= 1:
+                    func_type = 'gto'
+                else:
+                    func_type = 'gto_spherical'
+
                 shell = {
-                    'function_type': 'gto_spherical',
-                    'region': 'valence',
+                    'function_type': func_type,
+                    'region': '',
                     'angular_momentum': shell_am
                 }
 

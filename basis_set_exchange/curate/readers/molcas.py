@@ -103,8 +103,13 @@ def read_molcas(basis_lines, fname):
                 ngen = int(lsplt[1])
                 i += 1
 
+                if shell_am <= 1:
+                    func_type = 'gto'
+                else:
+                    func_type = 'gto_spherical'
+
                 shell = {
-                    'function_type': 'gto_spherical',
+                    'function_type': func_type,
                     'region': '',
                     'angular_momentum': [shell_am]
                 }

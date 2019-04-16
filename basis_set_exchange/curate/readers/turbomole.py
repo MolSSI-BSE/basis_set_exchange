@@ -82,8 +82,13 @@ def read_turbomole(basis_lines, fname):
                 shell_am = lut.amchar_to_int(lsplt[1])
                 nprim = int(lsplt[0])
 
+                if max(shell_am) <= 1:
+                    func_type = 'gto'
+                else:
+                    func_type = 'gto_spherical'
+
                 shell = {
-                    'function_type': 'gto_spherical',
+                    'function_type': func_type,
                     'region': '',
                     'angular_momentum': shell_am
                 }

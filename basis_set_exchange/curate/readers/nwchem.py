@@ -42,9 +42,14 @@ def read_nwchem(basis_lines, fname):
 
                 element_data = bs_data['elements'][element_Z]
 
+                if max(shell_am) <= 1:
+                    func_type = 'gto'
+                else:
+                    func_type = 'gto_spherical'
+
                 shell = {
-                    'function_type': 'gto_spherical',
-                    'region': 'valence',
+                    'function_type': func_type,
+                    'region': '',
                     'angular_momentum': shell_am
                 }
 

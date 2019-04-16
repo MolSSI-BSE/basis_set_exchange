@@ -52,9 +52,15 @@ def read_gbasis(basis_lines, fname):
             if shell_am[0] != am:
                 raise RuntimeError("AM out of order in gbasis?")
 
+            if max(shell_am) <= 1:
+                func_type = 'gto'
+            else:
+                func_type = 'gto_spherical'
+
+
             shell = {
-                'function_type': 'gto_spherical',
-                'region': 'valence',
+                'function_type': func_type,
+                'region': '',
                 'angular_momentum': shell_am
             }
 

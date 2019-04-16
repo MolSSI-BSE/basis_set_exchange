@@ -37,8 +37,13 @@ def read_dalton(basis_lines, fname):
 
                 element_data = bs_data['elements'][element_Z]
 
+                if shell_am <= 1:
+                    func_type = 'gto'
+                else:
+                    func_type = 'gto_spherical'
+
                 shell = {
-                    'function_type': 'gto_spherical',
+                    'function_type': func_type,
                     'region': '',
                     'angular_momentum': [shell_am]
                 }
