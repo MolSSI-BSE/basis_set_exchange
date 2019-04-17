@@ -1,0 +1,202 @@
+Correlation Consistent Polarized Valence Quintuple Zeta (cc-pV5Z) Basis
+ ----------------------------------------------------------------------
+Elements        Contraction                                   References
+ H     : (8s,4p,3d,2f,1g)          -> [5s,4p,3d,2f,1g]        T.H. Dunning, Jr.
+ He    : (8s,4p,3d,2f,1g)          -> [5s,4p,3d,2f,1g]        D.E. Woon and T.H.
+                                                              Dunning, Jr., J.C.P.
+                                                              100, 2975 (1994).
+ Li    : (14s,7p,4d,3f,2g,1h)      -> [6s,5p,4d,3f,2g,1h]     Unofficial set from
+                                                              D. Feller.
+ B - Ne: (14s,8p,4d,3f,2g,1h)      -> [6s,5p,4d,3f,2g,1h]     D. Woon, K. Peterson
+ Na    : (20s,12p,4d,3f,2g,1h)     -> [7s,6p,4d,3f,2g,1h]     D. Woon and T.H. Dunning
+ Mg    : (20s,14p,4d,3f,2g,1h)     -> [7s,6p,4d,3f,2g,1h]     (unpublished)
+ Al- Ar: (20s,12p,4d,3f,2g,1h)     -> [7s,6p,4d,3f,2g,1h]
+Ca     : (26s,18p,8d,3f,2g,1h)     -> [8s,7p,5d,3f,2g,1h]     J. Koput and K.A.
+                                                              Peterson, J.  Phys.
+                                                              Chem. A, 106, 9595
+                                                              (2002)
+Sc - Zn: (28s,20p,12d,4f,3g,2h,1i) -> [9s,8p,6d,4f,3g,2h,1i]  N.B. Balabanov and K.A. Peterson,
+                                                              J. Chem. Phys. 123, 064107 (2005)
+Ga - Kr: (26s,17p,13d,3f,2g,1h)    -> [8s,7p,5d,3f,2g,1h]     A.K. Wilson, D.E. Woon,
+                                                              K.A. Peterson, T.H.
+                                                              Dunning, Jr., J.
+                                                              Chem. Phys. 110, 7667
+                                                              (1999)
+The lithium and sodium sets are unofficial sets designed to loosely match
+the original cc-pVDZ, cc-pVTZ and cc-pVQZ Na sets.
+It was noticed in January 2000 that the s and p contractions for Ar
+don't correspond to the HF AOs.  The vectors are rotated amongst
+themselves.  The total energy is unaffected.  The contraction coefficients
+appear to correspond to the SCF natural orbitals.
+                        cc-pV5Z Atomic Energies
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.499995    -0.499995    -0.499995     -0.50000
+He  1-S                                            -2.86168
+Li  2-S    -7.432722    -7.432722    -7.432722     -7.43273
+Be  1-S   -14.573012   -14.573012   -14.573012    -14.57302
+B   2-P   -24.533124   -24.529109                 -24.52906
+C   3-P   -37.693677   -37.688642   -37.688571    -37.68862
+N   4-S                -54.400852   -54.400852    -54.40094
+O   3-P   -74.818781   -74.812231                 -74.80940
+F   2-P   -99.416046   -99.411171                 -99.40935
+Ne  1-S  -128.546770  -128.546770  -128.546770   -128.54710
+Na  2-S  -161.858717                             -161.85891
+Mg  1-S  -199.614605               -199.614605   -199.61463
+Al  2-P               -241.876777                -241.87671
+Si  3-P  -288.858814  -288.854439                -288.85436
+P   4-S               -340.718677  -340.718677   -340.71878
+S   3-P  -397.513160  -397.507108                -397.50490
+Cl  2-P  -459.488781  -459.483779                -459.48207
+Ar  1-S  -526.813116  -526.813116                -526.81751
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(T)(noneq)
+            UHF          UHF          UHF           UHF
+   State  No core      Froz. core   Froz. core   Froz. core
+   -----  ----------   ----------   ----------  --------------
+H   2-S    -0.499995    -0.499995    -0.499995     -0.499995
+He  1-S
+Li  2-S                 -7.432722    -7.432722     -7.432722
+Be  1-S                -14.602898   -14.614753
+B   2-P                -24.581325   -24.597608
+C   3-P   -37.797519   -37.767826   -37.785484
+N   4-S
+O   3-P                -74.982456   -74.999117
+F   2-P                -99.646728   -99.660313
+Ne  1-S
+Na  2-S               -161.858717  -161.858717    -161.858717
+Mg  1-S               -199.639284  -199.646608
+Al  2-P
+Si  3-P               -288.920334  -288.937008
+P   4-S
+S   3-P  -397.816757  -397.645266  -397.669863
+Cl  2-P               -459.670561  -459.697567
+Ar  1-S               -527.052552
+          CCSD(noneq) CCSD(T)(noneq  CCSD(noneq)  CCSD(T)(noneq)
+            UHF          UHF          ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   -----------   ----------   -----------
+H   2-S    -0.499995    -0.499995    -0.499995    -0.499995
+He  1-S
+Li  2-S    -7.432722    -7.432722    -7.432722    -7.432722
+Be  1-S   -14.619078   -14.619078   -14.619078   -14.619078
+B   2-P   -24.600054   -24.601552   -24.599820   -24.601462
+C   3-P   -37.785770   -37.788237   -37.785359   -37.787961
+N   4-S                             -54.524404   -54.527481
+O   3-P   -74.996123   -75.000109   -74.995569   -74.999678
+F   2-P   -99.655563   -99.660628   -99.655243   -99.660382
+Ne  1-S  -128.852259  -128.858358  -128.852259  -128.858358
+Mg  1-S  -199.648590  -199.648590
+Al  2-P                            -241.932846  -241.934377
+Si  3-P  -288.936031  -288.938970  -288.935455  -288.938641
+P   4-S                            -340.824709  -340.829594
+S   3-P  -397.665268  -397.671369  -397.664430  -397.670868
+Cl  2-P                            -459.691669  -459.699611
+          CISD(noneq)  CISD+Q(noneq) Full CI (noneq)  CCSDT        CCSDTQ
+            ROHF         ROHF          ROHF            ROHF        ROHF
+   State  Froz. core   Froz. core    Froz. core     Froz. core   Froz. core
+   -----  ----------   -----------   ----------     ----------   ----------
+H   2-S    -0.499995    -0.499995    -0.499995      -0.499995    -0.499995
+He  1-S
+Li  2-S    -7.432722
+Be  1-S   -14.619078   -14.619078
+B   2-P   -24.599736   -24.604965
+C   3-P   -37.784767   -37.789953
+N   4-S
+O   3-P   -74.992004   -74.992224
+F   2-P   -99.650434   -99.659281
+Ne  1-S  -128.844888                               -128.8583160
+Mg  1-S  -199.648590
+P   4-S  -340.823383  -340.830166
+S   3-P  -397.659600
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.499995    -0.499995     -0.499995    -0.499995
+B   2-P
+C   3-P   -37.785372   -37.787986    -37.785536   -37.788124
+N   4-S   -54.524441   -54.527520    -54.524689   -54.527722
+O   3-P
+F   2-P
+Ne  1-S
+Si  3-P
+P   4-S
+S   3-P  -397.664441  -397.670847   -397.664834  -397.671144
+Cl  2-P
+Ar  1-S
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+The basic idea behind the correlation consistent basis sets is that
+functions which contribute approximately the same amount of correlation
+energy should be grouped together.
+The SD-CI energies quoted below are for valence CI's.  However, unlike
+the SD-CI's for the smaller basis sets these calculations used just a
+single reference configuration.  With the smaller sets the SD-CI
+energies were obtained with a symmetry equivalenced reference space.
+For example, for carbon all 3 p(2) configurations were used in the
+reference space.
+It was noticed in January 2000 that the s and p contractions for Ar
+don't correspond to the HF AOs.  The vectors are rotated amongst
+themselves.  The total energy is unaffected.  The contraction coefficients
+appear to correspond to the SCF natural orbitals.
+This file contains the original Ar contraction coefficients. 
+All-electron, Nonrelativistic Transition Metal cc-pV5Z-NR Basis Sets
+ --------------------------------------------------------------------
+Elements                      Contraction                    References
+Sc - Zn: (28s,20p,12d,4f,3g,2h,1i) -> [9s,8p,6d,4f,3g,2h,1i] N.B. Balabanov and
+                                                             K.A. Peterson,
+                                                             J. Chem. Phys.,
+                                                             123, 064107 (2005)
+                      cc-pV5Z-NR Atomic Energies
+                                                                  Numerical
+        State           UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit(equiv)
+   --------------------  ----------  -----------   -----------   --------------
+Sc ...4s2 3d1      2-D                             -759.735714    -795.735718
+   ...4s1 3d2      4-F                             -759.698781    -759.698786
+Ti ...4s2 3d2      3-F                             -848.405992    -848.405997
+   ...4s1 3d3      5-F                             -848.386148    -848.386154
+V  ...4s2 3d3      4-F                             -942.884331    -942.884338
+   ...4s1 3d4      6-D                             -942.879776    -942.879783
+Cr ...4s2 3d4      5-D                            -1043.356368   -1043.30982
+   ...4s1 3d5      7-S                            -1043.309811   -1043.35638
+Mn ...4s2 3d5      6-S                            -1149.866242   -1149.86625
+   ...4s1 3d6      6-D                            -1149.743947   -1149.74396
+Fe ...4s2 3d6      5-D                            -1262.443654   -1262.44367
+   ...4s1 3d7      5-F                            -1262.377604   -1262.37762
+Co ...4s2 3d7      4-F                            -1381.414538   -1381.41455
+   ...4s1 3d8      4-F                            -1381.358368   -1381.35838
+Ni ...4s2 3d8      3-F                            -1506.870890   -1506.87091
+   ...4s1 3d9      3-D                            -1506.824009   -1506.82403
+Cu ...4s2 3d9      2-D                            -1638.950068   -1638.95008
+   ...4s1 3d10     2-S                            -1638.963725   -1506.96374
+Zn ...4s2 3d10     1-S                            -1777.848104   -1777.84812
+   ...4s1 3d10 4p1 3-P                            -1777.750955   -1777.75100
+Numerical HF energies are taken from H. Tatewaki and T. Koga, Chem. Phys. Lett.
+228, 562 (1994).
+                           CCSD(T)(noneq)   CCSD(T)(eq)     CCSD(T)(eq)
+                              UHF              ROHF             R/U
+     State/# Val. El.        Froz. Core       Froz. Core      Froz. Core
+   ----------------------  --------------   ------------    ------------
+Sc ...4s2 3d1      2-D  3                                    -759.778705
+   ...4s1 3d2      4-F  3                                    -759.719834
+Ti ...4s2 3d2      3-F  4                                    -848.464066
+   ...4s1 3d3      5-F  4                                    -848.430352
+V  ...4s2 3d3      4-F  5                                    -942.966987
+   ...4s1 3d4      6-D  5                                    -942.956359
+Cr ...4s2 3d4      5-D  6                                   -1043.467551
+   ...4s1 3d5      7-S  6                                   -1043.426516
+Mn ...4s2 3d5      6-S  7                                   -1150.018207
+   ...4s1 3d6      6-D  7                                   -1149.934608
+Fe ...4s2 3d6      5-D  8                                   -1262.669701
+   ...4s1 3d7      5-F  8                                   -1262.637828
+Co ...4s2 3d7      4-F  9                                   -1381.709025
+   ...4s1 3d8      4-F  9                                   -1381.697299
+Ni ...4s2 3d8      3-F 10                                   -1507.242829
+   ...4s1 3d9      3-D 10                                   -1507.250743
+Cu ...4s2 3d9      2-D 11                                   -1639.408961
+   ...4s1 3d10     2-S 11                                   -1639.476532
+Zn ...4s2 3d10     1-S 12                                   -1778.391928
+   ...4s1 3d10 4p1 3-P 12                                   -1778.250600
+Note: these calculations correlated the outermost 3d4s valence electrons only.

@@ -1,0 +1,301 @@
+Correlation Consistent Polarized Valence Double Zeta (cc-pVDZ) Basis
+--------------------------------------------------------------------
+Elements      Contraction                       References
+ H     : (4s,1p)     -> [2s,1p]            T.H. Dunning, Jr. J. Chem. Phys. 90, 1007
+                                           (1989).
+ He    : (5s,1p)     -> [2s,1p]            D.E. Woon and T.H. Dunning, Jr. J. Chem.
+                                           Phys. 100, 2975 (1994).
+Li - Be: (9s,4p,1d)  -> [3s,2p,1d]         K.A. Peterson, D.E. Woon, and T.H. 
+                                           Dunning, Jr., to be published
+B  - Ne: (9s,4p,1d)  -> [3s,2p,1d]         T.H. Dunning, Jr. J.C.P. 90, 1007 (1989).
+Na - Mg: (12s,8p,1d) -> [4s,3p,1d]         D. Woon and T.H. Dunning, Jr.
+                                           (to be published)
+Al - Ar: (12s,8p,1d) -> [4s,3p,1d]         D.E. Woon and T.H. Dunning, Jr.
+                                           J. Chem. Phys. 98, 1358 (1993).
+Ca     : (14s,11p,5d) -> [5s,4p,2d]        J. Koput and K.A. Peterson, J. Phys.
+                                           Chem. A, 106, 9595 (2002)
+Sc - Zn: (20s,16p,8d,2f) -> [6s,5p,3d,1f]  N.B. Balabanov and K.A. Peterson, J. Chem. 
+                                           Phys. 123, 064107 (2005), N.B. Balabanov 
+                                           and K.A. Peterson, J. Chem. Phys. 125, 074110 
+                                           (2006)
+Ga - Kr: (14s,11p,6d) -> [5s,4p,1d]        A.K. Wilson, D.E. Woon, K.A. Peterson,
+                                           T.H. Dunning, Jr., J. Chem. Phys., 110,
+                                           7667 (1999)
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level. The p contraction coefficients for Li, Be, Na
+and Mg were based on 2-P excited state calculations.
+Note that the Ga - Kr basis sets are intended for use with a 14 orbital
+frozen core, i.e. (1s,2s,2px,2py,2pz,3s,3px,3py,3pz,3d(z2),3d(x2-y2),3dxy,
+3dxz,3dyz) atomic orbitals. This is not the default in Gaussian, which
+keeps the 3d space active.
+                           cc-pVDZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)  HF Limit(equiv) UB3LYP (noneq)
+   -----  ----------  -----------   -----------  ----------      ----------
+H   2-S    -0.499278    -0.499278    -0.499278     -0.50000       -0.501258
+He  1-S    -2.855160    -2.855160    -2.855160     -2.86168       -2.907054
+Li  2-S    -7.432420    -7.432420    -7.432420     -7.43273       -7.491415
+Be  1-S   -14.572337   -14.572337   -14.572337    -14.57302      -14.671191
+B   2-P   -24.529962   -24.526591   -24.526564    -24.52906      -24.660873
+C   3-P   -37.686544   -37.682418   -37.682391    -37.68862      -37.851975
+N   4-S   -54.391115   -54.388414   -54.388414    -54.40094      -54.589136
+O   3-P   -74.792166   -74.787513   -74.786188    -74.80940      -75.068499
+F   2-P   -99.375240   -99.371862   -99.371080    -99.40935      -99.726602
+Ne  1-S  -128.488776  -128.488776  -128.488776   -128.54710     -128.909463
+Na  2-S  -161.853057  -161.853027  -161.853027   -161.85891
+Mg  1-S  -199.608297  -199.608297  -199.608297   -199.61463
+Al  2-P  -241.873510  -241.870133  -241.870107   -241.87671
+Si  3-P  -288.850077  -288.846437  -288.846398   -288.85436
+P   4-S  -340.709049  -340.709014  -340.709014   -340.71878
+S   3-P  -397.496802  -397.492840  -397.492316   -397.50490
+Cl  2-P  -459.471143  -459.467181  -459.466832   -459.48207
+Ar  1-S  -526.799865  -526.799865  -526.799865   -526.81751
+Ca  1-S  -676.749824  -676.749824
+Br  2-P -2572.368374
+Note: the B3YLP energies were obtained with Gaussian 98.
+          MP2(noneq)   MP2(noneq)   MP4(noneq)  QCISD(noneq)    QCISD(T)(noneq)
+            UHF         UHF            UHF        UHF              UHF
+   State  No core      Froz. core   Froz. core   Froz. core      Froz. core
+   -----  ----------   ----------   ----------  --------------  --------------
+H   2-S    -0.499278    -0.499278    -0.499278    -0.499278       -0.499278
+He  1-S    -2.880989    -2.880989    -2.887390    -2.887595       -2.887595
+Li  2-S    -7.432613    -7.432420    -7.432420    -7.432420       -7.432420
+Be  1-S   -14.598673   -14.597951   -14.612682   -14.616842      -14.616842
+B   2-P   -24.567498   -24.566470   -24.585636                   -24.589431
+C   3-P   -37.739655   -37.738310   -37.757911   -37.759465      -37.760385
+N   4-S   -54.463437   -54.461855   -54.478021                   -54.478501
+O   3-P   -74.895884   -74.894132   -74.909441                   -74.909961
+F   2-P   -99.517756   -99.515840   -99.527284   -99.526769      -99.527603
+Ne  1-S  -128.676343  -128.674299  -128.679051                  -128.678884
+Na  2-S  -161.854176  -161.853057  -161.853057                  -161.853057
+Mg  1-S  -199.633213  -199.629667  -199.639392  -199.641173     -199.641173
+Al  2-P  -241.908409  -241.904080  -241.919213                  -241.921318
+Si  3-P  -288.900381  -288.895013  -288.913560  -288.914149     -288.915125
+P   4-S  -340.778499  -340.772561  -340.791147                  -340.791334
+S   3-P  -397.586580  -397.581525  -397.599794                  -397.600572
+Cl  2-P  -459.586610  -459.580942  -459.598341
+Ar  1-S  -526.945481  -526.940142  -526.952803
+Ca  1-S               -676.767321
+          CCSD(noneq) CCSD(T)(noneq)  CCSDT(noneq)  CCSDTQ(noneq)
+            UHF         UHF             UHF            UHF
+   State  Froz. core   Froz. core    Froz. core     Froz. core
+   -----  ----------   ----------    -----------    -----------
+H   2-S    -0.499278    -0.499278    -0.499278       -0.499278
+He  1-S    -2.887595    -2.887595
+Li  2-S    -7.432420    -7.432420
+Be  1-S   -14.616842   -14.616843
+B   2-P   -24.588605   -24.589408   -24.5897722
+C   3-P   -37.759451   -37.760377   -37.7606882     -37.7607174
+N   4-S   -54.477874   -54.478502   -54.4786311
+O   3-P   -74.909200   -74.909950   -74.9100624
+F   2-P   -99.526690   -99.527574   -99.5276498
+Ne  1-S  -128.677792  -128.678836  -128.6788646
+Na  2-S  -161.853057  -161.853057
+Mg  1-S  -199.641173  -199.641173
+Al  2-P  -241.920585  -241.921269
+Si  3-P  -288.914091  -288.915089  -288.9154869
+P   4-S  -340.790316  -340.791331  -340.7916029
+S   3-P  -397.599416  -397.600552  -397.6008106    -397.6009334
+Cl  2-P  -459.597739  -459.598893
+Ar  1-S  -526.951704  -526.952858
+Ca  1-S  -676.777803  -676.777803
+Br  2-P -2572.475058 -2572.475902
+Note: the UCCSDTQ(FC) calculations were run with UTChem 2004 (beta).
+            MOLPRO 99 and earlier       MOLPRO 2000
+          CCSD(noneq) CCSD(T)(noneq) CCSD(noneq)  CCSD(T)(noneq) CCSD(T)(noneq)
+             ROHF         ROHF          ROHF         ROHF          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core     Froz. core
+   -----  ----------   ----------    ----------   -----------    ----------
+H   2-S    -0.499278    -0.499278    -0.499278    -0.499278      -0.499278
+He  1-S    -2.887595    -2.887595    -2.887595    -2.887595
+Li  2-S    -7.432420    -7.432420    -7.432420    -7.432420
+Be  1-S   -14.616842   -14.616843   -14.616842   -14.616843
+B   2-P   -24.588605   -24.589408   -24.588507   -24.589384
+C   3-P   -37.759451   -37.760377   -37.759331   -37.760308     -37.760317
+N   4-S   -54.477874   -54.478502   -54.477719   -54.478353     -54.478377
+O   3-P   -74.909200   -74.909950   -74.909057   -74.909836     -74.909867
+F   2-P   -99.526690   -99.527574   -99.526613   -99.527518
+Ne  1-S  -128.677792  -128.678836  -128.677792  -128.678836
+Na  2-S  -161.853057  -161.853057
+Mg  1-S  -199.641173  -199.641173
+Al  2-P  -241.920585  -241.921269
+Si  3-P  -288.914091  -288.915089
+P   4-S  -340.790316  -340.791331
+S   3-P  -397.599416  -397.600552  -397.599253  -397.600472
+Cl  2-P  -459.597739  -459.598893
+Ar  1-S  -526.951704  -526.952858
+                  MOLPRO
+          CISD(noneq)  CISD+Q(noneq) Full CI(noneq)  CCSDT(noneq) CCSDTQ(noneq)
+            ROHF         ROHF          ROHF            ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core      Froz. core   Froz. core
+   -----  ----------   ----------    ----------      ----------   ----------
+H   2-S    -0.499278    -0.499278    -0.499278       -0.499278    -0.499278
+He  1-S    -2.887595    -2.887595    -2.887595
+Li  2-S    -7.432420    -7.432420    -7.432420
+Be  1-S
+B   2-P   -24.588442   -24.592930   -24.589985
+C   3-P   -37.758881   -37.762641   -37.76066140    -37.760632   -37.760661
+N   4-S   -54.477042   -54.479767   -54.47855095    -54.478508   -54.478550
+O   3-P   -74.907164   -74.910745   -74.91006464    -74.909984   -74.910062
+F   2-P   -99.523576   -99.527849   -99.527730
+Ne  1-S  -128.673617  -128.678455  -128.679025     -128.678865  -128.679015
+Na  2-S
+Mg  1-S  -199.641173
+Al  2-P
+Si  3-P
+P   4-S  -340.789450
+S   3-P  -397.596700               -397.6009142    -397.600784  -397.6009107
+Cl  2-P                            -459.5992341
+Ar  1-S
+Note: because MOLPRO uses the internal contraction code for open shell CISD
+calculations, these energies may differ from CISD and CISD+Q energies reported
+by other programs.  Specifically, these energies may be higher.
+          CCSD(eq)    CCSD(T)(eq)     CCSD(eq)    CCSD(T)(eq)
+            ROHF         ROHF           R/U          R/U
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   ----------    ----------   ----------
+H   2-S    -0.499278    -0.499278     -0.499278    -0.499278
+B   2-P
+C   3-P   -37.759322   -37.760304    -37.759334   -37.760314
+N   4-S   -54.477719   -54.478353    -54.477749   -54.478377
+O   3-P
+F   2-P
+Ne  1-S
+Si  3-P
+P   4-S
+S   3-P  -397.599205  -397.600433   -397.599248  -397.600468
+Cl  2-P
+Ar  1-S
+Note: for the symmetry equivalenced calculations the contaminants resulting
+from higher l-value functions that are present in atomic calculations performed
+in D2h symmetry were removed.  For example, the d0 and d2+ contaminants present
+in the s irrep were removed.
+**************************************************************************
+Hydrogen:
+--------
+Exponents for the (s)-functions were taken from the calculations of
+van Duijneveldt, IBM Research Report RJ 945 (1971). 
+The polarization set was obtained by optimizing the (p)-exponent in
+HF+1+2 calculations on the (1)Sigmag(+) state of molecular hydrogen.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+Molecular Hydrogen
+State: sigmag(2), (1)Sigmag(+)
+R(HH) = 1.401535 a(0)
+Total HF Energy     Total CI Energy      HF Coefficient
+-1.12871740         -1.16342095          0.99150789
+******************************************************  Certified: July 1988
+Helium:
+------
+The atomic set was obtained by optimizing the (s)-exponents in Hartree-Fock 
+calculations on the ground, (1)S, state of helium,  The polarization function
+was obtained by optimizing the p-exponent in HF+1+2 calculations on the (1)S
+state.
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-2.85516048         -5.71033611        2.85517563         -1.999995
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-2.88759483          0.99636585
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+****************************************************  Certified: December 1988
+Boron:
+-----
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (2)P, state of boron.  The polarization set was
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (2)P state.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-24.52656395        -49.05307137       24.52650742         -2.000002
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-24.58956841          0.96400303
+****************************************************  Certified: April 1988
+Carbon:
+------
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-37.68239129        -75.36479506       37.68240377         -2.000000
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-37.75978323          0.97533852
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (3)P, state of carbon.  The polarization set was
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (3)P state.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+Certified: April 1988
+****************************************************  Certified: April 1988
+Nitrogen:
+--------
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-54.38841424       -108.77673368       54.38831944         -2.000002
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-54.47711180          0.98492880
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (4)S, state of nitrogen. The polarization set was
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (4)S state.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+******************************************************  Certified: April 1988
+Oxygen:
+------
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-74.78618805       -149.57227641       74.78608836         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-74.90725729          0.98469192
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (3)P, state of oxygen.   The polarization set was
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (3)P state.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+******************************************************  Certified: April 1988
+Fluorine:
+--------
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-99.37108022       -198.74212060       99.37104037         -2.000000
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-99.52361942          0.98592244
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (2)P, state of fluorine. The polarization set was
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (2)P state.
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+******************************************************  Certified: April 1988
+Neon:
+----
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-128.48877557       -256.97737579      128.48860022         -2.000001
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-128.67361737          0.98716679
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock
+calculations on the ground, (1)S, state of neon.  The polarization set was 
+obtained by optimizing the exponent of a single d primitive in HF+1+2 
+calculations on the (1)S state.
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+*****************************************************  Certified: April 1988
+Sodium:
+------
+Na2 Energies at 2.9090 bohr.
+E(RHF)         E(SD-CI)
+-323.70448225   -323.73083421
+*****************************************************
