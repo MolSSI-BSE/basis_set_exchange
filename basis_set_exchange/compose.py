@@ -60,7 +60,14 @@ def compose_elemental_basis(file_relpath, data_dir):
         components = v.pop('components')
 
         # all of the component data for this element
-        el_comp_data = [component_map[c]['elements'][k] for c in components]
+        el_comp_data = []
+        for c in components:
+            centry = component_map[c]['elements']
+
+            if k not in centry:
+                raise RuntimeError('File {} does not contain element {}'.format(c, k))
+
+            el_comp_data.append(centry[k])
 
         # merge all the data
         v = manip.merge_element_data(None, el_comp_data)
@@ -97,6 +104,10 @@ def compose_table_basis(file_relpath, data_dir):
     # from the elemental basis
     for k, entry in table_bs['elements'].items():
         data = element_map[entry]
+
+        if k not in data['elements']:
+            raise KeyError('File {} does not contain element {}'.format(entry, k))
+
         table_bs['elements'][k] = data['elements'][k]
 
     # Add the version to the dictionary
