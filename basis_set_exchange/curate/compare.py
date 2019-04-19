@@ -4,7 +4,7 @@ Functions for comparing basis sets and pieces of basis sets
 
 import operator
 import copy
-from ..sort import sort_shells, sort_potentials
+from ..sort import sort_shell, sort_shells, sort_potentials
 
 
 def _reldiff(a, b):
@@ -153,6 +153,9 @@ def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0
 
     If compare_meta is True, the metadata is also compared for exact equality. 
     '''
+
+    subset = sort_shells(subset, True)
+    superset = sort_shells(superset, True)
     for item1 in subset:
         for item2 in superset:
             if compare_electron_shells(item1, item2, compare_meta, rel_tol):
@@ -175,6 +178,9 @@ def electron_shells_are_equal(shells1, shells2, compare_meta=False, rel_tol=0.0)
 
     # Lists are equal if each is a subset of the other
     # Slow but effective
+    if len(shells1) != len(shells2):
+        return False
+
     return electron_shells_are_subset(shells1, shells2, compare_meta, rel_tol) and electron_shells_are_subset(
         shells2, shells1, compare_meta, rel_tol)
 

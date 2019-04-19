@@ -78,6 +78,35 @@ def sort_basis_dict(bs):
     return bs_sorted
 
 
+def sort_shell(shell, use_copy=True):
+    """
+    Sort a basis set shell into a standard order
+
+    The order within a shell is by decreasing value of the exponent.
+
+    If use_copy is True, the input shells are not modified.
+    """
+
+    if use_copy:
+        shell = copy.deepcopy(shell)
+
+    # Transpose of coefficients
+    tmp_c = list(map(list, zip(*shell['coefficients'])))
+
+    # Zip together exponents and coeffs for sorting
+    tmp = zip(shell['exponents'], tmp_c)
+
+    # Sort by decreasing value of exponent
+    tmp = sorted(tmp, key=lambda x: -float(x[0]))
+
+    # Unpack, and re-transpose the coefficients
+    tmp_c = [x[1] for x in tmp]
+    shell['exponents'] = [x[0] for x in tmp]
+    shell['coefficients'] = list(map(list, zip(*tmp_c)))
+
+    return shell
+
+
 def sort_shells(shells, use_copy=True):
     """
     Sort a list of basis set shells into a standard order
@@ -93,23 +122,11 @@ def sort_shells(shells, use_copy=True):
     if use_copy:
         shells = copy.deepcopy(shells)
 
-    for sh in shells:
-        # Sort primitives within a shell
-        # Transpose of coefficients
-        tmp_c = list(map(list, zip(*sh['coefficients'])))
+    # Sort primitives within a shell
+    # (copying already handled above)
+    shells = [sort_shell(sh, False) for sh in shells]
 
-        # Zip together exponents and coeffs for sorting
-        tmp = zip(sh['exponents'], tmp_c)
-
-        # Sort by decreasing value of exponent
-        tmp = sorted(tmp, key=lambda x: -float(x[0]))
-
-        # Unpack, and re-transpose the coefficients
-        tmp_c = [x[1] for x in tmp]
-        sh['exponents'] = [x[0] for x in tmp]
-        sh['coefficients'] = list(map(list, zip(*tmp_c)))
-
-    # Sort by increasing AM, then general contraction level, then decreasing highest exponent
+    # Sort the list by increasing AM, then general contraction level, then decreasing highest exponent
     return list(
         sorted(
             shells,
