@@ -8,6 +8,7 @@ from .g94 import write_g94
 from .gamess_us import write_gamess_us
 from .psi4 import write_psi4
 from .turbomole import write_turbomole
+from .tonto import write_tonto
 from .molpro import write_molpro
 from .cfour import write_cfour
 from .bsedebug import write_bsedebug
@@ -47,6 +48,13 @@ _converter_map = {
         'comment': '#',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_turbomole
+    },
+    'tonto': {
+        'display': 'tonto',
+        'extension': '.tm',
+        'comment': '#',
+        'valid': set(['cartesian_gto']),
+        'function': write_tonto
     },
     'molpro': {
         'display': 'Molpro',
@@ -101,10 +109,17 @@ def convert_basis(basis_dict, fmt, header=None):
     # Actually do the conversion
     ret_str = converter['function'](basis_dict)
 
-    if header is not None and fmt != 'json':
+    if header is not None and fmt != 'json' and fmt != 'tonto':
         comment_str = _converter_map[fmt]['comment']
         header_str = comment_str + comment_str.join(header.splitlines(True))
         ret_str = header_str + '\n\n' + ret_str
+
+    if fmt == 'tonto' :
+        harm_type = 'cartesian'
+        if header is not None :
+           comment_str = '!'
+           header_str = comment_str + comment_str.join(header.splitlines(True))
+           ret_str = header_str + '\n\n' + ret_str
 
     # HACK - Psi4 requires the first non-comment line be spherical/cartesian
     #        so we have to add that before the header
