@@ -1,5 +1,6 @@
 v0.X.X
 --------------------
+  * Fixes bug in make_general when shell contains duplicate exponents (#59)
   * Remove harmonic_type in favor of function_type
   * Remove cartesian/spherical from s and p orbitals
   * Adds data from old BSE:
@@ -9,6 +10,9 @@ v0.X.X
     * CCJ basis sets
     * EMD basis sets of Lehtola
     * Rest of Jensen basis sets
+    * ahlrichs variations: dhf and x2c
+    * (aug)-cc-pCVXZ-DK
+    * cc-pwCVXZ-DK3
   * Adds updated v1 data:
     * Jorge basis sets
 
