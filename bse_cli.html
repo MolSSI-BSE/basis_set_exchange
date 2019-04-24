@@ -400,6 +400,7 @@ With <code class="docutils literal notranslate"><span class="pre">-n</span></cod
 See <a class="reference internal" href="#list-roles">list-roles</a> and <cite>list-families</cite>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -r jfit
 def2-universal-jfit  Coulomb fitting auxiliary basis for def2 basis sets
+x2c-jfit             x2c coulomb fitting
 ...
 </pre></div>
 </div>
@@ -417,10 +418,10 @@ def2-universal-jfit  Coulomb fitting auxiliary basis for def2 basis sets
 This command respects the <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code> option.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-families
 ahlrichs
+ahlrichs_dhf
 ahlrichs_fit
+ahlrichs_x2c
 ano
-ano_claudino
-ccj
 ...
 </pre></div>
 </div>
@@ -449,7 +450,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.6.9+21.g09cb5a84
+# Version v0.6.9+23.gedf4510b
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
