@@ -50,13 +50,84 @@ def merge_element_data(dest, sources, use_copy=True):
     return ret
 
 
+def prune_shell(shell, use_copy=True):
+    """
+    Removes exact duplicates of primitives, and condenses duplicate exponents
+    into general contractions
+
+    Also removes primitives if all coefficients are zero
+    """
+
+    new_exponents = []
+    new_coefficients = []
+
+    exponents = shell['exponents']
+    nprim = len(exponents)
+
+    # transpose of the coefficient matrix
+    coeff_t = list(map(list, zip(*shell['coefficients'])))
+
+    # Group by exponents
+    ex_groups = []
+    for i in range(nprim):
+        for ex in ex_groups:
+            if float(exponents[i]) == float(ex[0]):
+                ex[1].append(coeff_t[i])
+                break
+        else:
+            ex_groups.append((exponents[i], [coeff_t[i]]))
+
+    # Now collapse within groups
+    for ex in ex_groups:
+        if len(ex[1]) == 1:
+            # only add if there is a nonzero contraction coefficient
+            if not all([float(x) == 0.0 for x in ex[1][0]]):
+                new_exponents.append(ex[0])
+                new_coefficients.append(ex[1][0])
+            continue
+
+        # ex[1] contains rows of coefficients. The length of ex[1]
+        # is the number of times the exponent is duplicated. Columns represent general contractions.
+        # We want to find the non-zero coefficient in each column, if it exists
+        # The result is a single row with a length representing the number
+        # of general contractions
+
+        new_coeff_row = []
+
+        # so take yet another transpose.
+        ex_coeff = list(map(list, zip(*ex[1])))
+        for g in ex_coeff:
+            nonzero = [x for x in g if float(x) != 0.0]
+            if len(nonzero) > 1:
+                raise RuntimeError("Exponent {} is duplicated within a contraction".format(ex[0]))
+
+            if len(nonzero) == 0:
+                new_coeff_row.append(g[0])
+            else:
+                new_coeff_row.append(nonzero[0])
+
+        # only add if there is a nonzero contraction coefficient anywhere for this exponent
+        if not all([float(x) == 0.0 for x in new_coeff_row]):
+            new_exponents.append(ex[0])
+            new_coefficients.append(new_coeff_row)
+
+    # take the transpose again, putting the general contraction
+    # as the slowest index
+    new_coefficients = list(map(list, zip(*new_coefficients)))
+
+    shell['exponents'] = new_exponents
+    shell['coefficients'] = new_coefficients
+
+    return shell
+
+
 def prune_basis(basis, use_copy=True):
     """
     Removes primitives that have a zero coefficient, and
-    removes duplicate shells
+    removes duplicate primitives and shells
 
     This only finds EXACT duplicates, and is meant to be used
-    after uncontracting
+    after other manipulations
 
     If use_copy is True, the input basis set is not modified.
     """
@@ -68,30 +139,10 @@ def prune_basis(basis, use_copy=True):
         if not 'electron_shells' in el:
             continue
 
-        for sh in el['electron_shells']:
-            new_exponents = []
-            new_coefficients = []
-
-            exponents = sh['exponents']
-
-            # transpose of the coefficient matrix
-            coeff_t = list(map(list, zip(*sh['coefficients'])))
-
-            # only add if there is a nonzero contraction coefficient
-            for i in range(len(sh['exponents'])):
-                if not all([float(x) == 0.0 for x in coeff_t[i]]):
-                    new_exponents.append(exponents[i])
-                    new_coefficients.append(coeff_t[i])
-
-            # take the transpose again, putting the general contraction
-            # as the slowest index
-            new_coefficients = list(map(list, zip(*new_coefficients)))
-
-            sh['exponents'] = new_exponents
-            sh['coefficients'] = new_coefficients
+        shells = el.pop('electron_shells')
+        shells = [prune_shell(sh, False) for sh in shells]
 
         # Remove any duplicates
-        shells = el.pop('electron_shells')
         el['electron_shells'] = []
 
         for sh in shells:
@@ -247,9 +298,10 @@ def make_general(basis, use_copy=True):
     """
     Makes one large general contraction for each angular momentum
 
-    If split_spdf is True, sp... orbitals will be split apary
-
     If use_copy is True, the input basis set is not modified.
+
+    The output of this function is not pretty. If you want to make it nicer,
+    use sort_basis afterwards.
     """
 
     zero = '0.00000000'
@@ -279,25 +331,15 @@ def make_general(basis, use_copy=True):
             }
 
             # Do exponents first
-            # Get all unique exponents
-            exponents = []
-
             for sh in el['electron_shells']:
                 if sh['angular_momentum'] != am:
                     continue
-                exponents.extend(sh['exponents'])
+                newsh['exponents'].extend(sh['exponents'])
 
-            # Remove duplicates (by checking the float value)
-            done_exponents = []
-            unique_exponents = []
-            for ex in exponents:
-                fex = float(ex)
-                if not fex in done_exponents:
-                    done_exponents.append(fex)
-                    unique_exponents.append(ex)
+            # Number of primitives in the new shell
+            nprim = len(newsh['exponents'])
 
-            newsh['exponents'] = unique_exponents
-
+            cur_prim = 0
             for sh in el['electron_shells']:
                 if sh['angular_momentum'] != am:
                     continue
@@ -316,23 +358,13 @@ def make_general(basis, use_copy=True):
 
                 ngen = len(sh['coefficients'])
 
-                # Every general contraction shell should add a column to the coefficients
-                coeffs = []
                 for g in range(ngen):
-                    coeff_row = []
-                    for ex1 in unique_exponents:
-                        fex1 = float(ex1)
-                        for idx, ex2 in enumerate(sh['exponents']):
-                            fex2 = float(ex2)
-                            if fex1 == fex2:
-                                coeff_row.append(sh['coefficients'][g][idx])
-                                break
-                        else:
-                            coeff_row.append(zero)
+                    coef = [zero] * cur_prim
+                    coef.extend(sh['coefficients'][g])
+                    coef.extend([zero] * (nprim - len(coef)))
+                    newsh['coefficients'].append(coef)
 
-                    coeffs.append(coeff_row)
-
-                newsh['coefficients'].extend(coeffs)
+                cur_prim += len(sh['exponents'])
 
             newshells.append(newsh)
 

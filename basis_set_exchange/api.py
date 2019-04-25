@@ -208,9 +208,6 @@ def get_basis(name,
     # Note that from now on, the pipleline is going to modify basis_dict. That is ok,
     # since we are returned a unique instance from compose_table_basis
 
-    # Sort the basis set into a more canonical form
-    basis_dict = sort.sort_basis(basis_dict, False)
-
     needs_pruning = False
     if optimize_general:
         basis_dict = manip.optimize_general(basis_dict, False)
@@ -220,6 +217,7 @@ def get_basis(name,
     if uncontract_segmented:
         basis_dict = manip.uncontract_segmented(basis_dict, False)
         needs_pruning = True
+
     elif uncontract_general:
         basis_dict = manip.uncontract_general(basis_dict, False)
         needs_pruning = True
@@ -235,6 +233,9 @@ def get_basis(name,
     # Remove dead and duplicate shells
     if needs_pruning:
         basis_dict = manip.prune_basis(basis_dict, False)
+
+    # Sort the basis set into a more canonical form
+    basis_dict = sort.sort_basis(basis_dict, False)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

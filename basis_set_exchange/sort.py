@@ -93,16 +93,31 @@ def sort_shell(shell, use_copy=True):
     # Transpose of coefficients
     tmp_c = list(map(list, zip(*shell['coefficients'])))
 
+    # For each primitive, find the index of the first nonzero coefficient
+    nonzero_idx = [next((i for i, x in enumerate(c) if float(x) != 0.0), None) for c in tmp_c]
+
     # Zip together exponents and coeffs for sorting
-    tmp = zip(shell['exponents'], tmp_c)
+    tmp = zip(shell['exponents'], tmp_c, nonzero_idx)
 
     # Sort by decreasing value of exponent
     tmp = sorted(tmp, key=lambda x: -float(x[0]))
 
+    # Now (stable) sort by first non-zero coefficient
+    tmp = sorted(tmp, key=lambda x: int(x[2]))
+
     # Unpack, and re-transpose the coefficients
     tmp_c = [x[1] for x in tmp]
     shell['exponents'] = [x[0] for x in tmp]
-    shell['coefficients'] = list(map(list, zip(*tmp_c)))
+
+    # Now sort the columns of the coefficient by index of first nonzero coefficient
+    tmp_c = list(map(list, zip(*tmp_c)))
+    nonzero_idx = [next((i for i, x in enumerate(c) if float(x) != 0.0), None) for c in tmp_c]
+
+    tmp = zip(tmp_c, nonzero_idx)
+    tmp = sorted(tmp, key=lambda x: int(x[1]))
+    tmp_c = [x[0] for x in tmp]
+
+    shell['coefficients'] = tmp_c
 
     return shell
 
