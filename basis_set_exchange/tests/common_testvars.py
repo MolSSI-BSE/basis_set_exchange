@@ -54,6 +54,24 @@ all_component_paths = all_file_paths[3]
 bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g', 'fano-qz']
 
 
+# Authoritative data in the sources dir
+auth_src_map = {}
+for x in os.listdir(auth_data_dir):
+    if not x.endswith('.bz2'):
+        continue
+
+    # remove .fmt.bz2
+    base, _ = os.path.splitext(x)
+    base, _ = os.path.splitext(base)
+
+    if base in auth_src_map:
+        raise RuntimeError("Duplicate basis set in authoritative sources: {}".format(base))
+
+    auth_src_map[base] = os.path.join(auth_data_dir, x)
+
+
+
+
 def bool_matrix(size):
     '''Returns an identity matrix of a given size consisting of bool types
     '''
