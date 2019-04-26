@@ -82,8 +82,6 @@ def sort_shell(shell, use_copy=True):
     """
     Sort a basis set shell into a standard order
 
-    The order within a shell is by decreasing value of the exponent.
-
     If use_copy is True, the input shells are not modified.
     """
 
@@ -145,8 +143,8 @@ def sort_shells(shells, use_copy=True):
     return list(
         sorted(
             shells,
-            key=lambda x: (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(x[
-                'exponents'][0]))))
+            key=lambda x: (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(
+                max(x['exponents'])))))
 
 
 def sort_potentials(potentials, use_copy=True):

@@ -3,8 +3,26 @@ Computing the difference between basis sets and files
 '''
 
 import copy
+from .compare import compare_electron_shells
 from .. import fileio
-from .compare import subtract_electron_shells
+
+
+def subtract_electron_shells(s1, s2, rel_tol=0.0):
+    """
+    Returns the difference between two lists of electron shells (s1 - s2)
+
+    This will remove any shells from s1 that are also in s2, within a tolerance
+    """
+
+    diff_shells = []
+    for sh1 in s1:
+        for sh2 in s2:
+            if compare_electron_shells(sh1, sh2, rel_tol=rel_tol):
+                break
+        else:
+            diff_shells.append(copy.deepcopy(sh1))
+
+    return diff_shells
 
 
 def diff_basis_dict(left_list, right_list):

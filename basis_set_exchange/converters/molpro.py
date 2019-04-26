@@ -2,7 +2,7 @@
 Conversion of basis sets to Molpro format
 '''
 
-from .. import lut, manip, misc
+from .. import lut, manip, misc, sort
 from .common import find_range
 
 
@@ -13,6 +13,7 @@ def write_molpro(basis):
     # Uncontract all, and make as generally-contracted as possible
     basis = manip.uncontract_spdf(basis, 0, True)
     basis = manip.make_general(basis, False)
+    basis = sort.sort_basis(basis, True)
 
     s = ''
 

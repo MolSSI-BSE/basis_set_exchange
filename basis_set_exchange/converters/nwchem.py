@@ -2,7 +2,7 @@
 Conversion of basis sets to NWChem format
 '''
 
-from .. import lut, manip, printing, misc
+from .. import lut, manip, printing, misc, sort
 
 
 def write_nwchem(basis):
@@ -11,6 +11,7 @@ def write_nwchem(basis):
 
     # Uncontract all but SP
     basis = manip.uncontract_spdf(basis, 1, True)
+    basis = sort.sort_basis(basis, True)
 
     s = ''
 

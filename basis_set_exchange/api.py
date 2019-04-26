@@ -234,9 +234,6 @@ def get_basis(name,
     if needs_pruning:
         basis_dict = manip.prune_basis(basis_dict, False)
 
-    # Sort the basis set into a more canonical form
-    basis_dict = sort.sort_basis(basis_dict, False)
-
     # If fmt is not specified, return as a python dict
     if fmt is None:
         return basis_dict

@@ -4,7 +4,6 @@ Functions for comparing basis sets and pieces of basis sets
 
 import operator
 import copy
-from ..sort import sort_shell, sort_shells, sort_potentials
 
 
 def _reldiff(a, b):
@@ -123,14 +122,17 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     if shell1['angular_momentum'] != shell2['angular_momentum']:
         return False
 
-    exponents1 = shell1['exponents']
-    exponents2 = shell2['exponents']
-    coefficients1 = shell1['coefficients']
-    coefficients2 = shell2['coefficients']
+    # Zip together exponents and coeffs for sorting
+    # This basically creates the typical matrix with exponents
+    # being in the first column
+    tmp1 = list(zip(shell1['exponents'], *shell1['coefficients']))
+    tmp2 = list(zip(shell2['exponents'], *shell2['coefficients']))
 
-    if not _compare_vector(exponents1, exponents2, rel_tol):
-        return False
-    if not _compare_matrix(coefficients1, coefficients2, rel_tol):
+    # Now sort by first non-zero coefficient
+    tmp1 = sorted(tmp1)
+    tmp2 = sorted(tmp2)
+
+    if not _compare_matrix(tmp1, tmp2, rel_tol):
         return False
     if compare_meta:
         if shell1['region'] != shell2['region']:
@@ -154,8 +156,6 @@ def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0
     If compare_meta is True, the metadata is also compared for exact equality. 
     '''
 
-    subset = sort_shells(subset, True)
-    superset = sort_shells(superset, True)
     for item1 in subset:
         for item2 in superset:
             if compare_electron_shells(item1, item2, compare_meta, rel_tol):
@@ -338,149 +338,10 @@ def compare_basis(bs1,
                 compare_ecp_pots_meta=compare_ecp_pots_meta,
                 compare_meta=compare_elements_meta,
                 rel_tol=rel_tol):
-            print("Elements failed", el)
+            print("Element failed:", el)
             return False
     if compare_meta:
         for k in ['name', 'family', 'description', 'revision_description', 'role', 'auxiliaries']:
             if not _compare_keys(bs1, bs2, k, operator.eq):
                 return False
     return True
-
-
-def shells_difference(s1, s2):
-    """
-    Computes and prints the differences between two lists of shells
-
-    If the shells contain a different number primitives,
-    or the lists are of different length, inf is returned.
-    Otherwise, the maximum relative difference is returned.
-    """
-
-    max_rdiff = 0.0
-    nsh = len(s1)
-    if len(s2) != nsh:
-        print("Different number of shells: {} vs {}".format(len(s1), len(s2)))
-        return float('inf')
-
-    shells1 = sort_shells(s1)
-    shells2 = sort_shells(s2)
-
-    for n in range(nsh):
-        sh1 = shells1[n]
-        sh2 = shells2[n]
-
-        if sh1['angular_momentum'] != sh2['angular_momentum']:
-            print("Different angular momentum for shell {}".format(n))
-            return float('inf')
-
-        nprim = len(sh1['exponents'])
-        if len(sh2['exponents']) != nprim:
-            print("Different number of primitives for shell {}".format(n))
-            return float('inf')
-
-        ngen = len(sh1['coefficients'])
-        if len(sh2['coefficients']) != ngen:
-            print("Different number of general contractions for shell {}".format(n))
-            return float('inf')
-
-        for p in range(nprim):
-            e1 = sh1['exponents'][p]
-            e2 = sh2['exponents'][p]
-            r = _reldiff(e1, e2)
-            if r > 0.0:
-                print("   Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
-            max_rdiff = max(max_rdiff, r)
-
-            for g in range(ngen):
-                c1 = sh1['coefficients'][g][p]
-                c2 = sh2['coefficients'][g][p]
-                r = _reldiff(c1, c2)
-                if r > 0.0:
-                    print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
-                max_rdiff = max(max_rdiff, r)
-
-    print()
-    print("Max relative difference for these shells: {}".format(max_rdiff))
-    return max_rdiff
-
-
-def potentials_difference(p1, p2):
-    """
-    Computes and prints the differences between two lists of potentials 
-
-    If the shells contain a different number primitives,
-    or the lists are of different length, inf is returned.
-    Otherwise, the maximum relative difference is returned.
-    """
-
-    max_rdiff = 0.0
-    np = len(p1)
-    if len(p2) != np:
-        print("Different number of potentials")
-        return float('inf')
-
-    pots1 = sort_potentials(p1)
-    pots2 = sort_potentials(p2)
-
-    for n in range(np):
-        pot1 = pots1[n]
-        pot2 = pots2[n]
-
-        if pot1['angular_momentum'] != pot2['angular_momentum']:
-            print("Different angular momentum for potential {}".format(n))
-            return float('inf')
-
-        nprim = len(pot1['gaussian_exponents'])
-        if len(pot2['gaussian_exponents']) != nprim:
-            print("Different number of primitives for potential {}".format(n))
-            return float('inf')
-
-        ngen = len(pot1['coefficients'])
-        if len(pot2['coefficients']) != ngen:
-            print("Different number of general contractions for potential {}".format(n))
-            return float('inf')
-
-        for p in range(nprim):
-            e1 = pot1['gaussian_exponents'][p]
-            e2 = pot2['gaussian_exponents'][p]
-            r = _reldiff(e1, e2)
-            if r > 0.0:
-                print("   Gaussian Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
-            max_rdiff = max(max_rdiff, r)
-
-            e1 = pot1['r_exponents'][p]
-            e2 = pot2['r_exponents'][p]
-            r = _reldiff(e1, e2)
-            if r > 0.0:
-                print("          R Exponent {:3}: {:20} {:20} -> {:16.8e}".format(p, e1, e2, r))
-            max_rdiff = max(max_rdiff, r)
-
-            for g in range(ngen):
-                c1 = pot1['coefficients'][g][p]
-                c2 = pot2['coefficients'][g][p]
-                r = _reldiff(c1, c2)
-                if r > 0.0:
-                    print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
-                max_rdiff = max(max_rdiff, r)
-
-    print()
-    print("Max relative difference for these potentials: {}".format(max_rdiff))
-    return max_rdiff
-
-
-def subtract_electron_shells(s1, s2, rel_tol=0.0):
-    """
-    Returns the difference between two lists of electron shells (s1 - s2)
-
-    This will remove any shells from s1 that are also in s2, within a tolerance
-    """
-
-    diff_shells = []
-    for sh1 in s1:
-        for sh2 in s2:
-            if compare_electron_shells(sh1, sh2, rel_tol=rel_tol):
-                break
-        else:
-            diff_shells.append(copy.deepcopy(sh1))
-
-    return diff_shells
