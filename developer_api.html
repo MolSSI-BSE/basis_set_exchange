@@ -804,8 +804,9 @@ data, as well as some other small functions.</p>
 <dt id="basis_set_exchange.manip.make_general">
 <code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes one large general contraction for each angular momentum</p>
-<p>If split_spdf is True, sp… orbitals will be split apary</p>
 <p>If use_copy is True, the input basis set is not modified.</p>
+<p>The output of this function is not pretty. If you want to make it nicer,
+use sort_basis afterwards.</p>
 </dd></dl>
 
 <dl class="function">
@@ -839,10 +840,18 @@ and sources</p>
 <dt id="basis_set_exchange.manip.prune_basis">
 <code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes primitives that have a zero coefficient, and
-removes duplicate shells</p>
+removes duplicate primitives and shells</p>
 <p>This only finds EXACT duplicates, and is meant to be used
-after uncontracting</p>
+after other manipulations</p>
 <p>If use_copy is True, the input basis set is not modified.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.prune_shell">
+<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_shell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes exact duplicates of primitives, and condenses duplicate exponents
+into general contractions</p>
+<p>Also removes primitives if all coefficients are zero</p>
 </dd></dl>
 
 <dl class="function">
@@ -1048,7 +1057,6 @@ reference are put in a more canonical order.</p>
 <dt id="basis_set_exchange.sort.sort_shell">
 <code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a basis set shell into a standard order</p>
-<p>The order within a shell is by decreasing value of the exponent.</p>
 <p>If use_copy is True, the input shells are not modified.</p>
 </dd></dl>
 
