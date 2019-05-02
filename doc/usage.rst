@@ -210,7 +210,7 @@ A list of families can be obtained with :func:`basis_set_exchange.get_families`.
    >>> # Print all the basis sets known to the BSE
    >>> all_bs = basis_set_exchange.get_all_basis_names()
    >>> print(all_bs)
-   ['3-21g', '4-31g', '5-21g', ...
+   ['2zapa-nr', '2zapa-nr-cv', '3-21g', '3zapa-nr'...
 
    >>> # A list of all families
    >>> all_fam = basis_set_exchange.get_families()
