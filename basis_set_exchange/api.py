@@ -417,7 +417,7 @@ def get_families(data_dir=None):
     return sorted(list(families))
 
 
-def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
+def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_dir=None):
     '''Filter basis sets by some criteria
 
     All parameters are ANDed together and are not case sensitive.
@@ -430,6 +430,12 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
         Family the basis set belongs to
     role : str
         Role of the basis set
+    elements : str or list
+        List of elements that the basis set must include.
+        Elements can be specified by Z-number (int or str) or by symbol (str).
+        If this argument is a str (ie, '1-3,7-10'), it is expanded into a list.
+        Z numbers and symbols (case insensitive) can be used interchangeably
+        (see :func:`bse.misc.expand_elements`)
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -445,16 +451,26 @@ def filter_basis_sets(substr=None, family=None, role=None, data_dir=None):
 
     # family and role are required to be lowercase (via schema and validation functions)
 
-    if family:
+    if family is not None:
         family = family.lower()
         if not family in get_families(data_dir):
             raise RuntimeError("Family '{}' is not a valid family".format(family))
         metadata = {k: v for k, v in metadata.items() if v['family'] == family}
-    if role:
+    if role is not None:
         role = role.lower()
         if not role in get_roles():
             raise RuntimeError("Role '{}' is not a valid role".format(role))
         metadata = {k: v for k, v in metadata.items() if v['role'] == role}
+    if elements is not None:
+        elements = misc.expand_elements(elements, True)
+        elements = set(elements)
+
+        for basis_name, basis_data in metadata.items():
+            ver_data = basis_data['versions']
+            basis_data['versions'] = {k: v for k, v in ver_data.items() if elements <= set(v['elements'])}
+
+        # There will be basis sets with no versions. So clean that up
+        metadata = {k: v for k, v in metadata.items() if len(v['versions']) > 0}
     if substr:
         substr = substr.lower()
         metadata = {k: v for k, v in metadata.items() if substr in k or substr in v['display_name']}

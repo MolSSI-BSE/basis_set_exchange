@@ -57,6 +57,7 @@ def run_bse_cli():
     subp.add_argument('-f', '--family', help='Limit the basis set list to only the specified family').completer = cli_family_completer
     subp.add_argument('-r', '--role', help='Limit the basis set list to only the specified role').completer = cli_role_completer
     subp.add_argument('-s', '--substr', help='Limit the basis set list to only basis sets whose name contains the specified substring')
+    subp.add_argument('-e', '--elements', help='Limit the basis set list to only basis sets that contain all the given elements')
 
     # list-families subcommand
     subparsers.add_parser('list-families', help='Output a list all available basis set families')

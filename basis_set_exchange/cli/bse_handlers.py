@@ -9,7 +9,7 @@ from .common import format_columns
 
 def _bse_cli_list_basis_sets(args):
     '''Handles the list-basis-sets subcommand'''
-    metadata = api.filter_basis_sets(args.substr, args.family, args.role, args.data_dir)
+    metadata = api.filter_basis_sets(args.substr, args.family, args.role, args.elements, args.data_dir)
 
     if args.no_description:
         liststr = metadata.keys()
