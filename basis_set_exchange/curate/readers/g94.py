@@ -88,7 +88,7 @@ def read_g94(basis_lines, fname):
 
             while basis_lines[i] != '****':
                 lsplt = basis_lines[i].split()
-                shell_am = lut.amchar_to_int(lsplt[0])
+                shell_am = lut.amchar_to_int(lsplt[0], hij=True)
                 nprim = int(lsplt[1])
 
                 if max(shell_am) <= 1:
