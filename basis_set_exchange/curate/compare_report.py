@@ -4,7 +4,7 @@ Comparison of basis data against authoritative sources
 
 from ..api import get_basis
 from ..misc import compact_elements
-from ..sort import sort_shell, sort_shells, sort_potentials
+from ..sort import sort_shells, sort_potentials
 from .. import manip
 from .readers import read_formatted_basis
 from .compare import _reldiff

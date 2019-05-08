@@ -9,7 +9,6 @@ from . import compose
 from . import converters
 from . import fileio
 from . import manip
-from . import sort
 from . import memo
 from . import notes
 from . import refconverters
