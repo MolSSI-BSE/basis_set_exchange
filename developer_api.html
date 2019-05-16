@@ -182,7 +182,7 @@
 <p>Main interface to Basis Set Exchange functionality</p>
 <dl class="function">
 <dt id="basis_set_exchange.api.filter_basis_sets">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">filter_basis_sets</code><span class="sig-paren">(</span><em>substr=None</em>, <em>family=None</em>, <em>role=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">basis_set_exchange.api.</code><code class="descname">filter_basis_sets</code><span class="sig-paren">(</span><em>substr=None</em>, <em>family=None</em>, <em>role=None</em>, <em>elements=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter basis sets by some criteria</p>
 <p>All parameters are ANDed together and are not case sensitive.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -198,6 +198,13 @@
 </dd>
 <dt><strong>role</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Role of the basis set</p>
+</dd>
+<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list</span></dt>
+<dd><p class="first last">List of elements that the basis set must include.
+Elements can be specified by Z-number (int or str) or by symbol (str).
+If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
+Z numbers and symbols (case insensitive) can be used interchangeably
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
 </dd>
 <dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd><p class="first last">Data directory with all the basis set information. By default,

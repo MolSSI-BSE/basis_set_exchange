@@ -343,7 +343,7 @@ A list of families can be obtained with <code class="xref py py-func docutils li
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print all the basis sets known to the BSE</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_bs</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
-<span class="go">[&#39;3-21g&#39;, &#39;4-31g&#39;, &#39;5-21g&#39;, ...</span>
+<span class="go">[&#39;2zapa-nr&#39;, &#39;2zapa-nr-cv&#39;, &#39;3-21g&#39;, &#39;3zapa-nr&#39;...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># A list of all families</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_fam</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_families</span><span class="p">()</span>
@@ -384,7 +384,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;31g&#39; in the name</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">filter_basis_sets</span><span class="p">(</span><span class="s1">&#39;31g&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-<span class="go">dict_keys([&#39;4-31g&#39;, &#39;6-31g&#39;, &#39;6-31g(d,p)&#39;, &#39;6-31g*&#39;, &#39;6-31g**&#39;])</span>
+<span class="go">dict_keys([&#39;4-31g&#39;, &#39;6-31g&#39;, &#39;6-31g(d,p)&#39;, &#39;6-31g*&#39;, &#39;6-31g**&#39;...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;aug&#39; in the name that can be used for RI fitting</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">filter_basis_sets</span><span class="p">(</span><span class="s1">&#39;aug&#39;</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
