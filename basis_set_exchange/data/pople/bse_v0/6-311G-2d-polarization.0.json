@@ -3,22 +3,37 @@
     "schema_type": "component",
     "schema_version": "0.1"
   },
-  "description": "6-31G(f)",
+  "description": "6-31G(2df)",
   "data_source": "Original Basis Set Exchange",
   "elements": {
     "3": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "0.1500000"
+            "0.4000000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.1000000"
           ],
           "coefficients": [
             [
@@ -30,17 +45,32 @@
     },
     "4": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "0.2600000"
+            "0.5100000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.1275000"
           ],
           "coefficients": [
             [
@@ -52,17 +82,32 @@
     },
     "5": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "0.5000000"
+            "0.8020000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.2005000"
           ],
           "coefficients": [
             [
@@ -74,17 +119,32 @@
     },
     "6": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "0.8000000"
+            "1.2520000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.3130000"
           ],
           "coefficients": [
             [
@@ -96,17 +156,32 @@
     },
     "7": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "1.0000000"
+            "1.8260000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.4565000"
           ],
           "coefficients": [
             [
@@ -118,17 +193,32 @@
     },
     "8": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "1.4000000"
+            "2.5840000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.6460000"
           ],
           "coefficients": [
             [
@@ -140,17 +230,32 @@
     },
     "9": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "1.8500000"
+            "3.5000000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.8750000"
           ],
           "coefficients": [
             [
@@ -162,193 +267,32 @@
     },
     "10": {
       "references": [
-        "curtiss1998a"
+        "krishnan1980a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "2.5000000"
+            "4.6080000"
           ],
           "coefficients": [
             [
               "1.0000000"
             ]
           ]
-        }
-      ]
-    },
-    "11": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
+        },
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "0.1500000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "12": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.2000000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "13": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.2500000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "14": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.3200000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "15": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.4500000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "16": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.5500000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "17": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.7000000"
-          ],
-          "coefficients": [
-            [
-              "1.0000000"
-            ]
-          ]
-        }
-      ]
-    },
-    "18": {
-      "references": [
-        "curtiss1998a"
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto_spherical",
-          "region": "",
-          "angular_momentum": [
-            3
-          ],
-          "exponents": [
-            "0.8500000"
+            "1.1520000"
           ],
           "coefficients": [
             [
@@ -360,17 +304,32 @@
     },
     "19": {
       "references": [
-        "curtiss1998a"
+        "blaudeau1997a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "1.1100000"
+            "0.4580000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.1145000"
           ],
           "coefficients": [
             [
@@ -382,17 +341,32 @@
     },
     "20": {
       "references": [
-        "curtiss1998a"
+        "blaudeau1997a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            3
+            2
           ],
           "exponents": [
-            "1.3300000"
+            "0.5200000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.1300000"
           ],
           "coefficients": [
             [

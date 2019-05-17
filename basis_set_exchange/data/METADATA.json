@@ -1024,6 +1024,88 @@
       }
     }
   },
+  "6-311++g(2d,2p)": {
+    "display_name": "6-311++G(2d,2p)",
+    "other_names": [],
+    "description": "6-311++G(2d,2p)",
+    "latest_version": "0",
+    "basename": "6-311PPG(2d,2p)",
+    "relpath": "",
+    "family": "pople",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-311PPG(2d,2p).0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20"
+        ]
+      }
+    }
+  },
+  "6-311++g(3df,3pd)": {
+    "display_name": "6-311++G(3df,3pd)",
+    "other_names": [],
+    "description": "6-311++G(3df,3pd)",
+    "latest_version": "0",
+    "basename": "6-311PPG(3df,3pd)",
+    "relpath": "",
+    "family": "pople",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-311PPG(3df,3pd).0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "6-311++g*": {
     "display_name": "6-311++G*",
     "other_names": [],
@@ -1035,6 +1117,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1077,6 +1160,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1151,6 +1235,49 @@
       }
     }
   },
+  "6-311+g(2d,p)": {
+    "display_name": "6-311+G(2d,p)",
+    "other_names": [],
+    "description": "6-311+G(2d,p)",
+    "latest_version": "0",
+    "basename": "6-311PG(2d,p)",
+    "relpath": "",
+    "family": "pople",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-311PG(2d,p).0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20"
+        ]
+      }
+    }
+  },
   "6-311+g*": {
     "display_name": "6-311+G*",
     "other_names": [],
@@ -1162,6 +1289,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1205,6 +1333,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1335,6 +1464,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1385,6 +1515,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -1437,6 +1568,7 @@
     "role": "orbital",
     "functiontypes": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
