@@ -1,0 +1,16 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "31G",
+  "description": "31G valence double-zeta",
+  "notes": "Includes erroneous H from old BSE",
+  "elements": {
+    "1": {
+      "components": [
+        "pople/bse_v0/6-31G-H-BSE.0.json"
+      ]
+    }
+  }
+}

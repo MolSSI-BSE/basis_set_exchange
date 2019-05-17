@@ -1,0 +1,17 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "31++G",
+  "description": "Pople 31++G basis set for H",
+  "notes": "Includes erroneous H from old BSE",
+  "elements": {
+    "1": {
+      "components": [
+        "pople/bse_v0/6-31G-H-BSE.0.json",
+        "pople/bse_v0/31G-diffuse.0.json"
+      ]
+    }
+  }
+}

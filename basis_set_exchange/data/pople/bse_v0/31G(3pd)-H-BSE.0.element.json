@@ -1,0 +1,18 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "31G(3pd)",
+  "description": "31G(3pd)",
+  "notes": "Includes erroneous H from old BSE",
+  "elements": {
+    "1": {
+      "components": [
+        "pople/bse_v0/6-31G-H-BSE.0.json",
+        "pople/bse_v0/311G-3p-polarization.0.json",
+        "pople/bse_v0/311G-d-polarization.0.json"
+      ]
+    }
+  }
+}
