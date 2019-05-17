@@ -3,13 +3,14 @@
     "schema_type": "element",
     "schema_version": "0.1"
   },
-  "name": "31G*",
-  "description": "31G valence double-zeta w/ polarization",
+  "name": "31G(3pd)",
+  "description": "31G(3pd)",
   "elements": {
     "2": {
       "components": [
         "pople/bse_v0/31G.0.json",
-        "pople/bse_v0/31G-p-polarization.0.json"
+        "pople/bse_v0/311G-3p-polarization.0.json",
+        "pople/bse_v0/311G-d-polarization.0.json"
       ]
     }
   }

@@ -3,22 +3,22 @@
     "schema_type": "component",
     "schema_version": "0.1"
   },
-  "description": "1P Polarization functions associated with 6-311G for H,He",
+  "description": "3PD      Polarization functions associated with 6-31G and 6-311G",
   "data_source": "Original Basis Set Exchange",
   "elements": {
     "1": {
       "references": [
-        "krishnan1980a"
+        "curtiss1998a"
       ],
       "electron_shells": [
         {
-          "function_type": "gto",
-          "region": "polarization",
+          "function_type": "gto_spherical",
+          "region": "",
           "angular_momentum": [
-            1
+            2
           ],
           "exponents": [
-            "0.750"
+            "1.0000"
           ],
           "coefficients": [
             [
@@ -30,17 +30,17 @@
     },
     "2": {
       "references": [
-        "krishnan1980a"
+        "curtiss1998a"
       ],
       "electron_shells": [
         {
-          "function_type": "gto",
-          "region": "polarization",
+          "function_type": "gto_spherical",
+          "region": "",
           "angular_momentum": [
-            1
+            2
           ],
           "exponents": [
-            "0.750"
+            "2.0000"
           ],
           "coefficients": [
             [
