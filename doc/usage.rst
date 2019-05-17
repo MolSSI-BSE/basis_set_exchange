@@ -262,7 +262,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
    >>> # Find all basis sets with '31g' in the name
    >>> md = basis_set_exchange.filter_basis_sets('31g')
    >>> md.keys()
-   dict_keys(['4-31g', '6-31g', '6-31g(d,p)', '6-31g*', '6-31g**'...
+   dict_keys(['4-31g', ...
 
    >>> # Find all basis sets with 'aug' in the name that can be used for RI fitting
    >>> md = basis_set_exchange.filter_basis_sets('aug', role='rifit')
