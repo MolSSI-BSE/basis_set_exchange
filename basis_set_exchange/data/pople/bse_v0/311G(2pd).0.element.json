@@ -1,0 +1,24 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "311G(2pd)",
+  "description": "311G(2pd)",
+  "elements": {
+    "1": {
+      "components": [
+        "pople/bse_v0/311G.0.json",
+        "pople/bse_v0/311G-2p-polarization.0.json",
+        "pople/bse_v0/311G-d-polarization.0.json"
+      ]
+    },
+    "2": {
+      "components": [
+        "pople/bse_v0/311G.0.json",
+        "pople/bse_v0/311G-2p-polarization.0.json",
+        "pople/bse_v0/311G-d-polarization.0.json"
+      ]
+    }
+  }
+}
