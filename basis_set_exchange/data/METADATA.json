@@ -19589,28 +19589,24 @@
       }
     }
   },
-  "sbkjc vdz": {
-    "display_name": "SBKJC VDZ",
+  "sbkjc-ecp": {
+    "display_name": "SBKJC-ECP",
     "other_names": [],
-    "description": "VDZ Valence Double Zeta with ECP",
+    "description": "SBKJC ECP",
     "latest_version": "0",
-    "basename": "SBKJC_VDZ",
+    "basename": "SBKJC-ECP",
     "relpath": "",
     "family": "sbkjc",
     "role": "orbital",
     "functiontypes": [
-      "gto",
-      "gto_spherical",
       "scalar_ecp"
     ],
     "auxiliaries": {},
     "versions": {
       "0": {
-        "file_relpath": "SBKJC_VDZ.0.table.json",
+        "file_relpath": "SBKJC-ECP.0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "elements": [
-          "1",
-          "2",
           "3",
           "4",
           "5",
@@ -19686,24 +19682,28 @@
       }
     }
   },
-  "sbkjc-ecp": {
-    "display_name": "SBKJC-ECP",
+  "sbkjc-vdz": {
+    "display_name": "SBKJC-VDZ",
     "other_names": [],
-    "description": "SBKJC ECP",
+    "description": "VDZ Valence Double Zeta with ECP",
     "latest_version": "0",
-    "basename": "SBKJC-ECP",
+    "basename": "SBKJC-VDZ",
     "relpath": "",
     "family": "sbkjc",
     "role": "orbital",
     "functiontypes": [
+      "gto",
+      "gto_spherical",
       "scalar_ecp"
     ],
     "auxiliaries": {},
     "versions": {
       "0": {
-        "file_relpath": "SBKJC-ECP.0.table.json",
+        "file_relpath": "SBKJC-VDZ.0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "elements": [
+          "1",
+          "2",
           "3",
           "4",
           "5",
