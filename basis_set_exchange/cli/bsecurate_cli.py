@@ -116,7 +116,8 @@ def run_bsecurate_cli():
     if args.output:
         with open(args.output, 'w', encoding='utf-8') as outfile:
             outfile.write(output)
-    else:
+    elif len(output) > 0:
+        # Don't print if output is empty
         print(output)
 
     return 0
