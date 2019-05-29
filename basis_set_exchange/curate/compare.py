@@ -3,6 +3,7 @@ Functions for comparing basis sets and pieces of basis sets
 '''
 
 import operator
+from ..sort import sort_shell
 
 
 def _reldiff(a, b):
@@ -121,15 +122,15 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     if shell1['angular_momentum'] != shell2['angular_momentum']:
         return False
 
-    # Zip together exponents and coeffs for sorting
+    # Sort into some canonical order
+    shell1 = sort_shell(shell1)
+    shell2 = sort_shell(shell2)
+
+    # Zip together exponents and coeffs
     # This basically creates the typical matrix with exponents
     # being in the first column
     tmp1 = list(zip(shell1['exponents'], *shell1['coefficients']))
     tmp2 = list(zip(shell2['exponents'], *shell2['coefficients']))
-
-    # Now sort by first non-zero coefficient
-    tmp1 = sorted(tmp1)
-    tmp2 = sorted(tmp2)
 
     if not _compare_matrix(tmp1, tmp2, rel_tol):
         return False
@@ -175,11 +176,11 @@ def electron_shells_are_equal(shells1, shells2, compare_meta=False, rel_tol=0.0)
     If compare_meta is True, the metadata is also compared for exact equality. 
     '''
 
-    # Lists are equal if each is a subset of the other
-    # Slow but effective
     if len(shells1) != len(shells2):
         return False
 
+    # Lists are equal if each is a subset of the other
+    # Slow but effective
     return electron_shells_are_subset(shells1, shells2, compare_meta, rel_tol) and electron_shells_are_subset(
         shells2, shells1, compare_meta, rel_tol)
 
