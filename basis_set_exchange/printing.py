@@ -51,8 +51,9 @@ def write_matrix(mat, point_place, convert_exp=False):
         line = ''
         for c, val in enumerate(row):
             sp = pad[r][c] - len(line)
-            # ensure at least one space
-            sp = max(sp, 1)
+            # ensure at least one space, except for the beginning of the line
+            if c > 0:
+                sp = max(sp, 1)
             line += ' ' * sp + str(mat[r][c])
         lines += line + '\n'
 
