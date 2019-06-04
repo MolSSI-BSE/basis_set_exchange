@@ -3,415 +3,598 @@
     "schema_type": "component",
     "schema_version": "0.1"
   },
-  "description": "LANL2DZ polarization functions",
+  "description": "f polarization functions for LANL08/LANL2TZ",
   "data_source": "Original Basis Set Exchange",
   "elements": {
-    "1": {
+    "21": {
       "references": [
-      ],
-      "electron_shells": [
-        {
-          "function_type": "gto",
-          "region": "",
-          "angular_momentum": [
-            1
-          ],
-          "exponents": [
-            "0.3560"
-          ],
-          "coefficients": [
-            [
-              "1.0"
-            ]
-          ]
-        }
-      ]
-    },
-    "6": {
-      "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.5870"
+            "1.3350000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "7": {
+    "22": {
       "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.7360"
+            "1.5060000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "8": {
+    "23": {
       "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.9610"
+            "1.7510000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "9": {
+    "24": {
       "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "1.5770"
+            "1.9410000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "14": {
+    "25": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2960"
+            "2.1950000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "15": {
+    "26": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.3640"
+            "2.4620000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "16": {
+    "27": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.4960"
+            "2.7800000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "17": {
+    "28": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.6480"
+            "3.1300000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "32": {
+    "29": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2460"
+            "3.5250000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "33": {
+    "39": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2860"
+            "0.8350000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "34": {
+    "40": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.3630"
+            "0.8750000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "35": {
+    "41": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.4340"
+            "0.9520000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "50": {
+    "42": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.1860"
+            "1.0430000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "51": {
+    "43": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2070"
+            "1.1340000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "52": {
+    "44": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2500"
+            "1.2350000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "53": {
+    "45": {
       "references": [
-        "check2001a"
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.2940"
+            "1.3500000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "82": {
+    "46": {
       "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.1790"
+            "1.4720000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
             ]
           ]
         }
       ]
     },
-    "83": {
+    "47": {
       "references": [
+        "ehlers1993a"
       ],
       "electron_shells": [
         {
           "function_type": "gto_spherical",
           "region": "",
           "angular_momentum": [
-            2
+            3
           ],
           "exponents": [
-            "0.1920"
+            "1.6110000"
           ],
           "coefficients": [
             [
-              "1.0"
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "57": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.5910000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "72": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.7840000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "73": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.7900000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "74": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.8230000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "75": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.8690000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "76": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.8860000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "77": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.9380000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "78": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.9930000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "79": {
+      "references": [
+        "ehlers1993a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "1.0500000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
             ]
           ]
         }
