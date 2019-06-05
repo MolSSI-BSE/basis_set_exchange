@@ -222,3 +222,87 @@ def amchar_to_int(amchar, hij=False):
         amint.append(amchar_map.index(c))
 
     return amint
+
+
+def electron_shells_start(nelectrons, maxam=20):
+    '''Return the starting principle quantum numbers of electron shells
+
+    For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
+    electrons shells will then start at 3s, 3p, 3d, and 4f (returned as [3, 3, 3, 4])
+
+    If an ECP covers 30 electrons, then the shells will start at [5, 4, 4, 4]
+
+    Only fully-covered shells are counted. If a shell is partly covered, an exception
+    is raised.
+
+    The returned list is extended up to maxam.
+
+    Note: Since the main use of this is for ECPs, we only cover what can really be found
+    on the periodic table. No excited states!
+
+    Parameters
+    ----------
+    nelectrons : int
+        Number of electrons covered by an ECP
+    maxam : int
+        Fill out the starting principal quantum numbers up to this am
+
+    Returns
+    -------
+    list
+        The starting principal quantum numbers of s, p, d, and f shells.
+    '''
+
+    if nelectrons < 0:
+        raise RuntimeError("Can't have a negative number of electrons")
+    if nelectrons > 118:
+        raise NotImplementedError("Too many electrons for electrons_shells_start")
+
+    # yapf: disable
+    # The usual filling order of electrons you learned in high school
+    # Tuple of (am, nelec)
+    aminfo = ( (0, 2),                           # He       
+               (0, 2), (1, 6),                   # Ne
+               (0, 2), (1, 6),                   # Ar
+               (0, 2), (2, 10), (1, 6),          # Kr
+               (0, 2), (2, 10), (1, 6),          # Xe
+               (0, 2), (3, 14), (2, 10), (1, 6), # Rn
+               (0, 2), (3, 14), (2, 10), (1, 6)  # Og
+             )
+
+    # But the above doesn't always work - ECPs don't always
+    # cover things in such a regular order. So handle some
+    # special ones
+    special_am = { 28: [0, 0, 0, 1, 1, 2],
+                   46: [0, 0, 0, 0, 1, 1, 1, 2, 2],
+                   60: [0, 0, 0, 0, 1, 1, 1, 2, 2, 3],
+                   68: [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3],
+                   78: [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3],
+                   92: [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3]
+                 }
+    # yapf: enable
+
+    if nelectrons in special_am:
+        contained_am = special_am[nelectrons]
+    else:
+        contained_am = []
+
+        for am, n in aminfo:
+            if nelectrons >= n:
+                nelectrons -= n
+                contained_am.append(am)
+            else:
+                break
+
+        if nelectrons != 0:
+            raise RuntimeError("Electrons cover a partial shell. {} electrons left".format(nelectrons))
+
+    start = [
+        contained_am.count(0) + 1,
+        contained_am.count(1) + 2,
+        contained_am.count(2) + 3,
+        contained_am.count(3) + 4
+    ]
+    start.extend(range(5, maxam + 2))
+
+    return start
