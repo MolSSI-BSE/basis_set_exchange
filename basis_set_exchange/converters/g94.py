@@ -5,7 +5,7 @@ Conversion of basis sets to Gaussian format
 from .. import lut, manip, sort, printing
 
 
-def write_g94(basis):
+def _write_g94_common(basis, add_harm_type=True):
     '''Converts a basis set to Gaussian format
     '''
 
@@ -37,7 +37,11 @@ def write_g94(basis):
 
                 am = shell['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True).upper()
-                s += '{}   {}   1.00\n'.format(amchar, nprim)
+
+                harm = ''
+                if add_harm_type is True and shell['function_type'] == 'gto_cartesian':
+                    harm = ' c'
+                s += '{}   {}   1.00{}\n'.format(amchar, nprim, harm)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=True)
@@ -79,3 +83,19 @@ def write_g94(basis):
                 s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=True)
 
     return s
+
+
+def write_g94(basis):
+    '''Converts a basis set to Gaussian format
+    '''
+    return _write_g94_common(basis, False)
+
+
+def write_xtron(basis):
+    '''Converts a basis set to xTron format
+
+    xTron uses a modified gaussian format that puts 'c' on the same
+    line as the angular momentum if the shell is cartesian.
+    '''
+    return _write_g94_common(basis, True)
+

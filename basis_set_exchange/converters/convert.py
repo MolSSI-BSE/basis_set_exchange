@@ -4,7 +4,7 @@ Converts basis set data to a specified output format
 
 from .bsejson import write_json
 from .nwchem import write_nwchem
-from .g94 import write_g94
+from .g94 import write_g94, write_xtron
 from .gamess_us import write_gamess_us
 from .psi4 import write_psi4
 from .turbomole import write_turbomole
@@ -77,6 +77,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_cfour
+    },
+    'xtron': {
+        'display': 'xTron',
+        'extension': '.gbs',
+        'comment': '!',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_xtron
     },
     'bsedebug': {
         'display': 'BSE Debug',
