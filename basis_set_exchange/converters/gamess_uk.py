@@ -1,12 +1,12 @@
 '''
-Conversion of basis sets to GAMESS-US
+Conversion of basis sets to GAMESS-UK format
 '''
 
 from .. import lut, manip, sort, printing
 
 
-def write_gamess_us(basis):
-    '''Converts a basis set to GAMESS-US
+def write_gamess_uk(basis):
+    '''Converts a basis set to GAMESS-UK
     '''
 
     s = ''
@@ -25,13 +25,14 @@ def write_gamess_us(basis):
     # Electron Basis
     if len(electron_elements) > 0:
         # electronic part starts with $DATA
-        s += '$DATA\n'
 
         for z in electron_elements:
             data = basis['elements'][z]
 
             el_name = lut.element_name_from_Z(z).upper()
-            s += '\n' + el_name + "\n"
+            el_sym = lut.element_sym_from_Z(z, normalize=True)
+            s += '\n'
+            s += '# ' + el_name + "\n"
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
@@ -41,18 +42,16 @@ def write_gamess_us(basis):
 
                 am = shell['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True, use_L=True).upper()
-                s += '{}   {}\n'.format(amchar, nprim)
+                s += '{}   {}\n'.format(amchar, el_sym)
 
                 # 1-based indexing
-                idx_column = list(range(1, nprim + 1))
-                point_places = [0] + [4 + 8 * i + 15 * (i - 1) for i in range(1, ncol)]
-                s += printing.write_matrix([idx_column, exponents, *coefficients], point_places)
-
-        s += "$END"
+                point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol)]
+                s += printing.write_matrix([*coefficients, exponents], point_places)
 
     # Write out ECP
     if len(ecp_elements) > 0:
-        s += "\n\n$ECP\n"
+        s += "\n\nEffective Core Potentials\n"
+        s += "---------------------------\n"
 
         for z in ecp_elements:
             data = basis['elements'][z]
@@ -64,7 +63,8 @@ def write_gamess_us(basis):
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            s += '{}-ECP GEN    {}    {}\n'.format(sym, data['ecp_electrons'], max_ecp_am)
+            s += 'CARDS {}\n'.format(sym)
+            s += '    {}     {}\n'.format(max_ecp_am, data['ecp_electrons'])
 
             for pot in ecp_list:
                 rexponents = pot['r_exponents']
@@ -75,15 +75,9 @@ def write_gamess_us(basis):
                 am = pot['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=False)
 
-                # Title line
-                if am[0] == max_ecp_am:
-                    s += '{:<5} ----- {}-ul potential -----\n'.format(nprim, amchar)
-                else:
-                    s += '{:<5} ----- {}-{} potential -----\n'.format(nprim, amchar, max_ecp_amchar)
+                s += ' {}\n'.format(nprim)
 
-                point_places = [8, 23, 32]
-                s += printing.write_matrix([*coefficients, rexponents, gexponents], point_places)
-
-        s += "$END\n"
-
+                point_places = [1, 9, 32]
+                s += printing.write_matrix([rexponents, *coefficients, gexponents], point_places)
+            s += '\n'
     return s

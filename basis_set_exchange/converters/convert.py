@@ -11,6 +11,7 @@ from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .cfour import write_cfour
 from .dalton import write_dalton
+from .gamess_uk import write_gamess_uk
 from .bsedebug import write_bsedebug
 
 _converter_map = {
@@ -55,6 +56,13 @@ _converter_map = {
         'comment': '#',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_turbomole
+    },
+    'gamess_uk': {
+        'display': 'GAMESS UK',
+        'extension': '.bas',
+        'comment': '#',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_gamess_uk
     },
     'molpro': {
         'display': 'Molpro',
