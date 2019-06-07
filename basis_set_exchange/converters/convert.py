@@ -6,12 +6,13 @@ from .bsejson import write_json
 from .nwchem import write_nwchem
 from .g94 import write_g94, write_xtron
 from .gamess_us import write_gamess_us
+from .gamess_uk import write_gamess_uk
 from .psi4 import write_psi4
 from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .cfour import write_cfour
 from .dalton import write_dalton
-from .gamess_uk import write_gamess_uk
+from .demon2k import write_demon2k
 from .bsedebug import write_bsedebug
 
 _converter_map = {
@@ -42,6 +43,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_dalton
+    },
+    'demon2k': {
+        'display': 'deMon2K',
+        'extension': '.d2k',
+        'comment': '#',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_demon2k
     },
     'gamess_us': {
         'display': 'GAMESS US',

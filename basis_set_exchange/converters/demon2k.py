@@ -1,17 +1,21 @@
 '''
-Conversion of basis sets to Dalton format
+Conversion of basis sets to deMon2K format
 '''
 
 from .. import lut, manip, sort, misc, printing
 
 
-def write_dalton(basis):
-    '''Converts a basis set to Dalton format
+def write_demon2k(basis):
+    '''Converts a basis set to deMon2K format
     '''
 
-    s = '! Basis = {}\n\n'.format(basis['name'])
+    if 'gto_spherical' in basis['function_types']:
+        s = '# This basis set uses spherical components\n\n'
+    else:
+        s = '# This basis set uses cartesian components\n\n'
 
-    basis = manip.make_general(basis, True)
+    basis = manip.uncontract_spdf(basis, 0, True)
+    basis = manip.uncontract_general(basis, False)
     basis = sort.sort_basis(basis, False)
 
     # Elements for which we have electron basis
@@ -28,23 +32,31 @@ def write_dalton(basis):
             elname = lut.element_name_from_Z(z).upper()
             cont_string = misc.contraction_string(data)
 
-            s += '! {}       {}\n'.format(elname, cont_string)
-            s += '! {}       {}\n'.format(elname, cont_string)
+            # Need the start of electron shells if there are ECPs
+            ecp_electrons = data.get('ecp_electrons', 0)
+            shells_start = lut.electron_shells_start(ecp_electrons)
+            shells_start = list(shells_start)
+
+            s += 'O-{} {} ({})\n'.format(elname, sym.upper(), basis['name'])
+            s += '# {}\n'.format(cont_string)
+
+            nshells = len(data['electron_shells'])
+            s += '    {}\n'.format(nshells)
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
                 coefficients = shell['coefficients']
                 ncol = len(coefficients) + 1
                 nprim = len(exponents)
-                ngen = len(coefficients)
 
-                am = shell['angular_momentum']
-                amchar = lut.amint_to_char(am, hij=True)
-                s += '! {} functions\n'.format(amchar)
+                # We removed spdf already
+                assert len(shell['angular_momentum']) == 1
+                am = shell['angular_momentum'][0]
 
-                # Is this a bug in the original EMSL?
-                #s += '{}   {}   1.00\n'.format(sym, r, nprim)
-                s += '{}    {}    {}\n'.format('H', nprim, ngen)
+                # shells_start has starting principal quantum numbers for all AM
+                pqn = shells_start[am]
+                shells_start[am] += 1
+                s += '    {}    {}    {}\n'.format(pqn, am, nprim)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=False)
@@ -82,4 +94,5 @@ def write_dalton(basis):
                 s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=False)
 
         s += 'END\n'
+
     return s
