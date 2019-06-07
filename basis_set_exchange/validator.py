@@ -4,6 +4,7 @@ Functions related to validating JSON files (including against schema)
 
 import os
 import jsonschema
+import datetime
 
 from . import api
 from . import fileio
@@ -63,6 +64,9 @@ def _validate_extra_table(bs_data):
     '''Extra checks for table basis files'''
 
     assert len(bs_data['elements']) > 0
+
+    # Will throw an exception on invalid dates
+    datetime.datetime.strptime(bs_data['revision_date'], "%Y-%m-%d")
 
 
 _validate_map = {

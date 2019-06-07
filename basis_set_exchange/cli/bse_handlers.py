@@ -122,8 +122,8 @@ def _bse_cli_get_info(args):
     ret.append('')
     ret.append('Versions:')
 
-    # Print 3 columns - version, elements, revision description
-    version_lines = format_columns([(k, compact_elements(v['elements']), v['revdesc']) for k, v in ver.items()],
+    # Print 4 columns - version, date, elements, revision description
+    version_lines = format_columns([(k, v['revdate'], compact_elements(v['elements']), v['revdesc']) for k, v in ver.items()],
                                     '    ')
     ret.extend(version_lines)
 

@@ -39,7 +39,7 @@ def sort_basis_dict(bs):
         'reference_description', 'reference_keys',
 
         # Version metadata
-        'version', 'revision_description',
+        'version', 'revision_description', 'revision_date',
 
         # Sources of components
         'data_source',

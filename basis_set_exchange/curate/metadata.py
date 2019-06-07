@@ -71,6 +71,7 @@ def create_metadata_file(output_path, data_dir):
             # yapf: disable
             version_info[ver] = { 'file_relpath': table_file,
                                   'revdesc': bs['revision_description'],
+                                  'revdate': bs['revision_date'],
                                   'elements': defined_elements
                                 }
             # yapf: enable

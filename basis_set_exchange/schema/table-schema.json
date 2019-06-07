@@ -9,6 +9,7 @@
     "required": [
         "molssi_bse_schema",
         "revision_description",
+        "revision_date",
         "elements"
     ],
     "properties":
@@ -36,6 +37,11 @@
         "revision_description": {
             "description": "Brief description of the difference between this revision and the last",
             "type": "string"
+        },
+        "revision_date": {
+            "description": "The date when this revision was finalized/uploaded",
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
         },
         "elements": {
             "description": "Data for the elements of the basis set",
