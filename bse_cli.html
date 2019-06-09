@@ -325,10 +325,13 @@ nwchem      NWChem
 gaussian94  Gaussian94
 psi4        Psi4
 dalton      Dalton
+demon2k     deMon2K
 gamess_us   GAMESS US
 turbomole   Turbomole
+gamess_uk   GAMESS UK
 molpro      Molpro
 cfour       CFOUR
+xtron       xTron
 bsedebug    BSE Debug
 json        JSON
 </pre></div>
@@ -338,10 +341,13 @@ nwchem
 gaussian94
 psi4
 dalton
+demon2k
 gamess_us
 turbomole
+gamess_uk
 molpro
 cfour
+xtron
 bsedebug
 json
 </pre></div>
@@ -407,9 +413,9 @@ x2c-jfit             x2c coulomb fitting
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -f pople -s &#39;31g&#39;
-4-31g         4-31G valence double-zeta basis set
-6-31g         6-31G valence double-zeta
-6-31g(2df,p)  6-31G(2df,p)
+4-31g           4-31G valence double-zeta basis set
+6-31g           6-31G valence double-zeta
+6-31g(2df,p)    6-31G(2df,p)
 ...
 </pre></div>
 </div>
@@ -452,7 +458,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.1
+# Version v0.8.3+3.g3ecc1473
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -610,8 +616,8 @@ Auxiliary Basis Sets:
     rifit  cc-pvdz-rifit
 
 Versions:
-    0  H-Ar,Ca-Kr  Data from the Original Basis Set Exchange
-    1  H-Ar,Ca-Kr  Data from ccRepo/Grant Hill
+    0  2011-02-14  H-Ar,Ca-Kr  Data from the Original Basis Set Exchange
+    1  2018-10-03  H-Ar,Ca-Kr  Data from ccRepo/Grant Hill
 </pre></div>
 </div>
 </div>
@@ -620,6 +626,12 @@ Versions:
 <p>Obtain the notes about a basis set.
 This takes only one required argument (the name of the basis set).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-notes sto-3g
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:47:11 GMT
+--------------------------------------------------------------------------------
+
 Notes from the original BSE
 ===========================
 

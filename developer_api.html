@@ -756,6 +756,43 @@ ordering will be spdfghikl (skipping j)</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.lut.electron_shells_start">
+<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">electron_shells_start</code><span class="sig-paren">(</span><em>nelectrons</em>, <em>maxam=20</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.electron_shells_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the starting principle quantum numbers of electron shells</p>
+<p>For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
+electrons shells will then start at 3s, 3p, 3d, and 4f (returned as [3, 3, 3, 4])</p>
+<p>If an ECP covers 30 electrons, then the shells will start at [5, 4, 4, 4]</p>
+<p>Only fully-covered shells are counted. If a shell is partly covered, an exception
+is raised.</p>
+<p>The returned list is extended up to maxam.</p>
+<p>Note: Since the main use of this is for ECPs, we only cover what can really be found
+on the periodic table. No excited states!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>nelectrons</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of electrons covered by an ECP</p>
+</dd>
+<dt><strong>maxam</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Fill out the starting principal quantum numbers up to this am</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>list</strong></dt>
+<dd><p class="first last">The starting principal quantum numbers of s, p, d, and f shells.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.lut.element_Z_from_sym">
 <code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_Z_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s Z-number given its symbol</p>
