@@ -29,6 +29,7 @@ _skeletons = {
             "schema_version": "0.1"
         },
         "revision_description": "",
+        "revision_date": "",
         "elements": {}
     },
     "metadata": {

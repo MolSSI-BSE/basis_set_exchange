@@ -284,7 +284,7 @@ Notes about a basis set or a basis set family can be obtained, also.
 
    >>> # Notes from a basis (name is case insensitive)
    >>> basis_set_exchange.get_basis_notes('6-31g')
-   'Notes from the original BSE\n===========================\n\nThe 6-31G basis set uses 6...
+   '--------------------------------------------------------------------------------\n   Original BSE Contributor: Dr. David Feller...
 
    >>> # Get the family of a basis set from the metadata
    >>> fam = basis_set_exchange.get_basis_family('6-31G**')

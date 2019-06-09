@@ -3,6 +3,7 @@ Add a basis set to the library
 '''
 
 import os
+import datetime
 from ..fileio import write_json_basis
 from ..misc import expand_elements
 from ..validator import validate_data
@@ -129,6 +130,7 @@ def add_basis(bs_file,
 
     table_file_data = create_skel('table')
     table_file_data['revision_description'] = revision_description
+    table_file_data['revision_date'] = datetime.date.today().isoformat()
     table_file_name = '{}.{}.table.json'.format(file_base, version)
 
     # and the metadata file
