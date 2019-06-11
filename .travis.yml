@@ -16,6 +16,8 @@ before_install:
 
 install:
   - pip install .[docs,tests,curate] codecov
+  - git clone https://github.com/molssi/QCSchema.git
+  - pip install -e ./QCSchema
 
 before_script:
   - python -V
