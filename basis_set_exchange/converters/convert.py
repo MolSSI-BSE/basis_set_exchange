@@ -46,8 +46,8 @@ _converter_map = {
         'function': write_dalton
     },
     'qcschema': {
-        'display': 'Dalton',
-        'extension': '.dalton',
+        'display': 'QCSchema',
+        'extension': '.json',
         'comment': None,
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_qcschema
