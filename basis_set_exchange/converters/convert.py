@@ -12,6 +12,7 @@ from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .cfour import write_cfour
 from .dalton import write_dalton
+from .qcschema import write_qcschema
 from .demon2k import write_demon2k
 from .bsedebug import write_bsedebug
 
@@ -43,6 +44,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_dalton
+    },
+    'qcschema': {
+        'display': 'Dalton',
+        'extension': '.dalton',
+        'comment': None,
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_qcschema
     },
     'demon2k': {
         'display': 'deMon2K',
@@ -132,7 +140,8 @@ def convert_basis(basis_dict, fmt, header=None):
     # Actually do the conversion
     ret_str = converter['function'](basis_dict)
 
-    if header is not None and fmt != 'json':
+    # Don't add a header for QCSchema, JSON, etc
+    if header is not None and _converter_map[fmt]['comment'] is not None:
         comment_str = _converter_map[fmt]['comment']
         header_str = comment_str + comment_str.join(header.splitlines(True))
         ret_str = header_str + '\n\n' + ret_str
