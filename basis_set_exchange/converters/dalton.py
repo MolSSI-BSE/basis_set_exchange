@@ -24,7 +24,7 @@ def write_dalton(basis):
     if len(electron_elements) > 0:
         for z in electron_elements:
             data = basis['elements'][z]
-            sym = lut.element_sym_from_Z(z, True)
+            #sym = lut.element_sym_from_Z(z, True)
             elname = lut.element_name_from_Z(z).upper()
             cont_string = misc.contraction_string(data)
 
@@ -56,7 +56,6 @@ def write_dalton(basis):
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z, normalize=True)
             max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
-            max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
 
             # Sort lowest->highest, then put the highest at the beginning
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
@@ -68,7 +67,6 @@ def write_dalton(basis):
                 rexponents = pot['r_exponents']
                 gexponents = pot['gaussian_exponents']
                 coefficients = pot['coefficients']
-                nprim = len(rexponents)
 
                 am = pot['angular_momentum']
                 amchar = lut.amint_to_char(am).upper()

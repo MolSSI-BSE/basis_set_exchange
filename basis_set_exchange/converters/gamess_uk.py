@@ -38,7 +38,6 @@ def write_gamess_uk(basis):
                 exponents = shell['exponents']
                 coefficients = shell['coefficients']
                 ncol = len(coefficients) + 2  #include index column
-                nprim = len(exponents)
 
                 am = shell['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True, use_L=True).upper()
@@ -59,7 +58,6 @@ def write_gamess_uk(basis):
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z).upper()
             max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
-            max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
 
             # Sort lowest->highest, then put the highest at the beginning
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
@@ -75,7 +73,6 @@ def write_gamess_uk(basis):
                 nprim = len(rexponents)
 
                 am = pot['angular_momentum']
-                amchar = lut.amint_to_char(am, hij=False)
 
                 s += ' {}\n'.format(nprim)
 
