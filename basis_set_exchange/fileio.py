@@ -188,8 +188,6 @@ def write_metadata(file_path, metadata):
     _write_plain_json(file_path, sort_basis_dict(bs))
 
 
-
-
 def get_all_filelist(data_dir):
     """
     Returns a tuple containing the following (as lists)

@@ -98,4 +98,3 @@ def write_xtron(basis):
     line as the angular momentum if the shell is cartesian.
     '''
     return _write_g94_common(basis, True)
-

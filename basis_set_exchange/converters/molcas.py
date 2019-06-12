@@ -44,12 +44,12 @@ def write_molcas(basis):
                 amchar = lut.amint_to_char(shell['angular_momentum']).upper()
                 s += '* {}-type functions\n'.format(amchar)
                 s += '{:>6}    {}\n'.format(nprim, ngen)
-                
+
                 s += printing.write_matrix([exponents], [17])
 
                 am = shell['angular_momentum']
 
-                point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen+1)]
+                point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen + 1)]
                 s += printing.write_matrix(coefficients, point_places)
 
     # Write out ECP
