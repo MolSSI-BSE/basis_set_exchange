@@ -11,7 +11,7 @@ def write_nwchem(basis):
 
     # Uncontract all but SP
     basis = manip.uncontract_spdf(basis, 1, True)
-    basis = sort.sort_basis(basis, True)
+    basis = sort.sort_basis(basis, False)
 
     s = ''
 
