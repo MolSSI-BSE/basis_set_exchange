@@ -10,6 +10,7 @@ from .gamess_uk import write_gamess_uk
 from .psi4 import write_psi4
 from .turbomole import write_turbomole
 from .molpro import write_molpro
+from .molcas import write_molcas
 from .cfour import write_cfour
 from .dalton import write_dalton
 from .qcschema import write_qcschema
@@ -37,6 +38,20 @@ _converter_map = {
         'comment': '!',
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_psi4
+    },
+    'dalton': {
+        'display': 'Dalton',
+        'extension': '.dalton',
+        'comment': '!',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_dalton
+    },
+    'molcas': {
+        'display': 'Molcas',
+        'extension': '.molcas',
+        'comment': '*',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_molcas
     },
     'dalton': {
         'display': 'Dalton',
