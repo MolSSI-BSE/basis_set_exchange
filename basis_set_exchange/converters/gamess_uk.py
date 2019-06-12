@@ -46,7 +46,9 @@ def write_gamess_uk(basis):
 
                 # 1-based indexing
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol)]
-                s += printing.write_matrix([*coefficients, exponents], point_places)
+
+                # Note: order for sp shells is (coeff of s) (exponents) (coeff of p)
+                s += printing.write_matrix([coefficients[0], exponents, *coefficients[1:]], point_places)
 
     # Write out ECP
     if len(ecp_elements) > 0:
