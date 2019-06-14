@@ -12,11 +12,11 @@ def _ref_bib(key, ref):
     '''
     s = ''
 
-    s += '@{}{{{},\n'.format(ref['type'], key)
+    s += '@{}{{{},\n'.format(ref['_entry_type'], key)
 
     entry_lines = []
     for k, v in ref.items():
-        if k == 'type':
+        if k == '_entry_type':
             continue
 
         # Handle authors/editors

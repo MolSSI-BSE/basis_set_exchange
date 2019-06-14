@@ -29,7 +29,7 @@ def sort_basis_dict(bs):
         'molssi_bse_schema', 'schema_type', 'schema_version',
 
         # Auxiliary block
-         'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftjfit',
+        'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftjfit',
 
         # Basis set metadata
         'name', 'names', 'aliases', 'flags', 'family', 'description', 'role', 'auxiliaries',
@@ -198,11 +198,11 @@ def sort_single_reference(ref_entry):
         'schema_type', 'schema_version',
 
         # Type of the entry
-        'type',
+        '_entry_type', 'type',
 
         # Actual publication info
         'authors', 'title', 'booktitle', 'series', 'editors', 'journal',
-        'institution', 'volume', 'number', 'page', 'year', 'note', 'publisher',
+        'institution', 'school', 'volume', 'number', 'page', 'year', 'note', 'publisher',
         'address', 'isbn', 'doi'
     ]
     # yapf: enable

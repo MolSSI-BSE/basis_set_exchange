@@ -64,40 +64,51 @@ def reference_text(ref):
     ref_wrap = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 8)
 
     s = ''
-    if ref['type'] == 'unpublished':
+    if ref['_entry_type'] == 'unpublished':
         s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
-        s += ref_wrap.fill(ref['title']) + '\n'
-        s += ref_wrap.fill(ref['note']) + '\n'
-    elif ref['type'] == 'article':
+        if 'title' in ref:
+            s += ref_wrap.fill(ref['title']) + '\n'
+        if 'year' in ref:
+            s += ref['year'] + ', '
+        s += 'unpublished'
+    elif ref['_entry_type'] == 'article':
         s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
         s += ref_wrap.fill(ref['title']) + '\n'
         s += '{}, {}, {} ({})'.format(ref['journal'], ref['volume'], ref['page'], ref['year'])
         s += '\n' + ref['doi']
-    elif ref['type'] == 'incollection':
+    elif ref['_entry_type'] == 'incollection':
         s += ref_wrap.fill(', '.join(ref['authors']))
-        s += ref_wrap.fill('\n{}'.format(ref['title']))
-        s += ref_wrap.fill('\nin \'{}\''.format(ref['booktitle']))
+        s += '\n' + ref_wrap.fill('{}'.format(ref['title']))
+        s += '\n' + ref_wrap.fill('in \'{}\''.format(ref['booktitle']))
         if 'editors' in ref:
-            s += ref_wrap.fill('\ned. ' + ', '.join(ref['editors']))
+            s += '\n' + ref_wrap.fill('ed. ' + ', '.join(ref['editors']))
         if 'series' in ref:
             s += '\n{}, {}, {} ({})'.format(ref['series'], ref['volume'], ref['page'], ref['year'])
         if 'doi' in ref:
             s += '\n' + ref['doi']
-    elif ref['type'] == 'techreport':
-        s += ref_wrap.fill(', '.join(ref['authors']))
-        s += ref_wrap.fill('\n{}'.format(ref['title']))
+    elif ref['_entry_type'] == 'phdthesis':
+        s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
+        s += ref_wrap.fill(ref['title']) + '\n'
+        s += '{}, {}'.format(ref.get('type', 'Ph.D. Thesis'), ref['school'])
+    elif ref['_entry_type'] == 'techreport':
+        s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
+        s += '\n' + ref_wrap.fill('{}'.format(ref['title']))
         s += '\n\'{}\''.format(ref['institution'])
-        s += '\nTechnical Report {}'.format(ref['number'])
-        s += '\n{}'.format(ref['year'])
+        s += '\n' + ref.get('type', 'Technical Report')
+        if 'number' in ref:
+            s += ' ' + ref['number']
+        s += ', {}'.format(ref['year'])
         if 'doi' in ref:
             s += '\n' + ref['doi']
-    elif ref['type'] == 'misc':
+    elif ref['_entry_type'] == 'misc':
         s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
         s += ref_wrap.fill(ref['title'])
-        if 'note' in ref:
-            s += '\n' + ref['note']
+        if 'year' in ref:
+            s += '\n' + ref['year']
         if 'doi' in ref:
             s += '\n' + ref['doi']
     else:
-        raise RuntimeError('Cannot handle reference type {}'.format(ref['type']))
+        raise RuntimeError('Cannot handle reference type {}'.format(ref['_entry_type']))
+    if 'note' in ref:
+        s += '\n' + ref_wrap.fill(ref['note'])
     return s
