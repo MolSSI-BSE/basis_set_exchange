@@ -81,8 +81,12 @@ def electron_shell_str(shell, shellidx=None):
     coefficients = shell['coefficients']
     ncol = len(coefficients) + 1
 
+    region = shell['region']
+    if region == '':
+        region = '(none)'
+
     point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
-    s = "Shell: {}Region: {}: AM: {}\n".format(shellidx_str, shell['region'], amchar)
+    s = "Shell: {} Region: {} AM: {}\n".format(shellidx_str, region, amchar)
     s += "Function: {}\n".format(shell['function_type'])
     s += write_matrix([exponents, *coefficients], point_places)
     return s
