@@ -282,7 +282,7 @@ def uncontract_segmented(basis, use_copy=True):
             for i in range(len(exponents)):
                 newsh = sh.copy()
                 newsh['exponents'] = [exponents[i]]
-                newsh['coefficients'] = [["1.00000000"] * nam]
+                newsh['coefficients'] = [["1.00000000E+00"] * nam]
 
                 # Remember to transpose the coefficients
                 newsh['coefficients'] = list(map(list, zip(*newsh['coefficients'])))
@@ -389,64 +389,6 @@ def _is_single_column(col):
     return sum(float(x) != 0.0 for x in col) == 1
 
 
-def _is_zero_column(col):
-    return sum(float(x) != 0.0 for x in col) == 0
-
-
-def _nonzero_range(vec):
-    for idx, x in enumerate(vec):
-        if float(x) != 0.0:
-            first = idx
-            break
-
-    for idx, x in enumerate(reversed(vec)):
-        if float(x) != 0.0:
-            last = (len(vec) - idx)
-            break
-
-    if first is None:
-        return (None, None)
-    else:
-        return (first, last)
-
-
-def _find_block(mat):
-
-    # Initial range of rows
-    row_range = _nonzero_range(mat[0])
-    rows = range(row_range[0], row_range[1])
-
-    # Find the right-most column with a nonzero in it
-    col_range = (0, 0)
-    for r in rows:
-        x, y = _nonzero_range([col[r] for col in mat])
-        col_range = (min(col_range[0], x), max(col_range[1], y))
-
-    cols = range(col_range[0], col_range[1])
-
-    # Columns may be jagged also
-    # Iterate until we don't see any change
-    while True:
-        row_range_old = row_range
-        col_range_old = col_range
-        for c in cols:
-            x, y = _nonzero_range(mat[c])
-            row_range = (min(row_range[0], x), max(row_range[1], y))
-
-        rows = range(row_range[0], row_range[1])
-
-        for r in rows:
-            x, y = _nonzero_range([col[r] for col in mat])
-            col_range = (min(col_range[0], x), max(col_range[1], y))
-
-        cols = range(col_range[0], col_range[1])
-
-        if col_range == col_range_old and row_range == row_range_old:
-            break
-
-    return (rows, cols)
-
-
 def optimize_general(basis, use_copy=True):
     """
     Optimizes the general contraction using the method of Hashimoto et al
@@ -469,8 +411,7 @@ def optimize_general(basis, use_copy=True):
         if not 'electron_shells' in el:
             continue
 
-        elshells = el.pop('electron_shells')
-        el['electron_shells'] = []
+        elshells = el['electron_shells']
         for sh in elshells:
             exponents = sh['exponents']
             coefficients = sh['coefficients']
@@ -479,7 +420,6 @@ def optimize_general(basis, use_copy=True):
 
             # Skip sp shells and shells with only one general contraction
             if nam > 1 or len(coefficients) < 2:
-                el['electron_shells'].append(sh)
                 continue
 
             # First, find columns (general contractions) with a single non-zero value
@@ -487,53 +427,19 @@ def optimize_general(basis, use_copy=True):
 
             # Find the corresponding rows that have a value in one of these columns
             # Note that at this stage, the row may have coefficients in more than one
-            # column. That is ok, we are going to split it off anyway
-            single_rows = []
+            # column. That is what we are looking for
+            row_col_pairs = []
             for col_idx in single_columns:
                 col = coefficients[col_idx]
                 for row_idx in range(nprim):
                     if float(col[row_idx]) != 0.0:
-                        single_rows.append(row_idx)
+                        # Store the index of the nonzero value in single_columns
+                        row_col_pairs.append((row_idx, col_idx))
 
-            # Split those out into new shells, and remove them from the
-            # original shell
-            new_shells_single = []
-            for row_idx in single_rows:
-                newsh = copy.deepcopy(sh)
-                newsh['exponents'] = [exponents[row_idx]]
-                newsh['coefficients'] = [['1.00000000000']]
-                new_shells_single.append(newsh)
-
-            exponents = [x for idx, x in enumerate(exponents) if idx not in single_rows]
-            coefficients = [x for idx, x in enumerate(coefficients) if idx not in single_columns]
-            coefficients = [[x for idx, x in enumerate(col) if not idx in single_rows] for col in coefficients]
-
-            # Remove Zero columns
-            #coefficients = [ x for x in coefficients if not _is_zero_column(x) ]
-
-            # Find contiguous rectanglar blocks
-            new_shells = []
-            while len(exponents) > 0:
-                block_rows, block_cols = _find_block(coefficients)
-
-                # add as a new shell
-                newsh = copy.deepcopy(sh)
-                newsh['exponents'] = [exponents[i] for i in block_rows]
-                newsh['coefficients'] = [[coefficients[colidx][i] for i in block_rows] for colidx in block_cols]
-                new_shells.append(newsh)
-
-                # Remove from the original exponent/coefficient set
-                exponents = [x for idx, x in enumerate(exponents) if idx not in block_rows]
-                coefficients = [x for idx, x in enumerate(coefficients) if idx not in block_cols]
-                coefficients = [[x for idx, x in enumerate(col) if not idx in block_rows] for col in coefficients]
-
-            # I do this order to mimic the output of the original BSE
-            el['electron_shells'].extend(new_shells)
-            el['electron_shells'].extend(new_shells_single)
-
-        # Fix coefficients for completely uncontracted shells to 1.0
-        for sh in el['electron_shells']:
-            if len(sh['coefficients']) == 1 and len(sh['coefficients'][0]) == 1:
-                sh['coefficients'][0][0] = '1.0000000'
-
+            # Now for each row/col pair, zero out the entire row
+            # EXCEPT for the column that has the single value 
+            for row_idx,col_idx in row_col_pairs:
+                for idx,col in enumerate(coefficients):
+                    if float(col[row_idx]) != 0.0 and col_idx != idx:
+                        col[row_idx] = '0.0000000E+00'
     return basis
