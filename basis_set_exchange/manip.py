@@ -462,7 +462,7 @@ def optimize_general(basis, use_copy=True):
         basis = copy.deepcopy(basis)
 
     # Make as generally-contracted as possible first
-    #basis = make_general(basis, skip_spdf=True, use_copy=False)
+    basis = make_general(basis, skip_spdf=True, use_copy=False)
 
     for k, el in basis['elements'].items():
 
