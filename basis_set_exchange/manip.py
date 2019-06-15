@@ -344,9 +344,8 @@ def make_general(basis, skip_spdf=False, use_copy=True):
 
             # Do exponents first
             for sh in el['electron_shells']:
-                if sh['angular_momentum'] != am:
-                    continue
-                newsh['exponents'].extend(sh['exponents'])
+                if sh['angular_momentum'] == am:
+                    newsh['exponents'].extend(sh['exponents'])
 
             # Number of primitives in the new shell
             nprim = len(newsh['exponents'])

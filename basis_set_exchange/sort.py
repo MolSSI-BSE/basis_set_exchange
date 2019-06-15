@@ -88,8 +88,17 @@ def sort_shell(shell, use_copy=True):
     if use_copy:
         shell = copy.deepcopy(shell)
 
+    tmp_c = shell['coefficients']
+
+    # Sort columns by number of non-zero entries
+    # But don't sort columns for SP shells
+    if len(shell['angular_momentum']) == 1:
+        col_counts = [sum([1 for x in y if float(x) != 0.0]) for y in tmp_c]
+        tmp_c = sorted(zip(col_counts, tmp_c), key=lambda x: x[0], reverse=True)
+        tmp_c = list(zip(*tmp_c))[1]
+
     # Transpose of coefficients
-    tmp_c = list(map(list, zip(*shell['coefficients'])))
+    tmp_c = list(map(list, zip(*tmp_c)))
 
     # For each primitive, find the index of the first nonzero coefficient
     nonzero_idx = [next((i for i, x in enumerate(c) if float(x) != 0.0), None) for c in tmp_c]
@@ -107,13 +116,7 @@ def sort_shell(shell, use_copy=True):
     tmp_c = [x[1] for x in tmp]
     shell['exponents'] = [x[0] for x in tmp]
 
-    # Now sort the columns of the coefficient by index of first nonzero coefficient
     tmp_c = list(map(list, zip(*tmp_c)))
-    nonzero_idx = [next((i for i, x in enumerate(c) if float(x) != 0.0), None) for c in tmp_c]
-
-    tmp = zip(tmp_c, nonzero_idx)
-    tmp = sorted(tmp, key=lambda x: int(x[1]))
-    tmp_c = [x[0] for x in tmp]
 
     shell['coefficients'] = tmp_c
 
