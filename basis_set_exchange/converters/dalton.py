@@ -11,7 +11,7 @@ def write_dalton(basis):
 
     s = '! Basis = {}\n\n'.format(basis['name'])
 
-    basis = manip.make_general(basis, True)
+    basis = manip.make_general(basis, False, True)
     basis = sort.sort_basis(basis, False)
 
     # Elements for which we have electron basis

@@ -226,7 +226,7 @@ def get_basis(name,
         needs_pruning = True
 
     if make_general:
-        basis_dict = manip.make_general(basis_dict, False)
+        basis_dict = manip.make_general(basis_dict, False, False)
         needs_pruning = True
 
     # Remove dead and duplicate shells

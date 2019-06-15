@@ -9,8 +9,7 @@ def write_molcas(basis):
     '''Converts a basis set to Molcas format
     '''
 
-    # Uncontract all but SP
-    basis = manip.make_general(basis, True)
+    basis = manip.make_general(basis, False, True)
     basis = sort.sort_basis(basis, False)
 
     s = ''

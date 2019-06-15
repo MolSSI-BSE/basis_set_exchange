@@ -294,7 +294,7 @@ def uncontract_segmented(basis, use_copy=True):
     return basis
 
 
-def make_general(basis, use_copy=True):
+def make_general(basis, skip_spdf=False, use_copy=True):
     """
     Makes one large general contraction for each angular momentum
 
@@ -306,21 +306,33 @@ def make_general(basis, use_copy=True):
 
     zero = '0.00000000'
 
-    basis = uncontract_spdf(basis, 0, use_copy)
+    if use_copy:
+        basis = copy.deepcopy(basis)
+
+    if skip_spdf is False:
+        basis = uncontract_spdf(basis, 0, False)
 
     for k, el in basis['elements'].items():
         if not 'electron_shells' in el:
             continue
 
+        newshells = []
+
         # See what we have
         all_am = []
         for sh in el['electron_shells']:
-            if not sh['angular_momentum'] in all_am:
-                all_am.append(sh['angular_momentum'])
+            am = sh['angular_momentum']
+
+            # Skip sp shells
+            if len(am) > 1:
+                newshells.append(sh)
+                continue
+
+            if not am in all_am:
+                all_am.append(am)
 
         all_am = sorted(all_am)
 
-        newshells = []
         for am in all_am:
             newsh = {
                 'angular_momentum': am,
@@ -449,6 +461,9 @@ def optimize_general(basis, use_copy=True):
     if use_copy:
         basis = copy.deepcopy(basis)
 
+    # Make as generally-contracted as possible first
+    #basis = make_general(basis, skip_spdf=True, use_copy=False)
+
     for k, el in basis['elements'].items():
 
         if not 'electron_shells' in el:
@@ -462,6 +477,7 @@ def optimize_general(basis, use_copy=True):
             nprim = len(exponents)
             nam = len(sh['angular_momentum'])
 
+            # Skip sp shells and shells with only one general contraction
             if nam > 1 or len(coefficients) < 2:
                 el['electron_shells'].append(sh)
                 continue

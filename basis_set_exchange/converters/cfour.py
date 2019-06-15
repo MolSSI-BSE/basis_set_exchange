@@ -13,8 +13,7 @@ def write_cfour(basis):
     # Format determined from http://slater.chemie.uni-mainz.de/cfour/index.php?n=Main.NewFormatOfAnEntryInTheGENBASFile
 
     # Uncontract all, then make general
-    basis = manip.uncontract_spdf(basis, 0, True)
-    basis = manip.make_general(basis, False)
+    basis = manip.make_general(basis, False, True)
     basis = sort.sort_basis(basis, False)
 
     # Elements for which we have electron basis
