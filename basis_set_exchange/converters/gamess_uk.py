@@ -74,8 +74,6 @@ def write_gamess_uk(basis):
 
                 am = pot['angular_momentum']
 
-                s += ' {}\n'.format(nprim)
-
                 point_places = [1, 9, 32]
                 s += printing.write_matrix([rexponents, *coefficients, gexponents], point_places)
             s += '\n'

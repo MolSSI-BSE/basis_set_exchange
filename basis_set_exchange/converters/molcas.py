@@ -24,7 +24,6 @@ def write_molcas(basis):
         # Electron Basis
         for z in electron_elements:
             data = basis['elements'][z]
-            sym = lut.element_sym_from_Z(z, True)
             el_name = lut.element_name_from_Z(z).upper()
             s += '* {}  {}\n'.format(el_name, misc.contraction_string(data))
             s += ' Basis set\n'
@@ -45,8 +44,6 @@ def write_molcas(basis):
                 s += '{:>6}    {}\n'.format(nprim, ngen)
 
                 s += printing.write_matrix([exponents], [17])
-
-                am = shell['angular_momentum']
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen + 1)]
                 s += printing.write_matrix(coefficients, point_places)

@@ -39,13 +39,6 @@ _converter_map = {
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_psi4
     },
-    'dalton': {
-        'display': 'Dalton',
-        'extension': '.dalton',
-        'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
-        'function': write_dalton
-    },
     'molcas': {
         'display': 'Molcas',
         'extension': '.molcas',
