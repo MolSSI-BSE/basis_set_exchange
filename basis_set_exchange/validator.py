@@ -30,19 +30,20 @@ def _validate_extra_component(bs_data):
     assert len(bs_data['elements']) > 0
 
     # Make sure size of the coefficient matrix matches the number of exponents
-    for el in bs_data['elements'].values():
+    for z, el in bs_data['elements'].items():
         if not 'electron_shells' in el:
             continue
 
-        for s in el['electron_shells']:
+        for idx, s in enumerate(el['electron_shells']):
             nprim = len(s['exponents'])
             if nprim <= 0:
-                raise RuntimeError("Invalid number of primitives: {}".format(nprim))
+                raise RuntimeError("Element {} Shell {}: Invalid number of primitives: {}".format(z, idx, nprim))
 
             for g in s['coefficients']:
                 if nprim != len(g):
-                    raise RuntimeError("Number of coefficients doesn't match number of primitives ({} vs {}".format(
-                        len(g), nprim))
+                    raise RuntimeError(
+                        "Element {} Shell {}: Number of coefficients doesn't match number of primitives ({} vs {})".
+                        format(z, idx, len(g), nprim))
 
             # If more than one AM is given, that should be the number of
             # general contractions
@@ -50,8 +51,15 @@ def _validate_extra_component(bs_data):
             if nam > 1:
                 ngen = len(s['coefficients'])
                 if ngen != nam:
-                    raise RuntimeError("Number of general contractions doesn't match combined AM ({} vs {}".format(
-                        ngen, nam))
+                    raise RuntimeError(
+                        "Element {} Shell {}: Number of general contractions doesn't match combined AM ({} vs {})".
+                        format(z, idx, ngen, nam))
+
+            # All exponents should be unique
+            exp1 = [float(x) for x in s['exponents']]
+            exp2 = set(exp1)
+            if len(exp1) != len(exp2):
+                raise RuntimeError("Element {} Shell {}: Exponents are not unique".format(z, idx))
 
 
 def _validate_extra_element(bs_data):
