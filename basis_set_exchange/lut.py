@@ -47,15 +47,16 @@ _data_table = [
     ("pu",   94, "plutonium"),    ("am",   95, "americium"),     ("cm",   96, "curium"),
     ("bk",   97, "berkelium"),    ("cf",   98, "californium"),   ("es",   99, "einsteinium"),
     ("fm",  100, "fermium"),      ("md",  101, "mendelevium"),   ("no",  102, "nobelium"),
-    ("lr",  103, "lawrencium"),   ("rf",  104, "rutherfordium"), ("db",  105, "dubnium"),
-    ("sg",  106, "seaborgium"),   ("bh",  107, "bohrium"),       ("hs",  108, "hassium"),
-    ("mt",  109, "meitnerium"),   ("uun", 110, "ununnilium"),    ("ds",  110, "darmstadtium"),
-    ("uuu", 111, "unununium"),    ("rg",  111, "roentgenium"),   ("uub", 112, "ununbium"),
-    ("cn",  112, "copernicium"),  ("uut", 113, "ununtrium"),     ("nh",  113, "nihonium"),
-    ("uuq", 114, "ununquadium"),  ("fl",  114, "flerovium"),     ("uup", 115, "ununpentium"),
-    ("mc",  115, "moscovium"),    ("uuh", 116, "ununhexium"),    ("lv",  116, "livermorium"),
-    ("uus", 117, "ununseptium"),  ("ts",  117, "tennessine"),    ("uuo", 118, "ununoctium"),
-    ("og",  118, "oganesson")
+    ("lr",  103, "lawrencium"),   ("rf",  104, "rutherfordium"), ("ha",  105, "hahnium"),
+    ("db",  105, "dubnium"),      ("sg",  106, "seaborgium"),    ("bh",  107, "bohrium"),
+    ("hs",  108, "hassium"),      ("mt",  109, "meitnerium"),    ("uun", 110, "ununnilium"),
+    ("ds",  110, "darmstadtium"), ("uuu", 111, "unununium"),     ("rg",  111, "roentgenium"),
+    ("uub", 112, "ununbium"),     ("cn",  112, "copernicium"),   ("uut", 113, "ununtrium"),
+    ("nh",  113, "nihonium"),     ("uuq", 114, "ununquadium"),   ("fl",  114, "flerovium"),
+    ("uup", 115, "ununpentium"),  ("mc",  115, "moscovium"),     ("uuh", 116, "ununhexium"),
+    ("lv",  116, "livermorium"),  ("uus", 117, "ununseptium"),   ("ts",  117, "tennessine"),
+    ("uuo", 118, "ununoctium"),   ("og",  118, "oganesson"),     ("uue", 119, "ununennium"),
+    ("ubn", 120, "unbinilium")
 ]
 # yapf: enable
 
