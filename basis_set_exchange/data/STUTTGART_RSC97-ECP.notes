@@ -1,0 +1,47 @@
+
+The following assignments were found via comparison with the Stuttgart data set
+on 2019-06-20.
+
+Comparison was made against the March 5, 2013 revision of the Stuttgart/Cologn
+group data set.
+
+    K,Ca,Cu,Zn  : ECP10MWB
+    Sc-Ni       : ECP10MDF
+    Rb-Cd,La-Lu : ECP28MWB
+    Cs,Ba       : ECP46MWB
+    Hf-Pt,Ac-No : ECP60MWB
+    Au,Hg       : ECP60oldMDF
+    Db          : ECP92MWB
+
+Lr is claimed to come from ECP60MWB, but does not match that in the data set
+nor does it appear in the supplemental information of cao2003a.
+
+
+From old BSE
+----------------
+Stuttgart Relativistic, Small Core ECP Basis Set
+           ------------------------------------------------
+                        Stuttgart
+              Core         Name     Primitives        Contractions
+     K     : 10[Ne]       ECP10MWB (7s,6p)          -> [5s,4p]
+    Ca     : 10           ECP10MWB (6s,6p,5d)       -> [4s,4p,2d]
+    Sc - Zn: 10           ECP10MDF (8s,7p,6d,1f)    -> [6s,5p,3d,1f]
+    Rb     : 28[Ar+3d]    ECP28MWB (7s,6p)          -> [5s,4p]
+    Sr     : 28           ECP28MWB (6s,6p,5d)       -> [4s,4p,2d]
+    Y  - Cd: 28           ECP28MWB (8s,7p,6d)       -> [6s,5p,3d]
+    Cs     : 46[Kr+4d]    ECP46MWB (7s,6p)          -> [5s,4p]
+    Ba     : 46           ECP46MWB (6s,6p,5d,1f)    -> [3s,3p,2d,1f]
+    Ce - Ho: 28[Ar+3d]    ECP28MWB (12s,11p,9d,8f)  -> [5s,5p,4d,3f]
+    Er - Yb: 28           ECP28MWB (12s,10p,8d,8f)  -> [5s,5p,4d,3f]
+    Hf - Pt: 60[Kr+4d+4f] ECP60MWB (8s,7p,6d)       -> [6s,5p,3d]
+    Au     : 60[Kr+4d+4f] ECP60MDF (8s,6p,5d)       -> [7s,3p,4d]
+    Hg     : 60[Kr+4d+4f] ECP60MDF (8s,8p,7d)       -> [6s,6p,4d]
+    Ac - Lr: 60           ECP60MWB (12s,11p,10d,8f) -> [8s,7p,6d,4f]
+    Db     : 92[Xe+4f+5d] ECP92MWB (8s,7p,6d,2f,1g) -> [6s,5p,4d,2f,1g]
+
+Note that the Au and Hg basis sets included with this family correspond to
+ECP60MDF in the Stuttgart nomenclature.  The rest of the third row transition
+metal elements (Hf - Pt) correspond to ECP60MWB.
+
+These basis sets and ECPs correspond to Revision: Fri Jun 27 1997 of the
+Stuttgart/Dresden groups.
