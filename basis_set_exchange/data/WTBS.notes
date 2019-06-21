@@ -1,0 +1,48 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:45:31 GMT
+--------------------------------------------------------------------------------
+
+
+
+
+From old BSE
+----------------
+             Well-Tempered Basis Sets (Huzinaga/Miguel/Klobukowski)
+             ------------------------------------------------------
+Elements          Contraction                        References
+He     : (17s)         -> [1s]       S. Huzinaga and B. Miguel, Chem. Phys.
+Li - Be: (20s)         -> [2s]       Lett. 175, 289 (1990) and
+B  - Ne: (20s,13p)     -> [2s,1p]    S. Huzinaga and M. Klobukowski,
+Na - Mg: (23s,13p)     -> [3s,1p]    Chem. Phys. Lett. 212, 260 (1993)
+Al - Ar: (23s,16p)     -> [3s,2p]
+K  - Ca: (26s,16p)     -> [4s,2p]
+Sc - Zn: (26s,17p,13d) -> [4s,2p,1d]
+Ga - Kr: (26s,20p,14d) -> [4s,3p,1d]
+Rb - Sr: (28s,20p,14d) -> [5s,3p,1d]
+Y  - Cd: (27s,20p,17d) -> [5s,3p,2d]
+In - Xe: (28s,23p,17d) -> [5s,4p,2d]
+Cs - Ba: (30s,23p,17d) -> [6s,4p,2d]
+La - Tb: (30s,23p,17d,14f) -> [6s,4p,2d,1f]
+Dy - Yb: (29s,22p,16d,13f) -> [6s,4p,2d,1f]
+Lu     : (28s,21p,18d,12f) -> [6s,4p,3d,1f]
+Hf - Hg: (28s,21p,18d,12f) -> [6s,4p,3d,1f]
+Tl - Rn: (28s,24p,18d,12f) -> [6s,5p,3d,1f]
+
+The well-tempered formula is a modification of the even-tempered formula,
+originally recommended by Reeves and explored by Ruendenberg and coworkers
+[for complete references, see Chem. Phys. Lett. 212, 260 (1993)].  In the
+well-tempered formula there are only four parameters (which need to be
+optimized) for each atom in the periodic table.  The values of exponential
+parameters are shared between the angular symmetries, thus reducing the
+effort required in the optimization of basis sets.  Usually, the higher
+angular subspaces use only a subset of the complete pool of exponential
+parameters defined by N; in consequence, the well-tempered basis sets
+contain a hidden parameter, the pattern of sharing the exponents between
+the s, p, d, and f symmetries.  Savings in the computing time may be
+achieved especially in the evaluation of energy derivatives with the
+integral codes which utilize the sharing of the exponents between the
+atomic angular symmetries (e.g. GAMESS, HONDO, or Gaussian).
+
+Users can split off individual diffuse primitives for added flexibility.
