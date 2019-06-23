@@ -210,6 +210,7 @@ def basis_name_to_filename(name):
 
     filename = transform_basis_name(name)
     filename = filename.replace('*', '_s')
+    filename = filename.replace('/', '_?')
     return filename
 
 
@@ -224,4 +225,5 @@ def basis_name_from_filename(filename):
 
     name = filename.lower()
     name = name.replace('_s', '*')
+    name = name.replace('_?', '/')
     return name
