@@ -1,0 +1,22 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "element",
+    "schema_version": "0.1"
+  },
+  "name": "6-31G*-Blaudeau",
+  "description": "VDZP    Valence Double Zeta + Polarization on All Atoms",
+  "elements": {
+    "19": {
+      "components": [
+        "blaudeau/6-31G-blaudeau.0.json",
+        "blaudeau/6-31G-blaudeau-polarization.0.json"
+      ]
+    },
+    "20": {
+      "components": [
+        "blaudeau/6-31G-blaudeau.0.json",
+        "blaudeau/6-31G-blaudeau-polarization.0.json"
+      ]
+    }
+  }
+}

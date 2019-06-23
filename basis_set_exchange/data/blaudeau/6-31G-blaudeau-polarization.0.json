@@ -1,0 +1,54 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "1P      Polarization functions",
+  "data_source": "Original Basis Set Exchange",
+  "elements": {
+    "19": {
+      "references": [
+        "blaudeau1997a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.235000"
+          ],
+          "coefficients": [
+            [
+              "1.000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "20": {
+      "references": [
+        "blaudeau1997a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.216000"
+          ],
+          "coefficients": [
+            [
+              "1.000000"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
