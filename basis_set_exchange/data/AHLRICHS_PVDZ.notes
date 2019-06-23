@@ -1,0 +1,70 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:45:26 GMT
+--------------------------------------------------------------------------------
+
+
+Polarization functions are mostly unpublished, but some are given in
+schafer1992a. Therefore, that reference is used for all.
+
+
+From original BSE
+-----------------
+
+              Schafer, Horn and Ahlrichs pVDZ Basis Set
+              -----------------------------------------
+ Elements                            Reference
+H  - He: (4s,1p)      -> [2s,1p]    A. Schafer, H. Horn and R. Ahlrichs,
+Li     : (7s,1p)      -> [3s,1p]    J. Chem. Phys. 97, 2571 (1992).
+Be     : (7s,4p)      -> [3s,2p]
+B  - Ne: (7s,4p,1d)   -> [3s,2p,1d]
+Na - Mg: (10s,6p)     -> [4s,2p]
+Al - Ar: (10s,7p,1d)  -> [4s,3p,1d]
+K  - Ca: (14s,9p)     -> [5s,3p]
+Sc - Zn: (14s,9p,5d)  -> [5s,3p,2d]
+Ga - Kr: (14s,10p,6d) -> [5s,4p,3d]
+
+These basis sets were obtained by optimizing the exponents and contraction
+coefficients in groundstate, ROHF calculations.
+
+                     Ahlrichs VDZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.499278    -0.499278    -0.499278     -0.50000
+He  1-S    -2.855160    -2.855160    -2.855160     -2.86168
+Li  2-S                              -7.425064     -7.43273
+Be  1-S                                           -14.57302
+B   2-P                             -24.497558    -24.52906
+C   3-P                                           -37.68862
+N   4-S                             -52.097007    -54.40094
+O   3-P                             -71.572305    -74.80940
+F   2-P                             -95.015084    -99.40935
+Ne  1-S  -122.746034  -122.746034  -122.746034   -128.54710
+Na  2-S                            -155.159951   -161.85891
+Mg  1-S  -191.441546  -191.441546  -191.441546   -199.61463
+Al  2-P                            -232.097666   -241.87671
+Si  3-P                            -277.434874   -288.85436
+P   4-S                            -327.494645   -340.71878
+S   3-P                            -382.320055   -397.50490
+Cl  2-P                            -442.209256   -459.48207
+Ar  1-S                            -507.249273   -526.81751
+K   2-S                            -577.501649   -599.16479
+Ca  1-S                            -652.553616   -676.75817
+Sc  2-D                                          -759.73572
+Ti  3-F                                          -848.40600
+V   4-F                                          -942.88433
+Cr  7-S                                         -1043.35636
+Mn  6-S                                         -1149.86624
+Fe  5-D                                         -1262.44366
+Co  4-F                                         -1381.41454
+Ni  3-F                                         -1506.87089
+Cu  2-S                                         -1638.96371
+Zn  1-S                                         -1777.84810
+Ga  2-P                                         -1923.26098
+Ge  3-P                                         -2075.35971
+As  4-S                                         -2234.23864
+Se  3-P                                         -2399.86759
+Br  2-P                                         -2572.44130
+Kr  1-S                                         -2752.05496

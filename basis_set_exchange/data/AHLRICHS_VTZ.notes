@@ -1,0 +1,29 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:45:25 GMT
+--------------------------------------------------------------------------------
+
+From Original BSE
+------------------
+
+              Schafer, Horn and Ahlrichs VTZ Basis Set
+              ----------------------------------------
+ Elements                            Reference
+H  - He: (5s)         -> [3s]       A. Schafer, H. Horn and R. Ahlrichs,
+Li - Be: (10s)        -> [6s]       J. Chem. Phys. 97, 2571 (1992).
+B  - Ne: (10s,6p)     -> [6s,3p]
+Na - Mg: (12s,6p)     -> [7s,2p]
+Al - Ar: (12s,9p)     -> [7s,5p]
+K  - Ca: (14s,9p)     -> [8s,5p]
+Sc - Zn: (14s,9p,5d)  -> [8s,5p,3d]
+Ga - Kr: (14s,11p,5d) -> [8s,6p,2d]
+
+These basis sets were obtained by optimizing the exponents and contraction
+coefficients in groundstate, ROHF calculations.
+
+                     Ahlrichs VTZ Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit (equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.499278    -0.499278    -0.499278     -0.50000
