@@ -1,0 +1,30 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:46:33 GMT
+--------------------------------------------------------------------------------
+
+FROM DESCRIPTION:
+----------------
+ Polarized Valence Octuple Zeta Basis
+ -------------------------------------------------
+C - Ne: (22s,16p,8d,7f,6g,5h,4i,3k,2l,1m) -> [10s,9p,8d,7f,6g,5h,4i,3k,2l,1m]
+        D. Feller, K.A. Peterson and T.D. Crawford (to be published)
+
+                           pV9Z Atomic Energies
+
+   State  UHF (noneq)   ROHF (noneq)    ROHF(equiv)   HF Limit (equiv)
+   -----  ----------    -------------  -------------   ---------
+Ne  1-S                                                -128.547098
+
+          MP2(noneq)   MP2(noneq)   MP2(noneq)   MP2(noneq)
+            UHF          UHF          RHF          RHF
+   State  No core      Froz. core   No core      Froz. core
+   -----  ----------   ----------   -----------  -----------
+Ne  1-S
+
+          CCSD(noneq) CCSD(T)(noneq  CCSD(noneq)  CCSD(T)(noneq)
+            UHF          UHF            ROHF          ROHF
+   State  Froz. core   Froz. core    Froz. core    Froz. core
+   -----  ----------   -----------   -----------   -----------
+Ne  1-S                              -128.861078   -128.867524

@@ -4381,6 +4381,36 @@
       }
     }
   },
+  "aug-cc-pv7z": {
+    "display_name": "aug-cc-pV7Z",
+    "other_names": [],
+    "description": "aug-cc-pV7Z",
+    "latest_version": "0",
+    "basename": "aug-cc-pV7Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pV7Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2017-10-11",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
   "aug-cc-pvdz": {
     "display_name": "aug-cc-pVDZ",
     "other_names": [],
@@ -8746,6 +8776,57 @@
           "16",
           "17",
           "18"
+        ]
+      }
+    }
+  },
+  "cc-pv8z": {
+    "display_name": "cc-pV8Z",
+    "other_names": [],
+    "description": "cc-pV8Z",
+    "latest_version": "0",
+    "basename": "cc-pV8Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pV8Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2010-07-15",
+        "elements": [
+          "1",
+          "10"
+        ]
+      }
+    }
+  },
+  "cc-pv9z": {
+    "display_name": "cc-pV9Z",
+    "other_names": [],
+    "description": "V7Z6P   Valence Octuple Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "cc-pV9Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pV9Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "10"
         ]
       }
     }

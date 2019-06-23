@@ -1,0 +1,51 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Thu, 15 Jul 2010 19:30:23 GMT
+--------------------------------------------------------------------------------
+
+From Original BSE
+------------------
+Polarized Valence Octuple Zeta (pV8Z-like) Basis
+ -------------------------------------------------
+H:      (15s,7p,6d,5f,4g,3h,2i,1k)     -> [8s,7p,6d,5f,4g,3h,2i,1k]
+C - Ne: (20s,14p,7d,6f,5g,4h,3i,2k,1l) -> [9s,8p,7d,6f,5g,4h,3i,2k,1l]
+The H, C - F basis sets are D. Feller (unpublished)
+The Ne basis set is taken from D. Feller, K. A. Peterson, W. A. de Jong
+and D. A. Dixon, J. Chem. Phys. 118, 3510 (2003).
+                        cc-pV8Z Atomic Energies
+   State  UHF (noneq)   ROHF (noneq)    ROHF(equiv)   HF Limit (equiv)
+   -----  ----------    -------------  -------------   ---------
+H   2-S    -0.49999997    -0.49999997    -0.49999997     -0.50000
+Ne  1-S   -128.5470969  -128.5470969   -128.5470969    -128.54710
+          MP2(noneq)   MP2(noneq)   MP2(noneq)   MP2(noneq)
+            UHF          UHF          RHF          RHF
+   State  No core      Froz. core   No core      Froz. core
+   -----  ----------   ----------   -----------  -----------
+H   2-S    -0.49999997  -0.49999997
+Ne  1-S                -128.8636052
+          CCSD(noneq) CCSD(T)(noneq  CCSD(noneq)  CCSD(T)(noneq)
+            UHF          UHF          ROHF         ROHF
+   State  Froz. core   Froz. core    Froz. core   Froz. core
+   -----  ----------   -----------   -----------   -----------
+H   2-S    -0.4999992   -0.4999992    -0.4999992   -0.4999992
+He  1-S
+Li  2-S
+Be  1-S
+B   2-P
+C   3-P
+N   4-S
+O   3-P
+F   2-P
+Ne  1-S                              -128.8604237  -128.8668451
+
+
+REFERENCES
+----------------
+Elements                             References
+--------                             ----------
+H    : S. L. Mielke and K. A. Peterson, to be published.
+Ne   : D. Feller, K. A. Peterson, W. A. de Jong and D. A. Dixon,
+J. Chem. Phys. 118, 3510 (2003)
+
+
