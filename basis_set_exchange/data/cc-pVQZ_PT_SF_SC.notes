@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:44:47 GMT
+--------------------------------------------------------------------------------
+
+FROM DESCRIPTION:
+----------------
+ Point Nucleus, Spin-Free, Small Component Recontraction of the
+ Correlation Consistent Polarized Valence Quadruple Zeta (cc-pVQZ) Basis
+ ----------------------------------------------------------------------
+Elements        Contraction                        References
+ H     : (6s,3p,2d,1f)      -> [4s,3p,2d,1f]    T.H. Dunning, Jr. J. Chem.
+                                                Phys. 90, 1007 (1989).
+ He    : (7s,3p,2d,1f)      -> [4s,3p,2d,1f]    D.E. Woon and T.H. Dunning, Jr.
+                                                J. Chem. Phys. 100, 2975 (1994)
+ B - Ne: (12s,6p,3d,2f,1g)  -> [5s,4p,3d,2f,1g] T.H. Dunning, Jr. J. Chem.
+                                                Phys. 90, 1007 (1989).
+Al - Ar: (16s,11p,3d,2f,1g) -> [6s,5p,3d,2f,1g] D.E. Woon and T.H. Dunning, Jr.
+                                                J. Chem. Phys. 98, 1358 (1993).
+Ga - Kr: (21s,16p,12d,2f,1g)-> [7s,6p,4d,2f,1g] A.K. Wilson, D.E. Woon, K.A.
+                                                Peterson, T.H. Dunning, Jr.,
+                                                J. Chem. Phys. 110, 7667 (1999)
+
+BPP: I don't know what the following paragraph means...
+Note: Only the NWChem and GAMESS(US) formats have been changed to reflect
+the difference in normalization between these basis set and normal (i.e
+nonrelativistic) basis sets, which are normalized to unity.
+
+FROM REFERENCE:
+----------------
+
+Original cc- basis sets:
+T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+D.E. Woon and T.H. Dunning, Jr. J. Chem. Phys. 100, 2975 (1994).
+T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+D.E. Woon and T.H. Dunning, Jr.  (to be published)
+D.E. Woon and T.H. Dunning, Jr.  J. Chem. Phys. 98, 1358 (1993).
+
+Recontraction:
+K. G. Dyall, in preparation.
+
+  

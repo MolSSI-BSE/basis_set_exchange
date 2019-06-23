@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:44:48 GMT
+--------------------------------------------------------------------------------
+
+FROM DESCRIPTION:
+----------------
+   Point Nucleus, Spin-Free, Large Component Recontraction of the
+   Correlation Consistent Polarized Valence Triple Zeta (cc-pVTZ) Basis
+   --------------------------------------------------------------------
+Elements      Contraction                       References
+H      : (5s,2p,1d)     -> [3s,2p,1d]      T.H. Dunning, Jr. J. Chem. Phys.
+                                           90, 1007 (1989).
+He     : (6s,2p,1d)     -> [3s,2p,1d]      D.E. Woon and T.H. Dunning, Jr.,
+                                           J. Chem. Phys. 100, 2975 (1994).
+ B - Ne: (10s,5p,2d,1f) -> [4s,3p,2d,1f]   T.H. Dunning, Jr. J. Chem. Phys.
+                                           90, 1007 (1989).
+Al - Ar: (15s,9p,2d,1f) -> [5s,4p,2d,1f]   D.E. Woon and T.H. Dunning, Jr.,
+                                           J. Chem. Phys. 98, 1358 (1993).
+Ga - Kr: (20s,13p,9d,1f)-> [6s,5p,3d,1f]   A.K. Wilson, D.E. Woon, K.A.
+                                           Peterson, T.H. Dunning, Jr.,
+                                           J. Chem. Phys., 110, 7667 (1999)
+
+BPP: I don't know what the following paragraph means...
+Note: Only the NWChem and GAMESS(US) formats have been changed to reflect
+the difference in normalization between these basis set and normal (i.e
+nonrelativistic) basis sets, which are normalized to unity.
+
+FROM REFERENCE:
+----------------
+
+Original cc- basis sets:
+T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+D.E. Woon and T.H. Dunning, Jr. J. Chem. Phys. 100, 2975 (1994).
+T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+D.E. Woon and T.H. Dunning, Jr.  (to be published)
+D.E. Woon and T.H. Dunning, Jr.  J. Chem. Phys. 98, 1358 (1993).
+
+Recontraction:
+K. G. Dyall, in preparation.
+
+  
