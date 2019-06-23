@@ -70,9 +70,6 @@ def write_gamess_uk(basis):
                 rexponents = pot['r_exponents']
                 gexponents = pot['gaussian_exponents']
                 coefficients = pot['coefficients']
-                nprim = len(rexponents)
-
-                am = pot['angular_momentum']
 
                 point_places = [1, 9, 32]
                 s += printing.write_matrix([rexponents, *coefficients, gexponents], point_places)
