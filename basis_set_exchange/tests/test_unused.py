@@ -4,7 +4,7 @@ Test for unused data
 
 import os
 import basis_set_exchange as bse
-from .common_testvars import data_dir, all_component_paths, all_element_paths, all_table_paths
+from .common_testvars import data_dir, all_component_paths, all_element_paths, all_table_paths, all_metadata_files, all_families
 
 
 def test_unused_data():
@@ -71,3 +71,38 @@ def test_unused_data():
 
     if found_unused:
         raise RuntimeError("Found unused data")
+
+
+def test_unused_notes():
+    '''
+    Test for orphan basis and family notes files
+    '''
+
+    all_basis_notes = []
+    all_family_notes = []
+    for root, dirs, files in os.walk(data_dir):
+        for basename in files:
+            fpath = os.path.join(root, basename)
+            fpath = os.path.relpath(fpath, data_dir)
+
+            if basename.endswith('.notes'):
+                all_basis_notes.append(fpath)
+            elif basename.startswith('NOTES.'):
+                all_family_notes.append(fpath)
+
+    found_unused = False
+    for bs_notes in all_basis_notes:
+        base = os.path.splitext(bs_notes)[0]
+        metafile = base + '.metadata.json'
+        if metafile not in all_metadata_files:
+            print("File {} does not have a corresponding metadata file".format(bs_notes))
+            found_unused = True
+
+    for fam_notes in all_family_notes:
+        fam = os.path.splitext(fam_notes)[1][1:] # Removes period
+        if fam not in all_families:
+            print("File {} does not have a corresponding family".format(fam_notes))
+            found_unused = True
+
+    if found_unused:
+        raise RuntimeError("Found unused notes files")
