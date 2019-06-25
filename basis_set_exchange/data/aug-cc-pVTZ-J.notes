@@ -1,0 +1,41 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Stephan P. A. Sauer
+            Original BSE PI: Stephan P. A. Sauer
+ Original BSE Last Modified: Fri, 08 Jun 2012 18:50:59 GMT
+--------------------------------------------------------------------------------
+
+The aug-cc-pVTZ-J basis sets developed by Sauer and co-workers are modifications of the aug-cc-pVTZ basis sets by Dunning and co-workers
+(T. H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989);
+ R. A. Kendall, T. H. Dunning, Jr. and R. J. Harrison, J. Chem. Phys. 96, 6769 (1992);
+ D. E. Woon and T. H. Dunning, Jr. J. Chem. Phys. 98, 1358 (1993)
+ N. B. Balabanov, K. A. Peterson, J. Chem. Phys. 123, 64107 (2005)).
+
+They were optimized for the calculation of NMR indirect nuclear spin-spin
+coupling constants or ESR hyperfine coupling constants with either correlated
+wavefunction methods such as SOPPA and SOPPA(CCSD) or density functional
+theory methods.
+
+The composition of the basis sets are:
+for H:          (10s3p1d) contracted to [6s3p1d]
+for B, C, N, O, F: (15s6p3d1f) contracted to [9s5p3d1f]
+for Al, P, Si, S, Cl: (20s10p6d1f) contracted to [10s7p6d1f]
+for Se:               (23s14p10d2f) contracted to [12s9p6d2f]
+for Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn: (25s17p10d3f2g) contracted to [17s10p7d3f2g]
+
+The references for the basis sets are:
+T. Enevoldsen, J. Oddershede and S. P. A. Sauer, Theor. Chem. Acc. 100, 275-284 (1998)
+S. P. A. Sauer and W. T. Raynes, J. Chem. Phys. 113, 3121-3129 (2000).
+S. P. A. Sauer, W. T. Raynes and R. A. Nicholls, J. Chem. Phys. 115, 5994-6006 (2001).
+P. F. Provasi, G. A. Aucar and S. P. A. Sauer, J. Chem. Phys. 115, 1324 (2001) 
+V. Barone, P. F. Provasi, J. E. Peralta, J. P. Snyder, S. P. A. Sauer and R. H. Contreras, J. Phys. Chem. A 107, 4748-4754 (2003).
+Y. Yu. Rusakov, L. B. Krivdin, S. P. A. Sauer, E. P. Levanova and G. G. Levkovskaya, Magn. Res. Chem. 48, 633-637 (2010). 
+P. F. Provasi and S. P. A. Sauer, J. Chem. Phys. 133, 054308 (2010).
+E. D. Hedeg&#229;rd, J. Kongsted and S. P. A. Sauer, J. Chem. Theory Comput. 7, 4077-4087 (2011)
+
+The performance of the basis sets in correlated wavefunction calculations was investigated e.g. in:
+T. Enevoldsen, J. Oddershede and S. P. A. Sauer, Theor. Chem. Acc. 100, 275-284 (1998)
+P. F. Provasi, G. A. Aucar and S. P. A. Sauer, J. Chem. Phys. 115, 1324 (2001) 
+L. B. Krivdin, S. P. A. Sauer, J. E. Peralta and R. H. Contreras, Magn. Res. Chem. 40, 187-194 (2002) 
+The performance of the basis sets in DFT/B3LYP calculations was investigated e.g. in:
+L. B. Krivdin, S. P. A. Sauer, J. E. Peralta and R. H. Contreras, Magn. Res. Chem. 40, 187-194 (2002)
+J. E. Peralta, G. E. Scuseria, J. R. Cheeseman and M. J. Frisch, Chem. Phys. Lett. 375, 452-458 (2003).
