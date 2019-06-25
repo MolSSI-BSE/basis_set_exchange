@@ -1,0 +1,65 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Tue, 16 Dec 2008 22:07:23 GMT
+--------------------------------------------------------------------------------
+
+From the original BSE
+---------------------
+
+ Augmented Polarized Valence Septuple Zeta (pV7Z-like) Basis
+ -----------------------------------------------------------
+H:     (15s,7p,6d,5f,4g,3h,2i)  -> [8s,7p,6d,5f,4g,3h,2i]
+C - F: (19s,13p,7d,6f,5g,4h,3i,2k) -> [9s,8p,7d,6f,5g,4h,3i,2k]  D. Feller and
+                                                           K.A. Peterson, J.
+                                                           Chem. Phys. 110,
+                                                           8384 (1999)
+Ne:    (19s,13p,7d,6f,5g,4h,3i,2k) -> [9s,8p,7d,6f,5g,4h,3i,2k] D. Feller
+                                                           (to be published)
+S:     (28s,19p,7d,6f,5g,4h,3i,2k) ->[10s,9p,7d,6f,5g,4h,3i,2k] D. Feller and
+                                                           J.A.
+                                                           Sordo J. Chem. Phys.
+                                                           113, 485 (2000).
+
+The k function exponents were provided by Dr. Ed. Valeev from the Georgia
+Institute of Technology.
+
+                      aug-pV7Z Atomic Energies
+                                                    ROHF
+   State  UHF (noneq) ROHF (noneq)  ROHF(equiv)   HF Limit(equiv)
+   -----  ----------  -----------   -----------   ---------
+H   2-S    -0.49999974  -0.49999974  -0.49999974   -0.50000
+B   2-P                                           -24.52906
+C   3-P   -37.6937389                             -37.68862
+N   4-S   -54.4045460                             -54.40094
+O   3-P                                           -74.80940
+F   2-P                                           -99.40935
+Al  2-P                                          -241.87671
+Si  3-P                                          -288.85436
+P   4-S                                          -340.71878
+S   3-P                                          -397.50490
+
+          MP2(noneq)
+            UHF
+   State  Froz. Core
+   -----  ----------
+H   2-S    -0.49999974
+B   2-P
+C   3-P
+N   4-S   -54.5139085
+
+          CCSD(noneq) CCSD(T)(noneq)
+            UHF         UHF
+   State  Froz. core   Froz. core
+   -----  ----------   ----------
+H   2-S    -0.49999974  -0.49999974
+B   2-P
+C   3-P   -37.7865015  -37.7890231
+N   4-S   -54.5263704  -54.5294541
+O   3-P
+F   2-P
+Al  2-P
+Si  3-P
+P   4-S
+S   3-P
+

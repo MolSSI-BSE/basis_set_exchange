@@ -7934,6 +7934,35 @@
       }
     }
   },
+  "aug-pv7z": {
+    "display_name": "aug-pV7Z",
+    "other_names": [],
+    "description": "V7Z6P   Valence Septuple Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "aug-pV7Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-pV7Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2008-12-16",
+        "elements": [
+          "6",
+          "7",
+          "8",
+          "9",
+          "16"
+        ]
+      }
+    }
+  },
   "cc-pcv5z": {
     "display_name": "cc-pCV5Z",
     "other_names": [],
@@ -22726,6 +22755,65 @@
           "51",
           "52",
           "53"
+        ]
+      }
+    }
+  },
+  "pv6z": {
+    "display_name": "pV6Z",
+    "other_names": [],
+    "description": "V6Z5P   Valence Sextuple Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "pV6Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "pV6Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "pv7z": {
+    "display_name": "pV7Z",
+    "other_names": [],
+    "description": "pV7Z",
+    "latest_version": "0",
+    "basename": "pV7Z",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "pV7Z.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2008-12-16",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "16"
         ]
       }
     }

@@ -1,0 +1,70 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:46:36 GMT
+--------------------------------------------------------------------------------
+
+From the original BSE
+---------------------
+ 
+ Polarized Valence Sextuple Zeta (pV6Z-like) Basis
+ -------------------------------------------------
+Elements        Contraction                             References
+ H: (10s,5p,4d,3f,2g,1h) -> [6s,5p,4d,3f,2g,1h]        K.A. Peterson, D.E.
+                                                       Woon and T.H. Dunning,
+                                                       Jr., J. Chem. Phys. 100,
+                                                       7410 (1994).
+ C: (16s,11p,5d,4f,3g,2h,1i) -> [7s,6p,5d,4f,3g,2h,1i] A.D. Pradhan, H.
+                                                       Partridge and C.W.
+                                                       Bauschlicher, Jr.,
+                                                       J. Chem. Phys. 101,
+                                                       3857 (1994).
+ N: (16s,11p,5d,4f,3g,2h,1i) -> [7s,6p,5d,4f,3g,2h,1i] C. W. Bauschlicher, Jr.
+                                                       and H. Partridge,
+                                                       J. Chem. Phys. 100,
+                                                       4329 (1994).
+ O: (16s,10p,5d,4f,3g,2h,1i) -> [7s,6p,5d,4f,3g,2h,1i] T.H. Dunning, Jr.
+                                                       (unpublished)
+
+Note: an error was discovered in the carbon basis set published in J. Chem.
+Phys. 101, (1994).  That error has been corrected in this version of the basis.
+This collection of basis sets was designed to mimic and extend the correlation
+consistent sets.  These sets were created before the official cc-pV6Z sets were
+developed.
+
+The oxygen basis was constructed of (s,p,d,f,g) exponents optimized by T. H.
+Dunning along with h and i exponents extrapolated from other data by D. Feller.
+
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+
+The basic idea behind the correlation consistent basis sets is that
+functions which contribute approximately the same amount of correlation
+energy should be grouped together.
+
+The SD-CI energies quoted below are for valence CI's.  However, unlike
+the SD-CI's for the smaller basis sets these calculations used just a
+single reference configuration.  With the smaller sets the SD-CI
+energies were obtained with a symmetry equivalenced reference space.
+For example, for carbon all 3 p(2) configurations were used in the
+reference space.
+
+
+Elements                             References
+--------                             ----------
+H:         T. H. Dunning, Jr., (to be published). 
+C:         A.D. Pradhan, H. Partridge and C.W. Bauschlicher, Jr., J. Chem.
+           Phys. 101, 3857 (1994) with correction to the p set.
+O:         (s,p) set from H. Partridge, (d,f,g) from T.H. Dunning, Jr., 
+           (h,i) from D. Feller.
+N:         C.W. Bauschlicher, Jr. and H. Partridge, J. Chem. Phys. 100,
+           4329 (1994).
+
+  
