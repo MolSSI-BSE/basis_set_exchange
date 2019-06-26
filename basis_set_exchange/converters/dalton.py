@@ -28,7 +28,7 @@ def write_dalton(basis):
             elname = lut.element_name_from_Z(z).upper()
             cont_string = misc.contraction_string(data)
 
-            s += '! {}       {}\n'.format(elname, cont_string)
+            s += 'a {}\n'.format(z)
             s += '! {}       {}\n'.format(elname, cont_string)
 
             for shell in data['electron_shells']:
