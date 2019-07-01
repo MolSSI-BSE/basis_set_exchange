@@ -1,6 +1,85 @@
 Notes about the Jensen basis sets
 =================================
 
+admm basis sets
+------------------------
+The most widely used approach to approximate the Coulomb and exchange integrals is density fitting, also known as the resolution-of-the-identity (RI) approximation.
+In this, the products of two one-electron basis functions are expanded in one-center auxiliary functions. RI significantly improves performance with a limited impact on 
+the accuracy and has therfore been applied to HF/KS theory as well as correlated methods. ADMM has been developed specifically for the exchange contribution. The exchange 
+energy is split into two parts. On consisting of the exact HF exchange and the second is a first-order correction term, evaluated as the difference between the generalized 
+gradient approximation exchange in the full and auxiliary basis sets. 
+
+
+aug-pc-n and  pc-n basis sets (where n indicates the level of polarization beyond the atomic system)
+--------------------------------------------------------------------------------------------------------
+For the basis sets pc-0 through pc-4, the exponents were optimized by a pseudo-Newton-Raphson approach. Molecular geometries were either taken from experimental work
+or MP2/cc-pVTZ optimized.
+The pc-n basis sets have been designed to systematically improve the representation of the wave function, which is the primary contributor to energetic quantities.
+It is also expected that the addition of diffuse functions (aug-pc-n basis sets) will improve the performance of the excitation energies. 
+
+The Diamagnetic Spin-Orbit Contribution is insensitive to the addiion of tight functions, as their influence is only indirect by changes in the density.
+The Paramagnetic Spin-Orbit Contribution provides the largest contribution to the coupling constant
+The Spin Dipole Contribution provides the second largest contribution to the coupling constant
+
+Below are the DSO PSO and SD contributions (Hz) to the spin-spin coupling in F2 (which was used as a representative case)
+                      DSO                                                     PSO                                                          SD
+BASIS       NONE    +s      +p     +d     +f             BASIS       NONE    +s	    +p       +d       +f              BASIS       NONE    +s      +p      +d      +f
+pc-0        3.41    3.41    3.04                         pc-0        7032    7033    9497                             pc-0        3733    3774    5172
+pc-1        2.53    2.53    2.39   2.36                  pc-1        8542    8542    9569    9565                     pc-1        4805    4805    5406    5691
+pc-2        2.20    2.20    2.17   2.14   2.13           pc-2        9245    9245    9418    9416     9409            pc-2        5426    5426    5527    5800    5926
+pc-3        2.12    2.12    2.12   2.11   2.11           pc-3        9399    9399    9417    9417     9416            pc-3        5728    5738    5749    5873    5927
+pc-4        2.11    2.11    2.11   2.11   2.11           pc-4        9409    9409    9414    9414     9414            pc-4        5865    5865    5867    5873    5911
+aug-pc-0    3.30    3.30    2.99                         aug-pc-0    7745    7746    10483                            aug-pc-0    4341    4341    5969
+aug-pc-1    2.49    2.49    2.36   2.33                  aug-pc-1    8623    8623    9611    9658                     aug-pc-1    4870    4870    5481    5770
+aug-pc-2    2.20    2.20    2.17   2.14   2.13           aug-pc-2    9245    9245    9419    9416     9409            aug-pc-2    5428    5428    5530    5803    5929
+aug-pc-3    2.12    2.12    2.12   2.11   2.11           aug-pc-3    9395    9295    9414    9413     9413            aug-pc-3    5737    5737    5748    5872    5926
+
+
+pcJ-n basis sets
+-------------------------
+Optimized for calculating indirect nuclear spin-spin coupling constants 
+using density functional methods. The calculation of nuclear magnetic spin-spin constats are a challenging task because the results largely depend on the quality of 
+the wave function. There are two limiting types of basis set contraction, denoted segmented and general. In a segmented contraction, each primitive basis function is 
+only allowed to contribute to one contracted function, while in a general contraction, all primitive functions are allowed to contribute to all contracted functions.
+The contraction coefficients for a general contraction are normally obtained from SCF coefficients. 
+Jensen2010a performed a systematic search for the optimum contraction schemes for the pcJ-n sets and permformed extensive analysis on the s and p functions of atoms and 
+documented the results. The work provides guidelines for searching for optimum contraction schemes at theoretical levels, like CCSD, where a systematic search is impractical.
+
+Below are the recommended contraction schemes for the pcJ-n Basis Sets:
+                   Hydrogen                       1st Row                        2nd Row
+Basis    Uncontracted    Contracted    Uncontracted     Contracted    Uncontracted    Contracted
+pcJ-0    5s              3s            7s4p             4s3p          10s7p           5s4p
+pcJ-1    6s2p            4s            9s5p2d           5s4p          13s9p2d         6s5p
+pcJ-2    8s3p2d          5s            12s7p3d2f        7s5p          15s11p3d2f      8s6p
+pcJ-3    11s5p3d1f       8s            16s10p5d2f1g     10s8p         19s14p5d3f1g    11s10p
+pcJ-4    12s7p4d2f1g     10s           19s12p7d3f2g1h   15s10p        22s17p7d4f2g1h  16s12p
+
+
+pcX-n basis sets
+-------------------------
+The self-consistent-field method (SCF) includes orbital relaxation effects by separate optimizations of the ground and the core–hole states, and calculates the
+CEBE (core-electron binding energy) as the difference between total electronic energies, and this method is widely used. The first SCF calculations were performed using HF
+which ignores electron correlation and relativistic effects, but the inclusion of the relaxation energy allowed reproduction of experimental results. The SCF method can 
+be extended to post HF-methods such as MPn, MCSCF and CCSD methods, but they significantly increase the required computational resources and achieving convergence of the highly 
+excited hole state using coupled cluster methids can be difficult. PcX-n basis sets can approach the basis set limit for core-excitation processes such as XPS and XAS calculated 
+by the SCF approach. They are shown to provide lower basis set errors than other basis sets of similar size, and can be used as local basis sets in combination with the energy 
+optimized pcseg-n basis sets for reducing computational costs when core-excitation processes are only required for a small subset of atoms.
+
+
+pcseg-n and psSseg-n basis sets
+------------------------------------
+These segmented basis sets were constructed from polarization consistent basis sets. An energy-optimized uncontracted basis set is augmented with property specific functions 
+to improve the basis set convergence. It is then general contracted based on the property basis set error relative to the complete basis set limit at each ζ level, and finally 
+converted into a computational more efficient segmented contraction by removing the redundancy among the primitive functions in the general contracted functions. The pcSseg-n 
+basis sets are in qualities ranging from double-ζ to pentuple-ζ quality and should be suitable for both routine and benchmark calculations of nuclear magnetic shielding constants.
+While these basis sets have been developed for use with DFT methods, they may also be suitable for wave function methods including electron correlation. They can furthermore be 
+used as locally dense basis sets in combination with the energy-optimized pcseg-n basis sets for large systems, where shielding constants are only required for a small subset 
+of atoms. 
+
+
+
+
+
 Notes from Frank Jensen
 -----------------------
 
