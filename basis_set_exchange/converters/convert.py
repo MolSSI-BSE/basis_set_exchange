@@ -15,6 +15,7 @@ from .cfour import write_cfour
 from .dalton import write_dalton
 from .qcschema import write_qcschema
 from .demon2k import write_demon2k
+from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
 
 _converter_map = {
@@ -59,6 +60,13 @@ _converter_map = {
         'comment': None,
         'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
         'function': write_qcschema
+    },
+    'cp2k': {
+        'display': 'CP2K',
+        'extension': '.cp2k',
+        'comment': '#',
+        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'function': write_cp2k
     },
     'demon2k': {
         'display': 'deMon2K',
