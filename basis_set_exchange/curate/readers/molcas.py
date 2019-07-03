@@ -87,20 +87,34 @@ def read_molcas(basis_lines, fname):
             i += 3
 
             # Skip over an options block
+            # But detect 'orbitalenergies'
+            has_orb_energies = False
             line = basis_lines[i]
             if line.lower() == 'options':
                 while basis_lines[i].lower() != 'endoptions':
+                    if basis_lines[i].lower() == 'orbitalenergies':
+                        has_orb_energies = True
                     i += 1
                 i += 1
 
             lsplt = basis_lines[i].split()
-            max_am = int(lsplt[1])
+
+            # We are ignoring the maxam - some files don't have it...
+            # The first part is the Z number. But we already have the
+            # element symbol
             i += 1
 
-            for shell_am in range(max_am+1):
+            shell_am = 0
+            while i < len(basis_lines) and not basis_lines[i].startswith('/'):
                 lsplt = basis_lines[i].replace(',', ' ').split()
                 nprim = int(lsplt[0])
-                ngen = int(lsplt[1])
+
+                # if ngen is not present, autodetect
+                if len(lsplt) > 1:
+                    ngen = int(lsplt[1])
+                else:
+                    ngen = 0
+
                 i += 1
 
                 if shell_am <= 1:
@@ -130,7 +144,7 @@ def read_molcas(basis_lines, fname):
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()
-                    if len(lsplt) != ngen:
+                    if ngen != 0 and len(lsplt) != ngen:
                         print(fname)
                         print(line)
                         raise RuntimeError("Unexpected number of coefficients")
@@ -138,6 +152,7 @@ def read_molcas(basis_lines, fname):
 
 
                     i += 1
+                shell_am += 1
 
                 shell['exponents'] = exponents
 
@@ -149,11 +164,12 @@ def read_molcas(basis_lines, fname):
                 element_data['electron_shells'].append(shell)
 
                 # Skip energies?
-                to_skip = int(basis_lines[i].strip())
-                skipped = 0
-                i += 1
-                while skipped < to_skip:
-                    skipped += len(basis_lines[i].split())
+                if has_orb_energies:
+                    to_skip = int(basis_lines[i].strip())
+                    skipped = 0
                     i += 1
+                    while skipped < to_skip:
+                        skipped += len(basis_lines[i].split())
+                        i += 1
                 
     return bs_data
