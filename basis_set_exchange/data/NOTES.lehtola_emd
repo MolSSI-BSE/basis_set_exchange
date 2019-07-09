@@ -1,0 +1,13 @@
+Notes about Lehtola_emd basis sets
+--------------------------------------
+
+Completeness-optimization is a novel method for the formation of one-electron basis sets. It is a completely general, blackbox method
+that can be used to form cost-effective basis sets for any wanted property at any level of theory. In Lehtola2013a they applied the 
+completeness-optimization approach to forming primitive basis sets tuned for calculations of the electron momentum density at HF level
+of theory. Contractions are found to yield significant reductions in the amount of functions without compromising the accuracy. They
+suggest polarization-consistent and correlation-consistent basis sets for the first three rows of the periodic table, which are 
+completeness-optimized for electron momentum density calculations.
+
+Used MP2 theory as it has been found to account for most correlation effects on the moments of the EMD. The truncation of the virtual 
+orbital space with respect to MP2 natural orbitals has been recently found to significantly speed up coupled-cluster calculations, 
+without compromising their accuracy.
