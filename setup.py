@@ -52,6 +52,7 @@ if __name__ == "__main__":
                 'sphinxcontrib-programoutput',
                 'sphinx_rtd_theme',
                 'numpydoc',
+                'graphviz'
             ],
             'tests': [
                 'pytest>=4.0',
