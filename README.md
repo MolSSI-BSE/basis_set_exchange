@@ -97,4 +97,4 @@ Same as above, but using the command line
 
 ## License
 
-This project is released under the BSE 3-Clause license. See LICENSE for details.
+This project is released under the BSD 3-Clause license. See LICENSE for details.
