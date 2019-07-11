@@ -192,11 +192,11 @@ organization at <a class="reference external" href="https://github.com/MolSSI-BS
 around 2004. However, the current code stack is considered outdated and
 in need of a rewrite.</p>
 <ul class="simple">
-<li>The code is currently written in Java, which is considered ‘heavy’ for
-such a project today.</li>
-<li>The codebase is considered over-engineered in other ways, including
+<li><p>The code is currently written in Java, which is considered ‘heavy’ for
+such a project today.</p></li>
+<li><p>The codebase is considered over-engineered in other ways, including
 the use of multiple components originally written for other projects
-and repurposed for the BSE</li>
+and repurposed for the BSE</p></li>
 </ul>
 <p>The actual basis set data is considered de-facto standard by much of the
 community. Nevertheless, there are errors and inconsistencies. While most
@@ -207,11 +207,11 @@ of the current code stack.</p>
 <h2>Proposed Components<a class="headerlink" href="#proposed-components" title="Permalink to this headline">¶</a></h2>
 <p>The new BSE is proposed to have 4 separate components</p>
 <ol class="arabic simple">
-<li>A store or database of basis set data, in some form</li>
-<li>A library accompanying the data, allowing for querying and composing basis
-set information</li>
-<li>An web API for programmatically querying and obtaining basis set data</li>
-<li>A web frontend</li>
+<li><p>A store or database of basis set data, in some form</p></li>
+<li><p>A library accompanying the data, allowing for querying and composing basis
+set information</p></li>
+<li><p>An web API for programmatically querying and obtaining basis set data</p></li>
+<li><p>A web frontend</p></li>
 </ol>
 <div class="section" id="backend-data-store">
 <h3>Backend Data Store<a class="headerlink" href="#backend-data-store" title="Permalink to this headline">¶</a></h3>
@@ -232,13 +232,13 @@ be available to those that are not familiar.</p>
 <p>This library is responsible for consuming the raw basis set data and
 producing some useful output. Some aspects of this include:</p>
 <ul class="simple">
-<li>Composing complete basis sets from components (for example, adding polarization or diffuse functions)</li>
-<li>Converting a basis set to a particular output format (Gaussian or NWChem, for example)</li>
-<li>Helper functions for curation</li>
-<li>Schemas and validation functions</li>
-<li>Basis set manipulation, such as uncontraction and optimization of general contractions.</li>
-<li>Obtaining notes about basis sets and basis set families</li>
-<li>Obtaining references for basis sets</li>
+<li><p>Composing complete basis sets from components (for example, adding polarization or diffuse functions)</p></li>
+<li><p>Converting a basis set to a particular output format (Gaussian or NWChem, for example)</p></li>
+<li><p>Helper functions for curation</p></li>
+<li><p>Schemas and validation functions</p></li>
+<li><p>Basis set manipulation, such as uncontraction and optimization of general contractions.</p></li>
+<li><p>Obtaining notes about basis sets and basis set families</p></li>
+<li><p>Obtaining references for basis sets</p></li>
 </ul>
 <p>Due to the nature of this library, it is combined (in the same version
 control repository) with the raw basis set data. While this is likely
@@ -284,21 +284,24 @@ calculations.</p>
 <p>The project is a collaboration between MolSSI and EMSL/PNNL. The members
 and major responsibilities are:</p>
 <ul class="simple">
-<li>MolSSI<ul>
-<li>Benjamin Pritchard - Project lead, development of backend library</li>
-<li>Doaa Altaraway - Development of the web frontend</li>
-<li>Daniel Smith - Programming support</li>
+<li><p>MolSSI</p>
+<ul>
+<li><p>Benjamin Pritchard - Project lead, development of backend library</p></li>
+<li><p>Doaa Altaraway - Development of the web frontend</p></li>
+<li><p>Daniel Smith - Programming support</p></li>
 </ul>
 </li>
-<li>EMSL<ul>
-<li>Tara Gibson - EMSL lead, development support</li>
-<li>Phil Gackle - Sysadmin/Advisor</li>
-<li>Eric Bylaska - Subject matter expert</li>
+<li><p>EMSL</p>
+<ul>
+<li><p>Tara Gibson - EMSL lead, development support</p></li>
+<li><p>Phil Gackle - Sysadmin/Advisor</p></li>
+<li><p>Eric Bylaska - Subject matter expert</p></li>
 </ul>
 </li>
-<li>Other<ul>
-<li>Theresa Windus - Liaison, MolSSI BoD Sponsor, development support</li>
-<li>Ellie Fought - Basis set curation support</li>
+<li><p>Other</p>
+<ul>
+<li><p>Theresa Windus - Liaison, MolSSI BoD Sponsor, development support</p></li>
+<li><p>Ellie Fought - Basis set curation support</p></li>
 </ul>
 </li>
 </ul>

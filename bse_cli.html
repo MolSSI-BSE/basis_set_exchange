@@ -197,21 +197,21 @@ the <code class="docutils literal notranslate"><span class="pre">bse</span></cod
 If enabled, TAB autocompletion will be enabled for</p>
 <blockquote>
 <div><ul class="simple">
-<li>Directories</li>
-<li>Arguments (<code class="docutils literal notranslate"><span class="pre">--elements</span></code>, etc)</li>
-<li>Basis set names</li>
-<li>Basis set families</li>
-<li>Roles</li>
-<li>Basis set formats and reference formats</li>
+<li><p>Directories</p></li>
+<li><p>Arguments (<code class="docutils literal notranslate"><span class="pre">--elements</span></code>, etc)</p></li>
+<li><p>Basis set names</p></li>
+<li><p>Basis set families</p></li>
+<li><p>Roles</p></li>
+<li><p>Basis set formats and reference formats</p></li>
 </ul>
 </div></blockquote>
 <p>Autocompletion is implemented via the <strong>argcomplete</strong> library (<a class="reference external" href="https://argcomplete.readthedocs.io">https://argcomplete.readthedocs.io</a>).
 TAB completion can be enabled one of two ways:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">&quot;$(register-python-argcomplete</span> <span class="pre">bse)&quot;</span></code> on the command line</li>
-<li>Enable globally by running <code class="docutils literal notranslate"><span class="pre">activate-global-python-argcomplete</span></code> and
-then sourcing <code class="docutils literal notranslate"><span class="pre">~/.bash_completion.d/python-argcomplete.sh</span></code> manually or in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">&quot;$(register-python-argcomplete</span> <span class="pre">bse)&quot;</span></code> on the command line</p></li>
+<li><p>Enable globally by running <code class="docutils literal notranslate"><span class="pre">activate-global-python-argcomplete</span></code> and
+then sourcing <code class="docutils literal notranslate"><span class="pre">~/.bash_completion.d/python-argcomplete.sh</span></code> manually or in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <p>The first method must be run every time a new terminal is opened.
@@ -289,12 +289,11 @@ bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
 <p>Some subcommands take a string specifying which elements the subcommand will work with. This
 string is a comma-separated list of element symbols and/or Z numbers. Ranges can also be used.</p>
 <p>Symbols are not case sensitive and can be mixed with Z-numbers.</p>
-<dl class="docutils">
-<dt>Examples:</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">H-Ne</span></code> - for hydrogen through neon (inclusive)</li>
-<li><code class="docutils literal notranslate"><span class="pre">1-10</span></code> - same as above</li>
-<li><code class="docutils literal notranslate"><span class="pre">C,8,p-17</span></code> - carbon, oxygen, phosphorus through chlorine</li>
+<dl class="simple">
+<dt>Examples:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">H-Ne</span></code> - for hydrogen through neon (inclusive)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1-10</span></code> - same as above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C,8,p-17</span></code> - carbon, oxygen, phosphorus through chlorine</p></li>
 </ul>
 </dd>
 </dl>
@@ -327,6 +326,7 @@ psi4        Psi4
 molcas      Molcas
 dalton      Dalton
 qcschema    QCSchema
+cp2k        CP2K
 demon2k     deMon2K
 gamess_us   GAMESS US
 turbomole   Turbomole
@@ -345,6 +345,7 @@ psi4
 molcas
 dalton
 qcschema
+cp2k
 demon2k
 gamess_us
 turbomole
@@ -462,7 +463,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.6
+# Version v0.8.6+8.g32927ce9
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G

@@ -182,179 +182,149 @@
 <p>Main interface to Basis Set Exchange functionality</p>
 <dl class="function">
 <dt id="basis_set_exchange.api.filter_basis_sets">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">filter_basis_sets</code><span class="sig-paren">(</span><em>substr=None</em>, <em>family=None</em>, <em>role=None</em>, <em>elements=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">filter_basis_sets</code><span class="sig-paren">(</span><em class="sig-param">substr=None</em>, <em class="sig-param">family=None</em>, <em class="sig-param">role=None</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.filter_basis_sets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filter basis sets by some criteria</p>
 <p>All parameters are ANDed together and are not case sensitive.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>substr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Substring to search for in the basis set name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>substr</strong><span class="classifier">str</span></dt><dd><p>Substring to search for in the basis set name</p>
 </dd>
-<dt><strong>family</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Family the basis set belongs to</p>
+<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family the basis set belongs to</p>
 </dd>
-<dt><strong>role</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Role of the basis set</p>
+<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set</p>
 </dd>
-<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list</span></dt>
-<dd><p class="first last">List of elements that the basis set must include.
+<dt><strong>elements</strong><span class="classifier">str or list</span></dt><dd><p>List of elements that the basis set must include.
 Elements can be specified by Z-number (int or str) or by symbol (str).
 If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
 Z numbers and symbols (case insensitive) can be used interchangeably
 (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>dict</strong></dt>
-<dd><p class="first last">Basis set metadata that matches the search criteria</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Basis set metadata that matches the search criteria</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.fix_data_dir">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">fix_data_dir</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.fix_data_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">fix_data_dir</code><span class="sig-paren">(</span><em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.fix_data_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>If data_dir is None, returns the default data_dir. Otherwise,
 returns the data_dir parameter unmodified</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_all_basis_names">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_all_basis_names</code><span class="sig-paren">(</span><em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_all_basis_names</code><span class="sig-paren">(</span><em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_all_basis_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a list of all basis set names</p>
 <p>The returned list is the internal representation of the basis set name.</p>
 <p>The data is read from the METADATA.json file in the data directory.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_basis">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis</code><span class="sig-paren">(</span><em>name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>uncontract_general=False</em>, <em>uncontract_spdf=False</em>, <em>uncontract_segmented=False</em>, <em>make_general=False</em>, <em>optimize_general=False</em>, <em>data_dir=None</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_basis</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">uncontract_general=False</em>, <em class="sig-param">uncontract_spdf=False</em>, <em class="sig-param">uncontract_segmented=False</em>, <em class="sig-param">make_general=False</em>, <em class="sig-param">optimize_general=False</em>, <em class="sig-param">data_dir=None</em>, <em class="sig-param">header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain a basis set</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
 as a string or as a python dictionary.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set. This is not case sensitive.</p>
 </dd>
-<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list</span></dt>
-<dd><p class="first">List of elements that you want the basis set for.
+<dt><strong>elements</strong><span class="classifier">str or list</span></dt><dd><p>List of elements that you want the basis set for.
 Elements can be specified by Z-number (int or str) or by symbol (str).
 If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
 Z numbers and symbols (case insensitive) can be used interchangeably
 (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
-<p class="last">If an empty string or list is passed, or if None is passed (the default),
+<p>If an empty string or list is passed, or if None is passed (the default),
 all elements for which the basis set is defined are included.</p>
 </dd>
-<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or str</span></dt>
-<dd><p class="first last">Obtain a specific version of this basis set. By default,
+<dt><strong>version</strong><span class="classifier">int or str</span></dt><dd><p>Obtain a specific version of this basis set. By default,
 the latest version is returned.</p>
 </dd>
-<dt><strong>fmt: str</strong></dt>
-<dd><p class="first">The desired output format of the basis set. By default,
+<dt><strong>fmt: str</strong></dt><dd><p>The desired output format of the basis set. By default,
 basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
 Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to programmatically obtain the available
 formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available formats are</p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>nwchem</li>
-<li>gaussian94</li>
-<li>psi4</li>
-<li>gamess_us</li>
-<li>turbomole</li>
-<li>json</li>
+<li><p>nwchem</p></li>
+<li><p>gaussian94</p></li>
+<li><p>psi4</p></li>
+<li><p>gamess_us</p></li>
+<li><p>turbomole</p></li>
+<li><p>json</p></li>
 </ul>
 </div></blockquote>
 </dd>
-<dt><strong>uncontract_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, remove general contractions by duplicating the set
+<dt><strong>uncontract_general</strong><span class="classifier">bool</span></dt><dd><p>If True, remove general contractions by duplicating the set
 of primitive exponents with each vector of coefficients.
 Primitives with zero coefficient are removed, as are duplicate shells.</p>
 </dd>
-<dt><strong>uncontract_spdf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, remove general contractions with combined angular momentum (sp, spd, etc)
+<dt><strong>uncontract_spdf</strong><span class="classifier">bool</span></dt><dd><p>If True, remove general contractions with combined angular momentum (sp, spd, etc)
 by duplicating the set of primitive exponents with each vector of coefficients.
 Primitives with zero coefficient are removed, as are duplicate shells.</p>
 </dd>
-<dt><strong>uncontract_segmented</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, remove segmented contractions by duplicating each primitive into new shells.
+<dt><strong>uncontract_segmented</strong><span class="classifier">bool</span></dt><dd><p>If True, remove segmented contractions by duplicating each primitive into new shells.
 Each coefficient is set to 1.0</p>
 </dd>
-<dt><strong>make_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">If True, make the basis set as generally-contracted as possible. There will be one
+<dt><strong>make_general</strong><span class="classifier">bool</span></dt><dd><p>If True, make the basis set as generally-contracted as possible. There will be one
 shell per angular momentum (for each element)</p>
 </dd>
-<dt><strong>optimize_general</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">Optimize by removing general contractions that contain uncontracted
+<dt><strong>optimize_general</strong><span class="classifier">bool</span></dt><dd><p>Optimize by removing general contractions that contain uncontracted
 functions (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code>)</p>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>str or dict</strong></dt>
-<dd><p class="first last">The basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str or dict</dt><dd><p>The basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_basis_family">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_basis_family</code><span class="sig-paren">(</span><em>basis_name</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_basis_family</code><span class="sig-paren">(</span><em class="sig-param">basis_name</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_basis_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup a family by a basis set name</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_data_dir">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_data_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_data_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_data_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_data_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the default data directory of this installation</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_formats">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_formats</code><span class="sig-paren">(</span><em>function_types=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_formats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_formats</code><span class="sig-paren">(</span><em class="sig-param">function_types=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the basis set formats available</p>
 <p>The returned data is a map of format to display name. The format
 can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.api.get_basis" title="basis_set_exchange.api.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_basis()</span></code></a></p>
@@ -364,7 +334,7 @@ supporting the given function types will be returned.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_reference_formats">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_reference_formats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_reference_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the reference/citation formats available</p>
 <p>The returned data is a map of format to display name. The format
 can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.api.get_references" title="basis_set_exchange.api.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_references()</span></code></a></p>
@@ -372,60 +342,50 @@ can be passed as the fmt argument to <a class="reference internal" href="#basis_
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_references">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_references</code><span class="sig-paren">(</span><em>basis_name</em>, <em>elements=None</em>, <em>version=None</em>, <em>fmt=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_references</code><span class="sig-paren">(</span><em class="sig-param">basis_name</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>basis_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Name of the basis set. This is not case sensitive.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>basis_name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set. This is not case sensitive.</p>
 </dd>
-<dt><strong>elements</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">List of element numbers that you want the basis set for. By default,
+<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of element numbers that you want the basis set for. By default,
 all elements for which the basis set is defined are included.</p>
 </dd>
-<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Obtain a specific version of this basis set. By default,
+<dt><strong>version</strong><span class="classifier">int</span></dt><dd><p>Obtain a specific version of this basis set. By default,
 the latest version is returned.</p>
 </dd>
-<dt><strong>fmt: str</strong></dt>
-<dd><p class="first">The desired output format of the basis set references. By default,
+<dt><strong>fmt: str</strong></dt><dd><p>The desired output format of the basis set references. By default,
 basis set information is returned as a list of dictionaries. Use
 get_reference_formats() to programmatically obtain the available formats.
 The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available reference formats are</p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>bib</li>
-<li>txt</li>
-<li>json</li>
+<li><p>bib</p></li>
+<li><p>txt</p></li>
+<li><p>json</p></li>
 </ul>
 </div></blockquote>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>str or dict</strong></dt>
-<dd><p class="first last">The references for the given basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str or dict</dt><dd><p>The references for the given basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_roles">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_roles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_roles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the available basis set roles available</p>
 <p>The returned data is a map of role to display name. The format
 can be passed as the role argument to fmt argument to <a class="reference internal" href="#basis_set_exchange.api.lookup_basis_by_role" title="basis_set_exchange.api.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">lookup_basis_by_role()</span></code></a></p>
@@ -433,7 +393,7 @@ can be passed as the role argument to fmt argument to <a class="reference intern
 
 <dl class="function">
 <dt id="basis_set_exchange.api.get_schema">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">get_schema</code><span class="sig-paren">(</span><em>schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_schema" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_schema</code><span class="sig-paren">(</span><em class="sig-param">schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a schema that can validate BSE JSON files</p>
 <p>The schema_type represents the type of BSE JSON file to be validated,
 and can be ‘component’, ‘element’, ‘table’, ‘metadata’, or ‘references’.</p>
@@ -441,53 +401,45 @@ and can be ‘component’, ‘element’, ‘table’, ‘metadata’, or ‘re
 
 <dl class="function">
 <dt id="basis_set_exchange.api.lookup_basis_by_role">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em>primary_basis</em>, <em>role</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em class="sig-param">primary_basis</em>, <em class="sig-param">role</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup the name of an auxiliary basis set given a primary basis set and role</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>primary_basis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The primary (orbital) basis set that we want the auxiliary
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>primary_basis</strong><span class="classifier">str</span></dt><dd><p>The primary (orbital) basis set that we want the auxiliary
 basis set for. This is not case sensitive.</p>
 </dd>
-<dt><strong>role: str</strong></dt>
-<dd><p class="first">Desired role/type of auxiliary basis set.
+<dt><strong>role: str</strong></dt><dd><p>Desired role/type of auxiliary basis set.
 Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_roles()</span></code> to programmatically obtain the available
 formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available roles are</p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>jfit</li>
-<li>jkfit</li>
-<li>rifit</li>
-<li>admmfit</li>
+<li><p>jfit</p></li>
+<li><p>jkfit</p></li>
+<li><p>rifit</p></li>
+<li><p>admmfit</p></li>
 </ul>
 </div></blockquote>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>str</strong></dt>
-<dd><p class="first last">The name of the auxiliary basis set for the given primary basis
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The name of the auxiliary basis set for the given primary basis
 and role.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.api.version">
-<code class="descclassname">basis_set_exchange.api.</code><code class="descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.version" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain the version of the basis set exchange library (as a string)</p>
 </dd></dl>
 
@@ -497,47 +449,37 @@ and role.</p>
 <p>Functions for creating archives of all basis sets</p>
 <dl class="function">
 <dt id="basis_set_exchange.bundle.create_bundle">
-<code class="descclassname">basis_set_exchange.bundle.</code><code class="descname">create_bundle</code><span class="sig-paren">(</span><em>outfile</em>, <em>fmt</em>, <em>reffmt</em>, <em>archive_type=None</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.bundle.create_bundle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.bundle.</code><code class="sig-name descname">create_bundle</code><span class="sig-paren">(</span><em class="sig-param">outfile</em>, <em class="sig-param">fmt</em>, <em class="sig-param">reffmt</em>, <em class="sig-param">archive_type=None</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.bundle.create_bundle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a single archive file containing all basis
 sets in a given format</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>outfile</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Path to the file to create. Existing files will be overwritten</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Path to the file to create. Existing files will be overwritten</p>
 </dd>
-<dt><strong>fmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Format of the basis set to archive (nwchem, turbomole, …)</p>
+<dt><strong>fmt</strong><span class="classifier">str</span></dt><dd><p>Format of the basis set to archive (nwchem, turbomole, …)</p>
 </dd>
-<dt><strong>reffmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Format of the basis set references to archive (nwchem, turbomole, …)</p>
+<dt><strong>reffmt</strong><span class="classifier">str</span></dt><dd><p>Format of the basis set references to archive (nwchem, turbomole, …)</p>
 </dd>
-<dt><strong>archive_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
+<dt><strong>archive_type</strong><span class="classifier">str</span></dt><dd><p>Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
 None, which will autodetect based on the outfile name</p>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Data directory with all the basis set information. By default,
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>None</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.bundle.get_archive_types">
-<code class="descclassname">basis_set_exchange.bundle.</code><code class="descname">get_archive_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.bundle.get_archive_types" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.bundle.</code><code class="sig-name descname">get_archive_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.bundle.get_archive_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information related to the types of archives available</p>
 </dd></dl>
 
@@ -547,7 +489,7 @@ it is in the ‘data’ subdirectory of this project.</p>
 <p>Functions related to composing basis sets from individual components</p>
 <dl class="function">
 <dt id="basis_set_exchange.compose.compose_elemental_basis">
-<code class="descclassname">basis_set_exchange.compose.</code><code class="descname">compose_elemental_basis</code><span class="sig-paren">(</span><em>file_relpath</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.compose.</code><code class="sig-name descname">compose_elemental_basis</code><span class="sig-paren">(</span><em class="sig-param">file_relpath</em>, <em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.compose.compose_elemental_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an ‘elemental’ basis from an elemental json file</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
@@ -561,168 +503,130 @@ information together into one ‘elemental’ basis dictionary</p>
 basis set format</p>
 <dl class="function">
 <dt id="basis_set_exchange.fileio.get_all_filelist">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">get_all_filelist</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_all_filelist" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">get_all_filelist</code><span class="sig-paren">(</span><em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.get_all_filelist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a tuple containing the following (as lists)</p>
 <ol class="arabic simple" start="0">
-<li>All metadata files</li>
-<li>All table basis files</li>
-<li>All element basis files</li>
-<li>All component basis files</li>
+<li><p>All metadata files</p></li>
+<li><p>All table basis files</p></li>
+<li><p>All element basis files</p></li>
+<li><p>All component basis files</p></li>
 </ol>
 <p>The paths to all the files are returned as paths relative to data_dir</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_json_basis">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_json_basis</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_json_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">read_json_basis</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_json_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads generic basis set information from a JSON file</p>
 <p>After reading, the MolSSI BSE schema information is searched for and if not
 found, an exception is raised.</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_metadata">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_metadata</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">read_metadata</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_notes_file">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_notes_file</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_notes_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">read_notes_file</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_notes_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the contents of a notes file.</p>
 <p>If the notes file does not exist, None is returned</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_references">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_references</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_references" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">read_references</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a JSON file containing info for all references</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.read_schema">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">read_schema</code><span class="sig-paren">(</span><em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_schema" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">read_schema</code><span class="sig-paren">(</span><em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a JSON schema file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to read</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.write_json_basis">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_json_basis</code><span class="sig-paren">(</span><em>file_path</em>, <em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">write_json_basis</code><span class="sig-paren">(</span><em class="sig-param">file_path</em>, <em class="sig-param">bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_json_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write basis set information to a JSON file</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
 </dd>
-<dt><strong>bs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Basis set information to write</p>
+<dt><strong>bs</strong><span class="classifier">dict</span></dt><dd><p>Basis set information to write</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.write_metadata">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_metadata</code><span class="sig-paren">(</span><em>file_path</em>, <em>metadata</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_metadata" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">write_metadata</code><span class="sig-paren">(</span><em class="sig-param">file_path</em>, <em class="sig-param">metadata</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
 </dd>
-<dt><strong>metadata</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Metadata information for all basis sets</p>
+<dt><strong>metadata</strong><span class="classifier">dict</span></dt><dd><p>Metadata information for all basis sets</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.fileio.write_references">
-<code class="descclassname">basis_set_exchange.fileio.</code><code class="descname">write_references</code><span class="sig-paren">(</span><em>file_path</em>, <em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_references" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.fileio.</code><code class="sig-name descname">write_references</code><span class="sig-paren">(</span><em class="sig-param">file_path</em>, <em class="sig-param">refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a dict containing info for all references to a JSON file</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>file_path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Full path to the file to write to. It will be overwritten if it exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
 </dd>
-<dt><strong>refs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Reference information to write</p>
+<dt><strong>refs</strong><span class="classifier">dict</span></dt><dd><p>Reference information to write</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -735,7 +639,7 @@ symbol, name, or number. It also has functions for converting
 angular momentum between integers (0, 1, 2) and letters (s, p, d).</p>
 <dl class="function">
 <dt id="basis_set_exchange.lut.amchar_to_int">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">amchar_to_int</code><span class="sig-paren">(</span><em>amchar</em>, <em>hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">amchar_to_int</code><span class="sig-paren">(</span><em class="sig-param">amchar</em>, <em class="sig-param">hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
 <p>The return value is a list of integers (to handle sp, spd, … orbitals)</p>
 <p>For example, converts ‘p’ to [1] and ‘sp’ to [0,1]</p>
@@ -745,7 +649,7 @@ ordering will be spdfghikl (skipping j)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.amint_to_char">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">amint_to_char</code><span class="sig-paren">(</span><em>am</em>, <em>hij=False</em>, <em>use_L=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">amint_to_char</code><span class="sig-paren">(</span><em class="sig-param">am</em>, <em class="sig-param">hij=False</em>, <em class="sig-param">use_L=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amint_to_char" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
 <p>The input is a list (to handle sp, spd, … orbitals). The return
 value is a string</p>
@@ -757,7 +661,7 @@ ordering will be spdfghikl (skipping j)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.electron_shells_start">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">electron_shells_start</code><span class="sig-paren">(</span><em>nelectrons</em>, <em>maxam=20</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.electron_shells_start" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">electron_shells_start</code><span class="sig-paren">(</span><em class="sig-param">nelectrons</em>, <em class="sig-param">maxam=20</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.electron_shells_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the starting principle quantum numbers of electron shells</p>
 <p>For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
 electrons shells will then start at 3s, 3p, 3d, and 4f (returned as [3, 3, 3, 4])</p>
@@ -767,48 +671,41 @@ is raised.</p>
 <p>The returned list is extended up to maxam.</p>
 <p>Note: Since the main use of this is for ECPs, we only cover what can really be found
 on the periodic table. No excited states!</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>nelectrons</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Number of electrons covered by an ECP</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nelectrons</strong><span class="classifier">int</span></dt><dd><p>Number of electrons covered by an ECP</p>
 </dd>
-<dt><strong>maxam</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
-<dd><p class="first last">Fill out the starting principal quantum numbers up to this am</p>
+<dt><strong>maxam</strong><span class="classifier">int</span></dt><dd><p>Fill out the starting principal quantum numbers up to this am</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>list</strong></dt>
-<dd><p class="first last">The starting principal quantum numbers of s, p, d, and f shells.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>The starting principal quantum numbers of s, p, d, and f shells.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_Z_from_sym">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_Z_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_Z_from_sym</code><span class="sig-paren">(</span><em class="sig-param">sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s Z-number given its symbol</p>
 <p>An exception is thrown if the symbol is not found</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_data_from_Z">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_Z</code><span class="sig-paren">(</span><em>Z</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_Z" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_data_from_Z</code><span class="sig-paren">(</span><em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given a Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_data_from_name">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_data_from_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given an elemental name</p>
 <p>The given name is not case sensitive</p>
 <p>An exception is thrown if the name is not found</p>
@@ -816,7 +713,7 @@ on the periodic table. No excited states!</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_data_from_sym">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_data_from_sym</code><span class="sig-paren">(</span><em>sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_sym" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_data_from_sym</code><span class="sig-paren">(</span><em class="sig-param">sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_data_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain elemental data given an elemental symbol</p>
 <p>The given symbol is not case sensitive</p>
 <p>An exception is thrown if the symbol is not found</p>
@@ -824,7 +721,7 @@ on the periodic table. No excited states!</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_name_from_Z">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_name_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_name_from_Z" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_name_from_Z</code><span class="sig-paren">(</span><em class="sig-param">Z</em>, <em class="sig-param">normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_name_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s name from its Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 <p>If normalize is True, the first letter will be capitalized</p>
@@ -832,7 +729,7 @@ on the periodic table. No excited states!</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.element_sym_from_Z">
-<code class="descclassname">basis_set_exchange.lut.</code><code class="descname">element_sym_from_Z</code><span class="sig-paren">(</span><em>Z</em>, <em>normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_sym_from_Z" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_sym_from_Z</code><span class="sig-paren">(</span><em class="sig-param">Z</em>, <em class="sig-param">normalize=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_sym_from_Z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s symbol from its Z number</p>
 <p>An exception is thrown if the Z number is not found</p>
 <p>If normalize is True, the first letter will be capitalized</p>
@@ -846,7 +743,7 @@ on the periodic table. No excited states!</p>
 data, as well as some other small functions.</p>
 <dl class="function">
 <dt id="basis_set_exchange.manip.make_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">make_general</code><span class="sig-paren">(</span><em>basis</em>, <em>skip_spdf=False</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">make_general</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">skip_spdf=False</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes one large general contraction for each angular momentum</p>
 <p>If use_copy is True, the input basis set is not modified.</p>
 <p>The output of this function is not pretty. If you want to make it nicer,
@@ -855,7 +752,7 @@ use sort_basis afterwards.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.merge_element_data">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">merge_element_data</code><span class="sig-paren">(</span><em>dest</em>, <em>sources</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">merge_element_data</code><span class="sig-paren">(</span><em class="sig-param">dest</em>, <em class="sig-param">sources</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.merge_element_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges the basis set data for an element from multiple sources
 into dest.</p>
 <p>The destination is not modified, and a (shallow) copy of dest is returned
@@ -867,11 +764,11 @@ and sources</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.optimize_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">optimize_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">optimize_general</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.optimize_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimizes the general contraction using the method of Hashimoto et al</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<div class="last line-block">
+<p class="admonition-title">See also</p>
+<div class="line-block">
 <div class="line">T. Hashimoto, K. Hirao, H. Tatewaki</div>
 <div class="line">‘Comment on Dunning’s correlation-consistent basis set’</div>
 <div class="line">Chemical Physics Letters v243, Issues 1-2, pp, 190-192 (1995)</div>
@@ -882,7 +779,7 @@ and sources</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.prune_basis">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">prune_basis</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes primitives that have a zero coefficient, and
 removes duplicate primitives and shells</p>
 <p>This only finds EXACT duplicates, and is meant to be used
@@ -892,7 +789,7 @@ after other manipulations</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.prune_shell">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">prune_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_shell" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">prune_shell</code><span class="sig-paren">(</span><em class="sig-param">shell</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.prune_shell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes exact duplicates of primitives, and condenses duplicate exponents
 into general contractions</p>
 <p>Also removes primitives if all coefficients are zero</p>
@@ -900,7 +797,7 @@ into general contractions</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_general">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_general</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">uncontract_general</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the general contractions from a basis set</p>
 <p>The input basis set is not modified. The returned basis
 may have functions with coefficients of zero and may have duplicate
@@ -910,7 +807,7 @@ shells.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_segmented">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_segmented</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">uncontract_segmented</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_segmented" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the segmented contractions from a basis set</p>
 <p>This implicitly removes general contractions as well,
 but will leave sp, spd, … orbitals alone</p>
@@ -922,7 +819,7 @@ shells.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.manip.uncontract_spdf">
-<code class="descclassname">basis_set_exchange.manip.</code><code class="descname">uncontract_spdf</code><span class="sig-paren">(</span><em>basis</em>, <em>max_am=0</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">uncontract_spdf</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">max_am=0</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.uncontract_spdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes sp, spd, spdf, etc, contractions from a basis set</p>
 <p>The general contractions are replaced by uncontracted versions</p>
 <p>Contractions up to max_am will be left in place. For example,
@@ -943,7 +840,7 @@ shells.</p>
 <p>Miscellaneous helper functions</p>
 <dl class="function">
 <dt id="basis_set_exchange.misc.basis_name_from_filename">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">basis_name_from_filename</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_from_filename" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">basis_name_from_filename</code><span class="sig-paren">(</span><em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_from_filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a basis set name that was part of a filename, determine the basis set name</p>
 <p>This is opposite of <a class="reference internal" href="#basis_set_exchange.misc.transform_basis_name" title="basis_set_exchange.misc.transform_basis_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">transform_basis_name()</span></code></a></p>
 <p>Pass only the part of the filename that contains the basis set name</p>
@@ -951,28 +848,28 @@ shells.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.misc.basis_name_to_filename">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">basis_name_to_filename</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_to_filename" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">basis_name_to_filename</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.basis_name_to_filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a basis set name, transform it into a valid filename</p>
 <p>This makes sure filenames don’t contain invalid characters</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.misc.compact_elements">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">compact_elements</code><span class="sig-paren">(</span><em>elements</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.compact_elements" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">compact_elements</code><span class="sig-paren">(</span><em class="sig-param">elements</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.compact_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a string (with ranges) given a list of element numbers</p>
 <p>For example, [1, 2, 3, 6, 7, 8, 10] will return “H-Li,C-O,Ne”</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.misc.contraction_string">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">contraction_string</code><span class="sig-paren">(</span><em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.contraction_string" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">contraction_string</code><span class="sig-paren">(</span><em class="sig-param">element</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.contraction_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Forms a string specifying the contractions for an element</p>
 <p>ie, (16s,10p) -&gt; [4s,3p]</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.misc.expand_elements">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">expand_elements</code><span class="sig-paren">(</span><em>compact_el</em>, <em>as_str=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.expand_elements" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">expand_elements</code><span class="sig-paren">(</span><em class="sig-param">compact_el</em>, <em class="sig-param">as_str=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.expand_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a list of integers given a string or list of compacted elements</p>
 <p>This is partly the opposite of compact_elements, but is more flexible.</p>
 <p>compact_el can be a list or a string. If compact_el is a list, each element is processed individually
@@ -980,11 +877,11 @@ as a string (meaning list elements can contain commas, ranges, etc)
 If compact_el is a string, it is split by commas and then each section is processed.</p>
 <p>In all cases, element symbols (case insensitive) and Z numbers (as integers or strings)
 can be used interchangeably. Ranges are also allowed in both lists and strings.</p>
-<dl class="docutils">
-<dt>Some examples:</dt>
-<dd>“H-Li,C-O,Ne” will return [1, 2, 3, 6, 7, 8, 10]
+<dl class="simple">
+<dt>Some examples:</dt><dd><p>“H-Li,C-O,Ne” will return [1, 2, 3, 6, 7, 8, 10]
 “H-N,8,Na-12” will return [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
-[‘C’, ‘Al-15,S’, 17, ‘18’] will return [6, 13, 14, 15, 16, 17, 18]</dd>
+[‘C’, ‘Al-15,S’, 17, ‘18’] will return [6, 13, 14, 15, 16, 17, 18]</p>
+</dd>
 </dl>
 <p>If as_str is True, the list will contain strings of the integers
 (ie, the first example above will return [‘1’, ‘2’, ‘3’, ‘6’, ‘7’, ‘8’, ‘10’]</p>
@@ -992,7 +889,7 @@ can be used interchangeably. Ranges are also allowed in both lists and strings.<
 
 <dl class="function">
 <dt id="basis_set_exchange.misc.transform_basis_name">
-<code class="descclassname">basis_set_exchange.misc.</code><code class="descname">transform_basis_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.transform_basis_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">transform_basis_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.transform_basis_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms the name of a basis set to an internal representation</p>
 <p>This makes comparison of basis set names easier by, for example,
 converting the name to all lower case.</p>
@@ -1004,7 +901,7 @@ converting the name to all lower case.</p>
 <p>Functionality for handling basis set and family notes</p>
 <dl class="function">
 <dt id="basis_set_exchange.notes.process_notes">
-<code class="descclassname">basis_set_exchange.notes.</code><code class="descname">process_notes</code><span class="sig-paren">(</span><em>notes</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.notes.process_notes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.notes.</code><code class="sig-name descname">process_notes</code><span class="sig-paren">(</span><em class="sig-param">notes</em>, <em class="sig-param">ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.notes.process_notes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add reference information to the bottom of a notes file</p>
 <p><cite>:ref:</cite> tags are removed and the actual reference data is appended</p>
 </dd></dl>
@@ -1015,47 +912,36 @@ converting the name to all lower case.</p>
 <p>Some helper functions related to handling of references/citations</p>
 <dl class="function">
 <dt id="basis_set_exchange.references.compact_references">
-<code class="descclassname">basis_set_exchange.references.</code><code class="descname">compact_references</code><span class="sig-paren">(</span><em>basis_dict</em>, <em>ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.compact_references" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.references.</code><code class="sig-name descname">compact_references</code><span class="sig-paren">(</span><em class="sig-param">basis_dict</em>, <em class="sig-param">ref_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.compact_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a mapping of elements to reference keys</p>
 <p>A list is returned, with each element of the list being a dictionary
 with entries ‘reference_info’ containing data for (possibly) multiple references,
 and ‘elements’ which is a list of element Z numbers
 that those references apply to</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>basis_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Dictionary containing basis set information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>basis_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing basis set information</p>
 </dd>
-<dt><strong>ref_data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Dictionary containing all reference information</p>
+<dt><strong>ref_data</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing all reference information</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.references.reference_text">
-<code class="descclassname">basis_set_exchange.references.</code><code class="descname">reference_text</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.references.</code><code class="sig-name descname">reference_text</code><span class="sig-paren">(</span><em class="sig-param">ref</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a single reference to plain text format</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>ref</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Information about a single reference</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ref</strong><span class="classifier">dict</span></dt><dd><p>Information about a single reference</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -1064,14 +950,14 @@ that those references apply to</p>
 <p>Sorting of BSE related dictionaries and data</p>
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_basis">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_basis</code><span class="sig-paren">(</span><em>basis</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_basis</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sorts all the information in a basis set into a standard order</p>
 <p>If use_copy is True, the input basis set is not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_basis_dict">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_basis_dict</code><span class="sig-paren">(</span><em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_basis_dict</code><span class="sig-paren">(</span><em class="sig-param">bs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_basis_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sorts a basis set dictionary into a standard order</p>
 <p>This, for example, allows the written file to be more easily read by humans by,
 for example, putting the name and description before more detailed fields.</p>
@@ -1081,7 +967,7 @@ in a consistent order</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_potentials">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_potentials</code><span class="sig-paren">(</span><em>potentials</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_potentials" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_potentials</code><span class="sig-paren">(</span><em class="sig-param">potentials</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_potentials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of ECP potentials into a standard order</p>
 <p>The order within a potential is not modified.</p>
 <p>The order of the shell list is in increasing angular momentum, with the largest
@@ -1091,7 +977,7 @@ angular momentum being moved to the front.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_references_dict">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_references_dict</code><span class="sig-paren">(</span><em>refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_references_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_references_dict</code><span class="sig-paren">(</span><em class="sig-param">refs</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_references_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sorts a reference dictionary into a standard order</p>
 <p>The keys of the references are also sorted, and the keys for the data for each
 reference are put in a more canonical order.</p>
@@ -1099,14 +985,14 @@ reference are put in a more canonical order.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_shell">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_shell</code><span class="sig-paren">(</span><em>shell</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shell" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_shell</code><span class="sig-paren">(</span><em class="sig-param">shell</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a basis set shell into a standard order</p>
 <p>If use_copy is True, the input shells are not modified.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_shells">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_shells</code><span class="sig-paren">(</span><em>shells</em>, <em>use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_shells</code><span class="sig-paren">(</span><em class="sig-param">shells</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of basis set shells into a standard order</p>
 <p>The order within a shell is by decreasing value of the exponent.</p>
 <p>The order of the shell list is in increasing angular momentum, and then
@@ -1116,7 +1002,7 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 
 <dl class="function">
 <dt id="basis_set_exchange.sort.sort_single_reference">
-<code class="descclassname">basis_set_exchange.sort.</code><code class="descname">sort_single_reference</code><span class="sig-paren">(</span><em>ref_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_single_reference" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.sort.</code><code class="sig-name descname">sort_single_reference</code><span class="sig-paren">(</span><em class="sig-param">ref_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.sort.sort_single_reference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sorts a dictionary containing data for a single reference into a standard order</p>
 </dd></dl>
 
@@ -1126,78 +1012,60 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <p>Functions related to validating JSON files (including against schema)</p>
 <dl class="function">
 <dt id="basis_set_exchange.validator.validate_data">
-<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate_data</code><span class="sig-paren">(</span><em>file_type</em>, <em>bs_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.validator.</code><code class="sig-name descname">validate_data</code><span class="sig-paren">(</span><em class="sig-param">file_type</em>, <em class="sig-param">bs_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates json basis set data against a schema</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>file_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
 </dd>
-<dt><strong>bs_data:</strong></dt>
-<dd><p class="first last">Data to be validated</p>
+<dt><strong>bs_data:</strong></dt><dd><p>Data to be validated</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>RuntimeError</strong></dt>
-<dd><p class="first last">If the file_type is not valid (and/or a schema doesn’t exist)</p>
 </dd>
-<dt><strong>ValidationError</strong></dt>
-<dd><p class="first last">If the given file does not pass validation</p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
 </dd>
-<dt><strong>FileNotFoundError</strong></dt>
-<dd><p class="first last">If the file given by file_path doesn’t exist</p>
+<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.validator.validate_data_dir">
-<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate_data_dir</code><span class="sig-paren">(</span><em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.validator.</code><code class="sig-name descname">validate_data_dir</code><span class="sig-paren">(</span><em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates all files in a data_dir</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.validator.validate_file">
-<code class="descclassname">basis_set_exchange.validator.</code><code class="descname">validate_file</code><span class="sig-paren">(</span><em>file_type</em>, <em>file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.validator.</code><code class="sig-name descname">validate_file</code><span class="sig-paren">(</span><em class="sig-param">file_type</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates a file against a schema</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>file_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of file to read. May be ‘component’, ‘element’, ‘table’, or ‘references’</p>
 </dd>
-<dt><strong>file_path:</strong></dt>
-<dd><p class="first last">Full path to the file to be validated</p>
+<dt><strong>file_path:</strong></dt><dd><p>Full path to the file to be validated</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>RuntimeError</strong></dt>
-<dd><p class="first last">If the file_type is not valid (and/or a schema doesn’t exist)</p>
 </dd>
-<dt><strong>ValidationError</strong></dt>
-<dd><p class="first last">If the given file does not pass validation</p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
 </dd>
-<dt><strong>FileNotFoundError</strong></dt>
-<dd><p class="first last">If the file given by file_path doesn’t exist</p>
+<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

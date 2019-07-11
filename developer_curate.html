@@ -171,118 +171,101 @@
 <p>Functions for helping curate BSE basis set data</p>
 <dl class="function">
 <dt id="basis_set_exchange.curate.add_basis">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">add_basis</code><span class="sig-paren">(</span><em>bs_file</em>, <em>data_dir</em>, <em>subdir</em>, <em>file_base</em>, <em>name</em>, <em>family</em>, <em>role</em>, <em>description</em>, <em>version</em>, <em>revision_description</em>, <em>data_source</em>, <em>refs=None</em>, <em>file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">add_basis</code><span class="sig-paren">(</span><em class="sig-param">bs_file</em>, <em class="sig-param">data_dir</em>, <em class="sig-param">subdir</em>, <em class="sig-param">file_base</em>, <em class="sig-param">name</em>, <em class="sig-param">family</em>, <em class="sig-param">role</em>, <em class="sig-param">description</em>, <em class="sig-param">version</em>, <em class="sig-param">revision_description</em>, <em class="sig-param">data_source</em>, <em class="sig-param">refs=None</em>, <em class="sig-param">file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a basis set to this library</p>
 <p>This takes in a single file containing the basis set is some format, parses it, and
 create the component, element, and table basis set files in the given data_dir (and subdir).
 The metadata file for the basis is created if it doesn’t exist, and the main metadata file is
 also updated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>bs_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Path to the file with formatted basis set information</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>bs_file</strong><span class="classifier">str</span></dt><dd><p>Path to the file with formatted basis set information</p>
 </dd>
-<dt><strong>data_dir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Path to the data directory to add the data to</p>
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Path to the data directory to add the data to</p>
 </dd>
-<dt><strong>subdir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Subdirectory of the data directory to add the basis set to</p>
+<dt><strong>subdir</strong><span class="classifier">str</span></dt><dd><p>Subdirectory of the data directory to add the basis set to</p>
 </dd>
-<dt><strong>file_base</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Base name for new files</p>
+<dt><strong>file_base</strong><span class="classifier">str</span></dt><dd><p>Base name for new files</p>
 </dd>
-<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Name of the basis set</p>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set</p>
 </dd>
-<dt><strong>family</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Family to which this basis set belongs</p>
+<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family to which this basis set belongs</p>
 </dd>
-<dt><strong>role</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Role of the basis set (orbital, etc)</p>
+<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set (orbital, etc)</p>
 </dd>
-<dt><strong>description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Description of the basis set</p>
+<dt><strong>description</strong><span class="classifier">str</span></dt><dd><p>Description of the basis set</p>
 </dd>
-<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Version of the basis set</p>
+<dt><strong>version</strong><span class="classifier">str</span></dt><dd><p>Version of the basis set</p>
 </dd>
-<dt><strong>revision_description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Description of this version of the basis set</p>
+<dt><strong>revision_description</strong><span class="classifier">str</span></dt><dd><p>Description of this version of the basis set</p>
 </dd>
-<dt><strong>data_source</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Description of where this data came from</p>
+<dt><strong>data_source</strong><span class="classifier">str</span></dt><dd><p>Description of where this data came from</p>
 </dd>
-<dt><strong>refs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict or str</span></dt>
-<dd><p class="first">Mapping of references to elements. This can be a dictionary with a compressed
+<dt><strong>refs</strong><span class="classifier">dict or str</span></dt><dd><p>Mapping of references to elements. This can be a dictionary with a compressed
 string of elements as keys and a list of reference strings as values.
 For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
 <p>If a list or string is passed, then those reference(s) will be used for
 all elements.</p>
-<p class="last">Elements that exist in the file but do not have a reference are given the
+<p>Elements that exist in the file but do not have a reference are given the
 usual ‘noref’ extension and the references entry is empty.</p>
 </dd>
-<dt><strong>file_fmt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Format of the input basis data (None = autodetect)</p>
+<dt><strong>file_fmt</strong><span class="classifier">str</span></dt><dd><p>Format of the input basis data (None = autodetect)</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.basis_comparison_report">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">basis_comparison_report</code><span class="sig-paren">(</span><em>bs1</em>, <em>bs2</em>, <em>uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.basis_comparison_report" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">basis_comparison_report</code><span class="sig-paren">(</span><em class="sig-param">bs1</em>, <em class="sig-param">bs2</em>, <em class="sig-param">uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.basis_comparison_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares two basis set dictionaries and prints a report about their differences</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis</code><span class="sig-paren">(</span><em>bs1</em>, <em>bs2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_elements_meta=False</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis</code><span class="sig-paren">(</span><em class="sig-param">bs1</em>, <em class="sig-param">bs2</em>, <em class="sig-param">compare_electron_shells_meta=False</em>, <em class="sig-param">compare_ecp_pots_meta=False</em>, <em class="sig-param">compare_elements_meta=False</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if two basis set dictionaries are the same</p>
-<dl class="docutils">
-<dt>bs1 <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>Full basis information</dd>
-<dt>bs2 <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd>Full basis information</dd>
-<dt>compare_electron_shells_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd>Compare the metadata of electron shells</dd>
-<dt>compare_ecp_pots_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd>Compare the metadata of ECP potentials</dd>
-<dt>compare_elements_meta <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd>Compare the overall element metadata</dd>
-<dt>compare_meta: bool</dt>
-<dd>Compare the metadata for the basis set (name, description, etc)</dd>
-<dt>rel_tol <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>Maximum relative error that is considered equal</dd>
+<dl class="simple">
+<dt>bs1<span class="classifier">dict</span></dt><dd><p>Full basis information</p>
+</dd>
+<dt>bs2<span class="classifier">dict</span></dt><dd><p>Full basis information</p>
+</dd>
+<dt>compare_electron_shells_meta<span class="classifier">bool</span></dt><dd><p>Compare the metadata of electron shells</p>
+</dd>
+<dt>compare_ecp_pots_meta<span class="classifier">bool</span></dt><dd><p>Compare the metadata of ECP potentials</p>
+</dd>
+<dt>compare_elements_meta<span class="classifier">bool</span></dt><dd><p>Compare the overall element metadata</p>
+</dd>
+<dt>compare_meta: bool</dt><dd><p>Compare the metadata for the basis set (name, description, etc)</p>
+</dd>
+<dt>rel_tol<span class="classifier">float</span></dt><dd><p>Maximum relative error that is considered equal</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis_against_file">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_against_file</code><span class="sig-paren">(</span><em>basis_name</em>, <em>src_filepath</em>, <em>file_type=None</em>, <em>version=None</em>, <em>uncontract_general=False</em>, <em>data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_against_file</code><span class="sig-paren">(</span><em class="sig-param">basis_name</em>, <em class="sig-param">src_filepath</em>, <em class="sig-param">file_type=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">uncontract_general=False</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare a basis set in the BSE against a reference file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis_files">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_files</code><span class="sig-paren">(</span><em>file_path_1</em>, <em>file_path_2</em>, <em>file_type_1=None</em>, <em>file_type_2=None</em>, <em>uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_files</code><span class="sig-paren">(</span><em class="sig-param">file_path_1</em>, <em class="sig-param">file_path_2</em>, <em class="sig-param">file_type_1=None</em>, <em class="sig-param">file_type_2=None</em>, <em class="sig-param">uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two files containing formatted basis sets</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_basis_sets">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_basis_sets</code><span class="sig-paren">(</span><em>basis_name_1</em>, <em>basis_name_2</em>, <em>version_1=None</em>, <em>version_2=None</em>, <em>uncontract_general=False</em>, <em>data_dir_1=None</em>, <em>data_dir_2=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_sets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_sets</code><span class="sig-paren">(</span><em class="sig-param">basis_name_1</em>, <em class="sig-param">basis_name_2</em>, <em class="sig-param">version_1=None</em>, <em class="sig-param">version_2=None</em>, <em class="sig-param">uncontract_general=False</em>, <em class="sig-param">data_dir_1=None</em>, <em class="sig-param">data_dir_2=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_sets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two files containing formatted basis sets</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_ecp_pots">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_ecp_pots</code><span class="sig-paren">(</span><em>potential1</em>, <em>potential2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_ecp_pots</code><span class="sig-paren">(</span><em class="sig-param">potential1</em>, <em class="sig-param">potential2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two ecp potentials for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
@@ -290,7 +273,7 @@ usual ‘noref’ extension and the references entry is empty.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_electron_shells">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_electron_shells</code><span class="sig-paren">(</span><em>shell1</em>, <em>shell2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_electron_shells</code><span class="sig-paren">(</span><em class="sig-param">shell1</em>, <em class="sig-param">shell2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare two electron shells for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
@@ -298,75 +281,59 @@ usual ‘noref’ extension and the references entry is empty.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.compare_elements">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">compare_elements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>compare_electron_shells_meta=False</em>, <em>compare_ecp_pots_meta=False</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_elements</code><span class="sig-paren">(</span><em class="sig-param">element1</em>, <em class="sig-param">element2</em>, <em class="sig-param">compare_electron_shells_meta=False</em>, <em class="sig-param">compare_ecp_pots_meta=False</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if the basis information for two elements is the same as another</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>element1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Basis information for an element</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>element1</strong><span class="classifier">dict</span></dt><dd><p>Basis information for an element</p>
 </dd>
-<dt><strong>element2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
-<dd><p class="first last">Basis information for another element</p>
+<dt><strong>element2</strong><span class="classifier">dict</span></dt><dd><p>Basis information for another element</p>
 </dd>
-<dt><strong>compare_electron_shells_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">Compare the metadata of electron shells</p>
+<dt><strong>compare_electron_shells_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the metadata of electron shells</p>
 </dd>
-<dt><strong>compare_ecp_pots_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">Compare the metadata of ECP potentials</p>
+<dt><strong>compare_ecp_pots_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the metadata of ECP potentials</p>
 </dd>
-<dt><strong>compare_meta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
-<dd><p class="first last">Compare the overall element metadata</p>
+<dt><strong>compare_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the overall element metadata</p>
 </dd>
-<dt><strong>rel_tol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd><p class="first last">Maximum relative error that is considered equal</p>
+<dt><strong>rel_tol</strong><span class="classifier">float</span></dt><dd><p>Maximum relative error that is considered equal</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.component_file_refs">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">component_file_refs</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">component_file_refs</code><span class="sig-paren">(</span><em class="sig-param">filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of what elements/refrences exist in component JSON files</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>filelist</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">A list of paths to json files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filelist</strong><span class="classifier">list</span></dt><dd><p>A list of paths to json files</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>dict</strong></dt>
-<dd><p class="first last">Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.create_metadata_file">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">create_metadata_file</code><span class="sig-paren">(</span><em>output_path</em>, <em>data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">create_metadata_file</code><span class="sig-paren">(</span><em class="sig-param">output_path</em>, <em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a METADATA.json file from a data directory</p>
 <p>The file is written to output_path</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.create_skel">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">create_skel</code><span class="sig-paren">(</span><em>role</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_skel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">create_skel</code><span class="sig-paren">(</span><em class="sig-param">role</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_skel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the skeleton of a dictionary or JSON file</p>
 <p>A dictionary is returned that contains the “molssi_bse_schema”
 key and other required keys, depending on the role</p>
@@ -375,7 +342,7 @@ key and other required keys, depending on the role</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.diff_basis_dict">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">diff_basis_dict</code><span class="sig-paren">(</span><em>left_list</em>, <em>right_list</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">diff_basis_dict</code><span class="sig-paren">(</span><em class="sig-param">left_list</em>, <em class="sig-param">right_list</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the difference between two sets of basis set dictionaries</p>
 <p>The result is a list of dictionaries that correspond to each dictionary in
 <cite>left_list</cite>. Each resulting dictionary will contain only the elements/shells
@@ -383,34 +350,27 @@ that exist in that entry and not in any of the dictionaries in <cite>right_list<
 <p>This only works on the shell level, and will only subtract entire shells
 that are identical. ECP potentials are not affected.</p>
 <p>The return value contains deep copies of the input data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>left_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
-<dd><p class="first last">Dictionaries to use as the base</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>left_list</strong><span class="classifier">list of dict</span></dt><dd><p>Dictionaries to use as the base</p>
 </dd>
-<dt><strong>right_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
-<dd><p class="first last">Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p>
+<dt><strong>right_list</strong><span class="classifier">list of dict</span></dt><dd><p>Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>list</strong></dt>
-<dd><p class="first last">Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>list</dt><dd><p>Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.diff_json_files">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">diff_json_files</code><span class="sig-paren">(</span><em>left_files</em>, <em>right_files</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_json_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">diff_json_files</code><span class="sig-paren">(</span><em class="sig-param">left_files</em>, <em class="sig-param">right_files</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_json_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the difference between two sets of basis set JSON files</p>
 <p>The output is a set of files that correspond to each file in
 <cite>left_files</cite>. Each resulting dictionary will contain only the elements/shells
@@ -420,33 +380,26 @@ that are identical. ECP potentials are not affected.</p>
 <p><cite>left_files</cite> and <cite>right_files</cite> are lists of file paths. The output
 is written to files with the same names as those in <cite>left_files</cite>,
 but with <cite>.diff</cite> added to the end. If those files exist, they are overwritten.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>left_files</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
-<dd><p class="first last">Paths to JSON files to use as the base</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>left_files</strong><span class="classifier">list of str</span></dt><dd><p>Paths to JSON files to use as the base</p>
 </dd>
-<dt><strong>right_files</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
-<dd><p class="first last">Paths to JSON files to subtract from each file of <cite>left_files</cite></p>
+<dt><strong>right_files</strong><span class="classifier">list of str</span></dt><dd><p>Paths to JSON files to subtract from each file of <cite>left_files</cite></p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>None</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.ecp_pots_are_equal">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em>pots1</em>, <em>pots2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em class="sig-param">pots1</em>, <em class="sig-param">pots2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -455,7 +408,7 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.ecp_pots_are_subset">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em class="sig-param">subset</em>, <em class="sig-param">superset</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of ecp potentials is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The potentials are compared approximately (exponents/coefficients are 
@@ -465,7 +418,7 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.electron_shells_are_equal">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em>shells1</em>, <em>shells2</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em class="sig-param">shells1</em>, <em class="sig-param">shells2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The shells are compared approximately (exponents/coefficients are 
 within a tolerance)</p>
@@ -474,7 +427,7 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.electron_shells_are_subset">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em>subset</em>, <em>superset</em>, <em>compare_meta=False</em>, <em>rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em class="sig-param">subset</em>, <em class="sig-param">superset</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a list of electron shells is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The shells are compared approximately (exponents/coefficients are 
@@ -484,35 +437,29 @@ within a tolerance)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.elements_in_files">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">elements_in_files</code><span class="sig-paren">(</span><em>filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.elements_in_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">elements_in_files</code><span class="sig-paren">(</span><em class="sig-param">filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.elements_in_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of what elements exist in JSON files</p>
 <p>This works on table, element, and component data files</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>filelist</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
-<dd><p class="first last">A list of paths to json files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filelist</strong><span class="classifier">list</span></dt><dd><p>A list of paths to json files</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>dict</strong></dt>
-<dd><p class="first last">Keys are the file path, value is a compacted element string of
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Keys are the file path, value is a compacted element string of
 what elements are in that file</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.get_reader_formats">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">get_reader_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.get_reader_formats" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">get_reader_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.get_reader_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the available formats mapped to display name.</p>
 <p>This is returned as an ordered dictionary, with the most common
 at the top, followed by the rest in alphabetical order</p>
@@ -520,7 +467,7 @@ at the top, followed by the rest in alphabetical order</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.potentials_difference">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">potentials_difference</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">potentials_difference</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes and prints the differences between two lists of potentials</p>
 <p>If the shells contain a different number primitives,
 or the lists are of different length, inf is returned.
@@ -529,7 +476,7 @@ Otherwise, the maximum relative difference is returned.</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.curate.shells_difference">
-<code class="descclassname">basis_set_exchange.curate.</code><code class="descname">shells_difference</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.shells_difference" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">shells_difference</code><span class="sig-paren">(</span><em class="sig-param">s1</em>, <em class="sig-param">s2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.shells_difference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes and prints the differences between two lists of shells</p>
 <p>If the shells contain a different number primitives,
 or the lists are of different length, inf is returned.
