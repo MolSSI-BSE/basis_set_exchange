@@ -6,3 +6,20 @@
 
 The original BSE had an entry for barium/ADZP. However, I do not know where the augmenting functions
 came from - neto2013a states it is "not possible to construct ADZP set by extrapolation".
+
+A set of primitive s and p functions was added to the sp sets of each DZP set of neutral atoms and 
+the exponents optimized for the anion HF energy. Then an additional primitive polarization function 
+was added to each of the d-polarization sets present in the neutral atoms, and the exponents of 
+these functions were optimized for the ROMP2 energy of the anion. 
+
+Thus, the ADZP basis sets have [3s2p], [5s3p2d], and [8s5p2d] functions for H, Li–Ne, and Na–Ar, 
+respectively. They can be used both in the cartesian or spherical harmonic representation of the
+basis functions of higher angular momentum.
+
+These sets have the following contraction schemes:
+
+H & He: Contracted to [2s] through the contraction scheme (3,1). 
+For Li and for atoms Be-Ne: (9s5p) primitive Gaussians sets were contracted to [4s2p] through 
+the contraction schemes (6111/41) and (5211/41), respectively. 
+Second-row atoms (12s9p) were contracted to [7s4p] through the following contraction schemes: 
+for Na (5112111/6111); for Mg–S (5111211/6111); and for Cl and Ar (5121111/6111).

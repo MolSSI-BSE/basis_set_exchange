@@ -1,0 +1,45 @@
+Notes about Jorge basis sets
+-------------------------------------------------------------------------------
+
+
+
+Gaussian Basis Sets for non relativistic calculations
+-------------------------------------------------------------------------------
+The performance of the basis sets are assed in molecular HF and MP2 calculations 
+for a sample of diatomic molecules by comparing energies, dissociation energies 
+and dipole moments. The sets have minimized the total energy of selected states, using 
+the ATOM-SCF program, modified to introduce the IGCHF method and to optimize each exponent
+of the s and p symmetries. This program uses RO self-consistent field (SCF) procedure.
+
+
+
+
+Gaussian Basis Sets for Douglas-Kroll-Hess calculations
+-------------------------------------------------------------------------------
+Jorge et al. presented segmented contracted double, triple, quadruple and quintuple 
+zeta valence quality plus polarization function (XZP, X = D, T, Q, and 5, 
+respectively) basis sets for the atoms from H to Ar. 
+At the HF, DFT and MP2 levels of theory, they have been applied with success in 
+calculations of various atomic and molecular properties
+
+The use of nonrelativistic contracted basis sets can result in a large amount 
+of error in calculation of scalar relativistic effects. As stated in Jorge2009a, 
+Jong et al. found that nonrelativistic basis sets need to be recontracted and 
+used with the one-electron DKH Hamiltonian. 
+DKH calculations use a Gaussian nuclear model and employed spherical harmonic 
+Gaussian-type functions, which can can then be systematically used to reduce basis set 
+truncation error.
+
+
+
+
+--------------------------------------------------------------------------------
+REFERENCES MENTIONED ABOVE
+--------------------------------------------------------------------------------
+
+Jorge2009a
+F.E. Jorge, A. Canal Neto, G.G. Camiletti, S.F. Machado
+Contracted Gaussian basis sets for Douglas–Kroll–Hess calculations: Estimating
+scalar relativistic effects of some atomic and molecular properties
+J. Chem. Phys. 130, 064108 (2009)
+10.1063/1.3072360

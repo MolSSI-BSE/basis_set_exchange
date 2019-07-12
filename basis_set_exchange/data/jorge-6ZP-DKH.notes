@@ -4,3 +4,21 @@
  Original BSE Last Modified: Tue, 13 May 2014 20:41:59 GMT
 --------------------------------------------------------------------------------
 
+H,He: fully atom optimized basis sets (8s) were contracted to [6s] through the 
+following contraction scheme: [311111] 
+
+Li-Ne: fully atom optimized basis sets (15s9p) were contracted to [8s6p] through 
+the following contraction scheme [72111111/411111]
+
+Na-Ar: fully atom optimized basis sets (19s13p) were contracted to [11s8p] through
+the following contraction schemes {82111111111/52111111} for Na, Mg, and P–Ar
+and {91111111111/52111111} for Al and Si.
+
+
+
+The 6ZP is obtained from the above representations by addition of functions of 
+higher angular quantum number than are required to describe the atom in ground 
+state. To re-optimize the contraction coefficientts of the set, a subroutine to 
+optimize contraction coefficients was developed and then coupled to the 
+Gaussian 03 program. The DKH second-order scalar relativistic (DKH2) Hamiltonian 
+as implimented in the Gaussian 03 code was used.

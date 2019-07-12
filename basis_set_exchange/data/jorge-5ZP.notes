@@ -4,3 +4,16 @@
  Original BSE Last Modified: Fri, 25 Apr 2014 22:48:55 GMT
 --------------------------------------------------------------------------------
 
+The methodology originally developed to construct the DZP basis set for H-Ar is 
+extended to generate 5Z plus polarization function  (5ZP) basis set. Total HF and 
+second order correlation energies for FH N2 F2 AlF SiO PN SC and ClB were calculated 
+and compared with the results obtained with numerical HF methods. Comparing with
+results of MP2 theory with linear terms (MP2-R12) calculations, they examined the CBS 
+limit of the MP2 method using XPZ and cc-pVXZ basis sets.
+
+After many experiments, Jorge et al. decided for 5Z basis sets:
+H & He: fully atom optimized basis sets (7s) were contracted to [5s] through the following 
+contraction scheme {31111}
+First-row elements: fully atom optimized basis sets (14s 8p) were contracted to [7s 5p] through 
+the following contraction schemes {7211111/41111} for Li–B, N–Ne and {7211111/32111} for C
+Second-row atoms: fully atom optimized basis sets (18s 12p) were contracted to [10s 7p] through the following contraction scheme {8211111111/6111111} for Na–Ar.

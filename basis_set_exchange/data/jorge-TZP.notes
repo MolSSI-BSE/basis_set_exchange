@@ -4,3 +4,16 @@
  Original BSE Last Modified: Mon, 05 May 2014 22:11:24 GMT
 --------------------------------------------------------------------------------
 
+The TZP basis set has been determined from fully-optimized basis sets of primitive Gaussian-type 
+functions generated in atomic HF calculations. The performance of the basis sets are assed in 
+molecular HF and MP2 calculations for a sample of diatomic molecules by comparing energies, 
+dissociation energies and dipole moments. 
+
+After many experiments, Jorge et al. decided for TZ basis sets: 
+H & He: fully atom optimized basis sets (5s) were contracted to [3s] through the following 
+contraction scheme {311}
+First-row elements: fully atom optimized basis sets (10s6p) were contracted to [5s3p] through the 
+following contraction schemes, {61111/411} for Li–B and {52111/411} for C–Ne
+Second-row atoms: fully atom optimized basis sets (13s10p) were contracted to [8s5p] through the 
+following contraction schemes {51112111/61111} for Na, Mg, and Al–P, {51111211/61111} for S and Cl, 
+and {52111111/61111} for Ar. 

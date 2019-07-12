@@ -4,3 +4,15 @@
  Original BSE Last Modified: Fri, 25 Apr 2014 19:50:50 GMT
 --------------------------------------------------------------------------------
 
+The QZP basis set has been determined from fully-optimized basis sets of primitive Gaussian-type
+functions generated in atomic HF calculations. The performance of the basis sets are assed in
+molecular HF and MP2 calculations for a sample of diatomic molecules by comparing energies,
+dissociation energies and dipole moments.
+
+After many experiments, Jorge et al. decided for QZ basis sets:
+H & He: fully atom optimized basis sets (6s) were contracted to [4s] through the following 
+contraction scheme {3111}
+First-row elements: fully atom optimized basis sets (11s7p) were contracted to [6s4p] through the 
+following contraction schemes {521111/4111} for Li and Be and {611111/4111} for B–Ne
+Second-row atoms: fully atom optimized basis sets (14s11p) were contracted to [9s6p] through the 
+following contraction scheme {521111111/611111} for Na–Ar.
