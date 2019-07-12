@@ -865,7 +865,7 @@
       }
     }
   },
-  "6-31++g*": {
+  "6-31++g_st_": {
     "display_name": "6-31++G*",
     "other_names": [],
     "description": "6-31G + diffuse functions on all atoms, polarization on heavy atoms",
@@ -934,7 +934,7 @@
       }
     }
   },
-  "6-31++g**": {
+  "6-31++g_st__st_": {
     "display_name": "6-31++G**",
     "other_names": [],
     "description": "6-31G + diffuse and polarization functions on all atoms",
@@ -1002,7 +1002,7 @@
       }
     }
   },
-  "6-31++g**-j": {
+  "6-31++g_st__st_-j": {
     "display_name": "6-31++G**-J",
     "other_names": [],
     "description": "6-31++G**-J",
@@ -1098,7 +1098,7 @@
       }
     }
   },
-  "6-31+g*": {
+  "6-31+g_st_": {
     "display_name": "6-31+G*",
     "other_names": [],
     "description": "6-31G + diffuse and polarization functions on heavy atoms",
@@ -1167,7 +1167,35 @@
       }
     }
   },
-  "6-31+g**": {
+  "6-31+g_st_-j": {
+    "display_name": "6-31+G*-J",
+    "other_names": [],
+    "description": "6-31+G*-J",
+    "latest_version": "0",
+    "basename": "6-31PGS-J",
+    "relpath": "",
+    "family": "sauer_j",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-31PGS-J.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2016-07-11",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "6-31+g_st__st_": {
     "display_name": "6-31+G**",
     "other_names": [],
     "description": "6-31G + diffuse functions on heavy atoms, polarization on all",
@@ -1232,34 +1260,6 @@
           "16",
           "17",
           "18"
-        ]
-      }
-    }
-  },
-  "6-31+g*-j": {
-    "display_name": "6-31+G*-J",
-    "other_names": [],
-    "description": "6-31+G*-J",
-    "latest_version": "0",
-    "basename": "6-31PGS-J",
-    "relpath": "",
-    "family": "sauer_j",
-    "role": "orbital",
-    "functiontypes": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-31PGS-J.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2016-07-11",
-        "elements": [
-          "1",
-          "6",
-          "7",
-          "8"
         ]
       }
     }
@@ -1391,7 +1391,7 @@
       }
     }
   },
-  "6-311++g*": {
+  "6-311++g_st_": {
     "display_name": "6-311++G*",
     "other_names": [],
     "description": "VTZ Valence Triple Zeta: 3 Funct.'s/Valence AO with diffuse on all atoms, polarization on heavy atoms",
@@ -1435,7 +1435,7 @@
       }
     }
   },
-  "6-311++g**": {
+  "6-311++g_st__st_": {
     "display_name": "6-311++G**",
     "other_names": [],
     "description": "VTZ Valence Triple Zeta: 3 Funct.'s/Valence AO with diffuse+polarization on all atoms",
@@ -1479,7 +1479,7 @@
       }
     }
   },
-  "6-311++g**-j": {
+  "6-311++g_st__st_-j": {
     "display_name": "6-311++G**-J",
     "other_names": [],
     "description": "6-311++G**-J",
@@ -1595,7 +1595,7 @@
       }
     }
   },
-  "6-311+g*": {
+  "6-311+g_st_": {
     "display_name": "6-311+G*",
     "other_names": [],
     "description": "VTZ Valence Triple Zeta: 3 Funct.'s/Valence AO with diffuse+polarization on heavy atoms",
@@ -1640,7 +1640,35 @@
       }
     }
   },
-  "6-311+g**": {
+  "6-311+g_st_-j": {
+    "display_name": "6-311+G*-J",
+    "other_names": [],
+    "description": "6-311+G*-J",
+    "latest_version": "0",
+    "basename": "6-311PGS-J",
+    "relpath": "",
+    "family": "sauer_j",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-311PGS-J.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2016-07-11",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "6-311+g_st__st_": {
     "display_name": "6-311+G**",
     "other_names": [],
     "description": "VTZ Valence Triple Zeta: 3 Funct.'s/Valence AO with diffuse on heavy atoms, polarization on all atoms",
@@ -1681,34 +1709,6 @@
           "18",
           "19",
           "20"
-        ]
-      }
-    }
-  },
-  "6-311+g*-j": {
-    "display_name": "6-311+G*-J",
-    "other_names": [],
-    "description": "6-311+G*-J",
-    "latest_version": "0",
-    "basename": "6-311PGS-J",
-    "relpath": "",
-    "family": "sauer_j",
-    "role": "orbital",
-    "functiontypes": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-311PGS-J.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2016-07-11",
-        "elements": [
-          "1",
-          "6",
-          "7",
-          "8"
         ]
       }
     }
@@ -1854,7 +1854,34 @@
       }
     }
   },
-  "6-311g*": {
+  "6-311g-j": {
+    "display_name": "6-311G-J",
+    "other_names": [],
+    "description": "6-311G-J",
+    "latest_version": "0",
+    "basename": "6-311G-J",
+    "relpath": "",
+    "family": "sauer_j",
+    "role": "orbital",
+    "functiontypes": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-311G-J.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2016-07-11",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "6-311g_st_": {
     "display_name": "6-311G*",
     "other_names": [],
     "description": "VTZ Valence Triple Zeta: 3 Funct.'s/Valence AO",
@@ -1906,7 +1933,7 @@
       }
     }
   },
-  "6-311g**": {
+  "6-311g_st__st_": {
     "display_name": "6-311G**",
     "other_names": [
       "6-311G(d,p)"
@@ -1956,33 +1983,6 @@
           "35",
           "36",
           "53"
-        ]
-      }
-    }
-  },
-  "6-311g-j": {
-    "display_name": "6-311G-J",
-    "other_names": [],
-    "description": "6-311G-J",
-    "latest_version": "0",
-    "basename": "6-311G-J",
-    "relpath": "",
-    "family": "sauer_j",
-    "role": "orbital",
-    "functiontypes": [
-      "gto"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-311G-J.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2016-07-11",
-        "elements": [
-          "1",
-          "6",
-          "7",
-          "8"
         ]
       }
     }
@@ -2268,7 +2268,60 @@
       }
     }
   },
-  "6-31g*": {
+  "6-31g-blaudeau": {
+    "display_name": "6-31G-Blaudeau",
+    "other_names": [],
+    "description": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
+    "latest_version": "0",
+    "basename": "6-31G-blaudeau",
+    "relpath": "",
+    "family": "blaudeau",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-31G-blaudeau.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "19",
+          "20"
+        ]
+      }
+    }
+  },
+  "6-31g-j": {
+    "display_name": "6-31G-J",
+    "other_names": [],
+    "description": "6-31G-J",
+    "latest_version": "0",
+    "basename": "6-31G-J",
+    "relpath": "",
+    "family": "sauer_j",
+    "role": "orbital",
+    "functiontypes": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-31G-J.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2016-07-11",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    }
+  },
+  "6-31g_st_": {
     "display_name": "6-31G*",
     "other_names": [],
     "description": "6-31G + polarization on heavy atoms",
@@ -2372,7 +2425,33 @@
       }
     }
   },
-  "6-31g**": {
+  "6-31g_st_-blaudeau": {
+    "display_name": "6-31G*-Blaudeau",
+    "other_names": [],
+    "description": "VDZP    Valence Double Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "6-31GS-blaudeau",
+    "relpath": "",
+    "family": "blaudeau",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "6-31GS-blaudeau.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "19",
+          "20"
+        ]
+      }
+    }
+  },
+  "6-31g_st__st_": {
     "display_name": "6-31G**",
     "other_names": [
       "6-31G(d,p)"
@@ -2468,85 +2547,6 @@
           "34",
           "35",
           "36"
-        ]
-      }
-    }
-  },
-  "6-31g*-blaudeau": {
-    "display_name": "6-31G*-Blaudeau",
-    "other_names": [],
-    "description": "VDZP    Valence Double Zeta + Polarization on All Atoms",
-    "latest_version": "0",
-    "basename": "6-31GS-blaudeau",
-    "relpath": "",
-    "family": "blaudeau",
-    "role": "orbital",
-    "functiontypes": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-31GS-blaudeau.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2007-01-15",
-        "elements": [
-          "19",
-          "20"
-        ]
-      }
-    }
-  },
-  "6-31g-blaudeau": {
-    "display_name": "6-31G-Blaudeau",
-    "other_names": [],
-    "description": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
-    "latest_version": "0",
-    "basename": "6-31G-blaudeau",
-    "relpath": "",
-    "family": "blaudeau",
-    "role": "orbital",
-    "functiontypes": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-31G-blaudeau.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2007-01-15",
-        "elements": [
-          "19",
-          "20"
-        ]
-      }
-    }
-  },
-  "6-31g-j": {
-    "display_name": "6-31G-J",
-    "other_names": [],
-    "description": "6-31G-J",
-    "latest_version": "0",
-    "basename": "6-31G-J",
-    "relpath": "",
-    "family": "sauer_j",
-    "role": "orbital",
-    "functiontypes": [
-      "gto"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "0": {
-        "file_relpath": "6-31G-J.0.table.json",
-        "revdesc": "Data from the original Basis Set Exchange",
-        "revdate": "2016-07-11",
-        "elements": [
-          "1",
-          "6",
-          "7",
-          "8"
         ]
       }
     }
@@ -8875,7 +8875,7 @@
       }
     }
   },
-  "cc-pv5z(fi/sf/fw)": {
+  "cc-pv5z(fi_sl_sf_sl_fw)": {
     "display_name": "cc-pV5Z(fi/sf/fw)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -8919,7 +8919,7 @@
       }
     }
   },
-  "cc-pv5z(fi/sf/lc)": {
+  "cc-pv5z(fi_sl_sf_sl_lc)": {
     "display_name": "cc-pV5Z(fi/sf/lc)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -8963,7 +8963,7 @@
       }
     }
   },
-  "cc-pv5z(fi/sf/sc)": {
+  "cc-pv5z(fi_sl_sf_sl_sc)": {
     "display_name": "cc-pV5Z(fi/sf/sc)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -9007,7 +9007,7 @@
       }
     }
   },
-  "cc-pv5z(pt/sf/fw)": {
+  "cc-pv5z(pt_sl_sf_sl_fw)": {
     "display_name": "cc-pV5Z(pt/sf/fw)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -9051,7 +9051,7 @@
       }
     }
   },
-  "cc-pv5z(pt/sf/lc)": {
+  "cc-pv5z(pt_sl_sf_sl_lc)": {
     "display_name": "cc-pV5Z(pt/sf/lc)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -9095,7 +9095,7 @@
       }
     }
   },
-  "cc-pv5z(pt/sf/sc)": {
+  "cc-pv5z(pt_sl_sf_sl_sc)": {
     "display_name": "cc-pV5Z(pt/sf/sc)",
     "other_names": [],
     "description": "V5Z4P   Relativistic Valence Quintuple Zeta + Polarization",
@@ -9669,7 +9669,7 @@
       }
     }
   },
-  "cc-pvdz(fi/sf/fw)": {
+  "cc-pvdz(fi_sl_sf_sl_fw)": {
     "display_name": "cc-pVDZ(fi/sf/fw)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -9713,7 +9713,7 @@
       }
     }
   },
-  "cc-pvdz(fi/sf/lc)": {
+  "cc-pvdz(fi_sl_sf_sl_lc)": {
     "display_name": "cc-pVDZ(fi/sf/lc)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -9757,7 +9757,7 @@
       }
     }
   },
-  "cc-pvdz(fi/sf/sc)": {
+  "cc-pvdz(fi_sl_sf_sl_sc)": {
     "display_name": "cc-pVDZ(fi/sf/sc)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -9801,7 +9801,7 @@
       }
     }
   },
-  "cc-pvdz(pt/sf/fw)": {
+  "cc-pvdz(pt_sl_sf_sl_fw)": {
     "display_name": "cc-pVDZ(pt/sf/fw)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -9845,7 +9845,7 @@
       }
     }
   },
-  "cc-pvdz(pt/sf/lc)": {
+  "cc-pvdz(pt_sl_sf_sl_lc)": {
     "display_name": "cc-pVDZ(pt/sf/lc)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -9889,7 +9889,7 @@
       }
     }
   },
-  "cc-pvdz(pt/sf/sc)": {
+  "cc-pvdz(pt_sl_sf_sl_sc)": {
     "display_name": "cc-pVDZ(pt/sf/sc)",
     "other_names": [],
     "description": "VDZP    Relativistic Valence Double Zeta + Polarization",
@@ -10319,7 +10319,7 @@
       }
     }
   },
-  "cc-pvqz(fi/sf/fw)": {
+  "cc-pvqz(fi_sl_sf_sl_fw)": {
     "display_name": "cc-pVQZ(fi/sf/fw)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -10363,7 +10363,7 @@
       }
     }
   },
-  "cc-pvqz(fi/sf/lc)": {
+  "cc-pvqz(fi_sl_sf_sl_lc)": {
     "display_name": "cc-pVQZ(fi/sf/lc)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -10407,7 +10407,7 @@
       }
     }
   },
-  "cc-pvqz(fi/sf/sc)": {
+  "cc-pvqz(fi_sl_sf_sl_sc)": {
     "display_name": "cc-pVQZ(fi/sf/sc)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -10451,7 +10451,7 @@
       }
     }
   },
-  "cc-pvqz(pt/sf/fw)": {
+  "cc-pvqz(pt_sl_sf_sl_fw)": {
     "display_name": "cc-pVQZ(pt/sf/fw)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -10495,7 +10495,7 @@
       }
     }
   },
-  "cc-pvqz(pt/sf/lc)": {
+  "cc-pvqz(pt_sl_sf_sl_lc)": {
     "display_name": "cc-pVQZ(pt/sf/lc)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -10539,7 +10539,7 @@
       }
     }
   },
-  "cc-pvqz(pt/sf/sc)": {
+  "cc-pvqz(pt_sl_sf_sl_sc)": {
     "display_name": "cc-pVQZ(pt/sf/sc)",
     "other_names": [],
     "description": "VQZ3P   Relativistic Valence Quadruple Zeta + Polarization",
@@ -11029,7 +11029,7 @@
       }
     }
   },
-  "cc-pvtz(fi/sf/fw)": {
+  "cc-pvtz(fi_sl_sf_sl_fw)": {
     "display_name": "cc-pVTZ(fi/sf/fw)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -11073,7 +11073,7 @@
       }
     }
   },
-  "cc-pvtz(fi/sf/lc)": {
+  "cc-pvtz(fi_sl_sf_sl_lc)": {
     "display_name": "cc-pVTZ(fi/sf/lc)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -11117,7 +11117,7 @@
       }
     }
   },
-  "cc-pvtz(fi/sf/sc)": {
+  "cc-pvtz(fi_sl_sf_sl_sc)": {
     "display_name": "cc-pVTZ(fi/sf/sc)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -11161,7 +11161,7 @@
       }
     }
   },
-  "cc-pvtz(pt/sf/fw)": {
+  "cc-pvtz(pt_sl_sf_sl_fw)": {
     "display_name": "cc-pVTZ(pt/sf/fw)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -11205,7 +11205,7 @@
       }
     }
   },
-  "cc-pvtz(pt/sf/lc)": {
+  "cc-pvtz(pt_sl_sf_sl_lc)": {
     "display_name": "cc-pVTZ(pt/sf/lc)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -11249,7 +11249,7 @@
       }
     }
   },
-  "cc-pvtz(pt/sf/sc)": {
+  "cc-pvtz(pt_sl_sf_sl_sc)": {
     "display_name": "cc-pVTZ(pt/sf/sc)",
     "other_names": [],
     "description": "VTZ2P   Relativistic Valence Triple Zeta + Polarization",
@@ -20587,7 +20587,7 @@
       }
     }
   },
-  "m6-31g*": {
+  "m6-31g_st_": {
     "display_name": "m6-31G*",
     "other_names": [],
     "description": "m6-31G*",
@@ -23593,7 +23593,7 @@
       }
     }
   },
-  "s3-21g*": {
+  "s3-21g_st_": {
     "display_name": "s3-21G*",
     "other_names": [],
     "description": "s3-21G*",
@@ -23661,7 +23661,7 @@
       }
     }
   },
-  "s6-31g*": {
+  "s6-31g_st_": {
     "display_name": "s6-31G*",
     "other_names": [],
     "description": "s6-31G*",
@@ -24810,7 +24810,7 @@
       }
     }
   },
-  "sto-3g*": {
+  "sto-3g_st_": {
     "display_name": "STO-3G*",
     "other_names": [],
     "description": "MBP     Minimal Basis + Polarization on second row",

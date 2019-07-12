@@ -343,7 +343,9 @@ def get_all_basis_names(data_dir=None):
         it is in the 'data' subdirectory of this project.
     '''
 
-    return sorted(list(get_metadata(data_dir).keys()))
+    md = get_metadata(data_dir)
+    names = list(v['display_name'] for v in md.values())
+    return sorted(names)
 
 
 def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=None):

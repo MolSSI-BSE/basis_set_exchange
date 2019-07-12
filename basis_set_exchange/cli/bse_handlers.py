@@ -12,9 +12,9 @@ def _bse_cli_list_basis_sets(args):
     metadata = api.filter_basis_sets(args.substr, args.family, args.role, args.elements, args.data_dir)
 
     if args.no_description:
-        liststr = metadata.keys()
+        liststr = [x['display_name'] for x in metadata.values()]
     else:
-        liststr = format_columns([(k, v['description']) for k, v in metadata.items()])
+        liststr = format_columns([(v['display_name'], v['description']) for k, v in metadata.items()])
 
     return '\n'.join(liststr)
 

@@ -59,10 +59,10 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
 
             fpath = os.path.join(root, basename)
             name,ver = basename.split('.')[:2]
-            name = bse.misc.basis_name_from_filename(name)
+            tr_name = bse.misc.basis_name_from_filename(name)
 
             if basename.endswith('.ref' + ref_ext):
-                compare_data = bse.get_references(name, fmt=reffmt, version=ver, data_dir=data_dir)
+                compare_data = bse.get_references(tr_name, fmt=reffmt, version=ver, data_dir=data_dir)
                 all_ref.remove((name,ver))
             elif basename.endswith(bs_ext):
                 compare_data = bse.get_basis(name, fmt=fmt, version=ver, data_dir=data_dir)

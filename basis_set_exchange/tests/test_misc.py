@@ -68,12 +68,12 @@ def test_expand_elements_fail(compact_el):
 @pytest.mark.parametrize("name,expected",
                               [('6-31g', '6-31g'),
                                ('6-31G', '6-31g'),
-                               ('6-31G**', '6-31g_s_s'),
+                               ('6-31G**', '6-31g_st__st_'),
                                ('6-31++G', '6-31++g'),
-                               ('6-31++G**', '6-31++g_s_s')])
+                               ('6-31++G**', '6-31++g_st__st_')])
 # yapf: enable
 def test_basis_name_to_filename(name, expected):
     fname = misc.basis_name_to_filename(name)
     assert fname == expected
     name2 = misc.basis_name_from_filename(fname)
-    assert name2 == misc.transform_basis_name(name)
+    assert name2 == name.lower()

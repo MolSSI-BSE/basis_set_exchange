@@ -14,7 +14,7 @@ rand_seed = 39466  # from random.org
 # Load all the metadata once
 data_dir = bse.api._default_data_dir
 bs_metadata = bse.get_metadata()
-bs_names = bse.get_all_basis_names()
+bs_names = list(bs_metadata.keys())
 bs_formats = list(bse.get_formats().keys()) + [None]
 ref_formats = list(bse.get_reference_formats().keys()) + [None]
 all_families = bse.get_families()

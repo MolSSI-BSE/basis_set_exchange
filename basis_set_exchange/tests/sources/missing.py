@@ -19,7 +19,6 @@ missing = {k: list(v['versions'].keys()) for k, v in md.items()}
 
 for s in auth_sources:
     bsname, ver, _, _ = s.split('.')
-    bsname = misc.basis_name_from_filename(bsname)
 
     if not bsname in missing:
         raise RuntimeError("Source {} does not correspond to a basis set in the library".format(bsname))

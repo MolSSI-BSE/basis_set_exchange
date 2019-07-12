@@ -18,9 +18,6 @@ def test_authoritative(basis_name_ver):
     basis_name, ver = os.path.splitext(basis_name_ver)
     ver = ver[1:]  # remove starting '.'
 
-    # Determine the basis name from the filename
-    basis_name = misc.basis_name_from_filename(basis_name)
-
     basis_meta = bs_metadata[basis_name]
 
     ref_path = auth_src_map[basis_name_ver]

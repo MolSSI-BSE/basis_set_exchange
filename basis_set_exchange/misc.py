@@ -198,7 +198,10 @@ def transform_basis_name(name):
     converting the name to all lower case.
     """
 
-    return name.lower()
+    name = name.lower()
+    name = name.replace('/', '_sl_')
+    name = name.replace('*', '_st_')
+    return name
 
 
 def basis_name_to_filename(name):
@@ -208,10 +211,7 @@ def basis_name_to_filename(name):
     This makes sure filenames don't contain invalid characters
     '''
 
-    filename = transform_basis_name(name)
-    filename = filename.replace('/', '_%')
-    filename = filename.replace('*', '_s')
-    return filename
+    return transform_basis_name(name)
 
 
 def basis_name_from_filename(filename):
@@ -224,6 +224,6 @@ def basis_name_from_filename(filename):
     '''
 
     name = filename.lower()
-    name = name.replace('_%', '/')
-    name = name.replace('_s', '*')
+    name = name.replace('_sl_', '/')
+    name = name.replace('_st_', '*')
     return name
