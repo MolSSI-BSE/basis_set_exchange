@@ -1,0 +1,51 @@
+Notes about Sarc basis sets
+-------------------------------
+SARC  (segmented all-electron relativistically contracted)
+SARC2 (second-generation segmented all-electron relativistically contracted)
+ZORA  (zeroth-order regular approximation)
+DKH2  (second-order Douglar-Kroll-Hess)
+
+A family of segmented all-electron relativistically contracted (SARC) basis sets for
+the elements Hf-Hg is constructed for use in conjunction with the Douglas-Kroll-Hess (DKH)
+and zeroth-order regular approximation (ZORA) scalar relativistic Hamiltonians. The SARC basis
+sets are loosely contracted and thus offer computational advantages compared to generally
+contracted relativistic basis sets, while their sufficiently small size allows them to be used in
+place of effective core potentials (ECPs) for routine studies of molecules.
+
+Scalar relativistic basis sets for the ZORA approximation have been developed by the Amsterdam group 
+for Slater functions and are available in the Amsterdam Density Functional code. Recent reports on 
+basis sets for transition metal atoms that are contracted to be consistent with the 
+second- or third-order DKH (DKH2, DKH3) procedures.
+
+
+Pantazis2008a found that the ZORA and DKH results are essentially of the same quality. Most importantly, 
+the transition from the uncontracted WTBS to the much more compact SARC has minimal impact on the
+accuracy of the computed values, the rms error increasing by a mere 0.01 eV.
+
+	    	          Ionization Energies (eV) computed with the B3LYP 
+	                  Functional and the SARC Basis Sets, Compared to 
+	                  Experimental Values
+			  -------------------------------------------------
+			   	            DKH2            ZORA          -
+			        exp      IE      ∆E      IE      ∆E       -
+			  Hf    6.825    6.711   -0.115  6.716   -0.109   -
+			  Ta    7.550    7.466   -0.084  7.481   -0.069   -			
+		          W     7.864    7.791   -0.073  7.807   -0.057   -
+			  Re    7.834    7.915    0.081  7.933    0.099   -
+			  Os    8.438    8.483    0.045  8.503    0.065   -
+			  Ir    8.967    8.896   -0.071  8.904   -0.063   -
+			  Pt    8.959    9.197    0.238  9.223    0.264   -
+			  Au    9.226    9.382    0.157  9.412    0.186   -
+			  Hg    10.438   10.342  -0.096  10.373  -0.065   -
+			  -------------------------------------------------
+
+The behavior of the DKH2 and ZORA orbitals is understood from the well-known fact that the deep core 
+orbital energies are much too low in the ZORA method.
+
+
+The SARC2 basis sets extend the applicability of the first-generation DFT-oriented basis sets to routine 
+all-electron wave function-based treatments of lanthanide complexes. The new basis sets are benchmarked 
+with respect to excitation energies, radial distribution functions, optimized geometries, orbital 
+eigenvalues, ionization potentials, and spin–orbit coupling parameters of lanthanide systems and are shown 
+to be suitable for the description of magnetic and spectroscopic properties using both DFT and 
+multireference wave function-based methods.

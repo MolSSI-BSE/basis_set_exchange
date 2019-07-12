@@ -1,0 +1,18 @@
+Notes about Stuttgart/Cologne group
+---------------------------------------
+
+The energy-consistent pseudopotentials of the Stuttgart/Cologne group are semi-
+local pseudopotentials adjusted to reproduce atomic valence-energy spectra.
+The adjustment of the pseudopotential parameters has been done in fully nume-
+rical calculations, valence basis sets have been generated a-posteriori via
+energy optimization. The complete set of potentials includes one-component
+(non-relativistic and scalar-relativistic) effective-core potentials (ECP),
+spin-orbit (SO) and core-polarization potentials (CPP); only the one-component
+ECPs are listed in full, in the present file. The energy-consistent pseudo-
+potentials are under continuous development and extension.
+
+
+These pseudopotentials are scalar-relativistic energy-consistent Hartree-Fock 
+pseudopotentials, which do not exhibit a singularity at the nucleus and are 
+specifically constructed for the use in quantum Monte Carlo calculations - 
+although they can of course be used for other approaches as well.

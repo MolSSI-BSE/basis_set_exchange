@@ -1,11 +1,19 @@
 Notes about the IGLO family
-===========================
+-------------------------------
 
 These basis sets are intended for computing NMR chemical shifts.
 IGLO - Individual Gauge for Localized Orbitals
 
-The actual source of the data is unknown. Any up-to-date resources
-about these basis sets is also unknown.
+According to Fouda2017a, these were built upon old huzinaga basis sets and my not be optimal for 
+all calculations. They are often used for the of magnetic properties; however, they 
+have only been defined for hydrogen and the first- and second-row p-block elements.
+IGLO-II and IGLO-III basis sets are only available for the p-block elements.
 
-According to the reference, these were built upon old huzinaga basis sets
-and my not be optimal for all calculations.
+For the p-block elements, the IGLO-II basis set has a much lower error (<0.9 eV) than basis sets 
+of comparable size. It is difficult to understand in detail the reason for the excellent performance 
+of the IGLO-II basis set since it may be a consequence of a balance between several different factors. 
+One notable difference between the IGLO-II basis set and 6-31G(d,p) is that the exponents of the 
+Gaussian functions of the inner 1s orbital are larger in IGLO-II. If H  2 S is taken as an example, 
+the CEBE is computed to be 2485.0 eV with 6-31G(d,p) and 2468.9 eV with IGLO-II compared with a value 
+of 2470.3 eV for pcSseg-4, consistent with the better performance of IGLO-II. 
+The IGLO-III basis set also performs well, but it is surprising that IGLO-III shows no improvement over IGLO-II.≈ß

@@ -1,0 +1,14 @@
+Notes about Ahlrichs-dhf basis sets
+-------------------------------------
+
+In case of scalar-relativistic calculations with ECPs, relativity is taken into account simply 
+by the choice of a relativistic ECP together with a suited basis set. A reasonable choice are 
+the Dirac-Hartree-Fock effective core potentials by the Stuttgart-Köln group labelled dhf-ecp 
+in TURBOMOLE, together with optimized basis sets termed dhf-XVP (X=S, TZ, QZ) [?]. These ECPs 
+and bases are available for Rb to Xe, except for f-elements. For H to Kr dhf and def2 bases are 
+identical non-relativistic all-electron basis sets. 
+For lanthanides and actinides at present no DHF ECPs are available. The usage of Wood-Boring type ECPs, 
+for lanthanides together with def2-bases, for actinides together with the original Stuttgart-Köln bases 
+(labelled def in TURBOMOLE) is recommended here. Note that for def2-bases the unerlying ECPs are of 
+different type (due to history). For p-elements def2-bases are optimized for Dirac-Hartree-Fock ECPs, 
+for the other elements for Wood-Boring ECPs.

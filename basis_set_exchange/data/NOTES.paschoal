@@ -1,0 +1,37 @@
+Notes about Paschoal basis sets
+------------------------------------------
+
+Paschoal2014a presented three new basis sets called NLO-I(ADZP), NLO‐II(DZP) and NLO‐III(VDZP).
+The NLO-III is the best choice to predict linear and nonlinear optics (L-NLO) properties of large 
+molecular systems because it presents a balance between computational cost and accuracy. 
+The average errors for β at B3LYP/NLO‐III level were of 8% for diatomic molecules and 14% for 
+polyatomic molecules that are within the experimental uncertainty. 
+
+L-NLO deals with changes on the optical properties of materials due to their interaction with 
+electromagnetic radiation. The optical properties, mainly those with nonlinear response,
+are strongly dependent on the level of theory applied, with electronic correlation known to 
+play a major role. Paschoal2014a also describes a comparative study accounting for ab initio 
+(HF, MP2, MP3, MP4(SDQ), MP4, CCSD, and CCSD(T)) and density functional theory (DFT) (B3LYP) 
+levels to assess the sensitivity of the basis sets to the common levels of theory used for 
+L–NLO calculations.
+
+NLO‐I: the original contraction scheme and coefficients of Thakkar‐DZ basis set were kept and new sets 
+of diffuse and polarization functions were added with the exponents adjusted to minimize the HF atomic energy. 
+The final basis set is an augmented double‐zeta‐polarized basis sets (ADZP).
+
+NLO‐II: the reference Thakkar‐DZ basis set was first fully uncontracted and new sets of diffuse functions added 
+using the standard even‐tempered method37 to generate the exponents. Next, the basis set was contracted again as 
+a double‐zeta basis set using the contraction coefficients from the HF atomic orbitals. The number of primitive 
+functions for each CGTO group was chosen to minimize the HF energy. Finally, polarization functions were added as 
+described previously for NLO‐I. The final basis set presents a DZP character.
+
+NLO‐III: similar procedure as for NLO‐II was adopted. However, the basis set was contracted as a valence‐double‐zeta 
+basis set and the polarization functions were added with the exponents adjusted to minimize the HF atomic energy in 
+the presence of an electric field (z = 0.01 a.u.).38, 39 This basis set is assigned as a valence‐double‐zeta‐polarized 
+basis set (VDZP).
+
+
+The new basis sets identified as NMR-DKH were partially contracted as a triple-zeta doubly polarized scheme with all 
+coefficients obtained from a Douglas-Kroll-Hess (DKH) second-order scalar relativistic calculation. It has been
+tested in the prediction of the Pt-195 NMR chemical shift. For a set of 258 Pt(II) complexes, a mean absolute deviation
+of 168 ppm and a mean relative deviation of 5% were found.

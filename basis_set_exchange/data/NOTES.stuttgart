@@ -1,0 +1,59 @@
+Notes about Stuttgart basis sets
+-----------------------------------
+
+Stuttgart-Dresden-Bonn (SDB) have been validated by calculations on a variety of third-row and fourth-row diatomics
+that suggest them to be comparable in quality to the all-electron cc-pVTZ and cc-pVQZ basis sets for lighter elements.
+Especially the SDB-cc-pVQZ basis set in conjunction with a core polarization potential (CPP) yields excellent agreement
+with experiment for compounds of the later heavy p-block elements.
+
+Martin2000a carried out all electronic structure calculations using MOLPRO2000 running on a Compaq ES40 at the 
+Weizmann Institute of Science. Basis sets were carried out by means of an adaptation of the DOMIN program, which is 
+an implementation of the BFGS (Broyden-Fletcher-Goldfarb-Shanno) variable-metric method.
+
+For the third-row main group elements, they  employed the SDB pseudopotentials denoted by the SDB group as ECP28MWB, 
+large-core (1s2s2p3s3p3d) energy-consistent pseudopotentials obtained from quasirelativistic Wood-Boring calculations. 
+For the fourth-row main group elements, we employed the ECP46MWB set [37], i.e. large-core (1s2s2p3s3p3d4s4p4d).
+
+In the fourth row, the convergence pattern of the d exponents is somewhat peculiar, in that for instance for Te and I, 
+the energy lowerings for the 2nd and 3rd (3d) function are similar. This is caused by the rather low-lying (5d) orbital, 
+which also causes a some whatpeculiar (2d) exponent pattern for Te.
+
+For Stuttgart RSC ANO
+--------------------------
+Stuttgart Relativistic, Small Core ECP Basis Set
+          
+                        Stuttgart
+              Core         Name     Primitives        Contractions
+     K     : 10[Ne]       ECP10MWB (7s,6p)          -> [5s,4p]
+    Ca     : 10           ECP10MWB (6s,6p,5d)       -> [4s,4p,2d]
+    Sc - Zn: 10           ECP10MDF (8s,7p,6d,1f)    -> [6s,5p,3d,1f]
+    Rb     : 28[Ar+3d]    ECP28MWB (7s,6p)          -> [5s,4p]
+
+Stuttgart Relativistic, Small Core ANO/ECP Basis Set
+           
+                        Stuttgart
+             Core         Name     Primitives        Contractions
+  La - Lu: 28[Ar+3d]    ECP28MWB (14s,13p,10d,8f,6g) -> [6s,6p,5d,4f,3g]
+
+
+  For Stuttgart RSC 1997
+  ----------------------------------
+
+  ECP Basis:
+     K,Ca,Cu,Zn  : ECP10MWB
+     Sc-Ni       : ECP10MDF
+     Rb-Cd,La-Lu : ECP28MWB
+     Cs,Ba       : ECP46MWB
+     Hf-Pt,Ac-No : ECP60MWB
+     Au,Hg       : ECP60oldMDF
+     Db          : ECP92MWB
+
+  Valence Basis:
+     K,Ca,Cu,Zn  : ECP10MWB
+     Sc-Ni       : ECP10MDF
+     Rb,Sr       : ECP28MWB
+     Cs,Ba       : ECP46MWB
+     Hf-Pt       : ECP60MWB
+     Au          : ECP60oldMDF
+     Hg          : ECP60MHF
+     Db          : ECP92MWB

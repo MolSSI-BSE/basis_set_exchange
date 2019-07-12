@@ -1,0 +1,24 @@
+Notes about SBKJC basis sets
+--------------------------------------
+
+Sadlej’s electric polarization method of Gaussian basis functions was applied to the double-zeta
+effective core potential basis sets of Stevens, Basch, Krauss, Jasien and Cundari to generate a new
+augmented polarized valence double-zeta set, named as pSBKJC, which is appropriate for the calculation
+of dynamic polarizabilities and Raman intensities. The pSBKJC basis set was developed for the atoms of
+families 14–17 (from C-F, Si-Cl, Ge-Br and Sn-I).
+
+The SBKJC basis set uses effective core for all atoms except H and He. SBKJC-VDZ has a contraction scheme 
+of (7s7p5d)->[4s4p3d]. Vidal2012a developed the pSBKJC bases for the atoms of groups 14 (C–Sn), 15 (N–Sb), 16 (O–Te) 
+and 17 (F–I) where the double-zeta valence basis set SBKJC was electrically polarized. The pseudopotential SBKJC 
+for these atoms keeps the valence s and p subshell electrons (e.g., 5s 25p 5 for iodine) and replaces the inner 
+ones by an energy-consistent pseudopotential modeled to represent the scalar relativistic effects.
+
+The pSBKJC basis set was also used in correlated calculations where the CCSD differential Raman scattering 
+cross sections of C6H6 and C6D6 were calculated at λex = 488 nm, using the pSBKJC and Sadlej-pVTZ sets.
+
+Hartree-Fock/pSBKJC calculations have proved to be less demanding of the computer than the Hartree-Fock/Sadlej-pVTZ 
+ones but give results in excellent agreement with those from the Sadlej-pVTZ basis set.
+
+In recent years, electronic structure methods were reported and implemented for the calculation of the dynamic 
+polarizabilities at the HF, MCSCF, MP2, Coupled cluster and DFT levels enabling the calculation of Raman intensities 
+without the restriction of νex = 0 by finite difference methods or even from analytic derivatives.

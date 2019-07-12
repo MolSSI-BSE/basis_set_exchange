@@ -1,9 +1,21 @@
 Notes about the Truhlar family
-==============================
+---------------------------------
 
 This family is the 'calendar' basis sets - apr, may, jun, and jul. These
 are formed by progressively removing diffuse functions from 'aug-cc-pV(X+d)Z' basis
 sets to form earlier and earlier 'months'.
+
+The naming of this series of basis sets comes from the fact that the cc-pV*Z basis 
+sets with added polarization functions are known as the Aug-cc-pVZ. 
+They are constructed by removing diffuse functions from the Aug basis sets. 
+For example, the Jul-cc-pVZ basis sets remove the diffuse function from H and He 
+from Aug-cc-pVZ. Jun-cc-pVZ also removes the highest angular momentum diffuse function 
+from all other atoms, May-cc-pVZ removes the two highest angular momentum functions, 
+and Apr-cc-pVZ removes the three highest angular momentum functions.
+By default, at least s and p diffuse functions are always included in these basis sets. 
+This serves to avoid some inherent inconsistencies, but it differs from Truhlar and 
+coworkers' original definitions.
+
 
 Curator Notes
 -------------

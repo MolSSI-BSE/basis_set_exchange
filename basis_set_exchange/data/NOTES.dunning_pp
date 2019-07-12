@@ -1,0 +1,60 @@
+Notes about Dunning_pp basis sets
+-----------------------------------
+
+New correlation consistent-like basis sets based on pseudopotential (PP) have been developed by Hill2017a for the 
+post-d group 13–15 elements (Ga–As, In–Sb, Tl–Bi) employing accurate, small-core relativistic pseudopotentials. 
+The resulting basis sets, which are denoted cc-pVnZ-PP, are appropriate for valence electron correlation and 
+range in size from (8s7p7d)/[4s3p2d] for the cc-pVDZ-PP to (16s13p12d3f2g1h)/[7s7p5d3f2g1h] for the 
+cc-pV5Z-PP sets. Much like their all-electron counterparts, the cc-pVnZ-PP basis sets yield systematic 
+convergence of total energies and spectroscopic constants. Diffuse-augmented basis sets, aug-cc-pVnZ-PP, have 
+also been developed and have been used in calculations of the atomic electron affinities.
+
+The –PP sets have been developed for use with smallcore PPs, while the all-electron sets utilized 
+second-order DKH Hamiltonians for 4s and 5s elements and third-order DKH for 6s and 7s. The accuracy 
+of the basis sets is assessed through benchmark calculations at the coupled-cluster level of theory 
+for both atomic and molecular properties. Just as in the correlation consistent basis sets for the 
+lighter group 1 and 2 elements, the exponents of the s functions within the HF primitives paired to 
+PPs were optimized for the electronic ground state of the neutral atoms. For K–Sr, the second-order DKH
+Hamiltonian (DKH2) was used, with Cs–Ra using the thirdorder DKH Hamiltonian (DKH3).
+
+
+	    	       	     Compositions of the contracted valence correlating
+			     PP based correlation consistent basis sets developed
+			     for the group 1 and 2 elements.
+
+			                                      *Atoms*
+			     Basis set            K,Ca,Rb,Sr           Cs,Ba,Fr,Ra
+			     -----------------------------------------------------
+			     cc-pVDZ-PP		   [4s3p2d]             [4s3p2d]
+			     cc-pVTZ-PP		  [5s4p3d1f]           [5s4p3d2f]
+			     cc-pVQZ-PP	         [6s5p4d2f1g]         [6s5p4d3f1g]
+			     cc-pV5Z-PP	        [7s6p5d3f2g1h]       [7s6p5d4f2g1h]
+
+
+The convergence of calculated spectroscopic constants with both the cc-pCVnZ-PP and cc-pwCVnZ-PP sequences 
+of basis sets is shown for the electronic ground state (1Σ+) of KF. The aug-cc-pVnZ basis sets were used for 
+fluorine, all K electrons not replaced by the pseudopotential were included in the correlation treatment, and 
+the F 1s electrons were not correlated. The effect of correlating the outer-core electrons on the spectroscopic 
+constants is shown in parentheses, and, as expected, convergence towards the CBS limit with respect to zeta-level 
+is faster with the weighted CV sets. However, while the convergence with weighted core valence basis sets is somewhat 
+quicker and overall relatively smooth, the core-valence effect still converges slowly; for cc-pwCVQZ-PP, the effect 
+is relatively well converged in terms of re and ωe, but the effect on De is underestimated by 3.57 kcal mol1. 
+
+
+                    CCSD(coupled cluster singles and doubles) spectroscopic constants for 
+                    KF, with all K electrons (that are not replaced by a pseudopotential) 
+                    correlated. Values in parentheses indicate the effect of the core-valence 
+                    correlation relative to a frozen-core calculation.
+
+                    Basis set          re (Å)              ωe (cm1)        De (kcal mol1)
+                    ---------------------------------------------------------------------
+                    cc-pCVDZ-PP        2.2270(+0.0059)     407.2(-3.0)     111.57(+20.48)
+                    cc-pCVTZ-PP        2.1925(-0.0013)     416.0(+0.3)     114.90(+33.35)
+                    cc-pCVQZ-PP        2.1774(-0.0063)     422.8(+2.3)     117.04(+38.13)
+                    cc-pCV5Z-PP        2.1734(-0.0085)     424.9(+4.2)     117.71(+39.99)
+                    CBS                2.1695(-0.0109)     426.9(+4.2)     118.43(+41.93)
+                    cc-pwCVDZ-PP       2.2228(+0.0028)     409.4(-2.0)     110.99(+21.66)
+                    cc-pwCVTZ-PP       2.1834(-0.0070)     423.7(+4.8)     115.33(+34.08)
+                    cc-pwCVQZ-PP       2.1753(-0.0083)     425.5(+4.1)     117.24(+38.47)
+                    cc-pwCV5Z-PP       2.1731(-0.0091)     426.3(+4.3)     117.79(+40.21)
+                    CBS                2.1708(-0.0100)     427.2(+4.4)     118.45(+42.04)
