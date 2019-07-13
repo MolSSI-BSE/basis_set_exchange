@@ -65,7 +65,7 @@ def write_bib(refs):
             refdata = ri['reference_data']
 
             if len(refdata) == 0:
-                full_str += '%     (...no reference...)\n%\n'
+                full_str += '%         (...no reference...)\n%\n'
             else:
                 rkeys = [x[0] for x in ri['reference_data']]
                 full_str += '%         {}\n%\n'.format(' '.join(rkeys))

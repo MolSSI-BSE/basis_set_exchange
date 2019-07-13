@@ -44,8 +44,7 @@ def merge_element_data(dest, sources, use_copy=True):
             if 'references' not in ret:
                 ret['references'] = []
             for ref in s['references']:
-                if not ref in ret['references']:
-                    ret['references'].append(ref)
+                ret['references'].append(ref)
 
     return ret
 
