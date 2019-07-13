@@ -2,7 +2,7 @@
 Conversion of basis sets to cp2k format
 '''
 
-from .. import lut, manip, sort, misc, printing
+from .. import lut, sort, misc, printing
 
 
 def write_cp2k(basis):
