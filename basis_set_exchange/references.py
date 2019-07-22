@@ -75,7 +75,8 @@ def reference_text(ref):
         s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
         s += ref_wrap.fill(ref['title']) + '\n'
         s += '{}, {}, {} ({})'.format(ref['journal'], ref['volume'], ref['page'], ref['year'])
-        s += '\n' + ref['doi']
+        if 'doi' in ref:
+            s += '\n' + ref['doi']
     elif ref['_entry_type'] == 'incollection':
         s += ref_wrap.fill(', '.join(ref['authors']))
         s += '\n' + ref_wrap.fill('{}'.format(ref['title']))
