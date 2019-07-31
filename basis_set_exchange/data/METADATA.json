@@ -21110,6 +21110,35 @@
       }
     }
   },
+  "orp": {
+    "display_name": "ORP",
+    "other_names": [],
+    "description": "ORP (Optical Rotation Predicion) Basis Set",
+    "latest_version": "1",
+    "basename": "orp",
+    "relpath": "",
+    "family": "orp",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "orp.1.table.json",
+        "revdesc": "Data from Supplemental Information of publications",
+        "revdate": "2019-07-31",
+        "elements": [
+          "1",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      }
+    }
+  },
   "pc-0": {
     "display_name": "pc-0",
     "other_names": [],
