@@ -34,7 +34,7 @@ def write_qcschema(basis):
             for sh in eldata['electron_shells']:
                 sh.pop('region')
                 func = sh.pop('function_type')
-                if func == 'spherical_gto':
+                if func == 'gto_spherical':
                     sh['harmonic_type'] = 'spherical'
                 else:
                     # Set to cartesian if explicitely cartesian, or if it is an

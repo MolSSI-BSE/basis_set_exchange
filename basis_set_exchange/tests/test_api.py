@@ -152,7 +152,7 @@ def test_filter_0(substr, family, role):
 
 # yapf: disable
 @pytest.mark.parametrize('fmts', [None,
-                                  ['spherical_gto', 'scalar_ecp'],
+                                  ['gto_spherical', 'scalar_ecp'],
                                   ['CARTESIAN_gto']])
 # yapf: enable
 def test_get_formats(fmts):

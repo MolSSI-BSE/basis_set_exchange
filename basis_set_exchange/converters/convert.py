@@ -23,98 +23,98 @@ _converter_map = {
         'display': 'NWChem',
         'extension': '.nw',
         'comment': '#',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_nwchem
     },
     'gaussian94': {
         'display': 'Gaussian94',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_g94
     },
     'psi4': {
         'display': 'Psi4',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_psi4
     },
     'molcas': {
         'display': 'Molcas',
         'extension': '.molcas',
         'comment': '*',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_molcas
     },
     'dalton': {
         'display': 'Dalton',
         'extension': '.dalton',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_dalton
     },
     'qcschema': {
         'display': 'QCSchema',
         'extension': '.json',
         'comment': None,
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_qcschema
     },
     'cp2k': {
         'display': 'CP2K',
         'extension': '.cp2k',
         'comment': '#',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_cp2k
     },
     'demon2k': {
         'display': 'deMon2K',
         'extension': '.d2k',
         'comment': '#',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_demon2k
     },
     'gamess_us': {
         'display': 'GAMESS US',
         'extension': '.bas',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_gamess_us
     },
     'turbomole': {
         'display': 'Turbomole',
         'extension': '.tm',
         'comment': '#',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_turbomole
     },
     'gamess_uk': {
         'display': 'GAMESS UK',
         'extension': '.bas',
         'comment': '#',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_gamess_uk
     },
     'molpro': {
         'display': 'Molpro',
         'extension': '.mpro',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_molpro
     },
     'cfour': {
         'display': 'CFOUR',
         'extension': '.c4bas',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_cfour
     },
     'xtron': {
         'display': 'xTron',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['cartesian_gto', 'spherical_gto', 'scalar_ecp']),
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_xtron
     },
     'bsedebug': {
@@ -150,7 +150,7 @@ def convert_basis(basis_dict, fmt, header=None):
     # Determine if the converter supports all the types in the basis_dict
     if converter['valid'] is not None:
         ftypes = set(basis_dict['function_types'])
-        if ftypes > converter['valid']:
+        if not ftypes <= converter['valid']:
             raise RuntimeError('Converter {} does not support all function types: {}'.format(fmt, str(ftypes)))
 
     # Actually do the conversion
@@ -166,7 +166,7 @@ def convert_basis(basis_dict, fmt, header=None):
     #        so we have to add that before the header
     if fmt == 'psi4':
         types = basis_dict['function_types']
-        harm_type = 'spherical' if 'spherical_gto' in types else 'cartesian'
+        harm_type = 'spherical' if 'gto_spherical' in types else 'cartesian'
         ret_str = harm_type + '\n\n' + ret_str
 
     return ret_str
