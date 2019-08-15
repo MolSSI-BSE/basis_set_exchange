@@ -31,7 +31,7 @@ hehre1970a - Exponents/coefficients for 3sp
 
 pietro1980a - Exponents/coefficients for 3spd and 4sp.
               The new 3sp data was re-optimized for use with elements with
-              occupied 3d shells (starting at Sc) 
+              occupied 3d shells (starting at Sc)
               Scaling factors for K, Ca, Ga-Kr
 
 pietro1981a - Exponents/coefficints for 4spd and 5sp.
@@ -75,7 +75,7 @@ GAMESS uses a different scaling factors for some elements.
 
 Both codes tend to use the "Standard valence-shell scale factors" for other blocks. Therefore,
 I believe Gaussian is most likely correct.
-  
+
 GAMESS also uses different base exponents and coefficients for some elements.
 
   * GAMESS uses the data from hehre1970a for all 3sp shells. For elements
@@ -93,21 +93,21 @@ Scaling Factors
 ==========================================           ==========================================
 = GAUSSIAN                               =           = GAMESS                                 =
 ==========================================           ==========================================
-Sym     1s    2sp           
----   ----   ----          
-H     1.24                                          
-He    1.69                                          
-Li    2.69   0.80                                   
-Be    3.68   1.15                                   
-B     4.68   1.50                                   
-C     5.67   1.72                                   
-N     6.67   1.95                                   
-O     7.66   2.25                                   
-F     8.65   2.55                                   
-Ne    9.64   2.88                                   
-     
-     
-Sym     1s   2sp   3sp                                Sym   3sp    
+Sym     1s    2sp
+---   ----   ----
+H     1.24
+He    1.69
+Li    2.69   0.80
+Be    3.68   1.15
+B     4.68   1.50
+C     5.67   1.72
+N     6.67   1.95
+O     7.66   2.25
+F     8.65   2.55
+Ne    9.64   2.88
+
+
+Sym     1s   2sp   3sp                                Sym   3sp
 ---  -----  ----  ----                                ---  ----
 Na   10.61  3.48  1.75                                Na   1.21
 Mg   11.59  3.90  1.70                                Mg   1.28
@@ -117,8 +117,8 @@ P    14.50  5.31  1.90                                P    1.74
 S    15.47  5.79  2.05                                S    1.93
 Cl   16.43  6.26  2.10                                Cl   2.14
 Ar   17.40  6.74  2.33                                Ar   2.33
-     
-     
+
+
 Sym     1s    2sp   3sp    3d   4sp
 ---  -----  -----  ----  ----  ----
 K    18.61   7.26  2.75        1.43
@@ -159,13 +159,13 @@ Ag   46.15  20.43  10.41  4.76  3.75  1.80            Ag  3.74  1.60
 Cd   47.14  20.88  10.74  4.93  3.95  2.10            Cd  3.96  1.63
 
 
-Sym    1s    2sp    3spd  4sp     4d   5sp           
----  -----  -----  -----  ----  ----  ----           
-Rb   36.32  15.81   7.18  3.02        1.90            
-Sr   37.31  16.28   7.49  3.16        1.80            
-In   48.12  21.33  11.08  4.65  4.65  2.05            
-Sn   49.10  21.79  11.39  4.89  4.89  2.15            
-Sb   50.08  22.25  11.71  5.12  5.12  2.20            
-Te   51.07  22.71  12.03  5.36  5.36  2.28            
-I    52.05  23.17  12.35  5.59  5.59  2.42            
-Xe   53.03  23.63  12.66  5.82  5.82  2.57            
+Sym    1s    2sp    3spd  4sp     4d   5sp
+---  -----  -----  -----  ----  ----  ----
+Rb   36.32  15.81   7.18  3.02        1.90
+Sr   37.31  16.28   7.49  3.16        1.80
+In   48.12  21.33  11.08  4.65  4.65  2.05
+Sn   49.10  21.79  11.39  4.89  4.89  2.15
+Sb   50.08  22.25  11.71  5.12  5.12  2.20
+Te   51.07  22.71  12.03  5.36  5.36  2.28
+I    52.05  23.17  12.35  5.59  5.59  2.42
+Xe   53.03  23.63  12.66  5.82  5.82  2.57

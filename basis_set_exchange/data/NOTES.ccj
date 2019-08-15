@@ -1,20 +1,20 @@
 Notes about ccj basis sets
 -----------------------------
 
-The ccJ-pVXZ basis sets with diffuse functions included (aug-ccJ-pVXZ) show consistent performance 
-across all types of SSCCs(spin-spin coupling constants), with the triple-zeta (X = T) basis set 
+The ccJ-pVXZ basis sets with diffuse functions included (aug-ccJ-pVXZ) show consistent performance
+across all types of SSCCs(spin-spin coupling constants), with the triple-zeta (X = T) basis set
 yielding sufficiently good results for most purposes.
 
-Within Faber2018a, they compared for each basis set the mean absolute deviation of the results for 
+Within Faber2018a, they compared for each basis set the mean absolute deviation of the results for
 the reduced coupling constants (K in Hz), and is shown in great detail within figure 1.
-They found that the contraction coefficients of the normal ccJ-pVXZ series of basis sets are 
-nearly optimal for the calculation of this type of coupling constants, as completely uncontracting 
-the basis sets changes neither the mean nor the maximum deviation significantly. However, this is 
-no longer the case when diffuse functions are added. In terms of the maximum deviation, 
-the aug-ccJ-pVXZ basis sets are a major improvement over the ccJ-pVXZ basis sets, at least at the 
+They found that the contraction coefficients of the normal ccJ-pVXZ series of basis sets are
+nearly optimal for the calculation of this type of coupling constants, as completely uncontracting
+the basis sets changes neither the mean nor the maximum deviation significantly. However, this is
+no longer the case when diffuse functions are added. In terms of the maximum deviation,
+the aug-ccJ-pVXZ basis sets are a major improvement over the ccJ-pVXZ basis sets, at least at the
 triple and quadruple zeta levels.
 
-The ccJ-pVXZ basis sets converge only very slowly. However, upon adding diffuse functions the 
-convergence is quite rapid, though possibly in part due to favourable cancellation of the contraction 
-error. Faber1018a found relatively large contraction errors for both Jensen’s pcJ-n basis sets and 
-also the ccJ-pVXZ basis sets when diffuse functions are added to them. 
+The ccJ-pVXZ basis sets converge only very slowly. However, upon adding diffuse functions the
+convergence is quite rapid, though possibly in part due to favourable cancellation of the contraction
+error. Faber1018a found relatively large contraction errors for both Jensen’s pcJ-n basis sets and
+also the ccJ-pVXZ basis sets when diffuse functions are added to them.

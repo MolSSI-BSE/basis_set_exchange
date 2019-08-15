@@ -24,51 +24,51 @@ to *ZVPP.  Compare the basis sets and consult the literature for the reasons.
 
 Notes from BSE
 --------------------
-1. GENERAL DESCRIPTION 
-  Def2-bases form a system of segmented contracted basis sets for the 
-  elements H-Rn for different levels of flexibility/accuracy. The 
-  respective basis set types are named def2-SV(P) to def2-QZVPP. These 
-  basis sets are designed to give similar errors all accross the 
-  periodic table for a given basis set type. They were tested for a set 
-  of ca. 300 molecules representing nearly each element in nearly all 
-  of its common oxidation states. These basis sets were derived from 
+1. GENERAL DESCRIPTION
+  Def2-bases form a system of segmented contracted basis sets for the
+  elements H-Rn for different levels of flexibility/accuracy. The
+  respective basis set types are named def2-SV(P) to def2-QZVPP. These
+  basis sets are designed to give similar errors all accross the
+  periodic table for a given basis set type. They were tested for a set
+  of ca. 300 molecules representing nearly each element in nearly all
+  of its common oxidation states. These basis sets were derived from
   previous Karlsruhe bases ("def-SV(P)", etc.) in many cases.
   Details of developent and coordinates of test compounds are given in
   [1] F. Weigend, R. Ahlrichs, Phys.Chem.Chem.Phys., 2005, 7, 3297?3305.
   Basis for this work are preceding treatments:
-  [2] A. Schaefer, H. Horn, R. Ahlrichs, 
+  [2] A. Schaefer, H. Horn, R. Ahlrichs,
       J. Chem. Phys., 1992, 97(4), 2571?2577.
-  [3] A. Schaefer, C. Huber, R. Ahlrichs, 
+  [3] A. Schaefer, C. Huber, R. Ahlrichs,
       J. Chem. Phys., 1994, 100(8), 5829?5835.
-  [4] K. Eichkorn, F. Weigend, O. Treutler, R. Ahlrichs, 
+  [4] K. Eichkorn, F. Weigend, O. Treutler, R. Ahlrichs,
       Theor. Chem. Acc., 1997, 97, 119?124.
   [5] F. Weigend, F. Furche, R. Ahlrichs,
       J. Chem. Phys. ,2003, 119(24), 12753?12762.
-  For the elements beyond Krypton def2-bases are designed to be used 
+  For the elements beyond Krypton def2-bases are designed to be used
   with ECPs:
   Y-Cd(ecp-28), Hf-Hg(ecp-46):
-  [6] D. Andrae,U. Haeussermann, M.Dolg, H.Stoll, H.Preuss, 
+  [6] D. Andrae,U. Haeussermann, M.Dolg, H.Stoll, H.Preuss,
       Theor.Chim.Acta, 1990, 77, 123?141.
   In-Sb(ecp-28), Tl-Bi(ecp-46):
-  [7] B. Metz, H. Stoll, M. Dolg, 
+  [7] B. Metz, H. Stoll, M. Dolg,
       J. Chem. Phys., 2000, 113, 2563?2569.
   Te-Xe(ecp-28), Po-Rn(ecp-46):
-  [8]K. A. Peterson, D. Figgen, E. Goll, H. Stoll, M. Dolg, 
+  [8]K. A. Peterson, D. Figgen, E. Goll, H. Stoll, M. Dolg,
      J. Chem. Phys., 2003, 119, 11113?11123.
   Rb(ecp-28), Cs(ecp-46):
-  [9] T.Leininger, A.Nicklass, W.Kuechle, H.Stoll, M.Dolg, A.Bergner, 
+  [9] T.Leininger, A.Nicklass, W.Kuechle, H.Stoll, M.Dolg, A.Bergner,
       Chem. Phys. Lett., 1996, 255, 274?280.
   Sr(ecp-28), Ba(ecp-46):
-  [10] M. Kaupp, P. V. Schleyer, H. Stoll and H. Preuss, 
+  [10] M. Kaupp, P. V. Schleyer, H. Stoll and H. Preuss,
        J. Chem. Phys., 1991, 94, 1360?1366.
 2. RECOMMENDATIONS:
   A) How to use
-     Summarizing the results of ref.1 we may roughly give the 
+     Summarizing the results of ref.1 we may roughly give the
      following scheme:
-   ____________________________________________________________________ 
+   ____________________________________________________________________
   |                                                                    |
   |Accuracy:   - exploratory - qualitative - quantitative  -  cbs-limit|
-  |                                                                    |  
+  |                                                                    |
   |Typical errors*           30            10          3        1      |
   |                                                                    |
   | HF                          SVP             TZVPP       QZVPP      |
@@ -79,14 +79,14 @@ Notes from BSE
   |*:atomization energy per atom kJ/mol                                |
   |____________________________________________________________________|
    B) How to quote
-     Use of def2-bases requires citation of ref.1 and in case of ECPs 
-     that of the respective reference. Further citation of ref.2-5 is 
+     Use of def2-bases requires citation of ref.1 and in case of ECPs
+     that of the respective reference. Further citation of ref.2-5 is
      recommended. Thus:
                H-He    Y-Cd     Rb,Cs  Sr,Ba  Li,Mg  In-Sb  Te-Xe
                B-Ne    La-Hg                  K,Ca   Tl-Bi  Po-Rn
-               Al-Ar                       
-               Sc-Kr                       
-     SV(P)/P   1,(2)   1,6,(4)  1,9    1,10   1       1,7    1,8 
+               Al-Ar
+               Sc-Kr
+     SV(P)/P   1,(2)   1,6,(4)  1,9    1,10   1       1,7    1,8
      TZVP/PP   1,(3)   1,6,(4)  1,9    1,10   1       1,7    1,8
      QZVP/PP   1,(5)   1,6      1,9    1,10   1,(5)   1,7    1,8
 3. AVAILABILITY
@@ -94,11 +94,11 @@ Notes from BSE
   http://www.ipc.uni-karlsruhe.de/tch/tch1/index.html
   in formats TURBOMOLE, GAUSSIAN, DALTON and MOLPRO.
 4. MOST RELEVANT DATA/RESULTS OF REFERENCE 1 (FOR CONVENIENCE):
-  A)Numbers of contraction basis functions (for representative 
+  A)Numbers of contraction basis functions (for representative
     elements, slight deviations within a period):
-    def2- QZVPP    QZVP   TZVPP TZVP  SVP SV(P) 
+    def2- QZVPP    QZVP   TZVPP TZVP  SVP SV(P)
           spdfg    spdfg  spdfg spdf  spdf spd
-    H     4321     4321   321   31    21   2   
+    H     4321     4321   321   31    21   2
     N     74321    74321  5321  5321  321  321
     P     96421    96421  5531  5521  431  431
     As (11)7441 (11)7421  6541  6541  543  543
@@ -107,20 +107,20 @@ Notes from BSE
     Mn (11)6542 (11)6531  65421 6441  5321 532
     Tc    75442    75431  64321 6431  5321 532
     Re    75442    75431  64321 6431  6321 632
-    Li    6421     6421   531   53    32   32 
+    Li    6421     6421   531   53    32   32
     Na    9542     9531   543   543   421  421
     K  (11)643  (11)641   643   643   532  532
     Rb    7543     7541   6431  643   532  532
     Cs    6533     6531   5331  533   532  532
-    Be    7421     7421   531   531   32   32 
+    Be    7421     7421   531   531   32   32
     Mg    9552     9541   543   543   431  431
     Ca (11)643  (11)641   653   653   532  532
     Sr    7543     7541   6431  643   432  432
     Ba    7533     7531   6431  6431  432  432
-  B) Accuracy: 
+  B) Accuracy:
      Differences in atomization energies per atom, in kJ/mol:
      a) def-QZVPP to limit (typically): HF,DFT<1, MP2:ca.5
-     b) smaller def2-bases vs. def2-QZVPP by statistical evaluation 
-        all over the test set, see below; "avg":average, 
-	"sig":standard deviation.
+     b) smaller def2-bases vs. def2-QZVPP by statistical evaluation
+        all over the test set, see below; "avg":average,
+    "sig":standard deviation.
                    HF       DFT(BP86)      MP2

@@ -3,12 +3,12 @@ Notes about Blaudeau basis sets
 
 Blaudeau1996a used the COLUMBUS suite of programs to perform the spin-orbit calculations.
 These include ARGOS, a molecular integral program; CNVRT, a supermatrix formation program.
-SCFPQ, a restricted self-consistent field SCF program using P and Q supermatrices; LSTRN, an 
+SCFPQ, a restricted self-consistent field SCF program using P and Q supermatrices; LSTRN, an
 integral transformation program; CGDBG, which generates a configuration list for use in the
 CI; and CIDBG, a double-group CI program that includes spin-orbit matrix elements.
 
-The basis sets for K and Ca are (6s6p4d) contracted to 3s3p2d in size. The six s exponents 
+The basis sets for K and Ca are (6s6p4d) contracted to 3s3p2d in size. The six s exponents
 and the four most compact p exponents were optimized for the ground state. The two diffuse
-p exponents were optimized for the lowest LS-coupled state when one 4s electron is excited 
-to the 4p shell (a 1s2 2s2 2p6 core is used for these atoms). Similarly, the d exponents 
-were optimized when a 4s electron was excited into the 3d shell. 
+p exponents were optimized for the lowest LS-coupled state when one 4s electron is excited
+to the 4p shell (a 1s2 2s2 2p6 core is used for these atoms). Similarly, the d exponents
+were optimized when a 4s electron was excited into the 3d shell.

@@ -11,21 +11,21 @@ Cu. For example, the midi-type basis sets (421/31) and (4321/421), derived by sp
 comparisons are possible. In the present notation 4-31G is (431/31) and 44-316 is (4431/431).
 
 Minimal Basis set:
-The MINI-1 set features three gaussian expansions of each atomic orbital: since the exponents 
-and contraction coefficients are optimized for each element, and s and p exponents are not 
-constrained to be equal, these bases give much lower energies than does STO-3G. This set 
-represents the most extensive coverage of the elements within GAMESS, with the code-named 
-MINI1 basis available for all elements from Hydrogen to Radon (Z=86). A second set, 
+The MINI-1 set features three gaussian expansions of each atomic orbital: since the exponents
+and contraction coefficients are optimized for each element, and s and p exponents are not
+constrained to be equal, these bases give much lower energies than does STO-3G. This set
+represents the most extensive coverage of the elements within GAMESS, with the code-named
+MINI1 basis available for all elements from Hydrogen to Radon (Z=86). A second set,
 code-named MIDI4, features four gaussian orbitals for each inner shell function.
 
 Split-valence Basis set:
-The MIDI basis sets are derived from the MINI sets by floating the outermost primitive in 
-each valence orbitals, and renormalizing the remaining 2 gaussians. MIDI bases are not scaled 
-by GAMESS-UK. The transition metal basis sets are taken from sd states. 
+The MIDI basis sets are derived from the MINI sets by floating the outermost primitive in
+each valence orbitals, and renormalizing the remaining 2 gaussians. MIDI bases are not scaled
+by GAMESS-UK. The transition metal basis sets are taken from sd states.
 The MIDI bases are code-named MIDI1 and MIDI4.
 
-Easton1996a presented the MIDI! basis set, which  is identified as a good compromise of speed 
-and accuracy, yielding excellent geometries and charge balances at a cost that is as affordable 
+Easton1996a presented the MIDI! basis set, which  is identified as a good compromise of speed
+and accuracy, yielding excellent geometries and charge balances at a cost that is as affordable
 as possible for large molecules. The basis set is optimized for molecules containing H, C, N, O,
-F, P, S, and C1. Although much smaller than the popular 6-31G* basis set, in direct comparisons 
-it yields more accurate geometries and charges as judged by comparison to MP2/cc-pVDZ calculations. 
+F, P, S, and C1. Although much smaller than the popular 6-31G* basis set, in direct comparisons
+it yields more accurate geometries and charges as judged by comparison to MP2/cc-pVDZ calculations.

@@ -1,24 +1,24 @@
 Notes about Sadlej basis sets
 ---------------------------------
 
-The basis set polarization method is used to generate the first-order polarized basis sets for Sn, Sb, Te, and I. 
+The basis set polarization method is used to generate the first-order polarized basis sets for Sn, Sb, Te, and I.
 The standard (spd) and extended (spdf) versions of those basis sets are derived for the purpose of calculations of
-dipole moments and dipole polarizabilities for molecules involving the fourth row atoms. 
+dipole moments and dipole polarizabilities for molecules involving the fourth row atoms.
 
-The uniform scaling factors for use with the Sadlej pVTZ basis set are 0.9066, 0.9946, 1.0047, 0.9726, 0.9674 and 0.9649 
-for Hartree–Fock, the Slater–Dirac exchange functional with the Vosko–Wilk–Nusair fit for the correlation functional 
-(S-VWN), Becke's gradient-corrected exchange functional with the Lee–Yang–Parr fit for the correlation functional 
+The uniform scaling factors for use with the Sadlej pVTZ basis set are 0.9066, 0.9946, 1.0047, 0.9726, 0.9674 and 0.9649
+for Hartree–Fock, the Slater–Dirac exchange functional with the Vosko–Wilk–Nusair fit for the correlation functional
+(S-VWN), Becke's gradient-corrected exchange functional with the Lee–Yang–Parr fit for the correlation functional
 (B-LYP), B3-LYP, B3-PW91 and second-order Møller–Plesset theory with frozen core (MP2(fc)), respectively.
 
-Sadlej1992a used a general strategy to generate the so-called polarized basis sets closely follows that employed in 
-their earlier studies. The initial basis sets for the fourth-row atoms are the energy-optimized and fully uncontracted 
-(18.14.8) GTO sets of Huzinaga. The reduction of their size is accomplished by their contraction to the 2-zeta size 
+Sadlej1992a used a general strategy to generate the so-called polarized basis sets closely follows that employed in
+their earlier studies. The initial basis sets for the fourth-row atoms are the energy-optimized and fully uncontracted
+(18.14.8) GTO sets of Huzinaga. The reduction of their size is accomplished by their contraction to the 2-zeta size
 [18.14.8/10.8.4]. Following the experience gained during the generation of polarized sets for the third-row atoms, they
-employed the Raffenetti, rather than the standard segmented, contraction scheme: 13 highest-exponent GTO's of the s 
+employed the Raffenetti, rather than the standard segmented, contraction scheme: 13 highest-exponent GTO's of the s
 subset have been contracted to 5 CGTO's, 10 highest-exponent p-type GTO's have been contracted to 4 CGTO's,
-and all d-type GTO's of the primitive set have been converted into two groups of two CGTO's. 
+and all d-type GTO's of the primitive set have been converted into two groups of two CGTO's.
 
-The performance of the so-called medium-size polarized basis sets for the first-, second-, and third-row atoms has been 
-well documented in molecular calculations of dipole moments and dipole polarizabilities performed at the SCF HF 
-(self-consistent field Hartree-Fock) and different correlated levels of approximation [ 1, 2, 4]. Also, the calculated 
+The performance of the so-called medium-size polarized basis sets for the first-, second-, and third-row atoms has been
+well documented in molecular calculations of dipole moments and dipole polarizabilities performed at the SCF HF
+(self-consistent field Hartree-Fock) and different correlated levels of approximation [ 1, 2, 4]. Also, the calculated
 quadrupole moments turn out to be exceptionally good.

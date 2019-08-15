@@ -19,13 +19,13 @@ For 6-31G, the basis sets for potassium and calcium were originally
 given in rassolov1998a, along with d-type polarization functions with an
 exponent of 0.2000.  Rassolov2001a updates these basis sets, adding extra
 d functions to the valence. In doing so, the d-type polarization functions
-were also updated, to be 1/4 the smallest valence d function. 
+were also updated, to be 1/4 the smallest valence d function.
 
 As far, diffuse functions for K,Ca have not been published. Gaussian
 uses the diffuse functions from blaudeau1997a. But those functions
 are for a different kind of basis set. This is also
 true for Sc-Zn. Gaussian is also missing the updated data from Rassolov2001a for
-K,Ca. In light of this inconsistency, I have removed K-Zn from v1. 
+K,Ca. In light of this inconsistency, I have removed K-Zn from v1.
 
 There does not appear to be diffuse functions available for helium. The data
 here is taken from Gaussian.
@@ -80,7 +80,7 @@ Differences/Issues with the original BSE
 ----------------------------------------
 
 The original BSE sometimes truncates to a fixed number of decimal places, removing
-significant figures. 
+significant figures.
 
 In the original BSE, the H basis for 6-31G and 4-31G differ slightly,
 possibly due to transcription error. The 6-31G basis set for H in

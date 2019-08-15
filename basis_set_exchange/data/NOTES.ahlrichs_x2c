@@ -4,19 +4,19 @@ Notes about Ahlrichs_x2c basis sets
 
 Segmented contracted Gaussian basis sets optimized at the one-electron exact two-component (X2C) level
 (including a finite size model for the nucleus) are presented by pollak2017a for elements up to Rn.
-These basis sets are counterparts for relativistic all-electron calculations to the Karlsruhe “def2” 
-basis sets for nonrelativistic (H–Kr) or effective core potential based (Rb–Rn) treatments. For maximum 
+These basis sets are counterparts for relativistic all-electron calculations to the Karlsruhe “def2”
+basis sets for nonrelativistic (H–Kr) or effective core potential based (Rb–Rn) treatments. For maximum
 consistency, the bases presented here were obtained from the latter by modification and reoptimization.
-All calculations were done with the X2C implementation in TURBOMOLE. In all cases the optimization of X2C 
-bases started from an existing or previously optimized nonrelativistic basis. Improved contraction coefficients 
-were obtained by resolving contractions and taking the MO coefficients resulting from an X2C-HF calculation 
+All calculations were done with the X2C implementation in TURBOMOLE. In all cases the optimization of X2C
+bases started from an existing or previously optimized nonrelativistic basis. Improved contraction coefficients
+were obtained by resolving contractions and taking the MO coefficients resulting from an X2C-HF calculation
 as new contraction coefficients.
 
-Typical errors for atomization energies amount to 20(5) kJ/mol per atom at the double(triple)-ζ level, errors 
-for dipole moments amount to 0.5(0.1) D, and errors for HOMO energies amount to 0.5(0.1) eV. For inner shells 
-errors are in the range of ca. 1 eV, for the 1s orbital of heavy elements up to 5 eV, which is still not much 
-if compared to the energies themselves and to method-induced changes. The x2c-SV(P)all bases yield much smaller 
-errors than DKH-DZP bases, which are of similar size; x2c-TZVPall and Sapporo-DZP are similar to each other 
+Typical errors for atomization energies amount to 20(5) kJ/mol per atom at the double(triple)-ζ level, errors
+for dipole moments amount to 0.5(0.1) D, and errors for HOMO energies amount to 0.5(0.1) eV. For inner shells
+errors are in the range of ca. 1 eV, for the 1s orbital of heavy elements up to 5 eV, which is still not much
+if compared to the energies themselves and to method-induced changes. The x2c-SV(P)all bases yield much smaller
+errors than DKH-DZP bases, which are of similar size; x2c-TZVPall and Sapporo-DZP are similar to each other
 concerning both size and errors.
 
 Contraction schemes for Bases x2c-SV(P)all, x2c-SVPall, x2c-TZVPall, and x2c-TZVPPall
@@ -24,11 +24,11 @@ Contraction schemes for Bases x2c-SV(P)all, x2c-SVPall, x2c-TZVPall, and x2c-TZV
 -------------------------------------------------------------------------------------------------------------------
                    SV                (P)     P                       TZV                    P            PP       -
          s/p/d/f                    p/d/f   p/d/f     s/p/d/f                              p/d/f       p/d/f/g    -
-Li	 511                        21      21        62111                                111         111/1      -
-Be	 511                        31      31        62111                                121         121/1      -
+Li       511                        21      21        62111                                111         111/1      -
+Be       511                        31      31        62111                                121         121/1      -
 B−Ne     511/31                     -/1     -/1       62111/411                            -/11/1      -/11/1     -
-Na	 533/5                      1/1     1/1       73211/51                             11/111      11/111     -
-Mg	 533/5                      11/1    11/1      73211/51                             11/111      11/111     -
+Na       533/5                      1/1     1/1       73211/51                             11/111      11/111     -
+Mg       533/5                      11/1    11/1      73211/51                             11/111      11/111     -
 Al−Ar    533/511                    -/1     -/1       73211/51111                          -/21/1      -/111/1    -
 K        63311/53                   1/11    1/11      842111/631                           1/111       1/111      -
 Ca       63311/53                   1/31    1/31      842111/631                           11/211      11/211     -

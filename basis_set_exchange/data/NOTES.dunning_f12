@@ -1,22 +1,22 @@
 Notes about Dunning_f12 basis sets
 ------------------------------------
 
-F12 explicitly-correlated molecular electronic-structure methods are emerging as practical tools 
-for computational chemistry. These methods overcome the extremely slow convergence of orbital 
-expansions with the basis size by using additional geminal basis functions, chosen to closely 
+F12 explicitly-correlated molecular electronic-structure methods are emerging as practical tools
+for computational chemistry. These methods overcome the extremely slow convergence of orbital
+expansions with the basis size by using additional geminal basis functions, chosen to closely
 approximate the form of the correlation hole at short interelectronic distances.
 
-The cc-pVXZ-F12 (X =D,T,Q) basis sets developed by Peterson and co-workers especially for F12 
-calculations perform remarkably well, except perhaps for the smallest member in the series, cc-pVDZ-F12, 
-which yields RMS errors of 0.47 kJ mol−1 per valence electron (99.93 ± 0.11%) of the atomisation energy. 
-Using the cc-pVTZ-F12 and cc-pVQZ-F12 basis sets, the atomisation energies are obtained accurate to within 
-0.04 kJ mol−1 (99.99 ± 0.03%) and 0.01 kJ mol−1 (99.99 ± 0.02%), respectively, with respect to the 
+The cc-pVXZ-F12 (X =D,T,Q) basis sets developed by Peterson and co-workers especially for F12
+calculations perform remarkably well, except perhaps for the smallest member in the series, cc-pVDZ-F12,
+which yields RMS errors of 0.47 kJ mol−1 per valence electron (99.93 ± 0.11%) of the atomisation energy.
+Using the cc-pVTZ-F12 and cc-pVQZ-F12 basis sets, the atomisation energies are obtained accurate to within
+0.04 kJ mol−1 (99.99 ± 0.03%) and 0.01 kJ mol−1 (99.99 ± 0.02%), respectively, with respect to the
 basis-set-limit reference value.
 
 The cc-pVXZ-F12 sets are the preferred basis sets for F12 theory and that the extrapolation
-from the aug-cc-pVQZ and aug-cc-pV5Z is slightly more accurate than F12 theory in the cc-pVTZ-F12 
+from the aug-cc-pVQZ and aug-cc-pV5Z is slightly more accurate than F12 theory in the cc-pVTZ-F12
 basis but less accurate than F12 theory in the cc-pVQZ-F12 basis.
 
-There have been many advances in F12 theory over the last six years and it is now possible to use 
-the standard orbital basis sets of quantum chemistry 18, for example the def2-QZVPP basis, to obtain 
+There have been many advances in F12 theory over the last six years and it is now possible to use
+the standard orbital basis sets of quantum chemistry 18, for example the def2-QZVPP basis, to obtain
 ∼99.5% of the basis set limit correlation energy for the MP2, CCSD CASPT2 methods.

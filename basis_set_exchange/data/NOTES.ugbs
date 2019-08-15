@@ -2,11 +2,11 @@ Notes about the Univeral Gaussian basis set
 -----------------------------------------------
 
 The universal Gaussian basis set of de Castro, Jorge and coworkers.
- 
+
 Additional polarization functions may be added by including a suffix to this keyword: UGBSnP|V|O
 
-Where n is an integer indicating whether to add 1, 2 or 3 polarization functions for each function 
-in the normal UGBS basis set. The second item is a code letter indicating which function should be 
+Where n is an integer indicating whether to add 1, 2 or 3 polarization functions for each function
+in the normal UGBS basis set. The second item is a code letter indicating which function should be
 augmented polarization functions:
 P adds them to all functions
 V adds them to all valence functions
@@ -16,10 +16,10 @@ For example:
 UGBS1P keyword requests this basis set with one additional polarization function to all orbitals
 UGBS2V adds two additional polarization function to all valence orbitals.
 
-The O suffix adds the same functions as the UGBSnP keywords in Gaussian 03. UGBS1O adds a "p" function 
-for each "s", a "d" function for each "p", and so on; UGBS2O adds a "p" and "d" function for each "s", 
+The O suffix adds the same functions as the UGBSnP keywords in Gaussian 03. UGBS1O adds a "p" function
+for each "s", a "d" function for each "p", and so on; UGBS2O adds a "p" and "d" function for each "s",
 a "d" and "f" function for each "p", and UGBS3O adds a "p", "d" and "f" for each "s", etc.
 
-Diffuse functions may be added as usual with + or ++; the first of these may be specified as 2+ to 
+Diffuse functions may be added as usual with + or ++; the first of these may be specified as 2+ to
 add two diffuse functions for heavy atoms.
 
