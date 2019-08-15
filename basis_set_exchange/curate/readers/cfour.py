@@ -75,7 +75,6 @@ def read_cfour(basis_lines, fname):
             while len(exponents) < nprim:
                 line = basis_lines[i].replace('D', 'E')
                 line = line.replace('d', 'E')
-                lsplt = line.split()
                 exponents.extend([x.strip() for x in line.split()])
                 i += 1
 
@@ -85,7 +84,6 @@ def read_cfour(basis_lines, fname):
                 while len(coef_tmp) < ngen:
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
-                    lsplt = line.split()
                     coef_tmp.extend([x.strip() for x in line.split()])
                     i += 1
                 coefficients.append(coef_tmp)
