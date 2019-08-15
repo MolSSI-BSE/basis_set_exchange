@@ -42,11 +42,7 @@ def read_dalton(basis_lines, fname):
                 else:
                     func_type = 'gto_spherical'
 
-                shell = {
-                    'function_type': func_type,
-                    'region': '',
-                    'angular_momentum': [shell_am]
-                }
+                shell = {'function_type': func_type, 'region': '', 'angular_momentum': [shell_am]}
 
                 exponents = []
                 coefficients = []
@@ -70,11 +66,13 @@ def read_dalton(basis_lines, fname):
                 # Make sure the number of general contractions is >0
                 # (This error was found in some bad files)
                 if int(ngen) <= 0:
-                    raise RuntimeError("Number of general contractions is not greater than zero for element " + str(element_Z))
+                    raise RuntimeError("Number of general contractions is not greater than zero for element " +
+                                       str(element_Z))
 
                 # Make sure the number of general contractions match the heading line
                 if len(shell['coefficients']) != int(ngen):
-                    raise RuntimeError("Number of general contractions does not equal what was given for element " + str(element_Z))
+                    raise RuntimeError("Number of general contractions does not equal what was given for element " +
+                                       str(element_Z))
 
                 element_data['electron_shells'].append(shell)
                 shell_am += 1

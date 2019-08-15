@@ -435,9 +435,9 @@ def optimize_general(basis, use_copy=True):
                         row_col_pairs.append((row_idx, col_idx))
 
             # Now for each row/col pair, zero out the entire row
-            # EXCEPT for the column that has the single value 
-            for row_idx,col_idx in row_col_pairs:
-                for idx,col in enumerate(coefficients):
+            # EXCEPT for the column that has the single value
+            for row_idx, col_idx in row_col_pairs:
+                for idx, col in enumerate(coefficients):
                     if float(col[row_idx]) != 0.0 and col_idx != idx:
                         col[row_idx] = '0.0000000E+00'
     return basis

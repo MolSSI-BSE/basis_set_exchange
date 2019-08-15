@@ -122,11 +122,7 @@ def read_molcas(basis_lines, fname):
                 else:
                     func_type = 'gto_spherical'
 
-                shell = {
-                    'function_type': func_type,
-                    'region': '',
-                    'angular_momentum': [shell_am]
-                }
+                shell = {'function_type': func_type, 'region': '', 'angular_momentum': [shell_am]}
 
                 exponents = []
                 coefficients = []
@@ -150,7 +146,6 @@ def read_molcas(basis_lines, fname):
                         raise RuntimeError("Unexpected number of coefficients")
                     coefficients.append(lsplt)
 
-
                     i += 1
                 shell_am += 1
 
@@ -171,5 +166,5 @@ def read_molcas(basis_lines, fname):
                     while skipped < to_skip:
                         skipped += len(basis_lines[i].split())
                         i += 1
-                
+
     return bs_data

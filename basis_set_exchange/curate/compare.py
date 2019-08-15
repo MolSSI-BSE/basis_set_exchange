@@ -331,13 +331,12 @@ def compare_basis(bs1,
         return False
 
     for el in els1:
-        if not compare_elements(
-                bs1['elements'][el],
-                bs2['elements'][el],
-                compare_electron_shells_meta=compare_electron_shells_meta,
-                compare_ecp_pots_meta=compare_ecp_pots_meta,
-                compare_meta=compare_elements_meta,
-                rel_tol=rel_tol):
+        if not compare_elements(bs1['elements'][el],
+                                bs2['elements'][el],
+                                compare_electron_shells_meta=compare_electron_shells_meta,
+                                compare_ecp_pots_meta=compare_ecp_pots_meta,
+                                compare_meta=compare_elements_meta,
+                                rel_tol=rel_tol):
             print("Element failed:", el)
             return False
     if compare_meta:

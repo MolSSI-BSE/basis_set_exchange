@@ -38,7 +38,7 @@ def read_cfour(basis_lines, fname):
         if not 'electron_shells' in element_data:
             element_data['electron_shells'] = []
 
-        i += 2 # Skip comment line
+        i += 2  # Skip comment line
 
         nshell = int(basis_lines[i].strip())
         i += 1
@@ -58,20 +58,15 @@ def read_cfour(basis_lines, fname):
 
         for shell_idx in range(nshell):
             shell_am = [all_am[shell_idx]]
-            ngen = all_ngen[shell_idx] 
-            nprim = all_nprim[shell_idx] 
+            ngen = all_ngen[shell_idx]
+            nprim = all_nprim[shell_idx]
 
             if max(shell_am) <= 1:
                 func_type = 'gto'
             else:
                 func_type = 'gto_spherical'
 
-
-            shell = {
-                'function_type': func_type,
-                'region': '',
-                'angular_momentum': shell_am
-            }
+            shell = {'function_type': func_type, 'region': '', 'angular_momentum': shell_am}
 
             exponents = []
             coefficients = []
@@ -84,7 +79,6 @@ def read_cfour(basis_lines, fname):
                 exponents.extend([x.strip() for x in line.split()])
                 i += 1
 
-                
             # Read in all coefficients
             for prim in range(nprim):
                 coef_tmp = []

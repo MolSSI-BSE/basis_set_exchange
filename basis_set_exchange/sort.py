@@ -146,8 +146,8 @@ def sort_shells(shells, use_copy=True):
     return list(
         sorted(
             shells,
-            key=lambda x: (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(
-                max(x['exponents'])))))
+            key=lambda x:
+            (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(max(x['exponents'])))))
 
 
 def sort_potentials(potentials, use_copy=True):

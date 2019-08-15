@@ -96,11 +96,7 @@ def read_g94(basis_lines, fname):
                 else:
                     func_type = 'gto_spherical'
 
-                shell = {
-                    'function_type': func_type,
-                    'region': '',
-                    'angular_momentum': shell_am
-                }
+                shell = {'function_type': func_type, 'region': '', 'angular_momentum': shell_am}
 
                 exponents = []
                 coefficients = []
