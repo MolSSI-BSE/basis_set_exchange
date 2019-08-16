@@ -278,9 +278,9 @@ bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat /tmp/my_out_file
-2zapa-nr                       Double Zeta augmented + polarization (nonrelativistic)
-2zapa-nr-cv                    Double zeta augmented +polarization (nonrelativistic + core-valence)
-3-21g                          3-21G Split-valence basis set
+2ZaPa-NR                       Double Zeta augmented + polarization (nonrelativistic)
+2ZaPa-NR-CV                    Double zeta augmented +polarization (nonrelativistic + core-valence)
+3-21G                          3-21G Split-valence basis set
 ...
 </pre></div>
 </div>
@@ -403,24 +403,24 @@ dftjfit  DFT Correlation Fitting
 This command respects the <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code> option.
 With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the basis set.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets
-2zapa-nr                       Double Zeta augmented + polarization (nonrelativistic)
-2zapa-nr-cv                    Double zeta augmented +polarization (nonrelativistic + core-valence)
-3-21g                          3-21G Split-valence basis set
+2ZaPa-NR                       Double Zeta augmented + polarization (nonrelativistic)
+2ZaPa-NR-CV                    Double zeta augmented +polarization (nonrelativistic + core-valence)
+3-21G                          3-21G Split-valence basis set
 ...
 </pre></div>
 </div>
 <p>Basis sets can be filtered by role, family, or by arbitrary search string (case insensitive).
 See <a class="reference internal" href="#list-roles">list-roles</a> and <cite>list-families</cite>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -r jfit
-def2-universal-jfit  Coulomb fitting auxiliary basis for def2 basis sets
-x2c-jfit             x2c coulomb fitting
+def2-universal-JFIT  Coulomb fitting auxiliary basis for def2 basis sets
+x2c-JFIT             x2c coulomb fitting
 ...
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-basis-sets -f pople -s &#39;31g&#39;
-4-31g           4-31G valence double-zeta basis set
-6-31g           6-31G valence double-zeta
-6-31g(2df,p)    6-31G(2df,p)
+4-31G           4-31G valence double-zeta basis set
+6-31G           6-31G valence double-zeta
+6-31G(2df,p)    6-31G(2df,p)
 ...
 </pre></div>
 </div>
@@ -430,11 +430,11 @@ x2c-jfit             x2c coulomb fitting
 <p>List all basis set families.
 This command respects the <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code> option.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-families
+acvxz-j
 ahlrichs
 ahlrichs_dhf
 ahlrichs_fit
 ahlrichs_x2c
-ano
 ...
 </pre></div>
 </div>
@@ -463,7 +463,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.6+19.g8fe75afa
+# Version v0.8.8
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G

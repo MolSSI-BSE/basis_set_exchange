@@ -210,12 +210,12 @@ A list of families can be obtained with :func:`basis_set_exchange.get_families`.
    >>> # Print all the basis sets known to the BSE
    >>> all_bs = basis_set_exchange.get_all_basis_names()
    >>> print(all_bs)
-   ['2zapa-nr', '2zapa-nr-cv', '3-21g', '3zapa-nr'...
+   ['2ZaPa-NR', '2ZaPa-NR-CV', '3-21G', '3ZaPa-NR', '3ZaPa-NR-CV',...
 
    >>> # A list of all families
    >>> all_fam = basis_set_exchange.get_families()
    >>> print(all_fam)
-   ['ahlrichs', 'ahlrichs_dhf', 'ahlrichs_fit', ...
+   ['acvxz-j', 'ahlrichs', 'ahlrichs_dhf', 'ahlrichs_fit', ...
 
 
 Lookup by Role
