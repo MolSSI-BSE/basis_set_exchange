@@ -8,6 +8,7 @@ from .g94 import write_g94, write_xtron
 from .gamess_us import write_gamess_us
 from .gamess_uk import write_gamess_uk
 from .psi4 import write_psi4
+from .qchem import write_qchem
 from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .molcas import write_molcas
@@ -46,6 +47,13 @@ _converter_map = {
         'comment': '*',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_molcas
+    },
+    'qchem': {
+        'display': 'Q-Chem',
+        'extension': '.qchem',
+        'comment': '!',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_qchem
     },
     'dalton': {
         'display': 'Dalton',
