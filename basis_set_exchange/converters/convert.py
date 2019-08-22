@@ -12,6 +12,7 @@ from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .molcas import write_molcas
 from .cfour import write_cfour
+from .crystal import write_crystal
 from .dalton import write_dalton
 from .qcschema import write_qcschema
 from .demon2k import write_demon2k
@@ -109,6 +110,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_cfour
+    },
+    'crystal': {
+        'display': 'CRYSTAL',
+        'extension': '.cry',
+        'comment': '!',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_crystal
     },
     'xtron': {
         'display': 'xTron',
