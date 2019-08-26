@@ -1,0 +1,30 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:45:39 GMT
+--------------------------------------------------------------------------------
+
+From old BSE:
+----------------
+                      Atomic Natural Orbital Basis
+                      ----------------------------
+Elements          Contraction                        References
+ H     : (8s,6p,4d,3f)      -> [4s,3p,2d,1f]     J. Almlof and P.R. Taylor,
+ B - Ne: (13s,8p,6d,4f,2g)  -> [5s,4p,3d,2f,1g]  J.C.P. 86, 4070 (1987).
+Al - P : (18s,13p,6d,4f,2g) -> [6s,5p,3d,2f,1g]  (unpublished)
+Ti     : (21s,16p,10d,6f)   -> [7s,6p,4d,2f]     C.W. Bauschlicher, Jr.
+Fe     : (21s,15p,10d,6f,4g)-> [7s,6p,4d,3f,2g]  S. R. Langhoff and
+Ni     : (20s,15p,10d,6f)   -> [7s,6p,4d,2f]     Kormornicki, Theor. Chim. Acta
+                                                 77, 263 (1990).
+                                                 C.W. Bauschlicher, Jr. and
+                                                 P.R. Taylor, Theor. Chim. Acta
+                                                 86, 13 (1993).
+
+The atomic natural orbital basis sets of Almlof, Taylor and coworkers are
+based on atomic valence SD-CI densities or densities derived from state-
+averaged MR SD-CI calculations.  The aim was to derive generally contracted
+sets with large numbers of Gaussian primitives without significant loss in
+the SCF or correlation energy. Choices of what mixture of s,p,d,f,g
+functions to group together were based on the natural orbital occupation
+numbers.
+
