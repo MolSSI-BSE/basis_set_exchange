@@ -17675,6 +17675,216 @@
       }
     }
   },
+  "dz (dunning-hay)": {
+    "display_name": "DZ (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZ      Double Zeta: 2 Functions/AO",
+    "latest_version": "0",
+    "basename": "dunhay_DZ",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZ.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
+  "dz + double rydberg (dunning-hay)": {
+    "display_name": "DZ + Double Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZ2R    Double Zeta + Double Rydberg Functions",
+    "latest_version": "0",
+    "basename": "dunhay_DZ_rydberg2",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZ_rydberg2.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
+  "dz + rydberg (dunning-hay)": {
+    "display_name": "DZ + Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZ1R    Double Zeta: 2 Functions/AO",
+    "latest_version": "0",
+    "basename": "dunhay_DZ_rydberg",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZ_rydberg.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
+  "dzp (dunning-hay)": {
+    "display_name": "DZP (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZP     Double Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "dunhay_DZP",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZP.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
+  "dzp + diffuse (dunning-hay)": {
+    "display_name": "DZP + Diffuse (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZPD    Double Zeta + Polarization + Diffuse",
+    "latest_version": "0",
+    "basename": "dunhay_DZP_diffuse",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZP_diffuse.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "dzp + rydberg (dunning-hay)": {
+    "display_name": "DZP + Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "DZP1R   Double Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "dunhay_DZP_rydberg",
+    "relpath": "",
+    "family": "other_family",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_DZP_rydberg.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    }
+  },
   "fano-5z": {
     "display_name": "FANO-5Z",
     "other_names": [],
@@ -27034,6 +27244,256 @@
           "69",
           "70",
           "71"
+        ]
+      }
+    }
+  },
+  "sv (dunning-hay)": {
+    "display_name": "SV (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZ     Valence Double Zeta: 2 Funct.'s/Valence AO",
+    "latest_version": "0",
+    "basename": "dunhay_SV",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SV.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "sv + double rydberg (dunning-hay)": {
+    "display_name": "SV + Double Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZ2R   Valence Double Zeta + Double Rydberg Functions",
+    "latest_version": "0",
+    "basename": "dunhay_SV_rydberg2",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SV_rydberg2.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "sv + rydberg (dunning-hay)": {
+    "display_name": "SV + Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZ1R   Valence Double Zeta + Diffuse Rydberg Functions",
+    "latest_version": "0",
+    "basename": "dunhay_SV_rydberg",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SV_rydberg.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "svp (dunning-hay)": {
+    "display_name": "SVP (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZP    Valence Double Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "basename": "dunhay_SVP",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SVP.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "svp + diffuse (dunning-hay)": {
+    "display_name": "SVP + Diffuse (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZPD   Valence Double Zeta + Polarization + Diffuse",
+    "latest_version": "0",
+    "basename": "dunhay_SVP_diffuse",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SVP_diffuse.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "svp + diffuse + rydberg (dunning-hay)": {
+    "display_name": "SVP + Diffuse + Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZPD1R Valence Double Zeta + Polar. + Diffuse + Rydberg",
+    "latest_version": "0",
+    "basename": "dunhay_SVP_diffuse_rydberg",
+    "relpath": "",
+    "family": "other_family",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SVP_diffuse_rydberg.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "svp + rydberg (dunning-hay)": {
+    "display_name": "SVP + Rydberg (Dunning-Hay)",
+    "other_names": [],
+    "description": "VDZP1R  Valence Double Zeta + Polarization + Rydberg",
+    "latest_version": "0",
+    "basename": "dunhay_SVP_rydberg",
+    "relpath": "",
+    "family": "other_family",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_SVP_rydberg.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    }
+  },
+  "tz (dunning-hay)": {
+    "display_name": "TZ (Dunning-Hay)",
+    "other_names": [],
+    "description": "TZ (Dunning-Hay)",
+    "latest_version": "0",
+    "basename": "dunhay_TZ",
+    "relpath": "",
+    "family": "dunning_hay",
+    "role": "orbital",
+    "functiontypes": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "dunhay_TZ.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2009-08-06",
+        "elements": [
+          "1",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
         ]
       }
     }

@@ -1,0 +1,57 @@
+
+This family is largely based on the work of Dunning & Hay in dunning1977b.
+These basis sets can include polarization, diffuse, and rydberg
+functions.
+
+
+SV basis set
+------------
+The Dunning-Hay split valence basis sets are moderate sized segmented
+contractions, which can be used efficiently in programs that don't support
+general contractions.
+
+
+DZ basis sets
+-------------
+The set of contracted basis functions for B - F was derived from the
+Huzinaga (9s,5p) primitive set using contraction coefficients taken directly
+from atomic calculations.  A given primitive is not allowed to appear in
+more than one contracted function, ie. these are segmented contractions.
+
+The Al - Cl set of functions was derived from the Huzinaga (11s,7p)
+primitve set. In these contractions one of the s primitives and one of p
+primitives are used twice.
+
+The neon basis is unpublished.  It was derived from the SV contraction of
+Dunning and Hay.
+
+
+TZ basis sets
+-------------
+The set of contracted basis functions for B - F was derived from the
+Huzinaga (10s,6p) primitive set using contraction coefficients taken
+directly from atomic calculations.
+
+
+Polarization, Diffuse
+---------------------
+The polarization function for Ne are estimated based on neighboring elements.
+Polarization functions for Li,Be,Al are taken from 6-31G*, however they are
+taken to be spherical functions (rather than cartesian as in 6-31G).
+
+The diffuse exponents were optimized at the SCF level for the negative ions.
+For H, Li and Be (where exponents were not given by Dunning & Hay) the values
+were obtained by simply extending the exponents in an even-tempered sense.
+
+
+Rydberg and Double Rydberg
+--------------------------
+The single shell of Rydberg functions is designed to describe the n = 3 and n=
+4 states of first row atoms.  For Ne and Ar (where exponents were not given by
+Dunning & Hay) the values were estimated on the basis of neighboring elements.
+
+The second shell of Rydberg functions is intended for the 4s, 4p and 4d
+states of first row elements.  Corresponding 5s, 5p 4d exponents were not
+given in the paper by Dunning & Hay, but were estimated here by scaling
+the second Rydberg exponents for first row elements by the ratio of the 3s
+(first row)/4s (second row).
