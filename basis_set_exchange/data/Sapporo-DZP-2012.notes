@@ -1,0 +1,593 @@
+#******************************************************************************
+# Element : Ag
+# Basis : Ag = gtf non-relativistic ([7s5p4d1f]{7432111/74212/7412/2})
+# Term : 2S   Valence configuration : 4s(2)4p(6)4d(10)5s(1)
+# SCF energy : -5197.59724958 a.u.
+# Valence Correlation energy : -0.42467583 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Al
+# Basis : Al = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 2P   Valence configuration : 2s(2)2p(6)3s(2)3p(1)
+# SCF energy : -241.84886015 a.u.
+# Valence Correlation energy : -0.24292813 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ar
+# Basis : Ar = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 1S   Valence configuration : 2s(2)2p(6)3s(2)3p(6)
+# SCF energy : -526.76166939 a.u.
+# Valence Correlation energy : -0.36262174 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : As
+# Basis : As = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 4S   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(3)
+# SCF energy : -2234.18818879 a.u.
+# Valence Correlation energy : -0.57466136 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : B
+# Basis : B = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 2P   Valence configuration : 1s(2)2s(2)2p(1)
+# SCF energy : -24.52438193 a.u.
+# Valence Correlation energy : -0.09497651 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Be
+# Basis : Be = gtf non-relativistic ([4s2p]{5111/22})
+# Term : 1S   Valence configuration : 1s(2)2s(2)
+# SCF energy : -14.56946139 a.u.
+# Valence Correlation energy : -0.07504829 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Br
+# Basis : Br = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 2P   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(5)
+# SCF energy : -2572.38519179 a.u.
+# Valence Correlation energy : -0.6111798 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ca
+# Basis : Ca = gtf non-relativistic ([6s5p1d]{742111/72111/2})
+# Term : 1S   Valence configuration : 3s(2)3p(6)4s(2)
+# SCF energy : -676.74030211 a.u.
+# Valence Correlation energy : -0.21176169 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : C
+# Basis : C = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 3P   Valence configuration : 1s(2)2s(2)2p(2)
+# SCF energy : -37.67927012 a.u.
+# Valence Correlation energy : -0.11425744 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cd
+# Basis : Cd = gtf non-relativistic ([7s5p4d1f]{7432111/74212/7412/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)4d(10)5s(2)
+# SCF energy : -5465.02942538 a.u.
+# Valence Correlation energy : -0.4557922 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cl
+# Basis : Cl = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 2P   Valence configuration : 2s(2)2p(6)3s(2)3p(5)
+# SCF energy : -459.43299102 a.u.
+# Valence Correlation energy : -0.33625182 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Co
+# Basis : Co = gtf non-relativistic ([6s4p3d1f]{742111/7312/612/2})
+# Term : 4F   Valence configuration : 3s(2)3p(6)3d(7)4s(2)
+# SCF energy : -1381.37854574 a.u.
+# Valence Correlation energy : -0.40676221 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cr
+# Basis : Cr = gtf non-relativistic ([6s5p3d1f]{742111/72112/612/2})
+# Term : 7S   Valence configuration : 3s(2)3p(6)3d(5)4s(1)
+# SCF energy : -1043.32957091 a.u.
+# Valence Correlation energy : -0.32118602 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cu
+# Basis : Cu = gtf non-relativistic ([6s4p3d1f]{742111/7312/612/2})
+# Term : 2S   Valence configuration : 3s(2)3p(6)3d(10)4s(1)
+# SCF energy : -1638.9222417 a.u.
+# Valence Correlation energy : -0.53416859 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : F
+# Basis : F = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 2P   Valence configuration : 1s(2)2s(2)2p(5)
+# SCF energy : -99.36402857 a.u.
+# Valence Correlation energy : -0.20093012 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Fe
+# Basis : Fe = gtf non-relativistic ([6s4p3d1f]{742111/7312/612/2})
+# Term : 5D   Valence configuration : 3s(2)3p(6)3d(6)4s(2)
+# SCF energy : -1262.41058548 a.u.
+# Valence Correlation energy : -0.37725814 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ga
+# Basis : Ga = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 2P   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(1)
+# SCF energy : -1923.21526878 a.u.
+# Valence Correlation energy : -0.55210744 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ge
+# Basis : Ge = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 3P   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(2)
+# SCF energy : -2075.31177892 a.u.
+# Valence Correlation energy : -0.56368651 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : H
+# Basis : H = gtf non-relativistic ([2s1p]{31/3})
+# Term : 2S   Valence configuration : 1s(1)
+# SCF energy : -0.49927841 a.u.
+# Reference
+# Authors : H. Yamamoto, O. Matsuoka,   [inner and valence shell]
+# Journal : Bull. Univ. Electro. Comm., 5, 23 (1992)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [valence correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+
+#******************************************************************************
+# Element : He
+# Basis : He = gtf non-relativistic ([2s1p]{31/2})
+# Term : 1S   Valence configuration : 1s(2)
+# SCF energy : -2.85516048 a.u.
+# Valence Correlation energy : -0.03444604 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : I
+# Basis : I = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 2P   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(5)
+# SCF energy : -6917.85327499 a.u.
+# Valence Correlation energy : -0.55440095 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : In
+# Basis : In = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 2P   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(1)
+# SCF energy : -5740.05792791 a.u.
+# Valence Correlation energy : -0.47226786 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : K
+# Basis : K = gtf non-relativistic ([6s5p1d]{742111/72111/2})
+# Term : 2S   Valence configuration : 3s(2)3p(6)4s(1)
+# SCF energy : -599.14845077 a.u.
+# Valence Correlation energy : -0.18062156 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Kr
+# Basis : Kr = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 1S   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(6)
+# SCF energy : -2751.99575052 a.u.
+# Valence Correlation energy : -0.62957617 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Li
+# Basis : Li = gtf non-relativistic ([5s2p]{41111/22})
+# Term : 2S   Valence configuration : 1s(2)2s(1)
+# SCF energy : -7.43172061 a.u.
+# Valence Correlation energy : -0.03659597 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mg
+# Basis : Mg = gtf non-relativistic ([5s4p1d]{62111/4111/2})
+# Term : 1S   Valence configuration : 2s(2)2p(6)3s(2)
+# SCF energy : -199.59053719 a.u.
+# Valence Correlation energy : -0.23584657 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mn
+# Basis : Mn = gtf non-relativistic ([6s5p3d1f]{742111/72112/612/2})
+# Term : 6S   Valence configuration : 3s(2)3p(6)3d(5)4s(2)
+# SCF energy : -1149.83602331 a.u.
+# Valence Correlation energy : -0.34287524 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mo
+# Basis : Mo = gtf non-relativistic ([7s6p4d1f]{7432111/741112/7412/2})
+# Term : 7S   Valence configuration : 4s(2)4p(6)4d(5)5s(1)
+# SCF energy : -3975.46841289 a.u.
+# Valence Correlation energy : -0.26610706 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Na
+# Basis : Na = gtf non-relativistic ([5s4p1d]{62111/4111/2})
+# Term : 2S   Valence configuration : 2s(2)2p(6)3s(1)
+# SCF energy : -161.83829196 a.u.
+# Valence Correlation energy : -0.21338032 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : N
+# Basis : N = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 4S   Valence configuration : 1s(2)2s(2)2p(3)
+# SCF energy : -54.3841668 a.u.
+# Valence Correlation energy : -0.13105117 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Nb
+# Basis : Nb = gtf non-relativistic ([7s6p4d1f]{7432111/741112/7412/2})
+# Term : 6D   Valence configuration : 4s(2)4p(6)4d(4)5s(1)
+# SCF energy : -3753.52065387 a.u.
+# Valence Correlation energy : -0.23871253 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ne
+# Basis : Ne = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 1S   Valence configuration : 1s(2)2s(2)2p(6)
+# SCF energy : -128.48003314 a.u.
+# Valence Correlation energy : -0.23630517 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ni
+# Basis : Ni = gtf non-relativistic ([6s4p3d1f]{742111/7312/612/2})
+# Term : 3F   Valence configuration : 3s(2)3p(6)3d(8)4s(2)
+# SCF energy : -1506.83178879 a.u.
+# Valence Correlation energy : -0.44897555 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : O
+# Basis : O = gtf non-relativistic ([4s3p1d]{5211/131/2})
+# Term : 3P   Valence configuration : 1s(2)2s(2)2p(4)
+# SCF energy : -74.78063388 a.u.
+# Valence Correlation energy : -0.16626342 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : P
+# Basis : P = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 4S   Valence configuration : 2s(2)2p(6)3s(2)3p(3)
+# SCF energy : -340.68153173 a.u.
+# Valence Correlation energy : -0.28166644 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Pd
+# Basis : Pd = gtf non-relativistic ([7s5p4d1f]{7432111/74221/7412/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)4d(10)
+# SCF energy : -4937.82304259 a.u.
+# Valence Correlation energy : -0.41109463 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Rb
+# Basis : Rb = gtf non-relativistic ([7s6p2d]{7432111/741111/72})
+# Term : 2S   Valence configuration : 4s(2)4p(6)5s(1)
+# SCF energy : -2938.29404024 a.u.
+# Valence Correlation energy : -0.14364639 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Rh
+# Basis : Rh = gtf non-relativistic ([7s5p4d1f]{7432111/74212/7412/2})
+# Term : 4F   Valence configuration : 4s(2)4p(6)4d(8)5s(1)
+# SCF energy : -4685.78817978 a.u.
+# Valence Correlation energy : -0.35786286 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ru
+# Basis : Ru = gtf non-relativistic ([7s5p4d1f]{7432111/74212/7412/2})
+# Term : 5F   Valence configuration : 4s(2)4p(6)4d(7)5s(1)
+# SCF energy : -4441.4500031 a.u.
+# Valence Correlation energy : -0.32460932 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : S
+# Basis : S = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 3P   Valence configuration : 2s(2)2p(6)3s(2)3p(4)
+# SCF energy : -397.46200807 a.u.
+# Valence Correlation energy : -0.30910368 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sb
+# Basis : Sb = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 4S   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(3)
+# SCF energy : -6313.36634682 a.u.
+# Valence Correlation energy : -0.50742702 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sc
+# Basis : Sc = gtf non-relativistic ([6s5p3d1f]{742111/72112/621/2})
+# Term : 2D   Valence configuration : 3s(2)3p(6)3d(1)4s(2)
+# SCF energy : -759.71557569 a.u.
+# Valence Correlation energy : -0.23863267 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Se
+# Basis : Se = gtf non-relativistic ([6s5p3d1f]{742211/73121/522/2})
+# Term : 3P   Valence configuration : 3s(2)3p(6)3d(10)4s(2)4p(4)
+# SCF energy : -2399.81439791 a.u.
+# Valence Correlation energy : -0.59266817 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Si
+# Basis : Si = gtf non-relativistic ([5s4p2d]{62211/4221/23})
+# Term : 3P   Valence configuration : 2s(2)2p(6)3s(2)3p(2)
+# SCF energy : -288.82207715 a.u.
+# Valence Correlation energy : -0.26329275 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sn
+# Basis : Sn = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 3P   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(2)
+# SCF energy : -6022.81674483 a.u.
+# Valence Correlation energy : -0.4901361 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sr
+# Basis : Sr = gtf non-relativistic ([7s6p2d]{7432111/741111/72})
+# Term : 1S   Valence configuration : 4s(2)4p(6)5s(2)
+# SCF energy : -3131.47913681 a.u.
+# Valence Correlation energy : -0.17051419 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Tc
+# Basis : Tc = gtf non-relativistic ([7s6p4d1f]{7432111/741112/7412/2})
+# Term : 6S   Valence configuration : 4s(2)4p(6)4d(5)5s(2)
+# SCF energy : -4204.70345606 a.u.
+# Valence Correlation energy : -0.30357867 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Te
+# Basis : Te = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 3P   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(4)
+# SCF energy : -6611.66086532 a.u.
+# Valence Correlation energy : -0.5307678 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ti
+# Basis : Ti = gtf non-relativistic ([6s5p3d1f]{742111/72112/621/2})
+# Term : 3F   Valence configuration : 3s(2)3p(6)3d(2)4s(2)
+# SCF energy : -848.38363198 a.u.
+# Valence Correlation energy : -0.25630894 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : V
+# Basis : V = gtf non-relativistic ([6s5p3d1f]{742111/72112/612/2})
+# Term : 4F   Valence configuration : 3s(2)3p(6)3d(3)4s(2)
+# SCF energy : -942.85955657 a.u.
+# Valence Correlation energy : -0.28615129 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Xe
+# Basis : Xe = gtf non-relativistic ([7s6p4d1f]{7432211/742121/7222/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)4d(10)5s(2)5p(6)
+# SCF energy : -7232.00614158 a.u.
+# Valence Correlation energy : -0.57755175 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Y
+# Basis : Y = gtf non-relativistic ([7s6p4d1f]{7432111/741112/7421/2})
+# Term : 2D   Valence configuration : 4s(2)4p(6)4d(1)5s(2)
+# SCF energy : -3331.61421267 a.u.
+# Valence Correlation energy : -0.20538532 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Zn
+# Basis : Zn = gtf non-relativistic ([6s4p3d1f]{742111/7312/612/2})
+# Term : 1S   Valence configuration : 3s(2)3p(6)3d(10)4s(2)
+# SCF energy : -1777.80566239 a.u.
+# Valence Correlation energy : -0.5733326 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Zr
+# Basis : Zr = gtf non-relativistic ([7s6p4d1f]{7432111/741112/7421/2})
+# Term : 3F   Valence configuration : 4s(2)4p(6)4d(2)5s(2)
+# SCF energy : -3538.92156923 a.u.
+# Valence Correlation energy : -0.23123216 a.u.
+# Reference
+# Authors : T. Noro, M. Sekiya, T. Koga,
+# Journal : Theoret. Chem. Acc. 131, 1124 (2012)
+#******************************************************************************
