@@ -6,6 +6,7 @@ import os
 import tempfile
 
 from basis_set_exchange import curate, api, validator, misc, fileio, compose, memo
+from basis_set_exchange.curate.readers import g94
 from .common_testvars import auth_data_dir
 
 # yapf: disable
@@ -68,3 +69,30 @@ def test_add_basis(tmp_path):
 
     # Validate the new data dir
     validator.validate_data_dir(tmp_path)
+
+def test_g94_reader_reference():
+    tmp_file = '''! test file for testing multiple elements referencing to the same internal basis set
+! and a mixture of internal and external basis set for the same element
+-Li     0 
+def2SVP
+D   1   1.00
+      0.2300000              1.0000000        
+D   1   1.00
+      0.0757000              1.0000000        
+F   1   1.00
+      0.1350000              1.0000000        
+S 1 1.00
+ 6.98698293267e-03 1.0
+P 1 1.00
+ 2.73333333333e-02 1.0
+****
+-Be -B  -C  -N  -O  -F  -Ne 0 
+def2SVP
+****'''
+    bs_data = g94.read_g94(tmp_file.split('\n'), None)
+    # test if the external data is read
+    assert bs_data['elements']['3']['electron_shells'][5]['exponents'][0][:4] == '0.23'
+    # test if the internal data is read
+    assert bs_data['elements']['3']['electron_shells'][0]['exponents'][0][:4] == '266.'
+    # test if all elements are being read
+    assert bs_data['elements']['10']['electron_shells'][0]['exponents'][0][:4] == '3598'

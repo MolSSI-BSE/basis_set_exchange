@@ -1,6 +1,36 @@
 from ... import lut
 from ..skel import create_skel
+from ...api import get_basis
 
+# Dict for solving the difference in the naming convention for Ahlrichs basis set in Gaussian
+# Specifically for Def2SV, Def2SVP, Def2SVPP, Def2TZV, Def2TZVP, Def2TZVPP, Def2QZV, Def2QZVP, Def2QZVPP
+
+name_dict = {'DEF2SV': 'def2-SV', 'DEF2SVP': 'def2-SVP', 'DEF2SVPP': 'def2-SVPP', 'DEF2TZV': 'def2-TZV',
+             'DEF2TZVP': 'def2-TZVP', 'DEF2TZVPP': 'def2-TZVPP', 'DEF2QZV': 'def2-QZV', 'DEF2QZVP': 'def2-QZVP',
+             'DEF2QZVPP': 'def2-QZVPP'}
+
+def append_data(current_bs, new_bs, element):
+    if not element in current_bs['elements']:
+        current_bs['elements'][element] = {}
+        current_bs['elements'][element]['electron_shells'] = []
+
+    if new_bs['elements'][element]['electron_shells']:
+        current_bs['elements'][element]['electron_shells'].extend(
+            new_bs['elements'][element]['electron_shells'])
+
+    if new_bs['elements'][element]['references']:
+        try:
+            current_bs['elements'][element]['references'].extend(
+                new_bs['elements'][element]['references'])
+        except KeyError:
+            current_bs['elements'][element]['references'] = new_bs['elements'][element]['references']
+
+    if 'function_types' in current_bs:
+        for function in new_bs['function_types']:
+            if not function in current_bs['function_types']:
+                current_bs['function_types'].append(function)
+    else:
+        current_bs['function_types'] = new_bs['function_types']
 
 def read_g94(basis_lines, fname):
     '''Reads G94-formatted file data and converts it to a dictionary with the
@@ -21,7 +51,51 @@ def read_g94(basis_lines, fname):
 
     while i < len(basis_lines):
         line = basis_lines[i]
-        elementsym = line.split()[0]
+
+        # check for additional **** in the end
+        if line == '****':
+            i += 1
+            continue
+
+        split_line = line.split()
+
+        # Check for a specific type of format
+        # Example:
+        # ****
+        # -Li -Be -B  -C  -N  -O  -F  -Ne 0
+        # def2SVP
+        # ****
+
+        if len(split_line) > 2 and split_line[-1] == '0':
+            # read elements
+            elementsyms = []
+            for elementsym in split_line[:-1]:
+                if elementsym[0] == '-':
+                    elementsyms.append(elementsym[1:])
+                else:
+                    elementsyms.append(elementsym)
+
+            i += 1
+            # read basis set
+            name = basis_lines[i]
+
+            for elementsym in elementsyms:
+                try:
+                    # fmt=None for specifying getint the dict
+                    new_basis_set = get_basis(name, elements=elementsym, fmt=None)
+                except KeyError:
+                    # print('{} basis set for element {} not found.'.format(name, elementsym))
+                    new_basis_set = get_basis(name_dict[name.upper()], elements=elementsym, fmt=None)
+                    # print('Assume the {} basis set is enquired.'.format(name_dict[name.upper()]))
+
+                element_Z = lut.element_Z_from_sym(elementsym)
+                element_Z = str(element_Z)
+                append_data(bs_data, new_basis_set, element_Z)
+
+            i += 1
+            continue
+
+        elementsym = split_line[0]
 
         # Some gaussian files have a dash before the element
         if elementsym[0] == '-':
@@ -88,36 +162,56 @@ def read_g94(basis_lines, fname):
 
             while basis_lines[i] != '****':
                 lsplt = basis_lines[i].split()
-                shell_am = lut.amchar_to_int(lsplt[0], hij=True)
-                nprim = int(lsplt[1])
 
-                if max(shell_am) <= 1:
-                    func_type = 'gto'
-                else:
-                    func_type = 'gto_spherical'
+                # check if reference to other basis set
+                # Example form:
+                # -H     0
+                # def2TZVP
+                # ****
+                if len(lsplt) == 1:
+                    # add the data from existing basis set
+                    name = lsplt[0]
+                    try:
+                        # fmt=None for specifying getint the dict
+                        new_basis_set = get_basis(name, elements=elementsym, fmt=None)
+                    except KeyError:
+                        # print('{} basis set for element {} not found.'.format(name, elementsym))
+                        new_basis_set = get_basis(name_dict[name.upper()], elements=elementsym, fmt=None)
+                        # print('Assume the {} basis set is enquired.'.format(name_dict[name.upper()]))
 
-                shell = {'function_type': func_type, 'region': '', 'angular_momentum': shell_am}
-
-                exponents = []
-                coefficients = []
-
-                i += 1
-                for j in range(nprim):
-                    line = basis_lines[i].replace('D', 'E')
-                    line = line.replace('d', 'E')
-                    lsplt = line.split()
-                    exponents.append(lsplt[0])
-                    coefficients.append(lsplt[1:])
+                    append_data(bs_data, new_basis_set, element_Z)
                     i += 1
+                else:
+                    shell_am = lut.amchar_to_int(lsplt[0], hij=True)
+                    nprim = int(lsplt[1])
 
-                shell['exponents'] = exponents
+                    if max(shell_am) <= 1:
+                        func_type = 'gto'
+                    else:
+                        func_type = 'gto_spherical'
 
-                # We need to transpose the coefficient matrix
-                # (we store a matrix with primitives being the column index and
-                # general contraction being the row index)
-                shell['coefficients'] = list(map(list, zip(*coefficients)))
+                    shell = {'function_type': func_type, 'region': '', 'angular_momentum': shell_am}
 
-                element_data['electron_shells'].append(shell)
+                    exponents = []
+                    coefficients = []
+
+                    i += 1
+                    for j in range(nprim):
+                        line = basis_lines[i].replace('D', 'E')
+                        line = line.replace('d', 'E')
+                        lsplt = line.split()
+                        exponents.append(lsplt[0])
+                        coefficients.append(lsplt[1:])
+                        i += 1
+
+                    shell['exponents'] = exponents
+
+                    # We need to transpose the coefficient matrix
+                    # (we store a matrix with primitives being the column index and
+                    # general contraction being the row index)
+                    shell['coefficients'] = list(map(list, zip(*coefficients)))
+
+                    element_data['electron_shells'].append(shell)
 
             i += 1
 
