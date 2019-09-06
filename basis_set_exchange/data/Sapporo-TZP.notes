@@ -1,0 +1,719 @@
+NOTE: This basis set has been superceded by Sapporo-TZP-2012
+
+#******************************************************************************
+# Element : Ag
+# Basis : Ag = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/731(5)/721(3)/21/2})
+# Term : 2S   Valence configuration : 4s(2)4p(6)4d(10)5s(1)
+# SCF energy : -5197.5995096 a.u.   
+# Valence Correlation energy : -0.59343518 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Al
+# Basis : Al = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 2P   Valence configuration : 3s(2)3p(1)
+# SCF energy : -241.84851537 a.u.   
+# Valence Correlation energy : -0.05475338 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ar
+# Basis : Ar = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 1S   Valence configuration : 3s(2)3p(6)
+# SCF energy : -526.76094589 a.u.   
+# Valence Correlation energy : -0.21795614 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : As
+# Basis : As = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 4S   Valence configuration : 4s(2)4p(3)
+# SCF energy : -2234.1880595 a.u.   
+# Valence Correlation energy : -0.0852627 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : B
+# Basis : B = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 2P   Valence configuration : 2s(2)2p(1)
+# SCF energy : -24.52550227 a.u.   
+# Valence Correlation energy : -0.06711881 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Be
+# Basis : Be = gtf non-relativistic ([6s4p2d]{41(5)/1(4)/21})
+# Term : 1S   Valence configuration : 1s(2)2s(2)
+# SCF energy : -14.57227385 a.u.   
+# Valence Correlation energy : -0.08486525 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Br
+# Basis : Br = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 2P   Valence configuration : 4s(2)4p(5)
+# SCF energy : -2572.3851103 a.u.   
+# Valence Correlation energy : -0.15467683 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ca
+# Basis : Ca = gtf non-relativistic ([8s6p3d1f]{7421(5)/721(4)/21(2)/1})
+# Term : 1S   Valence configuration : 3s(2)3p(6)4s(2)
+# SCF energy : -676.74082839 a.u.   
+# Valence Correlation energy : -0.27082717 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : C
+# Basis : C = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 3P   Valence configuration : 2s(2)2p(2)
+# SCF energy : -37.68284223 a.u.   
+# Valence Correlation energy : -0.0897979 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cd
+# Basis : Cd = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/731(5)/731(3)/21/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)4d(10)5s(2)
+# SCF energy : -5465.03123746 a.u.   
+# Valence Correlation energy : -0.61464714 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cl
+# Basis : Cl = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 2P   Valence configuration : 3s(2)3p(5)
+# SCF energy : -459.43240991 a.u.   
+# Valence Correlation energy : -0.18317986 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Co
+# Basis : Co = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 4F   Valence configuration : 3s(2)3p(6)3d(7)4s(2)
+# SCF energy : -1381.37957691 a.u.   
+# Valence Correlation energy : -0.56237901 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cr
+# Basis : Cr = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 7S   Valence configuration : 3s(2)3p(6)3d(5)4s(1)
+# SCF energy : -1043.33061884 a.u.   
+# Valence Correlation energy : -0.40939018 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Cu
+# Basis : Cu = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 2S   Valence configuration : 3s(2)3p(6)3d(10)4s(1)
+# SCF energy : -1638.9234858 a.u.   
+# Valence Correlation energy : -0.73005998 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : F
+# Basis : F = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 2P   Valence configuration : 2s(2)2p(5)
+# SCF energy : -99.39027727 a.u.   
+# Valence Correlation energy : -0.21216118 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Fe
+# Basis : Fe = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 5D   Valence configuration : 3s(2)3p(6)3d(6)4s(2)
+# SCF energy : -1262.41166145 a.u.   
+# Valence Correlation energy : -0.50556718 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ga
+# Basis : Ga = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 2P   Valence configuration : 4s(2)4p(1)
+# SCF energy : -1923.21526771 a.u.   
+# Valence Correlation energy : -0.04999489 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ge
+# Basis : Ge = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 3P   Valence configuration : 4s(2)4p(2)
+# SCF energy : -2075.31164884 a.u.   
+# Valence Correlation energy : -0.06795412 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : H
+# Basis : H = gtf non-relativistic ([3s2p1d]{411/21/2})
+# Term : 2S   Valence configuration : 1s(1)
+# SCF energy : -0.49994557 a.u.   
+# Reference
+# Authors : H. Yamamoto, O. Matsuoka,   [inner and valence shell]
+# Journal : Bull. Univ. Electro. Comm., 5, 23 (1992)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [valence correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : He
+# Basis : He = gtf non-relativistic ([3s2p1d]{41(2)/21/2})
+# Term : 1S   Valence configuration : 1s(2)
+# SCF energy : -2.86115335 a.u.   
+# Valence Correlation energy : -0.03934829 a.u.
+# Reference
+# Authors : H. Moriyama, H. Tatewaki,   [inner and valence shell]
+# Journal : unpublished
+# Authors : T. Noro, M. Sekiya, T. Koga,   [valence correlated set]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : I
+# Basis : I = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 2P   Valence configuration : 5s(2)5p(5)
+# SCF energy : -6917.85311065 a.u.   
+# Valence Correlation energy : -0.1343577 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : In
+# Basis : In = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 2P   Valence configuration : 5s(2)5p(1)
+# SCF energy : -5740.05792669 a.u.   
+# Valence Correlation energy : -0.04553954 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : K
+# Basis : K = gtf non-relativistic ([8s6p3d1f]{7421(5)/721(4)/21(2)/1})
+# Term : 2S   Valence configuration : 3s(2)3p(6)4s(1)
+# SCF energy : -599.148887 a.u.   
+# Valence Correlation energy : -0.23348953 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Kr
+# Basis : Kr = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)
+# SCF energy : -2751.99568325 a.u.   
+# Valence Correlation energy : -0.18137573 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Li
+# Basis : Li = gtf non-relativistic ([6s4p2d]{41(5)/1(4)/21})
+# Term : 2S   Valence configuration : 1s(2)2s(1)
+# SCF energy : -7.43239109 a.u.   
+# Valence Correlation energy : -0.04155888 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mg
+# Basis : Mg = gtf non-relativistic ([7s6p3d1f]{731(5)/41(5)/21(2)/1})
+# Term : 1S   Valence configuration : 2s(2)2p(6)3s(2)
+# SCF energy : -199.6078639 a.u.   
+# Valence Correlation energy : -0.29438877 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mn
+# Basis : Mn = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 6S   Valence configuration : 3s(2)3p(6)3d(5)4s(2)
+# SCF energy : -1149.83717387 a.u.   
+# Valence Correlation energy : -0.4365969 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Mo
+# Basis : Mo = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 7S   Valence configuration : 4s(2)4p(6)4d(5)5s(1)
+# SCF energy : -3975.47032639 a.u.   
+# Valence Correlation energy : -0.34940343 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Na
+# Basis : Na = gtf non-relativistic ([7s6p3d1f]{731(5)/41(5)/21(2)/1})
+# Term : 2S   Valence configuration : 2s(2)2p(6)3s(1)
+# SCF energy : -161.852574 a.u.   
+# Valence Correlation energy : -0.2692196 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : N
+# Basis : N = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 4S   Valence configuration : 2s(2)2p(3)
+# SCF energy : -54.39207604 a.u.   
+# Valence Correlation energy : -0.11261268 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Nb
+# Basis : Nb = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 6D   Valence configuration : 4s(2)4p(6)4d(4)5s(1)
+# SCF energy : -3753.52225602 a.u.   
+# Valence Correlation energy : -0.31673943 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ne
+# Basis : Ne = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 1S   Valence configuration : 2s(2)2p(6)
+# SCF energy : -128.52077573 a.u.   
+# Valence Correlation energy : -0.25963617 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ni
+# Basis : Ni = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6112/21/2})
+# Term : 3F   Valence configuration : 3s(2)3p(6)3d(8)4s(2)
+# SCF energy : -1506.83283471 a.u.   
+# Valence Correlation energy : -0.62275851 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : O
+# Basis : O = gtf non-relativistic ([4s3p2d1f]{621(2)/31(2)/21/2})
+# Term : 3P   Valence configuration : 2s(2)2p(4)
+# SCF energy : -74.79609737 a.u.   
+# Valence Correlation energy : -0.16383293 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : J. Chem. Chem. 104, 8493 (1996)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 98, 25-32 (1997)
+#******************************************************************************
+
+#******************************************************************************
+# Element : P
+# Basis : P = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 4S   Valence configuration : 3s(2)3p(3)
+# SCF energy : -340.68107619 a.u.   
+# Valence Correlation energy : -0.10032685 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Pd
+# Basis : Pd = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/731(5)/721(3)/21/2})
+# Term : 1S   Valence configuration : 4s(2)4p(6)4d(10)
+# SCF energy : -4937.82618304 a.u.   
+# Valence Correlation energy : -0.57223841 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Rb
+# Basis : Rb = gtf non-relativistic ([9s7p4d1f]{74321(5)/741(5)/721(2)/1})
+# Term : 2S   Valence configuration : 4s(2)4p(6)5s(1)
+# SCF energy : -2938.29554027 a.u.   
+# Valence Correlation energy : -0.1947229 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 109, 85-90 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Rh
+# Basis : Rh = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/731(5)/721(3)/21/2})
+# Term : 4F   Valence configuration : 4s(2)4p(6)4d(8)5s(1)
+# SCF energy : -4685.79027709 a.u.   
+# Valence Correlation energy : -0.5001829 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ru
+# Basis : Ru = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 5F   Valence configuration : 4s(2)4p(6)4d(7)5s(1)
+# SCF energy : -4441.45231266 a.u.   
+# Valence Correlation energy : -0.45234398 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : S
+# Basis : S = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 3P   Valence configuration : 3s(2)3p(4)
+# SCF energy : -397.46151937 a.u.   
+# Valence Correlation energy : -0.14395163 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sb
+# Basis : Sb = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 4S   Valence configuration : 5s(2)5p(3)
+# SCF energy : -6313.36626163 a.u.   
+# Valence Correlation energy : -0.0745202 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sc
+# Basis : Sc = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6121/21/2})
+# Term : 2D   Valence configuration : 3s(2)3p(6)3d(1)4s(2)
+# SCF energy : -759.71600984 a.u.   
+# Valence Correlation energy : -0.27934727 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Se
+# Basis : Se = gtf non-relativistic ([6s5p3d1f]{74321(2)/741(3)/721/2})
+# Term : 3P   Valence configuration : 4s(2)4p(4)
+# SCF energy : -2399.81456988 a.u.   
+# Valence Correlation energy : -0.12205222 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Si
+# Basis : Si = gtf non-relativistic ([5s4p2d1f]{6321(2)/61(3)/31/2})
+# Term : 3P   Valence configuration : 3s(2)3p(2)
+# SCF energy : -288.82171213 a.u.   
+# Valence Correlation energy : -0.07791718 a.u.
+# Reference
+# Authors : H. Tatewaki, T. Koga,  
+# Journal : Theor. Chem. Acc. 96, 243 (1997)
+# Authors : M. Sekiya, T. Noro, T. Koga, H. Matsuyama,   [inner and valence shell]
+# Journal : J. Mol. Struct.(Theochem), 451, 51-60 (1998)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sn
+# Basis : Sn = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 3P   Valence configuration : 5s(2)5p(2)
+# SCF energy : -6022.81671682 a.u.   
+# Valence Correlation energy : -0.06046858 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Sr
+# Basis : Sr = gtf non-relativistic ([9s7p4d1f]{74321(5)/741(5)/721(2)/1})
+# Term : 1S   Valence configuration : 4s(2)4p(6)5s(2)
+# SCF energy : -3131.48074545 a.u.   
+# Valence Correlation energy : -0.22813489 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : T. Noro, M. Sekiya, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 121, 289-295 (2008)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [core correlated set]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Tc
+# Basis : Tc = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 6S   Valence configuration : 4s(2)4p(6)4d(5)5s(2)
+# SCF energy : -4204.70554622 a.u.   
+# Valence Correlation energy : -0.39176306 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Te
+# Basis : Te = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 3P   Valence configuration : 5s(2)5p(4)
+# SCF energy : -6611.66074383 a.u.   
+# Valence Correlation energy : -0.10711789 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Ti
+# Basis : Ti = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6121/21/2})
+# Term : 3F   Valence configuration : 3s(2)3p(6)3d(2)4s(2)
+# SCF energy : -848.38420985 a.u.   
+# Valence Correlation energy : -0.32055075 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : V
+# Basis : V = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6121/21/2})
+# Term : 4F   Valence configuration : 3s(2)3p(6)3d(3)4s(2)
+# SCF energy : -942.86030391 a.u.   
+# Valence Correlation energy : -0.36197814 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Xe
+# Basis : Xe = gtf non-relativistic ([7s6p4d1f]{743(2)21(2)/7431(3)/741(2)/2/})
+# Term : 1S   Valence configuration : 5s(2)5p(6)
+# SCF energy : -7232.00593408 a.u.   
+# Valence Correlation energy : -0.15565096 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : M. Sekiya, T. Noro, Y. Osanai, T. Koga,   [inner and valence shell]
+# Journal : Theor. Chem. Acc., 106, 297-300 (2001)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Y
+# Basis : Y = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 2D   Valence configuration : 4s(2)4p(6)4d(1)5s(2)
+# SCF energy : -3331.61577064 a.u.   
+# Valence Correlation energy : -0.24293543 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Zn
+# Basis : Zn = gtf non-relativistic ([8s6p4d2f1g]{7421(5)/721(4)/6121/21/2})
+# Term : 1S   Valence configuration : 3s(2)3p(6)3d(10)4s(2)
+# SCF energy : -1777.80676418 a.u.   
+# Valence Correlation energy : -0.74017192 a.u.
+# Reference
+# Authors : T. Koga, H. Tatewaki, H. Matsuyama, Y. Satoh,  
+# Journal : Theor. Chem. Acc. 102, 105 (1999)
+# Authors : T. Noro, M. Sekiya, T. Koga, H. Matsuyama,   [inner shell]
+# Journal : Theor. Chem. Acc., 104, 146-152 (2000)
+#******************************************************************************
+
+#******************************************************************************
+# Element : Zr
+# Basis : Zr = gtf non-relativistic ([9s7p5d2f1g]{74321(5)/741(5)/721(3)/21/2})
+# Term : 3F   Valence configuration : 4s(2)4p(6)4d(2)5s(2)
+# SCF energy : -3538.92316309 a.u.   
+# Valence Correlation energy : -0.28457501 a.u.
+# Reference
+# Authors : T. Koga, S. Yamamoto, T. Shimazaki, H. Tatewaki,  
+# Journal : Theor. Chem. Acc. 108, 41 (2002)
+# Authors : Y. Osanai, M. Sekiya, T. Noro, T. Koga,   [inner shell]
+# Journal : Mol. Phys., 101, 65-71 (2003)
+#******************************************************************************
+
