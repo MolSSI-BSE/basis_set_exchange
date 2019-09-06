@@ -88,6 +88,7 @@ def create_metadata_file(output_path, data_dir):
                       'other_names': None,
                       'description': bs['description'],
                       'latest_version': latest_ver,
+                      'flags': bs['flags'],
                       'basename': base_filename[:-1], # Strip off that trailing period
                       'relpath': base_relpath,
                       'family': bs['family'],
