@@ -4,12 +4,143 @@ Add a basis set to the library
 
 import os
 import datetime
-from ..fileio import write_json_basis
+from ..fileio import read_json_basis, write_json_basis
 from ..misc import expand_elements
 from ..validator import validate_data
 from .skel import create_skel
 from .readers import read_formatted_basis
 from .metadata import create_metadata_file
+
+
+def add_from_components(component_files, data_dir, subdir, file_base, name, family, role, description, version,
+                        revision_description):
+    '''
+    Add a basis set to this library that is a combination of component files
+
+    This takes in a list of component basis files and creates a new basis set for the intersection
+    of all the elements contained in those files.  This creates the element, and table basis set
+    files in the given data_dir (and subdir). The metadata file for the basis is created if it
+    doesn't exist, and the main metadata file is also updated.
+    
+    Parameters
+    ----------
+    component_files : str
+        Path to component json files (in BSE format already)
+    data_dir : str
+        Path to the data directory to add the data to
+    subdir : str
+        Subdirectory of the data directory to add the basis set to
+    file_base : str
+        Base name for new files
+    name : str
+        Name of the basis set
+    family : str
+        Family to which this basis set belongs
+    role : str
+        Role of the basis set (orbital, etc)
+    description : str
+        Description of the basis set
+    version : str
+        Version of the basis set
+    revision_description : str
+        Description of this version of the basis set
+    '''
+
+    if len(component_files) == 0:
+        raise RuntimeError("Need at least one component file to create a basis set from")
+
+    # Determine what files have which elements
+    valid_elements = None
+
+    # And the relative path of the component files to the data dir
+    cfile_relpaths = []
+
+    for cfile in component_files:
+        cfile_data = read_json_basis(cfile)
+        cfile_elements = set(cfile_data['elements'].keys())
+
+        relpath = os.path.relpath(cfile, data_dir)
+
+        if valid_elements is None:
+            valid_elements = cfile_elements
+        else:
+            valid_elements = valid_elements.intersection(cfile_elements)
+
+        cfile_relpaths.append(relpath)
+
+    valid_elements = list(sorted(valid_elements, key=lambda x: int(x)))
+
+    # Start the data files for the element and table json
+    element_file_data = create_skel('element')
+    element_file_data['name'] = name
+    element_file_data['description'] = description
+    element_file_name = '{}.{}.element.json'.format(file_base, version)
+    element_file_relpath = os.path.join(subdir, element_file_name)
+    element_file_path = os.path.join(data_dir, element_file_relpath)
+
+    table_file_data = create_skel('table')
+    table_file_data['revision_description'] = revision_description
+    table_file_data['revision_date'] = datetime.date.today().isoformat()
+    table_file_name = '{}.{}.table.json'.format(file_base, version)
+
+    # and the metadata file
+    meta_file_data = create_skel('metadata')
+    meta_file_data['names'] = [name]
+    meta_file_data['family'] = family
+    meta_file_data['description'] = description
+    meta_file_data['role'] = role
+    meta_file_name = '{}.metadata.json'.format(file_base)
+
+    # These get created directly in the top-level data directory
+    table_file_path = os.path.join(data_dir, table_file_name)
+    meta_file_path = os.path.join(data_dir, meta_file_name)
+
+    # Can just make all the entries for the table file pretty easily
+    # (we add the relative path to the location of the element file,
+    # which resides in subdir)
+    table_file_entry = element_file_relpath
+    table_file_data['elements'] = {k: table_file_entry for k in valid_elements}
+
+    # Add to the element file data
+    for el in valid_elements:
+        element_file_data['elements'][el] = {'components': cfile_relpaths}
+
+    # Verify all data using the schema
+    validate_data('element', element_file_data)
+    validate_data('table', table_file_data)
+
+    ######################################################################################
+    # Before creating any files, check that all the files don't already exist.
+    # Yes, there is technically a race condition (files could be created between the
+    # check and then actually writing out), but if that happens, you are probably using
+    # this library wrong
+    #
+    # Note that the metadata file may exist already. That is ok
+    ######################################################################################
+    if os.path.exists(element_file_path):
+        raise RuntimeError("Element json file {} already exists".format(element_file_path))
+    if os.path.exists(table_file_path):
+        raise RuntimeError("Table json file {} already exists".format(table_file_path))
+
+    #############################################
+    # Actually create all the files
+    #############################################
+
+    # First, create the subdirectory
+    subdir_path = os.path.join(data_dir, subdir)
+    if not os.path.exists(subdir_path):
+        os.makedirs(subdir_path)
+
+    write_json_basis(element_file_path, element_file_data)
+    write_json_basis(table_file_path, table_file_data)
+
+    # Create the metadata file if it doesn't exist already
+    if not os.path.exists(meta_file_path):
+        write_json_basis(meta_file_path, meta_file_data)
+
+    # Update the metadata file
+    metadata_file = os.path.join(data_dir, 'METADATA.json')
+    create_metadata_file(metadata_file, data_dir)
 
 
 def add_basis(bs_file,
@@ -79,8 +210,7 @@ def add_basis(bs_file,
     if refs is None:
         refs = []
 
-    # Split out the component data into files based on the reference
-    # information. We keep track of which elements we've done so that
+    # We keep track of which elements we've done so that
     # we can detect duplicates in the references (which would be an error)
     # (and also handle elements with no reference)
     orig_elements = bs_data['elements']
@@ -120,51 +250,14 @@ def add_basis(bs_file,
             for el in noref_elements:
                 bs_data['elements'][el]['references'] = []
 
-    # Start the data files for the element and table json
-    element_file_data = create_skel('element')
-    element_file_data['name'] = name
-    element_file_data['description'] = description
-    element_file_name = '{}.{}.element.json'.format(file_base, version)
-    element_file_relpath = os.path.join(subdir, element_file_name)
-    element_file_path = os.path.join(data_dir, element_file_relpath)
-
-    table_file_data = create_skel('table')
-    table_file_data['revision_description'] = revision_description
-    table_file_data['revision_date'] = datetime.date.today().isoformat()
-    table_file_name = '{}.{}.table.json'.format(file_base, version)
-
-    # and the metadata file
-    meta_file_data = create_skel('metadata')
-    meta_file_data['names'] = [name]
-    meta_file_data['family'] = family
-    meta_file_data['description'] = description
-    meta_file_data['role'] = role
-    meta_file_name = '{}.metadata.json'.format(file_base)
-
-    # These get created directly in the top-level data directory
-    table_file_path = os.path.join(data_dir, table_file_name)
-    meta_file_path = os.path.join(data_dir, meta_file_name)
-
-    # Can just make all the entries for the table file pretty easily
-    table_file_entry = element_file_relpath
-    table_file_data['elements'] = {k: table_file_entry for k in bs_data['elements'].keys()}
-
     # Create the filenames for the components
     # Also keep track of where data for each element is (for the element and table files)
     component_file_name = file_base + '.' + str(version) + '.json'
     component_file_relpath = os.path.join(subdir, component_file_name)
     component_file_path = os.path.join(data_dir, component_file_relpath)
 
-    # Add to the element file data
-    # (we add the relative path to the location of the element file,
-    # which resides in subdir)
-    for el in bs_data['elements'].keys():
-        element_file_data['elements'][el] = {'components': [component_file_relpath]}
-
     # Verify all data using the schema
     validate_data('component', bs_data)
-    validate_data('element', element_file_data)
-    validate_data('table', table_file_data)
 
     ######################################################################################
     # Before creating any files, check that all the files don't already exist.
@@ -176,10 +269,6 @@ def add_basis(bs_file,
     ######################################################################################
     if os.path.exists(component_file_path):
         raise RuntimeError("Component json file {} already exists".format(component_file_path))
-    if os.path.exists(element_file_path):
-        raise RuntimeError("Element json file {} already exists".format(element_file_path))
-    if os.path.exists(table_file_path):
-        raise RuntimeError("Table json file {} already exists".format(table_file_path))
 
     #############################################
     # Actually create all the files
@@ -191,13 +280,7 @@ def add_basis(bs_file,
         os.makedirs(subdir_path)
 
     write_json_basis(component_file_path, bs_data)
-    write_json_basis(element_file_path, element_file_data)
-    write_json_basis(table_file_path, table_file_data)
 
-    # Create the metadata file if it doesn't exist already
-    if not os.path.exists(meta_file_path):
-        write_json_basis(meta_file_path, meta_file_data)
-
-    # Update the metadata file
-    metadata_file = os.path.join(data_dir, 'METADATA.json')
-    create_metadata_file(metadata_file, data_dir)
+    # Do all the rest
+    add_from_components([component_file_path], data_dir, subdir, file_base, name, family, role, description, version,
+                        revision_description)
