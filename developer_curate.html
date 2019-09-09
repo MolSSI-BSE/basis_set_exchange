@@ -218,6 +218,42 @@ usual ‘noref’ extension and the references entry is empty.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.curate.add_from_components">
+<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">add_from_components</code><span class="sig-paren">(</span><em class="sig-param">component_files</em>, <em class="sig-param">data_dir</em>, <em class="sig-param">subdir</em>, <em class="sig-param">file_base</em>, <em class="sig-param">name</em>, <em class="sig-param">family</em>, <em class="sig-param">role</em>, <em class="sig-param">description</em>, <em class="sig-param">version</em>, <em class="sig-param">revision_description</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_from_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a basis set to this library that is a combination of component files</p>
+<p>This takes in a list of component basis files and creates a new basis set for the intersection
+of all the elements contained in those files.  This creates the element, and table basis set
+files in the given data_dir (and subdir). The metadata file for the basis is created if it
+doesn’t exist, and the main metadata file is also updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>component_files</strong><span class="classifier">str</span></dt><dd><p>Path to component json files (in BSE format already)</p>
+</dd>
+<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Path to the data directory to add the data to</p>
+</dd>
+<dt><strong>subdir</strong><span class="classifier">str</span></dt><dd><p>Subdirectory of the data directory to add the basis set to</p>
+</dd>
+<dt><strong>file_base</strong><span class="classifier">str</span></dt><dd><p>Base name for new files</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set</p>
+</dd>
+<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family to which this basis set belongs</p>
+</dd>
+<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set (orbital, etc)</p>
+</dd>
+<dt><strong>description</strong><span class="classifier">str</span></dt><dd><p>Description of the basis set</p>
+</dd>
+<dt><strong>version</strong><span class="classifier">str</span></dt><dd><p>Version of the basis set</p>
+</dd>
+<dt><strong>revision_description</strong><span class="classifier">str</span></dt><dd><p>Description of this version of the basis set</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.curate.basis_comparison_report">
 <code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">basis_comparison_report</code><span class="sig-paren">(</span><em class="sig-param">bs1</em>, <em class="sig-param">bs2</em>, <em class="sig-param">uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.basis_comparison_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares two basis set dictionaries and prints a report about their differences</p>
