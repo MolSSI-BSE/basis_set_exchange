@@ -10558,6 +10558,55 @@
       }
     }
   },
+  "cc-pvdz(seg-opt)": {
+    "display_name": "cc-pVDZ(seg-opt)",
+    "other_names": [],
+    "description": "VDZP    Valence Double Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "flags": [],
+    "basename": "cc-pVDZ_segopt",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVDZ_segopt.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36"
+        ]
+      }
+    }
+  },
   "cc-pvdz-dk": {
     "display_name": "cc-pVDZ-DK",
     "other_names": [],
@@ -11216,6 +11265,35 @@
           "34",
           "35",
           "36"
+        ]
+      }
+    }
+  },
+  "cc-pvqz(seg-opt)": {
+    "display_name": "cc-pVQZ(seg-opt)",
+    "other_names": [],
+    "description": "VQZ3P   Valence Quadruple Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "flags": [],
+    "basename": "cc-pVQZ_segopt",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVQZ_segopt.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "2",
+          "6",
+          "8"
         ]
       }
     }
@@ -11927,6 +12005,55 @@
           "8",
           "9",
           "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36"
+        ]
+      }
+    }
+  },
+  "cc-pvtz(seg-opt)": {
+    "display_name": "cc-pVTZ(seg-opt)",
+    "other_names": [],
+    "description": "VTZ2P   Valence Triple Zeta + Polarization on All Atoms",
+    "latest_version": "0",
+    "flags": [],
+    "basename": "cc-pVTZ_segopt",
+    "relpath": "",
+    "family": "dunning",
+    "role": "orbital",
+    "functiontypes": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVTZ_segopt.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2007-01-15",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
           "13",
           "14",
           "15",

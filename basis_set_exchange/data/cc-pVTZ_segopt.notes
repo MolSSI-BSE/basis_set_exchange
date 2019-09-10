@@ -1,0 +1,262 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:46:30 GMT
+--------------------------------------------------------------------------------
+
+From Original BSE:
+----------------
+   Correlation Consistent Polarized Valence Triple Zeta (cc-pVTZ) Basis
+    These basis functions have been converted to segmented contractions
+    and transformed to reduce the length of the contractions.
+   --------------------------------------------------------------------
+Elements      Contraction                       References
+H      : (5s,2p,1d)     -> [3s,2p,1d]      T.H. Dunning, Jr. J. Chem. Phys.
+                                           90, 1007 (1989).
+He     : (6s,2p,1d)     -> [3s,2p,1d]      D.E. Woon and T.H. Dunning, Jr.,
+                                           J. Chem. Phys. 100, 2975 (1994).
+Li - Ne: (10s,5p,2d,1f) -> [4s,3p,2d,1f]   T.H. Dunning, Jr. J. Chem. Phys.
+                                           90, 1007 (1989).
+NA     : (16s,10p,2d,1f)-> [5s,4p,2d,1f]   D. Woon and T.H. Dunning, Jr.
+Mg     : (15s,10p,2d,1f)-> [5s,4p,2d,1f]   (to be published)
+Al - Ar: (15s,9p,2d,1f) -> [5s,4p,2d,1f]   D.E. Woon and T.H. Dunning, Jr.,
+                                           J. Chem. Phys. 98, 1358 (1993).
+Ga - Kr: (20s,13p,9d,1f)-> [6s,5p,3d,1f]   A.K. Wilson, D.E. Woon, K.A.
+                                           Peterson, T.H. Dunning, Jr.,
+                                           J. Chem. Phys., 110, 7667 (1999)
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+The Gaussian elimination algorithm used to reduce the contraction lengths was
+described in an article by E.R. Davidson (davidson1996a).
+
+
+
+**************************************************************************
+Hydrogen:
+--------
+State: s(1), (2)S
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-0.49980981         -0.99959675        0.49978694         -2.000046
+
+Molecular Hydrogen
+State: sigmag(2), (1)Sigmag(+)
+R(HH) = 1.401535 a(0)
+Total HF Energy     Total CI Energy      HF Coefficient
+-1.13295273         -1.17233607          0.99098992
+
+Exponents for the (s)-functions taken from the calculations of Duijneveldt,
+IBM Research Report RJ 945 (1971).  The polarization set was obtained by
+optimizing the (p,d)-exponents in HF+1+2 calculations on the (1)Sigmag(+)
+state of molecular hydrogen: first the p-exponents were optimized in the 
+absence of the d-function;then the d-function was added to the set and its
+exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+Helium: 
+------
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-2.86115334         -5.72230374        2.86115040         -2.000001
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-2.90023217          0.99607010
+
+
+The atomic set was obtained by optimizing the (s)-exponents in Hartree-Fock 
+calculations on the ground, (1)S, state of helium,  The polarization set was
+obtained by optimizing the (p,d)-exponents in HF+1+2 calculations on the (1)S
+state: first the p-exponents were optimized in the absence of the d-function
+then the d-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Boron Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(1), (2)P
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-24.52809763        -49.05622291       24.52812528         -1.999999
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-24.59819252          0.96222054
+
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (2)P, state of boron.  The polarization set was
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the (2)P
+state: first the d-exponents were optimized in the absence of the f-function
+then the f-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Carbon Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(2), (3)P
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-37.68666224        -75.37337177       37.68670954         -1.999999
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-37.77961079          0.97246905
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (3)P, state of carbon.  The polarization set was
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the (3)P
+state: first the d-exponents were optimized in the absence of the f-function
+then the f-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Nitrogen Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(3), (4)S
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-54.39735785       -108.79474803       54.39739018         -1.999999
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-54.51177921          0.98152805
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (4)S, state of nitrogen. The polarization set was
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the (4)S
+state: first the d-exponents were optimized in the absence of the f-function
+then the f-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Oxygen Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(4), (3)P
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-74.80307839       -149.60624542       74.80316703         -1.999999
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-74.96845119          0.98053766
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (3)P, state of oxygen.  The polarization set was
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the (3)P
+state: first the d-exponents were optimized in the absence of the f-function
+then the f-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (3)P configurations.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Fluorine Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(5), (2)P
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-99.39919373       -198.79839910       99.39920537         -2.000000
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-99.61219853          0.98245527
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (2)P, state of fluorine. The polarization set was
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the (2)P
+state: first the d-exponents were optimized in the absence of the f-function
+then the f-function was added to the set and its exponent optimized.
+
+The HF+1+2 calculations were carried out in D(2h) symmetry; the CI 
+configurations were generated relative to all three (2)P configurations.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+
+The Neon Atom        pVTZ Correlation Consistent Set
+
+Basis Set: (10s5p2d1f)/[4s3p2d1f]
+
+State: s(2)p(6), (1)S
+
+Hartree-Fock Calculations
+Total HF Energy    Potential Energy    Kinetic Energy    Virial Theorem
+-128.53186165       -257.06348735      128.53162570         -2.000002
+
+(HF+1+2) Calculations
+Total CI Energy      HF Coefficient
+-128.79191607          0.98445752
+
+The atomic set was obtained by optimizing the (s,p)-exponents in Hartree-Fock 
+calculations on the ground, (1)S, state of neon.  The polarization set was 
+obtained by optimizing the (d,f)-exponents in HF+1+2 calculations on the 
+(1)S state: first the d-exponents were optimized in the absence of the 
+f-function, then the f-function was added to the set and its exponent
+optimized.
+
+The HF+1+2 calculations carried out in D(2h) symmetry.
+
+* Original Exponents and Contraction Coefficients Certified: April 1988 (ANL)
+------------------------------------------------------------------------------
+Sodium:
+------
+Na2 Energies at 2.9090 bohr.
+E(RHF)         E(SD-CI)
+-323.71495543   -323.74218643
+
+*****************************************************
+
+FROM REFERENCE:
+----------------
+
+Elements                             References
+--------                             ----------
+ H     : T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+ He    : D.E. Woon and T.H. Dunning, Jr. J. Chem. Phys. 100, 2975 (1994).
+Li - Ne: T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+Na - Mg: D.E. Woon and T.H. Dunning, Jr.  (to be published)
+Al - Ar: D.E. Woon and T.H. Dunning, Jr.  J. Chem. Phys. 98, 1358 (1993).
+
+  

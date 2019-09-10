@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:46:31 GMT
+--------------------------------------------------------------------------------
+
+From Original BSE:
+----------------
+   Correlation Consistent Polarized Valence Double Zeta (cc-pVDZ) Basis
+    These basis functions have been converted to segmented contractions
+    and transformed to reduce the length of the contractions.
+   --------------------------------------------------------------------
+Elements      Contraction                       References
+ H     : (4s,1p)     -> [2s,1p]      T.H. Dunning, Jr. J. Chem. Phys. 90, 1007
+                                     (1989).
+ He    : (5s,1p)     -> [2s,1p]      D.E. Woon and T.H. Dunning, Jr. J. Chem.
+                                     Phys. 100, 2975 (1994).
+Li - Ne: (9s,4p,1d)  -> [3s,2p,1d]   T.H. Dunning, Jr. J.C.P. 90, 1007 (1989).
+Na - Mg: (12s,8p,1d) -> [4s,3p,1d]   D. Woon and T.H. Dunning, Jr.
+                                     (to be published)
+Al - Ar: (12s,8p,1d) -> [4s,3p,1d]   D.E. Woon and T.H. Dunning, Jr.
+                                     J. Chem. Phys. 98, 1358 (1993).
+
+The basic idea behind the correlation consistent basis sets is that functions
+which contribute approximately the same amount of correlation energy should
+be grouped together when considering what mixture of s,p,d,.. etc basis
+functions to use.  For hydrogen the polarization exponents were determined by
+optimizing them at the SD-CI level for molecular hydrogen in its ground
+state.  The (s,p) exponents for B - Ne were optimized in atomic Hartree-
+Fock calculations on the ground state.  The polarization exponents were
+optimized at the SD-CI level.
+
+The Gaussian elimination algorithm used to reduce the contraction lengths was
+described in an article by E.R. Davidson (davidson1996a).
+In practice, the amount of savings will depend upon the calculation being
+performed and the application.  For example, an RHF + gradient calculation
+with Gaussian 94 on an SGI R10000 CPU with the cc-pVDZ basis set produced the
+following:
+                                       SCF+Gradient
+Molecule=C6H6 (benzene)                  CPU (sec)
+Original format (as in G94)              126
+Breaking apart the individual primitives  84
+Current optimized format                  77
+Energies differed by ~10**-9 Hartree and gradients differed by ~0.00001 Eh/ao.
+
+Molecule=CCl4                            CPU (sec)
+Original format (as in G94)              638
+Breaking apart the individual primitives 307
+Current optimized format                 157
+
+Molecule=Br2                             CPU (sec)
+Original format                          692
+Current optimized format                 154
