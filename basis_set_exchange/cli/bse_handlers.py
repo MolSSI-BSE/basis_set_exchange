@@ -107,7 +107,7 @@ def _bse_cli_get_info(args):
     ret.append('     Description: ' + bs_meta['description'])
     ret.append('            Role: ' + bs_meta['role'])
     ret.append('          Family: ' + bs_meta['family'])
-    ret.append('  Function Types: ' + ','.join(bs_meta['functiontypes']))
+    ret.append('  Function Types: ' + ','.join(bs_meta['function_types']))
     ret.append('  Latest Version: ' + bs_meta['latest_version'])
     ret.append('')
 

@@ -93,7 +93,7 @@ def create_metadata_file(output_path, data_dir):
                       'relpath': base_relpath,
                       'family': bs['family'],
                       'role': bs['role'],
-                      'functiontypes': function_types,
+                      'function_types': function_types,
                       'auxiliaries': bs['auxiliaries'],
                       'versions': version_info }
         # yapf: enable

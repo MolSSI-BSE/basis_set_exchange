@@ -6,7 +6,7 @@ import pytest
 from basis_set_exchange import lut, api
 from .common_testvars import bs_metadata
 
-ecp_basis_sets = [k for k,v in bs_metadata.items() if 'scalar_ecp' in v['functiontypes']] 
+ecp_basis_sets = [k for k,v in bs_metadata.items() if 'scalar_ecp' in v['function_types']] 
 
 @pytest.mark.slow
 @pytest.mark.parametrize('basis_name', ecp_basis_sets)
