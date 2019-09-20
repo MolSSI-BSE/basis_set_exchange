@@ -38,7 +38,7 @@ _skeletons = {
             "schema_version": "0.1"
         },
         "names": [],
-        "flags": [],
+        "tags": [],
         "family": "",
         "description": "",
         "role": "",

@@ -32,7 +32,7 @@ def sort_basis_dict(bs):
         'jkfit', 'jfit', 'rifit', 'admmfit', 'dftxfit', 'dftjfit',
 
         # Basis set metadata
-        'name', 'names', 'aliases', 'flags', 'family', 'description', 'role', 'auxiliaries',
+        'name', 'names', 'aliases', 'tags', 'family', 'description', 'role', 'auxiliaries',
         'notes', 'function_types',
 
         # Reference stuff

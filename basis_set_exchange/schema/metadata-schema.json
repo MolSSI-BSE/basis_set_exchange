@@ -9,7 +9,7 @@
     "required": [
         "molssi_bse_schema",
         "names",
-        "flags",
+        "tags",
         "family",
         "description",
         "role",
@@ -44,8 +44,8 @@
             "uniqueItems": true,
             "items": { "type": "string" }
         },
-        "flags": {
-            "description": "Feature flags (for internal use/marking)",
+        "tags": {
+            "description": "Feature tags (for internal use/marking)",
             "type": "array",
             "uniqueItems": true,
             "items": {
