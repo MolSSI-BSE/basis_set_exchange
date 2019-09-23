@@ -4,6 +4,7 @@ Conversion of basis sets to GAMESS-US
 
 from .. import lut, manip, sort, printing
 
+
 def write_gamess_us_electron_basis(basis, electron_elements):
     # electronic part starts with $DATA
     s = '$DATA\n'

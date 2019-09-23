@@ -9,6 +9,7 @@ from .gamess_us import write_gamess_us
 from .gamess_uk import write_gamess_uk
 from .psi4 import write_psi4
 from .qchem import write_qchem
+from .orca import write_orca
 from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .molcas import write_molcas
@@ -54,6 +55,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_qchem
+    },
+    'orca': {
+        'display': 'ORCA',
+        'extension': '.orca',
+        'comment': '!',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_orca
     },
     'dalton': {
         'display': 'Dalton',
