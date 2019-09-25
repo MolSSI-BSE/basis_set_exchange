@@ -267,7 +267,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
    >>> # Find all basis sets with 'aug' in the name that can be used for RI fitting
    >>> md = basis_set_exchange.filter_basis_sets('aug', role='rifit')
    >>> md.keys()
-   dict_keys(['aug-cc-pv5z-rifit', 'aug-cc-pv6z-rifit', 'aug-cc-pvdz-rifit', 'aug-cc-pvqz-rifit', 'aug-cc-pvtz-rifit'])
+   dict_keys(['aug-cc-pv5z-pp-rifit', 'aug-cc-pv5z-rifit', 'aug-cc-pv6z-rifit', ...
 
    >>> # All basis sets of the dunning family that have '5z' in the name
    >>> md = basis_set_exchange.filter_basis_sets('5z', family='dunning')
