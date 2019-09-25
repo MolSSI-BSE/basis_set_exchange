@@ -79,7 +79,7 @@ def read_turbomole(basis_lines, fname):
             i += 1
             while i < len(basis_lines) and basis_lines[i][0].isalpha() == False:
                 lsplt = basis_lines[i].split()
-                shell_am = lut.amchar_to_int(lsplt[1])
+                shell_am = lut.amchar_to_int(lsplt[1], hij=False)
                 nprim = int(lsplt[0])
 
                 if max(shell_am) <= 1:

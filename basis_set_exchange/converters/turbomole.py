@@ -38,7 +38,7 @@ def write_turbomole(basis):
                 nprim = len(exponents)
 
                 am = shell['angular_momentum']
-                amchar = lut.amint_to_char(am, hij=True)
+                amchar = lut.amint_to_char(am, hij=False)
                 s += '    {}   {}\n'.format(nprim, amchar)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
