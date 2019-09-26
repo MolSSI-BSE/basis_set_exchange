@@ -20,11 +20,12 @@ def write_qcschema(basis):
     new_basis = {
         'schema_name': 'qcschema_basis',
         'schema_version': 1,
-        'description': '{}: {}'.format(basis_name, basis['description'])
+        'name': basis_name,
+        'description': basis['description']
     }
 
-    # For the 'basis_data' key in the schema
-    basis_data = {}
+    # For the 'center_data' key in the schema
+    center_data = {}
     for el, eldata in basis['elements'].items():
         entry_name = lut.element_sym_from_Z(el) + '_' + basis_name
 
@@ -45,8 +46,8 @@ def write_qcschema(basis):
             for pot in eldata['ecp_potentials']:
                 pot['ecp_type'] = pot['ecp_type'].replace('_ecp', '')
 
-        basis_data[entry_name] = eldata
+        center_data[entry_name] = eldata
 
-    new_basis['basis_data'] = basis_data
+    new_basis['center_data'] = center_data
 
     return json.dumps(new_basis, indent=2, ensure_ascii=False)

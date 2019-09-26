@@ -27,8 +27,8 @@ def test_valid_qcschema(basis_name):
     for idx,el in enumerate(el_list):
         coords.extend((0.0, 0.0, float(idx)))
 
-    qcs_json['basis_atom_map'] = list(qcs_json['basis_data'].keys())
-    assert len(qcs_json['basis_atom_map']) == len(el_list)
+    qcs_json['atom_map'] = list(qcs_json['center_data'].keys())
+    assert len(qcs_json['atom_map']) == len(el_list)
 
     dummy_inp = {
         "schema_name": "qc_schema_input",
