@@ -19,6 +19,7 @@ from .qcschema import write_qcschema
 from .demon2k import write_demon2k
 from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
+from .bdf import write_bdf
 
 _converter_map = {
     'nwchem': {
@@ -146,6 +147,13 @@ _converter_map = {
         'comment': None,
         'valid': None,
         'function': write_json
+    },
+    'bdf': {
+        'display': 'BDF',
+        'extension': '.bdf',
+        'comment': '*',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_bdf
     }
 }
 
