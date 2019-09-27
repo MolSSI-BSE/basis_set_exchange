@@ -135,6 +135,7 @@ def get_basis(name,
             * gamess_us
             * turbomole
             * json
+            * bdf
 
     uncontract_general : bool
         If True, remove general contractions by duplicating the set
