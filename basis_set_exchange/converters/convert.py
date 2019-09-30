@@ -30,7 +30,7 @@ _converter_map = {
         'function': write_nwchem
     },
     'gaussian94': {
-        'display': 'Gaussian94',
+        'display': 'Gaussian',
         'extension': '.gbs',
         'comment': '!',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
