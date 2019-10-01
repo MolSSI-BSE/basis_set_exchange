@@ -40,8 +40,8 @@ When publishing results obtained from use of the Basis Set Exchange software, pl
 
 For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following references:
 
- * *The Role of Databases in Support of Computational Chemistry Calculations,* Feller, D., *J. Comp. Chem.* **1996**, 17(13), 1571-1586.
- * *Basis Set Exchange: A Community Database for Computational Sciences Schuchardt,* K.L., Didier, B.T., Elsethagen, T., Sun, L., Gurumoorthi, V., Chase, J., Li, J., and Windus, T.L. *J. Chem. Inf. Model.* **2007**, 47(3), 1045-1052, doi:10.1021/ci600510j.
+ * *The Role of Databases in Support of Computational Chemistry Calculations,* Feller, D., *J. Comp. Chem.* **1996**, 17(13), 1571-1586, doi:[10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P](https://doi.org/10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P).
+ * *Basis Set Exchange: A Community Database for Computational Sciences Schuchardt,* K.L., Didier, B.T., Elsethagen, T., Sun, L., Gurumoorthi, V., Chase, J., Li, J., and Windus, T.L. *J. Chem. Inf. Model.* **2007**, 47(3), 1045-1052, doi:[10.1021/ci600510j](https://doi.org/10.1021/ci600510j).
 
 ## Documentation
 
@@ -74,7 +74,7 @@ Tests can be run using `py.test -v` once installed. Thorough (but very
 long) tests can be run with `py.test --runslow`.
 
 ## Examples
-```
+```python
 import basis_set_exchange as bse
 
 # Obtain the STO-3G basis set in nwchem format (as a string) for hydrogen and carbon
@@ -91,10 +91,10 @@ For more documentation, see https://molssi-bse.github.io/basis_set_exchange
 
 Same as above, but using the command line
 
-``$ bse bse get-basis sto-3g nwchem --elements=1,6``
+``$ bse get-basis sto-3g nwchem --elements=1,6``
 
 ``$ bse get-refs sto-3g txt --elements=1,6``
 
 ## License
 
-This project is released under the BSD 3-Clause license. See LICENSE for details.
+This project is released under the BSD 3-Clause license. See [LICENSE](LICENSE) for details.
