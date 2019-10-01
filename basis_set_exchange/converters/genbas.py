@@ -1,17 +1,47 @@
 '''
-Conversion of basis sets to cfour format
+Conversion of basis sets to cfour/aces2/genbas format
 '''
 
+import math
 from .. import lut, manip, sort, printing
 
+def _cfour_exp(e):
+    '''Formats an exponent for CFour'''
+    return e.replace('E', 'D') + ' '
 
-def write_cfour(basis):
-    '''Converts a basis set to cfour
-    '''
+def _cfour_coef(c):
+    '''Formats a coefficient for CFour'''
+    return c.replace('E', 'D') + ' '
 
-    # March 2019
-    # Format determined from http://slater.chemie.uni-mainz.de/cfour/index.php?n=Main.NewFormatOfAnEntryInTheGENBASFile
+def _aces_exp(e):
+    '''Formats an exponent for AcesII'''
+    e = float(e)
+    mag = int(math.log(e, 10))
+    ndec = min(7, 14 - 2 - mag)
+    fmtstr = '{{:14.{}f}}'.format(ndec)
+    s = fmtstr.format(e)
 
+    # Trim a single trailing zero if there is one
+    # and our string takes up all 14 characters
+    if s[0] != ' ' and s[-1] == '0':
+        s = ' ' + s[:-1]
+
+    return s
+
+def _aces_coef(c):
+    '''Formats a coefficient for AcesII'''
+    c = float(c)
+    return '{:10.7f} '.format(c)
+
+
+def _print_columns(data, ncol):
+    s = ''
+    for i in range(0, len(data), ncol):
+        s += ''.join(data[i:i+ncol]) + '\n'
+    return s
+
+
+def _write_genbas_internal(basis, exp_formatter, coef_formatter):
     # Uncontract all, then make general
     basis = manip.make_general(basis, False, True)
     basis = sort.sort_basis(basis, False)
@@ -50,13 +80,13 @@ def write_cfour(basis):
             s += '\n'
 
             for shell in data['electron_shells']:
-                exponents = shell['exponents']
-                coefficients = shell['coefficients']
+                exponents = [exp_formatter(x) for x in shell['exponents']]
+                coefficients = [[coef_formatter(x) for x in y] for y in shell['coefficients']]
                 coefficients = list(map(list, zip(*coefficients)))
 
-                s += '  '.join(exponents).replace("E", "D") + '\n\n'
+                s += _print_columns(exponents, 5) + '\n'
                 for c in coefficients:
-                    s += '  '.join(c).replace("E", "D") + '\n'
+                    s += _print_columns(c, 7)
                 s += '\n'
 
     # Write out ECP
@@ -98,3 +128,23 @@ def write_cfour(basis):
                 #    s += '{}  {}  {};\n'.format(gexponents[p], rexponents[p], coefficients[0][p])
             s += '*\n'
     return s
+
+
+def write_cfour(basis):
+    '''Converts a basis set to cfour
+    '''
+
+    # March 2019
+    # Format determined from http://slater.chemie.uni-mainz.de/cfour/index.php?n=Main.NewFormatOfAnEntryInTheGENBASFile
+
+    return _write_genbas_internal(basis, _cfour_exp, _cfour_coef)
+
+
+def write_aces2(basis):
+    '''Converts a basis set to cfour
+    '''
+
+    # March 2019
+    # Format determined from http://slater.chemie.uni-mainz.de/cfour/index.php?n=Main.OldFormatOfAnEntryInTheGENBASFile
+
+    return _write_genbas_internal(basis, _aces_exp, _aces_coef)

@@ -13,7 +13,7 @@ from .orca import write_orca
 from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .molcas import write_molcas
-from .cfour import write_cfour
+from .genbas import write_cfour, write_aces2
 from .dalton import write_dalton
 from .qcschema import write_qcschema
 from .demon2k import write_demon2k
@@ -126,6 +126,13 @@ _converter_map = {
         'comment': '!',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_cfour
+    },
+    'acesii': {
+        'display': 'ACES II',
+        'extension': '.acesii',
+        'comment': '!',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_aces2
     },
     'xtron': {
         'display': 'xTron',
