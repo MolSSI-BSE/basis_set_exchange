@@ -321,7 +321,7 @@ positional arguments:
 With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats
 nwchem      NWChem
-gaussian94  Gaussian94
+gaussian94  Gaussian
 psi4        Psi4
 molcas      Molcas
 qchem       Q-Chem
@@ -335,9 +335,11 @@ turbomole   Turbomole
 gamess_uk   GAMESS UK
 molpro      Molpro
 cfour       CFOUR
+acesii      ACES II
 xtron       xTron
 bsedebug    BSE Debug
 json        JSON
+bdf         BDF
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats -n
@@ -356,9 +358,11 @@ turbomole
 gamess_uk
 molpro
 cfour
+acesii
 xtron
 bsedebug
 json
+bdf
 </pre></div>
 </div>
 </div>
@@ -467,7 +471,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.9+11.gc6963c41
+# Version v0.8.9+20.g7011463c
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
