@@ -15,9 +15,20 @@ def _cfour_coef(c):
 
 def _aces_exp(e):
     '''Formats an exponent for AcesII'''
+
     e = float(e)
-    mag = int(math.log(e, 10))
+    # Some basis sets have negative exponents???
+    mag = int(math.log(abs(e), 10))
+
+    mag = max(mag, 1)
+
+    # Make room for the negative sign
+    if e < 0.0:
+        mag += 1
+
+    # Number of decimal places to show
     ndec = min(7, 14 - 2 - mag)
+
     fmtstr = '{{:14.{}f}}'.format(ndec)
     s = fmtstr.format(e)
 
