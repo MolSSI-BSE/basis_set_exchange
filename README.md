@@ -29,7 +29,7 @@ This library is used to form the backend of the new Basis Set Exchange
 website.
 
 This project is a collaboration between the Molecular Sciences Software
-Institute (http://www.molssi.org) and the Environmental Molecular Sciences
+Institute (https://molssi.org) and the Environmental Molecular Sciences
 Laboratory (https://www.emsl.pnl.gov)
 
 ## Citation
