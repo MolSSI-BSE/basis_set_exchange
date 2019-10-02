@@ -69,7 +69,7 @@ def read_gbasis(basis_lines, fname):
                 lsplt = line.split()
 
                 if len(lsplt) != (ngen + 1):
-                    raise RuntimeError("Incorrect number of general contractions in gbasis")
+                    raise RuntimeError("Incorrect number of general contractions in gbasis: {} vs {} at exponent {}".format(len(lsplt), ngen+1, lsplt[0]))
 
                 exponents.append(lsplt[0])
                 coefficients.append(lsplt[1:])
