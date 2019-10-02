@@ -7,7 +7,7 @@ project.
 
 Goal
 -------------------
-A rewrite of the current EMSL Basis Set Exchange database and website (https://bse.pnl.gov/bse/portal)
+A rewrite of the current EMSL Basis Set Exchange database and website (https://www.basissetexchange.org)
 
 
 Public Code Repository
