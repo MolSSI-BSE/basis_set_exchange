@@ -614,6 +614,7 @@ def get_roles():
              'jfit': 'J-fitting',
              'jkfit': 'JK-fitting',
              'rifit': 'RI-fitting',
+             'optri': 'Optimized RI-fitting',
              'admmfit': 'Auxiliary-Density Matrix Method Fitting',
              'dftxfit': 'DFT Exchange Fitting',
              'dftjfit': 'DFT Correlation Fitting'
