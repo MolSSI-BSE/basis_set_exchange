@@ -4291,7 +4291,8 @@
     ],
     "auxiliaries": {
       "jkfit": "cc-pv5z-jkfit",
-      "rifit": "aug-cc-pv5z-rifit"
+      "rifit": "aug-cc-pv5z-rifit",
+      "optri": "aug-cc-pv5z-optri"
     },
     "versions": {
       "0": {
@@ -4433,6 +4434,45 @@
       }
     }
   },
+  "aug-cc-pv5z-optri": {
+    "display_name": "aug-cc-pV5Z-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pV5Z-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pV5Z-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pV5Z-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2010-05-19",
+        "elements": [
+          "1",
+          "2",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "aug-cc-pv5z-pp": {
     "display_name": "aug-cc-pV5Z-PP",
     "other_names": [],
@@ -4449,7 +4489,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pv5z-pp-rifit"
+      "rifit": "aug-cc-pv5z-pp-rifit",
+      "optri": "aug-cc-pv5z-pp-optri"
     },
     "versions": {
       "0": {
@@ -4496,6 +4537,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pv5z-pp-optri": {
+    "display_name": "aug-cc-pV5Z-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pV5Z-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pV5Z-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pV5Z-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -4796,7 +4868,8 @@
       "gto_spherical"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pvdz-rifit"
+      "rifit": "aug-cc-pvdz-rifit",
+      "optri": "aug-cc-pvdz-optri"
     },
     "versions": {
       "0": {
@@ -4942,6 +5015,45 @@
       }
     }
   },
+  "aug-cc-pvdz-optri": {
+    "display_name": "aug-cc-pVDZ-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVDZ-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVDZ-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVDZ-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2010-05-19",
+        "elements": [
+          "1",
+          "2",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "aug-cc-pvdz-pp": {
     "display_name": "aug-cc-pVDZ-PP",
     "other_names": [],
@@ -4958,7 +5070,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pvdz-pp-rifit"
+      "rifit": "aug-cc-pvdz-pp-rifit",
+      "optri": "aug-cc-pvdz-pp-optri"
     },
     "versions": {
       "0": {
@@ -5005,6 +5118,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pvdz-pp-optri": {
+    "display_name": "aug-cc-pVDZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVDZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVDZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVDZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -5139,7 +5283,8 @@
     ],
     "auxiliaries": {
       "jkfit": "cc-pvqz-jkfit",
-      "rifit": "aug-cc-pvqz-rifit"
+      "rifit": "aug-cc-pvqz-rifit",
+      "optri": "aug-cc-pvqz-optri"
     },
     "versions": {
       "0": {
@@ -5285,6 +5430,45 @@
       }
     }
   },
+  "aug-cc-pvqz-optri": {
+    "display_name": "aug-cc-pVQZ-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVQZ-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVQZ-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVQZ-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2010-05-19",
+        "elements": [
+          "1",
+          "2",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "aug-cc-pvqz-pp": {
     "display_name": "aug-cc-pVQZ-PP",
     "other_names": [],
@@ -5301,7 +5485,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pvqz-pp-rifit"
+      "rifit": "aug-cc-pvqz-pp-rifit",
+      "optri": "aug-cc-pvqz-pp-optri"
     },
     "versions": {
       "0": {
@@ -5348,6 +5533,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pvqz-pp-optri": {
+    "display_name": "aug-cc-pVQZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVQZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVQZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVQZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -5502,7 +5718,8 @@
     ],
     "auxiliaries": {
       "jkfit": "cc-pvtz-jkfit",
-      "rifit": "aug-cc-pvtz-rifit"
+      "rifit": "aug-cc-pvtz-rifit",
+      "optri": "aug-cc-pvtz-optri"
     },
     "versions": {
       "0": {
@@ -5703,6 +5920,45 @@
       }
     }
   },
+  "aug-cc-pvtz-optri": {
+    "display_name": "aug-cc-pVTZ-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVTZ-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVTZ-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVTZ-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2010-05-19",
+        "elements": [
+          "1",
+          "2",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "aug-cc-pvtz-pp": {
     "display_name": "aug-cc-pVTZ-PP",
     "other_names": [],
@@ -5719,7 +5975,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pvtz-pp-rifit"
+      "rifit": "aug-cc-pvtz-pp-rifit",
+      "optri": "aug-cc-pvtz-pp-optri"
     },
     "versions": {
       "0": {
@@ -5766,6 +6023,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pvtz-pp-optri": {
+    "display_name": "aug-cc-pVTZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pVTZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pVTZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pVTZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -6004,7 +6292,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pwcv5z-pp-rifit"
+      "rifit": "aug-cc-pwcv5z-pp-rifit",
+      "optri": "aug-cc-pwcv5z-pp-optri"
     },
     "versions": {
       "0": {
@@ -6051,6 +6340,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pwcv5z-pp-optri": {
+    "display_name": "aug-cc-pwCV5Z-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pwCV5Z-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pwCV5Z-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pwCV5Z-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -6180,7 +6500,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pwcvdz-pp-rifit"
+      "rifit": "aug-cc-pwcvdz-pp-rifit",
+      "optri": "aug-cc-pwcvdz-pp-optri"
     },
     "versions": {
       "0": {
@@ -6227,6 +6548,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pwcvdz-pp-optri": {
+    "display_name": "aug-cc-pwCVDZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pwCVDZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pwCVDZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pwCVDZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -6402,7 +6754,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pwcvqz-pp-rifit"
+      "rifit": "aug-cc-pwcvqz-pp-rifit",
+      "optri": "aug-cc-pwcvqz-pp-optri"
     },
     "versions": {
       "0": {
@@ -6449,6 +6802,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pwcvqz-pp-optri": {
+    "display_name": "aug-cc-pwCVQZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pwCVQZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pwCVQZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pwCVQZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -6631,7 +7015,8 @@
       "scalar_ecp"
     ],
     "auxiliaries": {
-      "rifit": "aug-cc-pwcvtz-pp-rifit"
+      "rifit": "aug-cc-pwcvtz-pp-rifit",
+      "optri": "aug-cc-pwcvtz-pp-optri"
     },
     "versions": {
       "0": {
@@ -6678,6 +7063,37 @@
           "84",
           "85",
           "86"
+        ]
+      }
+    }
+  },
+  "aug-cc-pwcvtz-pp-optri": {
+    "display_name": "aug-cc-pwCVTZ-PP-OPTRI",
+    "other_names": [],
+    "description": "aug-cc-pwCVTZ-PP-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "aug-cc-pwCVTZ-PP-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "aug-cc-pwCVTZ-PP-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-26",
+        "elements": [
+          "29",
+          "30",
+          "47",
+          "48",
+          "79",
+          "80"
         ]
       }
     }
@@ -9679,10 +10095,53 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pcvdz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pCVDZ-F12.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pcvdz-f12-optri": {
+    "display_name": "cc-pCVDZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pCVDZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pCVDZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pCVDZ-F12-OPTRI.0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "revdate": "2012-06-08",
         "elements": [
@@ -9803,10 +10262,53 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pcvqz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pCVQZ-F12.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pcvqz-f12-optri": {
+    "display_name": "cc-pCVQZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pCVQZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pCVQZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pCVQZ-F12-OPTRI.0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "revdate": "2012-06-08",
         "elements": [
@@ -9927,10 +10429,53 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pcvtz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pCVTZ-F12.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pcvtz-f12-optri": {
+    "display_name": "cc-pCVTZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pCVTZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pCVTZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pCVTZ-F12-OPTRI.0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "revdate": "2012-06-08",
         "elements": [
@@ -11642,7 +12187,9 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pvdz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pVDZ-F12.0.table.json",
@@ -11651,6 +12198,48 @@
         "elements": [
           "1",
           "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pvdz-f12-optri": {
+    "display_name": "cc-pVDZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pVDZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pVDZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVDZ-F12-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "1",
           "3",
           "4",
           "5",
@@ -12375,7 +12964,9 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pvqz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pVQZ-F12.0.table.json",
@@ -12384,6 +12975,48 @@
         "elements": [
           "1",
           "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pvqz-f12-optri": {
+    "display_name": "cc-pVQZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pVQZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pVQZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVQZ-F12-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "1",
           "3",
           "4",
           "5",
@@ -13197,7 +13830,9 @@
       "gto",
       "gto_spherical"
     ],
-    "auxiliaries": {},
+    "auxiliaries": {
+      "optri": "cc-pvtz-f12-optri"
+    },
     "versions": {
       "0": {
         "file_relpath": "cc-pVTZ-F12.0.table.json",
@@ -13206,6 +13841,48 @@
         "elements": [
           "1",
           "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "cc-pvtz-f12-optri": {
+    "display_name": "cc-pVTZ-F12-OPTRI",
+    "other_names": [],
+    "description": "cc-pVTZ-F12-OPTRI",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "cc-pVTZ-F12-OPTRI",
+    "relpath": "",
+    "family": "dunning_optri",
+    "role": "optri",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "cc-pVTZ-F12-OPTRI.0.table.json",
+        "revdesc": "Data from the original Basis Set Exchange",
+        "revdate": "2012-06-08",
+        "elements": [
+          "1",
           "3",
           "4",
           "5",
