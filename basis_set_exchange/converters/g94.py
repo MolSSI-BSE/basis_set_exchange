@@ -50,6 +50,7 @@ def _write_g94_common(basis, add_harm_type=True):
 
     # Write out ECP
     if len(ecp_elements) > 0:
+        s += '\n'
         for z in ecp_elements:
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z).upper()

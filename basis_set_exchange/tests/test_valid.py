@@ -36,7 +36,3 @@ def test_valid_reffile():
     '''
     file_path = os.path.join(data_dir, "REFERENCES.json")
     validator.validate_file('references', file_path)
-
-
-def test_valid_data_dir():
-    validator.validate_data_dir(data_dir)

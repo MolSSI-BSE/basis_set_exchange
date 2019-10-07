@@ -32,7 +32,7 @@ Basis set notes have a .notes extension, and family
 notes have a .family_notes extension.
 
 -------------------------------------------------
-https://wwww.basissetexchange.org
+https://www.basissetexchange.org
 https://github.com/MolSSI-BSE/basis_set_exchange
 bse@molssi.org
 -------------------------------------------------

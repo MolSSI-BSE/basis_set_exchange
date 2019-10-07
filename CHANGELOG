@@ -1,9 +1,22 @@
-v0.8.X
+v0.8.10
 --------------------
+  * Adds output converters
+    * Orca
+    * BDF
+    * AcesII
+  * Fixes issue in turbomole output (AM ordering)
+  * Fixes issue in gaussian output (missing blank line)
   * Adds v0 basis sets
     * Dunning PP fitting
     * aug-cc-pwCVXZ-PP (X=D,T,Q,5)
     * (aug)-cc-pwCVXZ-RIFIT (X=D,T,Q,5)
+    * Dunning OPTRI (including F12 and PP)
+  * Adds v1 basis sets
+    * x2c-SV(P)all-s, x2c-SVPall-s,
+      x2c-TZVPall-s, x2c-TZVPPall-s
+    * Dunning X2C/DK3
+    * jgauss basis sets from cfour
+
 
 v0.8.9
 --------------------
