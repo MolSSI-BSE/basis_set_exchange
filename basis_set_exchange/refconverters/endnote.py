@@ -1,5 +1,5 @@
 '''
-Conversion of references to bibtex format
+Conversion of references to enw format
 '''
 
 import textwrap
@@ -12,7 +12,20 @@ def _ref_endnote(key, ref):
     '''
     s = ''
 
-    s += '@{}{{{},\n'.format(ref['_entry_type'], key)
+    s += '  \n'.format(ref['_entry_type'], key)
+    if ref['_entry_type'] == 'article':
+        s += "%O Journal Article \n"
+    if ref['_entry_type'] == 'misc':
+        s += "%O Miscellaneous \n"
+    if ref['_entry_type'] == 'unpublished':
+        s += "%O Unpublished \n"
+    if ref['_entry_type'] == 'incollection':
+        s += "%O In Collection \n"
+    if ref['_entry_type'] == 'phdthesis':
+        s += "%O PHD Thesis \n"
+    if ref['_entry_type'] == 'techreport':
+        s += "%O Technical Report \n"
+
 
     entry_lines = []
     for k, v in ref.items():
@@ -21,29 +34,34 @@ def _ref_endnote(key, ref):
 
         # Handle authors/editors
         if k == 'authors':
-            entry_lines.append('    author = {{{}}}'.format(' and '.join(v)))
-        elif k == 'editors':
-            entry_lines.append('    editor = {{{}}}'.format(' and '.join(v)))
+            for author in v:
+                entry_lines.append('%A {}'.format(author))
         elif k == 'year':
-            entry_lines.append('    year = {{{}}}'.format()
+            entry_lines.append('%D {}'.format(v))
         elif k == 'journal':
-            entry_lines.append('    journal = {{{}}}'.format()
+            entry_lines.append('%J {}'.format(v))
         elif k == 'volume':
-            entry_lines.append('    volume = {{{}}}'.format()
+            entry_lines.append('%V {}'.format(v))
         elif k == 'page':
-            entry_lines.append('    page = {{{}}}'.format()
-
+            entry_lines.append('%P {}'.format(v))
+        elif k == 'title':
+            entry_lines.append('%T {}'.format(v))
+        elif k == 'doi':
+            entry_lines.append('%R {}'.format(v))
+#If URL is to ever be added to BSE references
+        #elif k == 'url':
+            #entry_lines.append('%U {}'.format(v))
         else:
             entry_lines.append('    {} = {{{}}}'.format(k, v))
 
-    s += ',\n'.join(entry_lines)
-    s += '\n}'
+    s += '\n'.join(entry_lines)
+    s += '\n'
 
     return s
 
 
 def write_endnote(refs):
-    '''Converts references to bibtex
+    '''Converts references to endnote
     '''
 
     full_str = ''
