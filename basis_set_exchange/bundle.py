@@ -102,7 +102,7 @@ def _bundle_tbz(outfile, fmt, reffmt, data_dir):
 
 
 def _bundle_zip(outfile, fmt, reffmt, data_dir):
-    with zipfile.ZipFile(outfile, 'w') as zf:
+    with zipfile.ZipFile(outfile, 'w', zipfile.ZIP_DEFLATED) as zf:
         _bundle_generic(zf, _add_to_zip, fmt, reffmt, data_dir)
 
 
