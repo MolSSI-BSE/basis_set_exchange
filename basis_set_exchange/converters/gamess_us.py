@@ -71,8 +71,9 @@ def write_gamess_us_ecp_basis(basis, ecp_elements):
     return s
 
 
-def write_gamess_us(basis):
-    '''Converts a basis set to GAMESS-US
+def write_gamess_us_common(basis, ecp_func):
+    '''Converts the electronic basis to GAMESS-US, using a
+       different function for ECP
     '''
 
     s = ''
@@ -94,6 +95,13 @@ def write_gamess_us(basis):
 
     # Write out ECP
     if len(ecp_elements) > 0:
-        s += write_gamess_us_ecp_basis(basis, ecp_elements)
+        s += ecp_func(basis, ecp_elements)
 
     return s
+
+
+def write_gamess_us(basis):
+    '''Converts a basis set to GAMESS-US
+    '''
+
+    return write_gamess_us_common(basis, write_gamess_us_ecp_basis)

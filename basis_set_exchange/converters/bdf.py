@@ -2,7 +2,7 @@
 Conversion of basis sets to BDF format
 '''
 
-from .. import lut, manip, printing, misc, sort
+from .. import lut, manip, printing, sort
 
 
 def write_bdf(basis):
@@ -23,7 +23,7 @@ def write_bdf(basis):
     if len(electron_elements) > 0:
         # Electron Basis
         for z in electron_elements:
-            s += '****\n'            
+            s += '****\n'
             data = basis['elements'][z]
             #Get element symbol
             s += lut.element_sym_from_Z(z, True)

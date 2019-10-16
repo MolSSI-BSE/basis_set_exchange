@@ -3,7 +3,7 @@ Conversion of basis sets to ORCA
 '''
 
 from .. import lut, manip, sort, printing
-from .gamess_us import write_gamess_us_electron_basis
+from .gamess_us import write_gamess_us_common
 
 
 def write_orca_ecp_basis(basis, ecp_elements):
@@ -50,25 +50,4 @@ def write_orca(basis):
     '''Converts a basis set to ORCA
     '''
 
-    s = ''
-
-    # Uncontract all but SP
-    basis = manip.uncontract_general(basis, True)
-    basis = manip.uncontract_spdf(basis, 1, False)
-    basis = sort.sort_basis(basis, False)
-
-    # Elements for which we have electron basis
-    electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]
-
-    # Elements for which we have ECP
-    ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
-
-    # Electron Basis
-    if len(electron_elements) > 0:
-        s += write_gamess_us_electron_basis(basis, electron_elements)
-
-    # Write out ECP
-    if len(ecp_elements) > 0:
-        s += write_orca_ecp_basis(basis, ecp_elements)
-
-    return s
+    return write_gamess_us_common(basis, write_orca_ecp_basis)
