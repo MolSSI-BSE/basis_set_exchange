@@ -17,6 +17,7 @@ from .genbas import write_cfour, write_aces2
 from .dalton import write_dalton
 from .qcschema import write_qcschema
 from .demon2k import write_demon2k
+from .pqs import write_pqs
 from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
 from .bdf import write_bdf
@@ -84,6 +85,13 @@ _converter_map = {
         'comment': '#',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_cp2k
+    },
+    'pqs': {
+        'display': 'PQS',
+        'extension': '.pqs',
+        'comment': '!',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'function': write_pqs
     },
     'demon2k': {
         'display': 'deMon2K',
