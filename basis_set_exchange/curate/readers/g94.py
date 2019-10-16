@@ -38,7 +38,7 @@ def read_g94(basis_lines, fname):
         i += 1
 
         # Try to guess if this is an ecp
-        # Electron basis almost always end in 1.0 (scale factor)
+        # Electron basis almost always end in a floating point number (scale factor)
         # ECP lines would end in an integer, so isdecimal() = true for ecp
         if basis_lines[i].split()[-1].isdecimal():
             if not 'ecp_potentials' in element_data:
@@ -91,6 +91,12 @@ def read_g94(basis_lines, fname):
                 shell_am = lut.amchar_to_int(lsplt[0], hij=True)
                 nprim = int(lsplt[1])
 
+                scalings = lsplt[2:]
+                scalings = [x for x in scalings if float(x) != 0.0]
+                scaling_factor = float(scalings[0])**2
+                if len(scalings) != 1:
+                    raise NotImplemented("shell with >1 scaling factors")
+
                 if max(shell_am) <= 1:
                     func_type = 'gto'
                 else:
@@ -102,11 +108,25 @@ def read_g94(basis_lines, fname):
                 coefficients = []
 
                 i += 1
+                has_scaling = scaling_factor != 1.0
                 for j in range(nprim):
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()
-                    exponents.append(lsplt[0])
+
+                    if has_scaling:
+                        ex = float(lsplt[0])*scaling_factor
+                        ex = '{:.16E}'.format(ex)
+
+                        # Trim useless zero
+                        ex_splt = ex.split('E')
+                        ex = ex_splt[0].rstrip('0')
+                        if ex[-1] == '.': # Stripped all the zeroes...
+                            ex += '0'
+                        ex += 'E' + ex_splt[1]
+                        exponents.append(ex)
+                    else:
+                        exponents.append(lsplt[0])
                     coefficients.append(lsplt[1:])
                     i += 1
 

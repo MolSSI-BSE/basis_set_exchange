@@ -136,3 +136,18 @@ def test_diff_json_files(tmp_path):
     refdata = fileio.read_json_basis(reffile)
 
     assert curate.compare_basis(diff1, refdata, rel_tol=0.0)
+
+
+def test_g94_scaling(tmp_path):
+    tmp_path = str(tmp_path)  # Needed for python 3.5
+
+    filename1 = 'sbo4-dz-scaled.gbs.bz2'
+    filename2 = 'sbo4-dz-unscaled.gbs.bz2'
+
+    file1 = os.path.join(test_data_dir, filename1)
+    file2 = os.path.join(test_data_dir, filename2)
+
+    bs1 = curate.read_formatted_basis(file1)
+    bs2 = curate.read_formatted_basis(file2)
+
+    assert curate.compare_basis(bs1, bs2, rel_tol=1.0e-14)
