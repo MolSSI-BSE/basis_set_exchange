@@ -143,11 +143,15 @@ def sort_shells(shells, use_copy=True):
     shells = [sort_shell(sh, False) for sh in shells]
 
     # Sort the list by increasing AM, then general contraction level, then decreasing highest exponent
+    # yapf: disable
     return list(
         sorted(
             shells,
-            key=lambda x:
-            (max(x['angular_momentum']), -len(x['exponents']), -len(x['coefficients']), -float(max(x['exponents'])))))
+            key=lambda x: (max(x['angular_momentum']),
+                          -len(x['exponents']),
+                          -len(x['coefficients']),
+                          -max(float(y) for y in x['exponents']))))
+    # yapf: enable
 
 
 def sort_potentials(potentials, use_copy=True):
