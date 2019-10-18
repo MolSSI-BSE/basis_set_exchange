@@ -20753,6 +20753,102 @@
       }
     }
   },
+  "dfo-1": {
+    "display_name": "DFO-1",
+    "other_names": [],
+    "description": "Optimized gaussian basis set for Density-functional calculations",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "DFO-1",
+    "relpath": "",
+    "family": "dfo",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "DFO-1.1.table.json",
+        "revdesc": "Data from SI of paper",
+        "revdate": "2019-10-18",
+        "elements": [
+          "1",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "13",
+          "14",
+          "25",
+          "29"
+        ]
+      }
+    }
+  },
+  "dfo-1-bhs": {
+    "display_name": "DFO-1-BHS",
+    "other_names": [],
+    "description": "Optimized gaussian basis set for Density-functional calculations (requiring pseudopotential)",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "DFO-1-BHS",
+    "relpath": "",
+    "family": "dfo",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "DFO-1-BHS.1.table.json",
+        "revdesc": "Data from SI of paper",
+        "revdate": "2019-10-18",
+        "elements": [
+          "14"
+        ]
+      }
+    }
+  },
+  "dfo-2": {
+    "display_name": "DFO-2",
+    "other_names": [],
+    "description": "Optimized gaussian basis set for Density-functional calculations",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "DFO-2",
+    "relpath": "",
+    "family": "dfo",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "DFO-2.1.table.json",
+        "revdesc": "Data from SI of paper",
+        "revdate": "2019-10-18",
+        "elements": [
+          "1",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "13",
+          "14",
+          "25",
+          "29"
+        ]
+      }
+    }
+  },
   "dgauss-a1-dftjfit": {
     "display_name": "dgauss-a1-dftjfit",
     "other_names": [],

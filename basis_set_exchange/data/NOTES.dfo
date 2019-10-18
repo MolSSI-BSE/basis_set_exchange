@@ -1,0 +1,18 @@
+The gaussian exponents and coefficients are given for the elements H, B-F,
+Al, Si, Mn, and Cu.  Custom basis sets may be constructed by using the basis
+set optimizer "basopt" which is available at no charge on the WWW.
+
+The table format for each element and basis set is as follows: 
+
+* a block containing all exponents
+* for each contracted gaussian orbital a block containing the
+  corresponding contraction coefficients (many of them are zero)
+
+The contraction coefficients c(l,i,alp) are defined in terms of normalized
+gaussian functions:
+                            ________________________
+        ---               _|        l            3/2
+Phi(r)= \   c(l,i,alp) *   | (4*alp)      /2*alp\      l            2
+        /                  | --------- * (------ )  * r * exp(-alp*r )
+        ---                | (2*l+1)!!    \ pi  /
+        alp
