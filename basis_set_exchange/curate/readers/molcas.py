@@ -89,15 +89,16 @@ def read_molcas(basis_lines, fname):
             # Skip over an options block
             # But detect 'orbitalenergies'
             has_orb_energies = False
+            has_fock_op = False
             line = basis_lines[i]
             if line.lower() == 'options':
                 while basis_lines[i].lower() != 'endoptions':
                     if basis_lines[i].lower() == 'orbitalenergies':
                         has_orb_energies = True
+                    elif basis_lines[i].lower() == 'fockoperator':
+                        has_fock_op = True
                     i += 1
                 i += 1
-
-            lsplt = basis_lines[i].split()
 
             # We are ignoring the maxam - some files don't have it...
             # The first part is the Z number. But we already have the
@@ -166,5 +167,10 @@ def read_molcas(basis_lines, fname):
                     while skipped < to_skip:
                         skipped += len(basis_lines[i].split())
                         i += 1
+
+                # Skip fock operator
+                if has_fock_op:
+                    to_skip = int(basis_lines[i].strip())
+                    i += to_skip + 1
 
     return bs_data
