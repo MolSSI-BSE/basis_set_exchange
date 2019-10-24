@@ -4,7 +4,7 @@ Helper functions for writing out basis set references in various formats
 
 from .. import api
 
-_lib_refs = ["pritchardXXXXa", "feller1996a", "schuchardt2007a"]
+_lib_refs = ["pritchard2019a", "feller1996a", "schuchardt2007a"]
 _lib_refs_desc = 'If you downloaded data from the basis set\nexchange or used the basis set exchange python library, please cite:\n'
 
 

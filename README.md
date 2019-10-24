@@ -36,12 +36,12 @@ Laboratory (https://www.emsl.pnl.gov)
 
 When publishing results obtained from use of the Basis Set Exchange software, please cite:
 
- * *A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community Pritchard*, Benjamin P. and Altarawy, Doaa and Windus, Theresa L. *Manuscript in Preparation*
+ * *A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community* Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus *J. Chem. Inf. Model.* **2019**, doi: 10.1021/acs.jcim.9b00725
 
 For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following references:
 
- * *The Role of Databases in Support of Computational Chemistry Calculations,* Feller, D., *J. Comp. Chem.* **1996**, 17(13), 1571-1586, doi:[10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P](https://doi.org/10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P).
- * *Basis Set Exchange: A Community Database for Computational Sciences Schuchardt,* K.L., Didier, B.T., Elsethagen, T., Sun, L., Gurumoorthi, V., Chase, J., Li, J., and Windus, T.L. *J. Chem. Inf. Model.* **2007**, 47(3), 1045-1052, doi:[10.1021/ci600510j](https://doi.org/10.1021/ci600510j).
+ * *The Role of Databases in Support of Computational Chemistry Calculations,* Feller, D., *J. Comp. Chem.* **1996**, 17(13), 1571-1586, doi:[10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P](https://doi.org/10.1002/(SICI)1096-987X(199610)17:13<1571::AID-JCC9>3.0.CO;2-P)
+ * *Basis Set Exchange: A Community Database for Computational Sciences Schuchardt,* K.L., Didier, B.T., Elsethagen, T., Sun, L., Gurumoorthi, V., Chase, J., Li, J., and Windus, T.L. *J. Chem. Inf. Model.* **2007**, 47(3), 1045-1052, doi:[10.1021/ci600510j](https://doi.org/10.1021/ci600510j)
 
 ## Documentation
 
