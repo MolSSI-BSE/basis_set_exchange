@@ -1,0 +1,1442 @@
+******************************************************************************
+*                                                                            *
+* HYDROGEN: H                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, H(2S)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* HELIUM: He                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, He(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* LITHIUM: Li                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Li(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BERYLLIUM: Be                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Be(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BORON: B                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, B(2P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CARBON: C                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, C(3P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NITROGEN: N                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, N(4S)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* OXYGEN: O                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, O(3P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* FLUORINE: F                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, F(2P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NEON: Ne                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, Ne(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SODIUM: Na                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Na(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* MAGNESIUM: Mg                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Mg(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ALUMINUM: Al                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Al(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SILICON: Si                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Si(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PHOSPHORUS: P                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, P(4S)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SULFUR: S                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, S(3P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CHLORINE: Cl                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Cl(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ARGON: Ar                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, Ar(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* POTASSIUM: K                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, K(2S)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CALCIUM: Ca                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Ca(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SCANDIUM: Sc                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Sc(2D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TITANIUM: Ti                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Ti(3F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* VANADIUM: V                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, V(4F)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CHROMIUM: Cr                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Cr(7S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* MANGANESE: Mn                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Mn(6S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* IRON: Fe                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, Fe(5D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* COBALT: Co                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Co(4F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NICKEL: Ni                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Ni(3F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* COPPER: Cu                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Cu(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ZINC: Zn                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, Zn(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* GALLIUM: Ga                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Ga(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* GERMANIUM: Ge                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Ge(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ARSENIC: As                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, As(4S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SELENIUM: Se                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Se(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BROMINE: Br                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Br(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* KRYPTON: Kr                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Kr(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RUBIDIUM: Rb                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Rb(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* STRONTIUM: Sr                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Sr(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* YTTRIUM: Y                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Y(2D)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ZIRCONIUM: Zr                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Zr(3F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NIOBIUM: Nb                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Nb(6D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* MOLYBDENUM: Mo                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Mo(7S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TECHNETIUM: Tc                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Tc(6S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RUTHENIUM: Ru                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Ru(5F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RHODIUM: Rh                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Rh(4F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PALLADIUM: Pd                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Pd(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SILVER: Ag                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Ag(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CADMIUM: Cd                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Cd(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* INDIUM: In                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, In(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TIN: Sn                                                                    *
+* =======                                                                    *
+*   Reference state:                                                         *
+*        The atomic ground state, Sn(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ANTIMONY: Sb                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Sb(4S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TELLURIUM: Te                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Te(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* IODINE: I                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, I(2P)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* XENON: Xe                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, Xe(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CESIUM: Cs                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Cs(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BARIUM: Ba                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Ba(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* LANTHANUM: La                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, La(2D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CERIUM: Ce                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Ce(1G)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PRASEODYMIUM: Pr                                                           *
+* ================                                                           *
+*   Reference state:                                                         *
+*        The atomic ground state, Pr(4I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NEODIUM: Nd                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Nd(5I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PROMETHIUM: Pm                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Pm(6H)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* SAMARIUM: Sm                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Sm(7F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* EUROPIUM: Eu                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Eu(8S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* GADOLINIUM: Gd                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Gd(9D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TERBIUM: Tb                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Tb(6H)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* DYSPROSIUM: Dy                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Dy(5I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* HOLMIUM: Ho                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Ho(4I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ERBIUM: Er                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Er(3H)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* THULIUM: Tm                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Tm(2F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* YTTERBIUM: Yb                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Yb(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* LUTECIUM: Lu                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Lu(2D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* HAFNIUM: Hf                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Hf(3F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TANTALUM: Ta                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Ta(4F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TUNGSTEN: W                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, W(5D)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RHENIUM: Re                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Re(6S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* OSMIUM: Os                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Os(5D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* IRIDIUM: Ir                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Ir(4F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PLATINUM: Pt                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Pt(3D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* GOLD: Au                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, Au(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* MERCURY: Hg                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Hg(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* TALLIUM: Tl                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Tl(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* LEAD: Pb                                                                   *
+* ========                                                                   *
+*   Reference state:                                                         *
+*        The atomic ground state, Pb(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BISMUTH: Bi                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Bi(4S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* POLONIUM: Po                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Po(3P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ASTATINE: At                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, At(2P)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RADON: Rn                                                                  *
+* =========                                                                  *
+*   Reference state:                                                         *
+*        The atomic ground state, Rn(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* FRANCIUM: Fr                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Fr(2S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* RADIUM: Ra                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Ra(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* ACTINIUM: Ac                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, Ac(2D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* THORIUM: Th                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Th(3F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PROTOACTINIUM: Pa                                                          *
+* =================                                                          *
+*   Reference state:                                                         *
+*        The atomic ground state, Pa(4J)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* URANIUM: U                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, U(5L)                                      *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NEPTUNIUM: Np                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Np(6L)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* PLUTONIUM: Pu                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Pu(7F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* AMERICIUM: Am                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Am(8S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CURIUM: Cm                                                                 *
+* ==========                                                                 *
+*   Reference state:                                                         *
+*        The atomic ground state, Cm(9D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* BERKELIUM: Bk                                                              *
+* =============                                                              *
+*   Reference state:                                                         *
+*        The atomic ground state, Bk(8H)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* CALIFORNIUM: Cf                                                            *
+* ===============                                                            *
+*   Reference state:                                                         *
+*        The atomic ground state, Cf(5I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* EINSTEINIUM: Es                                                            *
+* ===============                                                            *
+*   Reference state:                                                         *
+*        The atomic ground state, Es(4I)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* FERMIUM: Fm                                                                *
+* ===========                                                                *
+*   Reference state:                                                         *
+*        The atomic ground state, Fm(3H)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* MENDELEVIUM: Md                                                            *
+* ===============                                                            *
+*   Reference state:                                                         *
+*        The atomic ground state, Md(2F)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* NOBELIUM: No                                                               *
+* ============                                                               *
+*   Reference state:                                                         *
+*        The atomic ground state, No(1S)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
+******************************************************************************
+*                                                                            *
+* LAWRENCIUM: Lr                                                             *
+* ==============                                                             *
+*   Reference state:                                                         *
+*        The atomic ground state, Lr(2D)                                     *
+*   Relativistic effect:                                                     *
+*        The scalar relativistic third-order Douglas-Kroll(DK3) method       *
+*   Primitive functions:                                                     *
+*        Optimized by the total energy minimization in DK3-SCF               *
+*   Contraction:                                                             *
+*        Taken from the DK3-SCF orbital coefficients                         *
+*                                                                            *
+******************************************************************************
