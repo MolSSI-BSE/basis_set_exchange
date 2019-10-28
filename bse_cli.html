@@ -373,14 +373,16 @@ bdf
 <p>Lists the available output formats of references.
 With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats
-txt   Plain Text
-bib   BibTeX
-json  JSON
+txt      Plain Text
+bib      BibTeX
+endnote  EndNote
+json     JSON
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats -n
 txt
 bib
+endnote
 json
 </pre></div>
 </div>
@@ -474,7 +476,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.10+8.g912c75be.dirty
+# Version v0.8.10+18.g9f0051cb
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
