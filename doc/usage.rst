@@ -148,7 +148,7 @@ and can be obtained via :func:`basis_set_exchange.get_reference_formats`
 
    >>> # Available formats are available via get_reference_formats
    >>> basis_set_exchange.get_reference_formats()
-   {'txt': 'Plain Text', 'bib': 'BibTeX', 'json': 'JSON'}
+   {'txt': 'Plain Text', 'bib': 'BibTeX', 'endnote': 'EndNote', 'json': 'JSON'}
 
 
 Versioning
