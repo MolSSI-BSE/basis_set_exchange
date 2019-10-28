@@ -10,21 +10,22 @@ from .common import get_library_citation
 def _ref_endnote(key, ref):
     '''Convert a single reference to bibtex format
     '''
-    s = ''
+    s = '\n'
 
-    s += '  \n'.format(ref['_entry_type'], key)
     if ref['_entry_type'] == 'article':
-        s += "%O Journal Article \n"
+        s += "%0 Journal Article\n"
     if ref['_entry_type'] == 'misc':
-        s += "%O Miscellaneous \n"
+        s += "%0 Generic\n"
     if ref['_entry_type'] == 'unpublished':
-        s += "%O Unpublished \n"
+        s += "%0 Unpublished Work\n"
     if ref['_entry_type'] == 'incollection':
-        s += "%O In Collection \n"
+        s += "%0 Book\n"
     if ref['_entry_type'] == 'phdthesis':
-        s += "%O PHD Thesis \n"
+        s += "%0 Thesis \n"
     if ref['_entry_type'] == 'techreport':
-        s += "%O Technical Report \n"
+        s += "%0 Report \n"
+    else:
+        s += "%0 Generic\n"
 
 
     entry_lines = []
