@@ -14,15 +14,15 @@ def _ref_endnote(key, ref):
 
     if ref['_entry_type'] == 'article':
         s += "%0 Journal Article\n"
-    if ref['_entry_type'] == 'misc':
+    elif ref['_entry_type'] == 'misc':
         s += "%0 Generic\n"
-    if ref['_entry_type'] == 'unpublished':
+    elif ref['_entry_type'] == 'unpublished':
         s += "%0 Unpublished Work\n"
-    if ref['_entry_type'] == 'incollection':
+    elif ref['_entry_type'] == 'incollection':
         s += "%0 Book\n"
-    if ref['_entry_type'] == 'phdthesis':
+    elif ref['_entry_type'] == 'phdthesis':
         s += "%0 Thesis \n"
-    if ref['_entry_type'] == 'techreport':
+    elif ref['_entry_type'] == 'techreport':
         s += "%0 Report \n"
     else:
         s += "%0 Generic\n"
