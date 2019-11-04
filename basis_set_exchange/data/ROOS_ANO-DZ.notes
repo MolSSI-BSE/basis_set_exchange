@@ -1,0 +1,40 @@
+--------------------------------------------------------------------------------
+   Original BSE Contributor: Dr. David Feller
+            Original BSE PI: (none)
+ Original BSE Last Modified: Mon, 15 Jan 2007 23:45:33 GMT
+--------------------------------------------------------------------------------
+
+From Original BSE
+-----------------
+                      Atomic Natural Orbital Basis
+                      ----------------------------
+Elements          Contraction                        Reference
+      H: (8s,4p)         -> [3s,2p]     P. -O. Widmark, P. A. Malmqvist, B.
+     He: (9s,4p)         -> [3s,2p]     Roos, Theor. Chim. Acta, 77, 291 (1990).
+Li - Ne: (14s,9p,4d)     -> [4s,3p,2d]
+Na - Ar: (17s,12p,5d)    -> [5s,4p,2d]  P. -O. Widmark, B. J. Persson and B.
+K  - Ca: (17s,12p,4d)    -> [6s,5p,3d]  Roos, Theor. Chim. Acta, 79, 419 (1991).
+Sc - Zn: (21s,15p,10d,6f)-> [6s,5p,4d,2f] R. Pou-Amerigo, M. Merchan,
+                                        I. Nebot-Gil, P.O. Widmark and B. Roos,
+                                        Theor. Chim. Acta, 92, 149 (1995).
+
+The ANO basis sets of Widmark, Malmqvist, Persson and Roos are based on atomic
+valence SD-CI's. However, in contrast to the ANO contractions of Almlof and
+Taylor, these contractions were based not just on the atomic ground states, but
+on the positive and negative ions and electric field polarized atom as well.
+
+Additional low-lying electronic states were included for some atoms.  For
+example, the singlet D state of oxygen was included in the averaging process.
+
+The Gaussian primitive set for first row elemets is based on the van
+Duijneveldt (13s,8p) set augmented with a extra shell of diffuse functions. The
+second row sets were derived in an analogous fashion from a (16s,11p) set.
+The primitives for the transition metals were based on the [20s,12p,9d]
+set set of H. Partridge, J. Chem. Phys., 90, 1043 (1989).
+
+The ANO basis sets of Widmark, Malmqvist and Roos are based on atomic valence
+SD-CI's. However, in contrast to the ANO contractions of Almlof and Taylor,
+these contractions were based not just on the atomic ground states, but on
+the positive and negative ions and electric field polarized atom as well.
+Additional low-lying electronic states were included for some atoms.  For
+example, the singlet D state of oxygen was included in the averaging process.
