@@ -10644,7 +10644,8 @@
       "gto_spherical"
     ],
     "auxiliaries": {
-      "optri": "cc-pcvdz-f12-optri"
+      "optri": "cc-pcvdz-f12-optri",
+      "rifit": "cc-pcvdz-f12-rifit"
     },
     "versions": {
       "0": {
@@ -10716,13 +10717,13 @@
   "cc-pcvdz-f12-rifit": {
     "display_name": "cc-pCVDZ-F12-RIFIT",
     "other_names": [],
-    "description": "cc-pCVDZ-F12 MP2 Fitting",
+    "description": "cc-pCVDZ-F12 RI Fitting",
     "latest_version": "0",
     "tags": [],
     "basename": "cc-pCVDZ-F12-RIFIT",
     "relpath": "",
     "family": "dunning_f12_fit",
-    "role": "orbital",
+    "role": "rifit",
     "function_types": [
       "gto",
       "gto_spherical"
@@ -10852,7 +10853,8 @@
       "gto_spherical"
     ],
     "auxiliaries": {
-      "optri": "cc-pcvqz-f12-optri"
+      "optri": "cc-pcvqz-f12-optri",
+      "rifit": "cc-pcvqz-f12-rifit"
     },
     "versions": {
       "0": {
@@ -10924,13 +10926,13 @@
   "cc-pcvqz-f12-rifit": {
     "display_name": "cc-pCVQZ-F12-RIFIT",
     "other_names": [],
-    "description": "cc-pCVQZ-F12 MP2 Fitting",
+    "description": "cc-pCVQZ-F12 RI Fitting",
     "latest_version": "0",
     "tags": [],
     "basename": "cc-pCVQZ-F12-RIFIT",
     "relpath": "",
     "family": "dunning_f12_fit",
-    "role": "orbital",
+    "role": "rifit",
     "function_types": [
       "gto",
       "gto_spherical"
@@ -11060,7 +11062,8 @@
       "gto_spherical"
     ],
     "auxiliaries": {
-      "optri": "cc-pcvtz-f12-optri"
+      "optri": "cc-pcvtz-f12-optri",
+      "rifit": "cc-pcvtz-f12-rifit"
     },
     "versions": {
       "0": {
@@ -11132,13 +11135,13 @@
   "cc-pcvtz-f12-rifit": {
     "display_name": "cc-pCVTZ-F12-RIFIT",
     "other_names": [],
-    "description": "cc-pCVTZ-F12 MP2 Fitting",
+    "description": "cc-pCVTZ-F12 RI Fitting",
     "latest_version": "0",
     "tags": [],
     "basename": "cc-pCVTZ-F12-RIFIT",
     "relpath": "",
     "family": "dunning_f12_fit",
-    "role": "orbital",
+    "role": "rifit",
     "function_types": [
       "gto",
       "gto_spherical"
