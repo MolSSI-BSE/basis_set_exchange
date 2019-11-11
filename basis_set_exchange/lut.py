@@ -81,6 +81,11 @@ _amchar_map_hik = 'spdfghiklmnoqrtuvwxyzabce'
 _amchar_map_hij = 'spdfghijklmnoqrtuvwxyzabce'
 
 
+def all_element_names():
+    '''Obtain a list of the names of all the elements'''
+    return list(_element_name_map.keys())
+
+
 def element_data_from_Z(Z):
     '''Obtain elemental data given a Z number
 
@@ -137,6 +142,15 @@ def element_name_from_Z(Z, normalize=False):
         return r.capitalize()
     else:
         return r
+
+
+def element_Z_from_name(name):
+    '''Obtain an element's Z number given its name
+
+    An exception is thrown if the name is not found
+    '''
+
+    return element_data_from_name(name)[1]
 
 
 def element_sym_from_Z(Z, normalize=False):
