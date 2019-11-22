@@ -58,7 +58,8 @@ def create_skel(role):
     '''
 
     role = role.lower()
-    if not role in _skeletons:
-        raise RuntimeError("Role {} not found. Should be 'component', 'element', 'table', or 'metadata'")
+    if role not in _skeletons:
+        raise RuntimeError("Role {} not found. Should be 'component', 'element', 'table', or 'metadata'"
+                           .format(role))
 
     return copy.deepcopy(_skeletons[role])

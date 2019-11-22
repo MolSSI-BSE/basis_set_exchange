@@ -20,7 +20,7 @@ def write_molcas(basis):
     # Elements for which we have ECP
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
-    if len(electron_elements) > 0:
+    if electron_elements:
         # Electron Basis
         for z in electron_elements:
             data = basis['elements'][z]
@@ -49,7 +49,7 @@ def write_molcas(basis):
                 s += printing.write_matrix(coefficients, point_places)
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n\nECP\n'
 
         for z in ecp_elements:

@@ -62,7 +62,7 @@ def compact_elements(elements):
     For example, [1, 2, 3, 6, 7, 8, 10] will return "H-Li,C-O,Ne"
    """
 
-    if len(elements) == 0:
+    if not elements:
         return
 
     # We have to convert to integers for this function
@@ -131,7 +131,7 @@ def expand_elements(compact_el, as_str=False):
 
     # If an integer, just return it
     if isinstance(compact_el, int):
-        if as_str is True:
+        if as_str:
             return [str(compact_el)]
         else:
             return [compact_el]
@@ -139,7 +139,7 @@ def expand_elements(compact_el, as_str=False):
     # If compact_el is a list, make it a comma-separated string
     if isinstance(compact_el, list):
         compact_el = [str(x) for x in compact_el]
-        compact_el = [x for x in compact_el if len(x) > 0]
+        compact_el = [x for x in compact_el if x]
         compact_el = ','.join(compact_el)
 
     # Find multiple - or ,
@@ -152,7 +152,7 @@ def expand_elements(compact_el, as_str=False):
     compact_el = compact_el.strip(',')
 
     # Check if I was passed an empty string or list
-    if len(compact_el) == 0:
+    if not compact_el:
         return []
 
     # Find some erroneous patterns
@@ -176,7 +176,7 @@ def expand_elements(compact_el, as_str=False):
     # Now go over each one and replace elements with ints
     el_list = []
     for el in tmp_list:
-        if not '-' in el:
+        if '-' not in el:
             el_list.append(_Z_from_str(el))
         else:
             begin, end = el.split('-')
@@ -184,7 +184,7 @@ def expand_elements(compact_el, as_str=False):
             end = _Z_from_str(end)
             el_list.extend(list(range(begin, end + 1)))
 
-    if as_str is True:
+    if as_str:
         return [str(x) for x in el_list]
     else:
         return el_list

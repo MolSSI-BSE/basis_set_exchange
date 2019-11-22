@@ -49,7 +49,7 @@ def _get_basis_metadata(name, data_dir):
     # Get the metadata for all basis sets
     metadata = get_metadata(data_dir)
 
-    if not tr_name in metadata:
+    if tr_name not in metadata:
         raise KeyError("Basis set {} does not exist".format(name))
 
     return metadata[tr_name]
@@ -129,13 +129,13 @@ def get_basis(name,
 
         Available formats are
 
-            * nwchem
-            * gaussian94
-            * psi4
-            * gamess_us
-            * turbomole
-            * json
             * bdf
+            * gamess_us
+            * gaussian94
+            * json
+            * nwchem
+            * psi4
+            * turbomole
 
     uncontract_general : bool
         If True, remove general contractions by duplicating the set
@@ -174,7 +174,7 @@ def get_basis(name,
     else:
         version = str(version)  # Version may be an int
 
-    if not version in bs_data['versions']:
+    if version not in bs_data['versions']:
         raise KeyError("Version {} does not exist for basis {}".format(version, name))
 
     # Compose the entire basis set (all elements)
@@ -192,12 +192,12 @@ def get_basis(name,
 
         # Did the user pass an empty string or empty list? If so, include
         # all elements
-        if len(elements) != 0:
+        if elements:
             bs_elements = basis_dict['elements']
 
             # Are elements part of this basis set?
             for el in elements:
-                if not el in bs_elements:
+                if el not in bs_elements:
                     elsym = lut.element_sym_from_Z(el)
                     raise KeyError("Element {} (Z={}) not found in basis {} version {}".format(
                         elsym, el, name, version))
@@ -281,13 +281,13 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
 
     role = role.lower()
 
-    if not role in get_roles():
+    if role not in get_roles():
         raise RuntimeError("Role {} is not a valid role".format(role))
 
     bs_data = _get_basis_metadata(primary_basis, data_dir)
     auxdata = bs_data['auxiliaries']
 
-    if not role in auxdata:
+    if role not in auxdata:
         raise RuntimeError("Role {} doesn't exist for {}".format(role, primary_basis))
 
     return auxdata[role]
@@ -455,12 +455,12 @@ def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_d
 
     if family is not None:
         family = family.lower()
-        if not family in get_families(data_dir):
+        if family not in get_families(data_dir):
             raise RuntimeError("Family '{}' is not a valid family".format(family))
         metadata = {k: v for k, v in metadata.items() if v['family'] == family}
     if role is not None:
         role = role.lower()
-        if not role in get_roles():
+        if role not in get_roles():
             raise RuntimeError("Role '{}' is not a valid role".format(role))
         metadata = {k: v for k, v in metadata.items() if v['role'] == role}
     if elements is not None:
@@ -472,7 +472,7 @@ def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_d
             basis_data['versions'] = {k: v for k, v in ver_data.items() if elements <= set(v['elements'])}
 
         # There will be basis sets with no versions. So clean that up
-        metadata = {k: v for k, v in metadata.items() if len(v['versions']) > 0}
+        metadata = {k: v for k, v in metadata.items() if v['versions']}
     if substr:
         substr = substr.lower()
         metadata = {k: v for k, v in metadata.items() if substr in k or substr in v['display_name']}
@@ -487,7 +487,7 @@ def _family_notes_path(family, data_dir):
     data_dir = fix_data_dir(data_dir)
 
     family = family.lower()
-    if not family in get_families(data_dir):
+    if family not in get_families(data_dir):
         raise RuntimeError("Family '{}' does not exist".format(family))
 
     file_name = 'NOTES.' + family.lower()

@@ -19,7 +19,7 @@ Format: {fmt}
 Reference format: {reffmt}
 
 This directory contains all the basis sets in the library
-in {fmt} format. 
+in {fmt} format.
 
 Filenames of the basis sets are in the format
 {{name}}.{{version}}.{{extension}} where the version represents
@@ -145,14 +145,14 @@ def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
             addhelper(bfile, basis_filepath, bsdata)
             addhelper(bfile, ref_filename, refdata)
 
-        if len(notes) > 0:
+        if notes:
             notes_filename = os.path.join(subdir, filename + '.notes')
             addhelper(bfile, notes_filename, notes)
 
     for fam in api.get_families(data_dir):
         fam_notes = api.get_family_notes(fam, data_dir)
 
-        if len(fam_notes) > 0:
+        if fam_notes:
             fam_notes_filename = os.path.join(subdir, fam + '.family_notes')
             addhelper(bfile, fam_notes_filename, fam_notes)
 
@@ -208,7 +208,7 @@ def create_bundle(outfile, fmt, reffmt, archive_type=None, data_dir=None):
 
     else:
         archive_type = archive_type.lower()
-        if not archive_type in _bundle_types:
+        if archive_type not in _bundle_types:
             raise RuntimeError("Archive type '{}' is not valid.")
 
     _bundle_types[archive_type]['handler'](outfile, fmt, reffmt, data_dir)

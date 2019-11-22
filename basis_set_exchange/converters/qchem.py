@@ -49,16 +49,15 @@ def write_qchem(basis):
     purecart = _determine_pure(basis)
     if purecart != '':
         s += "$rem\n"
-        if len(electron_elements) > 0:
+        if electron_elements:
             s += "    BASIS GEN\n"
-        if len(ecp_elements) > 0:
+        if ecp_elements:
             s += "    ECP GEN\n"
         s += "    PURECART " + _determine_pure(basis) + "\n"
         s += "$end\n\n"
 
-
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         s += "$basis\n"
         for z in electron_elements:
             data = basis['elements'][z]
@@ -84,7 +83,7 @@ def write_qchem(basis):
         s += "$end\n"
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += "\n\n$ecp\n"
         for z in ecp_elements:
             data = basis['elements'][z]

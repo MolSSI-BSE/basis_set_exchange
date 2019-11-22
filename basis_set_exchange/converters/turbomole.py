@@ -24,7 +24,7 @@ def write_turbomole(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         for z in electron_elements:
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z, False)
@@ -47,7 +47,7 @@ def write_turbomole(basis):
             s += '*\n'
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '$ecp\n'
         s += '*\n'
         for z in ecp_elements:

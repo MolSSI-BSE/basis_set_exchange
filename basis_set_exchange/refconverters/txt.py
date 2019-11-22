@@ -40,7 +40,7 @@ def write_txt(refs):
 
             refdata = ri['reference_data']
 
-            if len(refdata) == 0:
+            if not refdata:
                 full_str += '#         (...no reference...)\n%\n'
             else:
                 rkeys = [x[0] for x in ri['reference_data']]

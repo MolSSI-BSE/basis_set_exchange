@@ -28,7 +28,7 @@ def process_notes(notes, ref_data):
     reference_sec += '-------------------------------------------------\n'
 
     # Add reference data
-    if len(found_refs) == 0:
+    if not found_refs:
         return notes
 
     for r in sorted(found_refs):

@@ -37,7 +37,7 @@ def write_gamess_us_electron_basis(basis, electron_elements):
 def write_gamess_us_ecp_basis(basis, ecp_elements, ecp_block=True):
     s = ""
 
-    if ecp_block is True:
+    if ecp_block:
         s += "\n\n$ECP\n"
 
     for z in ecp_elements:
@@ -70,7 +70,7 @@ def write_gamess_us_ecp_basis(basis, ecp_elements, ecp_block=True):
             point_places = [8, 23, 32]
             s += printing.write_matrix([*coefficients, rexponents, gexponents], point_places)
 
-    if ecp_block is True:
+    if ecp_block:
         s += "$END\n"
     return s
 
@@ -94,11 +94,11 @@ def write_gamess_us_common(basis, ecp_func):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         s += write_gamess_us_electron_basis(basis, electron_elements)
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += ecp_func(basis, ecp_elements)
 
     return s

@@ -8,7 +8,7 @@ Tests for the BSE IO functions
 import os
 import pytest
 
-from basis_set_exchange import fileio, api
+from basis_set_exchange import fileio
 from .common_testvars import data_dir
 
 

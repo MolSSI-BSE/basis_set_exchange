@@ -50,11 +50,11 @@ def write_pqs(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         s += write_pqs_electron_basis(basis, electron_elements)
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n\n'
         s += 'Effective core Potentials\n'
         s += '-------------------------\n'

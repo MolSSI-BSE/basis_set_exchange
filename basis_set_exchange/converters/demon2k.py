@@ -25,7 +25,7 @@ def write_demon2k(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         for z in electron_elements:
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z, True)
@@ -62,7 +62,7 @@ def write_demon2k(basis):
                 s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=False)
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n\nECP\n'
         for z in ecp_elements:
             data = basis['elements'][z]

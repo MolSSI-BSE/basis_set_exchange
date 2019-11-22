@@ -51,10 +51,9 @@ def _read_plain_json(file_path, check_bse):
     except json.decoder.JSONDecodeError as ex:
         raise RuntimeError("File {} contains JSON errors".format(file_path)) from ex
 
-    if check_bse is True:
-        # Check for molssi_bse_schema key
-        if 'molssi_bse_schema' not in js:
-            raise RuntimeError('File {} does not appear to be a BSE JSON file'.format(file_path))
+    # Check for molssi_bse_schema key
+    if check_bse and 'molssi_bse_schema' not in js:
+        raise RuntimeError('File {} does not appear to be a BSE JSON file'.format(file_path))
 
     return js
 

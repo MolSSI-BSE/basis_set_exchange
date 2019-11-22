@@ -7,6 +7,7 @@ import pytest
 from basis_set_exchange import api, curate, manip
 from .common_testvars import bs_names_sample
 
+
 @pytest.mark.parametrize('basis', bs_names_sample)
 def test_manip_roundtrip(basis):
     bse_dict = api.get_basis(basis, uncontract_general=True, uncontract_spdf=True)

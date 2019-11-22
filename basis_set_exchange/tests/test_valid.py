@@ -2,7 +2,6 @@
 Test for validating the formatting of the json files
 """
 
-import glob
 import os
 import pytest
 

@@ -30,7 +30,7 @@ def read_g94(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        if not element_Z in bs_data['elements']:
+        if element_Z not in bs_data['elements']:
             bs_data['elements'][element_Z] = {}
 
         element_data = bs_data['elements'][element_Z]
@@ -41,7 +41,7 @@ def read_g94(basis_lines, fname):
         # Electron basis almost always end in a floating point number (scale factor)
         # ECP lines would end in an integer, so isdecimal() = true for ecp
         if basis_lines[i].split()[-1].isdecimal():
-            if not 'ecp_potentials' in element_data:
+            if 'ecp_potentials' not in element_data:
                 element_data['ecp_potentials'] = []
 
             lsplt = basis_lines[i].split()
@@ -83,7 +83,7 @@ def read_g94(basis_lines, fname):
 
                 element_data['ecp_potentials'].append(ecp_shell)
         else:
-            if not 'electron_shells' in element_data:
+            if 'electron_shells' not in element_data:
                 element_data['electron_shells'] = []
 
             while basis_lines[i] != '****':

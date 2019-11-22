@@ -5,13 +5,16 @@ Conversion of basis sets to cfour/aces2/genbas format
 import math
 from .. import lut, manip, sort, printing
 
+
 def _cfour_exp(e):
     '''Formats an exponent for CFour'''
     return e.replace('E', 'D') + ' '
 
+
 def _cfour_coef(c):
     '''Formats a coefficient for CFour'''
     return c.replace('E', 'D') + ' '
+
 
 def _aces_exp(e):
     '''Formats an exponent for AcesII'''
@@ -39,6 +42,7 @@ def _aces_exp(e):
 
     return s
 
+
 def _aces_coef(c):
     '''Formats a coefficient for AcesII'''
     c = float(c)
@@ -65,7 +69,7 @@ def _write_genbas_internal(basis, exp_formatter, coef_formatter):
 
     s = '\n'
 
-    if len(electron_elements) > 0:
+    if electron_elements:
         # Electron Basis
         for z in electron_elements:
             data = basis['elements'][z]
@@ -101,7 +105,7 @@ def _write_genbas_internal(basis, exp_formatter, coef_formatter):
                 s += '\n'
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n\n! Effective core Potentials\n'
 
         for z in ecp_elements:

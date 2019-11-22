@@ -24,7 +24,7 @@ for data_dir in data_dirs:
             bse_package_data.append(os.path.relpath(filepath, 'basis_set_exchange'))
 
 if __name__ == "__main__":
-    my_packages=setuptools.find_packages()
+    my_packages = setuptools.find_packages()
 
     setuptools.setup(
         name='basis_set_exchange',

@@ -4,8 +4,6 @@ Tests BSE curation functions
 
 import os
 import pytest
-import shutil
-import bz2
 
 from basis_set_exchange import printing, fileio, api
 from .common_testvars import data_dir

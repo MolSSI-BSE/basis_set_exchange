@@ -49,7 +49,7 @@ class BSEMemoize:
         functools.update_wrapper(self, f)
 
     def __call__(self, *args, **kwargs):
-        if memoize_enabled is not True:
+        if not memoize_enabled:
             return self.__f(*args, **kwargs)
 
         arg_key = _make_key(self.args_spec, *args, **kwargs)

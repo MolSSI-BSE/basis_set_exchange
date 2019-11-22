@@ -7,6 +7,7 @@ from .. import bundle
 from ..misc import compact_elements
 from .common import format_columns
 
+
 def _bse_cli_list_basis_sets(args):
     '''Handles the list-basis-sets subcommand'''
     metadata = api.filter_basis_sets(args.substr, args.family, args.role, args.elements, args.data_dir)
@@ -34,7 +35,7 @@ def _bse_cli_list_formats(args):
     else:
         liststr = format_columns(all_formats.items())
 
-    return '\n'.join(liststr)
+    return '\n'.join(sorted(liststr))
 
 
 def _bse_cli_list_ref_formats(args):
@@ -112,7 +113,7 @@ def _bse_cli_get_info(args):
     ret.append('')
 
     aux = bs_meta['auxiliaries']
-    if len(aux) == 0:
+    if not aux:
         ret.append('Auxiliary Basis Sets: None')
     else:
         ret.append('Auxiliary Basis Sets:')
@@ -144,7 +145,7 @@ def _bse_cli_get_versions(args):
     '''Handles the get-versions subcommand'''
     name = args.basis.lower()
     metadata = api.get_metadata(args.data_dir)
-    if not name in metadata:
+    if name not in metadata:
         raise KeyError(
             "Basis set {} does not exist. For a complete list of basis sets, use the 'list-basis-sets' command".format(
                 name))

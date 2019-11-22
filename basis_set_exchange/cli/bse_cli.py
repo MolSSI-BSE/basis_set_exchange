@@ -120,7 +120,6 @@ def run_bse_cli():
     subp.add_argument('bundle_file', help='Bundle/Archive file to create')
     subp.add_argument('--archive-type', help='Override the type of archive to create (zip or tbz)')
 
-
     #############################
     # DONE WITH SUBCOMMANDS
     #############################

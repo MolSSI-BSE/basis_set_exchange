@@ -21,7 +21,7 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
     of all the elements contained in those files.  This creates the element, and table basis set
     files in the given data_dir (and subdir). The metadata file for the basis is created if it
     doesn't exist, and the main metadata file is also updated.
-    
+
     Parameters
     ----------
     component_files : str
@@ -46,7 +46,7 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
         Description of this version of the basis set
     '''
 
-    if len(component_files) == 0:
+    if not component_files:
         raise RuntimeError("Need at least one component file to create a basis set from")
 
     # Determine what files have which elements
@@ -163,7 +163,7 @@ def add_basis(bs_file,
     create the component, element, and table basis set files in the given data_dir (and subdir).
     The metadata file for the basis is created if it doesn't exist, and the main metadata file is
     also updated.
-    
+
     Parameters
     ----------
     bs_file : str
@@ -231,7 +231,7 @@ def add_basis(bs_file,
             # Make sure we have info for the given elements
             # and that there are no duplicates
             for el in elements:
-                if not el in orig_elements:
+                if el not in orig_elements:
                     raise RuntimeError("Element {} not found in file {}".format(el, bs_file))
                 if el in done_elements:
                     raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
@@ -246,7 +246,7 @@ def add_basis(bs_file,
         # Handle elements without a reference
         noref_elements = set(orig_elements.keys()) - set(done_elements)
 
-        if len(noref_elements) > 0:
+        if noref_elements:
             for el in noref_elements:
                 bs_data['elements'][el]['references'] = []
 

@@ -41,7 +41,6 @@ def test_unused_data():
             el_file = os.path.normpath(el_file)
             el_file_path = os.path.join(data_dir, el_file)
 
-
             el_file_data = all_element_data[el_file_path]
 
             for cfile in el_file_data[el]['components']:
@@ -62,7 +61,7 @@ def test_unused_data():
     remaining.update(all_element_elements)
 
     for k, v in remaining.items():
-        if len(v) == 0:
+        if not v:
             continue
 
         found_unused = True

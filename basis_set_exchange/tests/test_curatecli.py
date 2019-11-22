@@ -8,7 +8,8 @@ import pytest
 import shutil
 
 from basis_set_exchange import fileio, curate
-from .common_testvars import fake_data_dir, data_dir, test_data_dir, auth_data_dir
+from .common_testvars import fake_data_dir, data_dir, test_data_dir
+
 
 def _test_curatecli_cmd(cmd):
     # NOTE: We do not enforce any encoding here. What is returned will be a byte string
@@ -35,9 +36,11 @@ fakebsecurate_cmds = [
     '-V', 'compare-basis-sets bppfakebasis bppfakebasis'
 ]
 
+
 @pytest.mark.parametrize('bsecurate_cmd', bsecurate_cmds)
 def test_curatecli(bsecurate_cmd):
     _test_curatecli_cmd('bsecurate ' + bsecurate_cmd)
+
 
 @pytest.mark.parametrize('bsecurate_cmd', fakebsecurate_cmds)
 def test_curatecli_datadir(bsecurate_cmd):
@@ -48,7 +51,7 @@ def test_curatecli_makediff(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
 
     filename1 = '6-31G_s_s-full.json.bz2'
-    filename2 = '6-31G-full.json.bz2' 
+    filename2 = '6-31G-full.json.bz2'
 
     file1 = os.path.join(test_data_dir, filename1)
     file2 = os.path.join(test_data_dir, filename2)
@@ -87,7 +90,7 @@ def test_curatecli_compare_1():
 
 
 # yapf: disable
-@pytest.mark.parametrize('filename1,filename2,expected', 
+@pytest.mark.parametrize('filename1,filename2,expected',
                            [('6-31g-bse.gbs.bz2', '6-31g-bse.gbs.bz2', True),
                             ('6-31g-bse.gbs.bz2', '6-31g-bse.nw.bz2', True),
                             ('6-31g-bse.nw.bz2', '6-31g-bse-BAD1.gbs.bz2', False),

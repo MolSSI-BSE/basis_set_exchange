@@ -4,7 +4,7 @@ from ..skel import create_skel
 from .common import partition_line_list, parse_primitive_matrix, prune_lines
 
 all_element_names = [x.upper() for x in lut.all_element_names()]
-all_element_names.extend('WOLFFRAM') # For tungsten
+all_element_names.extend('WOLFFRAM')  # For tungsten
 
 # Lines beginning a shell can be:
 #   H {nprim} {ngen}
@@ -13,8 +13,9 @@ all_element_names.extend('WOLFFRAM') # For tungsten
 # This regex handles both cases
 _shell_begin_re = re.compile(r'^(?:H +)?(\d+) +(\d+)(?: +0)?$')
 
+
 def _line_begins_element(line):
-    if len(line) == 0:
+    if not line:
         return False
     if line.startswith('a '):
         return True
@@ -22,7 +23,7 @@ def _line_begins_element(line):
         s = line[2:].split()
         if s[0] in all_element_names:
             return True
-        
+
     return False
 
 
@@ -83,10 +84,10 @@ def read_dalton(basis_lines, fname):
 
     # Skip forward until either:
     # 1. Line begins with 'a'
-    # 2. Lines begins with '!', with an element name following 
+    # 2. Lines begins with '!', with an element name following
     i = 0
     while not _line_begins_element(basis_lines[i]):
-        i += 1 
+        i += 1
 
     # Now go through and find all element blocks
     all_blocks = partition_line_list(basis_lines, _line_begins_element, start=i)

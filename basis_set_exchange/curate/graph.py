@@ -29,7 +29,7 @@ def _make_graph(bsname, version=None, data_dir=None):
     else:
         version = str(version)
 
-    if not version in md['versions']:
+    if version not in md['versions']:
         raise RuntimeError("Version {} of {} doesn't exist".format(version, bsname))
 
     gr = graphviz.Digraph(comment='Basis Set Graph: ' + bsname)

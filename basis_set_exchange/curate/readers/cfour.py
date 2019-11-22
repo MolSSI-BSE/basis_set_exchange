@@ -30,12 +30,12 @@ def read_cfour(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        if not element_Z in bs_data['elements']:
+        if element_Z not in bs_data['elements']:
             bs_data['elements'][element_Z] = {}
 
         element_data = bs_data['elements'][element_Z]
 
-        if not 'electron_shells' in element_data:
+        if 'electron_shells' not in element_data:
             element_data['electron_shells'] = []
 
         i += 2  # Skip comment line

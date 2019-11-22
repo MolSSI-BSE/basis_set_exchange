@@ -20,7 +20,7 @@ def elements_in_files(filelist):
     -------
     dict
         Keys are the file path, value is a compacted element string of
-        what elements are in that file 
+        what elements are in that file
     '''
 
     ret = {}
@@ -53,7 +53,7 @@ def component_file_refs(filelist):
         refdict = {}
         for el, eldata in filedata['elements'].items():
             refs = tuple(eldata['references'])
-            if not refs in refdict:
+            if refs not in refdict:
                 refdict[refs] = [el]
             else:
                 refdict[refs].append(el)

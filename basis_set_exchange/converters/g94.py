@@ -22,7 +22,7 @@ def _write_g94_common(basis, add_harm_type=True):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         for z in electron_elements:
             data = basis['elements'][z]
 
@@ -39,7 +39,7 @@ def _write_g94_common(basis, add_harm_type=True):
                 amchar = lut.amint_to_char(am, hij=True).upper()
 
                 harm = ''
-                if add_harm_type is True and shell['function_type'] == 'gto_cartesian':
+                if add_harm_type and shell['function_type'] == 'gto_cartesian':
                     harm = ' c'
                 s += '{}   {}   1.00{}\n'.format(amchar, nprim, harm)
 
@@ -49,7 +49,7 @@ def _write_g94_common(basis, add_harm_type=True):
             s += '****\n'
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n'
         for z in ecp_elements:
             data = basis['elements'][z]

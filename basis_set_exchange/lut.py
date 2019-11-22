@@ -276,7 +276,7 @@ def electron_shells_start(nelectrons, maxam=20):
     # yapf: disable
     # The usual filling order of electrons you learned in high school
     # Tuple of (am, nelec)
-    aminfo = ( (0, 2),                           # He       
+    aminfo = ( (0, 2),                           # He
                (0, 2), (1, 6),                   # Ne
                (0, 2), (1, 6),                   # Ar
                (0, 2), (2, 10), (1, 6),          # Kr

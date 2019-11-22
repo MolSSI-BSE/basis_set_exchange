@@ -2,11 +2,9 @@
 Test for duplicate data in a basis set
 '''
 
-import os
 import pytest
 import basis_set_exchange as bse
-from basis_set_exchange import curate
-from .common_testvars import bs_names_vers, test_data_dir, true_false
+from .common_testvars import bs_names_vers, true_false
 from .test_duplicate import _test_duplicates
 
 

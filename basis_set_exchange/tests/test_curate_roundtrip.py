@@ -35,7 +35,6 @@ def test_curate_roundtrip(tmp_path, basis, fmt):
         make_general = True
         uncontract_spdf = 0
 
-
     bse_formatted = api.get_basis(basis, fmt=fmt)
     bse_dict = api.get_basis(basis, uncontract_general=uncontract_general, make_general=make_general)
     bse_dict = manip.uncontract_spdf(bse_dict, uncontract_spdf)

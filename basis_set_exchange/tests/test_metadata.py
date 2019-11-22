@@ -2,7 +2,6 @@
 Tests for BSE metadata
 """
 
-import json
 import os
 import pytest
 import glob

@@ -31,7 +31,7 @@ def _validate_extra_component(bs_data):
 
     # Make sure size of the coefficient matrix matches the number of exponents
     for z, el in bs_data['elements'].items():
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
 
         for idx, s in enumerate(el['electron_shells']):

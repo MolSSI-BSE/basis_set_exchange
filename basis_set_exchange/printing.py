@@ -57,7 +57,7 @@ def write_matrix(mat, point_place, convert_exp=False):
             line += ' ' * sp + str(mat[r][c])
         lines += line + '\n'
 
-    if convert_exp is True:
+    if convert_exp:
         lines = lines.replace('e', 'D')
         lines = lines.replace('E', 'D')
 

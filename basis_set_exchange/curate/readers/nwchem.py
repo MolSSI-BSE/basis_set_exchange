@@ -35,9 +35,9 @@ def read_nwchem(basis_lines, fname):
                 element_Z = lut.element_Z_from_sym(elementsym)
                 element_Z = str(element_Z)
 
-                if not element_Z in bs_data['elements']:
+                if element_Z not in bs_data['elements']:
                     bs_data['elements'][element_Z] = {}
-                if not 'electron_shells' in bs_data['elements'][element_Z]:
+                if 'electron_shells' not in bs_data['elements'][element_Z]:
                     bs_data['elements'][element_Z]['electron_shells'] = []
 
                 element_data = bs_data['elements'][element_Z]
@@ -53,10 +53,7 @@ def read_nwchem(basis_lines, fname):
                 coefficients = []
 
                 i += 1
-                while True:
-                    if i >= len(basis_lines) or basis_lines[i][0].isalpha():
-                        break
-
+                while i < len(basis_lines) and not basis_lines[i][0].isalpha():
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()
@@ -85,9 +82,9 @@ def read_nwchem(basis_lines, fname):
                     element_Z = lut.element_Z_from_sym(elementsym)
                     element_Z = str(element_Z)
 
-                    if not element_Z in bs_data['elements']:
+                    if element_Z not in bs_data['elements']:
                         bs_data['elements'][element_Z] = {}
-                    if not 'ecp_electrons' in bs_data['elements'][element_Z]:
+                    if 'ecp_electrons' not in bs_data['elements'][element_Z]:
                         bs_data['elements'][element_Z]['ecp_electrons'] = n_elec
 
                     i += 1
@@ -106,9 +103,9 @@ def read_nwchem(basis_lines, fname):
                 element_Z = lut.element_Z_from_sym(elementsym)
                 element_Z = str(element_Z)
 
-                if not element_Z in bs_data['elements']:
+                if element_Z not in bs_data['elements']:
                     bs_data['elements'][element_Z] = {}
-                if not 'ecp_potentials' in bs_data['elements'][element_Z]:
+                if 'ecp_potentials' not in bs_data['elements'][element_Z]:
                     bs_data['elements'][element_Z]['ecp_potentials'] = []
                 element_data = bs_data['elements'][element_Z]
 
@@ -119,10 +116,7 @@ def read_nwchem(basis_lines, fname):
                 coefficients = []
 
                 i += 1
-                while True:
-                    if i >= len(basis_lines) or basis_lines[i][0].isalpha():
-                        break
-
+                while i < len(basis_lines) and not basis_lines[i][0].isalpha():
                     line = basis_lines[i].replace('D', 'E')
                     line = line.replace('d', 'E')
                     lsplt = line.split()
@@ -144,7 +138,7 @@ def read_nwchem(basis_lines, fname):
 
         # Fix ecp angular momentum now that everything has been read
         for el, v in bs_data['elements'].items():
-            if not 'ecp_potentials' in v:
+            if 'ecp_potentials' not in v:
                 continue
 
             max_ecp_am = -1

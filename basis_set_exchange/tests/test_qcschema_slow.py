@@ -4,17 +4,17 @@ Validation of bibtex output
 
 import pytest
 import json
-from basis_set_exchange import api,lut
+from basis_set_exchange import api, lut
 from .common_testvars import bs_names
 
 _has_qcschema = True
 try:
     import qcschema
-except:
+except ImportError:
     _has_qcschema = False
 
 # yapf: disable
-@pytest.mark.skipif(_has_qcschema is False, reason="QCSchema not available to test qcschema output")
+@pytest.mark.skipif(not _has_qcschema, reason="QCSchema not available to test qcschema output")
 @pytest.mark.parametrize('basis_name', bs_names)
 # yapf: enable
 def test_valid_qcschema_slow(basis_name):
@@ -24,7 +24,7 @@ def test_valid_qcschema_slow(basis_name):
 
     el_list = [lut.element_sym_from_Z(x, True) for x in basis_dict['elements'].keys()]
     coords = []
-    for idx,el in enumerate(el_list):
+    for idx, el in enumerate(el_list):
         coords.extend((0.0, 0.0, float(idx)))
 
     qcs_json['atom_map'] = list(qcs_json['center_data'].keys())
@@ -37,14 +37,14 @@ def test_valid_qcschema_slow(basis_name):
         "molecule": {
           "schema_name": "qcschema_molecule",
           "schema_version": 2,
-          "geometry": coords, 
+          "geometry": coords,
           "symbols": el_list
         },
         'driver': 'energy',
         'model': {
             'method': 'B3LYP',
             'basis': qcs_json
-        } 
+        }
     }
 
     qcschema.validate(dummy_inp, 'input')
