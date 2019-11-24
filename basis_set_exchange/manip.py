@@ -426,13 +426,22 @@ def optimize_general(basis, use_copy=True):
             # Find the corresponding rows that have a value in one of these columns
             # Note that at this stage, the row may have coefficients in more than one
             # column. That is what we are looking for
+
+            # Also, test to see that each row is only represented once. That is, there should be
+            # no rows that are part of single columns (this would represent duplicate shells).
+            # This can happen in poorly-formatted basis sets and is an error
             row_col_pairs = []
+            all_row_idx = []
             for col_idx in single_columns:
                 col = coefficients[col_idx]
                 for row_idx in range(nprim):
                     if float(col[row_idx]) != 0.0:
+                        if row_idx in all_row_idx:
+                            raise RuntimeError("Badly-formatted basis. Row {} makes duplicate shells")
+
                         # Store the index of the nonzero value in single_columns
                         row_col_pairs.append((row_idx, col_idx))
+                        all_row_idx.append(row_idx)
 
             # Now for each row/col pair, zero out the entire row
             # EXCEPT for the column that has the single value
@@ -440,4 +449,5 @@ def optimize_general(basis, use_copy=True):
                 for idx, col in enumerate(coefficients):
                     if float(col[row_idx]) != 0.0 and col_idx != idx:
                         col[row_idx] = '0.0000000E+00'
+
     return basis

@@ -61,6 +61,14 @@ def _validate_extra_component(bs_data):
             if len(exp1) != len(exp2):
                 raise RuntimeError("Element {} Shell {}: Exponents are not unique".format(z, idx))
 
+            # All columns of general contractions should be unique
+            # But only if this isn't a fused contraction (sp, spd)
+            if nam == 1:
+                coefs = [[float(x) for x in c] for c in s['coefficients']]
+                for c in coefs:
+                    if coefs.count(c) != 1:
+                        raise RuntimeError("Element {} Shell {}: Coefficient columns are not unique".format(z, idx))
+
 
 def _validate_extra_element(bs_data):
     '''Extra checks for basis metadata files'''
