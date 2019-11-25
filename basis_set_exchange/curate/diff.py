@@ -56,7 +56,7 @@ def diff_basis_dict(left_list, right_list):
         res = copy.deepcopy(bs1)
         for bs2 in right_list:
             for el in res['elements'].keys():
-                if not el in bs2['elements']:
+                if el not in bs2['elements']:
                     continue  # Element only exist in left
 
                 eldata1 = res['elements'][el]
@@ -67,7 +67,7 @@ def diff_basis_dict(left_list, right_list):
                 eldata1['electron_shells'] = subtract_electron_shells(s1, s2)
 
         # Remove any empty elements
-        res['elements'] = {k: v for k, v in res['elements'].items() if len(v['electron_shells']) > 0}
+        res['elements'] = {k: v for k, v in res['elements'].items() if v['electron_shells']}
         ret.append(res)
 
     return ret

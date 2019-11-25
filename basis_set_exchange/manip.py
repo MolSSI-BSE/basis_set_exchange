@@ -100,7 +100,7 @@ def prune_shell(shell, use_copy=True):
             if len(nonzero) > 1:
                 raise RuntimeError("Exponent {} is duplicated within a contraction".format(ex[0]))
 
-            if len(nonzero) == 0:
+            if not nonzero:
                 new_coeff_row.append(g[0])
             else:
                 new_coeff_row.append(nonzero[0])
@@ -135,7 +135,7 @@ def prune_basis(basis, use_copy=True):
         basis = copy.deepcopy(basis)
 
     for k, el in basis['elements'].items():
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
 
         shells = el.pop('electron_shells')
@@ -172,7 +172,7 @@ def uncontract_spdf(basis, max_am=0, use_copy=True):
 
     for k, el in basis['elements'].items():
 
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
         newshells = []
 
@@ -225,7 +225,7 @@ def uncontract_general(basis, use_copy=True):
 
     for k, el in basis['elements'].items():
 
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
 
         newshells = []
@@ -269,7 +269,7 @@ def uncontract_segmented(basis, use_copy=True):
 
     for k, el in basis['elements'].items():
 
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
 
         newshells = []
@@ -308,11 +308,11 @@ def make_general(basis, skip_spdf=False, use_copy=True):
     if use_copy:
         basis = copy.deepcopy(basis)
 
-    if skip_spdf is False:
+    if not skip_spdf:
         basis = uncontract_spdf(basis, 0, False)
 
     for k, el in basis['elements'].items():
-        if not 'electron_shells' in el:
+        if 'electron_shells' not in el:
             continue
 
         newshells = []
@@ -327,7 +327,7 @@ def make_general(basis, skip_spdf=False, use_copy=True):
                 newshells.append(sh)
                 continue
 
-            if not am in all_am:
+            if am not in all_am:
                 all_am.append(am)
 
         all_am = sorted(all_am)

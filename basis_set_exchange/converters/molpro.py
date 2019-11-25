@@ -22,7 +22,7 @@ def write_molpro(basis):
     # Elements for which we have ECP
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
-    if len(electron_elements) > 0:
+    if electron_elements:
         # basis set starts with a string
         s += 'basis={\n'
 
@@ -46,7 +46,7 @@ def write_molpro(basis):
         s += '}\n'
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += '\n\n! Effective core Potentials\n'
 
         for z in ecp_elements:

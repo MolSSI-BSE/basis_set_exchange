@@ -30,7 +30,7 @@ def _cli_check_format(fmt):
         return None
 
     fmt = fmt.lower()
-    if not fmt in api.get_formats():
+    if fmt not in api.get_formats():
         errstr = "Format '" + fmt + "' does not exist.\n"
         errstr += "For a complete list of formats, use the 'bse list-formats' command"
         raise RuntimeError(errstr)
@@ -45,7 +45,7 @@ def _cli_check_ref_format(fmt):
         return None
 
     fmt = fmt.lower()
-    if not fmt in api.get_reference_formats():
+    if fmt not in api.get_reference_formats():
         errstr = "Reference format '" + fmt + "' does not exist.\n"
         errstr += "For a complete list of formats, use the 'bse list-ref-formats' command"
         raise RuntimeError(errstr)
@@ -60,7 +60,7 @@ def _cli_check_role(role):
         return None
 
     role = role.lower()
-    if not role in api.get_roles():
+    if role not in api.get_roles():
         errstr = "Role format '" + role + "' does not exist.\n"
         errstr += "For a complete list of roles, use the 'bse list-roles' command"
         raise RuntimeError(errstr)
@@ -76,7 +76,7 @@ def _cli_check_basis(name, data_dir):
 
     name = misc.transform_basis_name(name)
     metadata = api.get_metadata(data_dir)
-    if not name in metadata:
+    if name not in metadata:
         errstr = "Basis set '" + name + "' does not exist.\n"
         errstr += "For a complete list of basis sets, use the 'bse list-basis-sets' command"
         raise RuntimeError(errstr)
@@ -91,7 +91,7 @@ def _cli_check_family(family, data_dir):
         return None
 
     family = family.lower()
-    if not family in api.get_families(data_dir):
+    if family not in api.get_families(data_dir):
         errstr = "Basis set family '" + family + "' does not exist.\n"
         errstr += "For a complete list of families, use the 'bse list-families' command"
         raise RuntimeError(errstr)
@@ -106,7 +106,7 @@ def _cli_check_readfmt(readfmt):
         return None
 
     readfmt = readfmt.lower()
-    if not readfmt in curate.get_reader_formats():
+    if readfmt not in curate.get_reader_formats():
         errstr = "Reader for file type '" + readfmt + "' does not exist.\n"
         errstr += "For a complete list of file types, use the 'bsecurate get-reader-formats' command"
         raise RuntimeError(errstr)

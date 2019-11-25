@@ -2,6 +2,7 @@
 Some common formatting functions, etc
 '''
 
+
 def format_columns(lines, prefix=''):
     '''
     Create a simple column output
@@ -19,7 +20,7 @@ def format_columns(lines, prefix=''):
     str
         Columnated output as one big string
     '''
-    if len(lines) == 0:
+    if not lines:
         return ''
 
     ncols = 0
@@ -38,5 +39,3 @@ def format_columns(lines, prefix=''):
     fmtstr = prefix + '  '.join(['{{:{x}}}'.format(x=x) for x in maxlen])
     fmtstr += '  {}'
     return [fmtstr.format(*l) for l in lines]
-
-

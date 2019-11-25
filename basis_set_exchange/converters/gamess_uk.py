@@ -23,7 +23,7 @@ def write_gamess_uk(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         # electronic part starts with $DATA
 
         for z in electron_elements:
@@ -50,7 +50,7 @@ def write_gamess_uk(basis):
                 s += printing.write_matrix([coefficients[0], exponents, *coefficients[1:]], point_places)
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         s += "\n\nEffective Core Potentials\n"
         s += "---------------------------\n"
 

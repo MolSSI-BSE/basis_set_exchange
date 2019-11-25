@@ -6,14 +6,13 @@ import os
 import zipfile
 import tarfile
 import pytest
-import shutil
-import glob
 
 import basis_set_exchange as bse
 from .common_testvars import fake_data_dir
 
 _bundle_types = bse.bundle.get_archive_types()
 _bundle_exts = [v['extension'] for v in _bundle_types.values()]
+
 
 def _extract_all(filepath, extract_dir):
     if filepath.endswith('.zip'):
@@ -46,9 +45,9 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
     # Start with all found in the data dir, and remove
     # each time we process one
     all_bs = []
-    for k,v in bse.get_metadata(data_dir).items():
+    for k, v in bse.get_metadata(data_dir).items():
         for ver in v['versions'].keys():
-            all_bs.append((k,ver))
+            all_bs.append((k, ver))
 
     all_ref = all_bs.copy()
 
@@ -58,15 +57,15 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
                 continue
 
             fpath = os.path.join(root, basename)
-            name,ver = basename.split('.')[:2]
+            name, ver = basename.split('.')[:2]
             tr_name = bse.misc.basis_name_from_filename(name)
 
             if basename.endswith('.ref' + ref_ext):
                 compare_data = bse.get_references(tr_name, fmt=reffmt, version=ver, data_dir=data_dir)
-                all_ref.remove((name,ver))
+                all_ref.remove((name, ver))
             elif basename.endswith(bs_ext):
                 compare_data = bse.get_basis(name, fmt=fmt, version=ver, data_dir=data_dir)
-                all_bs.remove((name,ver))
+                all_bs.remove((name, ver))
             elif basename.endswith('.family_notes'):
                 compare_data = bse.get_family_notes(name, data_dir)
             elif basename.endswith('.notes'):
@@ -87,4 +86,4 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
                                          ('psi4', 'txt')])
 # yapf: enable
 def test_bundles_fast(tmp_path, fmt, reffmt, ext):
-   _run_test_bundles(tmp_path, fmt, reffmt, ext, fake_data_dir)
+    _run_test_bundles(tmp_path, fmt, reffmt, ext, fake_data_dir)

@@ -23,13 +23,13 @@ def read_turbomole(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(elementsym)
         element_Z = str(element_Z)
 
-        if not element_Z in bs_data['elements']:
+        if element_Z not in bs_data['elements']:
             bs_data['elements'][element_Z] = {}
 
         element_data = bs_data['elements'][element_Z]
 
         if "ecp" in line.lower():
-            if not 'ecp_potentials' in element_data:
+            if 'ecp_potentials' not in element_data:
                 element_data['ecp_potentials'] = []
 
             i += 1
@@ -58,7 +58,7 @@ def read_turbomole(basis_lines, fname):
                 ecp_rexponents = []
                 ecp_coefficients = []
 
-                while i < len(basis_lines) and basis_lines[i][0].isalpha() is False:
+                while i < len(basis_lines) and not basis_lines[i][0].isalpha():
                     lsplt = basis_lines[i].split()
                     ecp_exponents.append(lsplt[2])
                     ecp_rexponents.append(int(lsplt[1]))
@@ -73,11 +73,11 @@ def read_turbomole(basis_lines, fname):
             element_data['ecp_electrons'] = n_elec
 
         else:
-            if not 'electron_shells' in element_data:
+            if 'electron_shells' not in element_data:
                 element_data['electron_shells'] = []
 
             i += 1
-            while i < len(basis_lines) and basis_lines[i][0].isalpha() == False:
+            while i < len(basis_lines) and not basis_lines[i][0].isalpha():
                 lsplt = basis_lines[i].split()
                 shell_am = lut.amchar_to_int(lsplt[1], hij=False)
                 nprim = int(lsplt[0])

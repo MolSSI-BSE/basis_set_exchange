@@ -219,7 +219,7 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
     print(" BIG difference: ", _print_list(big_diff))
     print()
 
-    return (len(not_in_bs1) == 0 and len(not_in_bs2) == 0 and len(some_diff) == 0 and len(big_diff) == 0)
+    return (not not_in_bs1 and not not_in_bs2 and not some_diff and not big_diff)
 
 
 def compare_basis_against_file(basis_name,

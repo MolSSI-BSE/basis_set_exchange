@@ -19,7 +19,7 @@ def write_cp2k(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     # Electron Basis
-    if len(electron_elements) > 0:
+    if electron_elements:
         for z in electron_elements:
             data = basis['elements'][z]
             sym = lut.element_sym_from_Z(z, normalize=True)
@@ -59,7 +59,7 @@ def write_cp2k(basis):
             s += '\n'
 
     # Write out ECP
-    if len(ecp_elements) > 0:
+    if ecp_elements:
         bsname = basis['name'].replace(' ', '_') + '_ECP'
         s += '\n\n## Effective core potentials\n'
         s += bsname + '\n'

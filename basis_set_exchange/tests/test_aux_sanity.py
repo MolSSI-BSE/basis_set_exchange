@@ -2,7 +2,6 @@
 Tests for sanity of auxiliary basis sets
 """
 
-import basis_set_exchange as bse
 import pytest
 
 from .common_testvars import bs_names, bs_metadata

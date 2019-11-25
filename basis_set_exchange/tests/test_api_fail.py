@@ -2,7 +2,6 @@
 Tests for the BSE main API
 """
 
-import random
 import pytest
 
 import basis_set_exchange as bse

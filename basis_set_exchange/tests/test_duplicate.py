@@ -6,7 +6,7 @@ import os
 import pytest
 import basis_set_exchange as bse
 from basis_set_exchange import curate
-from .common_testvars import bs_names_vers, test_data_dir, true_false
+from .common_testvars import bs_names_vers, test_data_dir
 
 
 def _test_duplicates(bs_dict, expected):

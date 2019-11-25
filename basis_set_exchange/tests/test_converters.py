@@ -2,12 +2,9 @@
 Tests for the BSE main API
 """
 
-import random
-
 import basis_set_exchange as bse
 import pytest
 
-from basis_set_exchange import lut
 from .common_testvars import bs_formats, ref_formats
 
 
