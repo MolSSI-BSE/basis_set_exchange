@@ -36,7 +36,7 @@ Laboratory (https://www.emsl.pnl.gov)
 
 When publishing results obtained from use of the Basis Set Exchange software, please cite:
 
- * *A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community* Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus *J. Chem. Inf. Model.* **2019**, doi: [10.1021/acs.jcim.9b00725](https://doi.org/10.1021/acs.jcim.9b00725)
+ * *A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community* Benjamin P. Pritchard, Doaa Altarawy, Brett Didier, Tara D. Gibson, and Theresa L. Windus *J. Chem. Inf. Model.* **2019**, 59(11), 4814-4820 doi:[10.1021/acs.jcim.9b00725](https://doi.org/10.1021/acs.jcim.9b00725)
 
 For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following references:
 
