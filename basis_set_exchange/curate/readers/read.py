@@ -71,7 +71,8 @@ def _fix_uncontracted(basis):
     return basis
 
 
-def read_formatted_basis(file_path, file_type=None, encoding='utf-8'):
+def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig'):
+    # Note that the default is utf-8-sig, which handles the optional byte order mark
 
     if not os.path.isfile(file_path):
         raise RuntimeError('Basis file path \'{}\' does not exist'.format(file_path))
