@@ -9,7 +9,18 @@ def write_turbomole(basis):
     '''Converts a basis set to Gaussian format
     '''
 
+    # The role of the basis set determines what is put here
+    role = basis.get('role', 'orbital')
+
+    # By default, we will just use '$basis', unless otherwise specified
     s = '$basis\n'
+    if role == 'jfit':
+        s = '$jbas\n'
+    elif role == 'jkfit':
+        s = '$jkbas\n'
+    elif role == 'rifit':
+        s = '$cbas\n'
+
     s += '*\n'
 
     # TM basis sets are completely uncontracted
