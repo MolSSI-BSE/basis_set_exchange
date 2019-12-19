@@ -144,13 +144,18 @@ def element_name_from_Z(Z, normalize=False):
         return r
 
 
-def element_Z_from_name(name):
+def element_Z_from_name(name, as_str=False):
     '''Obtain an element's Z number given its name
+
+    If as_str is True, then a string is returned (ie, '1' for Hydrogen)
 
     An exception is thrown if the name is not found
     '''
 
-    return element_data_from_name(name)[1]
+    Z = element_data_from_name(name)[1]
+    if as_str:
+        Z = str(Z)
+    return Z
 
 
 def element_sym_from_Z(Z, normalize=False):
@@ -168,13 +173,18 @@ def element_sym_from_Z(Z, normalize=False):
         return r
 
 
-def element_Z_from_sym(sym):
+def element_Z_from_sym(sym, as_str=False):
     '''Obtain an element's Z-number given its symbol
+
+    If as_str is True, then a string is returned (ie, '1' for Hydrogen)
 
     An exception is thrown if the symbol is not found
     '''
 
-    return element_data_from_sym(sym)[1]
+    Z = element_data_from_sym(sym)[1]
+    if as_str:
+        Z = str(Z)
+    return Z
 
 
 def amint_to_char(am, hij=False, use_L=False):
