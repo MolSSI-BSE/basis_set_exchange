@@ -13,6 +13,12 @@ def _Z_from_str(s):
         return lut.element_Z_from_sym(s)
 
 
+def transpose_matrix(mat):
+    '''Transposes a matrix (list of lists) commonly done do coefficients'''
+
+    return list(map(list, zip(*mat)))
+
+
 def contraction_string(element):
     """
     Forms a string specifying the contractions for an element
