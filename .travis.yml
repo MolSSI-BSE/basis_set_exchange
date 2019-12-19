@@ -7,7 +7,7 @@ matrix:
     - python: 3.5
     - python: 3.6
     - python: 3.7
-      dist: xenial
+    - python: 3.8
       after_success:
         - cd /tmp && codecov
 
@@ -28,6 +28,8 @@ script:
   - pytest --pyargs --cov=basis_set_exchange basis_set_exchange
   - bse -V # Quick test of the cli
   - cd ${OLDDIR}/doc
+  - ln -s ${OLDDIR}/basis_set_exchange/tests/fakedata ${HOME}/my_data_dir # Used for making docs
+  - mkdir _static
   - make doctest
   - make html
 
