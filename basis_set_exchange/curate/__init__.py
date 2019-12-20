@@ -2,8 +2,6 @@
 Functions for helping curate BSE basis set data
 '''
 
-from .skel import create_skel
-from .readers import read_formatted_basis, get_reader_formats
 from .metadata import create_metadata_file
 from .add_basis import add_basis, add_from_components
 from .compare_report import basis_comparison_report, compare_basis_against_file, compare_basis_files, compare_basis_sets, shells_difference, potentials_difference

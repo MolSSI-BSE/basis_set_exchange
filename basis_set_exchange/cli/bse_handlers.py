@@ -2,8 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import api
-from .. import bundle
+from .. import api, bundle, readers, writers, refconverters
 from ..misc import compact_elements
 from .common import format_columns
 
@@ -26,9 +25,9 @@ def _bse_cli_list_families(args):
     return '\n'.join(families)
 
 
-def _bse_cli_list_formats(args):
-    '''Handles the list-formats subcommand'''
-    all_formats = api.get_formats()
+def _bse_cli_list_writer_formats(args):
+    '''Handles the list-writer-formats subcommand'''
+    all_formats = writers.get_writer_formats()
 
     if args.no_description:
         liststr = all_formats.keys()
@@ -38,9 +37,31 @@ def _bse_cli_list_formats(args):
     return '\n'.join(sorted(liststr))
 
 
+def _bse_cli_list_reader_formats(args):
+    all_formats = readers.get_reader_formats()
+
+    if args.no_description:
+        liststr = all_formats.keys()
+    else:
+        liststr = format_columns(all_formats.items())
+
+    return '\n'.join(liststr)
+
+
+def _bse_cli_list_formats(args):
+    all_formats = api.get_formats()
+
+    if args.no_description:
+        liststr = all_formats.keys()
+    else:
+        liststr = format_columns(all_formats.items())
+
+    return '\n'.join(liststr)
+
+
 def _bse_cli_list_ref_formats(args):
     '''Handles the list-ref-formats subcommand'''
-    all_refformats = api.get_reference_formats()
+    all_refformats = refconverters.get_reference_formats()
 
     if args.no_description:
         liststr = all_refformats.keys()
@@ -173,7 +194,9 @@ def _bse_cli_create_bundle(args):
 
 def bse_cli_handle_subcmd(args):
     handler_map = {
-        'list-formats': _bse_cli_list_formats,
+        'list-formats': _bse_cli_list_writer_formats,
+        'list-writer-formats': _bse_cli_list_writer_formats,
+        'list-reader-formats': _bse_cli_list_reader_formats,
         'list-ref-formats': _bse_cli_list_ref_formats,
         'list-roles': _bse_cli_list_roles,
         'get-data-dir': _bse_cli_get_data_dir,

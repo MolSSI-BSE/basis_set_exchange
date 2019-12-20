@@ -6,19 +6,6 @@ from .. import curate, printing, fileio
 from .common import format_columns
 
 
-def _bsecurate_cli_get_reader_formats(args):
-    '''Handles the get-file-types subcommand'''
-
-    all_formats = curate.get_reader_formats()
-
-    if args.no_description:
-        liststr = all_formats.keys()
-    else:
-        liststr = format_columns(all_formats.items())
-
-    return '\n'.join(liststr)
-
-
 def _bsecurate_cli_elements_in_files(args):
     '''Handles the elements-in-files subcommand'''
     data = curate.elements_in_files(args.files)
@@ -91,7 +78,6 @@ def _bsecurate_cli_make_graph_file(args):
 
 def bsecurate_cli_handle_subcmd(args):
     handler_map = {
-        'get-reader-formats': _bsecurate_cli_get_reader_formats,
         'elements-in-files': _bsecurate_cli_elements_in_files,
         'component-file-refs': _bsecurate_cli_component_file_refs,
         'print-component-file': _bsecurate_cli_print_component_file,

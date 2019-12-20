@@ -1,8 +1,6 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut, misc
 from . import helpers
-from ...misc import transpose_matrix
 from .turbomole import _parse_ecp_potential_lines
 
 element_block_re = re.compile(r'^([a-zA-Z]{1,3}):(.*)$')
@@ -56,7 +54,7 @@ def _parse_electron_lines(basis_lines, bs_data):
         basis_lines = helpers.remove_expected_line(basis_lines)
 
         coefficients, basis_lines = helpers.parse_fixed_matrix(basis_lines, nprim, ngen)
-        coefficients = transpose_matrix(coefficients)
+        coefficients = misc.transpose_matrix(coefficients)
 
         shell = {
             'function_type': func_type,
@@ -114,7 +112,7 @@ def read_genbas(basis_lines, fname):
     # Leave strip_end_blanks to True though
     basis_lines = helpers.prune_lines(basis_lines, '!#', prune_blank=False)
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # split into element blocks
     # each block may be electron shells or ECP

@@ -66,12 +66,11 @@ def convert_references(ref_data, fmt):
     return ret_str
 
 
-def get_formats():
-    '''
-    Returns the available reference formats mapped to display name.
+def get_reference_formats():
+    '''Return information about the reference/citation formats available
 
-    This is returned as an ordered dictionary, with the most common
-    at the top, followed by the rest in alphabetical order
+    The returned data is a map of format to display name. The format
+    can be passed as the fmt argument to :func:`get_references`
     '''
 
     return {k: v['display'] for k, v in _converter_map.items()}

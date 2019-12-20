@@ -34,7 +34,15 @@ def run_bse_cli():
     # Listing of data-independent info
     ########################################
     # list-formats subcommand
-    subp = subparsers.add_parser('list-formats', help='Output a list all available basis set formats and descriptions')
+    subp = subparsers.add_parser('list-formats', help='Output a list of basis set formats that can be used with obtaining a basis set')
+    subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
+
+    # list-writer-formats subcommand
+    subp = subparsers.add_parser('list-writer-formats', help='Output a list available basis set formats that can be written')
+    subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
+
+    # list-reader-formats
+    subp = subparsers.add_parser('list-reader-formats', help='Output a list of basis set formats that can be read')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
 
     # list-ref-formats subcommand

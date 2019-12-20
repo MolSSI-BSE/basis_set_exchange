@@ -5,7 +5,7 @@ Tests BSE curation functions
 import os
 import pytest
 
-from basis_set_exchange import api, curate, manip, sort
+from basis_set_exchange import api, readers, curate, manip, sort
 from .common_testvars import bs_names_sample
 
 # NOTE: CFour reader does not currently support ECP
@@ -43,7 +43,7 @@ def test_curate_roundtrip(tmp_path, basis, fmt):
     with open(outfile_path, 'w', encoding='utf-8') as outfile:
         outfile.write(bse_formatted)
 
-    test_dict = curate.read_formatted_basis(outfile_path, fmt)
+    test_dict = readers.read_formatted_basis(outfile_path, fmt)
 
     test_dict = sort.sort_basis(test_dict)
     bse_dict = sort.sort_basis(bse_dict)

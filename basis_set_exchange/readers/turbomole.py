@@ -1,6 +1,5 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut
 from . import helpers
 
 section_re = re.compile(r'^\$(basis|ecp|cbas|jbas|jkbas)$')
@@ -169,7 +168,7 @@ def read_turbomole(basis_lines, fname):
     if basis_lines and basis_lines[-1] != '$end':
         raise RuntimeError("Last line of basis is not $end. Line: " + basis_lines[-1])
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # Split into basis and ecp
     # Just split based on lines beginning with $

@@ -1,6 +1,5 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut
 from . import helpers
 
 element_entry_re = re.compile(r'^([a-zA-Z]{1,3}):(.*):(.*)$')
@@ -19,7 +18,7 @@ def read_gbasis(basis_lines, fname):
 
     basis_lines = helpers.prune_lines(basis_lines, '!#')
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # The file just contains sections separated headed by
     # a line looking like "Al:aug-cc-pV5+dZ:(21s13p6d4f3g2h) -> [8s7p6d4f3g2h]"

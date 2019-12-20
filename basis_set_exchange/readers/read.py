@@ -4,6 +4,7 @@ Read a basis set file in a given format
 
 import os
 import bz2
+from ..skel import create_skel
 from .turbomole import read_turbomole
 from .g94 import read_g94
 from .nwchem import read_nwchem
@@ -108,7 +109,11 @@ def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig'):
         with open(file_path, 'r', encoding=encoding) as f:
             basis_lines = [l.strip() for l in f.readlines()]
 
-    data = _type_readers[file_type]['reader'](basis_lines, fname)
+    element_data = _type_readers[file_type]['reader'](basis_lines, fname)
+
+    # the readers give the 'elements' member of a basis set json
+    data = create_skel('component')
+    data['elements'] = element_data
 
     # It's debateable if I want to do this
     #return _fix_uncontracted(data)
@@ -118,10 +123,9 @@ def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig'):
 
 def get_reader_formats():
     '''
-    Returns the available formats mapped to display name.
+    Returns the basis set formats that can be read by this library.
 
-    This is returned as an ordered dictionary, with the most common
-    at the top, followed by the rest in alphabetical order
+    This is returned as an ordered dictionary of key to display name.
     '''
 
     return {k: v['display'] for k, v in _type_readers.items()}

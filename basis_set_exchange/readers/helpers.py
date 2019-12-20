@@ -3,7 +3,7 @@ Some helper functions for parsing basis set files
 '''
 
 import re
-from ...misc import transpose_matrix
+from ..misc import transpose_matrix
 
 floating_re_str = r'[-+]?\d*\.\d*(?:[dDeE][-+]?\d+)?'
 floating_re = re.compile(floating_re_str)
@@ -64,10 +64,10 @@ def chunk_list(lst, rows, cols):
     '''Turns a list into a matrix of the given dimensions'''
 
     n_elements = len(lst)
-    if n_elements != rows*cols:
+    if n_elements != rows * cols:
         raise RuntimeError("Cannot partition {} elements into a {}x{} matrix".format(n_elements, rows, cols))
 
-    mat = [lst[i:i+cols] for i in range(0, n_elements, cols)]
+    mat = [lst[i:i + cols] for i in range(0, n_elements, cols)]
     assert len(mat) == rows
     return mat
 
@@ -97,17 +97,17 @@ def create_element_data(bs_data, element_Z, key, key_exist_ok=False, element_exi
     Note that bs_data is modified!
     '''
 
-    if element_Z not in bs_data['elements']:
-        bs_data['elements'][element_Z] = {}
+    if element_Z not in bs_data:
+        bs_data[element_Z] = {}
     elif not element_exist_ok:
         raise RuntimeError("Element {} already exists in basis data".format(element_Z))
 
-    if key not in bs_data['elements'][element_Z]:
-        bs_data['elements'][element_Z][key] = create()
+    if key not in bs_data[element_Z]:
+        bs_data[element_Z][key] = create()
     elif not key_exist_ok:
         raise RuntimeError("Key {} already exists in basis data for element {}".format(key, element_Z))
 
-    return bs_data['elements'][element_Z]
+    return bs_data[element_Z]
 
 
 def parse_line_regex(rex, line, description=None, convert_int=True):

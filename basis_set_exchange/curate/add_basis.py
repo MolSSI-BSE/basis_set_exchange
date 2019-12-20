@@ -7,8 +7,8 @@ import datetime
 from ..fileio import read_json_basis, write_json_basis
 from ..misc import expand_elements
 from ..validator import validate_data
-from .skel import create_skel
-from .readers import read_formatted_basis
+from ..skel import create_skel
+from ..readers import read_formatted_basis
 from .metadata import create_metadata_file
 
 

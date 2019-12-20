@@ -30,7 +30,7 @@ def _run_test_bundles(tmp_path, fmt, reffmt, ext, data_dir):
 
     tmp_path = str(tmp_path)  # Needed for python 3.5
 
-    bs_ext = bse.converters.get_format_extension(fmt)
+    bs_ext = bse.writers.get_format_extension(fmt)
     ref_ext = bse.refconverters.get_format_extension(reffmt)
 
     filename = "bundletest_" + fmt + "_" + reffmt + ext

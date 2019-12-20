@@ -1,18 +1,25 @@
 '''
-Main interface to Basis Set Exchange functionality
+Main interface to Basis Set Exchange internal basis sets
+
+This module contains the interface for getting basis set data
+and references from the internal data store of basis sets. As much
+as possible, this is being kept separate from the typical reading/writing
+functionality of the library.
 '''
 
 import os
 import textwrap
+import warnings
 
 from . import compose
-from . import converters
+from . import writers
 from . import fileio
 from . import manip
 from . import memo
 from . import notes
 from . import refconverters
 from . import references
+from . import readers
 from . import misc
 from . import lut
 from ._version import get_versions
@@ -33,8 +40,6 @@ _default_schema_dir = os.path.join(_my_dir, 'schema')
 
 # Main URL of the project
 _main_url = 'https://www.basissetexchange.org'
-
-# Reference for the BSE
 
 
 def _get_basis_metadata(name, data_dir):
@@ -243,7 +248,7 @@ def get_basis(name,
     else:
         header_str = None
 
-    return converters.convert_basis(basis_dict, fmt, header_str)
+    return writers.write_formatted_basis(basis_dict, fmt, header_str)
 
 
 def lookup_basis_by_role(primary_basis, role, data_dir=None):
@@ -590,7 +595,13 @@ def get_formats(function_types=None):
     supporting the given function types will be returned.
     '''
 
-    return converters.get_formats(function_types)
+    #####################################################################################
+    # This function is being kept for two reasons. One, for backwards compatibility.
+    # Two, the idea is that this module deals exclusively with obtaining data
+    # from the internal basis set files, and we want to know what format we can
+    # get them in. So it is semantically clear what get_formats means in that context.
+    #####################################################################################
+    return writers.get_writer_formats(function_types)
 
 
 def get_reference_formats():
@@ -599,7 +610,7 @@ def get_reference_formats():
     The returned data is a map of format to display name. The format
     can be passed as the fmt argument to :func:`get_references`
     '''
-    return refconverters.get_formats()
+    return refconverters.get_reference_formats()
 
 
 def get_roles():

@@ -1,6 +1,5 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut
 from . import helpers
 
 element_re = re.compile(r'^-?([A-Za-z]{1,3})(?:\s+0)?$')
@@ -173,7 +172,7 @@ def read_g94(basis_lines, fname):
     # Removes comments
     basis_lines = helpers.prune_lines(basis_lines, '!')
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # Empty file?
     if not basis_lines:

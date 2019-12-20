@@ -1,6 +1,5 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut
 from . import helpers
 from .nwchem import _parse_ecp_lines
 
@@ -126,7 +125,7 @@ def read_dalton(basis_lines, fname):
     # But we still prune blank lines
     basis_lines = helpers.prune_lines(basis_lines)
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # Skip forward until either:
     # 1. Line begins with 'a'

@@ -14,10 +14,14 @@ if sys.version_info < (3, 0):
 # Just import the basic user API
 from .api import (get_basis, lookup_basis_by_role, get_metadata, get_reference_data, get_all_basis_names,
                   get_references, get_basis_family, filter_basis_sets, get_families, get_family_notes, get_basis_notes,
-                  has_basis_notes, has_family_notes, get_schema, get_formats, get_reference_formats, get_roles,
+                  has_basis_notes, has_family_notes, get_schema, get_roles, get_formats,
                   version, get_data_dir)
+
+from .readers import read_formatted_basis, get_reader_formats
+from .writers import write_formatted_basis, get_writer_formats
+from .refconverters import get_reference_formats
+
 from .bundle import create_bundle, get_archive_types
-from .printing import electron_shell_str, ecp_pot_str, element_data_str, component_basis_str
 
 # Handle versioneer
 from ._version import get_versions

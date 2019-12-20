@@ -1,6 +1,5 @@
 import re
-from ... import lut
-from ..skel import create_skel
+from .. import lut
 from . import helpers
 
 am_line_re = re.compile(r'^([A-Za-z]+)\s+([A-Za-z]+)$')
@@ -99,7 +98,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
 
     # Fix ecp angular momentum now that everything has been read
     # Specifically, we can set the 'ul' potential to be the max am + 1
-    for el, v in bs_data['elements'].items():
+    for el, v in bs_data.items():
         if 'ecp_potentials' not in v:
             continue
 
@@ -114,7 +113,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
                 s['angular_momentum'] = [max_ecp_am + 1]
 
     # Make sure the number of electrons replaced by the ECP was specified for all elements
-    for el, v in bs_data['elements'].items():
+    for el, v in bs_data.items():
         if 'ecp_potentials' in v and 'ecp_electrons' not in v:
             raise RuntimeError("Number of ECP electrons not specified for element {}".format(el))
 
@@ -129,7 +128,7 @@ def read_nwchem(basis_lines, fname):
 
     basis_lines = helpers.prune_lines(basis_lines, '#')
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # split into basis and ecp
     basis_sections = helpers.partition_lines(basis_lines,

@@ -6,7 +6,7 @@ import bz2
 import os
 import pytest
 
-from basis_set_exchange import curate
+from basis_set_exchange import readers
 from .common_testvars import reader_test_data_dir
 
 subdirs = [x for x in os.listdir(reader_test_data_dir)]
@@ -35,9 +35,9 @@ def test_reader(file_rel_path):
         match = match[8:].strip()
 
         with pytest.raises(Exception, match=match):
-            curate.read_formatted_basis(file_path)
+            readers.read_formatted_basis(file_path)
     else:
-        curate.read_formatted_basis(file_path)
+        readers.read_formatted_basis(file_path)
 
 
 def test_reader_equivalent():
@@ -45,7 +45,7 @@ def test_reader_equivalent():
     # format.
     file1 = os.path.join(reader_test_data_dir, 'dalton', '6-31g.good.1.mol.bz2')
     file2 = os.path.join(reader_test_data_dir, 'dalton', '6-31g.good.2.mol.bz2')
-    data1 = curate.read_formatted_basis(file1)
-    data2 = curate.read_formatted_basis(file2)
+    data1 = readers.read_formatted_basis(file1)
+    data2 = readers.read_formatted_basis(file2)
 
     assert data1 == data2

@@ -18,7 +18,7 @@ def _test_cli_cmd(cmd):
 
 
 bse_cmds = [
-    '-V', '-h', '--help', 'list-formats', 'list-ref-formats', 'list-roles', 'get-data-dir', 'list-basis-sets',
+    '-V', '-h', '--help', 'list-formats', 'list-reader-formats', 'list-ref-formats', 'list-roles', 'get-data-dir', 'list-basis-sets',
     'list-basis-sets -s sto', 'list-basis-sets -f duNNing', 'list-basis-sets -r orbiTAL -f ahlrichs',
     'list-basis-sets -e cn-OG', 'list-families', 'lookup-by-role def2-tzVp riFit', 'get-basis sto-3g nwchem',
     'get-basis cc-pvtz psi4 --elements=1-10', 'get-basis def2-tzvp turbomole --elements=H-9,11-Ar,cO',

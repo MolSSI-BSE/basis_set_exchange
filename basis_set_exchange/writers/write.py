@@ -22,7 +22,7 @@ from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
 from .bdf import write_bdf
 
-_converter_map = {
+_writer_map = {
     'nwchem': {
         'display': 'NWChem',
         'extension': '.nw',
@@ -173,31 +173,31 @@ _converter_map = {
 }
 
 
-def convert_basis(basis_dict, fmt, header=None):
+def write_formatted_basis(basis_dict, fmt, header=None):
     '''
     Returns the basis set data as a string representing
     the data in the specified output format
     '''
 
-    # make converters case insensitive
+    # make writers case insensitive
     fmt = fmt.lower()
-    if fmt not in _converter_map:
+    if fmt not in _writer_map:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
-    converter = _converter_map[fmt]
+    writer = _writer_map[fmt]
 
-    # Determine if the converter supports all the types in the basis_dict
-    if converter['valid'] is not None:
+    # Determine if the writer supports all the types in the basis_dict
+    if writer['valid'] is not None:
         ftypes = set(basis_dict['function_types'])
-        if not ftypes <= converter['valid']:
+        if not ftypes <= writer['valid']:
             raise RuntimeError('Converter {} does not support all function types: {}'.format(fmt, str(ftypes)))
 
     # Actually do the conversion
-    ret_str = converter['function'](basis_dict)
+    ret_str = writer['function'](basis_dict)
 
     # Don't add a header for QCSchema, JSON, etc
-    if header is not None and _converter_map[fmt]['comment'] is not None:
-        comment_str = _converter_map[fmt]['comment']
+    if header is not None and _writer_map[fmt]['comment'] is not None:
+        comment_str = _writer_map[fmt]['comment']
         header_str = comment_str + comment_str.join(header.splitlines(True))
         ret_str = header_str + '\n\n' + ret_str
 
@@ -211,25 +211,24 @@ def convert_basis(basis_dict, fmt, header=None):
     return ret_str
 
 
-def get_formats(function_types=None):
-    '''
-    Returns the available formats mapped to display name.
+def get_writer_formats(function_types=None):
+    '''Return information about the basis set formats available for writing
 
-    This is returned as an ordered dictionary, with the most common
-    at the top, followed by the rest in alphabetical order
+    The returned data is a map of format to display name. The format
+    can be passed as the fmt argument to :func:`write_formatted_basis`
 
     If a list is specified for function_types, only those formats
     supporting the given function types will be returned.
     '''
 
     if function_types is None:
-        return {k: v['display'] for k, v in _converter_map.items()}
+        return {k: v['display'] for k, v in _writer_map.items()}
 
     ftypes = [x.lower() for x in function_types]
     ftypes = set(ftypes)
     ret = []
 
-    for fmt, v in _converter_map.items():
+    for fmt, v in _writer_map.items():
         if v['valid'] is None or ftypes <= v['valid']:
             ret.append(fmt)
     return ret
@@ -244,7 +243,7 @@ def get_format_extension(fmt):
         return 'dict'
 
     fmt = fmt.lower()
-    if fmt not in _converter_map:
+    if fmt not in _writer_map:
         raise RuntimeError('Unknown basis set format "{}"'.format(fmt))
 
-    return _converter_map[fmt]['extension']
+    return _writer_map[fmt]['extension']

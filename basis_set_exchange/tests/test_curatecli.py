@@ -28,8 +28,7 @@ test_files2 = [os.path.join(data_dir, x) for x in test_files2]
 bsecurate_cmds = [
     '-V', '-h', '--help',
     'elements-in-files ' + ' '.join(test_files1),
-    'component-file-refs ' + ' '.join(test_files2),
-    'get-reader-formats'
+    'component-file-refs ' + ' '.join(test_files2)
 ]
 
 fakebsecurate_cmds = [

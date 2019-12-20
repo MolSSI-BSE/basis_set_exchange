@@ -1,6 +1,5 @@
 import re
-from ... import lut, misc
-from ..skel import create_skel
+from .. import lut, misc
 from . import helpers
 
 element_head_re = re.compile(r'^/([a-zA-Z]{1,3})\.(?:ECP\.)?([^.]+)\..*$')
@@ -85,13 +84,14 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
         if n_coefs == 0:
             raise RuntimeError("Have zero coefficients?")
         if n_coefs % nprim != 0:
-            raise RuntimeError("Number of coefficients is not a multiple of nprim: {} % {} = {}".format(n_coefs, nprim, n_coefs % nprim))
-        
+            raise RuntimeError("Number of coefficients is not a multiple of nprim: {} % {} = {}".format(
+                n_coefs, nprim, n_coefs % nprim))
+
         # If we do actually have the number of general contractions, does it match?
-        if ngen is not None and ngen != n_coefs//nprim:
-            raise RuntimeError("Expected {} general contractions, but found {}".format(ngen, n_coefs//nprim))
+        if ngen is not None and ngen != n_coefs // nprim:
+            raise RuntimeError("Expected {} general contractions, but found {}".format(ngen, n_coefs // nprim))
         else:
-            ngen = n_coefs//nprim
+            ngen = n_coefs // nprim
 
         # Turn the coefficients into a matrix
         coefficients = helpers.chunk_list(coefficients, nprim, ngen)
@@ -177,7 +177,7 @@ def read_molcas(basis_lines, fname):
 
     basis_lines = helpers.prune_lines(basis_lines, '*#$')
 
-    bs_data = create_skel('component')
+    bs_data = {}
 
     # Split into elements. Every start of an element is /
     element_blocks = helpers.partition_lines(basis_lines, lambda x: x.startswith('/'), min_size=4)

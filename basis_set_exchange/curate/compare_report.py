@@ -6,7 +6,7 @@ from ..api import get_basis
 from ..misc import compact_elements
 from ..sort import sort_shells, sort_potentials
 from .. import manip
-from .readers import read_formatted_basis
+from ..readers import read_formatted_basis
 from .compare import _reldiff
 
 

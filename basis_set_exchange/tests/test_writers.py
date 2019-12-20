@@ -12,7 +12,7 @@ from .common_testvars import bs_formats, ref_formats
 def test_get_format_extensions(fmt):
     """For all basis set formats, get the extension
     """
-    bse.converters.get_format_extension(fmt)
+    bse.writers.get_format_extension(fmt)
 
 
 @pytest.mark.parametrize('fmt', ref_formats)

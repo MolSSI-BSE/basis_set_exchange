@@ -5,7 +5,7 @@ Test for duplicate data in a basis set
 import os
 import pytest
 import basis_set_exchange as bse
-from basis_set_exchange import curate
+from basis_set_exchange import readers
 from .common_testvars import bs_names_vers, curate_test_data_dir
 
 
@@ -51,5 +51,5 @@ def test_duplicate_data(bs_name, bs_ver):
 @pytest.mark.parametrize('filename', ['6-31g-bse-DUPE.nw.bz2', 'def2-ecp-DUPE.nw.bz2'])
 def test_duplicate_fail(filename):
     filepath = os.path.join(curate_test_data_dir, filename)
-    filedata = curate.read_formatted_basis(filepath, 'nwchem')
+    filedata = readers.read_formatted_basis(filepath, 'nwchem')
     _test_duplicates(filedata, True)

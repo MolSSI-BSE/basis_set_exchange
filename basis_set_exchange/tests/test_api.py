@@ -159,3 +159,8 @@ def test_get_formats(fmts):
 
     # JSON is always supported
     assert len(ret) > 1
+
+
+def test_get_reader_formats():
+    '''Test the get_reader_formats function'''
+    bse.get_reference_formats()

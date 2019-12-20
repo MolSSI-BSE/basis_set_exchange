@@ -8,7 +8,7 @@ import zipfile
 import tarfile
 import io
 import datetime
-from . import api, converters, refconverters, misc
+from . import api, writers, refconverters, misc
 
 _readme_str = '''Basis set exchange: Basis set bundle
 ==========================================
@@ -128,7 +128,7 @@ def _bundle_generic(bfile, addhelper, fmt, reffmt, data_dir):
     None
     '''
 
-    ext = converters.get_format_extension(fmt)
+    ext = writers.get_format_extension(fmt)
     refext = refconverters.get_format_extension(reffmt)
     subdir = 'basis_set_bundle-' + fmt + '-' + reffmt
 

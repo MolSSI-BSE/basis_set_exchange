@@ -6,7 +6,7 @@ import os
 import pytest
 import shutil
 
-from basis_set_exchange import api, curate, fileio
+from basis_set_exchange import api, curate, readers, fileio
 from .common_testvars import data_dir, curate_test_data_dir
 
 
@@ -146,7 +146,7 @@ def test_g94_scaling(tmp_path):
     file1 = os.path.join(curate_test_data_dir, filename1)
     file2 = os.path.join(curate_test_data_dir, filename2)
 
-    bs1 = curate.read_formatted_basis(file1)
-    bs2 = curate.read_formatted_basis(file2)
+    bs1 = readers.read_formatted_basis(file1)
+    bs2 = readers.read_formatted_basis(file2)
 
     assert curate.compare_basis(bs1, bs2, rel_tol=1.0e-14)
