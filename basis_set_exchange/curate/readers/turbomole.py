@@ -1,5 +1,156 @@
+import re
 from ... import lut
 from ..skel import create_skel
+from . import helpers
+
+section_re = re.compile(r'^\$(basis|ecp|cbas|jbas|jkbas)$')
+element_re = re.compile(r'^([a-zA-Z]{1,3})\s+(.*)$')
+shell_re = re.compile(r'^(\d+) +([a-zA-Z])$')
+ecp_info_re = re.compile(r'^ncore\s*=\s*(\d+)\s+lmax\s*=\s*(\d+)$', flags=re.IGNORECASE)
+ecp_pot_am_re = re.compile(r'^([a-z])(-[a-z])?$')
+
+
+def _parse_electron_lines(basis_lines, bs_data):
+    # Strip all lines beginning with $
+    basis_lines = helpers.prune_lines(basis_lines, '$')
+
+    # Last line should be *
+    # We don't need it
+    if basis_lines[-1] != '*':
+        raise RuntimeError("Missing terminating * line")
+    basis_lines.pop()
+
+    # Partition based on lines beginning with a character
+    element_blocks = helpers.partition_lines(basis_lines, element_re.match, before=1, min_size=4)
+
+    # Element lines should be surrounded by *
+    # Check all first. the partition_lines above will eat part of the previous
+    # element if the * is missing
+    for element_lines in element_blocks:
+        if element_lines[0] != '*':
+            raise RuntimeError("Element line not preceded by *")
+        if element_lines[2] != '*':
+            raise RuntimeError("Element line not followed by *")
+
+        # Check for any other lines starting with *
+        for line in element_lines[3:]:
+            if line.startswith('*'):
+                raise RuntimeError("Found line starting with * that probably doesn't belong: " + line)
+
+    # Now process them all
+    for element_lines in element_blocks:
+        element_sym, _ = helpers.parse_line_regex(element_re, element_lines[1], 'Element line')
+
+        element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
+        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+
+        # Partition into shells
+        shell_blocks = helpers.partition_lines(element_lines[3:], shell_re.match, min_size=2)
+
+        for sh_lines in shell_blocks:
+            nprim, shell_am = helpers.parse_line_regex(shell_re, sh_lines[0], 'shell nprim, am')
+            shell_am = lut.amchar_to_int(shell_am)
+
+            func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+
+            exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=1)
+
+            shell = {
+                'function_type': func_type,
+                'region': '',
+                'angular_momentum': shell_am,
+                'exponents': exponents,
+                'coefficients': coefficients
+            }
+
+            element_data['electron_shells'].append(shell)
+
+
+def _parse_ecp_potential_lines(element_lines, bs_data):
+    #########################################################
+    # This is split out because the turbomole ECP format is
+    # almost identical to the genbas ECP format
+    #########################################################
+    element_sym, _ = helpers.parse_line_regex(element_re, element_lines[0], 'Element line')
+
+    element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
+    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+
+    # 4th line should be ncore and lmax
+    n_elec, max_am = helpers.parse_line_regex(ecp_info_re, element_lines[1], 'ECP ncore, lmax')
+
+    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_electrons', key_exist_ok=False, create=int)
+    element_data['ecp_electrons'] = n_elec
+
+    # split the remaining lines by lines starting with a character
+    ecp_potentials = helpers.partition_lines(element_lines[2:], lambda x: x[0].isalpha(), min_size=2)
+
+    # Keep track of what the max AM we actually found is
+    found_max = False
+    for pot_lines in ecp_potentials:
+        pot_am, pot_base_am = helpers.parse_line_regex(ecp_pot_am_re, pot_lines[0], 'ECP potential am')
+
+        pot_am = lut.amchar_to_int(pot_am)
+
+        if pot_base_am:
+            pot_base_am = lut.amchar_to_int(pot_base_am[1:])  # Strip the - from the beginning
+
+            if pot_base_am[0] != max_am:
+                raise RuntimeError("Potential does not use max_am of {}. Uses {}".format(max_am, pot_base_am[0]))
+        else:
+            if found_max:
+                raise RuntimeError("Found multiple potentials with single AM")
+
+            if pot_am[0] != max_am:
+                raise RuntimeError("Potential with single AM {} is not the same as lmax = {}".format(
+                    pot_am[0], max_am))
+
+            found_max = True
+
+        ecp_data = helpers.parse_ecp_table(pot_lines[1:], order=['coeff', 'r_exp', 'g_exp'])
+        ecp_pot = {
+            'angular_momentum': pot_am,
+            'ecp_type': 'scalar_ecp',
+            'r_exponents': ecp_data['r_exp'],
+            'gaussian_exponents': ecp_data['g_exp'],
+            'coefficients': ecp_data['coeff']
+        }
+
+        element_data['ecp_potentials'].append(ecp_pot)
+
+
+def _parse_ecp_lines(basis_lines, bs_data):
+    # Strip all lines beginning with $
+    basis_lines = helpers.prune_lines(basis_lines, '$')
+
+    # Last line should be *
+    # We don't need it
+    if basis_lines[-1] != '*':
+        raise RuntimeError("Missing terminating * line")
+    basis_lines.pop()
+
+    # Partition based on lines beginning with a character
+    element_blocks = helpers.partition_lines(basis_lines, element_re.match, before=1)
+
+    # Element lines should be surrounded by *
+    # Check all first. the partition_lines above will eat part of the previous
+    # element if the * is missing
+    for element_lines in element_blocks:
+        if element_lines[0] != '*':
+            raise RuntimeError("Element line not preceded by *")
+        if element_lines[2] != '*':
+            raise RuntimeError("Element line not followed by *")
+
+        # Check for any other lines starting with *
+        for line in element_lines[3:]:
+            if line.startswith('*'):
+                raise RuntimeError("Found line starting with * that probably doesn't belong: " + line)
+
+    # Now process all elements
+    for element_lines in element_blocks:
+        # Remove the two * lines and parse using the separate function
+        element_lines = element_lines[1:2] + element_lines[3:]
+        _parse_ecp_potential_lines(element_lines, bs_data)
 
 
 def read_turbomole(basis_lines, fname):
@@ -10,104 +161,35 @@ def read_turbomole(basis_lines, fname):
        have, so some fields are left blank
     '''
 
-    skipchars = '*#$'
-    basis_lines = [l for l in basis_lines if l and not l[0] in skipchars]
+    basis_lines = helpers.prune_lines(basis_lines, '#')
+
+    # first line must begin with $, last line must be $end
+    if basis_lines and not basis_lines[0][0].startswith('$'):
+        raise RuntimeError("First line does not begin with $. Line: " + basis_lines[0])
+    if basis_lines and basis_lines[-1] != '$end':
+        raise RuntimeError("Last line of basis is not $end. Line: " + basis_lines[-1])
 
     bs_data = create_skel('component')
 
-    i = 0
-    while i < len(basis_lines):
-        line = basis_lines[i]
-        elementsym = line.split()[0]
+    # Split into basis and ecp
+    # Just split based on lines beginning with $
+    basis_sections = helpers.partition_lines(basis_lines,
+                                             lambda x: x.startswith('$') and x != '$end',
+                                             min_blocks=1,
+                                             max_blocks=2)
 
-        element_Z = lut.element_Z_from_sym(elementsym)
-        element_Z = str(element_Z)
+    for s in basis_sections:
+        # Check if section is empty. If so, all lines start with $
+        if all(x.startswith('$') for x in s):
+            continue
 
-        if element_Z not in bs_data['elements']:
-            bs_data['elements'][element_Z] = {}
-
-        element_data = bs_data['elements'][element_Z]
-
-        if "ecp" in line.lower():
-            if 'ecp_potentials' not in element_data:
-                element_data['ecp_potentials'] = []
-
-            i += 1
-            line = basis_lines[i]
-
-            lsplt = line.split('=')
-            maxam = int(lsplt[2])
-            n_elec = int(lsplt[1].split()[0])
-
-            amlist = [maxam]
-            amlist.extend(list(range(0, maxam)))
-
-            i += 1
-            for shell_am in amlist:
-                shell_am2 = lut.amchar_to_int(basis_lines[i][0])[0]
-                if shell_am2 != shell_am:
-                    raise RuntimeError("AM not in expected order?")
-
-                i += 1
-
-                ecp_shell = {
-                    'ecp_type': 'scalar_ecp',
-                    'angular_momentum': [shell_am],
-                }
-                ecp_exponents = []
-                ecp_rexponents = []
-                ecp_coefficients = []
-
-                while i < len(basis_lines) and not basis_lines[i][0].isalpha():
-                    lsplt = basis_lines[i].split()
-                    ecp_exponents.append(lsplt[2])
-                    ecp_rexponents.append(int(lsplt[1]))
-                    ecp_coefficients.append(lsplt[0])
-                    i += 1
-
-                ecp_shell['r_exponents'] = ecp_rexponents
-                ecp_shell['gaussian_exponents'] = ecp_exponents
-                ecp_shell['coefficients'] = [ecp_coefficients]
-                element_data['ecp_potentials'].append(ecp_shell)
-
-            element_data['ecp_electrons'] = n_elec
-
+        if len(s) == 0:  # Empty section
+            continue
+        elif s[0].lower() == '$ecp':
+            _parse_ecp_lines(s, bs_data)
+        elif section_re.match(s[0]):
+            _parse_electron_lines(s, bs_data)
         else:
-            if 'electron_shells' not in element_data:
-                element_data['electron_shells'] = []
-
-            i += 1
-            while i < len(basis_lines) and not basis_lines[i][0].isalpha():
-                lsplt = basis_lines[i].split()
-                shell_am = lut.amchar_to_int(lsplt[1], hij=False)
-                nprim = int(lsplt[0])
-
-                if max(shell_am) <= 1:
-                    func_type = 'gto'
-                else:
-                    func_type = 'gto_spherical'
-
-                shell = {'function_type': func_type, 'region': '', 'angular_momentum': shell_am}
-
-                exponents = []
-                coefficients = []
-
-                i += 1
-                for j in range(nprim):
-                    line = basis_lines[i].replace('D', 'E')
-                    line = line.replace('d', 'E')
-                    lsplt = line.split()
-                    exponents.append(lsplt[0])
-                    coefficients.append(lsplt[1:])
-                    i += 1
-
-                shell['exponents'] = exponents
-
-                # We need to transpose the coefficient matrix
-                # (we store a matrix with primitives being the column index and
-                # general contraction being the row index)
-                shell['coefficients'] = list(map(list, zip(*coefficients)))
-
-                element_data['electron_shells'].append(shell)
+            raise RuntimeError("Unknown section " + s[0])
 
     return bs_data

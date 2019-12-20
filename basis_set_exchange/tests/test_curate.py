@@ -7,7 +7,7 @@ import pytest
 import shutil
 
 from basis_set_exchange import api, curate, fileio
-from .common_testvars import data_dir, test_data_dir
+from .common_testvars import data_dir, curate_test_data_dir
 
 
 # yapf: disable
@@ -112,8 +112,8 @@ def test_diff_json_files(tmp_path):
     filename1 = '6-31G_s_s-full.json.bz2'
     filename2 = '6-31G-full.json.bz2'
 
-    file1 = os.path.join(test_data_dir, filename1)
-    file2 = os.path.join(test_data_dir, filename2)
+    file1 = os.path.join(curate_test_data_dir, filename1)
+    file2 = os.path.join(curate_test_data_dir, filename2)
 
     tmpfile1 = os.path.join(tmp_path, filename1)
     tmpfile2 = os.path.join(tmp_path, filename2)
@@ -131,7 +131,7 @@ def test_diff_json_files(tmp_path):
     assert len(diff2['elements']) == 0
 
     reffilename = '6-31G_s_s-polarization.json.bz2'
-    reffile = os.path.join(test_data_dir, reffilename)
+    reffile = os.path.join(curate_test_data_dir, reffilename)
     refdata = fileio.read_json_basis(reffile)
 
     assert curate.compare_basis(diff1, refdata, rel_tol=0.0)
@@ -143,8 +143,8 @@ def test_g94_scaling(tmp_path):
     filename1 = 'sbo4-dz-scaled.gbs.bz2'
     filename2 = 'sbo4-dz-unscaled.gbs.bz2'
 
-    file1 = os.path.join(test_data_dir, filename1)
-    file2 = os.path.join(test_data_dir, filename2)
+    file1 = os.path.join(curate_test_data_dir, filename1)
+    file2 = os.path.join(curate_test_data_dir, filename2)
 
     bs1 = curate.read_formatted_basis(file1)
     bs2 = curate.read_formatted_basis(file2)

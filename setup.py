@@ -14,7 +14,8 @@ bse_package_data = []
 data_dirs = ['data', 'schema',
              os.path.join('tests', 'sources'),
              os.path.join('tests', 'fakedata'),
-             os.path.join('tests', 'test_data')
+             os.path.join('tests', 'curate_test_data'),
+             os.path.join('tests', 'reader_test_data')
 ]
 
 for data_dir in data_dirs:

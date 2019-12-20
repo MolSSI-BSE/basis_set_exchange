@@ -1,72 +1,116 @@
 import re
 from ... import lut
 from ..skel import create_skel
-from .common import partition_line_list, parse_primitive_matrix, prune_lines
+from . import helpers
+from .nwchem import _parse_ecp_lines
 
-all_element_names = [x.upper() for x in lut.all_element_names()]
-all_element_names.extend('WOLFFRAM')  # For tungsten
+all_element_names = [x.lower() for x in lut.all_element_names()]
+all_element_names.append('wolffram')  # For tungsten
 
 # Lines beginning a shell can be:
 #   H {nprim} {ngen}
 # or
 #   {nprim} {ngen} 0
 # This regex handles both cases
-_shell_begin_re = re.compile(r'^(?:H +)?(\d+) +(\d+)(?: +0)?$')
+shell_begin_re = re.compile(r'^(?:[hH]\s+)?(\d+)\s+(\d+)(?: +0)?$')
+
+# Typical format for starting an element with a comment
+# Not sure this is absolutely required though
+element_begin_re = re.compile(r'^!\s+([a-z]+)\s+\(.*\)\s*->\s*\[.*\]$')
 
 
+#############################################################################
+# There seems to be several dalton formats. One splits out by element, with
+# each element block starting with "a {element_Z}". Then each shell
+# starts with "{nprim} {ngen} 0"
+# The second is also split by elements, but the element name
+# is in a comment...
+#############################################################################
 def _line_begins_element(line):
     if not line:
         return False
+
+    line = line.lower()
+
     if line.startswith('a '):
         return True
-    if line[0] == '!' and len(line) > 2:
-        s = line[2:].split()
+
+    if element_begin_re.match(line):
+        s = line[1:].split()
         if s[0] in all_element_names:
             return True
+        else:
+            raise RuntimeError("Line looks to start an element, but element name is unknown to me. Line: " + line)
 
     return False
 
 
-def _parse_dalton_block(block):
-    # Figure out which type of block this is
-    header = block[0]
-    if header.lower().startswith('a'):
-        element_Z = int(header.split()[1])
-    elif header.startswith('! '):
-        element_Z = lut.element_Z_from_name(header.split()[1])
-    else:
-        raise RuntimeError("Unable to parse block in dalton: header line is \"{}\"".format(header))
+def _parse_electron_lines(basis_lines, bs_data):
+    '''Parses lines representing all the electron shells for all elements
 
-    block = block[1:]
+    Resulting information is stored in bs_data
+    '''
 
-    # Now partition again into blocks of shells
-    block = [x for x in block if not x.startswith('!')]
-    shell_blocks = partition_line_list(block, lambda x: _shell_begin_re.match(x), start=0)
-
-    shell_am = 0
-
-    shells = []
-    for block in shell_blocks:
-        m = _shell_begin_re.match(block[0])
-        if not m:
-            raise RuntimeError("Line does not match beginning of shell: " + block[0])
-        nprim, ngen = m.groups()
-        exponents, coefficients = parse_primitive_matrix(block[1:])
-
-        if shell_am <= 1:
-            func_type = 'gto'
+    # A little bit of a hack here
+    # If we find the start of an element, remove all the following comment lines
+    new_basis_lines = []
+    i = 0
+    while i < len(basis_lines):
+        if _line_begins_element(basis_lines[i]):
+            new_basis_lines.append(basis_lines[i])
+            i += 1
+            while basis_lines[i].startswith('!'):
+                i += 1
         else:
-            func_type = 'gto_spherical'
+            new_basis_lines.append(basis_lines[i])
+            i += 1
 
-        shell = {'function_type': func_type,
-                 'region': '',
-                 'angular_momentum': [shell_am],
-                 'exponents': exponents,
-                 'coefficients': coefficients}
-        shells.append(shell)
-        shell_am += 1
+    basis_lines = new_basis_lines
 
-    return (str(element_Z), {'electron_shells': shells})
+    # Now split out all the element blocks
+    element_blocks = helpers.partition_lines(basis_lines, _line_begins_element, min_size=3)
+
+    # For each block, split out all the shells
+    for el_lines in element_blocks:
+        # Figure out which type of block this is (does it start with 'a ' or a comment
+        header = el_lines[0].lower()
+        if header.startswith('a '):
+            element_Z = helpers.parse_line_regex(r'a +(\d+) *$', header, "a {element_z}", convert_int=False)
+        elif header.startswith('!'):
+            element_name = helpers.parse_line_regex(element_begin_re, header, '! {element_name}')
+            element_Z = lut.element_Z_from_name(element_name, as_str=True)
+        else:
+            raise RuntimeError("Unable to parse block in dalton: header line is \"{}\"".format(header))
+
+        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        el_lines.pop(0)
+
+        # Remove all the rest of the comment lines
+        el_lines = helpers.prune_lines(el_lines, '!')
+
+        # Now partition again into blocks of shells for this element
+        shell_blocks = helpers.partition_lines(el_lines, lambda x: shell_begin_re.match(x))
+
+        # Shells are written in increasing angular momentum
+        shell_am = 0
+
+        shells = []
+        for sh_lines in shell_blocks:
+            nprim, ngen = helpers.parse_line_regex(shell_begin_re, sh_lines[0], 'nprim, ngen')
+            exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=ngen)
+
+            func_type = helpers.function_type_from_am([shell_am], 'gto', 'spherical')
+
+            shell = {
+                'function_type': func_type,
+                'region': '',
+                'angular_momentum': [shell_am],
+                'exponents': exponents,
+                'coefficients': coefficients
+            }
+
+            element_data['electron_shells'].append(shell)
+            shell_am += 1
 
 
 def read_dalton(basis_lines, fname):
@@ -74,31 +118,36 @@ def read_dalton(basis_lines, fname):
        usual BSE fields
     '''
 
-    # There seems to be several dalton formats. One splits out by element, with
-    # each element block starting with "a {element_Z}". Then each shell
-    # starts with "{nprim} {ngen} 0"
-    # The second is also split by elements, but the element name
-    # is in a comment...
+    ###########################################################################
+    # We need to leave in comments until later, since they can be significant
+    # (one format allows "! {ELEMENT}" to start an element block)
+    ###########################################################################
 
-    basis_lines = prune_lines(basis_lines, '$')
+    # But we still prune blank lines
+    basis_lines = helpers.prune_lines(basis_lines)
+
+    bs_data = create_skel('component')
 
     # Skip forward until either:
     # 1. Line begins with 'a'
+    # 2. Line begins with 'ecp'
     # 2. Lines begins with '!', with an element name following
-    i = 0
-    while not _line_begins_element(basis_lines[i]):
-        i += 1
+    while basis_lines and not _line_begins_element(basis_lines[0]) and basis_lines[0].lower() != 'ecp':
+        basis_lines.pop(0)
 
-    # Now go through and find all element blocks
-    all_blocks = partition_line_list(basis_lines, _line_begins_element, start=i)
+    # Empty file?
+    if not basis_lines:
+        return bs_data
 
-    # Skip blocks with only 1 line. This represents duplicated element header lines
-    all_blocks = [x for x in all_blocks if len(x) > 1]
+    # Partition into ECP and electron blocks
+    # I don't think Dalton supports ECPs, but the original BSE
+    # Used the NWChem output format for the ECP part
+    basis_sections = helpers.partition_lines(basis_lines, lambda x: x.lower() == 'ecp', min_blocks=1, max_blocks=2)
 
-    # Now parse each block into shells
-    element_data = [_parse_dalton_block(x) for x in all_blocks]
-
-    bs_data = create_skel('component')
-    bs_data['elements'] = dict(element_data)
+    for s in basis_sections:
+        if s[0].lower() == 'ecp':
+            _parse_ecp_lines(s, bs_data)
+        else:
+            _parse_electron_lines(s, bs_data)
 
     return bs_data

@@ -33,8 +33,11 @@ fake_data_dir = os.path.join(_my_dir, 'fakedata')
 # Directory with authoritative sources
 auth_data_dir = os.path.join(_my_dir, 'sources')
 
-# Directory with other testing data
-test_data_dir = os.path.join(_my_dir, 'test_data')
+# Directory with files for testing curation functions
+curate_test_data_dir = os.path.join(_my_dir, 'curate_test_data')
+
+# Directory with files for testing readers
+reader_test_data_dir = os.path.join(_my_dir, 'reader_test_data')
 
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)

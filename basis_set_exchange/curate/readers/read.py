@@ -10,7 +10,7 @@ from .nwchem import read_nwchem
 from .gbasis import read_gbasis
 from .dalton import read_dalton
 from .molcas import read_molcas
-from .cfour import read_cfour
+from .genbas import read_genbas
 
 _type_readers = {
     'turbomole': {
@@ -41,7 +41,12 @@ _type_readers = {
     'cfour': {
         'display': 'CFOUR',
         'extension': '.c4bas',
-        'reader': read_cfour
+        'reader': read_genbas
+    },
+    'genbas': {
+        'display': 'Genbas',
+        'extension': '.genbas',
+        'reader': read_genbas
     },
     'gbasis': {
         'display': 'GBasis',

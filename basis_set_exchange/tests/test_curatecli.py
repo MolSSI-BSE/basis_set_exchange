@@ -8,7 +8,7 @@ import pytest
 import shutil
 
 from basis_set_exchange import fileio, curate
-from .common_testvars import fake_data_dir, data_dir, test_data_dir
+from .common_testvars import fake_data_dir, data_dir, curate_test_data_dir
 
 
 def _test_curatecli_cmd(cmd):
@@ -53,8 +53,8 @@ def test_curatecli_makediff(tmp_path):
     filename1 = '6-31G_s_s-full.json.bz2'
     filename2 = '6-31G-full.json.bz2'
 
-    file1 = os.path.join(test_data_dir, filename1)
-    file2 = os.path.join(test_data_dir, filename2)
+    file1 = os.path.join(curate_test_data_dir, filename1)
+    file2 = os.path.join(curate_test_data_dir, filename2)
 
     tmpfile1 = os.path.join(tmp_path, filename1)
     tmpfile2 = os.path.join(tmp_path, filename2)
@@ -72,7 +72,7 @@ def test_curatecli_makediff(tmp_path):
     assert len(diff2['elements']) == 0
 
     reffilename = '6-31G_s_s-polarization.json.bz2'
-    reffile = os.path.join(test_data_dir, reffilename)
+    reffile = os.path.join(curate_test_data_dir, reffilename)
     refdata = fileio.read_json_basis(reffile)
 
     assert curate.compare_basis(diff1, refdata, rel_tol=0.0)
@@ -111,8 +111,8 @@ def test_curatecli_compare_1():
                             ('lanl2dz.nw.bz2', 'lanl2dz-BAD2.nw.bz2', False)])
 # yapf: enable
 def test_curatecli_compare_files(filename1, filename2, expected):
-    file1 = os.path.join(test_data_dir, filename1)
-    file2 = os.path.join(test_data_dir, filename2)
+    file1 = os.path.join(curate_test_data_dir, filename1)
+    file2 = os.path.join(curate_test_data_dir, filename2)
 
     output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file1, file2))
     if expected:

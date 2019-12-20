@@ -48,5 +48,11 @@ def test_curate_roundtrip(tmp_path, basis, fmt):
     test_dict = sort.sort_basis(test_dict)
     bse_dict = sort.sort_basis(bse_dict)
 
+    import json
+    with open('/tmp/bse.json', 'w') as f:
+        json.dump(bse_dict, f, indent=2, sort_keys=True)
+    with open('/tmp/test.json', 'w') as f:
+        json.dump(test_dict, f, indent=2, sort_keys=True)
+
     # Compare, ignoring metadata (not stored in most formats)
     assert curate.compare_basis(bse_dict, test_dict, rel_tol=0.0)
