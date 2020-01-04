@@ -22,13 +22,11 @@ role_tests = [('cc-pvdz', 'rifit', 'cc-pvdz-rifit'),
 # yapf: enable
 
 
-@pytest.mark.parametrize('basis_name', bs_names)
-def test_get_basis_1(basis_name):
+@pytest.mark.parametrize('basis_name, basis_ver', bs_names_vers)
+def test_get_basis_1(basis_name, basis_ver):
     """For all versions of basis sets, test a simple get_basis
     """
-    this_metadata = bs_metadata[basis_name]
-    for ver in this_metadata['versions'].keys():
-        bse.get_basis(basis_name, version=ver)
+    bse.get_basis(basis_name, version=basis_ver)
 
 
 @pytest.mark.parametrize('basis_name', bs_names)
