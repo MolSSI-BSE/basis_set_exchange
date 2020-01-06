@@ -39,6 +39,9 @@ curate_test_data_dir = os.path.join(_my_dir, 'curate_test_data')
 # Directory with files for testing readers
 reader_test_data_dir = os.path.join(_my_dir, 'reader_test_data')
 
+# Directory with files for testing the validator
+validator_test_data_dir = os.path.join(_my_dir, 'validator_test_data')
+
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)
 all_metadata_files = all_files[0]

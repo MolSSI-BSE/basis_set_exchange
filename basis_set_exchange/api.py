@@ -36,7 +36,6 @@ def version():
 # of this installation
 _my_dir = os.path.dirname(os.path.abspath(__file__))
 _default_data_dir = os.path.join(_my_dir, 'data')
-_default_schema_dir = os.path.join(_my_dir, 'schema')
 
 # Main URL of the project
 _main_url = 'https://www.basissetexchange.org'
@@ -567,22 +566,6 @@ def has_basis_notes(family, data_dir=None):
 
     file_path = _basis_notes_path(family, data_dir)
     return os.path.isfile(file_path)
-
-
-def get_schema(schema_type):
-    '''Get a schema that can validate BSE JSON files
-
-       The schema_type represents the type of BSE JSON file to be validated,
-       and can be 'component', 'element', 'table', 'metadata', or 'references'.
-    '''
-
-    schema_file = "{}-schema.json".format(schema_type)
-    file_path = os.path.join(_default_schema_dir, schema_file)
-
-    if not os.path.isfile(file_path):
-        raise RuntimeError('Schema file \'{}\' does not exist, is not readable, or is not a file'.format(file_path))
-
-    return fileio.read_schema(file_path)
 
 
 def get_formats(function_types=None):

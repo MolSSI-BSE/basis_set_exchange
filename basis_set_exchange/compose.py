@@ -125,7 +125,7 @@ def compose_table_basis(file_relpath, data_dir):
     bs_meta = fileio.read_json_basis(meta_filepath)
     table_bs.update(bs_meta)
 
-    # Remove the molssi schema (which isn't needed here)
-    table_bs.pop('molssi_bse_schema')
+    # Modify the molssi schema (is now 'complete' and not 'table')
+    table_bs['molssi_bse_schema'] = { "schema_type": "complete", "schema_version": "0.1" }
 
     return table_bs

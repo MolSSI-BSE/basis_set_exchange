@@ -44,15 +44,6 @@
             "uniqueItems": true,
             "items": { "type": "string" }
         },
-        "tags": {
-            "description": "Feature tags (for internal use/marking)",
-            "type": "array",
-            "uniqueItems": true,
-            "items": {
-                "type": "string",
-                "enum": ["deprecated"]
-            }
-        },
         "family": {
             "description": "Broad family that the basis set is from",
             "type": "string"
@@ -61,24 +52,14 @@
             "description": "Brief description of the basis set",
             "type": "string"
         },
+        "tags": {
+            "$ref": "common-definitions.json#tags"
+        },
         "role": {
-            "description": "Role that this basis plays in a calculation",
-            "type": "string",
-            "enum": [ "orbital", "rifit", "optri", "jkfit", "jfit", "admmfit", "dftxfit", "dftjfit"]
+            "$ref": "common-definitions.json#role"
         },
         "auxiliaries": {
-            "description": "Auxiliary basis sets (fitting, etc) and how their role with this basis",
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "jfit" : { "type": "string" },
-                "jkfit" : { "type": "string" },
-                "rifit" : { "type": "string" },
-                "optri" : { "type": "string" },
-                "admmfit" : { "type": "string" },
-                "dftxfit": { "type": "string" },
-                "dftjfit": { "type": "string" }
-            }
+            "$ref": "common-definitions.json#auxiliaries"
         }
     }
 }

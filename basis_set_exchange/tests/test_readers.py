@@ -37,7 +37,9 @@ def test_reader(file_rel_path):
         with pytest.raises(Exception, match=match):
             readers.read_formatted_basis(file_path)
     else:
-        readers.read_formatted_basis(file_path)
+        # Also validate the result (as both component and minimal)
+        readers.read_formatted_basis(file_path, validate=True, as_component=True)
+        readers.read_formatted_basis(file_path, validate=True, as_component=False)
 
 
 def test_reader_equivalent():

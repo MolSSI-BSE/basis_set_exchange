@@ -203,7 +203,7 @@ def add_basis(bs_file,
     '''
 
     # Read the basis set data into a component file, and add the description
-    bs_data = read_formatted_basis(bs_file, file_fmt)
+    bs_data = read_formatted_basis(bs_file, file_fmt, validate=True, as_component=True)
     bs_data['description'] = description
     bs_data['data_source'] = data_source
 

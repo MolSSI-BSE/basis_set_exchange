@@ -1,0 +1,218 @@
+{
+    "reference_keys": {
+        "description": "Citation/Reference keys pertaining to some basis set data",
+        "type": "array",
+        "minItems": 0,
+        "uniqueItems": true,
+        "items": {
+            "type": "string"
+        }
+    },
+    "reference_map": {
+        "description": "Citation/Reference data (including descriptions) pertaining to some basis set data",
+        "type": "array",
+        "minItems": 0,
+        "uniqueItems": false,
+        "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "reference_description",
+                "reference_keys"
+            ],
+            "properties": {
+                "reference_description": {
+                    "description": "A description of what this reference pertains to",
+                    "type": "string"
+                },
+                "reference_keys":
+                {
+                    "$ref": "#reference_keys"
+                }
+            }
+        }
+    },
+    "electron_shell": {
+        "description": "Information for a single electronic shell",
+        "additionalProperties": false,
+        "required": [
+            "function_type",
+            "region",
+            "angular_momentum",
+            "exponents",
+            "coefficients"
+        ],
+        "properties": {
+            "function_type": {
+                "$ref": "#electron_shell_function_type"
+            },
+            "region": {
+                "$ref": "#electron_shell_region"
+            },
+            "angular_momentum": {
+                "$ref": "#angular_momentum"
+            },
+            "exponents": {
+                "description": "Exponents for this contracted shell",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "string"
+                }
+            },
+            "coefficients": {
+                "description": "General contraction coefficients for this contracted shell",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "description": "Segmented contraction coefficients",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "type": "string" }
+                }
+            }
+        }
+    },
+    "ecp_electrons":
+    {
+        "description": "Number of electrons replaced by ECP",
+        "type": "integer",
+        "minimum": 1
+    },
+    "ecp_potential": {
+        "description": "ECP potential",
+        "additionalProperties": false,
+        "required": [
+            "ecp_type",
+            "angular_momentum",
+            "r_exponents",
+            "gaussian_exponents",
+            "coefficients"
+        ],
+        "properties": {
+            "ecp_type": {
+                "$ref": "#ecp_function_type"
+            },
+            "angular_momentum": {
+                "$ref": "#angular_momentum"
+            },
+            "r_exponents": {
+                "description": "Exponents of the r term",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "integer"
+                }
+            },
+            "gaussian_exponents": {
+                "description": "Exponents of the gaussian term",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "type": "string"
+                }
+            },
+            "coefficients": {
+                "description": "General contraction coefficients for this contracted shell",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                    "description": "Segmented contraction coefficients",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "type": "string" }
+                }
+            }
+        }
+    },
+    "electron_shell_function_type": {
+        "description": "Type of function for an electron shell",
+        "type": "string",
+        "enum": [ "gto", "gto_spherical", "gto_cartesian", "sto" ]
+    },
+    "ecp_function_type": {
+        "description": "Type of the ECP Potential",
+        "type": "string",
+        "enum": [ "scalar_ecp", "spinorbit_ecp" ]
+    },
+    "complete_function_type_list": {
+        "description": "A list of function types in a basis set",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "enum": [ "gto", "gto_spherical", "gto_cartesian", "sto", "scalar_ecp", "spinorbit_ecp" ]
+        }
+    },
+    "electron_shell_region": {
+        "description": "The region an electron shell describes",
+        "type": "string",
+        "enum": [ "", "valence", "polarization", "core", "tight", "diffuse" ]
+    },
+    "tags": {
+        "description": "Feature tags (for internal use/marking)",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "enum": ["deprecated"]
+        }
+    },
+    "role": {
+        "description": "Role that this basis plays in a calculation",
+        "type": "string",
+        "enum": [ "orbital", "rifit", "optri", "jkfit", "jfit", "admmfit", "dftxfit", "dftjfit"]
+    },
+    "auxiliaries": {
+        "description": "Auxiliary basis sets (fitting, etc) and how their role with this basis",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "jfit" : { "type": "string" },
+            "jkfit" : { "type": "string" },
+            "rifit" : { "type": "string" },
+            "optri" : { "type": "string" },
+            "admmfit" : { "type": "string" },
+            "dftxfit": { "type": "string" },
+            "dftjfit": { "type": "string" }
+        }
+    },
+    "revision_date": {
+        "description": "The date when this revision was finalized/uploaded",
+        "type": "string",
+        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "revision_description": {
+        "description": "Brief description of the difference between this revision and the last",
+        "type": "string"
+    },
+    "angular_momentum": {
+        "description": "Angular momentum (as an array of integers)",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+            "type": "integer",               
+            "minimum": 0
+        }
+    },
+    "electron_shell_list": {
+        "description": "A list of (electronic) shells",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+            "$ref": "#electron_shell"
+        }
+    },
+    "ecp_potential_list": {
+        "description": "A list of Effective Core Potentials",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+            "$ref": "#ecp_potential"
+        }
+    }
+}
