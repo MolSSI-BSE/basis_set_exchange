@@ -1,5 +1,5 @@
 '''                                                                                                      
-Conversion of references to enw format                                                                                              
+Conversion of references to ris format                                                                                              
 '''
 
 import textwrap
@@ -7,26 +7,26 @@ from ..misc import compact_elements
 from .common import get_library_citation
 
 
-def _ref_endnote(key, ref):
-    '''Convert a single reference to RIS format                                                                                  
+def _ref_ris(key, ref):
+    '''Convert a single reference to ris format                                                                                  
     '''
     s = ''
 
     s += '  \n'.format(ref['_entry_type'], key)
     if ref['_entry_type'] == 'article':
-        s += "%0 Journal Article \n"
+        s += "TY Journal Article \n"
     elif ref['_entry_type'] == 'misc':
-        s += "%0 Generic \n"
+        s += "TY Generic \n"
     elif ref['_entry_type'] == 'unpublished':
-        s += "%0 Unpublished \n"
+        s += "TY Unpublished \n"
     elif ref['_entry_type'] == 'incollection':
-        s += "%0 Book \n"
+        s += "TY Book \n"
     elif ref['_entry_type'] == 'phdthesis':
-        s += "%0 Thesis \n"
+        s += "TY Thesis \n"
     elif ref['_entry_type'] == 'techreport':
-        s += "%0 Report \n"
+        s += "TY Report \n"
     else:
-        s += "%0 Generic\n"
+        s += "TY Generic\n"
 
     entry_lines = []
     for k, v in ref.items():
@@ -36,19 +36,19 @@ def _ref_endnote(key, ref):
         # Handle authors/editors
         if k == 'authors':
             for author in v:
-                entry_lines.append('%A {}'.format(author))
+                entry_lines.append('AU {}'.format(author))
         elif k == 'year':
-            entry_lines.append('%D {}'.format(v))
+            entry_lines.append('PY {}'.format(v))
         elif k == 'journal':
-            entry_lines.append('%J {}'.format(v))
+            entry_lines.append('JO {}'.format(v))
         elif k == 'volume':
-            entry_lines.append('%V {}'.format(v))
+            entry_lines.append('VL {}'.format(v))
         elif k == 'page':
-            entry_lines.append('%P {}'.format(v))
+            entry_lines.append('SP {}'.format(v))
         elif k == 'title':
-            entry_lines.append('%T {}'.format(v))
+            entry_lines.append('T1 {}'.format(v))
         elif k == 'doi':
-            entry_lines.append('%R {}'.format(v))
+            entry_lines.append('DO {}'.format(v))
         else:
             entry_lines.append('    {} = {{{}}}'.format(k, v))
 
@@ -58,8 +58,9 @@ def _ref_endnote(key, ref):
     return s
 
 
-def write_endnote(refs):
-    '''Converts references to endnote                                                                                                  
+def write_ris(refs):
+    '''Converts references to ris   
+                                                                             
     '''
 
     full_str = ''
@@ -71,7 +72,7 @@ def write_endnote(refs):
     full_str += '%' * 80 + '\n\n'
 
     for k, r in lib_citations.items():
-        full_str += _ref_endnote(k, r) + '\n\n'
+        full_str += _ref_ris(k, r) + '\n\n'
 
     full_str += '%' * 80 + '\n'
     full_str += "% References for the basis set\n"
@@ -102,6 +103,6 @@ def write_endnote(refs):
 
     # Go through them sorted alphabetically by key
     for k, r in sorted(unique_refs.items(), key=lambda x: x[0]):
-        full_str += '{}\n\n'.format(_ref_endnote(k, r))
+        full_str += '{}\n\n'.format(_ref_ris(k, r))
 
     return full_str

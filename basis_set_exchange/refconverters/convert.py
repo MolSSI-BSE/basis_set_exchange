@@ -4,6 +4,7 @@ Converts basis set data to a specified output format
 
 from .. import sort
 from .bib import write_bib
+from .ris import write_ris
 from .endnote import write_endnote
 from .txt import write_txt
 from .bsejson import write_json
@@ -20,6 +21,12 @@ _converter_map = {
         'extension': '.bib',
         'comment': '%',
         'function': write_bib
+    },
+    'ris': {
+        'display': 'RIS',
+        'extension': '.RIS',
+        'comment': None,
+        'function': write_ris
     },
     'endnote': {
         'display': 'EndNote',
