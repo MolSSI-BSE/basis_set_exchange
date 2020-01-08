@@ -50,7 +50,7 @@ def _ref_endnote(key, ref):
         elif k == 'doi':
             entry_lines.append('%R {}'.format(v))
         else:
-            entry_lines.append('    {} = {{{}}}'.format(k, v))
+            entry_lines.append('%Z {}:{}'.format(k, v))
 
     s += '\n'.join(entry_lines)
     s += '\n'
