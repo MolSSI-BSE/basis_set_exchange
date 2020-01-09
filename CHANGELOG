@@ -1,11 +1,20 @@
 v0.8.X
 --------------------
   * Better dectection of duplicate shells within general contractions
+  * Adds RIS output for references
   * Add v0 basis sets
     * Roos augmented ANO DZ/TZ
+    * Dunning F12 RIFIT
   * Add v1 basis sets
     * Jensen (aug-)pcH
   * Fixes Sm p-shell in cc-pwCVQZ-DK3 (creates v2)
+  * Major refactor of readers/writers
+    * Adds lots of testing/validation to readers
+    * Moves readers out of curation.
+    * Renames output converters to writers
+  * Adds additional validation to data via schema and the
+    validator module
+
 
 v0.8.11
 --------------------
