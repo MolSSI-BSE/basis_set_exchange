@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Output converters" href="developer_converters.html" />
-    <link rel="prev" title="Developer API" href="developer_api.html" /> 
+    <link rel="next" title="The bsecurate command line interface" href="bsecurate_cli.html" />
+    <link rel="prev" title="Basis set readers" href="developer_readers.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,11 +89,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_writers.html">Output converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_readers.html">Basis set readers</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Curation API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="developer_converters.html">Output converters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
@@ -368,15 +369,6 @@ doesn’t exist, and the main metadata file is also updated.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.curate.create_skel">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">create_skel</code><span class="sig-paren">(</span><em class="sig-param">role</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_skel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the skeleton of a dictionary or JSON file</p>
-<p>A dictionary is returned that contains the “molssi_bse_schema”
-key and other required keys, depending on the role</p>
-<p>role can be either ‘component’, ‘element’, or ‘table’</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="basis_set_exchange.curate.diff_basis_dict">
 <code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">diff_basis_dict</code><span class="sig-paren">(</span><em class="sig-param">left_list</em>, <em class="sig-param">right_list</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the difference between two sets of basis set dictionaries</p>
@@ -494,14 +486,6 @@ what elements are in that file</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.curate.get_reader_formats">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">get_reader_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.get_reader_formats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the available formats mapped to display name.</p>
-<p>This is returned as an ordered dictionary, with the most common
-at the top, followed by the rest in alphabetical order</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="basis_set_exchange.curate.potentials_difference">
 <code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">potentials_difference</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes and prints the differences between two lists of potentials</p>
@@ -530,10 +514,10 @@ Otherwise, the maximum relative difference is returned.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="developer_converters.html" class="btn btn-neutral float-right" title="Output converters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bsecurate_cli.html" class="btn btn-neutral float-right" title="The bsecurate command line interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="developer_api.html" class="btn btn-neutral float-left" title="Developer API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="developer_readers.html" class="btn btn-neutral float-left" title="Basis set readers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -93,6 +93,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#subcommands">Subcommands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#list-formats">list-formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-ref-formats">list-ref-formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-wrtier-formats">list-wrtier-formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-reader-formats">list-reader-formats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-roles">list-roles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-data-dir">get-data-dir</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-basis-sets">list-basis-sets</a></li>
@@ -234,8 +236,13 @@ Description of your program
 
 positional arguments:
   subcommand
-    list-formats        Output a list all available basis set formats and
-                        descriptions
+    list-formats        Output a list of basis set formats that can be used
+                        with obtaining a basis set
+    list-writer-formats
+                        Output a list available basis set formats that can be
+                        written
+    list-reader-formats
+                        Output a list of basis set formats that can be read
     list-ref-formats    Output a list all available reference formats and
                         descriptions
     list-roles          Output a list all available roles and descriptions
@@ -389,6 +396,49 @@ json
 </pre></div>
 </div>
 </div>
+<div class="section" id="list-wrtier-formats">
+<h3>list-wrtier-formats<a class="headerlink" href="#list-wrtier-formats" title="Permalink to this headline">¶</a></h3>
+<p>Obtain a list of the formats that can be written to by the library</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-writer-formats
+acesii      ACES II
+bdf         BDF
+bsedebug    BSE Debug
+cfour       CFOUR
+cp2k        CP2K
+dalton      Dalton
+demon2k     deMon2K
+gamess_uk   GAMESS UK
+gamess_us   GAMESS US
+gaussian94  Gaussian
+json        JSON
+molcas      Molcas
+molpro      Molpro
+nwchem      NWChem
+orca        ORCA
+pqs         PQS
+psi4        Psi4
+qchem       Q-Chem
+qcschema    QCSchema
+turbomole   Turbomole
+xtron       xTron
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-reader-formats">
+<h3>list-reader-formats<a class="headerlink" href="#list-reader-formats" title="Permalink to this headline">¶</a></h3>
+<p>Obtain a list of the formats that can be read by the library</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-reader-formats
+turbomole   Turbomole
+gaussian94  Gaussian94
+nwchem      NWChem
+dalton      Dalton
+molcas      MolCAS
+cfour       CFOUR
+genbas      Genbas
+gbasis      GBasis
+</pre></div>
+</div>
+</div>
 <div class="section" id="list-roles">
 <h3>list-roles<a class="headerlink" href="#list-roles" title="Permalink to this headline">¶</a></h3>
 <p>Lists the available basis set roles. Takes no arguments</p>
@@ -478,7 +528,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.11+28.gf2f2966e.dirty
+# Version v0.8.11+33.g61f01562
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G

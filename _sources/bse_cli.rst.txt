@@ -120,6 +120,23 @@ With ``-n`` or ``--no-description``, the command will hide the description of th
 .. command-output:: bse list-ref-formats
 .. command-output:: bse list-ref-formats -n
 
+
+list-wrtier-formats
+*******************
+
+Obtain a list of the formats that can be written to by the library
+
+.. command-output:: bse list-writer-formats
+
+
+list-reader-formats
+*******************
+
+Obtain a list of the formats that can be read by the library
+
+.. command-output:: bse list-reader-formats
+
+
 list-roles
 *******************
 

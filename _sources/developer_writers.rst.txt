@@ -1,15 +1,15 @@
 Output converters
 ==============================================
 
-converters - Conversion basis set output
+writers - Formatting of basis set output
 ----------------------------------------
 
-.. automodule:: basis_set_exchange.converters
+.. automodule:: basis_set_exchange.writers
    :members:
    :imported-members:
 
 
-refconverters - Conversion of reference data
+refconverters - Formatting of reference data
 --------------------------------------------
 
 .. automodule:: basis_set_exchange.refconverters

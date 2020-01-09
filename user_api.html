@@ -159,14 +159,6 @@
 <p>Contains utilities for reading, writing, and converting
 basis set information</p>
 <dl class="function">
-<dt id="basis_set_exchange.component_basis_str">
-<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">component_basis_str</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.component_basis_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print a component basis set</p>
-<p>If elements is not None, only the specified elements will be printed
-(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="basis_set_exchange.create_bundle">
 <code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">create_bundle</code><span class="sig-paren">(</span><em class="sig-param">outfile</em>, <em class="sig-param">fmt</em>, <em class="sig-param">reffmt</em>, <em class="sig-param">archive_type=None</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.create_bundle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a single archive file containing all basis
@@ -191,36 +183,6 @@ it is in the ‘data’ subdirectory of this project.</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
 <dt>None</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.ecp_pot_str">
-<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">ecp_pot_str</code><span class="sig-paren">(</span><em class="sig-param">pot</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.ecp_pot_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the data for an ECP potential</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.electron_shell_str">
-<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">electron_shell_str</code><span class="sig-paren">(</span><em class="sig-param">shell</em>, <em class="sig-param">shellidx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.electron_shell_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string representing the data for an electron shell</p>
-<p>If shellidx (index of the shell) is not None, it will also be printed</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="basis_set_exchange.element_data_str">
-<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">element_data_str</code><span class="sig-paren">(</span><em class="sig-param">z</em>, <em class="sig-param">eldata</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.element_data_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a string with all data for an element</p>
-<p>This includes shell and ECP potential data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>z</strong><span class="classifier">int or str</span></dt><dd><p>Element Z-number</p>
-</dd>
-<dt><strong>eldata: dict</strong></dt><dd><p>Data for the element to be printed</p>
-</dd>
 </dl>
 </dd>
 </dl>
@@ -379,6 +341,13 @@ supporting the given function types will be returned.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.get_reader_formats">
+<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">get_reader_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_reader_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the basis set formats that can be read by this library.</p>
+<p>This is returned as an ordered dictionary of key to display name.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.get_reference_formats">
 <code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">get_reference_formats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_reference_formats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return information about the reference/citation formats available</p>
@@ -438,11 +407,13 @@ can be passed as the role argument to fmt argument to <a class="reference intern
 </dd></dl>
 
 <dl class="function">
-<dt id="basis_set_exchange.get_schema">
-<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">get_schema</code><span class="sig-paren">(</span><em class="sig-param">schema_type</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_schema" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a schema that can validate BSE JSON files</p>
-<p>The schema_type represents the type of BSE JSON file to be validated,
-and can be ‘component’, ‘element’, ‘table’, ‘metadata’, or ‘references’.</p>
+<dt id="basis_set_exchange.get_writer_formats">
+<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">get_writer_formats</code><span class="sig-paren">(</span><em class="sig-param">function_types=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.get_writer_formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about the basis set formats available for writing</p>
+<p>The returned data is a map of format to display name. The format
+can be passed as the fmt argument to <a class="reference internal" href="#basis_set_exchange.write_formatted_basis" title="basis_set_exchange.write_formatted_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_formatted_basis()</span></code></a></p>
+<p>If a list is specified for function_types, only those formats
+supporting the given function types will be returned.</p>
 </dd></dl>
 
 <dl class="function">
@@ -484,9 +455,68 @@ and role.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.validate_data">
+<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">validate_data</code><span class="sig-paren">(</span><em class="sig-param">file_type</em>, <em class="sig-param">bs_data</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validate_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates json basis set data against a schema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of the data to validate. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p>
+</dd>
+<dt><strong>bs_data:</strong></dt><dd><p>Data to be validated</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
+</dd>
+<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.validate_file">
+<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">validate_file</code><span class="sig-paren">(</span><em class="sig-param">file_type</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validate_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates a file against a schema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of file to read. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p>
+</dd>
+<dt><strong>file_path:</strong></dt><dd><p>Full path to the file to be validated</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
+</dd>
+<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
+</dd>
+<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.version">
 <code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain the version of the basis set exchange library (as a string)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.write_formatted_basis">
+<code class="sig-prename descclassname">basis_set_exchange.</code><code class="sig-name descname">write_formatted_basis</code><span class="sig-paren">(</span><em class="sig-param">basis_dict</em>, <em class="sig-param">fmt</em>, <em class="sig-param">header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.write_formatted_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the basis set data as a string representing
+the data in the specified output format</p>
 </dd></dl>
 
 </div>

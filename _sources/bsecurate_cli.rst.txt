@@ -45,14 +45,6 @@ can take the ``-h`` option to display help for that subcommand.
    :ellipsis: 8
 
 
-get-reader-formats
-*******************
-
-Obtain a list of the formats that can be read by the library
-
-.. command-output:: bsecurate get-reader-formats
-
-
 compare-basis-sets
 *******************
 
