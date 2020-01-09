@@ -66,7 +66,7 @@ There are two global options available to all subcommands. The first is an alter
 data directory can be specified with ``-d`` or ``--data-dir``. By default, the built-in
 data directory will be used.
 
-.. command-output:: bse -d /home/ben/my_data_dir list-basis-sets
+.. command-output:: bse -d ${HOME}/my_data_dir list-basis-sets
 
 Also, output can be written to a file rather than to the terminal
 

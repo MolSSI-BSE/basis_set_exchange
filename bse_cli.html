@@ -268,7 +268,7 @@ not case sensitive.</p>
 <p>There are two global options available to all subcommands. The first is an alternate
 data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>. By default, the built-in
 data directory will be used.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d /home/ben/my_data_dir list-basis-sets
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
 bppfakebasis        A fake basis set for testing the BSE
 bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
 </pre></div>
@@ -320,51 +320,51 @@ positional arguments:
 <p>Lists the available output formats of basis sets.
 With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats
-nwchem      NWChem
-gaussian94  Gaussian
-psi4        Psi4
-molcas      Molcas
-qchem       Q-Chem
-orca        ORCA
-dalton      Dalton
-qcschema    QCSchema
-cp2k        CP2K
-pqs         PQS
-demon2k     deMon2K
-gamess_us   GAMESS US
-turbomole   Turbomole
-gamess_uk   GAMESS UK
-molpro      Molpro
-cfour       CFOUR
 acesii      ACES II
-xtron       xTron
-bsedebug    BSE Debug
-json        JSON
 bdf         BDF
+bsedebug    BSE Debug
+cfour       CFOUR
+cp2k        CP2K
+dalton      Dalton
+demon2k     deMon2K
+gamess_uk   GAMESS UK
+gamess_us   GAMESS US
+gaussian94  Gaussian
+json        JSON
+molcas      Molcas
+molpro      Molpro
+nwchem      NWChem
+orca        ORCA
+pqs         PQS
+psi4        Psi4
+qchem       Q-Chem
+qcschema    QCSchema
+turbomole   Turbomole
+xtron       xTron
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats -n
-nwchem
-gaussian94
-psi4
-molcas
-qchem
-orca
-dalton
-qcschema
-cp2k
-pqs
-demon2k
-gamess_us
-turbomole
-gamess_uk
-molpro
-cfour
 acesii
-xtron
-bsedebug
-json
 bdf
+bsedebug
+cfour
+cp2k
+dalton
+demon2k
+gamess_uk
+gamess_us
+gaussian94
+json
+molcas
+molpro
+nwchem
+orca
+pqs
+psi4
+qchem
+qcschema
+turbomole
+xtron
 </pre></div>
 </div>
 </div>
@@ -375,6 +375,7 @@ With <code class="docutils literal notranslate"><span class="pre">-n</span></cod
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats
 txt      Plain Text
 bib      BibTeX
+ris      RIS
 endnote  EndNote
 json     JSON
 </pre></div>
@@ -382,6 +383,7 @@ json     JSON
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-ref-formats -n
 txt
 bib
+ris
 endnote
 json
 </pre></div>
@@ -476,7 +478,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.11+6.gceb144b3
+# Version v0.8.11+28.gf2f2966e.dirty
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -569,8 +571,8 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
     author = {Pritchard, Benjamin P. and Altarawy, Doaa and Didier, Brett and Gibsom, Tara D. and Windus, Theresa L.},
     title = {A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community},
     journal = {J. Chem. Inf. Model.},
-    volume = {XXX},
-    page = {XXX},
+    volume = {59},
+    page = {4814-4820},
     year = {2019},
     doi = {10.1021/acs.jcim.9b00725}
 }

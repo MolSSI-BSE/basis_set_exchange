@@ -269,13 +269,13 @@ formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available formats are</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>nwchem</p></li>
-<li><p>gaussian94</p></li>
-<li><p>psi4</p></li>
-<li><p>gamess_us</p></li>
-<li><p>turbomole</p></li>
-<li><p>json</p></li>
 <li><p>bdf</p></li>
+<li><p>gamess_us</p></li>
+<li><p>gaussian94</p></li>
+<li><p>json</p></li>
+<li><p>nwchem</p></li>
+<li><p>psi4</p></li>
+<li><p>turbomole</p></li>
 </ul>
 </div></blockquote>
 </dd>
@@ -639,6 +639,12 @@ and for converting between angular momentum conventions</p>
 symbol, name, or number. It also has functions for converting
 angular momentum between integers (0, 1, 2) and letters (s, p, d).</p>
 <dl class="function">
+<dt id="basis_set_exchange.lut.all_element_names">
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">all_element_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.all_element_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a list of the names of all the elements</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.lut.amchar_to_int">
 <code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">amchar_to_int</code><span class="sig-paren">(</span><em class="sig-param">amchar</em>, <em class="sig-param">hij=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.amchar_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an angular momentum integer to a character</p>
@@ -691,9 +697,18 @@ on the periodic table. No excited states!</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="basis_set_exchange.lut.element_Z_from_name">
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_Z_from_name</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">as_str=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an element’s Z number given its name</p>
+<p>If as_str is True, then a string is returned (ie, ‘1’ for Hydrogen)</p>
+<p>An exception is thrown if the name is not found</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.lut.element_Z_from_sym">
-<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_Z_from_sym</code><span class="sig-paren">(</span><em class="sig-param">sym</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">element_Z_from_sym</code><span class="sig-paren">(</span><em class="sig-param">sym</em>, <em class="sig-param">as_str=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.element_Z_from_sym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an element’s Z-number given its symbol</p>
+<p>If as_str is True, then a string is returned (ie, ‘1’ for Hydrogen)</p>
 <p>An exception is thrown if the symbol is not found</p>
 </dd></dl>
 
@@ -894,6 +909,12 @@ can be used interchangeably. Ranges are also allowed in both lists and strings.<
 <dd><p>Transforms the name of a basis set to an internal representation</p>
 <p>This makes comparison of basis set names easier by, for example,
 converting the name to all lower case.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.misc.transpose_matrix">
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">transpose_matrix</code><span class="sig-paren">(</span><em class="sig-param">mat</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.transpose_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transposes a matrix (list of lists) commonly done do coefficients</p>
 </dd></dl>
 
 </div>
