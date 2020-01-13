@@ -52,15 +52,18 @@ def compact_references(basis_dict, ref_data):
     return element_refs
 
 
-def reference_text(ref):
+def reference_text(key, ref):
     '''Convert a single reference to plain text format
 
     Parameters
     ----------
+    key : str
+        Reference key (authorname2009a, etc)
     ref : dict
         Information about a single reference
     '''
 
+    # Set up the text wrapping of the data (not the key)
     ref_wrap = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 8)
 
     s = ''
@@ -112,4 +115,7 @@ def reference_text(ref):
         raise RuntimeError('Cannot handle reference type {}'.format(ref['_entry_type']))
     if 'note' in ref:
         s += '\n' + ref_wrap.fill(ref['note'])
-    return s
+
+    # The final output has the key on its own line. The rest is indented by 4
+    s = '\n'.join(' ' * 4 + x for x in s.splitlines())
+    return key + '\n' + s

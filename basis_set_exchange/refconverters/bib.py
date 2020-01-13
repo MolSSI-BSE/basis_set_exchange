@@ -4,10 +4,9 @@ Conversion of references to bibtex format
 
 import textwrap
 from ..misc import compact_elements
-from .common import get_library_citation
 
 
-def _ref_bib(key, ref):
+def write_bib(key, ref):
     '''Convert a single reference to bibtex format
     '''
     s = ''
@@ -31,52 +30,3 @@ def _ref_bib(key, ref):
     s += '\n}'
 
     return s
-
-
-def write_bib(refs):
-    '''Converts references to bibtex
-    '''
-
-    full_str = ''
-
-    lib_citation_desc, lib_citations = get_library_citation()
-
-    full_str += '%' * 80 + '\n'
-    full_str += textwrap.indent(lib_citation_desc, '% ')
-    full_str += '%' * 80 + '\n\n'
-
-    for k, r in lib_citations.items():
-        full_str += _ref_bib(k, r) + '\n\n'
-
-    full_str += '%' * 80 + '\n'
-    full_str += "% References for the basis set\n"
-    full_str += '%' * 80 + '\n'
-
-    # First, write out the element, description -> key mapping
-    # Also make a dict of unique reference to output
-    unique_refs = {}
-
-    for ref in refs:
-        full_str += '% {}\n'.format(compact_elements(ref['elements']))
-
-        for ri in ref['reference_info']:
-            full_str += '%     {}\n'.format(ri['reference_description'])
-
-            refdata = ri['reference_data']
-
-            if not refdata:
-                full_str += '%         (...no reference...)\n%\n'
-            else:
-                rkeys = [x[0] for x in ri['reference_data']]
-                full_str += '%         {}\n%\n'.format(' '.join(rkeys))
-
-            for k, r in refdata:
-                unique_refs[k] = r
-
-    full_str += '\n\n'
-
-    # Go through them sorted alphabetically by key
-    for k, r in sorted(unique_refs.items(), key=lambda x: x[0]):
-        full_str += '{}\n\n'.format(_ref_bib(k, r))
-
-    return full_str
