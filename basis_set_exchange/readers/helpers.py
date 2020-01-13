@@ -19,9 +19,13 @@ def _convert_str_int(s):
     If string s represents an integer, returns an int. Otherwise, returns s unchanged
     '''
 
+    # May throw ValueError if string is not an int
+    # May throw TypeError if it is NoneType (some captures may be optional)
     try:
         return int(s)
-    except:
+    except ValueError:
+        return s
+    except TypeError:
         return s
 
 

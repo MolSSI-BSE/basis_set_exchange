@@ -9,7 +9,6 @@ functionality of the library.
 
 import os
 import textwrap
-import warnings
 
 from . import compose
 from . import writers
@@ -19,7 +18,6 @@ from . import memo
 from . import notes
 from . import refconverters
 from . import references
-from . import readers
 from . import misc
 from . import lut
 from ._version import get_versions

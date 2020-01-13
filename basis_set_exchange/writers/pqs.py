@@ -22,7 +22,6 @@ def write_pqs_electron_basis(basis, electron_elements):
             am = shell['angular_momentum']
             amchar = lut.amint_to_char(am, hij=True, use_L=True).upper()
 
-            nprim = len(exponents)
             ncol = len(coefficients) + 1
             point_places = [4 + 8 * i + 15 * (i - 1) for i in range(1, ncol+1)]
             mat = printing.write_matrix([exponents, *coefficients], point_places)

@@ -195,8 +195,7 @@ def read_molcas(basis_lines, fname):
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
         basis_names_found.add(basis_name.lower())
 
-        # Split out the header and comments
-        header = element_lines[:3]
+        # remove the header and comments
         element_lines = element_lines[3:]
 
         # Split based on PP (pseudopotential)

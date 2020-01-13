@@ -93,7 +93,6 @@ def _parse_electron_lines(basis_lines, bs_data):
         # Shells are written in increasing angular momentum
         shell_am = 0
 
-        shells = []
         for sh_lines in shell_blocks:
             nprim, ngen = helpers.parse_line_regex(shell_begin_re, sh_lines[0], 'nprim, ngen')
             exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=ngen)

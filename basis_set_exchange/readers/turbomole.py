@@ -73,7 +73,9 @@ def _parse_ecp_potential_lines(element_lines, bs_data):
     element_sym, _ = helpers.parse_line_regex(element_re, element_lines[0], 'Element line')
 
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+
+    # We don't need the return value - we will use the one from creating ecp_electrons
+    helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
 
     # 4th line should be ncore and lmax
     n_elec, max_am = helpers.parse_line_regex(ecp_info_re, element_lines[1], 'ECP ncore, lmax')

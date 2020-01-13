@@ -2,7 +2,7 @@
 Conversion of basis sets to ORCA
 '''
 
-from .. import lut, manip, sort, printing
+from .. import lut, printing
 from .gamess_us import write_gamess_us_common
 
 
