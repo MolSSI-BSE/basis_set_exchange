@@ -2,9 +2,6 @@
 Conversion of references to bibtex format
 '''
 
-import textwrap
-from ..misc import compact_elements
-
 
 def write_bib(key, ref):
     '''Convert a single reference to bibtex format

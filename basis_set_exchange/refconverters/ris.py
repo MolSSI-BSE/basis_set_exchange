@@ -2,9 +2,6 @@
 Conversion of references to ris format                                                                                              
 '''
 
-import textwrap
-from ..misc import compact_elements
-
 
 def write_ris(key, ref):
     '''Convert a single reference to ris format                                                                                  

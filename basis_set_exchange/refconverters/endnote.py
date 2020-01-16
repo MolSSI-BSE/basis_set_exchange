@@ -2,9 +2,6 @@
 Conversion of references to enw format                                                                                              
 '''
 
-import textwrap
-from ..misc import compact_elements
-
 
 def write_endnote(key, ref):
     '''Convert a single reference to RIS format                                                                                  
