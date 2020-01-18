@@ -118,7 +118,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
             raise RuntimeError("Number of ECP electrons not specified for element {}".format(el))
 
 
-def read_nwchem(basis_lines, fname):
+def read_nwchem(basis_lines):
     '''Reads NWChem-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

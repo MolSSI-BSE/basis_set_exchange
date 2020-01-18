@@ -6,7 +6,7 @@ element_entry_re = re.compile(r'^([a-zA-Z]{1,3}):(.*):(.*)$')
 shell_info_re = re.compile(r'^([a-zA-Z])\s+(\d+)\s+(\d+)$')
 
 
-def read_gbasis(basis_lines, fname):
+def read_gbasis(basis_lines):
     '''Reads gbasis-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

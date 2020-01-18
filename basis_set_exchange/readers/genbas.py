@@ -97,7 +97,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
     _parse_ecp_potential_lines(basis_lines, bs_data)
 
 
-def read_genbas(basis_lines, fname):
+def read_genbas(basis_lines):
     '''Reads genbas-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

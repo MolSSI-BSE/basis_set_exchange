@@ -161,7 +161,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
         pot['angular_momentum'] = [all_pot_am[idx]]
 
 
-def read_g94(basis_lines, fname):
+def read_g94(basis_lines):
     '''Reads G94-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

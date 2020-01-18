@@ -154,7 +154,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
         _parse_ecp_potential_lines(element_lines, bs_data)
 
 
-def read_turbomole(basis_lines, fname):
+def read_turbomole(basis_lines):
     '''Reads turbomole-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

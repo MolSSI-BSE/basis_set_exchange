@@ -167,7 +167,7 @@ def _parse_ecp_lines(basis_lines, bs_data, element_Z):
         element_data['ecp_potentials'].append(ecp_pot)
 
 
-def read_molcas(basis_lines, fname):
+def read_molcas(basis_lines):
     '''Reads molcas-formatted file data and converts it to a dictionary with the
        usual BSE fields
 

@@ -79,39 +79,10 @@ def _fix_uncontracted(basis):
     return basis
 
 
-def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig', validate=False, as_component=False):
-    # Note that the default is utf-8-sig, which handles the optional byte order mark
+def read_formatted_basis_str(basis_str, file_type, validate=False, as_component=False):
+    basis_lines = [x.strip() for x in basis_str.splitlines()]
 
-    if not os.path.isfile(file_path):
-        raise RuntimeError('Basis file path \'{}\' does not exist'.format(file_path))
-
-    if file_type is None:
-        for k, v in _type_readers.items():
-            ext = v['extension']
-            ext_bz2 = ext + '.bz2'
-            if file_path.endswith(ext) or file_path.endswith(ext_bz2):
-                file_type = k
-                break
-
-        else:
-            raise RuntimeError("Unable to determine basis set format of '{}'".format(file_path))
-    else:
-        file_type = file_type.lower()
-
-    if file_type not in _type_readers:
-        raise RuntimeError("Unknown file type to read '{}'".format(file_type))
-
-    fname = os.path.basename(file_path)
-
-    # Handle compressed files
-    if file_path.endswith('.bz2'):
-        with bz2.open(file_path, 'rt', encoding=encoding) as f:
-            basis_lines = [l.strip() for l in f.readlines()]
-    else:
-        with open(file_path, 'r', encoding=encoding) as f:
-            basis_lines = [l.strip() for l in f.readlines()]
-
-    element_data = _type_readers[file_type]['reader'](basis_lines, fname)
+    element_data = _type_readers[file_type]['reader'](basis_lines)
 
     # the readers give the 'elements' member of a basis set json
     # We need to do a little fixing up
@@ -137,6 +108,39 @@ def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig', valida
         validate_data(bs_type, data)
 
     return data
+
+
+def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig', validate=False, as_component=False):
+    # Note that the default is utf-8-sig, which handles the optional byte order mark
+
+    if not os.path.isfile(file_path):
+        raise RuntimeError('Basis file path \'{}\' does not exist'.format(file_path))
+
+    if file_type is None:
+        for k, v in _type_readers.items():
+            ext = v['extension']
+            ext_bz2 = ext + '.bz2'
+            if file_path.endswith(ext) or file_path.endswith(ext_bz2):
+                file_type = k
+                break
+
+        else:
+            raise RuntimeError("Unable to determine basis set format of '{}'".format(file_path))
+    else:
+        file_type = file_type.lower()
+
+    if file_type not in _type_readers:
+        raise RuntimeError("Unknown file type to read '{}'".format(file_type))
+
+    # Handle compressed files
+    if file_path.endswith('.bz2'):
+        with bz2.open(file_path, 'rt', encoding=encoding) as f:
+            basis_str = f.read()
+    else:
+        with open(file_path, 'r', encoding=encoding) as f:
+            basis_str = f.read()
+
+    return read_formatted_basis_str(basis_str, file_type, validate, as_component)
 
 
 def get_reader_formats():

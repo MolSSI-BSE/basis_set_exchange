@@ -111,7 +111,7 @@ def _parse_electron_lines(basis_lines, bs_data):
             shell_am += 1
 
 
-def read_dalton(basis_lines, fname):
+def read_dalton(basis_lines):
     '''Reads Dalton-formatted file data and converts it to a dictionary with the
        usual BSE fields
     '''
