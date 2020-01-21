@@ -259,14 +259,17 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     role: str
         Desired role/type of auxiliary basis set.
         Use :func:`bse.api.get_roles` to programmatically obtain the available
-        formats.  The `fmt` argument is not case sensitive.
+        roles.  The `role` argument is not case sensitive.
 
         Available roles are
 
             * jfit
             * jkfit
             * rifit
+            * optri
             * admmfit
+            * dftxfit
+            * dftjfit
 
     data_dir : str
         Data directory with all the basis set information. By default,
