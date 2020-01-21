@@ -51,5 +51,5 @@ def test_duplicate_data(bs_name, bs_ver):
 @pytest.mark.parametrize('filename', ['6-31g-bse-DUPE.nw.bz2', 'def2-ecp-DUPE.nw.bz2'])
 def test_duplicate_fail(filename):
     filepath = os.path.join(curate_test_data_dir, filename)
-    filedata = readers.read_formatted_basis(filepath, 'nwchem')
+    filedata = readers.read_formatted_basis_file(filepath, 'nwchem')
     _test_duplicates(filedata, True)

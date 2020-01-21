@@ -8,7 +8,7 @@ from ..fileio import read_json_basis, write_json_basis
 from ..misc import expand_elements
 from ..validator import validate_data
 from ..skel import create_skel
-from ..readers import read_formatted_basis
+from ..readers import read_formatted_basis_file
 from .metadata import create_metadata_file
 
 
@@ -203,7 +203,7 @@ def add_basis(bs_file,
     '''
 
     # Read the basis set data into a component file, and add the description
-    bs_data = read_formatted_basis(bs_file, file_fmt, validate=True, as_component=True)
+    bs_data = read_formatted_basis_file(bs_file, file_fmt, validate=True, as_component=True)
     bs_data['description'] = description
     bs_data['data_source'] = data_source
 

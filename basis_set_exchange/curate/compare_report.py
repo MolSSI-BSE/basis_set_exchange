@@ -6,7 +6,7 @@ from ..api import get_basis
 from ..misc import compact_elements
 from ..sort import sort_shells, sort_potentials
 from .. import manip
-from ..readers import read_formatted_basis
+from ..readers import read_formatted_basis_file
 from .compare import _reldiff
 
 
@@ -230,7 +230,7 @@ def compare_basis_against_file(basis_name,
                                data_dir=None):
     '''Compare a basis set in the BSE against a reference file'''
 
-    src_data = read_formatted_basis(src_filepath, file_type)
+    src_data = read_formatted_basis_file(src_filepath, file_type)
     bse_data = get_basis(basis_name, version=version, data_dir=data_dir)
     return basis_comparison_report(src_data, bse_data, uncontract_general=uncontract_general)
 
@@ -238,8 +238,8 @@ def compare_basis_against_file(basis_name,
 def compare_basis_files(file_path_1, file_path_2, file_type_1=None, file_type_2=None, uncontract_general=False):
     '''Compare two files containing formatted basis sets'''
 
-    bs1 = read_formatted_basis(file_path_1, file_type_1)
-    bs2 = read_formatted_basis(file_path_2, file_type_2)
+    bs1 = read_formatted_basis_file(file_path_1, file_type_1)
+    bs2 = read_formatted_basis_file(file_path_2, file_type_2)
     return basis_comparison_report(bs1, bs2, uncontract_general)
 
 

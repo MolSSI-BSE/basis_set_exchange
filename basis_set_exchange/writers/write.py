@@ -2,6 +2,7 @@
 Converts basis set data to a specified output format
 '''
 
+import bz2
 from .bsejson import write_json
 from .nwchem import write_nwchem
 from .g94 import write_g94, write_xtron
@@ -173,7 +174,7 @@ _writer_map = {
 }
 
 
-def write_formatted_basis(basis_dict, fmt, header=None):
+def write_formatted_basis_str(basis_dict, fmt, header=None):
     '''
     Returns the basis set data as a string representing
     the data in the specified output format
@@ -211,11 +212,38 @@ def write_formatted_basis(basis_dict, fmt, header=None):
     return ret_str
 
 
+def write_formatted_basis_file(basis_dict, outfile_path, basis_fmt=None, header=None):
+    if basis_fmt is None:
+        for k, v in _writer_map.items():
+            ext = v['extension']
+            ext_bz2 = ext + '.bz2'
+            if outfile_path.endswith(ext) or outfile_path.endswith(ext_bz2):
+                basis_fmt = k
+                break
+        else:
+            raise RuntimeError("Unable to determine basis set format of '{}'".format(outfile_path))
+    else:
+        basis_fmt = basis_fmt.lower()
+
+    if basis_fmt not in _writer_map:
+        raise RuntimeError("Unknown output file format '{}'".format(basis_fmt))
+
+    basis_str = write_formatted_basis_str(basis_dict, basis_fmt, header)
+
+    if outfile_path.endswith('.bz2'):
+        with bz2.open(outfile_path, 'wt') as f:
+            f.write(basis_str)
+    else:
+        with open(outfile_path, 'w') as f:
+            f.write(basis_str)
+
+
 def get_writer_formats(function_types=None):
     '''Return information about the basis set formats available for writing
 
     The returned data is a map of format to display name. The format
-    can be passed as the fmt argument to :func:`write_formatted_basis`
+    can be passed as the fmt argument to :func:`write_formatted_basis_str` or
+    :func:`write_formatted_basis_file`
 
     If a list is specified for function_types, only those formats
     supporting the given function types will be returned.

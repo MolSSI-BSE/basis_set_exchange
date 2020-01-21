@@ -146,7 +146,7 @@ def test_g94_scaling(tmp_path):
     file1 = os.path.join(curate_test_data_dir, filename1)
     file2 = os.path.join(curate_test_data_dir, filename2)
 
-    bs1 = readers.read_formatted_basis(file1)
-    bs2 = readers.read_formatted_basis(file2)
+    bs1 = readers.read_formatted_basis_file(file1)
+    bs2 = readers.read_formatted_basis_file(file2)
 
     assert curate.compare_basis(bs1, bs2, rel_tol=1.0e-14)

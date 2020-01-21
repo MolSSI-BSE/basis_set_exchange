@@ -17,8 +17,8 @@ from .api import (get_basis, lookup_basis_by_role, get_metadata, get_reference_d
                   has_basis_notes, has_family_notes, get_roles, get_formats,
                   version, get_data_dir)
 
-from .readers import read_formatted_basis, get_reader_formats
-from .writers import write_formatted_basis, get_writer_formats
+from .readers import read_formatted_basis_file, read_formatted_basis_str, get_reader_formats
+from .writers import write_formatted_basis_file, write_formatted_basis_str, get_writer_formats
 from .refconverters import get_reference_formats
 from .validator import validate_file, validate_data
 

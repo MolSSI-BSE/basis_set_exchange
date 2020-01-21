@@ -15,7 +15,7 @@ from .dalton import read_dalton
 from .molcas import read_molcas
 from .genbas import read_genbas
 
-_type_readers = {
+_reader_map = {
     'turbomole': {
         'display': 'Turbomole',
         'extension': '.tm',
@@ -79,10 +79,10 @@ def _fix_uncontracted(basis):
     return basis
 
 
-def read_formatted_basis_str(basis_str, file_type, validate=False, as_component=False):
+def read_formatted_basis_str(basis_str, basis_fmt, validate=False, as_component=False):
     basis_lines = [x.strip() for x in basis_str.splitlines()]
 
-    element_data = _type_readers[file_type]['reader'](basis_lines)
+    element_data = _reader_map[basis_fmt]['reader'](basis_lines)
 
     # the readers give the 'elements' member of a basis set json
     # We need to do a little fixing up
@@ -110,27 +110,27 @@ def read_formatted_basis_str(basis_str, file_type, validate=False, as_component=
     return data
 
 
-def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig', validate=False, as_component=False):
+def read_formatted_basis_file(file_path, basis_fmt=None, encoding='utf-8-sig', validate=False, as_component=False):
     # Note that the default is utf-8-sig, which handles the optional byte order mark
 
     if not os.path.isfile(file_path):
         raise RuntimeError('Basis file path \'{}\' does not exist'.format(file_path))
 
-    if file_type is None:
-        for k, v in _type_readers.items():
+    if basis_fmt is None:
+        for k, v in _reader_map.items():
             ext = v['extension']
             ext_bz2 = ext + '.bz2'
             if file_path.endswith(ext) or file_path.endswith(ext_bz2):
-                file_type = k
+                basis_fmt = k
                 break
 
         else:
             raise RuntimeError("Unable to determine basis set format of '{}'".format(file_path))
     else:
-        file_type = file_type.lower()
+        basis_fmt = basis_fmt.lower()
 
-    if file_type not in _type_readers:
-        raise RuntimeError("Unknown file type to read '{}'".format(file_type))
+    if basis_fmt not in _reader_map:
+        raise RuntimeError("Unknown file format to read '{}'".format(basis_fmt))
 
     # Handle compressed files
     if file_path.endswith('.bz2'):
@@ -140,7 +140,7 @@ def read_formatted_basis(file_path, file_type=None, encoding='utf-8-sig', valida
         with open(file_path, 'r', encoding=encoding) as f:
             basis_str = f.read()
 
-    return read_formatted_basis_str(basis_str, file_type, validate, as_component)
+    return read_formatted_basis_str(basis_str, basis_fmt, validate, as_component)
 
 
 def get_reader_formats():
@@ -150,4 +150,4 @@ def get_reader_formats():
     This is returned as an ordered dictionary of key to display name.
     '''
 
-    return {k: v['display'] for k, v in _type_readers.items()}
+    return {k: v['display'] for k, v in _reader_map.items()}

@@ -35,11 +35,11 @@ def test_reader(file_rel_path):
         match = match[8:].strip()
 
         with pytest.raises(Exception, match=match):
-            readers.read_formatted_basis(file_path)
+            readers.read_formatted_basis_file(file_path)
     else:
         # Also validate the result (as both component and minimal)
-        readers.read_formatted_basis(file_path, validate=True, as_component=True)
-        readers.read_formatted_basis(file_path, validate=True, as_component=False)
+        readers.read_formatted_basis_file(file_path, validate=True, as_component=True)
+        readers.read_formatted_basis_file(file_path, validate=True, as_component=False)
 
 
 def test_reader_equivalent():
@@ -47,7 +47,7 @@ def test_reader_equivalent():
     # format.
     file1 = os.path.join(reader_test_data_dir, 'dalton', '6-31g.good.1.mol.bz2')
     file2 = os.path.join(reader_test_data_dir, 'dalton', '6-31g.good.2.mol.bz2')
-    data1 = readers.read_formatted_basis(file1)
-    data2 = readers.read_formatted_basis(file2)
+    data1 = readers.read_formatted_basis_file(file1)
+    data2 = readers.read_formatted_basis_file(file2)
 
     assert data1 == data2

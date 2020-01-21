@@ -245,7 +245,7 @@ def get_basis(name,
     else:
         header_str = None
 
-    return writers.write_formatted_basis(basis_dict, fmt, header_str)
+    return writers.write_formatted_basis_str(basis_dict, fmt, header_str)
 
 
 def lookup_basis_by_role(primary_basis, role, data_dir=None):
