@@ -11,7 +11,7 @@ from .common_testvars import *
 
 @pytest.mark.slow
 @pytest.mark.parametrize('basis_name', bs_names)
-@pytest.mark.parametrize('fmt', bs_formats)
+@pytest.mark.parametrize('fmt', bs_write_formats)
 @pytest.mark.parametrize('unc_gen', true_false)
 @pytest.mark.parametrize('unc_seg', true_false)
 @pytest.mark.parametrize('unc_spdf', true_false)

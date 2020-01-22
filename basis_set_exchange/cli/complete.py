@@ -3,7 +3,7 @@ Completers & validators for argcomplete
 '''
 
 import os
-from .. import api, curate
+from .. import api, curate, writers, readers
 
 
 def _fix_datadir(data_dir):
@@ -33,8 +33,12 @@ def cli_family_completer(**kwargs):
     return api.get_families(data_dir)
 
 
-def cli_fmt_completer(**kwargs):
-    return api.get_formats()
+def cli_write_fmt_completer(**kwargs):
+    return writers.get_writer_formats()
+
+
+def cli_read_fmt_completer(**kwargs):
+    return readers.get_reader_formats()
 
 
 def cli_reffmt_completer(**kwargs):

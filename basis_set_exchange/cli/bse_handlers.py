@@ -2,7 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import api, bundle, readers, writers, refconverters
+from .. import api, bundle, readers, writers, refconverters, convert
 from ..misc import compact_elements
 from .common import format_columns
 
@@ -186,6 +186,14 @@ def _bse_cli_get_family_notes(args):
     return api.get_family_notes(args.family, args.data_dir)
 
 
+def _bse_cli_convert_basis(args):
+    '''Handles the convert-basis subcommand'''
+
+    # We convert file -> file
+    convert.convert_formatted_basis_file(args.input_file, args.output_file, args.in_fmt, args.out_fmt)
+    return "Converted {} -> {}".format(args.input_file, args.output_file)
+
+
 def _bse_cli_create_bundle(args):
     '''Handles the create-bundle subcommand'''
     bundle.create_bundle(args.bundle_file, args.fmt, args.reffmt, args.archive_type, args.data_dir)
@@ -210,6 +218,7 @@ def bse_cli_handle_subcmd(args):
         'get-family': _bse_cli_get_family,
         'get-versions': _bse_cli_get_versions,
         'get-family-notes': _bse_cli_get_family_notes,
+        'convert-basis': _bse_cli_convert_basis,
         'create-bundle': _bse_cli_create_bundle
     }
 
