@@ -136,7 +136,7 @@ def parse_line_regex(rex, line, description=None, convert_int=True):
         return g
 
 
-def partition_lines(lines, condition, before=0, min_blocks=None, max_blocks=None, min_size=1, include_match=True):
+def partition_lines(lines, condition, before=0, min_after=None, min_blocks=None, max_blocks=None, min_size=1, include_match=True):
     '''Partition a list of lines based on some condition
 
     Parameters
@@ -149,6 +149,9 @@ def partition_lines(lines, condition, before=0, min_blocks=None, max_blocks=None
     before : int
         Number of lines prior to the splitting line (where condition(line) == True)
         to include
+`   min_after : int
+        Minimum number of lines to include after the match. This number of lines is forced
+        even if a match is found again with that set of lines.
     min_blocks : int
         Minimum number of blocks to find. If fewer are found, an exception is thrown
     max_blocks : int
@@ -178,7 +181,9 @@ def partition_lines(lines, condition, before=0, min_blocks=None, max_blocks=None
 
             if include_match:
                 cur_block.append(line)
-
+            if min_after:
+                cur_block.extend(lines[i+1:i+1+min_after])
+                i += min_after
         else:
             cur_block.append(line)
 

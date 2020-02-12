@@ -116,7 +116,7 @@ def read_genbas(basis_lines):
 
     # split into element blocks
     # each block may be electron shells or ECP
-    element_blocks = helpers.partition_lines(basis_lines, element_block_re.match, min_size=4)
+    element_blocks = helpers.partition_lines(basis_lines, element_block_re.match, min_after=1, min_size=4)
 
     for element_lines in element_blocks:
         if any(ecp_block_re.match(l) for l in element_lines):
