@@ -95,6 +95,8 @@ def read_formatted_basis_str(basis_str, basis_fmt, validate=False, as_component=
     else:
         data = create_skel('minimal')
         data['elements'] = element_data
+        data['name'] = 'unknown_basis'
+        data['description'] = 'no_description'
         bs_type = 'minimal'
 
         # Create the function types
