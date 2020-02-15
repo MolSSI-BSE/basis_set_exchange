@@ -19,6 +19,7 @@ from .api import (get_basis, lookup_basis_by_role, get_metadata, get_reference_d
 
 from .readers import read_formatted_basis_file, read_formatted_basis_str, get_reader_formats
 from .writers import write_formatted_basis_file, write_formatted_basis_str, get_writer_formats
+from .convert import convert_formatted_basis_file, convert_formatted_basis_str
 from .refconverters import get_reference_formats
 from .validator import validate_file, validate_data
 
