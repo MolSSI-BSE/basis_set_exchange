@@ -1,7 +1,4 @@
-.. Basis Set Exchange documentation master file, created by
-   sphinx-quickstart on Thu May 10 12:26:59 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Basis Set Exchange documentation master file
 
 Basis Set Exchange - Library
 ==============================================
@@ -9,13 +6,20 @@ Basis Set Exchange - Library
 This project is the data repository for basis sets found in quantum
 chemistry, plus a library for reading and manipulating the basis sets.
 
-This library is written as part of a rewrite of the Basis Set Exchange
+With this library, you can obtain basis sets in various formats,
+manipulate them (contract, uncontract), as well as convert
+basis set files between formats. Reference information can also be queried.
+
+The library also contains a command line interface. See :ref:`bse_cli`.
+
+This library is a core part of the Basis Set Exchange
 (https://www.basissetexchange.org) and is a collaboration between the
 Molecular Sciences Software Institute (https://molssi.org) and the
 Environmental Molecular Sciences Laboratory (https://www.emsl.pnl.gov)
 
 The code for this project is located on GitHub at
 https://github.com/MolSSI-BSE/basis_set_exchange
+
 
 Citation
 ========
@@ -36,6 +40,7 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
 
    usage
    bse_cli
+   conversion
    bundling
    user_api
    developer
@@ -46,8 +51,7 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
 License
 ==============================================
 
-The code is released under the BSD 3-Clause license. See the LICENSE file for
-details.
+The code is released under the BSD 3-Clause license. See the `LICENSE <https://github.com/MolSSI-BSE/basis_set_exchange/blob/master/LICENSE>`_ file for details.
 
 
 Indices and tables

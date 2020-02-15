@@ -1,8 +1,8 @@
 '''
-Basis Set Exchange
+Basis Set Exchange Python library
 
-Contains utilities for reading, writing, and converting
-basis set information
+This package contains utilities for obtaining, reading, writing,
+and converting basis set information
 '''
 
 # Check to make sure we are using python 3

@@ -22,6 +22,13 @@ compose - Composition of basis set information
    :members:
 
 
+convert - Conversion of formatted basis set data/files
+------------------------------------------------------
+
+.. automodule:: basis_set_exchange.convert
+   :members:
+
+
 fileio - Input/Output of files (including json)
 ------------------------------------------------
 
@@ -64,10 +71,24 @@ notes - Handling of notes
    :members:
 
 
+printing - Functions for printing/outputting pieces of basis sets
+-----------------------------------------------------------------
+
+.. automodule:: basis_set_exchange.printing
+   :members:
+
+
 references - Handling of reference data
 ------------------------------------------------
 
 .. automodule:: basis_set_exchange.references
+   :members:
+
+
+skel - Creating of python object skeletons of basis set data
+------------------------------------------------------------
+
+.. automodule:: basis_set_exchange.skel
    :members:
 
 
