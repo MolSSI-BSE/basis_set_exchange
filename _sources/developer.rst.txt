@@ -9,5 +9,6 @@ Developer Documentation
    developer_api
    developer_writers
    developer_readers
+   developer_refconverters
    developer_curate
 

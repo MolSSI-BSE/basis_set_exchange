@@ -20,8 +20,8 @@ Rendering/Viewing graphs will require graphviz.
 General usage
 -------------------
 
-The ``bsecurate`` command is generally followed by a subcommand (see below). ``bse -h`` will display help
-and ``bse -V`` will display the version and exit.
+The ``bsecurate`` command is generally followed by a subcommand (see below). ``bsecurate -h`` will display help
+and ``bsecurate -V`` will display the version and exit.
 
 .. command-output:: bsecurate -h
 
@@ -45,6 +45,47 @@ can take the ``-h`` option to display help for that subcommand.
    :ellipsis: 8
 
 
+elements-in-files
+*******************
+
+For a list of BSE JSON files, determine what elements the file contains data for.
+This works on table, element, and component data files.
+
+.. command-output:: DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
+   :shell:
+
+
+component-file-refs
+*******************
+
+.. command-output:: DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
+   :shell:
+
+
+print-component-file
+********************
+
+Pretty prints data from a component file.
+
+
+.. command-output:: DATADIR=`bse get-data-dir`; bsecurate print-component-file ${DATADIR}/dunning/cc-pVDZ.1.json
+   :shell:
+   :ellipsis: 10
+
+
+make-diff
+***************
+
+Compute the difference between two groups of JSON files and store them in '.diff' files.
+
+For each file specified with the ``-l``, subtract all the common shells in files specified
+with ``-r``.
+
+Multiple files are specified after the ``-r`` or ``-l`` flag. For example, ``-l file1 file2 -r file3 file3``.
+
+For each file specified with ``-l``, an output file is created with the same name but with `.diff` appended to the filename.
+
+
 compare-basis-sets
 *******************
 
@@ -61,14 +102,13 @@ compare-basis-files
 Compare two formatted basis sets files and print a report. For valid formats, use ``get-reader-formats``
 
 
-elements-in-files
-*******************
+view-graph-file
+***************
 
-For a list of BSE JSON files, determine what elements the file contains data for.
-This works on table, element, and component data files.
+Similar to ``make-graph-file``, but will instead create a temporary file,
+render the PNG, and then call the default viewer.
 
-.. command-output:: DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
-   :shell:
+Requires graphviz and a graphical viewer to be installed.
 
 
 make-graph-file
@@ -82,25 +122,3 @@ If ``--render`` is passed, a PNG file will also be created.
 
 .. command-output:: bsecurate make-graph-file 6-31g graph_631g.dot
 .. command-output:: cat graph_631g.dot
-
-
-view-graph-file
-***************
-
-Similar to ``make-graph-file``, but will instead create a temporary file,
-render the PNG, and then call the default viewer.
-
-Requires graphviz and a graphical viewer to be installed.
-
-
-make-diff
-***************
-
-Compute the difference between two groups of JSON files and store them in '.diff' files.
-
-For each file specified with the ``-l``, subtract all the common shells in files specified
-with ``-r``.
-
-Multiple files are specified after the ``-r`` or ``-l`` flag. For example, ``-l file1 file2 -r file3 file3``.
-
-For each file specified with ``-l``, an output file is created with the same name but with `.diff` appended to the filename.

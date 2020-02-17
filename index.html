@@ -83,6 +83,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -156,7 +157,11 @@
 <h1>Basis Set Exchange - Library<a class="headerlink" href="#basis-set-exchange-library" title="Permalink to this headline">¶</a></h1>
 <p>This project is the data repository for basis sets found in quantum
 chemistry, plus a library for reading and manipulating the basis sets.</p>
-<p>This library is written as part of a rewrite of the Basis Set Exchange
+<p>With this library, you can obtain basis sets in various formats,
+manipulate them (contract, uncontract), as well as convert
+basis set files between formats. Reference information can also be queried.</p>
+<p>The library also contains a command line interface. See <a class="reference internal" href="bse_cli.html#bse-cli"><span class="std std-ref">The bse command line interface</span></a>.</p>
+<p>This library is a core part of the Basis Set Exchange
 (<a class="reference external" href="https://www.basissetexchange.org">https://www.basissetexchange.org</a>) and is a collaboration between the
 Molecular Sciences Software Institute (<a class="reference external" href="https://molssi.org">https://molssi.org</a>) and the
 Environmental Molecular Sciences Laboratory (<a class="reference external" href="https://www.emsl.pnl.gov">https://www.emsl.pnl.gov</a>)</p>
@@ -185,11 +190,11 @@ Environmental Molecular Sciences Laboratory (<a class="reference external" href=
 <li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#importing">Importing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#determining-the-library-version">Determining the library version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#getting-a-basis-set">Getting a basis set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#getting-a-basis-set-from-the-library">Getting a basis set from the library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#getting-references">Getting references</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#listing-basis-sets-and-getting-metadata">Listing Basis Sets and Getting Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#lookup-by-role">Lookup by Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#listing-basis-sets-and-getting-basis-set-metadata">Listing Basis Sets and Getting Basis Set Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#lookup-a-basis-by-role">Lookup a basis by Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#filtering-basis-sets">Filtering basis sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#basis-set-and-family-notes">Basis set and family notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#memoization">Memoization</a></li>
@@ -200,6 +205,12 @@ Environmental Molecular Sciences Laboratory (<a class="reference external" href=
 <li class="toctree-l2"><a class="reference internal" href="bse_cli.html#tab-completion">TAB completion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bse_cli.html#general-usage">General usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bse_cli.html#subcommands">Subcommands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html#about-conversion">About conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html#conversion-via-python">Conversion via python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conversion.html#conversion-via-the-command-line">Conversion via the command line</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a><ul>
@@ -214,6 +225,7 @@ Environmental Molecular Sciences Laboratory (<a class="reference external" href=
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_writers.html">Output converters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_readers.html">Basis set readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_refconverters.html">Basis set reference writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_curate.html">Developer Curation API</a></li>
 </ul>
 </li>
@@ -240,8 +252,7 @@ Environmental Molecular Sciences Laboratory (<a class="reference external" href=
 </div>
 <div class="section" id="license">
 <h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
-<p>The code is released under the BSD 3-Clause license. See the LICENSE file for
-details.</p>
+<p>The code is released under the BSD 3-Clause license. See the <a class="reference external" href="https://github.com/MolSSI-BSE/basis_set_exchange/blob/master/LICENSE">LICENSE</a> file for details.</p>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>

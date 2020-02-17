@@ -83,6 +83,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -208,6 +209,8 @@
 </li>
       <li><a href="developer_api.html#module-basis_set_exchange.compose">basis_set_exchange.compose (module)</a>
 </li>
+      <li><a href="developer_api.html#module-basis_set_exchange.convert">basis_set_exchange.convert (module)</a>
+</li>
       <li><a href="developer_curate.html#module-basis_set_exchange.curate">basis_set_exchange.curate (module)</a>
 </li>
       <li><a href="developer_api.html#module-basis_set_exchange.fileio">basis_set_exchange.fileio (module)</a>
@@ -224,11 +227,15 @@
 </li>
       <li><a href="developer_api.html#module-basis_set_exchange.notes">basis_set_exchange.notes (module)</a>
 </li>
+      <li><a href="developer_api.html#module-basis_set_exchange.printing">basis_set_exchange.printing (module)</a>
+</li>
       <li><a href="developer_readers.html#module-basis_set_exchange.readers">basis_set_exchange.readers (module)</a>
 </li>
-      <li><a href="developer_writers.html#module-basis_set_exchange.refconverters">basis_set_exchange.refconverters (module)</a>
+      <li><a href="developer_refconverters.html#module-basis_set_exchange.refconverters">basis_set_exchange.refconverters (module)</a>
 </li>
       <li><a href="developer_api.html#module-basis_set_exchange.references">basis_set_exchange.references (module)</a>
+</li>
+      <li><a href="developer_api.html#module-basis_set_exchange.skel">basis_set_exchange.skel (module)</a>
 </li>
       <li><a href="developer_api.html#module-basis_set_exchange.sort">basis_set_exchange.sort (module)</a>
 </li>
@@ -258,17 +265,31 @@
 </li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.compare_electron_shells">compare_electron_shells() (in module basis_set_exchange.curate)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer_curate.html#basis_set_exchange.curate.compare_elements">compare_elements() (in module basis_set_exchange.curate)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.printing.component_basis_str">component_basis_str() (in module basis_set_exchange.printing)</a>
 </li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.component_file_refs">component_file_refs() (in module basis_set_exchange.curate)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer_api.html#basis_set_exchange.compose.compose_elemental_basis">compose_elemental_basis() (in module basis_set_exchange.compose)</a>
 </li>
       <li><a href="developer_api.html#basis_set_exchange.misc.contraction_string">contraction_string() (in module basis_set_exchange.misc)</a>
 </li>
-      <li><a href="developer_writers.html#basis_set_exchange.refconverters.convert_references">convert_references() (in module basis_set_exchange.refconverters)</a>
+      <li><a href="user_api.html#basis_set_exchange.convert_formatted_basis_file">convert_formatted_basis_file() (in module basis_set_exchange)</a>
+
+      <ul>
+        <li><a href="developer_api.html#basis_set_exchange.convert.convert_formatted_basis_file">(in module basis_set_exchange.convert)</a>
+</li>
+      </ul></li>
+      <li><a href="user_api.html#basis_set_exchange.convert_formatted_basis_str">convert_formatted_basis_str() (in module basis_set_exchange)</a>
+
+      <ul>
+        <li><a href="developer_api.html#basis_set_exchange.convert.convert_formatted_basis_str">(in module basis_set_exchange.convert)</a>
+</li>
+      </ul></li>
+      <li><a href="developer_refconverters.html#basis_set_exchange.refconverters.convert_references">convert_references() (in module basis_set_exchange.refconverters)</a>
 </li>
       <li><a href="user_api.html#basis_set_exchange.create_bundle">create_bundle() (in module basis_set_exchange)</a>
 
@@ -277,6 +298,8 @@
 </li>
       </ul></li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.create_metadata_file">create_metadata_file() (in module basis_set_exchange.curate)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.skel.create_skel">create_skel() (in module basis_set_exchange.skel)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -296,9 +319,13 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer_api.html#basis_set_exchange.printing.ecp_pot_str">ecp_pot_str() (in module basis_set_exchange.printing)</a>
+</li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.ecp_pots_are_equal">ecp_pots_are_equal() (in module basis_set_exchange.curate)</a>
 </li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.ecp_pots_are_subset">ecp_pots_are_subset() (in module basis_set_exchange.curate)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.printing.electron_shell_str">electron_shell_str() (in module basis_set_exchange.printing)</a>
 </li>
       <li><a href="developer_curate.html#basis_set_exchange.curate.electron_shells_are_equal">electron_shells_are_equal() (in module basis_set_exchange.curate)</a>
 </li>
@@ -308,11 +335,13 @@
 </li>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_name">element_data_from_name() (in module basis_set_exchange.lut)</a>
 </li>
-      <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_sym">element_data_from_sym() (in module basis_set_exchange.lut)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_sym">element_data_from_sym() (in module basis_set_exchange.lut)</a>
+</li>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_Z">element_data_from_Z() (in module basis_set_exchange.lut)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.printing.element_data_str">element_data_str() (in module basis_set_exchange.printing)</a>
 </li>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_name_from_Z">element_name_from_Z() (in module basis_set_exchange.lut)</a>
 </li>
@@ -380,7 +409,7 @@
         <li><a href="developer_api.html#basis_set_exchange.api.get_data_dir">(in module basis_set_exchange.api)</a>
 </li>
       </ul></li>
-      <li><a href="developer_writers.html#basis_set_exchange.refconverters.get_format_extension">get_format_extension() (in module basis_set_exchange.refconverters)</a>
+      <li><a href="developer_refconverters.html#basis_set_exchange.refconverters.get_format_extension">get_format_extension() (in module basis_set_exchange.refconverters)</a>
 
       <ul>
         <li><a href="developer_writers.html#basis_set_exchange.writers.get_format_extension">(in module basis_set_exchange.writers)</a>
@@ -405,7 +434,7 @@
       <ul>
         <li><a href="developer_api.html#basis_set_exchange.api.get_reference_formats">(in module basis_set_exchange.api)</a>
 </li>
-        <li><a href="developer_writers.html#basis_set_exchange.refconverters.get_reference_formats">(in module basis_set_exchange.refconverters)</a>
+        <li><a href="developer_refconverters.html#basis_set_exchange.refconverters.get_reference_formats">(in module basis_set_exchange.refconverters)</a>
 </li>
       </ul></li>
       <li><a href="user_api.html#basis_set_exchange.get_references">get_references() (in module basis_set_exchange)</a>
@@ -578,10 +607,10 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="user_api.html#basis_set_exchange.write_formatted_basis">write_formatted_basis() (in module basis_set_exchange)</a>
+      <li><a href="user_api.html#basis_set_exchange.write_formatted_basis_str">write_formatted_basis_str() (in module basis_set_exchange)</a>
 
       <ul>
-        <li><a href="developer_writers.html#basis_set_exchange.writers.write_formatted_basis">(in module basis_set_exchange.writers)</a>
+        <li><a href="developer_writers.html#basis_set_exchange.writers.write_formatted_basis_str">(in module basis_set_exchange.writers)</a>
 </li>
       </ul></li>
   </ul></td>

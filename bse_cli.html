@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Creating Basis Set Bundles" href="bundling.html" />
+    <link rel="next" title="Converting basis sets" href="conversion.html" />
     <link rel="prev" title="Quickstart and Basic Usage" href="usage.html" /> 
 </head>
 
@@ -108,10 +108,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#get-versions">get-versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-family-notes">get-family-notes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-bundle">create-bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-basis">convert-basis</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -182,9 +184,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="the-bse-command-line-interface">
-<h1>The bse command line interface<a class="headerlink" href="#the-bse-command-line-interface" title="Permalink to this headline">¶</a></h1>
-<p>The basis set exchange package contains a command-line interface
-called <code class="docutils literal notranslate"><span class="pre">bse</span></code>. This command can be used to obtain basis sets and references,
+<span id="bse-cli"></span><h1>The bse command line interface<a class="headerlink" href="#the-bse-command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>The basis set exchange package contains a command-line interface called
+<code class="docutils literal notranslate"><span class="pre">bse</span></code>. This command can be used to obtain/print basis sets and references,
 as well as query the library for information and metadata.</p>
 <div class="section" id="installation">
 <span id="cliinstall"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -259,6 +261,7 @@ positional arguments:
     get-family          Output the family of a basis set
     get-versions        Output a list all available versions of a basis set
     get-family-notes    Get the notes of a family of basis sets
+    convert-basis       Convert basis set files from one format to another
     create-bundle       Create a bundle of basis sets
 
 optional arguments:
@@ -398,7 +401,7 @@ json
 </div>
 <div class="section" id="list-wrtier-formats">
 <h3>list-wrtier-formats<a class="headerlink" href="#list-wrtier-formats" title="Permalink to this headline">¶</a></h3>
-<p>Obtain a list of the formats that can be written to by the library</p>
+<p>Print a list of the formats that can be written to by the library</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-writer-formats
 acesii      ACES II
 bdf         BDF
@@ -426,7 +429,7 @@ xtron       xTron
 </div>
 <div class="section" id="list-reader-formats">
 <h3>list-reader-formats<a class="headerlink" href="#list-reader-formats" title="Permalink to this headline">¶</a></h3>
-<p>Obtain a list of the formats that can be read by the library</p>
+<p>Print a list of the formats that can be read by the library</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-reader-formats
 turbomole   Turbomole
 gaussian94  Gaussian94
@@ -456,7 +459,7 @@ dftjfit  DFT Correlation Fitting
 </div>
 <div class="section" id="get-data-dir">
 <h3>get-data-dir<a class="headerlink" href="#get-data-dir" title="Permalink to this headline">¶</a></h3>
-<p>Obtains the default data directory (built into the BSE package)</p>
+<p>Print the default data directory (built into the BSE package)</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-data-dir
 /home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data
 </pre></div>
@@ -514,12 +517,11 @@ def2-universal-jfit
 </div>
 <div class="section" id="get-basis">
 <h3>get-basis<a class="headerlink" href="#get-basis" title="Permalink to this headline">¶</a></h3>
-<p>Obtain a formatted basis set.
+<p>Print a formatted basis set from the library.
 This command has several options. See <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">get-basis</span> <span class="pre">-h</span></code> for a complete list.</p>
 <p>This subcommand takes two required arguments: the name of the basis set
 and the format. See <a class="reference internal" href="#list-basis-sets">list-basis-sets</a> and <a class="reference internal" href="#list-formats">list-formats</a>.</p>
-<p>The main popular option is <code class="docutils literal notranslate"><span class="pre">--elements</span></code> which takes an element string.
-See <a class="reference internal" href="#element-strings">Element strings</a>.
+<p>The main popular option is <code class="docutils literal notranslate"><span class="pre">--elements</span></code> which takes an element string. See <a class="reference internal" href="#element-strings">Element strings</a>.
 By default, all elements for which the basis set is defined are included.</p>
 <p>A version of the basis set can be specified with <code class="docutils literal notranslate"><span class="pre">--version</span></code>.
 See <a class="reference internal" href="#get-versions">get-versions</a> for how to list versions available for a basis set.</p>
@@ -528,7 +530,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.11+33.g61f01562
+# Version v0.8.12
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -604,7 +606,7 @@ C    S
 </div>
 <div class="section" id="get-refs">
 <h3>get-refs<a class="headerlink" href="#get-refs" title="Permalink to this headline">¶</a></h3>
-<p>Obtain formatted reference for a basis set.</p>
+<p>Print formatted reference info for a basis set.</p>
 <p>This subcommand takes two required arguments: the name of the basis set,
 and the desired reference format. See <a class="reference internal" href="#list-basis-sets">list-basis-sets</a> and <a class="reference internal" href="#list-ref-formats">list-ref-formats</a>.</p>
 <p>Elements can be restricted with <code class="docutils literal notranslate"><span class="pre">--elements</span></code>. See <a class="reference internal" href="#element-strings">Element strings</a>.
@@ -616,7 +618,6 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 % If you downloaded data from the basis set
 % exchange or used the basis set exchange python library, please cite:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 @article{pritchard2019a,
     author = {Pritchard, Benjamin P. and Altarawy, Doaa and Didier, Brett and Gibsom, Tara D. and Windus, Theresa L.},
     title = {A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community},
@@ -673,7 +674,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 </div>
 <div class="section" id="get-info">
 <h3>get-info<a class="headerlink" href="#get-info" title="Permalink to this headline">¶</a></h3>
-<p>Obtain some metadata about a basis set.
+<p>Print some metadata about a basis set.
 This takes only one required argument (the name of the basis set).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-info cc-pvdz
 --------------------------------------------------------------------------------
@@ -697,7 +698,7 @@ Versions:
 </div>
 <div class="section" id="get-notes">
 <h3>get-notes<a class="headerlink" href="#get-notes" title="Permalink to this headline">¶</a></h3>
-<p>Obtain the notes about a basis set.
+<p>Print the notes about a basis set.
 This takes only one required argument (the name of the basis set).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-notes sto-3g
 --------------------------------------------------------------------------------
@@ -807,7 +808,7 @@ This takes only one required argument (the name of the basis set).</p>
 </div>
 <div class="section" id="get-family-notes">
 <h3>get-family-notes<a class="headerlink" href="#get-family-notes" title="Permalink to this headline">¶</a></h3>
-<p>Obtain the notes about a basis set family. This takes only one required argument (the basis set family).</p>
+<p>Print the notes about a basis set family. This takes only one required argument (the basis set family).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-family-notes sto
 Notes about STO basis sets
 ============================
@@ -827,6 +828,10 @@ factors were taken from the literature and verified by dividing them out
 <h3>create-bundle<a class="headerlink" href="#create-bundle" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference internal" href="bundling.html#bundles"><span class="std std-ref">Creating Basis Set Bundles</span></a></p>
 </div>
+<div class="section" id="convert-basis">
+<h3>convert-basis<a class="headerlink" href="#convert-basis" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="conversion.html#conversion"><span class="std std-ref">Converting basis sets</span></a></p>
+</div>
 </div>
 </div>
 
@@ -838,7 +843,7 @@ factors were taken from the literature and verified by dividing them out
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bundling.html" class="btn btn-neutral float-right" title="Creating Basis Set Bundles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="conversion.html" class="btn btn-neutral float-right" title="Converting basis sets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="usage.html" class="btn btn-neutral float-left" title="Quickstart and Basic Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -86,17 +86,18 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#importing">Importing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#determining-the-library-version">Determining the library version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-a-basis-set">Getting a basis set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-a-basis-set-from-the-library">Getting a basis set from the library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-references">Getting references</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#listing-basis-sets-and-getting-metadata">Listing Basis Sets and Getting Metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#lookup-by-role">Lookup by Role</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listing-basis-sets-and-getting-basis-set-metadata">Listing Basis Sets and Getting Basis Set Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lookup-a-basis-by-role">Lookup a basis by Role</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filtering-basis-sets">Filtering basis sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basis-set-and-family-notes">Basis set and family notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#memoization">Memoization</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -183,12 +184,14 @@ the cloned git repository.</p>
 <h2>Determining the library version<a class="headerlink" href="#determining-the-library-version" title="Permalink to this headline">¶</a></h2>
 <p>The library version can be determined with <a class="reference internal" href="user_api.html#basis_set_exchange.version" title="basis_set_exchange.version"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.version()</span></code></a></p>
 </div>
-<div class="section" id="getting-a-basis-set">
-<h2>Getting a basis set<a class="headerlink" href="#getting-a-basis-set" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-a-basis-set-from-the-library">
+<h2>Getting a basis set from the library<a class="headerlink" href="#getting-a-basis-set-from-the-library" title="Permalink to this headline">¶</a></h2>
 <p>The main function for getting a basis set is <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.
 Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
-instread.</p>
+instread. This string will contain the newlines needed to properly format
+the string into a basis set.</p>
+<p>The name of the basis set is not case sensitive.</p>
 <p>The available formats are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>
 and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_formats" title="basis_set_exchange.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_formats()</span></code></a></p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get a basis set as a python dictionary</span>
@@ -218,8 +221,8 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 <span class="go">{&#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian&#39;, &#39;psi4&#39;: &#39;Psi4&#39;,...</span>
 </pre></div>
 </div>
-<p>By default, all elements for which the basis set is defined are included - this
-can be overridden with the <cite>elements</cite> parameter</p>
+<p>By default, all elements for which the basis set is defined are included. You can specify a
+subset of elements instead by using the <cite>elements</cite> parameter</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get only carbon and oxygen</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
@@ -295,28 +298,31 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 </div>
 <div class="section" id="versioning">
 <h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
-<p>Basis sets within the package are versioned. This allows for changes to be made to a
+<p>Basis sets within this package are versioned. This allows for changes to be made to a
 basis set, while keeping the old data accessible for historical purposes.
 Versions are specified by integers. By default,
-v0 will match the original BSE data.</p>
+v0 will match the original EMSL BSE data.</p>
 <p>Versions are meant to be increased only when there is a material change to the data.
 If data is simply being added (new elements), the version will not be incremented.</p>
 <p>Both <cite>basis_set_exchange.get_basis</cite> and <a class="reference internal" href="user_api.html#basis_set_exchange.get_references" title="basis_set_exchange.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_references()</span></code></a> accept a <cite>version</cite> parameter,
 which is a string. If <cite>version</cite> is not specified, the latest version is used.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get latest version</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the latest version of 6-31G*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;H     0\nS   3   1.00\n      0.1873113696D+02       0.3349460434D-01\n      0.2825394365D+01...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the original BSE data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Versions can also be passed as integers</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Versions can also be passed as strings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="listing-basis-sets-and-getting-metadata">
-<h2>Listing Basis Sets and Getting Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-metadata" title="Permalink to this headline">¶</a></h2>
-<p>The BSE contains metadata for all the basis sets that is in its data directory.
+<div class="section" id="listing-basis-sets-and-getting-basis-set-metadata">
+<h2>Listing Basis Sets and Getting Basis Set Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-basis-set-metadata" title="Permalink to this headline">¶</a></h2>
+<p>This package contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_metadata()</span></code> function</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -324,7 +330,7 @@ This information can be accessed by the <code class="xref py py-func docutils li
 into some internal name (see <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.transform_basis_name()</span></code>)</p>
 </div>
 <p>A simple list containing all the basis set names can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_all_basis_names" title="basis_set_exchange.get_all_basis_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_all_basis_names()</span></code></a>.
-A list of families can be obtained with <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_families()</span></code>.</p>
+A simple list of families can be obtained with <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_families()</span></code>.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the metadata</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">()</span>
 
@@ -341,26 +347,23 @@ A list of families can be obtained with <code class="xref py py-func docutils li
 <span class="go">[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;,...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print all the basis sets known to the BSE</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">all_bs</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">all_bs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_all_basis_names</span><span class="p">()</span>
 <span class="go">[&#39;2ZaPa-NR&#39;, &#39;2ZaPa-NR-CV&#39;, &#39;3-21G&#39;, &#39;3ZaPa-NR&#39;, &#39;3ZaPa-NR-CV&#39;,...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># A list of all families</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">all_fam</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_families</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">all_fam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_families</span><span class="p">()</span>
 <span class="go">[&#39;acvxz-j&#39;, &#39;ahlrichs&#39;, &#39;ahlrichs_dhf&#39;, &#39;ahlrichs_fit&#39;, ...</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="lookup-by-role">
-<h2>Lookup by Role<a class="headerlink" href="#lookup-by-role" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lookup-a-basis-by-role">
+<h2>Lookup a basis by Role<a class="headerlink" href="#lookup-a-basis-by-role" title="Permalink to this headline">¶</a></h2>
 <p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
 for example). These auxiliary basis sets can be queried in the BSE
 using the <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>. This function takes the
 primary basis set and the role you wish to look up. The function
 returns the name of the basis set.</p>
-<p>Like the other functions, the basis name and role are not
-case sensitive.</p>
+<p>Like the other functions, the basis name and role are not case sensitive.</p>
 <p>The available roles are listed at the documentation for <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>
 and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>

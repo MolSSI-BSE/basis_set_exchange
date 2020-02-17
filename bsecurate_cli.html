@@ -84,6 +84,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -91,12 +92,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation-and-tab-completion">Installation and TAB completion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#subcommands">Subcommands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#elements-in-files">elements-in-files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#component-file-refs">component-file-refs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-component-file">print-component-file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-diff">make-diff</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compare-basis-sets">compare-basis-sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compare-basis-files">compare-basis-files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#elements-in-files">elements-in-files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#make-graph-file">make-graph-file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#view-graph-file">view-graph-file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#make-diff">make-diff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-graph-file">make-graph-file</a></li>
 </ul>
 </li>
 </ul>
@@ -180,8 +183,8 @@ This can be used to query, add, or modify basis set data.</p>
 </div>
 <div class="section" id="general-usage">
 <h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code> command is generally followed by a subcommand (see below). <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-h</span></code> will display help
-and <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">-V</span></code> will display the version and exit.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code> command is generally followed by a subcommand (see below). <code class="docutils literal notranslate"><span class="pre">bsecurate</span> <span class="pre">-h</span></code> will display help
+and <code class="docutils literal notranslate"><span class="pre">bsecurate</span> <span class="pre">-V</span></code> will display the version and exit.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate -h
 usage: bsecurate [-h] [-V] [-d PATH] [-o PATH] subcommand ...
 
@@ -235,6 +238,78 @@ optional arguments:
 ...
 </pre></div>
 </div>
+<div class="section" id="elements-in-files">
+<h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Permalink to this headline">¶</a></h3>
+<p>For a list of BSE JSON files, determine what elements the file contains data for.
+This works on table, element, and component data files.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/6-31G.0.table.json                    H-Zn
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json    H,He,B-Ne,Al-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVD+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVDZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQ+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVT+dZ.1.element.json  Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVTZ.1.element.json    H-Ar,Sc-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5Z.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV6Z.1.element.json        H,He,Be-Ne,Al-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVD+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVDZ.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQ+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQZ.1.element.json        H-Ar,Ca-Kr
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVT+dZ.1.element.json      Na-Ar
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVTZ.1.element.json        H-Ar,Ca-Kr
+</pre></div>
+</div>
+</div>
+<div class="section" id="component-file-refs">
+<h3>component-file-refs<a class="headerlink" href="#component-file-refs" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVDZ.1.json
+    H,B-Ne  dunning1989a
+    He      woon1994a
+    Ca      koput2002a
+    Sc-Zn   balabanov2005a balabanov2006a
+    Ga-Kr   wilson1999a
+
+/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVTZ.1.json
+    H,B-Ne  dunning1989a
+    He      woon1994a
+    Ca      koput2002a
+    Sc-Zn   balabanov2005a
+    Ga-Kr   wilson1999a
+</pre></div>
+</div>
+</div>
+<div class="section" id="print-component-file">
+<h3>print-component-file<a class="headerlink" href="#print-component-file" title="Permalink to this headline">¶</a></h3>
+<p>Pretty prints data from a component file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate print-component-file ${DATADIR}/dunning/cc-pVDZ.1.json
+Description: The cc-pVDZ basis set
+
+Element: H : (4s,1p) -&gt; [2s,1p]
+Shell: Index 0  Region: (none) AM: S
+Function: gto
+      1.301000E+01           1.968500E-02           0.000000E+00
+      1.962000E+00           1.379770E-01           0.000000E+00
+      4.446000E-01           4.781480E-01           0.000000E+00
+      1.220000E-01           5.012400E-01           1.000000E+00
+
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-diff">
+<h3>make-diff<a class="headerlink" href="#make-diff" title="Permalink to this headline">¶</a></h3>
+<p>Compute the difference between two groups of JSON files and store them in ‘.diff’ files.</p>
+<p>For each file specified with the <code class="docutils literal notranslate"><span class="pre">-l</span></code>, subtract all the common shells in files specified
+with <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
+<p>Multiple files are specified after the <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag. For example, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">file1</span> <span class="pre">file2</span> <span class="pre">-r</span> <span class="pre">file3</span> <span class="pre">file3</span></code>.</p>
+<p>For each file specified with <code class="docutils literal notranslate"><span class="pre">-l</span></code>, an output file is created with the same name but with <cite>.diff</cite> appended to the filename.</p>
+</div>
 <div class="section" id="compare-basis-sets">
 <h3>compare-basis-sets<a class="headerlink" href="#compare-basis-sets" title="Permalink to this headline">¶</a></h3>
 <p>Compare two basis sets and print a report.
@@ -264,32 +339,11 @@ DIFFERENCES FOUND. SEE ABOVE
 <h3>compare-basis-files<a class="headerlink" href="#compare-basis-files" title="Permalink to this headline">¶</a></h3>
 <p>Compare two formatted basis sets files and print a report. For valid formats, use <code class="docutils literal notranslate"><span class="pre">get-reader-formats</span></code></p>
 </div>
-<div class="section" id="elements-in-files">
-<h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Permalink to this headline">¶</a></h3>
-<p>For a list of BSE JSON files, determine what elements the file contains data for.
-This works on table, element, and component data files.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/6-31G.0.table.json                    H-Zn
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json  Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json    H-Ar,Sc-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json    H,He,B-Ne,Al-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVD+dZ.1.element.json  Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVDZ.1.element.json    H-Ar,Sc-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQ+dZ.1.element.json  Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVQZ.1.element.json    H-Ar,Sc-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVT+dZ.1.element.json  Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/aug-cc-pVTZ.1.element.json    H-Ar,Sc-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5+dZ.1.element.json      Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV5Z.1.element.json        H-Ar,Ca-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pV6Z.1.element.json        H,He,Be-Ne,Al-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVD+dZ.1.element.json      Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVDZ.1.element.json        H-Ar,Ca-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQ+dZ.1.element.json      Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVQZ.1.element.json        H-Ar,Ca-Kr
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVT+dZ.1.element.json      Na-Ar
-/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/data/dunning/cc-pVTZ.1.element.json        H-Ar,Ca-Kr
-</pre></div>
-</div>
+<div class="section" id="view-graph-file">
+<h3>view-graph-file<a class="headerlink" href="#view-graph-file" title="Permalink to this headline">¶</a></h3>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">make-graph-file</span></code>, but will instead create a temporary file,
+render the PNG, and then call the default viewer.</p>
+<p>Requires graphviz and a graphical viewer to be installed.</p>
 </div>
 <div class="section" id="make-graph-file">
 <h3>make-graph-file<a class="headerlink" href="#make-graph-file" title="Permalink to this headline">¶</a></h3>
@@ -312,20 +366,6 @@ pople/6-31G/6-31G-valence.1.json&quot; [label=&quot;Na-Ar&quot;]
 }
 </pre></div>
 </div>
-</div>
-<div class="section" id="view-graph-file">
-<h3>view-graph-file<a class="headerlink" href="#view-graph-file" title="Permalink to this headline">¶</a></h3>
-<p>Similar to <code class="docutils literal notranslate"><span class="pre">make-graph-file</span></code>, but will instead create a temporary file,
-render the PNG, and then call the default viewer.</p>
-<p>Requires graphviz and a graphical viewer to be installed.</p>
-</div>
-<div class="section" id="make-diff">
-<h3>make-diff<a class="headerlink" href="#make-diff" title="Permalink to this headline">¶</a></h3>
-<p>Compute the difference between two groups of JSON files and store them in ‘.diff’ files.</p>
-<p>For each file specified with the <code class="docutils literal notranslate"><span class="pre">-l</span></code>, subtract all the common shells in files specified
-with <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
-<p>Multiple files are specified after the <code class="docutils literal notranslate"><span class="pre">-r</span></code> or <code class="docutils literal notranslate"><span class="pre">-l</span></code> flag. For example, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">file1</span> <span class="pre">file2</span> <span class="pre">-r</span> <span class="pre">file3</span> <span class="pre">file3</span></code>.</p>
-<p>For each file specified with <code class="docutils literal notranslate"><span class="pre">-l</span></code>, an output file is created with the same name but with <cite>.diff</cite> appended to the filename.</p>
 </div>
 </div>
 </div>

@@ -84,6 +84,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
@@ -92,19 +93,23 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.api">api - The main API Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.bundle">bundle - Creation of bundles/archives</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.compose">compose - Composition of basis set information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.convert">convert - Conversion of formatted basis set data/files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.fileio">fileio - Input/Output of files (including json)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.lut">lut - Lookup tables element information</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.memo">memo - Custom memoization decorator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.misc">misc - Miscellaneous helper functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.notes">notes - Handling of notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.printing">printing - Functions for printing/outputting pieces of basis sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.references">references - Handling of reference data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.skel">skel - Creating of python object skeletons of basis set data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.sort">sort - Sorting of basis set data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.validator">validator - Validation of basis sets</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="developer_writers.html">Output converters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_readers.html">Basis set readers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_refconverters.html">Basis set reference writers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_curate.html">Developer Curation API</a></li>
 </ul>
 </li>
@@ -409,14 +414,17 @@ basis set for. This is not case sensitive.</p>
 </dd>
 <dt><strong>role: str</strong></dt><dd><p>Desired role/type of auxiliary basis set.
 Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_roles()</span></code> to programmatically obtain the available
-formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
+roles.  The <cite>role</cite> argument is not case sensitive.</p>
 <p>Available roles are</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>jfit</p></li>
 <li><p>jkfit</p></li>
 <li><p>rifit</p></li>
+<li><p>optri</p></li>
 <li><p>admmfit</p></li>
+<li><p>dftxfit</p></li>
+<li><p>dftjfit</p></li>
 </ul>
 </div></blockquote>
 </dd>
@@ -492,6 +500,62 @@ it is in the ‘data’ subdirectory of this project.</p>
 <p>This function reads the info from the given file, and reads all the component
 basis set information from the files listed therein. It then composes all the
 information together into one ‘elemental’ basis dictionary</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-basis_set_exchange.convert">
+<span id="convert-conversion-of-formatted-basis-set-data-files"></span><h2>convert - Conversion of formatted basis set data/files<a class="headerlink" href="#module-basis_set_exchange.convert" title="Permalink to this headline">¶</a></h2>
+<p>Functions for basis set conversion</p>
+<dl class="function">
+<dt id="basis_set_exchange.convert.convert_formatted_basis_file">
+<code class="sig-prename descclassname">basis_set_exchange.convert.</code><code class="sig-name descname">convert_formatted_basis_file</code><span class="sig-paren">(</span><em class="sig-param">file_path_in</em>, <em class="sig-param">file_path_out</em>, <em class="sig-param">in_fmt=None</em>, <em class="sig-param">out_fmt=None</em>, <em class="sig-param">encoding='utf-8-sig'</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.convert.convert_formatted_basis_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a formatted basis set file to another format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path_in</strong><span class="classifier">str</span></dt><dd><p>Path to the file to be read</p>
+</dd>
+<dt><strong>file_path_out</strong><span class="classifier">str</span></dt><dd><p>Path to the file to be written.</p>
+</dd>
+<dt><strong>in_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis to be read. If None, it is detected from the file name</p>
+</dd>
+<dt><strong>out_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis to be written. If None, it is detected from the file name</p>
+</dd>
+<dt><strong>encoding</strong><span class="classifier">str</span></dt><dd><p>The encoding of the input file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The basis set as a str with the new format</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.convert.convert_formatted_basis_str">
+<code class="sig-prename descclassname">basis_set_exchange.convert.</code><code class="sig-name descname">convert_formatted_basis_str</code><span class="sig-paren">(</span><em class="sig-param">basis_in</em>, <em class="sig-param">in_fmt</em>, <em class="sig-param">out_fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.convert.convert_formatted_basis_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a formatted basis set to another format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>basis_in</strong><span class="classifier">str</span></dt><dd><p>String representing the formatted input basis set input</p>
+</dd>
+<dt><strong>in_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis set stored in basis_in</p>
+</dd>
+<dt><strong>out_fmt</strong><span class="classifier">str</span></dt><dd><p>The desired output format</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The basis set as a str with the new format</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -926,6 +990,48 @@ converting the name to all lower case.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-basis_set_exchange.printing">
+<span id="printing-functions-for-printing-outputting-pieces-of-basis-sets"></span><h2>printing - Functions for printing/outputting pieces of basis sets<a class="headerlink" href="#module-basis_set_exchange.printing" title="Permalink to this headline">¶</a></h2>
+<p>Helpers for printing pieces of basis sets</p>
+<dl class="function">
+<dt id="basis_set_exchange.printing.component_basis_str">
+<code class="sig-prename descclassname">basis_set_exchange.printing.</code><code class="sig-name descname">component_basis_str</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.printing.component_basis_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a component basis set</p>
+<p>If elements is not None, only the specified elements will be printed
+(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.printing.ecp_pot_str">
+<code class="sig-prename descclassname">basis_set_exchange.printing.</code><code class="sig-name descname">ecp_pot_str</code><span class="sig-paren">(</span><em class="sig-param">pot</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.printing.ecp_pot_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representing the data for an ECP potential</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.printing.electron_shell_str">
+<code class="sig-prename descclassname">basis_set_exchange.printing.</code><code class="sig-name descname">electron_shell_str</code><span class="sig-paren">(</span><em class="sig-param">shell</em>, <em class="sig-param">shellidx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.printing.electron_shell_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string representing the data for an electron shell</p>
+<p>If shellidx (index of the shell) is not None, it will also be printed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.printing.element_data_str">
+<code class="sig-prename descclassname">basis_set_exchange.printing.</code><code class="sig-name descname">element_data_str</code><span class="sig-paren">(</span><em class="sig-param">z</em>, <em class="sig-param">eldata</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.printing.element_data_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string with all data for an element</p>
+<p>This includes shell and ECP potential data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>z</strong><span class="classifier">int or str</span></dt><dd><p>Element Z-number</p>
+</dd>
+<dt><strong>eldata: dict</strong></dt><dd><p>Data for the element to be printed</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-basis_set_exchange.references">
 <span id="references-handling-of-reference-data"></span><h2>references - Handling of reference data<a class="headerlink" href="#module-basis_set_exchange.references" title="Permalink to this headline">¶</a></h2>
 <p>Some helper functions related to handling of references/citations</p>
@@ -951,16 +1057,31 @@ that those references apply to</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.references.reference_text">
-<code class="sig-prename descclassname">basis_set_exchange.references.</code><code class="sig-name descname">reference_text</code><span class="sig-paren">(</span><em class="sig-param">ref</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.references.</code><code class="sig-name descname">reference_text</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">ref</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a single reference to plain text format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>key</strong><span class="classifier">str</span></dt><dd><p>Reference key (authorname2009a, etc)</p>
+</dd>
 <dt><strong>ref</strong><span class="classifier">dict</span></dt><dd><p>Information about a single reference</p>
 </dd>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-basis_set_exchange.skel">
+<span id="skel-creating-of-python-object-skeletons-of-basis-set-data"></span><h2>skel - Creating of python object skeletons of basis set data<a class="headerlink" href="#module-basis_set_exchange.skel" title="Permalink to this headline">¶</a></h2>
+<p>Functions for creating skeletons of dictionaries/JSON files</p>
+<dl class="function">
+<dt id="basis_set_exchange.skel.create_skel">
+<code class="sig-prename descclassname">basis_set_exchange.skel.</code><code class="sig-name descname">create_skel</code><span class="sig-paren">(</span><em class="sig-param">role</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.skel.create_skel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the skeleton of a dictionary or JSON file</p>
+<p>A dictionary is returned that contains the “molssi_bse_schema”
+key and other required keys, depending on the role</p>
+<p>role can be either ‘component’, ‘element’, or ‘table’</p>
 </dd></dl>
 
 </div>
