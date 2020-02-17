@@ -10,7 +10,7 @@ with open(_readme_path, 'r', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
 # Find the json files in the data dir and the schema dir
-bse_package_data = []
+bse_package_data = ['pytest.ini']
 data_dirs = ['data', 'schema',
              os.path.join('tests', 'sources'),
              os.path.join('tests', 'fakedata'),
