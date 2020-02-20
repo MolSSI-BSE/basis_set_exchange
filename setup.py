@@ -1,12 +1,13 @@
 import os
 import setuptools
 import versioneer
+import io
 
 _my_dir = os.path.dirname(os.path.abspath(__file__))
 _readme_path = os.path.join(_my_dir, "README.md")
 
 # Use the readme file for a description
-with open(_readme_path, 'r', encoding='utf-8') as readme_file:
+with io.open(_readme_path, 'r', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
 # Find the json files in the data dir and the schema dir
