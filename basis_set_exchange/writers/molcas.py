@@ -14,24 +14,30 @@ def write_molcas(basis):
 
     s = ''
 
-    # Elements for which we have electron basis
-    electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]
+    for z, data in basis['elements'].items():
+        s += 'Basis set\n'
+        has_electron = 'electron_shells' in data
+        has_ecp = 'ecp_potentials' in data
 
-    # Elements for which we have ECP
-    ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
+        el_name = lut.element_name_from_Z(z).upper()
+        el_sym = lut.element_sym_from_Z(z, normalize=True)
+        s += '* {}  {}\n'.format(el_name, misc.contraction_string(data))
 
-    if electron_elements:
-        # Electron Basis
-        for z in electron_elements:
-            data = basis['elements'][z]
-            el_name = lut.element_name_from_Z(z).upper()
-            s += '* {}  {}\n'.format(el_name, misc.contraction_string(data))
-            s += ' Basis set\n'
-            s += ' {}    / inline\n'.format(el_name)
+        # if ECP is present, the line should be "{sym}.ECP /inline"
+        ecp_tag = '.ECP' if has_ecp else ''
+        s += ' {}{}    / inline\n'.format(el_sym, ecp_tag)
 
+        if has_electron:
             # Since we did make_general, max_am is the number of shells - 1
             max_am = len(data['electron_shells']) - 1
-            s += '{:>7}   {}\n'.format(z + '.00', max_am)
+
+            # number of electrons
+            # should be z - number of ecp electrons
+            nelectrons = int(z) 
+            if has_ecp:
+                nelectrons -= data['ecp_electrons']
+
+            s += '{:>7}.00   {}\n'.format(nelectrons, max_am)
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
@@ -48,20 +54,14 @@ def write_molcas(basis):
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen + 1)]
                 s += printing.write_matrix(coefficients, point_places)
 
-    # Write out ECP
-    if ecp_elements:
-        s += '\n\nECP\n'
-
-        for z in ecp_elements:
-            data = basis['elements'][z]
-            sym = lut.element_sym_from_Z(z, True)
+        if has_ecp:
             max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
 
             # Sort lowest->highest, then put the highest at the beginning
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            s += '{} nelec {}\n'.format(sym, data['ecp_electrons'])
+            s += 'PP, {}, {}, {} ;\n'.format(el_sym, data['ecp_electrons'], max_ecp_am)
 
             for pot in ecp_list:
                 rexponents = pot['r_exponents']
@@ -69,16 +69,21 @@ def write_molcas(basis):
                 coefficients = pot['coefficients']
 
                 am = pot['angular_momentum']
-                amchar = lut.amint_to_char(am).upper()
+                amchar = lut.amint_to_char(am)
+                s += '{};'.format(len(rexponents))
 
                 if am[0] == max_ecp_am:
-                    s += '{} ul\n'.format(sym)
+                    s += ' !  ul potential\n'
                 else:
-                    s += '{} {}\n'.format(sym, amchar)
+                    s += ' !  {}-ul potential\n'.format(amchar)
 
-                point_places = [0, 10, 33]
-                s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places)
+                for p in range(len(rexponents)):
+                    s += '{},{},{};\n'.format(rexponents[p], gexponents[p], coefficients[0][p])
 
-        s += 'END\n'
+            s += 'Spectral\n'
+            s += 'End of Spectral\n'
+            s += '*\n'
+
+        s += 'End of basis set\n\n'
 
     return s
