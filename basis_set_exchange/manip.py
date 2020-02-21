@@ -404,12 +404,12 @@ def optimize_general(basis, use_copy=True):
     # Make as generally-contracted as possible first
     basis = make_general(basis, skip_spdf=True, use_copy=False)
 
-    for k, el in basis['elements'].items():
+    for eldata in basis['elements'].values():
 
-        if not 'electron_shells' in el:
+        if not 'electron_shells' in eldata:
             continue
 
-        elshells = el['electron_shells']
+        elshells = eldata['electron_shells']
         for sh in elshells:
             exponents = sh['exponents']
             coefficients = sh['coefficients']
@@ -437,7 +437,7 @@ def optimize_general(basis, use_copy=True):
                 for row_idx in range(nprim):
                     if float(col[row_idx]) != 0.0:
                         if row_idx in all_row_idx:
-                            raise RuntimeError("Badly-formatted basis. Row {} makes duplicate shells")
+                            raise RuntimeError("Badly-formatted basis. Row {} makes duplicate shells".format(row_idx))
 
                         # Store the index of the nonzero value in single_columns
                         row_col_pairs.append((row_idx, col_idx))
