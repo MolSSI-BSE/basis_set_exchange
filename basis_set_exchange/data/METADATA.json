@@ -4867,7 +4867,9 @@
   },
   "apr-cc-pv(q+d)z": {
     "display_name": "apr-cc-pV(Q+d)Z",
-    "other_names": [],
+    "other_names": [
+      "maug-cc-pV(Q+d)Z"
+    ],
     "description": "apr-cc-pV(Q+d)Z basis of Papajak/Truhlar",
     "latest_version": "0",
     "tags": [],
@@ -26070,7 +26072,9 @@
   },
   "jun-cc-pv(d+d)z": {
     "display_name": "jun-cc-pV(D+d)Z",
-    "other_names": [],
+    "other_names": [
+      "maug-cc-pV(D+d)Z"
+    ],
     "description": "jun-cc-pV(D+d)Z basis of Papajak/Truhlar",
     "latest_version": "0",
     "tags": [],
@@ -26852,6 +26856,141 @@
       }
     }
   },
+  "maug-cc-pv(d+d)z": {
+    "display_name": "maug-cc-pV(D+d)Z",
+    "other_names": [
+      "jun-cc-pV(D+d)Z"
+    ],
+    "description": "jun-cc-pV(D+d)Z basis of Papajak/Truhlar",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "jun-cc-pVD+dZ",
+    "relpath": "",
+    "family": "truhlar",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "jun-cc-pVD+dZ.0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "revdate": "2013-01-23",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "maug-cc-pv(q+d)z": {
+    "display_name": "maug-cc-pV(Q+d)Z",
+    "other_names": [
+      "apr-cc-pV(Q+d)Z"
+    ],
+    "description": "apr-cc-pV(Q+d)Z basis of Papajak/Truhlar",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "apr-cc-pVQ+dZ",
+    "relpath": "",
+    "family": "truhlar",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "apr-cc-pVQ+dZ.0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "revdate": "2013-01-23",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
+  "maug-cc-pv(t+d)z": {
+    "display_name": "maug-cc-pV(T+d)Z",
+    "other_names": [
+      "may-cc-pV(T+d)Z"
+    ],
+    "description": "may-cc-pV(T+d)Z basis of Papajak/Truhlar",
+    "latest_version": "0",
+    "tags": [],
+    "basename": "may-cc-pVT+dZ",
+    "relpath": "",
+    "family": "truhlar",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "0": {
+        "file_relpath": "may-cc-pVT+dZ.0.table.json",
+        "revdesc": "Data from the Original Basis Set Exchange",
+        "revdate": "2013-01-23",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  },
   "may-cc-pv(q+d)z": {
     "display_name": "may-cc-pV(Q+d)Z",
     "other_names": [],
@@ -26897,7 +27036,9 @@
   },
   "may-cc-pv(t+d)z": {
     "display_name": "may-cc-pV(T+d)Z",
-    "other_names": [],
+    "other_names": [
+      "maug-cc-pV(T+d)Z"
+    ],
     "description": "may-cc-pV(T+d)Z basis of Papajak/Truhlar",
     "latest_version": "0",
     "tags": [],
