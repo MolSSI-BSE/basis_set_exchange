@@ -250,7 +250,7 @@ def amchar_to_int(amchar, hij=False):
     return amint
 
 
-def electron_shells_start(nelectrons, maxam=20):
+def electron_shells_start(nelectrons, max_am=20):
     '''Return the starting principle quantum numbers of electron shells
 
     For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
@@ -261,7 +261,7 @@ def electron_shells_start(nelectrons, maxam=20):
     Only fully-covered shells are counted. If a shell is partly covered, an exception
     is raised.
 
-    The returned list is extended up to maxam.
+    The returned list is extended up to max_am.
 
     Note: Since the main use of this is for ECPs, we only cover what can really be found
     on the periodic table. No excited states!
@@ -270,7 +270,7 @@ def electron_shells_start(nelectrons, maxam=20):
     ----------
     nelectrons : int
         Number of electrons covered by an ECP
-    maxam : int
+    max_am : int
         Fill out the starting principal quantum numbers up to this am
 
     Returns
@@ -329,6 +329,6 @@ def electron_shells_start(nelectrons, maxam=20):
         contained_am.count(2) + 3,
         contained_am.count(3) + 4
     ]
-    start.extend(range(5, maxam + 2))
+    start.extend(range(5, max_am + 2))
 
     return start

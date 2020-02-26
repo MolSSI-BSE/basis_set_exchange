@@ -2,7 +2,7 @@
 Conversion of basis sets to BDF format
 '''
 
-from .. import lut, manip, printing, sort
+from .. import lut, manip, printing, sort, misc
 
 
 def write_bdf(basis):
@@ -27,8 +27,8 @@ def write_bdf(basis):
             data = basis['elements'][z]
             #Get element symbol
             s += lut.element_sym_from_Z(z, True)
-            # Since we did make_general, max_am is the number of shells - 1
-            max_am = len(data['electron_shells']) - 1
+
+            max_am = misc.max_am(data['electron_shells'])
             s += '{:>7}   {}\n'.format(z, max_am)
 
             for shell in data['electron_shells']:

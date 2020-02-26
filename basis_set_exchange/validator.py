@@ -132,7 +132,7 @@ def _validate_ecp_potentials(potentials, ecp_electrons, element_z):
             raise RuntimeError("Element {} ECP Potential {}: Duplicate columns of coefficients: ".format(
                 element_z, idx, dupe_coef_col))
 
-        # Check for rows with 0.0 in the coefficients, except for maxam with nexp == 1
+        # Check for rows with 0.0 in the coefficients, except for max_am with nexp == 1
         if nexp > 1 or pot['angular_momentum'] != max_am:
             coeff_t = misc.transpose_matrix(all_coefficients_f)
             for pidx, row in enumerate(coeff_t):

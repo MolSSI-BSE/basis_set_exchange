@@ -112,7 +112,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
     element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
 
     # Second line is information about the ECP
-    max_am, ecp_electrons = helpers.parse_line_regex(ecp_am_nelec_re, basis_lines[1], 'ECP maxam, nelec')
+    max_am, ecp_electrons = helpers.parse_line_regex(ecp_am_nelec_re, basis_lines[1], 'ECP max_am, nelec')
 
     element_data['ecp_electrons'] = ecp_electrons
 

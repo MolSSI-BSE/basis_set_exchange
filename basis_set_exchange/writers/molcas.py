@@ -2,7 +2,7 @@
 Conversion of basis sets to Molcas format
 '''
 
-from .. import lut, manip, printing, misc, sort
+from .. import lut, manip, printing, misc, sort, misc
 
 
 def write_molcas(basis):
@@ -28,12 +28,11 @@ def write_molcas(basis):
         s += ' {}{}    / inline\n'.format(el_sym, ecp_tag)
 
         if has_electron:
-            # Since we did make_general, max_am is the number of shells - 1
-            max_am = len(data['electron_shells']) - 1
+            max_am = misc.max_am(data['electron_shells'])
 
             # number of electrons
             # should be z - number of ecp electrons
-            nelectrons = int(z) 
+            nelectrons = int(z)
             if has_ecp:
                 nelectrons -= data['ecp_electrons']
 

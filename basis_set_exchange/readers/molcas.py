@@ -6,7 +6,7 @@ element_head_re = re.compile(r'^/([a-zA-Z]{1,3})\.(?:ECP\.)?([^.]+)\..*$')
 electron_head_re = re.compile(r'^/([a-zA-Z]{1,3})\.([^.]+)\..*$')
 ecp_head_re = re.compile(r'^/([a-zA-Z]{1,3})\.ECP\.([^.]+)\..*$')
 
-electron_z_maxam_re = re.compile(r'^(\d+|{})(?:\s+(\d+))?$'.format(helpers.floating_re_str))
+electron_z_max_am_re = re.compile(r'^(\d+|{})(?:\s+(\d+))?$'.format(helpers.floating_re_str))
 shell_nprim_ngen_re = re.compile(r'^(\d+)(?:\s+(\d+))?$')
 
 ecp_info_re = re.compile(r'^[Pp]{2}\s*,\s*([a-zA-Z]+)\s*,\s*(\d+)\s*,\s*(\d+)\s*;$')
@@ -25,9 +25,9 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
     # I don't care about the contents, just how many options there are
     n_option_blocks = len(options_lines)
 
-    # Next is the nuclear charge and the maxam
-    # maxam may be missing
-    nuc_charge, max_am = helpers.parse_line_regex(electron_z_maxam_re, basis_lines[0], 'Electron: Z, maxam')
+    # Next is the nuclear charge and the max_am
+    # max_am may be missing
+    nuc_charge, max_am = helpers.parse_line_regex(electron_z_max_am_re, basis_lines[0], 'Electron: Z, max_am')
 
     # If the nuclear charge is not equal to the element Z, then this must be an ECP
     # If the number of ECP electrons already exists, check it.
@@ -49,7 +49,7 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
     # This includes typical electron shell blocks, and blocks corresponding to options
     shell_blocks = helpers.partition_lines(basis_lines[1:], lambda x: x.split()[0].isdecimal())
 
-    # There should be maxam + 1 shell blocks
+    # There should be max_am + 1 shell blocks
     # Each shell will also have n_option_blocks additional blocks
     if max_am is not None and len(shell_blocks) != (max_am + 1) * (n_option_blocks + 1):
         raise RuntimeError("Found {} shell blocks. Expected {}".format(len(shell_blocks),
@@ -118,7 +118,7 @@ def _parse_ecp_lines(basis_lines, bs_data, element_Z):
 
     # Parse the ecp info line
     element_sym, ecp_electrons, max_am = helpers.parse_line_regex(ecp_info_re, basis_lines[0],
-                                                                  "ECP Info: pp,sym,nelec,maxam")
+                                                                  "ECP Info: pp,sym,nelec,max_am")
     element_Z_ecp = lut.element_Z_from_sym(element_sym, as_str=True)
 
     # Does this block match the element symbol from the main element header?

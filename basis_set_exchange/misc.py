@@ -19,6 +19,12 @@ def transpose_matrix(mat):
     return list(map(list, zip(*mat)))
 
 
+def max_am(shells):
+    '''Determine the maximum angular momentum of a list of shells or potentials'''
+    all_am = [max(x['angular_momentum']) for x in shells]
+    return max(all_am)
+
+
 def contraction_string(element):
     """
     Forms a string specifying the contractions for an element
