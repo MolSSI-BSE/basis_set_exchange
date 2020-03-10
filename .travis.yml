@@ -1,8 +1,9 @@
 language: python
-sudo: false
+os: linux
+dist: xenial
 
 # Currently (1/8/2019) python3.7 requires xenial
-matrix:
+jobs:
   include:
     - python: 3.5
     - python: 3.6
