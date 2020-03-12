@@ -6,6 +6,7 @@ data, as well as some other small functions.
 """
 
 import copy
+from . import lut, skel
 
 
 def merge_element_data(dest, sources, use_copy=True):
@@ -449,5 +450,109 @@ def optimize_general(basis, use_copy=True):
                 for idx, col in enumerate(coefficients):
                     if float(col[row_idx]) != 0.0 and col_idx != idx:
                         col[row_idx] = '0.0000000E+00'
+
+    return basis
+
+
+def extend_dunning_aug(basis, level, use_copy=True, as_component=False):
+    '''
+    Extends the augmenting functions of a dunning basis set (aug -> daug,taug,...)
+
+    Parameters
+    ----------
+    basis : dict
+        Basis set dictionary to work with
+    level: int
+        Level to create (must be >1). 2 = daug, 3 = taug, etc
+    use_copy: bool
+        If True, the input basis set is not modified.
+    '''
+
+    if level < 2:
+        raise RuntimeError("Level = {} is invalid for dunning_extend_aug".format(level))
+
+    # We need to combine shells by AM
+    # I guess we don't NEED to, but it makes things a lot easier
+    basis_copy = make_general(basis, use_copy=True)
+
+    # We will now store the new shells in 'basis'
+    # If as_component is specified, then create a new empty component basis
+    if as_component:
+        basis = skel.create_skel('component')
+        basis['elements'] = {k: {} for k, v in basis_copy['elements'].items() if 'electron_shells' in v}
+    elif use_copy:
+        basis = copy.deepcopy(basis)
+
+    # From Woon & Dunning, Jr
+    # J. Chem. Phys. v100, No. 4, p. 2975 (1994)
+    # DOI: 10.1063/1.466439
+    #
+    # The exponent for d-aug-cc-pVXZ: alpha*beta
+    #                  t-aug-cc-pVXZ: alpha*(beta**2)
+    # and so on.
+    #
+    # alpha = smallest exponent in aug-cc-pVXZ
+    # beta = ratio of two most diffuse functions (beta < 1)
+    #
+    # This applies to all angular momentum (which have been combined into
+    # shells already)
+
+    for el_z, eldata in basis_copy['elements'].items():
+        if 'electron_shells' not in eldata:
+            continue
+
+        el_sym = lut.element_sym_from_Z(el_z)
+
+        new_shells = []
+
+        for shell in eldata['electron_shells']:
+            # Find the two smallest exponents. The smallest is alpha
+            # beta is the ratio alpha/(next smallest)
+            # Keep track of the indices as well
+            exponents = [(float(x), idx) for idx, x in enumerate(shell['exponents'])]
+            sorted_exponents = sorted(exponents)
+
+            if len(sorted_exponents) < 2:
+                raise RuntimeError(
+                    "Need more than two exponents to extend dunning augmentation. Element {} has {}: ".format(
+                        el_sym, ','.join(shell['exponents'])))
+
+            alpha, alpha_idx = sorted_exponents[0]
+            beta_tmp, _ = sorted_exponents[1]
+            beta = alpha / beta_tmp
+
+            if alpha == beta_tmp:
+                raise RuntimeError(
+                    "Two smallest exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}".
+                    format(alpha))
+
+            # Test that the primitive for alpha is completely uncontracted
+            alpha_coefs = [float(c[alpha_idx]) for c in shell['coefficients']]
+            n_coefs = len(alpha_coefs)
+            if alpha_coefs.count(0.0) != n_coefs - 1 or alpha_coefs.count(1.0) != 1:
+                raise RuntimeError("Smallest exponent is not completely uncontracted. Exponent: {}".format(alpha))
+
+            new_exponents = []
+            for i in range(1, level):
+                new_exponents.append(alpha * (beta**i))
+
+            new_exponents = ['{:.3e}'.format(x) for x in new_exponents]
+
+            # add the new exponents as new uncontracted shells
+            for ex in new_exponents:
+                new_shells.append({
+                    'function_type': shell['function_type'],
+                    'region': shell['region'],
+                    'angular_momentum': shell['angular_momentum'],
+                    'exponents': [ex],
+                    'coefficients': [['1.00000000']]
+                })
+
+        # add the shells to the original basis set
+        # (if this is a component basis, then 'electron_shells' may not exist)
+        if 'electron_shells' not in basis['elements'][el_z]:
+            basis['elements'][el_z]['electron_shells'] = []
+
+        basis['elements'][el_z]['electron_shells'].extend(new_shells)
 
     return basis
