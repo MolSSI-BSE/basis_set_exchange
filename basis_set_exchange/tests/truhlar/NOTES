@@ -1,0 +1,14 @@
+The base aug-cc-pV(Q+d)Z is constructed via the original (v0)
+data from the BSE
+
+  * Al-Ar come from "aug-cc-pV(Q+d)Z"
+  * H-Mg come from "aug-cc-pVQZ"
+  * Optimize general is applied
+
+The comparison reference files for the xxx-cc-(Q+d)Z also comes from
+v0 (with optimize general applied).
+
+---
+
+aug-cc-pVDZ comes straight from v1. This is used to test how it works with transition
+metals and Ga-Kr. Then, xxx-cc-pVDZ references are manually created from aug-cc-pVDZ

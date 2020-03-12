@@ -46,6 +46,9 @@ validator_test_data_dir = os.path.join(_my_dir, 'validator_test_data')
 # Directory with files for testing dunning aug extension
 dunningext_test_data_dir = os.path.join(_my_dir, 'dunning_extend')
 
+# Directory with files for testing truhlar calenderization
+truhlar_test_data_dir = os.path.join(_my_dir, 'truhlar')
+
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)
 all_metadata_files = all_files[0]

@@ -6,7 +6,7 @@ data, as well as some other small functions.
 """
 
 import copy
-from . import lut, skel
+from . import lut, skel, misc
 
 
 def merge_element_data(dest, sources, use_copy=True):
@@ -555,4 +555,132 @@ def extend_dunning_aug(basis, level, use_copy=True, as_component=False):
 
         basis['elements'][el_z]['electron_shells'].extend(new_shells)
 
+    return basis
+
+
+def remove_primitive(electron_shell, idx_to_remove):
+    '''Removes a primitive (by index) of a electron_shell
+
+    The electron_shell passed in is modified
+    '''
+
+    electron_shell['exponents'].pop(idx_to_remove)
+    for c in electron_shell['coefficients']:
+        c.pop(idx_to_remove)
+
+    # We may have removed the only primitive of a general contraction
+    # So remove general contractions if all coefficients are zero
+    electron_shell['coefficients'] = [
+        gen for gen in electron_shell['coefficients'] if any([float(c) != 0.0 for c in gen])
+    ]
+
+
+def _element_remove_diffuse(eldata, nremove):
+    if 'electron_shells' not in eldata:
+        pass
+
+    shells = eldata['electron_shells']
+    max_am = misc.max_am(shells)
+    if nremove == 'all':
+        nremove = max_am + 1
+
+    am_toremove = list(range(max_am, max_am - nremove, -1))
+
+    # We may be asked to remove more than we have. That is ok
+    am_toremove = [x for x in am_toremove if x >= 0]
+
+    for shell in shells:
+        shell_am = shell['angular_momentum']
+
+        if len(shell_am) > 1:
+            raise RuntimeError("Cannot not remove diffuse functions from fused shell: {}".format(shell_am))
+
+        shell_am = shell_am[0]
+        if shell_am not in am_toremove:
+            continue
+
+        # Find the most diffuse function and remove it
+        exponents = [(float(x), idx) for idx, x in enumerate(shell['exponents'])]
+        sorted_exponents = sorted(exponents)
+        diffuse_exponent, diffuse_idx = sorted_exponents[0]
+
+        remove_primitive(shell, diffuse_idx)
+
+
+def truhlar_calendarize(basis, month, use_copy=True):
+    '''Create the truhlar "month" basis sets from the corresponding aug basis set
+
+    In Papajak 2011, removal of diffuse function stopped before removal of s and p functions.
+    This, conceivably, extends to d functions for transition metals.
+    However, you can keep extending to further in the year by removing these functions,
+    although it may affect stability. This is implemented in Gaussian with the t(month)
+    basis sets - tjul, tjun, etc. The 'tmonth' and regular 'month' basis sets are equivalent
+    until the 'maug' basis set is reached (containg no diffuse functions on H,He, s,p,d on transition
+    metals, and s, p on other elements).
+
+    Since the regular 'month' basis sets are equivalent until maug, we do not adopt the
+    t(month) nomenclature. Instead, you can just go further backwards through the months
+    until you run out of diffuse functions or run out of months.
+
+    Parameters
+    ----------
+    basis : dict
+        Basis set dictionary to work with
+    month: str
+        Month to create ('apr', 'jul', etc). Not case sensitive
+    use_copy: bool
+        If True, the input basis set is not modified.
+    '''
+
+    valid_months = ['jul', 'jun', 'may', 'apr', 'mar', 'feb', 'jan']
+    month = month.lower()
+    if month not in valid_months:
+        raise RuntimeError("Month {} is not valid for truhlar calendarization")
+
+    # We need to combine shells by AM
+    # I guess we don't NEED to, but it makes things a lot easier
+    basis = make_general(basis, use_copy=use_copy)
+
+    # Find out he max am for the entire basis
+    all_am = [misc.max_am(x['electron_shells']) for x in basis['elements'].values()]
+    basis_max_am = max(all_am)
+
+    # Figure out what to remove
+    # We do this by finding the offset from jul
+    # The index represents the offset, since index('jul') = 0
+    # This offset represents how many diffuse functions to remove from each element
+    month_offset = valid_months.index(month)
+
+    # Are we removing all diffuse functions from all elements?
+    # If so, we will end up with all elements corresponding to the cc-pVXZ basis.
+    # While it is ok for some elements to end up that way, we don't want the entire
+    # basis set to be like that
+    # Note that for a given basis_max_am, there will be (basis_max_am+1) diffuse functions
+    if month_offset > basis_max_am:  # or month_offset >= (basis_max_am+1)
+        raise RuntimeError("Will not remove {} diffuse functions for basis with max am = {}".format(
+            month_offset, basis_max_am))
+
+    # jul = same as aug, except remove all diffuse from H,He
+    # First, remove diffuse functions from H,He
+    # This will always be true - we don't handle 'aug'
+    for el_z in ['1', '2']:
+        if el_z not in basis['elements']:
+            continue
+
+        eldata = basis['elements'][el_z]
+        _element_remove_diffuse(eldata, 'all')
+
+    # short circuit if we are doing jul
+    if month_offset == 0:
+        basis = prune_basis(basis, False)
+        return basis
+
+    # Now the rest
+    for el_z, eldata in basis['elements'].items():
+        if el_z == '1' or el_z == '2':
+            continue
+
+        _element_remove_diffuse(eldata, month_offset)
+
+    basis = prune_basis(basis, False)
     return basis
