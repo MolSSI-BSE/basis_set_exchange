@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
@@ -729,14 +730,14 @@ ordering will be spdfghikl (skipping j)</p>
 
 <dl class="function">
 <dt id="basis_set_exchange.lut.electron_shells_start">
-<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">electron_shells_start</code><span class="sig-paren">(</span><em class="sig-param">nelectrons</em>, <em class="sig-param">maxam=20</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.electron_shells_start" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">basis_set_exchange.lut.</code><code class="sig-name descname">electron_shells_start</code><span class="sig-paren">(</span><em class="sig-param">nelectrons</em>, <em class="sig-param">max_am=20</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.lut.electron_shells_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the starting principle quantum numbers of electron shells</p>
 <p>For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
 electrons shells will then start at 3s, 3p, 3d, and 4f (returned as [3, 3, 3, 4])</p>
 <p>If an ECP covers 30 electrons, then the shells will start at [5, 4, 4, 4]</p>
 <p>Only fully-covered shells are counted. If a shell is partly covered, an exception
 is raised.</p>
-<p>The returned list is extended up to maxam.</p>
+<p>The returned list is extended up to max_am.</p>
 <p>Note: Since the main use of this is for ECPs, we only cover what can really be found
 on the periodic table. No excited states!</p>
 <dl class="field-list simple">
@@ -744,7 +745,7 @@ on the periodic table. No excited states!</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>nelectrons</strong><span class="classifier">int</span></dt><dd><p>Number of electrons covered by an ECP</p>
 </dd>
-<dt><strong>maxam</strong><span class="classifier">int</span></dt><dd><p>Fill out the starting principal quantum numbers up to this am</p>
+<dt><strong>max_am</strong><span class="classifier">int</span></dt><dd><p>Fill out the starting principal quantum numbers up to this am</p>
 </dd>
 </dl>
 </dd>
@@ -819,6 +820,24 @@ on the periodic table. No excited states!</p>
 <p>This module contains functions for uncontracting and merging basis set
 data, as well as some other small functions.</p>
 <dl class="function">
+<dt id="basis_set_exchange.manip.extend_dunning_aug">
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">extend_dunning_aug</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">level</em>, <em class="sig-param">use_copy=True</em>, <em class="sig-param">as_component=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.extend_dunning_aug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends the augmenting functions of a dunning basis set (aug -&gt; daug,taug,…)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>basis</strong><span class="classifier">dict</span></dt><dd><p>Basis set dictionary to work with</p>
+</dd>
+<dt><strong>level: int</strong></dt><dd><p>Level to create (must be &gt;1). 2 = daug, 3 = taug, etc</p>
+</dd>
+<dt><strong>use_copy: bool</strong></dt><dd><p>If True, the input basis set is not modified.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="basis_set_exchange.manip.make_general">
 <code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">make_general</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">skip_spdf=False</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.make_general" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes one large general contraction for each angular momentum</p>
@@ -870,6 +889,41 @@ after other manipulations</p>
 <dd><p>Removes exact duplicates of primitives, and condenses duplicate exponents
 into general contractions</p>
 <p>Also removes primitives if all coefficients are zero</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.remove_primitive">
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">remove_primitive</code><span class="sig-paren">(</span><em class="sig-param">electron_shell</em>, <em class="sig-param">idx_to_remove</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.remove_primitive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a primitive (by index) of a electron_shell</p>
+<p>The electron_shell passed in is modified</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.manip.truhlar_calendarize">
+<code class="sig-prename descclassname">basis_set_exchange.manip.</code><code class="sig-name descname">truhlar_calendarize</code><span class="sig-paren">(</span><em class="sig-param">basis</em>, <em class="sig-param">month</em>, <em class="sig-param">use_copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.manip.truhlar_calendarize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the truhlar “month” basis sets from the corresponding aug basis set</p>
+<p>In Papajak 2011, removal of diffuse function stopped before removal of s and p functions.
+This, conceivably, extends to d functions for transition metals.
+However, you can keep extending to further in the year by removing these functions,
+although it may affect stability. This is implemented in Gaussian with the t(month)
+basis sets - tjul, tjun, etc. The ‘tmonth’ and regular ‘month’ basis sets are equivalent
+until the ‘maug’ basis set is reached (containg no diffuse functions on H,He, s,p,d on transition
+metals, and s, p on other elements.</p>
+<p>Since the regular ‘month’ basis sets are equivalent until maug, we do not adopt the
+t(month) nomenclature. Instead, you can just go further backwards through the months
+until you run out of diffuse functions or run out of months.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>basis</strong><span class="classifier">dict</span></dt><dd><p>Basis set dictionary to work with</p>
+</dd>
+<dt><strong>month: str</strong></dt><dd><p>Month to create (‘apr’, ‘jul’, etc). Not case sensitive</p>
+</dd>
+<dt><strong>use_copy: bool</strong></dt><dd><p>If True, the input basis set is not modified.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -962,6 +1016,12 @@ can be used interchangeably. Ranges are also allowed in both lists and strings.<
 </dl>
 <p>If as_str is True, the list will contain strings of the integers
 (ie, the first example above will return [‘1’, ‘2’, ‘3’, ‘6’, ‘7’, ‘8’, ‘10’]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="basis_set_exchange.misc.max_am">
+<code class="sig-prename descclassname">basis_set_exchange.misc.</code><code class="sig-name descname">max_am</code><span class="sig-paren">(</span><em class="sig-param">shells</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.misc.max_am" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the maximum angular momentum of a list of shells or potentials</p>
 </dd></dl>
 
 <dl class="function">

@@ -3,10 +3,6 @@
 Creating Basis Set Bundles
 ==============================================
 
-.. testsetup:: *
-
-   import basis_set_exchange
-
 
 About Bundles
 -------------------

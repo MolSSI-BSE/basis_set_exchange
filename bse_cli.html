@@ -114,6 +114,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -279,8 +280,16 @@ not case sensitive.</p>
 data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>. By default, the built-in
 data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
-bppfakebasis        A fake basis set for testing the BSE
-bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
+Traceback (most recent call last):
+  File &quot;/home/ben/programming/env/bselib/bin/bse&quot;, line 11, in &lt;module&gt;
+    load_entry_point(&#39;basis-set-exchange&#39;, &#39;console_scripts&#39;, &#39;bse&#39;)()
+  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/bse_cli.py&quot;, line 151, in run_bse_cli
+    args = cli_check_normalize_args(args)
+  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/check.py&quot;, line 129, in cli_check_normalize_args
+    args_copy.data_dir = _cli_check_data_dir(args.data_dir)
+  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/check.py&quot;, line 19, in _cli_check_data_dir
+    raise RuntimeError(&quot;Data directory &#39;{}&#39; does not exist or is not a directory&quot;.format(data_dir))
+RuntimeError: Data directory &#39;/home/ben/my_data_dir&#39; does not exist or is not a directory
 </pre></div>
 </div>
 <p>Also, output can be written to a file rather than to the terminal</p>
@@ -530,7 +539,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.12
+# Version v0.8.12+8.g960463c9
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G

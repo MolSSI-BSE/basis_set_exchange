@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -335,10 +336,10 @@
 </li>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_name">element_data_from_name() (in module basis_set_exchange.lut)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_sym">element_data_from_sym() (in module basis_set_exchange.lut)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer_api.html#basis_set_exchange.lut.element_data_from_Z">element_data_from_Z() (in module basis_set_exchange.lut)</a>
 </li>
       <li><a href="developer_api.html#basis_set_exchange.printing.element_data_str">element_data_str() (in module basis_set_exchange.printing)</a>
@@ -354,6 +355,8 @@
       <li><a href="developer_curate.html#basis_set_exchange.curate.elements_in_files">elements_in_files() (in module basis_set_exchange.curate)</a>
 </li>
       <li><a href="developer_api.html#basis_set_exchange.misc.expand_elements">expand_elements() (in module basis_set_exchange.misc)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.manip.extend_dunning_aug">extend_dunning_aug() (in module basis_set_exchange.manip)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -477,6 +480,8 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer_api.html#basis_set_exchange.misc.max_am">max_am() (in module basis_set_exchange.misc)</a>
+</li>
       <li><a href="developer_api.html#basis_set_exchange.manip.merge_element_data">merge_element_data() (in module basis_set_exchange.manip)</a>
 </li>
   </ul></td>
@@ -523,6 +528,8 @@
 </li>
       <li><a href="developer_api.html#basis_set_exchange.references.reference_text">reference_text() (in module basis_set_exchange.references)</a>
 </li>
+      <li><a href="developer_api.html#basis_set_exchange.manip.remove_primitive">remove_primitive() (in module basis_set_exchange.manip)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -558,6 +565,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer_api.html#basis_set_exchange.misc.transpose_matrix">transpose_matrix() (in module basis_set_exchange.misc)</a>
+</li>
+      <li><a href="developer_api.html#basis_set_exchange.manip.truhlar_calendarize">truhlar_calendarize() (in module basis_set_exchange.manip)</a>
 </li>
   </ul></td>
 </tr></table>
