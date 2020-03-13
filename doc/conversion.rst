@@ -3,10 +3,6 @@
 Converting basis sets
 ==============================================
 
-.. testsetup:: *
-
-   import basis_set_exchange
-
 
 About conversion
 ----------------

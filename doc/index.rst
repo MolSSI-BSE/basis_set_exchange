@@ -41,6 +41,7 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
    usage
    bse_cli
    conversion
+   dunning_mod
    bundling
    user_api
    developer
