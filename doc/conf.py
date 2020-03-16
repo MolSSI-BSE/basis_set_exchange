@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Basis Set Exchange'
-copyright = '2018, Benjamin Pritchard'
+copyright = '2020, Benjamin Pritchard'
 author = 'Benjamin Pritchard'
 
 # The short X.Y version
