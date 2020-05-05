@@ -162,7 +162,7 @@
     "role": {
         "description": "Role that this basis plays in a calculation",
         "type": "string",
-        "enum": [ "orbital", "rifit", "optri", "jkfit", "jfit", "admmfit", "dftxfit", "dftjfit"]
+        "enum": [ "orbital", "rifit", "optri", "jkfit", "jfit", "admmfit", "dftxfit", "dftjfit", "guess" ]
     },
     "auxiliaries": {
         "description": "Auxiliary basis sets (fitting, etc) and how their role with this basis",

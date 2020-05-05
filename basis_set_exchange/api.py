@@ -270,6 +270,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
             * admmfit
             * dftxfit
             * dftjfit
+            * guess
 
     data_dir : str
         Data directory with all the basis set information. By default,
@@ -612,7 +613,8 @@ def get_roles():
              'optri': 'Optimized RI-fitting',
              'admmfit': 'Auxiliary-Density Matrix Method Fitting',
              'dftxfit': 'DFT Exchange Fitting',
-             'dftjfit': 'DFT Correlation Fitting'
+             'dftjfit': 'DFT Correlation Fitting',
+             'guess': 'Initial guess'
             }
     # yapf: enable
 

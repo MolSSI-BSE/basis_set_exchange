@@ -32,7 +32,7 @@ def test_aux_reverse(basis_name):
 
     this_metadata = bs_metadata[basis_name]
     r = this_metadata['role']
-    if r == 'orbital':
+    if r == 'orbital' or r == 'guess':
         return
 
     # Find where this basis set is listed as an auxiliary
