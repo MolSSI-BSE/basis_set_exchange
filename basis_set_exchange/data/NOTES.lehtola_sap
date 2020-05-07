@@ -1,0 +1,9 @@
+Small/large fit of atomic effective potentials for starting electronic
+structure calculations. The potentials have been determined by obtaining
+accurate Hartree-Fock electron densities at the complete basis set with fully
+numerical methods, computing the local exchange and Coulomb potentials, and
+fitting the Gaussian expansion to this potential. The HelFEM calculations are
+non-relativistic, and the GRASP calculations are relativistic four-component
+calculations with finite nuclei. With these fits, the superposition of atomic
+potentials initial guess (lehtola2019b) can be implemented in terms of two-electron
+integrals; see lehtola2020b

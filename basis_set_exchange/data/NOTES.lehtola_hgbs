@@ -1,0 +1,26 @@
+The hydrogenic basis sets are formed on one-electron model systems that
+imitate the behavior of real atoms and molecules, where the full nuclear
+charge is seen at the nucleus while far away the effective nuclear charge
+goes to one for the optimized effective potential, and zero for density
+functional approximations. The basis set for atom Z is obtained by optimizing
+even-tempered exponents for the ground state of Z^{(Z-1)+} for every angular
+momentum, and by adding more functions until all the one-electron ions
+from H to Z^{(Z-1)+} are reproduced within the wanted tolerance. Augmented
+basis sets are obtained by requiring the basis to be accurate also for the
+Z=1/2 one-electron ion. For details on the formation of the basis sets,
+see lehtola2020a.
+
+Since the basis sets don't assume the atoms to be in a specific configuration,
+they turn out to be widely transferable and accurate. Not all atoms are
+accurately described by the non-augmented sets, since the potential therein
+is weaker than -1/r, but the augmented sets afford excellent in these cases. I
+recommend that you check whether augmentation affects your results.
+
+A practical issue in the use of these basis sets is their high number of
+diffuse functions of high angular momentum that arise from the use of a
+constant effective charge model Zeff(r) = Zeff: in reality, Zeff(r) goes to
+zero rapidly away from the nucleus. These diffuse functions cause significant
+linear dependencies in molecular calculations, but they are not a problem
+in practice since even pathological linear dependencies can be cured with a
+simple Cholesky procedure that can be easily included in any pre-existing
+implementation of the canonical orthogonalization procedure (lehtola2019a, lehtola2020c)
