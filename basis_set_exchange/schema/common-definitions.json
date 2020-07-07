@@ -34,6 +34,7 @@
     },
     "electron_shell": {
         "description": "Information for a single electronic shell",
+        "type": "object",
         "additionalProperties": false,
         "required": [
             "function_type",
@@ -81,6 +82,7 @@
     },
     "ecp_potential": {
         "description": "ECP potential",
+        "type": "object",
         "additionalProperties": false,
         "required": [
             "ecp_type",
