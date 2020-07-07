@@ -39,7 +39,7 @@ def write_endnote(key, ref):
             entry_lines.append('%J {}'.format(v))
         elif k == 'volume':
             entry_lines.append('%V {}'.format(v))
-        elif k == 'page':
+        elif k == 'pages':
             entry_lines.append('%P {}'.format(v))
         elif k == 'title':
             entry_lines.append('%T {}'.format(v))

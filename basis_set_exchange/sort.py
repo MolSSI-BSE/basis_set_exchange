@@ -209,7 +209,7 @@ def sort_single_reference(ref_entry):
 
         # Actual publication info
         'authors', 'title', 'booktitle', 'series', 'editors', 'journal',
-        'institution', 'school', 'volume', 'number', 'page', 'year', 'note', 'publisher',
+        'institution', 'school', 'volume', 'number', 'pages', 'year', 'note', 'publisher',
         'address', 'isbn', 'doi'
     ]
     # yapf: enable

@@ -39,7 +39,7 @@ def write_ris(key, ref):
             entry_lines.append('JO {}'.format(v))
         elif k == 'volume':
             entry_lines.append('VL {}'.format(v))
-        elif k == 'page':
+        elif k == 'pages':
             entry_lines.append('SP {}'.format(v))
         elif k == 'title':
             entry_lines.append('T1 {}'.format(v))

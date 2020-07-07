@@ -77,7 +77,7 @@ def reference_text(key, ref):
     elif ref['_entry_type'] == 'article':
         s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
         s += ref_wrap.fill(ref['title']) + '\n'
-        s += '{}, {}, {} ({})'.format(ref['journal'], ref['volume'], ref['page'], ref['year'])
+        s += '{}, {}, {} ({})'.format(ref['journal'], ref['volume'], ref['pages'], ref['year'])
         if 'doi' in ref:
             s += '\n' + ref['doi']
     elif ref['_entry_type'] == 'incollection':
@@ -87,7 +87,7 @@ def reference_text(key, ref):
         if 'editors' in ref:
             s += '\n' + ref_wrap.fill('ed. ' + ', '.join(ref['editors']))
         if 'series' in ref:
-            s += '\n{}, {}, {} ({})'.format(ref['series'], ref['volume'], ref['page'], ref['year'])
+            s += '\n{}, {}, {} ({})'.format(ref['series'], ref['volume'], ref['pages'], ref['year'])
         if 'doi' in ref:
             s += '\n' + ref['doi']
     elif ref['_entry_type'] == 'phdthesis':
