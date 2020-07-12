@@ -145,7 +145,7 @@ and can be obtained via :func:`basis_set_exchange.get_reference_formats`
        title = {Self-Consistent Molecular-Orbital Methods. IX. An Extended Gaussian-Type Basis for Molecular-Orbital Studies of Organic Molecules},
        journal = {J. Chem. Phys.},
        volume = {54},
-       page = {724-728},
+       pages = {724-728},
        year = {1971},
        doi = {10.1063/1.1674902}
    }

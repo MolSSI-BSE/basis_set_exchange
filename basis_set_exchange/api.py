@@ -115,7 +115,7 @@ def get_basis(name,
         Elements can be specified by Z-number (int or str) or by symbol (str).
         If this argument is a str (ie, '1-3,7-10'), it is expanded into a list.
         Z numbers and symbols (case insensitive) can be used interchangeably
-        (see :func:`bse.misc.expand_elements`)
+        (see :func:`basis_set_exchange.misc.expand_elements`)
 
         If an empty string or list is passed, or if None is passed (the default),
         all elements for which the basis set is defined are included.
@@ -126,7 +126,7 @@ def get_basis(name,
         The desired output format of the basis set. By default,
         basis set information is returned as a python dictionary. Otherwise,
         if a format is specified, a string is returned.
-        Use :func:`bse.api.get_formats` to programmatically obtain the available
+        Use :func:`basis_set_exchange.api.get_formats` to programmatically obtain the available
         formats.  The `fmt` argument is not case sensitive.
 
         Available formats are
@@ -155,7 +155,7 @@ def get_basis(name,
         shell per angular momentum (for each element)
     optimize_general : bool
         Optimize by removing general contractions that contain uncontracted
-        functions (see :func:`bse.manip.optimize_general`)
+        functions (see :func:`basis_set_exchange.manip.optimize_general`)
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -258,7 +258,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
         basis set for. This is not case sensitive.
     role: str
         Desired role/type of auxiliary basis set.
-        Use :func:`bse.api.get_roles` to programmatically obtain the available
+        Use :func:`get_roles` to programmatically obtain the available
         roles.  The `role` argument is not case sensitive.
 
         Available roles are
@@ -443,7 +443,7 @@ def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_d
         Elements can be specified by Z-number (int or str) or by symbol (str).
         If this argument is a str (ie, '1-3,7-10'), it is expanded into a list.
         Z numbers and symbols (case insensitive) can be used interchangeably
-        (see :func:`bse.misc.expand_elements`)
+        (see :func:`basis_set_exchange.misc.expand_elements`)
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.

@@ -55,7 +55,6 @@ if __name__ == "__main__":
                 'sphinx',
                 'sphinxcontrib-programoutput',
                 'sphinx_rtd_theme',
-                'numpydoc',
                 'graphviz'
             ],
             'tests': [
