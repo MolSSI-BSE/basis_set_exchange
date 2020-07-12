@@ -280,16 +280,8 @@ not case sensitive.</p>
 data directory can be specified with <code class="docutils literal notranslate"><span class="pre">-d</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code>. By default, the built-in
 data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
-Traceback (most recent call last):
-  File &quot;/home/ben/programming/env/bselib/bin/bse&quot;, line 11, in &lt;module&gt;
-    load_entry_point(&#39;basis-set-exchange&#39;, &#39;console_scripts&#39;, &#39;bse&#39;)()
-  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/bse_cli.py&quot;, line 151, in run_bse_cli
-    args = cli_check_normalize_args(args)
-  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/check.py&quot;, line 129, in cli_check_normalize_args
-    args_copy.data_dir = _cli_check_data_dir(args.data_dir)
-  File &quot;/home/ben/programming/bse_ng/basis_set_exchange/basis_set_exchange/cli/check.py&quot;, line 19, in _cli_check_data_dir
-    raise RuntimeError(&quot;Data directory &#39;{}&#39; does not exist or is not a directory&quot;.format(data_dir))
-RuntimeError: Data directory &#39;/home/ben/my_data_dir&#39; does not exist or is not a directory
+bppfakebasis        A fake basis set for testing the BSE
+bppfakebasis-jkfit  A fake jkfit basis set for testing the BSE
 </pre></div>
 </div>
 <p>Also, output can be written to a file rather than to the terminal</p>
@@ -463,6 +455,7 @@ optri    Optimized RI-fitting
 admmfit  Auxiliary-Density Matrix Method Fitting
 dftxfit  DFT Exchange Fitting
 dftjfit  DFT Correlation Fitting
+guess    Initial guess
 </pre></div>
 </div>
 </div>
@@ -539,7 +532,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.8.12+9.g893a8019
+# Version v0.8.12+17.g4c226c9f.dirty
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
@@ -632,7 +625,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
     title = {A New Basis Set Exchange: An Open, Up-to-date Resource for the Molecular Sciences Community},
     journal = {J. Chem. Inf. Model.},
     volume = {59},
-    page = {4814-4820},
+    pages = {4814-4820},
     year = {2019},
     doi = {10.1021/acs.jcim.9b00725}
 }
@@ -642,7 +635,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
     title = {The role of databases in support of computational chemistry calculations},
     journal = {J. Comput. Chem.},
     volume = {17},
-    page = {1571-1586},
+    pages = {1571-1586},
     year = {1996},
     doi = {10.1002/(SICI)1096-987X(199610)17:13&lt;1571::AID-JCC9&gt;3.0.CO;2-P}
 }
@@ -652,7 +645,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
     title = {Basis Set Exchange: A Community Database for Computational Sciences},
     journal = {J. Chem. Inf. Model.},
     volume = {47},
-    page = {1045-1052},
+    pages = {1045-1052},
     year = {2007},
     doi = {10.1021/ci600510j}
 }
@@ -674,7 +667,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
     title = {Balanced basis sets of split valence, triple zeta valence and quadruple zeta valence quality for H to Rn: Design and assessment of accuracy},
     journal = {Phys. Chem. Chem. Phys.},
     volume = {7},
-    page = {3297},
+    pages = {3297},
     year = {2005},
     doi = {10.1039/b508541a}
 }

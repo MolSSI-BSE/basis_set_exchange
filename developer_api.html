@@ -198,29 +198,24 @@ functionality of the library.</p>
 <p>All parameters are ANDed together and are not case sensitive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>substr</strong><span class="classifier">str</span></dt><dd><p>Substring to search for in the basis set name</p>
-</dd>
-<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family the basis set belongs to</p>
-</dd>
-<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set</p>
-</dd>
-<dt><strong>elements</strong><span class="classifier">str or list</span></dt><dd><p>List of elements that the basis set must include.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>substr</strong> (<em>str</em>) – Substring to search for in the basis set name</p></li>
+<li><p><strong>family</strong> (<em>str</em>) – Family the basis set belongs to</p></li>
+<li><p><strong>role</strong> (<em>str</em>) – Role of the basis set</p></li>
+<li><p><strong>elements</strong> (<em>str</em><em> or </em><em>list</em>) – List of elements that the basis set must include.
 Elements can be specified by Z-number (int or str) or by symbol (str).
 If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
 Z numbers and symbols (case insensitive) can be used interchangeably
-(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
+(see <a class="reference internal" href="#basis_set_exchange.misc.expand_elements" title="basis_set_exchange.misc.expand_elements"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.misc.expand_elements()</span></code></a>)</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>Basis set metadata that matches the search criteria</p>
+<dd class="field-even"><p>Basis set metadata that matches the search criteria</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -240,11 +235,8 @@ returns the data_dir parameter unmodified</p>
 <p>The data is read from the METADATA.json file in the data directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
+<dd class="field-odd"><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -256,30 +248,28 @@ it is in the ‘data’ subdirectory of this project.</p>
 <p>This is the main function for getting basis set information.
 This function reads in all the basis data and returns it either
 as a string or as a python dictionary.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set. This is not case sensitive.</p>
-</dd>
-<dt><strong>elements</strong><span class="classifier">str or list</span></dt><dd><p>List of elements that you want the basis set for.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the basis set. This is not case sensitive.</p></li>
+<li><p><strong>elements</strong> (<em>str</em><em> or </em><em>list</em>) – <p>List of elements that you want the basis set for.
 Elements can be specified by Z-number (int or str) or by symbol (str).
 If this argument is a str (ie, ‘1-3,7-10’), it is expanded into a list.
 Z numbers and symbols (case insensitive) can be used interchangeably
-(see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.misc.expand_elements()</span></code>)</p>
+(see <a class="reference internal" href="#basis_set_exchange.misc.expand_elements" title="basis_set_exchange.misc.expand_elements"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.misc.expand_elements()</span></code></a>)</p>
 <p>If an empty string or list is passed, or if None is passed (the default),
 all elements for which the basis set is defined are included.</p>
-</dd>
-<dt><strong>version</strong><span class="classifier">int or str</span></dt><dd><p>Obtain a specific version of this basis set. By default,
-the latest version is returned.</p>
-</dd>
-<dt><strong>fmt: str</strong></dt><dd><p>The desired output format of the basis set. By default,
+</p></li>
+<li><p><strong>version</strong> (<em>int</em><em> or </em><em>str</em>) – Obtain a specific version of this basis set. By default,
+the latest version is returned.</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – <p>The desired output format of the basis set. By default,
 basis set information is returned as a python dictionary. Otherwise,
 if a format is specified, a string is returned.
-Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_formats()</span></code> to programmatically obtain the available
+Use <a class="reference internal" href="#basis_set_exchange.api.get_formats" title="basis_set_exchange.api.get_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.api.get_formats()</span></code></a> to programmatically obtain the available
 formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available formats are</p>
 <blockquote>
-<div><ul class="simple">
+<div><ul>
 <li><p>bdf</p></li>
 <li><p>gamess_us</p></li>
 <li><p>gaussian94</p></li>
@@ -289,35 +279,29 @@ formats.  The <cite>fmt</cite> argument is not case sensitive.</p>
 <li><p>turbomole</p></li>
 </ul>
 </div></blockquote>
-</dd>
-<dt><strong>uncontract_general</strong><span class="classifier">bool</span></dt><dd><p>If True, remove general contractions by duplicating the set
+</p></li>
+<li><p><strong>uncontract_general</strong> (<em>bool</em>) – If True, remove general contractions by duplicating the set
 of primitive exponents with each vector of coefficients.
-Primitives with zero coefficient are removed, as are duplicate shells.</p>
-</dd>
-<dt><strong>uncontract_spdf</strong><span class="classifier">bool</span></dt><dd><p>If True, remove general contractions with combined angular momentum (sp, spd, etc)
+Primitives with zero coefficient are removed, as are duplicate shells.</p></li>
+<li><p><strong>uncontract_spdf</strong> (<em>bool</em>) – If True, remove general contractions with combined angular momentum (sp, spd, etc)
 by duplicating the set of primitive exponents with each vector of coefficients.
-Primitives with zero coefficient are removed, as are duplicate shells.</p>
-</dd>
-<dt><strong>uncontract_segmented</strong><span class="classifier">bool</span></dt><dd><p>If True, remove segmented contractions by duplicating each primitive into new shells.
-Each coefficient is set to 1.0</p>
-</dd>
-<dt><strong>make_general</strong><span class="classifier">bool</span></dt><dd><p>If True, make the basis set as generally-contracted as possible. There will be one
-shell per angular momentum (for each element)</p>
-</dd>
-<dt><strong>optimize_general</strong><span class="classifier">bool</span></dt><dd><p>Optimize by removing general contractions that contain uncontracted
-functions (see <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.manip.optimize_general()</span></code>)</p>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
+Primitives with zero coefficient are removed, as are duplicate shells.</p></li>
+<li><p><strong>uncontract_segmented</strong> (<em>bool</em>) – If True, remove segmented contractions by duplicating each primitive into new shells.
+Each coefficient is set to 1.0</p></li>
+<li><p><strong>make_general</strong> (<em>bool</em>) – If True, make the basis set as generally-contracted as possible. There will be one
+shell per angular momentum (for each element)</p></li>
+<li><p><strong>optimize_general</strong> (<em>bool</em>) – Optimize by removing general contractions that contain uncontracted
+functions (see <a class="reference internal" href="#basis_set_exchange.manip.optimize_general" title="basis_set_exchange.manip.optimize_general"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.manip.optimize_general()</span></code></a>)</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str or dict</dt><dd><p>The basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
+<dd class="field-even"><p>The basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -356,41 +340,37 @@ can be passed as the fmt argument to <a class="reference internal" href="#basis_
 <dt id="basis_set_exchange.api.get_references">
 <code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">get_references</code><span class="sig-paren">(</span><em class="sig-param">basis_name</em>, <em class="sig-param">elements=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">fmt=None</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the references/citations for a basis set</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>basis_name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set. This is not case sensitive.</p>
-</dd>
-<dt><strong>elements</strong><span class="classifier">list</span></dt><dd><p>List of element numbers that you want the basis set for. By default,
-all elements for which the basis set is defined are included.</p>
-</dd>
-<dt><strong>version</strong><span class="classifier">int</span></dt><dd><p>Obtain a specific version of this basis set. By default,
-the latest version is returned.</p>
-</dd>
-<dt><strong>fmt: str</strong></dt><dd><p>The desired output format of the basis set references. By default,
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis_name</strong> (<em>str</em>) – Name of the basis set. This is not case sensitive.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) – List of element numbers that you want the basis set for. By default,
+all elements for which the basis set is defined are included.</p></li>
+<li><p><strong>version</strong> (<em>int</em>) – Obtain a specific version of this basis set. By default,
+the latest version is returned.</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – <p>The desired output format of the basis set references. By default,
 basis set information is returned as a list of dictionaries. Use
 get_reference_formats() to programmatically obtain the available formats.
 The <cite>fmt</cite> argument is not case sensitive.</p>
 <p>Available reference formats are</p>
 <blockquote>
-<div><ul class="simple">
+<div><ul>
 <li><p>bib</p></li>
 <li><p>txt</p></li>
 <li><p>json</p></li>
 </ul>
 </div></blockquote>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
+</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str or dict</dt><dd><p>The references for the given basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
+<dd class="field-even"><p>The references for the given basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -407,18 +387,17 @@ can be passed as the role argument to fmt argument to <a class="reference intern
 <dt id="basis_set_exchange.api.lookup_basis_by_role">
 <code class="sig-prename descclassname">basis_set_exchange.api.</code><code class="sig-name descname">lookup_basis_by_role</code><span class="sig-paren">(</span><em class="sig-param">primary_basis</em>, <em class="sig-param">role</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup the name of an auxiliary basis set given a primary basis set and role</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>primary_basis</strong><span class="classifier">str</span></dt><dd><p>The primary (orbital) basis set that we want the auxiliary
-basis set for. This is not case sensitive.</p>
-</dd>
-<dt><strong>role: str</strong></dt><dd><p>Desired role/type of auxiliary basis set.
-Use <code class="xref py py-func docutils literal notranslate"><span class="pre">bse.api.get_roles()</span></code> to programmatically obtain the available
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>primary_basis</strong> (<em>str</em>) – The primary (orbital) basis set that we want the auxiliary
+basis set for. This is not case sensitive.</p></li>
+<li><p><strong>role</strong> (<em>str</em>) – <p>Desired role/type of auxiliary basis set.
+Use <a class="reference internal" href="#basis_set_exchange.api.get_roles" title="basis_set_exchange.api.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_roles()</span></code></a> to programmatically obtain the available
 roles.  The <cite>role</cite> argument is not case sensitive.</p>
 <p>Available roles are</p>
 <blockquote>
-<div><ul class="simple">
+<div><ul>
 <li><p>jfit</p></li>
 <li><p>jkfit</p></li>
 <li><p>rifit</p></li>
@@ -426,20 +405,20 @@ roles.  The <cite>role</cite> argument is not case sensitive.</p>
 <li><p>admmfit</p></li>
 <li><p>dftxfit</p></li>
 <li><p>dftjfit</p></li>
+<li><p>guess</p></li>
 </ul>
 </div></blockquote>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
+</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str</dt><dd><p>The name of the auxiliary basis set for the given primary basis
+<dd class="field-even"><p>The name of the auxiliary basis set for the given primary basis
 and role.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -461,25 +440,21 @@ and role.</p>
 sets in a given format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>outfile</strong><span class="classifier">str</span></dt><dd><p>Path to the file to create. Existing files will be overwritten</p>
-</dd>
-<dt><strong>fmt</strong><span class="classifier">str</span></dt><dd><p>Format of the basis set to archive (nwchem, turbomole, …)</p>
-</dd>
-<dt><strong>reffmt</strong><span class="classifier">str</span></dt><dd><p>Format of the basis set references to archive (nwchem, turbomole, …)</p>
-</dd>
-<dt><strong>archive_type</strong><span class="classifier">str</span></dt><dd><p>Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
-None, which will autodetect based on the outfile name</p>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Data directory with all the basis set information. By default,
-it is in the ‘data’ subdirectory of this project.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outfile</strong> (<em>str</em>) – Path to the file to create. Existing files will be overwritten</p></li>
+<li><p><strong>fmt</strong> (<em>str</em>) – Format of the basis set to archive (nwchem, turbomole, …)</p></li>
+<li><p><strong>reffmt</strong> (<em>str</em>) – Format of the basis set references to archive (nwchem, turbomole, …)</p></li>
+<li><p><strong>archive_type</strong> (<em>str</em>) – Type of archive to create. Can be ‘zip’ or ‘tbz’. Default is
+None, which will autodetect based on the outfile name</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
+it is in the ‘data’ subdirectory of this project.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -513,24 +488,19 @@ information together into one ‘elemental’ basis dictionary</p>
 <dd><p>Convert a formatted basis set file to another format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path_in</strong><span class="classifier">str</span></dt><dd><p>Path to the file to be read</p>
-</dd>
-<dt><strong>file_path_out</strong><span class="classifier">str</span></dt><dd><p>Path to the file to be written.</p>
-</dd>
-<dt><strong>in_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis to be read. If None, it is detected from the file name</p>
-</dd>
-<dt><strong>out_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis to be written. If None, it is detected from the file name</p>
-</dd>
-<dt><strong>encoding</strong><span class="classifier">str</span></dt><dd><p>The encoding of the input file</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path_in</strong> (<em>str</em>) – Path to the file to be read</p></li>
+<li><p><strong>file_path_out</strong> (<em>str</em>) – Path to the file to be written.</p></li>
+<li><p><strong>in_fmt</strong> (<em>str</em>) – The format of the basis to be read. If None, it is detected from the file name</p></li>
+<li><p><strong>out_fmt</strong> (<em>str</em>) – The format of the basis to be written. If None, it is detected from the file name</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>) – The encoding of the input file</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str</dt><dd><p>The basis set as a str with the new format</p>
+<dd class="field-even"><p>The basis set as a str with the new format</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -541,20 +511,17 @@ information together into one ‘elemental’ basis dictionary</p>
 <dd><p>Convert a formatted basis set to another format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>basis_in</strong><span class="classifier">str</span></dt><dd><p>String representing the formatted input basis set input</p>
-</dd>
-<dt><strong>in_fmt</strong><span class="classifier">str</span></dt><dd><p>The format of the basis set stored in basis_in</p>
-</dd>
-<dt><strong>out_fmt</strong><span class="classifier">str</span></dt><dd><p>The desired output format</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis_in</strong> (<em>str</em>) – String representing the formatted input basis set input</p></li>
+<li><p><strong>in_fmt</strong> (<em>str</em>) – The format of the basis set stored in basis_in</p></li>
+<li><p><strong>out_fmt</strong> (<em>str</em>) – The desired output format</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>str</dt><dd><p>The basis set as a str with the new format</p>
+<dd class="field-even"><p>The basis set as a str with the new format</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -586,10 +553,7 @@ found, an exception is raised.</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
 </dd></dl>
@@ -600,10 +564,7 @@ found, an exception is raised.</p>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
 </dd></dl>
@@ -621,10 +582,7 @@ found, an exception is raised.</p>
 <dd><p>Read a JSON file containing info for all references</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
 </dd></dl>
@@ -635,10 +593,7 @@ found, an exception is raised.</p>
 <dd><p>Reads a JSON schema file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to read</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
 </dd></dl>
@@ -650,12 +605,10 @@ found, an exception is raised.</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
-</dd>
-<dt><strong>bs</strong><span class="classifier">dict</span></dt><dd><p>Basis set information to write</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
+<li><p><strong>bs</strong> (<em>dict</em>) – Basis set information to write</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -666,12 +619,10 @@ found, an exception is raised.</p>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
-</dd>
-<dt><strong>metadata</strong><span class="classifier">dict</span></dt><dd><p>Metadata information for all basis sets</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
+<li><p><strong>metadata</strong> (<em>dict</em>) – Metadata information for all basis sets</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -682,12 +633,10 @@ found, an exception is raised.</p>
 <dd><p>Write a dict containing info for all references to a JSON file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to the file to write to. It will be overwritten if it exists</p>
-</dd>
-<dt><strong>refs</strong><span class="classifier">dict</span></dt><dd><p>Reference information to write</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
+<li><p><strong>refs</strong> (<em>dict</em>) – Reference information to write</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -742,18 +691,16 @@ is raised.</p>
 on the periodic table. No excited states!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>nelectrons</strong><span class="classifier">int</span></dt><dd><p>Number of electrons covered by an ECP</p>
-</dd>
-<dt><strong>max_am</strong><span class="classifier">int</span></dt><dd><p>Fill out the starting principal quantum numbers up to this am</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nelectrons</strong> (<em>int</em>) – Number of electrons covered by an ECP</p></li>
+<li><p><strong>max_am</strong> (<em>int</em>) – Fill out the starting principal quantum numbers up to this am</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>list</dt><dd><p>The starting principal quantum numbers of s, p, d, and f shells.</p>
+<dd class="field-even"><p>The starting principal quantum numbers of s, p, d, and f shells.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -825,14 +772,11 @@ data, as well as some other small functions.</p>
 <dd><p>Extends the augmenting functions of a dunning basis set (aug -&gt; daug,taug,…)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>basis</strong><span class="classifier">dict</span></dt><dd><p>Basis set dictionary to work with</p>
-</dd>
-<dt><strong>level: int</strong></dt><dd><p>Level to create (must be &gt;1). 2 = daug, 3 = taug, etc</p>
-</dd>
-<dt><strong>use_copy: bool</strong></dt><dd><p>If True, the input basis set is not modified.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis</strong> (<em>dict</em>) – Basis set dictionary to work with</p></li>
+<li><p><strong>level</strong> (<em>int</em>) – Level to create (must be &gt;1). 2 = daug, 3 = taug, etc</p></li>
+<li><p><strong>use_copy</strong> (<em>bool</em>) – If True, the input basis set is not modified.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -914,14 +858,11 @@ t(month) nomenclature. Instead, you can just go further backwards through the mo
 until you run out of diffuse functions or run out of months.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>basis</strong><span class="classifier">dict</span></dt><dd><p>Basis set dictionary to work with</p>
-</dd>
-<dt><strong>month: str</strong></dt><dd><p>Month to create (‘apr’, ‘jul’, etc). Not case sensitive</p>
-</dd>
-<dt><strong>use_copy: bool</strong></dt><dd><p>If True, the input basis set is not modified.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis</strong> (<em>dict</em>) – Basis set dictionary to work with</p></li>
+<li><p><strong>month</strong> (<em>str</em>) – Month to create (‘apr’, ‘jul’, etc). Not case sensitive</p></li>
+<li><p><strong>use_copy</strong> (<em>bool</em>) – If True, the input basis set is not modified.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1081,12 +1022,10 @@ converting the name to all lower case.</p>
 <p>This includes shell and ECP potential data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>z</strong><span class="classifier">int or str</span></dt><dd><p>Element Z-number</p>
-</dd>
-<dt><strong>eldata: dict</strong></dt><dd><p>Data for the element to be printed</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z</strong> (<em>int</em><em> or </em><em>str</em>) – Element Z-number</p></li>
+<li><p><strong>eldata</strong> (<em>dict</em>) – Data for the element to be printed</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1105,12 +1044,10 @@ and ‘elements’ which is a list of element Z numbers
 that those references apply to</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>basis_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing basis set information</p>
-</dd>
-<dt><strong>ref_data</strong><span class="classifier">dict</span></dt><dd><p>Dictionary containing all reference information</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis_dict</strong> (<em>dict</em>) – Dictionary containing basis set information</p></li>
+<li><p><strong>ref_data</strong> (<em>dict</em>) – Dictionary containing all reference information</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1121,12 +1058,10 @@ that those references apply to</p>
 <dd><p>Convert a single reference to plain text format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>key</strong><span class="classifier">str</span></dt><dd><p>Reference key (authorname2009a, etc)</p>
-</dd>
-<dt><strong>ref</strong><span class="classifier">dict</span></dt><dd><p>Information about a single reference</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – Reference key (authorname2009a, etc)</p></li>
+<li><p><strong>ref</strong> (<em>dict</em>) – Information about a single reference</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1216,22 +1151,17 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <dd><p>Validates json basis set data against a schema</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of the data to validate. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p>
-</dd>
-<dt><strong>bs_data:</strong></dt><dd><p>Data to be validated</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_type</strong> (<em>str</em>) – Type of the data to validate. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p></li>
+<li><p><strong>bs_data</strong> – Data to be validated</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><dl class="simple">
-<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
-</dd>
-<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
-</dd>
-<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If the file_type is not valid (and/or a schema doesn’t exist)</p></li>
+<li><p><strong>ValidationError</strong> – If the given file does not pass validation</p></li>
+<li><p><strong>FileNotFoundError</strong> – If the file given by file_path doesn’t exist</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1248,22 +1178,17 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <dd><p>Validates a file against a schema</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_type</strong><span class="classifier">str</span></dt><dd><p>Type of file to read. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p>
-</dd>
-<dt><strong>file_path:</strong></dt><dd><p>Full path to the file to be validated</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_type</strong> (<em>str</em>) – Type of file to read. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p></li>
+<li><p><strong>file_path</strong> – Full path to the file to be validated</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><dl class="simple">
-<dt>RuntimeError</dt><dd><p>If the file_type is not valid (and/or a schema doesn’t exist)</p>
-</dd>
-<dt>ValidationError</dt><dd><p>If the given file does not pass validation</p>
-</dd>
-<dt>FileNotFoundError</dt><dd><p>If the file given by file_path doesn’t exist</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – If the file_type is not valid (and/or a schema doesn’t exist)</p></li>
+<li><p><strong>ValidationError</strong> – If the given file does not pass validation</p></li>
+<li><p><strong>FileNotFoundError</strong> – If the file given by file_path doesn’t exist</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

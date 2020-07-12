@@ -181,42 +181,30 @@
 create the component, element, and table basis set files in the given data_dir (and subdir).
 The metadata file for the basis is created if it doesn’t exist, and the main metadata file is
 also updated.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>bs_file</strong><span class="classifier">str</span></dt><dd><p>Path to the file with formatted basis set information</p>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Path to the data directory to add the data to</p>
-</dd>
-<dt><strong>subdir</strong><span class="classifier">str</span></dt><dd><p>Subdirectory of the data directory to add the basis set to</p>
-</dd>
-<dt><strong>file_base</strong><span class="classifier">str</span></dt><dd><p>Base name for new files</p>
-</dd>
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set</p>
-</dd>
-<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family to which this basis set belongs</p>
-</dd>
-<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set (orbital, etc)</p>
-</dd>
-<dt><strong>description</strong><span class="classifier">str</span></dt><dd><p>Description of the basis set</p>
-</dd>
-<dt><strong>version</strong><span class="classifier">str</span></dt><dd><p>Version of the basis set</p>
-</dd>
-<dt><strong>revision_description</strong><span class="classifier">str</span></dt><dd><p>Description of this version of the basis set</p>
-</dd>
-<dt><strong>data_source</strong><span class="classifier">str</span></dt><dd><p>Description of where this data came from</p>
-</dd>
-<dt><strong>refs</strong><span class="classifier">dict or str</span></dt><dd><p>Mapping of references to elements. This can be a dictionary with a compressed
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bs_file</strong> (<em>str</em>) – Path to the file with formatted basis set information</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – Subdirectory of the data directory to add the basis set to</p></li>
+<li><p><strong>file_base</strong> (<em>str</em>) – Base name for new files</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the basis set</p></li>
+<li><p><strong>family</strong> (<em>str</em>) – Family to which this basis set belongs</p></li>
+<li><p><strong>role</strong> (<em>str</em>) – Role of the basis set (orbital, etc)</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Description of the basis set</p></li>
+<li><p><strong>version</strong> (<em>str</em>) – Version of the basis set</p></li>
+<li><p><strong>revision_description</strong> (<em>str</em>) – Description of this version of the basis set</p></li>
+<li><p><strong>data_source</strong> (<em>str</em>) – Description of where this data came from</p></li>
+<li><p><strong>refs</strong> (<em>dict</em><em> or </em><em>str</em>) – <p>Mapping of references to elements. This can be a dictionary with a compressed
 string of elements as keys and a list of reference strings as values.
 For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
 <p>If a list or string is passed, then those reference(s) will be used for
 all elements.</p>
 <p>Elements that exist in the file but do not have a reference are given the
 usual ‘noref’ extension and the references entry is empty.</p>
-</dd>
-<dt><strong>file_fmt</strong><span class="classifier">str</span></dt><dd><p>Format of the input basis data (None = autodetect)</p>
-</dd>
-</dl>
+</p></li>
+<li><p><strong>file_fmt</strong> (<em>str</em>) – Format of the input basis data (None = autodetect)</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -231,28 +219,18 @@ files in the given data_dir (and subdir). The metadata file for the basis is cre
 doesn’t exist, and the main metadata file is also updated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>component_files</strong><span class="classifier">str</span></dt><dd><p>Path to component json files (in BSE format already)</p>
-</dd>
-<dt><strong>data_dir</strong><span class="classifier">str</span></dt><dd><p>Path to the data directory to add the data to</p>
-</dd>
-<dt><strong>subdir</strong><span class="classifier">str</span></dt><dd><p>Subdirectory of the data directory to add the basis set to</p>
-</dd>
-<dt><strong>file_base</strong><span class="classifier">str</span></dt><dd><p>Base name for new files</p>
-</dd>
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the basis set</p>
-</dd>
-<dt><strong>family</strong><span class="classifier">str</span></dt><dd><p>Family to which this basis set belongs</p>
-</dd>
-<dt><strong>role</strong><span class="classifier">str</span></dt><dd><p>Role of the basis set (orbital, etc)</p>
-</dd>
-<dt><strong>description</strong><span class="classifier">str</span></dt><dd><p>Description of the basis set</p>
-</dd>
-<dt><strong>version</strong><span class="classifier">str</span></dt><dd><p>Version of the basis set</p>
-</dd>
-<dt><strong>revision_description</strong><span class="classifier">str</span></dt><dd><p>Description of this version of the basis set</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>component_files</strong> (<em>str</em>) – Path to component json files (in BSE format already)</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – Subdirectory of the data directory to add the basis set to</p></li>
+<li><p><strong>file_base</strong> (<em>str</em>) – Base name for new files</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the basis set</p></li>
+<li><p><strong>family</strong> (<em>str</em>) – Family to which this basis set belongs</p></li>
+<li><p><strong>role</strong> (<em>str</em>) – Role of the basis set (orbital, etc)</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Description of the basis set</p></li>
+<li><p><strong>version</strong> (<em>str</em>) – Version of the basis set</p></li>
+<li><p><strong>revision_description</strong> (<em>str</em>) – Description of this version of the basis set</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -326,20 +304,14 @@ doesn’t exist, and the main metadata file is also updated.</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>element1</strong><span class="classifier">dict</span></dt><dd><p>Basis information for an element</p>
-</dd>
-<dt><strong>element2</strong><span class="classifier">dict</span></dt><dd><p>Basis information for another element</p>
-</dd>
-<dt><strong>compare_electron_shells_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the metadata of electron shells</p>
-</dd>
-<dt><strong>compare_ecp_pots_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the metadata of ECP potentials</p>
-</dd>
-<dt><strong>compare_meta</strong><span class="classifier">bool</span></dt><dd><p>Compare the overall element metadata</p>
-</dd>
-<dt><strong>rel_tol</strong><span class="classifier">float</span></dt><dd><p>Maximum relative error that is considered equal</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>element1</strong> (<em>dict</em>) – Basis information for an element</p></li>
+<li><p><strong>element2</strong> (<em>dict</em>) – Basis information for another element</p></li>
+<li><p><strong>compare_electron_shells_meta</strong> (<em>bool</em>) – Compare the metadata of electron shells</p></li>
+<li><p><strong>compare_ecp_pots_meta</strong> (<em>bool</em>) – Compare the metadata of ECP potentials</p></li>
+<li><p><strong>compare_meta</strong> (<em>bool</em>) – Compare the overall element metadata</p></li>
+<li><p><strong>rel_tol</strong> (<em>float</em>) – Maximum relative error that is considered equal</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -350,16 +322,13 @@ doesn’t exist, and the main metadata file is also updated.</p>
 <dd><p>Get a list of what elements/refrences exist in component JSON files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filelist</strong><span class="classifier">list</span></dt><dd><p>A list of paths to json files</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>filelist</strong> (<em>list</em>) – A list of paths to json files</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
+<dd class="field-even"><p>Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -383,18 +352,16 @@ that are identical. ECP potentials are not affected.</p>
 <p>The return value contains deep copies of the input data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>left_list</strong><span class="classifier">list of dict</span></dt><dd><p>Dictionaries to use as the base</p>
-</dd>
-<dt><strong>right_list</strong><span class="classifier">list of dict</span></dt><dd><p>Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_list</strong> (<em>list of dict</em>) – Dictionaries to use as the base</p></li>
+<li><p><strong>right_list</strong> (<em>list of dict</em>) – Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>list</dt><dd><p>Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
+<dd class="field-even"><p>Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -413,17 +380,16 @@ is written to files with the same names as those in <cite>left_files</cite>,
 but with <cite>.diff</cite> added to the end. If those files exist, they are overwritten.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>left_files</strong><span class="classifier">list of str</span></dt><dd><p>Paths to JSON files to use as the base</p>
-</dd>
-<dt><strong>right_files</strong><span class="classifier">list of str</span></dt><dd><p>Paths to JSON files to subtract from each file of <cite>left_files</cite></p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_files</strong> (<em>list of str</em>) – Paths to JSON files to use as the base</p></li>
+<li><p><strong>right_files</strong> (<em>list of str</em>) – Paths to JSON files to subtract from each file of <cite>left_files</cite></p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None</dt><dd></dd>
-</dl>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,17 +439,14 @@ within a tolerance)</p>
 <p>This works on table, element, and component data files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filelist</strong><span class="classifier">list</span></dt><dd><p>A list of paths to json files</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><strong>filelist</strong> (<em>list</em>) – A list of paths to json files</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>Keys are the file path, value is a compacted element string of
+<dd class="field-even"><p>Keys are the file path, value is a compacted element string of
 what elements are in that file</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
