@@ -58,8 +58,9 @@ if __name__ == "__main__":
                 'graphviz'
             ],
             'tests': [
-                'pytest>=4.0',
-                'pytest-cov'
+                # List pytest-cov before pytest because of a dumb pip bug
+                'pytest-cov',
+                'pytest>=4.6'
             ],
             'curate': [
                 'graphviz'
