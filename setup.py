@@ -79,5 +79,7 @@ if __name__ == "__main__":
 
         package_data={'basis_set_exchange': bse_package_data},
 
+        data_files = [("", ["LICENSE"])],
+
         zip_safe=True,
     )
