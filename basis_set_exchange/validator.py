@@ -45,6 +45,17 @@ def _validate_electron_shells(shells, element_z):
         if nprim <= 0:
             raise RuntimeError("Element {} Shell {}: Invalid number of primitives: {}".format(element_z, idx, nprim))
 
+        # If len(am) > 2, gto types must specify spherical or cartesian
+        if len(s['angular_momentum']) > 2 and s['function_type'].startswith('gto'):
+            if s['function_type'] not in ['gto_spherical', 'gto_cartesian']:
+                raise RuntimeError("Element {} Shell {}: Fused shell > sp, but spherical/cartesian not specified".format(element_z, idx))
+
+        # If max(am) < 2, only gto is allowed
+        if max(s['angular_momentum']) < 2:
+            if 'spherical' in s['function_type'] or 'cartesian' in s['function_type']:
+                raise RuntimeError("Element {} Shell {}: AM = {} marked as spherical or cartesian: {}".format(element_z, idx, str(s['angular_momentum']), s['function_type']))
+             
+
         # Duplicate exponents (when converted to float)?
         exponents_f = [float(x) for x in s['exponents']]
         dupe_ex = _list_has_duplicates(exponents_f)
