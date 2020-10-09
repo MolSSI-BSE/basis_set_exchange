@@ -26,7 +26,7 @@ def _parse_electron_lines(basis_lines, bs_data):
     # First line is "{element} 0"
     element_sym = basis_lines[0].split()[0]
 
-    # Element symbols can start with a dash for some reason
+    # In the format, if the element symbol starts with a dash, then Gaussian does not crash with an error in case this element does not exist in the system input (this is what you need for system basis set libraries).
     element_sym = element_sym.lstrip('-')
 
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
