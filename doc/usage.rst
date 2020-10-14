@@ -61,7 +61,7 @@ and can be obtained via :func:`basis_set_exchange.get_formats`
    >>> bs_str = basis_set_exchange.get_basis('6-31G*', fmt='gaussian94', header=False)
    >>> print(bs_str)
    H     0
-   S   3   1.00
+   S    3   1.00
          0.1873113696D+02       0.3349460434D-01
          0.2825394365D+01       0.2347269535D+00
          0.6401216923D+00       0.8137573261D+00
@@ -176,15 +176,15 @@ which is a string. If `version` is not specified, the latest version is used.
 
    >>> # Get the latest version of 6-31G*
    >>> basis_set_exchange.get_basis('6-31G*', fmt='gaussian94', header=False)
-   'H     0\nS   3   1.00\n      0.1873113696D+02       0.3349460434D-01\n      0.2825394365D+01...
+   'H     0\nS    3   1.00\n      0.1873113696D+02       0.3349460434D-01\n      0.2825394365D+01...
 
    >>> # Get the original BSE data
    >>> basis_set_exchange.get_basis('6-31G*', version=0, fmt='gaussian94', header=False)
-   'H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...
+   'H     0\nS    3   1.00\n     18.7311370              0.03349460\n      2.8253937...
 
    >>> # Versions can also be passed as strings
    >>> basis_set_exchange.get_basis('6-31G*', version='0', fmt='gaussian94', header=False)
-   'H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...
+   'H     0\nS    3   1.00\n     18.7311370              0.03349460\n      2.8253937...
 
 
 
