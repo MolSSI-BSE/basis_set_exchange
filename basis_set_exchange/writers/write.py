@@ -5,10 +5,9 @@ Converts basis set data to a specified output format
 import bz2
 from .bsejson import write_json
 from .nwchem import write_nwchem
-from .g94 import write_g94, write_xtron
+from .g94 import write_g94, write_xtron, write_psi4
 from .gamess_us import write_gamess_us
 from .gamess_uk import write_gamess_uk
-from .psi4 import write_psi4
 from .qchem import write_qchem
 from .orca import write_orca
 from .turbomole import write_turbomole

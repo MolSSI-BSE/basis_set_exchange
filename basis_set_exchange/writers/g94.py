@@ -5,7 +5,7 @@ Conversion of basis sets to Gaussian format
 from .. import lut, manip, sort, printing
 
 
-def _write_g94_common(basis, add_harm_type=True):
+def _write_g94_common(basis, add_harm_type, psi4_am):
     '''Converts a basis set to Gaussian format
     '''
 
@@ -38,10 +38,14 @@ def _write_g94_common(basis, add_harm_type=True):
                 am = shell['angular_momentum']
                 amchar = lut.amint_to_char(am, hij=True).upper()
 
+                if psi4_am and len(am) == 1 and am[0] >= 7:
+                    # For am=7 and above, use explicit L={am} notation
+                    amchar = "L=" + str(am[0])
+
                 harm = ''
                 if add_harm_type and shell['function_type'] == 'gto_cartesian':
                     harm = ' c'
-                s += '{}   {}   1.00{}\n'.format(amchar, nprim, harm)
+                s += '{:4} {}   1.00{}\n'.format(amchar, nprim, harm)
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ncol + 1)]
                 s += printing.write_matrix([exponents, *coefficients], point_places, convert_exp=True)
@@ -89,7 +93,7 @@ def _write_g94_common(basis, add_harm_type=True):
 def write_g94(basis):
     '''Converts a basis set to Gaussian format
     '''
-    return _write_g94_common(basis, False)
+    return _write_g94_common(basis, False, False)
 
 
 def write_xtron(basis):
@@ -98,4 +102,20 @@ def write_xtron(basis):
     xTron uses a modified gaussian format that puts 'c' on the same
     line as the angular momentum if the shell is cartesian.
     '''
-    return _write_g94_common(basis, True)
+    return _write_g94_common(basis, True, False)
+
+
+def write_psi4(basis):
+    '''Converts a basis set to Psi4 format
+
+    Psi4 uses the same output as gaussian94, except
+    that the first line must be cartesian/spherical,
+    and it prefers to have a starting asterisks
+
+    The cartesian/spherical line is added later, since it must
+    be the first non-blank line.
+    '''
+
+    s = '****\n'
+    s += _write_g94_common(basis, False, True)
+    return s
