@@ -210,7 +210,7 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
 <span class="go">H     0</span>
-<span class="go">S   3   1.00</span>
+<span class="go">S    3   1.00</span>
 <span class="go">      0.1873113696D+02       0.3349460434D-01</span>
 <span class="go">      0.2825394365D+01       0.2347269535D+00</span>
 <span class="go">      0.6401216923D+00       0.8137573261D+00</span>
@@ -309,15 +309,15 @@ If data is simply being added (new elements), the version will not be incremente
 which is a string. If <cite>version</cite> is not specified, the latest version is used.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the latest version of 6-31G*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">&#39;H     0\nS   3   1.00\n      0.1873113696D+02       0.3349460434D-01\n      0.2825394365D+01...</span>
+<span class="go">&#39;H     0\nS    3   1.00\n      0.1873113696D+02       0.3349460434D-01\n      0.2825394365D+01...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the original BSE data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">&#39;H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
+<span class="go">&#39;H     0\nS    3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Versions can also be passed as strings</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;6-31G*&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;gaussian94&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">&#39;H     0\nS   3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
+<span class="go">&#39;H     0\nS    3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
 </pre></div>
 </div>
 </div>
