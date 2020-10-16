@@ -14039,13 +14039,13 @@
       }
     }
   },
-  "cc-pv5z-f12rev2": {
-    "display_name": "cc-pV5Z-F12rev2",
+  "cc-pv5z-f12(rev2)": {
+    "display_name": "cc-pV5Z-F12(rev2)",
     "other_names": [],
-    "description": "cc-pV5Z-F12rev2",
+    "description": "cc-pV5Z-F12(rev2)",
     "latest_version": "1",
     "tags": [],
-    "basename": "cc-pV5Z-F12rev2",
+    "basename": "cc-pV5Z-F12(rev2)",
     "relpath": "",
     "family": "dunning_f12",
     "role": "orbital",
@@ -14056,7 +14056,7 @@
     "auxiliaries": {},
     "versions": {
       "1": {
-        "file_relpath": "cc-pV5Z-F12rev2.1.table.json",
+        "file_relpath": "cc-pV5Z-F12(rev2).1.table.json",
         "revdesc": "Data from K. Peterson",
         "revdate": "2020-03-18",
         "elements": [
@@ -15091,6 +15091,31 @@
       }
     }
   },
+  "cc-pvdz-f12(rev2)": {
+    "display_name": "cc-pVDZ-F12(rev2)",
+    "other_names": [],
+    "description": "cc-pVDZ-F12(rev2)",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "cc-pVDZ-F12(rev2)",
+    "relpath": "",
+    "family": "dunning_f12",
+    "role": "orbital",
+    "function_types": [
+      "gto"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "cc-pVDZ-F12(rev2).1.table.json",
+        "revdesc": "Data from K. Peterson",
+        "revdate": "2020-03-18",
+        "elements": [
+          "1"
+        ]
+      }
+    }
+  },
   "cc-pvdz-f12-optri": {
     "display_name": "cc-pVDZ-F12-OPTRI",
     "other_names": [],
@@ -15129,31 +15154,6 @@
           "16",
           "17",
           "18"
-        ]
-      }
-    }
-  },
-  "cc-pvdz-f12rev2": {
-    "display_name": "cc-pVDZ-F12rev2",
-    "other_names": [],
-    "description": "cc-pVDZ-F12rev2",
-    "latest_version": "1",
-    "tags": [],
-    "basename": "cc-pVDZ-F12rev2",
-    "relpath": "",
-    "family": "dunning_f12",
-    "role": "orbital",
-    "function_types": [
-      "gto"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "1": {
-        "file_relpath": "cc-pVDZ-F12rev2.1.table.json",
-        "revdesc": "Data from K. Peterson",
-        "revdate": "2020-03-18",
-        "elements": [
-          "1"
         ]
       }
     }
@@ -16009,6 +16009,32 @@
       }
     }
   },
+  "cc-pvqz-f12(rev2)": {
+    "display_name": "cc-pVQZ-F12(rev2)",
+    "other_names": [],
+    "description": "cc-pVQZ-F12(rev2)",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "cc-pVQZ-F12(rev2)",
+    "relpath": "",
+    "family": "dunning_f12",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "cc-pVQZ-F12(rev2).1.table.json",
+        "revdesc": "Data from K. Peterson",
+        "revdate": "2020-03-18",
+        "elements": [
+          "1"
+        ]
+      }
+    }
+  },
   "cc-pvqz-f12-optri": {
     "display_name": "cc-pVQZ-F12-OPTRI",
     "other_names": [],
@@ -16047,32 +16073,6 @@
           "16",
           "17",
           "18"
-        ]
-      }
-    }
-  },
-  "cc-pvqz-f12rev2": {
-    "display_name": "cc-pVQZ-F12rev2",
-    "other_names": [],
-    "description": "cc-pVQZ-F12rev2",
-    "latest_version": "1",
-    "tags": [],
-    "basename": "cc-pVQZ-F12rev2",
-    "relpath": "",
-    "family": "dunning_f12",
-    "role": "orbital",
-    "function_types": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "1": {
-        "file_relpath": "cc-pVQZ-F12rev2.1.table.json",
-        "revdesc": "Data from K. Peterson",
-        "revdate": "2020-03-18",
-        "elements": [
-          "1"
         ]
       }
     }
@@ -17017,6 +17017,32 @@
       }
     }
   },
+  "cc-pvtz-f12(rev2)": {
+    "display_name": "cc-pVTZ-F12(rev2)",
+    "other_names": [],
+    "description": "cc-pVTZ-F12(rev2)",
+    "latest_version": "1",
+    "tags": [],
+    "basename": "cc-pVTZ-F12(rev2)",
+    "relpath": "",
+    "family": "dunning_f12",
+    "role": "orbital",
+    "function_types": [
+      "gto",
+      "gto_spherical"
+    ],
+    "auxiliaries": {},
+    "versions": {
+      "1": {
+        "file_relpath": "cc-pVTZ-F12(rev2).1.table.json",
+        "revdesc": "Data from K. Peterson",
+        "revdate": "2020-03-18",
+        "elements": [
+          "1"
+        ]
+      }
+    }
+  },
   "cc-pvtz-f12-optri": {
     "display_name": "cc-pVTZ-F12-OPTRI",
     "other_names": [],
@@ -17055,32 +17081,6 @@
           "16",
           "17",
           "18"
-        ]
-      }
-    }
-  },
-  "cc-pvtz-f12rev2": {
-    "display_name": "cc-pVTZ-F12rev2",
-    "other_names": [],
-    "description": "cc-pVTZ-F12rev2",
-    "latest_version": "1",
-    "tags": [],
-    "basename": "cc-pVTZ-F12rev2",
-    "relpath": "",
-    "family": "dunning_f12",
-    "role": "orbital",
-    "function_types": [
-      "gto",
-      "gto_spherical"
-    ],
-    "auxiliaries": {},
-    "versions": {
-      "1": {
-        "file_relpath": "cc-pVTZ-F12rev2.1.table.json",
-        "revdesc": "Data from K. Peterson",
-        "revdate": "2020-03-18",
-        "elements": [
-          "1"
         ]
       }
     }
