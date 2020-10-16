@@ -1,3 +1,18 @@
+v0.8.13
+--------------------
+  * Fix for molcas writer (issue #104)
+  * Ability to extend dunning augmentation (d-aug, t-aug, etc)
+  * Ability to create truhlar 'calendar' basis sets
+  * More fixes for validation
+  * Add v1 basis sets
+    * cc-pV5Z-F12
+    * cc-pV{D,T,Q,5}Z-rev2
+    * (aug-)cc-pwCV{D,T,Q,5}Z-RIFIT
+    * (A)HGBS
+    * SAP
+  * Fix "pages" entry in bibtex (issue #114)
+  * Fix psi4 output for L >= 7
+
 v0.8.12
 --------------------
   * Better dectection of duplicate shells within general contractions
