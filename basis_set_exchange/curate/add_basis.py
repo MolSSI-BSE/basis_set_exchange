@@ -68,7 +68,7 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
 
         cfile_relpaths.append(relpath)
 
-    valid_elements = list(sorted(valid_elements, key=lambda x: int(x)))
+    valid_elements = sorted(valid_elements, key=lambda x: int(x))
 
     # Start the data files for the element and table json
     element_file_data = create_skel('element')

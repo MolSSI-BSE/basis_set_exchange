@@ -422,7 +422,7 @@ def get_families(data_dir=None):
     for v in metadata.values():
         families.add(v['family'])
 
-    return sorted(list(families))
+    return sorted(families)
 
 
 def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_dir=None):

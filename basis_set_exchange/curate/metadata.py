@@ -58,7 +58,7 @@ def create_metadata_file(output_path, data_dir):
             bs = compose_table_basis(table_file, data_dir)
 
             # Elements for which this basis is defined
-            defined_elements = sorted(list(bs['elements'].keys()), key=lambda x: int(x))
+            defined_elements = sorted(bs['elements'].keys(), key=lambda x: int(x))
 
             # Determine the types of functions contained in the basis
             # (gto, ecp, etc)
