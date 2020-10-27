@@ -55,7 +55,8 @@ def run_bse_cli():
     parser = argparse.ArgumentParser(description='Description of your program')
     parser.add_argument('-V', action='version', version='basis_set_exchange ' + version())
     parser.add_argument('-d', '--data-dir', metavar='PATH', help='Override which data directory to use')
-    parser.add_argument('-o', '--output', metavar='PATH', help='Output to given file rather than stdout')
+    parser.add_argument('-o', '--output', metavar='PATH', help='Output to given file rather than stdout',
+                        default='-', type=argparse.FileType('w', encoding='utf-8'))
 
     subparsers = parser.add_subparsers(metavar='subcommand', dest='subcmd')
     subparsers.required = True  # https://bugs.python.org/issue9253#msg186387
@@ -232,11 +233,8 @@ def run_bse_cli():
     # Actually generate the output
     output = bse_cli_handle_subcmd(args)
 
-    if args.output:
-        with open(args.output, 'w', encoding='utf-8') as outfile:
-            outfile.write(output)
-    else:
-        print(output)
+    with args.output:
+        args.output.write(output + '\n')
 
     return 0
 
