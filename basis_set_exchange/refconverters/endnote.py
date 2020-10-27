@@ -1,14 +1,14 @@
-'''                                                                                                      
-Conversion of references to enw format                                                                                              
+'''
+Conversion of references to enw format
 '''
 
 
 def write_endnote(key, ref):
-    '''Convert a single reference to RIS format                                                                                  
+    '''Convert a single reference to endnote format
     '''
     s = ''
 
-    s += '  \n'.format(ref['_entry_type'], key)
+    s += '#{} {}\n'.format(ref['_entry_type'], key)
     if ref['_entry_type'] == 'article':
         s += "%0 Journal Article \n"
     elif ref['_entry_type'] == 'misc':

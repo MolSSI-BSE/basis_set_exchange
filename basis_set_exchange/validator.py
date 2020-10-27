@@ -79,7 +79,7 @@ def _validate_electron_shells(shells, element_z):
         if len(s['angular_momentum']) == 1:
             dupe_coef_col = _list_has_duplicates(all_coefficients_f)
             if dupe_coef_col:
-                raise RuntimeError("Element {} Shell {}: Duplicate columns of coefficients: ".format(
+                raise RuntimeError("Element {} Shell {}: Duplicate columns of coefficients: {}".format(
                     element_z, idx, dupe_coef_col))
 
         # Does a primitive have all zeroes in the coefficients?
@@ -105,12 +105,12 @@ def _validate_ecp_potentials(potentials, ecp_electrons, element_z):
     all_am = [x['angular_momentum'] for x in potentials]
     for am in all_am:
         if len(am) > 1:
-            raise RuntimeError("Element {} ECP: Fused AM in potentials (not supported)".format(element_Z))
+            raise RuntimeError("Element {} ECP: Fused AM in potentials (not supported)".format(element_z))
 
     all_am = [x[0] for x in all_am]
     dupe_am = _list_has_duplicates(all_am)
     if dupe_am:
-        raise RuntimeError("Element {} ECP: Duplicated angular momentum: {}".format(dupe_am))
+        raise RuntimeError("Element {} ECP: Duplicated angular momentum: {}".format(element_z, dupe_am))
 
     # Need this for later
     max_am = max(pot['angular_momentum'] for pot in potentials)
@@ -139,7 +139,7 @@ def _validate_ecp_potentials(potentials, ecp_electrons, element_z):
         all_coefficients_f = [[float(x) for x in g] for g in pot['coefficients']]
         dupe_coef_col = _list_has_duplicates(all_coefficients_f)
         if dupe_coef_col:
-            raise RuntimeError("Element {} ECP Potential {}: Duplicate columns of coefficients: ".format(
+            raise RuntimeError("Element {} ECP Potential {}: Duplicate columns of coefficients: {}".format(
                 element_z, idx, dupe_coef_col))
 
         # Check for rows with 0.0 in the coefficients, except for max_am with nexp == 1
@@ -157,7 +157,7 @@ def _validate_element(el_data, element_z):
         _validate_electron_shells(el_data['electron_shells'], element_z)
 
     if 'ecp_potentials' in el_data:
-        if not 'ecp_electrons' in el_data:
+        if 'ecp_electrons' not in el_data:
             raise RuntimeError("ecp_electrons doesn't exist for element {}, but ecp_potentials does".format(element_z))
         _validate_ecp_potentials(el_data['ecp_potentials'], el_data['ecp_electrons'], element_z)
 
