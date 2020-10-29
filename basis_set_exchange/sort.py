@@ -144,13 +144,12 @@ def sort_shells(shells, use_copy=True):
 
     # Sort the list by increasing AM, then general contraction level, then decreasing highest exponent
     # yapf: disable
-    return list(
-        sorted(
-            shells,
-            key=lambda x: (max(x['angular_momentum']),
-                          -len(x['exponents']),
-                          -len(x['coefficients']),
-                          -max(float(y) for y in x['exponents']))))
+    return sorted(
+        shells,
+        key=lambda x: (max(x['angular_momentum']),
+                      -len(x['exponents']),
+                      -len(x['coefficients']),
+                      -max(float(y) for y in x['exponents'])))
     # yapf: enable
 
 
@@ -170,7 +169,7 @@ def sort_potentials(potentials, use_copy=True):
         potentials = copy.deepcopy(potentials)
 
     # Sort by increasing AM, then move the last element to the front
-    potentials = list(sorted(potentials, key=lambda x: x['angular_momentum']))
+    potentials = sorted(potentials, key=lambda x: x['angular_momentum'])
     potentials.insert(0, potentials.pop())
     return potentials
 

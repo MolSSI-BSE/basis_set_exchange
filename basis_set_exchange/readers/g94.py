@@ -157,7 +157,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
     # Were there as many potentials as we thought there should be?
     if len(all_pot_am) != len(element_data['ecp_potentials']):
         raise RuntimeError("Found incorrect number of potentials for {}: Expected {}, got {}".format(
-            element_sym, len(all_pot_am), len(ecp_potentials)))
+            element_sym, len(all_pot_am), len(element_data['ecp_potentials'])))
 
     for idx, pot in enumerate(element_data['ecp_potentials']):
         pot['angular_momentum'] = [all_pot_am[idx]]

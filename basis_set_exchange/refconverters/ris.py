@@ -1,14 +1,14 @@
-'''                                                                                                      
-Conversion of references to ris format                                                                                              
+'''
+Conversion of references to ris format
 '''
 
 
 def write_ris(key, ref):
-    '''Convert a single reference to ris format                                                                                  
+    '''Convert a single reference to ris format
     '''
     s = ''
 
-    s += '  \n'.format(ref['_entry_type'], key)
+    s += '#{} {}\n'.format(ref['_entry_type'], key)
     if ref['_entry_type'] == 'article':
         s += "TY Journal Article \n"
     elif ref['_entry_type'] == 'misc':

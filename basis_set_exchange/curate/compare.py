@@ -325,8 +325,8 @@ def compare_basis(bs1,
         Maximum relative error that is considered equal
     '''
 
-    els1 = sorted(list(bs1['elements'].keys()))
-    els2 = sorted(list(bs2['elements'].keys()))
+    els1 = sorted(bs1['elements'].keys())
+    els2 = sorted(bs2['elements'].keys())
     if not els1 == els2:
         return False
 

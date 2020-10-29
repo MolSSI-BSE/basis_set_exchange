@@ -407,7 +407,7 @@ def optimize_general(basis, use_copy=True):
 
     for eldata in basis['elements'].values():
 
-        if not 'electron_shells' in eldata:
+        if 'electron_shells' not in eldata:
             continue
 
         elshells = eldata['electron_shells']
