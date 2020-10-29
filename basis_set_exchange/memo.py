@@ -18,8 +18,8 @@ def _make_key(args_spec, *args, **kwargs):
     defaults_names = args_spec.args[-num_defaults:]
 
     if not set(left_args).symmetric_difference(kwargs).issubset(defaults_names):
-        # We got an error in the function call. Let's simply trigger it
-        func(*args, **kwargs)
+        # Return None to signal an issue with the argument list
+        return None
 
     start = 0
     key = []
@@ -53,6 +53,11 @@ class BSEMemoize:
             return self.__f(*args, **kwargs)
 
         arg_key = _make_key(self.args_spec, *args, **kwargs)
+
+        if arg_key is None:
+            # There was a problem with the arguments. Just call the
+            # function to trigger the error
+            return self.__f(*args, **kwargs)
 
         if arg_key in self.__memo:
             return pickle.loads(self.__memo[arg_key])
