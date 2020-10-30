@@ -30,6 +30,8 @@ def write_gamess_us_electron_basis(basis, electron_elements):
             point_places = [0] + [4 + 8 * i + 15 * (i - 1) for i in range(1, ncol)]
             s += printing.write_matrix([idx_column, exponents, *coefficients], point_places)
 
+    # There must be a blank line before $END
+    s += "\n"
     s += "$END"
     return s
 
