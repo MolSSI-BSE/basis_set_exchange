@@ -50,6 +50,7 @@ from .demon2k import read_demon2k
 from .ricdlib import read_ricdlib
 from .gamess_us import read_gamess_us
 from .cp2k import read_cp2k
+from .crystal import read_crystal
 
 _reader_map = {
     'turbomole': {
@@ -121,6 +122,11 @@ _reader_map = {
         'display': 'CP2K',
         'extension': '.cp2k',
         'reader': read_cp2k
+    },
+    'crystal': {
+        'display': 'Crystal',
+        'extension': '.crystal',
+        'reader': read_crystal
     }
 }
 
