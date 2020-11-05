@@ -121,7 +121,7 @@ With ``-n`` or ``--no-description``, the command will hide the description of th
 .. command-output:: bse list-ref-formats -n
 
 
-list-wrtier-formats
+list-writer-formats
 *******************
 
 Print a list of the formats that can be written to by the library
