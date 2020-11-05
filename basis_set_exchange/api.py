@@ -18,6 +18,7 @@ from . import memo
 from . import notes
 from . import refconverters
 from . import references
+from . import sort
 from . import misc
 from . import lut
 from ._version import get_versions
@@ -99,6 +100,8 @@ def get_basis(name,
               remove_free_primitives=False,
               make_general=False,
               optimize_general=False,
+              augment_diffuse=0,
+              augment_steep=0,
               data_dir=None,
               header=True):
     '''Obtain a basis set
@@ -157,6 +160,10 @@ def get_basis(name,
     optimize_general : bool
         Optimize by removing general contractions that contain uncontracted
         functions (see :func:`basis_set_exchange.manip.optimize_general`)
+    augment_diffuse : int
+        Add n diffuse functions by even-tempered extrapolation
+    augment_steep : int
+        Add n steep functions by even-tempered extrapolation
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -241,6 +248,17 @@ def get_basis(name,
     # Remove dead and duplicate shells
     if needs_pruning:
         basis_dict = manip.prune_basis(basis_dict, False)
+
+    # Augment
+    if augment_diffuse > 0:
+        basis_dict = manip.geometric_augmentation(basis_dict, augment_diffuse, use_copy=False, as_component=False, steep=False)
+    if augment_steep > 0:
+        basis_dict = manip.geometric_augmentation(basis_dict, augment_steep, use_copy=False, as_component=False, steep=True)
+        # Need to sort to get added steep functions first
+        basis_dict = sort.sort_basis(basis_dict)
+    # Re-make general
+    if (augment_diffuse > 0 or augment_steep > 0) and make_general:
+        basis_dict = manip.make_general(basis_dict, False, False)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

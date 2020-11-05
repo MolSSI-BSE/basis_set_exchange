@@ -43,8 +43,9 @@ reader_test_data_dir = os.path.join(_my_dir, 'reader_test_data')
 # Directory with files for testing the validator
 validator_test_data_dir = os.path.join(_my_dir, 'validator_test_data')
 
-# Directory with files for testing dunning aug extension
-dunningext_test_data_dir = os.path.join(_my_dir, 'dunning_extend')
+# Directory with files for testing geometric augmentation
+diffuse_augmentation_test_data_dir = os.path.join(_my_dir, 'diffuse_augmentation')
+steep_augmentation_test_data_dir = os.path.join(_my_dir, 'steep_augmentation')
 
 # Directory with files for testing removal of free primitives
 rmfree_test_data_dir = os.path.join(_my_dir, 'rm_free')

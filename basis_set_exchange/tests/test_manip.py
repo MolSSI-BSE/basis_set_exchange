@@ -3,10 +3,11 @@ Tests BSE manip functions
 """
 
 import os
+import copy
 import pytest
 
-from basis_set_exchange import api, curate, manip, readers
-from .common_testvars import bs_names_sample, dunningext_test_data_dir, truhlar_test_data_dir, rmfree_test_data_dir
+from basis_set_exchange import api, curate, manip, readers, sort
+from .common_testvars import bs_names_sample, diffuse_augmentation_test_data_dir, steep_augmentation_test_data_dir, truhlar_test_data_dir, rmfree_test_data_dir
 
 def _list_subdirs(path):
     """
@@ -18,7 +19,8 @@ def _list_subdirs(path):
     subdirs = [os.path.join(path, x) for x in os.listdir(path)]
     return [os.path.relpath(x, path) for x in subdirs if os.path.isdir(x)]
 
-dunningext_test_subdirs = _list_subdirs(dunningext_test_data_dir)
+diffuse_augmentation_test_subdirs = _list_subdirs(diffuse_augmentation_test_data_dir)
+steep_augmentation_test_subdirs = _list_subdirs(steep_augmentation_test_data_dir)
 truhlar_test_subdirs = _list_subdirs(truhlar_test_data_dir)
 rmfree_test_subdirs = _list_subdirs(rmfree_test_data_dir)
 
@@ -31,23 +33,47 @@ def test_manip_roundtrip(basis):
 
     assert curate.compare_basis(bse_dict, bse_dict_unc, rel_tol=0.0)
 
-
-@pytest.mark.parametrize('testdir', dunningext_test_subdirs)
-def test_manip_dunningext(testdir):
-    full_testdir = os.path.join(dunningext_test_data_dir, testdir)
+@pytest.mark.parametrize('testdir', diffuse_augmentation_test_subdirs)
+def test_manip_diffuse_augmentation(testdir):
+    full_testdir = os.path.join(diffuse_augmentation_test_data_dir, testdir)
     basefile = testdir + '.nw.bz2'
     base_data = readers.read_formatted_basis_file(os.path.join(full_testdir, basefile))
 
-    for level, prefix in [(2, 'd-'), (3, 't-'), (4, 'q-')]:
+    for level, prefix in [(1, 'd'), (2, 't'), (3, 'q')]:
         ref = prefix + testdir + '.nw.ref.bz2'
         full_ref_path = os.path.join(full_testdir, ref)
         ref_data = readers.read_formatted_basis_file(full_ref_path, 'nwchem')
         ref_data = manip.make_general(ref_data)
 
-        new_data = manip.extend_dunning_aug(base_data, level)
+        new_data = manip.geometric_augmentation(base_data, level, steep=False)
         new_data = manip.make_general(new_data)
         assert curate.compare_basis(new_data, ref_data)
 
+@pytest.mark.parametrize('testdir', steep_augmentation_test_subdirs)
+def test_manip_steep_augmentation(testdir):
+    full_testdir = os.path.join(steep_augmentation_test_data_dir, testdir)
+    basefile = testdir + '.nw.bz2'
+    base_data = readers.read_formatted_basis_file(os.path.join(full_testdir, basefile))
+
+    for slevel, sprefix in [(0, ''), (1, 's'), (2, 'd')]:
+        # diffuse level 0 is augmented, 1 is doubly augmented
+        for dlevel, dprefix in [(0, ''), (1, 'd'), (2, 't')]:
+            if slevel == 0 and dlevel == 0:
+                continue
+            ref = testdir.replace('un-','un{}-'.format(sprefix)).replace('aug-','{}aug-'.format(dprefix)) + '.nw.ref.bz2'
+            full_ref_path = os.path.join(full_testdir, ref)
+            ref_data = readers.read_formatted_basis_file(full_ref_path, 'nwchem')
+            ref_data = manip.make_general(ref_data)
+
+            new_data = copy.deepcopy(base_data)
+            if slevel>0:
+                new_data = manip.geometric_augmentation(new_data, slevel, steep=True)
+            if dlevel>0:
+                new_data = manip.geometric_augmentation(new_data, dlevel, steep=False)
+            # The basis has to be sorted, since this also happens in the writers
+            new_data = sort.sort_basis(new_data)
+            new_data = manip.make_general(new_data)
+            assert curate.compare_basis(new_data, ref_data)
 
 @pytest.mark.parametrize('testdir', truhlar_test_subdirs)
 def test_manip_truhlar(testdir):
@@ -85,4 +111,3 @@ def test_manip_remove_free(testdir):
     new_data = manip.remove_free_primitives(base_data)
     new_data = manip.make_general(new_data)
     assert curate.compare_basis(new_data, ref_data)
-

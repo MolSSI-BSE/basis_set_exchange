@@ -386,6 +386,21 @@ def make_general(basis, skip_spdf=False, use_copy=True):
 def _is_single_column(col):
     return sum(float(x) != 0.0 for x in col) == 1
 
+def _free_primitives(coeffs):
+    # Find which columns represent free primitives
+    single_columns = [c for c in coeffs if _is_single_column(c)]
+    if len(single_columns)==0:
+        return []
+    # Now dig out the functions on those columns
+    csum=[0.0 for k in range(len(single_columns[0]))]
+    for c in single_columns:
+        for k in range(len(csum)):
+            csum[k] += abs(float(c[k]))
+    # Since we're only looking at columns that represent free
+    # primitives, the rows that have non-zero sums correspond to free
+    # exponents.
+    free_prims = [k for k, s in enumerate(csum) if s != 0.0]
+    return free_prims
 
 def remove_free_primitives(basis, use_copy=True):
     """
@@ -487,22 +502,30 @@ def optimize_general(basis, use_copy=True):
     return basis
 
 
-def extend_dunning_aug(basis, level, use_copy=True, as_component=False):
-    '''
-    Extends the augmenting functions of a dunning basis set (aug -> daug,taug,...)
+def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep=False):
+    '''Extends a basis set by adding extrapolated diffuse or steep functions.
+
+    For augmented Dunning sets (aug), the diffuse augmentation
+    corresponds to multiple augmentation (aug -> daug, taug, ...).
+
+    In order for the augmentation to make sense, the two outermost
+    primitives have to be free i.e. uncontracted.
 
     Parameters
     ----------
     basis : dict
         Basis set dictionary to work with
-    level: int
-        Level to create (must be >1). 2 = daug, 3 = taug, etc
+    nadd: int
+        Number of functions to add (must be >=1). For diffuse augmentation on an augmented set: 1 -> daug, 2 -> taug, etc
     use_copy: bool
         If True, the input basis set is not modified.
+    steep: bool
+        If True, the augmentation is done for steep functions instead of diffuse functions.
+
     '''
 
-    if level < 2:
-        raise RuntimeError("Level = {} is invalid for dunning_extend_aug".format(level))
+    if nadd < 1:
+        raise RuntimeError("Adding {} functions makes no sense for geometric_augmentation".format(nadd))
 
     # We need to combine shells by AM
     # I guess we don't NEED to, but it makes things a lot easier
@@ -546,30 +569,47 @@ def extend_dunning_aug(basis, level, use_copy=True, as_component=False):
             sorted_exponents = sorted(exponents)
 
             if len(sorted_exponents) < 2:
+                # Need at least two exponents to perform augmentation
+                continue
+
+            if steep:
+                # If we're augmenting by steep functions, the
+                # references are the steepest and second-steepest
+                # function.
+                ref_idx=-1
+                next_idx=-2
+            else:
+                # If we're augmenting by diffuse functions, the
+                # references are the diffusemost and second-most
+                # diffuse function.
+                ref_idx=0
+                next_idx=1
+
+            ref_exp, ref_idx = sorted_exponents[ref_idx]
+            next_exp, next_idx = sorted_exponents[next_idx]
+            # Even-tempered spacing parameter
+            beta = ref_exp / next_exp
+
+            if ref_exp == next_exp:
                 raise RuntimeError(
-                    "Need more than two exponents to extend dunning augmentation. Element {} has {}: ".format(
-                        el_sym, ','.join(shell['exponents'])))
+                    "The two outermost exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}".
+                    format(ref_exp))
 
-            alpha, alpha_idx = sorted_exponents[0]
-            beta_tmp, _ = sorted_exponents[1]
-            beta = alpha / beta_tmp
+            # Test that the primitives for the references are free.
+            free_prims = _free_primitives(shell['coefficients'])
+            if (ref_idx not in free_prims) or (next_idx not in free_prims):
+               # The shell does not have enough free primitives so
+               # skip the extrapolation. (The alternative would be to
+               # add in free primitives anyway, but then you'd have a
+               # problem with contraction errors.)
+               continue
 
-            if alpha == beta_tmp:
-                raise RuntimeError(
-                    "Two smallest exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}".
-                    format(alpha))
-
-            # Test that the primitive for alpha is completely uncontracted
-            alpha_coefs = [float(c[alpha_idx]) for c in shell['coefficients']]
-            n_coefs = len(alpha_coefs)
-            if alpha_coefs.count(0.0) != n_coefs - 1 or alpha_coefs.count(1.0) != 1:
-                raise RuntimeError("Smallest exponent is not completely uncontracted. Exponent: {}".format(alpha))
-
+            # Form new exponents
             new_exponents = []
-            for i in range(1, level):
-                new_exponents.append(alpha * (beta**i))
+            for i in range(1, nadd+1):
+                new_exponents.append(ref_exp * (beta**i))
 
-            new_exponents = ['{:.3e}'.format(x) for x in new_exponents]
+            new_exponents = ['{:.6e}'.format(x) for x in new_exponents]
 
             # add the new exponents as new uncontracted shells
             for ex in new_exponents:
