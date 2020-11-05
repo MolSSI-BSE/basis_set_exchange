@@ -2,9 +2,9 @@
 Handlers for command line subcommands
 '''
 
-from .. import curate, printing, fileio
+from .. import curate, printing, fileio, api
 from .common import format_columns
-
+import os
 
 def _bsecurate_cli_elements_in_files(args):
     '''Handles the elements-in-files subcommand'''
@@ -76,6 +76,15 @@ def _bsecurate_cli_make_graph_file(args):
     return ''
 
 
+def _bsecurate_cli_update_metadata(args):
+    '''Handles the update-metadata subcommand'''
+
+    data_dir = api._default_data_dir if args.data_dir is None else args.data_dir
+    metadata_file = os.path.join(data_dir, 'METADATA.json')
+    curate.create_metadata_file(metadata_file, data_dir)
+    return ''
+
+
 def bsecurate_cli_handle_subcmd(args):
     handler_map = {
         'elements-in-files': _bsecurate_cli_elements_in_files,
@@ -85,7 +94,8 @@ def bsecurate_cli_handle_subcmd(args):
         'compare-basis-files': _bsecurate_cli_compare_basis_files,
         'make-diff': _bsecurate_cli_make_diff,
         'view-graph': _bsecurate_cli_view_graph,
-        'make-graph-file': _bsecurate_cli_make_graph_file
+        'make-graph-file': _bsecurate_cli_make_graph_file,
+        'update-metadata': _bsecurate_cli_update_metadata
     }
 
     return handler_map[args.subcmd](args)
