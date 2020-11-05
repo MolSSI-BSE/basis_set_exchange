@@ -1,0 +1,64 @@
+name: Continuous Integration
+
+# adapted from openff-evaluator/.github/workflows/continuous_integration.yaml
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.6", "3.7", "3.8", "3.9"]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout/Clone the repository
+        uses: actions/checkout@v2
+
+      - name: Install package
+        shell: bash -l {0}
+        run: |
+          pip install .[docs,tests,curate] codecov
+          mkdir deps # For QCSchems
+
+      - name: Install QCSchema HEAD
+        shell: bash -l {0}
+        working-directory: ./deps
+        run: |
+          git clone https://github.com/molssi/QCSchema.git
+          pip install ./QCSchema
+
+      - name: Run tests
+        shell: bash -l {0}
+        working-directory: /tmp # Move to an unrelated dir and test the installed package
+        run: |
+          pytest --pyargs --cov=basis_set_exchange --cov-report=xml basis_set_exchange 
+          bse -V # Quick test of the cli
+
+      - name: Run documentation tests
+        shell: bash -l {0}
+        working-directory: ./doc
+        run: |
+          ln -s ../basis_set_exchange/tests/fakedata ${HOME}/my_data_dir
+          mkdir _static
+          make doctest
+          make html
+
+      - name: Code coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: /tmp/coverage.xml
+          fail_ci_if_error: true
