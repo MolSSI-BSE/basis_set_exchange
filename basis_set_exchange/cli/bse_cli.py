@@ -4,10 +4,10 @@ Command line interface for the basis set exchange
 
 import argparse
 import argcomplete
-from .. import version
-from .bse_handlers import bse_cli_handle_subcmd
-from .check import cli_check_normalize_args
-from .complete import (cli_case_insensitive_validator,
+from basis_set_exchange import version
+from basis_set_exchange.cli.bse_handlers import bse_cli_handle_subcmd
+from basis_set_exchange.cli.check import cli_check_normalize_args
+from basis_set_exchange.cli.complete import (cli_case_insensitive_validator,
                        cli_family_completer, cli_role_completer, cli_bsname_completer,
                        cli_write_fmt_completer, cli_read_fmt_completer, cli_reffmt_completer)
 
@@ -160,3 +160,6 @@ def run_bse_cli():
         print(output)
 
     return 0
+
+if __name__ == "__main__":
+    run_bse_cli()

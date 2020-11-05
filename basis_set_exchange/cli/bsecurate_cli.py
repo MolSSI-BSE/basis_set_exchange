@@ -4,10 +4,10 @@ Command line interface for the basis set exchange
 
 import argparse
 import argcomplete
-from .. import version
-from .bsecurate_handlers import bsecurate_cli_handle_subcmd
-from .check import cli_check_normalize_args
-from .complete import cli_case_insensitive_validator, cli_bsname_completer, cli_readerfmt_completer
+from basis_set_exchange import version
+from basis_set_exchange.cli.bsecurate_handlers import bsecurate_cli_handle_subcmd
+from basis_set_exchange.cli.check import cli_check_normalize_args
+from basis_set_exchange.cli.complete import cli_case_insensitive_validator, cli_bsname_completer, cli_readerfmt_completer
 
 
 def run_bsecurate_cli():
@@ -38,6 +38,11 @@ def run_bsecurate_cli():
     # elements-in-files
     subp = subparsers.add_parser('component-file-refs', help='For a list of component JSON files, output what elements/references are in each file')
     subp.add_argument('files', nargs='+', help='List of files to inspect')
+
+    ########################################
+    # Updating metadata
+    ########################################
+    subp = subparsers.add_parser('update-metadata', help='Update the metadata in the repository')
 
     ########################################
     # Printing data
@@ -82,7 +87,7 @@ def run_bsecurate_cli():
     subp.add_argument('--version', help='Which version of the basis set to inspect. Default is the latest version')
 
     # make-graph-file
-    subp = subparsers.add_parser('make-graph-file', help='Make a dot file (and png file) ofr a basis set file graph')
+    subp = subparsers.add_parser('make-graph-file', help='Make a dot file (and png file) for a basis set file graph')
     subp.add_argument('basis', help='Name of the basis set inspect').completer = cli_bsname_completer
     subp.add_argument('outfile', help='Output DOT file to create')
     subp.add_argument('--render', action='store_true', help='Render the DOT file into a corresponding png file')
@@ -112,3 +117,6 @@ def run_bsecurate_cli():
         print(output)
 
     return 0
+
+if __name__ == "__main__":
+    run_bsecurate_cli()
