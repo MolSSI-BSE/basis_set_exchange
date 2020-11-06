@@ -247,7 +247,7 @@ def uncontract_general(basis, use_copy=True):
 
         el['electron_shells'] = newshells
 
-    # If use_basis is True, we already made our deep copy
+    # If use_copy is True, we already made our deep copy
     return prune_basis(basis, False)
 
 
@@ -383,10 +383,43 @@ def make_general(basis, skip_spdf=False, use_copy=True):
 
     return basis
 
-
 def _is_single_column(col):
     return sum(float(x) != 0.0 for x in col) == 1
 
+
+def remove_free_primitives(basis, use_copy=True):
+    """
+    Removes any free primitives from a basis set as a way to generate a minimal basis
+
+    The input basis set is not modified. The returned basis
+    may have functions with coefficients of zero and may have duplicate
+    shells.
+
+    If use_copy is True, the input basis set is not modified.
+    """
+
+    if use_copy:
+        basis = copy.deepcopy(basis)
+
+    for k, el in basis['elements'].items():
+
+        if 'electron_shells' not in el:
+            continue
+
+        newshells = []
+        for sh in el['electron_shells']:
+            # Find contractions
+            coefficients = sh['coefficients']
+            contracted_columns = [idx for idx, c in enumerate(coefficients) if not _is_single_column(c)]
+            coefficients = [coefficients[c] for c in contracted_columns]
+            if len(coefficients):
+                sh['coefficients'] = coefficients
+                newshells.append(sh)
+        el['electron_shells'] = newshells
+
+    # We can now have exponents that aren't contracted so we need to
+    # prune. If use_copy is True, we already made our deep copy
+    return prune_basis(basis, False)
 
 def optimize_general(basis, use_copy=True):
     """

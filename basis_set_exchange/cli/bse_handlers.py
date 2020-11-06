@@ -105,6 +105,7 @@ def _bse_cli_get_basis(args):
         uncontract_general=args.unc_gen,
         uncontract_spdf=args.unc_spdf,
         uncontract_segmented=args.unc_seg,
+        remove_free_primitives=args.rm_free,
         make_general=args.make_gen,
         optimize_general=args.opt_gen,
         data_dir=args.data_dir,

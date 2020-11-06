@@ -88,6 +88,7 @@ def run_bse_cli():
     subp.add_argument('--unc-gen', action='store_true', help='Remove general contractions')
     subp.add_argument('--unc-spdf', action='store_true', help='Remove combined sp, spd, ... contractions')
     subp.add_argument('--unc-seg', action='store_true', help='Remove general contractions')
+    subp.add_argument('--rm-free', action='store_true', help='Remove free primitives')
     subp.add_argument('--opt-gen', action='store_true', help='Optimize general contractions')
     subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
 
