@@ -14,6 +14,7 @@ from .gbasis import read_gbasis
 from .dalton import read_dalton
 from .molcas import read_molcas
 from .genbas import read_genbas
+from .nrlmol import read_nrlmol
 
 _reader_map = {
     'turbomole': {
@@ -55,6 +56,11 @@ _reader_map = {
         'display': 'GBasis',
         'extension': '.gbasis',
         'reader': read_gbasis
+    },
+    'nrlmol': {
+        'display': 'NRLMOL',
+        'extension': '.nrlmol',
+        'reader': read_nrlmol
     }
 }
 
