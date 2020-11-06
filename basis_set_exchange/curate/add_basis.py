@@ -143,7 +143,7 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
     create_metadata_file(metadata_file, data_dir)
 
 
-def add_basis(bs_file,
+def add_basis_from_string(bs_data,
               data_dir,
               subdir,
               file_base,
@@ -154,20 +154,18 @@ def add_basis(bs_file,
               version,
               revision_description,
               data_source,
-              refs=None,
-              file_fmt=None):
-    '''
-    Add a basis set to this library
+              refs=None):
+    '''Add a basis set to this library
 
-    This takes in a single file containing the basis set is some format, parses it, and
-    create the component, element, and table basis set files in the given data_dir (and subdir).
-    The metadata file for the basis is created if it doesn't exist, and the main metadata file is
-    also updated.
+    This takes in a basis set string, and create the component,
+    element, and table basis set files in the given data_dir (and
+    subdir).  The metadata file for the basis is created if it doesn't
+    exist, and the main metadata file is also updated.
 
     Parameters
     ----------
-    bs_file : str
-        Path to the file with formatted basis set information
+    bs_data : str
+        Basis set string
     data_dir : str
         Path to the data directory to add the data to
     subdir : str
@@ -200,10 +198,10 @@ def add_basis(bs_file,
         usual 'noref' extension and the references entry is empty.
     file_fmt : str
         Format of the input basis data (None = autodetect)
+
     '''
 
     # Read the basis set data into a component file, and add the description
-    bs_data = read_formatted_basis_file(bs_file, file_fmt, validate=True, as_component=True)
     bs_data['description'] = description
     bs_data['data_source'] = data_source
 
@@ -284,3 +282,67 @@ def add_basis(bs_file,
     # Do all the rest
     add_from_components([component_file_path], data_dir, subdir, file_base, name, family, role, description, version,
                         revision_description)
+
+def add_basis(bs_file,
+              data_dir,
+              subdir,
+              file_base,
+              name,
+              family,
+              role,
+              description,
+              version,
+              revision_description,
+              data_source,
+              refs=None,
+              file_fmt=None):
+    '''
+    Add a basis set to this library
+
+    This takes in a single file containing the basis set is some format, parses it, and
+    create the component, element, and table basis set files in the given data_dir (and subdir).
+    The metadata file for the basis is created if it doesn't exist, and the main metadata file is
+    also updated.
+
+    Parameters
+    ----------
+    bs_file : str
+        Path to the file with formatted basis set information
+    data_dir : str
+        Path to the data directory to add the data to
+    subdir : str
+        Subdirectory of the data directory to add the basis set to
+    file_base : str
+        Base name for new files
+    name : str
+        Name of the basis set
+    family : str
+        Family to which this basis set belongs
+    role : str
+        Role of the basis set (orbital, etc)
+    description : str
+        Description of the basis set
+    version : str
+        Version of the basis set
+    revision_description : str
+        Description of this version of the basis set
+    data_source : str
+        Description of where this data came from
+    refs : dict or str
+        Mapping of references to elements. This can be a dictionary with a compressed
+        string of elements as keys and a list of reference strings as values.
+        For example, {'H,Li-B,Kr': ['kumar2018a']}
+
+        If a list or string is passed, then those reference(s) will be used for
+        all elements.
+
+        Elements that exist in the file but do not have a reference are given the
+        usual 'noref' extension and the references entry is empty.
+    file_fmt : str
+        Format of the input basis data (None = autodetect)
+    '''
+
+    # Read the basis set data into a component file, and add the description
+    bs_data = read_formatted_basis_file(bs_file, file_fmt, validate=True, as_component=True)
+    # The rest is done by the string routine
+    add_basis_from_string(bs_data, data_dir, subdir, file_base, name, family, role, description, version, revision_description, data_source, refs)
