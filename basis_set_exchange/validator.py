@@ -234,7 +234,7 @@ def _get_schema(file_type):
     schema = fileio.read_schema(file_path)
 
     # Set up the resolver for links
-    base_uri = 'file://{}/'.format(_default_schema_dir)
+    base_uri = 'file:///{}/'.format(_default_schema_dir)
     resolver = jsonschema.RefResolver(base_uri=base_uri, referrer=schema)
 
     return schema, resolver
