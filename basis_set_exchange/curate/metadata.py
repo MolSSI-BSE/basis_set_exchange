@@ -84,6 +84,7 @@ def create_metadata_file(output_path, data_dir):
         # Create the common metadata for this basis set
         # display_name and other_names are placeholders to keep order
         # yapf: disable
+        print(base_filename)
         common_md = { 'display_name': None,
                       'other_names': None,
                       'description': bs['description'],
