@@ -6,13 +6,21 @@ import os
 import pytest
 
 from basis_set_exchange import api, curate, manip, readers
-from .common_testvars import bs_names_sample, dunningext_test_data_dir, truhlar_test_data_dir
+from .common_testvars import bs_names_sample, dunningext_test_data_dir, truhlar_test_data_dir, rmfree_test_data_dir
 
-dunningext_test_subdirs = os.listdir(dunningext_test_data_dir)
-dunningext_test_subdirs = [x for x in dunningext_test_subdirs if x.startswith('aug-')]
+def _list_subdirs(path):
+    """
+    Create a list of subdirectories of a path.
 
-truhlar_test_subdirs = os.listdir(truhlar_test_data_dir)
-truhlar_test_subdirs = [x for x in truhlar_test_subdirs if x.startswith('cc-')]
+    The returned paths will be relative to the given path.
+    """
+
+    subdirs = [os.path.join(path, x) for x in os.listdir(path)]
+    return [os.path.relpath(x, path) for x in subdirs if os.path.isdir(x)]
+
+dunningext_test_subdirs = _list_subdirs(dunningext_test_data_dir)
+truhlar_test_subdirs = _list_subdirs(truhlar_test_data_dir)
+rmfree_test_subdirs = _list_subdirs(rmfree_test_data_dir)
 
 
 @pytest.mark.parametrize('basis', bs_names_sample)
@@ -61,3 +69,20 @@ def test_manip_truhlar(testdir):
 
         new_data = manip.truhlar_calendarize(base_data, month, use_copy=True)
         assert curate.compare_basis(new_data, ref_data)
+
+
+@pytest.mark.parametrize('testdir', rmfree_test_subdirs)
+def test_manip_remove_free(testdir):
+    full_testdir = os.path.join(rmfree_test_data_dir, testdir)
+    basefile = testdir + '.nw.bz2'
+    base_data = readers.read_formatted_basis_file(os.path.join(full_testdir, basefile))
+
+    ref = 'min_' + testdir + '.nw.ref.bz2'
+    full_ref_path = os.path.join(full_testdir, ref)
+    ref_data = readers.read_formatted_basis_file(full_ref_path, 'nwchem')
+    ref_data = manip.make_general(ref_data)
+
+    new_data = manip.remove_free_primitives(base_data)
+    new_data = manip.make_general(new_data)
+    assert curate.compare_basis(new_data, ref_data)
+
