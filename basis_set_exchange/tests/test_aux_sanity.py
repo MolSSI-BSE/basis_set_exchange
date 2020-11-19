@@ -5,6 +5,7 @@ Tests for sanity of auxiliary basis sets
 import pytest
 
 from .common_testvars import bs_names, bs_metadata
+from ..misc import transform_basis_name
 
 
 @pytest.mark.parametrize('basis_name', bs_names)
@@ -31,17 +32,22 @@ def test_aux_reverse(basis_name):
     """
 
     this_metadata = bs_metadata[basis_name]
-    r = this_metadata['role']
-    if r == 'orbital' or r == 'guess':
+    role = this_metadata['role']
+    if role == 'orbital' or role == 'guess':
         return
+
+    # All possible names for this auxiliary set
+    # We only have to match one
+    all_aux_names = this_metadata["other_names"] + [basis_name]
+    all_aux_names = [transform_basis_name(x) for x in all_aux_names]
 
     # Find where this basis set is listed as an auxiliary
     found = False
     for k, v in bs_metadata.items():
         aux = v['auxiliaries']
-        for ak, av in aux.items():
-            if av == basis_name:
-                assert ak == r
+        for aux_role, aux_name in aux.items():
+            if aux_name in all_aux_names:
+                assert aux_role == role
                 found = True
 
     assert found
