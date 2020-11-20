@@ -96,6 +96,7 @@ def get_basis(name,
               uncontract_general=False,
               uncontract_spdf=False,
               uncontract_segmented=False,
+              remove_free_primitives=False,
               make_general=False,
               optimize_general=False,
               data_dir=None,
@@ -211,6 +212,11 @@ def get_basis(name,
     # since we are returned a unique instance from compose_table_basis
 
     needs_pruning = False
+
+    if remove_free_primitives:
+        basis_dict = manip.remove_free_primitives(basis_dict, False)
+        needs_pruning = True
+
     if optimize_general:
         basis_dict = manip.optimize_general(basis_dict, False)
         needs_pruning = True

@@ -18,7 +18,8 @@ data_dirs = ['data', 'schema',
              os.path.join('tests', 'reader_test_data'),
              os.path.join('tests', 'validator_test_data'),
              os.path.join('tests', 'dunning_extend'),
-             os.path.join('tests', 'truhlar')
+             os.path.join('tests', 'truhlar'),
+             os.path.join('tests', 'rm_free')
 ]
 
 for data_dir in data_dirs:

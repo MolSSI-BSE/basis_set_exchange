@@ -46,6 +46,9 @@ validator_test_data_dir = os.path.join(_my_dir, 'validator_test_data')
 # Directory with files for testing dunning aug extension
 dunningext_test_data_dir = os.path.join(_my_dir, 'dunning_extend')
 
+# Directory with files for testing removal of free primitives
+rmfree_test_data_dir = os.path.join(_my_dir, 'rm_free')
+
 # Directory with files for testing truhlar calenderization
 truhlar_test_data_dir = os.path.join(_my_dir, 'truhlar')
 
