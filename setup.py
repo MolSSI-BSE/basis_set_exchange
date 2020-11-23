@@ -49,9 +49,11 @@ if __name__ == "__main__":
         },
         install_requires=[
             'jsonschema',
-            'argcomplete'
+            'argcomplete',
         ],
         extras_require={
+            ':python_version == "3.6"': ["importlib-metadata < 3"],
+            ':python_version == "3.7"': ["importlib-metadata < 3"],
             'docs': [
                 'sphinx',
                 'sphinxcontrib-programoutput',
