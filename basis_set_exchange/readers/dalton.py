@@ -65,7 +65,7 @@ def _parse_electron_lines(basis_lines, bs_data):
             new_basis_lines.append(basis_lines[i])
             i += 1
 
-    basis_lines = [line for line in new_basis_lines if line[0] != '$']
+    basis_lines = helpers.prune_lines(new_basis_lines, '$')
 
     # Now split out all the element blocks
     element_blocks = helpers.partition_lines(basis_lines, _line_begins_element, min_size=3)
@@ -97,10 +97,11 @@ def _parse_electron_lines(basis_lines, bs_data):
         for sh_lines in shell_blocks:
             nprim, ngen = helpers.parse_line_regex(shell_begin_re, sh_lines[0], 'nprim, ngen')
             # fix for split over newline
-            bas_lines = sh_lines[1:]
-            if len(sh_lines[1:]) != nprim:
-                if len(sh_lines[1:]) == 2 * nprim:
-                    bas_lines = [' '.join([sh_lines[1 + i], sh_lines[2 + i]]) for i in range(nprim)]
+            num_line_splits = len(sh_lines[1:]) // nprim
+            if num_line_splits * nprim == len(sh_lines[1:]):
+                bas_lines = [' '.join([sh_lines[1 + num_line_splits*i + offset] for offset in range(num_line_splits)]) for i in range(nprim)]
+            else:
+                raise ValueError('Inconsistent number of entries in element block.')
             exponents, coefficients = helpers.parse_primitive_matrix(bas_lines, nprim=nprim, ngen=ngen)
 
             func_type = helpers.function_type_from_am([shell_am], 'gto', 'spherical')
