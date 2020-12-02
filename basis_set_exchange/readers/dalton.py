@@ -49,7 +49,8 @@ def _parse_electron_lines(basis_lines, bs_data):
 
     Resulting information is stored in bs_data
     '''
-
+    # fix common spelling mistakes
+    basis_lines = [re.sub('PHOSPHOROUS', 'PHOSPHORUS', line) for line in basis_lines]
     # A little bit of a hack here
     # If we find the start of an element, remove all the following comment lines
     new_basis_lines = []
@@ -64,7 +65,7 @@ def _parse_electron_lines(basis_lines, bs_data):
             new_basis_lines.append(basis_lines[i])
             i += 1
 
-    basis_lines = new_basis_lines
+    basis_lines = helpers.prune_lines(new_basis_lines, '$')
 
     # Now split out all the element blocks
     element_blocks = helpers.partition_lines(basis_lines, _line_begins_element, min_size=3)
@@ -95,7 +96,13 @@ def _parse_electron_lines(basis_lines, bs_data):
 
         for sh_lines in shell_blocks:
             nprim, ngen = helpers.parse_line_regex(shell_begin_re, sh_lines[0], 'nprim, ngen')
-            exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=ngen)
+            bas_lines = sh_lines[1:]
+            # fix for split over newline
+            if nprim > 0 and bas_lines:
+                num_line_splits = len(sh_lines[1:]) // nprim
+                if num_line_splits * nprim == len(sh_lines[1:]):
+                    bas_lines = [' '.join([sh_lines[1 + num_line_splits*i + offset] for offset in range(num_line_splits)]) for i in range(nprim)]
+            exponents, coefficients = helpers.parse_primitive_matrix(bas_lines, nprim=nprim, ngen=ngen)
 
             func_type = helpers.function_type_from_am([shell_am], 'gto', 'spherical')
 
