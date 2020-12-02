@@ -11,22 +11,20 @@ with open(_readme_path, 'r', encoding='utf-8') as readme_file:
 
 # Find the json files in the data dir and the schema dir
 bse_package_data = ['pytest.ini']
-data_dirs = ['data', 'schema',
-             os.path.join('tests', 'sources'),
-             os.path.join('tests', 'fakedata'),
-             os.path.join('tests', 'curate_test_data'),
-             os.path.join('tests', 'reader_test_data'),
-             os.path.join('tests', 'validator_test_data'),
-             os.path.join('tests', 'dunning_extend'),
-             os.path.join('tests', 'truhlar'),
-             os.path.join('tests', 'rm_free')
-]
 
+# data_dirs contains dirctories to be installed to the final package location
+data_dirs = ['data', 'schema', 'tests']
+
+# Add all the files from those directories, making the path relative
 for data_dir in data_dirs:
     for (path, _, filenames) in os.walk(os.path.join('basis_set_exchange', data_dir)):
+        # Don't add pycache, of course
+        if '__pycache__' in path:
+            continue
         for filename in filenames:
             filepath = os.path.join(path, filename)
             bse_package_data.append(os.path.relpath(filepath, 'basis_set_exchange'))
+
 
 if __name__ == "__main__":
     my_packages = setuptools.find_packages()
