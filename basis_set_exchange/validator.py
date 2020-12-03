@@ -23,6 +23,17 @@ def _list_has_duplicates(lst):
     return dupe
 
 
+def _list_has_nonpositives(lst):
+    '''Check if a list of floats has nonpositive elements
+       Returns a list of nonpositive elements'''
+
+    nonpos = []
+    for x in lst:
+        if float(x)<=0.0:
+            nonpos.append(x)
+    return nonpos
+
+
 def _validate_extra_references(bs_data):
     '''Extra checks for references files'''
     pass
@@ -53,13 +64,18 @@ def _validate_electron_shells(shells, element_z):
             # If max(am) < 2, spherical/cartesian not allowed
             if 'spherical' in s['function_type'] or 'cartesian' in s['function_type']:
                 raise RuntimeError("Element {} Shell {}: AM = {} marked as spherical or cartesian: {}".format(element_z, idx, str(s['angular_momentum']), s['function_type']))
-             
+
 
         # Duplicate exponents (when converted to float)?
         exponents_f = [float(x) for x in s['exponents']]
         dupe_ex = _list_has_duplicates(exponents_f)
         if dupe_ex:
             raise RuntimeError("Element {} Shell {}: Has duplicate exponents: {}".format(element_z, idx, dupe_ex))
+
+        # Nonpositive exponents?
+        nonpos_ex = _list_has_nonpositives(exponents_f)
+        if nonpos_ex:
+            raise RuntimeError("Element {} Shell {}: Has negative exponents: {}".format(element_z, idx, nonpos_ex))
 
         for g in s['coefficients']:
             if nprim != len(g):
