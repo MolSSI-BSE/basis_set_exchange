@@ -42,7 +42,8 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
    bse_cli
    conversion
    minimal_sets
-   dunning_mod
+   augmentation
+   calendarization
    bundling
    user_api
    developer
