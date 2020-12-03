@@ -6,7 +6,7 @@ data, as well as some other small functions.
 """
 
 import copy
-from . import lut, skel, misc
+from . import skel, misc
 
 
 def merge_element_data(dest, sources, use_copy=True):
@@ -556,8 +556,6 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
     for el_z, eldata in basis_copy['elements'].items():
         if 'electron_shells' not in eldata:
             continue
-
-        el_sym = lut.element_sym_from_Z(el_z)
 
         new_shells = []
 
