@@ -19,8 +19,8 @@ calculation on the neon atom, where symmetry breaking is not an issue.
 We will consider the STO-3G and STO-6G basis sets, as well as minimal
 basis sets extracted from the Dunning cc-pVnZ sets, which can be
 compared to fully numerical reference values (Lehtola,
-http://doi.org/10.1103/PhysRevA.101.012516).
-::
+http://doi.org/10.1103/PhysRevA.101.012516). ::
+
   Basis             Energy (Eh)  Error (Eh)
   STO-3G          -126.60452509     1.9e+00
   STO-6G          -127.77673830     7.7e-01
@@ -31,7 +31,7 @@ http://doi.org/10.1103/PhysRevA.101.012516).
   cc-pV6Z         -128.54706110     3.7e-05
 
   fully numerical -128.54709811
-::
+
 
 As is immediately clear from the table, STO-3G and STO-6G are quite
 inaccurate by modern standards, with errors in the absolute energy of
@@ -51,4 +51,3 @@ Note that contracted polarization functions (e.g. in the atomic
 natural orbital, ANO, basis sets, or the correlation consistent sets
 for transition metals) will not be removed by the function, so be sure
 to check whether the result is what you want.
-
