@@ -223,7 +223,7 @@ def add_basis(bs_file,
     elif isinstance(refs, list):
         for k, v in bs_data['elements'].items():
             v['references'] = refs
-    else:
+    elif isinstance(refs, dict):
         for k, v in refs.items():
             # Expand the string a list of integers (as strings)
             elements = expand_elements(k, True)
@@ -249,6 +249,8 @@ def add_basis(bs_file,
         if noref_elements:
             for el in noref_elements:
                 bs_data['elements'][el]['references'] = []
+    else:
+        raise RuntimeError('refs should be a string, a list, or a dictionary')
 
     # Create the filenames for the components
     # Also keep track of where data for each element is (for the element and table files)
