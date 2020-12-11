@@ -42,7 +42,7 @@ def run_bsecurate_cli():
     ########################################
     # Updating metadata
     ########################################
-    subp = subparsers.add_parser('update-metadata', help='Update the metadata in the repository')
+    subparsers.add_parser('update-metadata', help='Update the metadata in the repository')
 
     ########################################
     # Printing data

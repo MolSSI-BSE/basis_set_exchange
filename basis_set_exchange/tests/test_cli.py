@@ -3,16 +3,18 @@ Testing of the BSE CLI interface
 '''
 
 import os
+import sys
 import subprocess
 import pytest
 
-from .common_testvars import fake_data_dir
+from .common_testvars import cli_dir, fake_data_dir
 
 
 def _test_cli_cmd(cmd):
     # NOTE: We do not enforce any encoding here. What is returned will be a byte string
     # For our purposes here, that is ok. We don't know what encoding is going to be
     # used (ie, windows)
+    cmd = '{} {} '.format(sys.executable, os.path.join(cli_dir,'bse_cli.py')) + cmd
     cmd = cmd.split(' ')
     return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
@@ -37,18 +39,18 @@ fakebse_cmds = [
 
 @pytest.mark.parametrize('bse_cmd', bse_cmds)
 def test_cli(bse_cmd):
-    _test_cli_cmd('bse ' + bse_cmd)
+    _test_cli_cmd(bse_cmd)
 
 
 @pytest.mark.parametrize('bse_cmd', fakebse_cmds)
 def test_cli_datadir(bse_cmd):
-    output = _test_cli_cmd('bse -d ' + fake_data_dir + ' ' + bse_cmd)
+    output = _test_cli_cmd('-d ' + fake_data_dir + ' ' + bse_cmd)
     assert b'bppfake' in output
 
 
 def test_cli_createbundle_datadir(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
     bfile_path = os.path.join(tmp_path, 'test_bundle_datadir.tar.bz2')
-    output = _test_cli_cmd('bse -d ' + fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_path)
+    output = _test_cli_cmd('-d ' + fake_data_dir + ' create-bundle gaussian94 bib ' + bfile_path)
     assert os.path.isfile(bfile_path)
     assert output.startswith(b'Created ')

@@ -28,6 +28,10 @@ for k, v in bs_metadata.items():
     for ver in v['versions'].keys():
         bs_names_vers.append((k, ver))
 
+# Directory the CLI executables
+_parent_dir = os.path.abspath(os.path.join(_my_dir, os.pardir))
+cli_dir = os.path.join(_parent_dir, 'cli')
+
 # Directory with some fake data
 fake_data_dir = os.path.join(_my_dir, 'fakedata')
 

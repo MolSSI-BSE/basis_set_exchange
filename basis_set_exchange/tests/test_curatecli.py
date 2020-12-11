@@ -3,18 +3,22 @@ Testing of the BSE Curation CLI interface
 '''
 
 import os
+import sys
 import subprocess
 import pytest
 import shutil
 
 from basis_set_exchange import fileio, curate
-from .common_testvars import fake_data_dir, data_dir, curate_test_data_dir
+from .common_testvars import cli_dir, fake_data_dir, data_dir, curate_test_data_dir
 
 
 def _test_curatecli_cmd(cmd):
     # NOTE: We do not enforce any encoding here. What is returned will be a byte string
     # For our purposes here, that is ok. We don't know what encoding is going to be
     # used (ie, windows)
+
+    # Python to run
+    cmd = '{} {} '.format(sys.executable, os.path.join(cli_dir, 'bsecurate_cli.py')) + cmd
     cmd = cmd.split(' ')
     return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
@@ -38,12 +42,12 @@ fakebsecurate_cmds = [
 
 @pytest.mark.parametrize('bsecurate_cmd', bsecurate_cmds)
 def test_curatecli(bsecurate_cmd):
-    _test_curatecli_cmd('bsecurate ' + bsecurate_cmd)
+    _test_curatecli_cmd(bsecurate_cmd)
 
 
 @pytest.mark.parametrize('bsecurate_cmd', fakebsecurate_cmds)
 def test_curatecli_datadir(bsecurate_cmd):
-    _test_curatecli_cmd('bsecurate -d ' + fake_data_dir + ' ' + bsecurate_cmd)
+    _test_curatecli_cmd('-d ' + fake_data_dir + ' ' + bsecurate_cmd)
 
 
 def test_curatecli_makediff(tmp_path):
@@ -61,8 +65,8 @@ def test_curatecli_makediff(tmp_path):
     shutil.copyfile(file1, tmpfile1)
     shutil.copyfile(file2, tmpfile2)
 
-    _test_curatecli_cmd('bsecurate make-diff -l {} -r {}'.format(tmpfile1, tmpfile2))
-    _test_curatecli_cmd('bsecurate make-diff -l {} -r {}'.format(tmpfile2, tmpfile1))
+    _test_curatecli_cmd('make-diff -l {} -r {}'.format(tmpfile1, tmpfile2))
+    _test_curatecli_cmd('make-diff -l {} -r {}'.format(tmpfile2, tmpfile1))
 
     diff1 = fileio.read_json_basis(tmpfile1 + '.diff')
     diff2 = fileio.read_json_basis(tmpfile2 + '.diff')
@@ -78,13 +82,13 @@ def test_curatecli_makediff(tmp_path):
 
 
 def test_curatecli_compare_1():
-    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0')
+    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 0')
     assert b"No difference found" in output
 
-    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general')
+    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general')
     assert b"No difference found" in output
 
-    output = _test_curatecli_cmd('bsecurate compare-basis-sets 6-31g 6-31g --version1 0 --version2 1')
+    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 1')
     assert b"DIFFERENCES FOUND" in output
 
 
@@ -113,13 +117,13 @@ def test_curatecli_compare_files(filename1, filename2, expected):
     file1 = os.path.join(curate_test_data_dir, filename1)
     file2 = os.path.join(curate_test_data_dir, filename2)
 
-    output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file1, file2))
+    output = _test_curatecli_cmd('compare-basis-files {} {} --uncontract-general'.format(file1, file2))
     if expected:
         assert b"No difference found" in output
     else:
         assert b"DIFFERENCES FOUND" in output
 
-    output = _test_curatecli_cmd('bsecurate compare-basis-files {} {} --uncontract-general'.format(file2, file1))
+    output = _test_curatecli_cmd('compare-basis-files {} {} --uncontract-general'.format(file2, file1))
     if expected:
         assert b"No difference found" in output
     else:
