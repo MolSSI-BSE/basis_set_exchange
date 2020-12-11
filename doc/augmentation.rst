@@ -10,13 +10,14 @@ description of the wave function close to the nucleus by adding more
 steep functions into a basis set.
 
 The extrapolation works by taking the two outermost primitives in the
-basis, X and Y. We assume X to be the steepest or most diffuse, and Y
-is the second-steepest or second-most diffuse. (If you want to do
-steep augmentation, you should also fully decontract your basis set.)
-Now, we can just add more primitives as X*X/Y, X*(X/Y)^2, ... The
-procedure is the best justified for even-tempered basis sets, where
-all exponents follow the same pattern, but the procedure is used often
-also for fully optimized basis sets.
+basis, :math:`X` and :math:`Y`. We assume :math:`X` to be the steepest
+or most diffuse, and :math:`Y` is the second-steepest or second-most
+diffuse. (If you want to do steep augmentation, you should also fully
+decontract your basis set.)  Now, we can just add more primitives as
+:math:`X(X/Y)`, :math:`X(X/Y)^2`, ... The procedure is the best
+justified for even-tempered basis sets, where all exponents follow the
+same pattern, but the procedure is used often also for fully optimized
+basis sets.
 
 Adding more diffuse functions to an already augmented basis set is
 generally known as multiple augmentation, as described by Woon &

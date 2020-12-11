@@ -20,8 +20,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Basis Set Exchange'
-copyright = '2020, Benjamin Pritchard'
-author = 'Benjamin Pritchard'
+copyright = '2020, Benjamin Pritchard and Susi Lehtola'
+author = 'Benjamin Pritchard and Susi Lehtola'
 
 # The short X.Y version
 version = ''
@@ -135,7 +135,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'BasisSetExchange.tex', 'Basis Set Exchange Documentation',
-     'Benjamin Pritchard', 'manual'),
+     'Benjamin Pritchard and Susi Lehtola', 'manual'),
 ]
 
 
