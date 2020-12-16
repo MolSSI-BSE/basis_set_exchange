@@ -14,7 +14,10 @@ def write_molpro(basis):
     basis = manip.make_general(basis, False, True)
     basis = sort.sort_basis(basis, True)
 
-    s = ''
+    # Start out with angular momentum type
+    types = basis['function_types']
+    harm_type = 'cartesian' if 'gto_cartesian' in types else 'spherical'
+    s = harm_type + '\n'
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]
