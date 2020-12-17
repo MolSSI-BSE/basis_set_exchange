@@ -215,6 +215,10 @@ def get_basis(name,
             # Set to only the elements we want
             basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
 
+            # Since we only grab some of the elements, we need to
+            # update the function types used, too
+            basis_dict['function_types'] = compose._whole_basis_types(basis_dict)
+
     # Note that from now on, the pipleline is going to modify basis_dict. That is ok,
     # since we are returned a unique instance from compose_table_basis
 
