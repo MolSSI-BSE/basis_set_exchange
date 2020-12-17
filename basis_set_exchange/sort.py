@@ -4,6 +4,7 @@ Sorting of BSE related dictionaries and data
 
 import sys
 import copy
+from .ints import gto_Rsq_contr
 
 # Dictionaries for python 3.6 and above are insertion ordered
 # For other versions, use an OrderedDict
@@ -12,6 +13,26 @@ _use_odict = sys.version_info.major == 3 and sys.version_info.minor < 6
 if _use_odict:
     from collections import OrderedDict
 
+def _spatial_extent(sh):
+    """Computes the spatial extent for the orbitals on the shell"""
+
+    rsq = []
+    if sh['function_type'][:3] == 'gto': # Catches GTO, spherical and cartesian
+        if len(sh['angular_momentum'])==1:
+            # General contraction
+            rsq_mat = gto_Rsq_contr(sh['exponents'], sh['coefficients'], sh['angular_momentum'][0])
+            rsq = [rsq_mat[i][i] for i in range(len(rsq_mat))]
+        else:
+            # SP shell etc
+            for iam in range(len(sh['angular_momentum'])):
+                rsq_mat = gto_Rsq_contr(sh['exponents'], [sh['coefficients'][iam]], sh['angular_momentum'][iam])
+                # We should only have a single element
+                assert(len(rsq_mat) == 1 and len(rsq_mat[0])==1)
+                rsq.append(rsq_mat[0][0])
+    else:
+        raise RuntimeError('Function type {} not handled'.format(sh['function_type']))
+
+    return rsq
 
 def sort_basis_dict(bs):
     """Sorts a basis set dictionary into a standard order
@@ -89,36 +110,25 @@ def sort_shell(shell, use_copy=True):
         shell = copy.deepcopy(shell)
 
     tmp_c = shell['coefficients']
+    tmp_z = shell['exponents']
 
-    # Sort columns by number of non-zero entries
-    # But don't sort columns for SP shells
-    if len(shell['angular_momentum']) == 1:
-        col_counts = [sum([1 for x in y if float(x) != 0.0]) for y in tmp_c]
-        tmp_c = sorted(zip(col_counts, tmp_c), key=lambda x: x[0], reverse=True)
-        tmp_c = list(zip(*tmp_c))[1]
+    # Exponents should be in decreasing order
+    zidx = [x for x, y in sorted(enumerate(tmp_z), key= lambda x: -float(x[1]))]
 
-    # Transpose of coefficients
-    tmp_c = list(map(list, zip(*tmp_c)))
+    if len(shell['angular_momentum'])==1:
+        rsq_vec = _spatial_extent(shell)
+        cidx = sorted(range(len(rsq_vec)), key=rsq_vec.__getitem__)
+    else:
+        # This is an SP shell etc; we only have one contraction per am
+        # so we don't have to sort the contractions.
+        cidx = range(len(tmp_c))
 
-    # For each primitive, find the index of the first nonzero coefficient
-    nonzero_idx = [next((i for i, x in enumerate(c) if float(x) != 0.0), None) for c in tmp_c]
+    # Collect the exponents and coefficients
+    newexp = [tmp_z[i] for i in zidx]
+    newcoef = [[tmp_c[i][j] for j in zidx ] for i in cidx]
 
-    # Zip together exponents and coeffs for sorting
-    tmp = zip(shell['exponents'], tmp_c, nonzero_idx)
-
-    # Sort by decreasing value of exponent
-    tmp = sorted(tmp, key=lambda x: -float(x[0]))
-
-    # Now (stable) sort by first non-zero coefficient
-    tmp = sorted(tmp, key=lambda x: int(x[2]))
-
-    # Unpack, and re-transpose the coefficients
-    tmp_c = [x[1] for x in tmp]
-    shell['exponents'] = [x[0] for x in tmp]
-
-    tmp_c = list(map(list, zip(*tmp_c)))
-
-    shell['coefficients'] = tmp_c
+    shell['exponents'] = newexp
+    shell['coefficients'] = newcoef
 
     return shell
 
@@ -142,16 +152,19 @@ def sort_shells(shells, use_copy=True):
     # (copying already handled above)
     shells = [sort_shell(sh, False) for sh in shells]
 
-    # Sort the list by increasing AM, then general contraction level, then decreasing highest exponent
-    # yapf: disable
-    return sorted(
-        shells,
-        key=lambda x: (max(x['angular_momentum']),
-                      -len(x['exponents']),
-                      -len(x['coefficients']),
-                      -max(float(y) for y in x['exponents'])))
-    # yapf: enable
+    # Collect minimum spatial extent of the shells
+    min_rms = []
+    for sh in shells:
+        min_rms.append(min(_spatial_extent(sh)))
 
+    # Zip together to sort
+    tmp = zip(shells, min_rms)
+
+    # Sort the list by increasing AM and then by increasing spatial extent
+    tmp_sorted=sorted(tmp, key=lambda x:
+                      (max(x[0]['angular_momentum']), x[1]))
+
+    return [x[0] for x in tmp_sorted]
 
 def sort_potentials(potentials, use_copy=True):
     """

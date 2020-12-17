@@ -85,7 +85,7 @@ subset of elements instead by using the `elements` parameter
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
-         8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00
+         8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00
    ...
 
    >>> # Can also use strings with the element symbols (and be mixed with integers)
@@ -95,7 +95,7 @@ subset of elements instead by using the `elements` parameter
    BASIS "ao basis" PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
-         8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00
+         8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00
    ...
 
 
