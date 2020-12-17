@@ -1,6 +1,6 @@
-'''
+"""
 Add a basis set to the library
-'''
+"""
 
 import os
 import datetime
@@ -12,9 +12,19 @@ from ..readers import read_formatted_basis_file
 from .metadata import create_metadata_file
 
 
-def add_from_components(component_files, data_dir, subdir, file_base, name, family, role, description, version,
-                        revision_description):
-    '''
+def add_from_components(
+    component_files,
+    data_dir,
+    subdir,
+    file_base,
+    name,
+    family,
+    role,
+    description,
+    version,
+    revision_description,
+):
+    """
     Add a basis set to this library that is a combination of component files
 
     This takes in a list of component basis files and creates a new basis set for the intersection
@@ -44,10 +54,12 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
         Version of the basis set
     revision_description : str
         Description of this version of the basis set
-    '''
+    """
 
     if not component_files:
-        raise RuntimeError("Need at least one component file to create a basis set from")
+        raise RuntimeError(
+            "Need at least one component file to create a basis set from"
+        )
 
     # Determine what files have which elements
     valid_elements = None
@@ -57,7 +69,7 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
 
     for cfile in component_files:
         cfile_data = read_json_basis(cfile)
-        cfile_elements = set(cfile_data['elements'].keys())
+        cfile_elements = set(cfile_data["elements"].keys())
 
         relpath = os.path.relpath(cfile, data_dir)
 
@@ -71,25 +83,25 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
     valid_elements = sorted(valid_elements, key=lambda x: int(x))
 
     # Start the data files for the element and table json
-    element_file_data = create_skel('element')
-    element_file_data['name'] = name
-    element_file_data['description'] = description
-    element_file_name = '{}.{}.element.json'.format(file_base, version)
+    element_file_data = create_skel("element")
+    element_file_data["name"] = name
+    element_file_data["description"] = description
+    element_file_name = "{}.{}.element.json".format(file_base, version)
     element_file_relpath = os.path.join(subdir, element_file_name)
     element_file_path = os.path.join(data_dir, element_file_relpath)
 
-    table_file_data = create_skel('table')
-    table_file_data['revision_description'] = revision_description
-    table_file_data['revision_date'] = datetime.date.today().isoformat()
-    table_file_name = '{}.{}.table.json'.format(file_base, version)
+    table_file_data = create_skel("table")
+    table_file_data["revision_description"] = revision_description
+    table_file_data["revision_date"] = datetime.date.today().isoformat()
+    table_file_name = "{}.{}.table.json".format(file_base, version)
 
     # and the metadata file
-    meta_file_data = create_skel('metadata')
-    meta_file_data['names'] = [name]
-    meta_file_data['family'] = family
-    meta_file_data['description'] = description
-    meta_file_data['role'] = role
-    meta_file_name = '{}.metadata.json'.format(file_base)
+    meta_file_data = create_skel("metadata")
+    meta_file_data["names"] = [name]
+    meta_file_data["family"] = family
+    meta_file_data["description"] = description
+    meta_file_data["role"] = role
+    meta_file_name = "{}.metadata.json".format(file_base)
 
     # These get created directly in the top-level data directory
     table_file_path = os.path.join(data_dir, table_file_name)
@@ -99,15 +111,15 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
     # (we add the relative path to the location of the element file,
     # which resides in subdir)
     table_file_entry = element_file_relpath
-    table_file_data['elements'] = {k: table_file_entry for k in valid_elements}
+    table_file_data["elements"] = {k: table_file_entry for k in valid_elements}
 
     # Add to the element file data
     for el in valid_elements:
-        element_file_data['elements'][el] = {'components': cfile_relpaths}
+        element_file_data["elements"][el] = {"components": cfile_relpaths}
 
     # Verify all data using the schema
-    validate_data('element', element_file_data)
-    validate_data('table', table_file_data)
+    validate_data("element", element_file_data)
+    validate_data("table", table_file_data)
 
     ######################################################################################
     # Before creating any files, check that all the files don't already exist.
@@ -118,7 +130,9 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
     # Note that the metadata file may exist already. That is ok
     ######################################################################################
     if os.path.exists(element_file_path):
-        raise RuntimeError("Element json file {} already exists".format(element_file_path))
+        raise RuntimeError(
+            "Element json file {} already exists".format(element_file_path)
+        )
     if os.path.exists(table_file_path):
         raise RuntimeError("Table json file {} already exists".format(table_file_path))
 
@@ -139,23 +153,25 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
         write_json_basis(meta_file_path, meta_file_data)
 
     # Update the metadata file
-    metadata_file = os.path.join(data_dir, 'METADATA.json')
+    metadata_file = os.path.join(data_dir, "METADATA.json")
     create_metadata_file(metadata_file, data_dir)
 
 
-def add_basis_from_dict(bs_data,
-              data_dir,
-              subdir,
-              file_base,
-              name,
-              family,
-              role,
-              description,
-              version,
-              revision_description,
-              data_source,
-              refs=None):
-    '''Add a basis set to this library
+def add_basis_from_dict(
+    bs_data,
+    data_dir,
+    subdir,
+    file_base,
+    name,
+    family,
+    role,
+    description,
+    version,
+    revision_description,
+    data_source,
+    refs=None,
+):
+    """Add a basis set to this library
 
     This takes in a basis set dictionary, and create the component,
     element, and table basis set files in the given data_dir (and
@@ -199,11 +215,11 @@ def add_basis_from_dict(bs_data,
     file_fmt : str
         Format of the input basis data (None = autodetect)
 
-    '''
+    """
 
     # Read the basis set data into a component file, and add the description
-    bs_data['description'] = description
-    bs_data['data_source'] = data_source
+    bs_data["description"] = description
+    bs_data["data_source"] = data_source
 
     if refs is None:
         refs = []
@@ -211,16 +227,16 @@ def add_basis_from_dict(bs_data,
     # We keep track of which elements we've done so that
     # we can detect duplicates in the references (which would be an error)
     # (and also handle elements with no reference)
-    orig_elements = bs_data['elements']
+    orig_elements = bs_data["elements"]
     done_elements = []
 
     # If a string or list of strings, use that as a reference for all elements
     if isinstance(refs, str):
-        for k, v in bs_data['elements'].items():
-            v['references'] = [refs]
+        for k, v in bs_data["elements"].items():
+            v["references"] = [refs]
     elif isinstance(refs, list):
-        for k, v in bs_data['elements'].items():
-            v['references'] = refs
+        for k, v in bs_data["elements"].items():
+            v["references"] = refs
     elif isinstance(refs, dict):
         for k, v in refs.items():
             # Expand the string a list of integers (as strings)
@@ -230,14 +246,18 @@ def add_basis_from_dict(bs_data,
             # and that there are no duplicates
             for el in elements:
                 if el not in orig_elements:
-                    raise RuntimeError("Element {} not found in file {}".format(el, bs_file))
+                    raise RuntimeError(
+                        "Element {} not found in file {}".format(el, bs_file)
+                    )
                 if el in done_elements:
-                    raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
+                    raise RuntimeError(
+                        "Duplicate element {} in reference string {}".format(el, k)
+                    )
 
                 if isinstance(v, str):
-                    bs_data['elements'][el]['references'] = [v]
+                    bs_data["elements"][el]["references"] = [v]
                 else:
-                    bs_data['elements'][el]['references'] = v
+                    bs_data["elements"][el]["references"] = v
 
             done_elements.extend(elements)
 
@@ -246,18 +266,18 @@ def add_basis_from_dict(bs_data,
 
         if noref_elements:
             for el in noref_elements:
-                bs_data['elements'][el]['references'] = []
+                bs_data["elements"][el]["references"] = []
     else:
-        raise RuntimeError('refs should be a string, a list, or a dictionary')
+        raise RuntimeError("refs should be a string, a list, or a dictionary")
 
     # Create the filenames for the components
     # Also keep track of where data for each element is (for the element and table files)
-    component_file_name = file_base + '.' + str(version) + '.json'
+    component_file_name = file_base + "." + str(version) + ".json"
     component_file_relpath = os.path.join(subdir, component_file_name)
     component_file_path = os.path.join(data_dir, component_file_relpath)
 
     # Verify all data using the schema
-    validate_data('component', bs_data)
+    validate_data("component", bs_data)
 
     ######################################################################################
     # Before creating any files, check that all the files don't already exist.
@@ -268,7 +288,9 @@ def add_basis_from_dict(bs_data,
     # Note that the metadata file may exist already. That is ok
     ######################################################################################
     if os.path.exists(component_file_path):
-        raise RuntimeError("Component json file {} already exists".format(component_file_path))
+        raise RuntimeError(
+            "Component json file {} already exists".format(component_file_path)
+        )
 
     #############################################
     # Actually create all the files
@@ -282,23 +304,36 @@ def add_basis_from_dict(bs_data,
     write_json_basis(component_file_path, bs_data)
 
     # Do all the rest
-    add_from_components([component_file_path], data_dir, subdir, file_base, name, family, role, description, version,
-                        revision_description)
+    add_from_components(
+        [component_file_path],
+        data_dir,
+        subdir,
+        file_base,
+        name,
+        family,
+        role,
+        description,
+        version,
+        revision_description,
+    )
 
-def add_basis(bs_file,
-              data_dir,
-              subdir,
-              file_base,
-              name,
-              family,
-              role,
-              description,
-              version,
-              revision_description,
-              data_source,
-              refs=None,
-              file_fmt=None):
-    '''
+
+def add_basis(
+    bs_file,
+    data_dir,
+    subdir,
+    file_base,
+    name,
+    family,
+    role,
+    description,
+    version,
+    revision_description,
+    data_source,
+    refs=None,
+    file_fmt=None,
+):
+    """
     Add a basis set to this library
 
     This takes in a single file containing the basis set is some format, parses it, and
@@ -342,9 +377,24 @@ def add_basis(bs_file,
         usual 'noref' extension and the references entry is empty.
     file_fmt : str
         Format of the input basis data (None = autodetect)
-    '''
+    """
 
     # Read the basis set data into a component file, and add the description
-    bs_data = read_formatted_basis_file(bs_file, file_fmt, validate=True, as_component=True)
+    bs_data = read_formatted_basis_file(
+        bs_file, file_fmt, validate=True, as_component=True
+    )
     # The rest is done by the dict routine
-    add_basis_from_dict(bs_data, data_dir, subdir, file_base, name, family, role, description, version, revision_description, data_source, refs)
+    add_basis_from_dict(
+        bs_data,
+        data_dir,
+        subdir,
+        file_base,
+        name,
+        family,
+        role,
+        description,
+        version,
+        revision_description,
+        data_source,
+        refs,
+    )

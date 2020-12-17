@@ -13,7 +13,7 @@ from basis_set_exchange import misc
                                                 ([1, 2, 3, 11, 23, 24], "H-Li,Na,V,Cr")])
 # yapf: enable
 def test_compact_string(elements, expected):
-    '''Test compacting a string of elements (and then expanding them)'''
+    """Test compacting a string of elements (and then expanding them)"""
     compacted = misc.compact_elements(elements)
     assert compacted == expected
 
@@ -60,7 +60,7 @@ def test_expand_elements(compact_el, expected):
                                 ['1', '-2', '10']])
 # yapf: enable
 def test_expand_elements_fail(compact_el):
-    with pytest.raises(RuntimeError, match=r'Malformed element string'):
+    with pytest.raises(RuntimeError, match=r"Malformed element string"):
         misc.expand_elements(compact_el)
 
 

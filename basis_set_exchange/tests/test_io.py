@@ -25,18 +25,18 @@ def test_read_write_basis(file_path):
     # needed to be tested to make sure something isn't left
     # out of the sort lists, etc
     full_path = os.path.join(data_dir, file_path)
-    full_path_new = full_path + '.new'
+    full_path_new = full_path + ".new"
     data = fileio.read_json_basis(full_path)
     fileio.write_json_basis(full_path_new, data)
     os.remove(full_path_new)
 
 
-@pytest.mark.parametrize('file_path', ['REFERENCES.json'])
+@pytest.mark.parametrize("file_path", ["REFERENCES.json"])
 def test_read_write_references(file_path):
     # needed to be tested to make sure something isn't left
     # out of the sort lists, etc
     full_path = os.path.join(data_dir, file_path)
-    full_path_new = full_path + '.new'
+    full_path_new = full_path + ".new"
     data = fileio.read_references(full_path)
     fileio.write_references(full_path_new, data)
     os.remove(full_path_new)

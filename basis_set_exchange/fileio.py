@@ -11,7 +11,7 @@ from .sort import sort_basis_dict, sort_references_dict
 
 # The encoding to use for reading/writing files.
 # For all the files in the project, UTF-8 is used
-_default_encoding = 'utf-8'
+_default_encoding = "utf-8"
 
 
 def _read_plain_json(file_path, check_bse):
@@ -37,23 +37,27 @@ def _read_plain_json(file_path, check_bse):
     """
 
     if not os.path.isfile(file_path):
-        raise FileNotFoundError('JSON file \'{}\' does not exist, is not '
-                                'readable, or is not a file'.format(file_path))
+        raise FileNotFoundError(
+            "JSON file '{}' does not exist, is not "
+            "readable, or is not a file".format(file_path)
+        )
 
     try:
-        if file_path.endswith('.bz2'):
-            with bz2.open(file_path, 'rt', encoding=_default_encoding) as f:
+        if file_path.endswith(".bz2"):
+            with bz2.open(file_path, "rt", encoding=_default_encoding) as f:
                 js = json.load(f)
         else:
-            with open(file_path, 'r', encoding=_default_encoding) as f:
+            with open(file_path, "r", encoding=_default_encoding) as f:
                 js = json.load(f)
 
     except json.decoder.JSONDecodeError as ex:
         raise RuntimeError("File {} contains JSON errors".format(file_path)) from ex
 
     # Check for molssi_bse_schema key
-    if check_bse and 'molssi_bse_schema' not in js:
-        raise RuntimeError('File {} does not appear to be a BSE JSON file'.format(file_path))
+    if check_bse and "molssi_bse_schema" not in js:
+        raise RuntimeError(
+            "File {} does not appear to be a BSE JSON file".format(file_path)
+        )
 
     return js
 
@@ -75,11 +79,11 @@ def _write_plain_json(file_path, js):
     # Disable ascii in the json - this prevents the json writer
     # from escaping everything
 
-    if file_path.endswith('.bz2'):
-        with bz2.open(file_path, 'wt', encoding=_default_encoding) as f:
+    if file_path.endswith(".bz2"):
+        with bz2.open(file_path, "wt", encoding=_default_encoding) as f:
             json.dump(js, f, indent=2, ensure_ascii=False)
     else:
-        with open(file_path, 'w', encoding=_default_encoding) as f:
+        with open(file_path, "w", encoding=_default_encoding) as f:
             json.dump(js, f, indent=2, ensure_ascii=False)
 
 
@@ -204,7 +208,7 @@ def get_all_filelist(data_dir):
     all_element = []
     all_component = []
 
-    special = ['METADATA.json', 'REFERENCES.json']
+    special = ["METADATA.json", "REFERENCES.json"]
 
     for root, dirs, files in os.walk(data_dir):
         for basename in files:
@@ -214,13 +218,13 @@ def get_all_filelist(data_dir):
             fpath = os.path.join(root, basename)
             fpath = os.path.relpath(fpath, data_dir)
 
-            if basename.endswith('.metadata.json'):
+            if basename.endswith(".metadata.json"):
                 all_meta.append(fpath)
-            elif basename.endswith('.table.json'):
+            elif basename.endswith(".table.json"):
                 all_table.append(fpath)
-            elif basename.endswith('.element.json'):
+            elif basename.endswith(".element.json"):
                 all_element.append(fpath)
-            elif basename.endswith('.json'):
+            elif basename.endswith(".json"):
                 all_component.append(fpath)
 
     return (all_meta, all_table, all_element, all_component)
@@ -236,5 +240,5 @@ def read_notes_file(file_path):
     if not os.path.isfile(file_path):
         return None
 
-    with open(file_path, 'r', encoding=_default_encoding) as f:
+    with open(file_path, "r", encoding=_default_encoding) as f:
         return f.read()

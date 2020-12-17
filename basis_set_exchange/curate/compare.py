@@ -1,6 +1,6 @@
-'''
+"""
 Functions for comparing basis sets and pieces of basis sets
-'''
+"""
 
 import operator
 from ..sort import sort_shell
@@ -24,7 +24,7 @@ def _reldiff(a, b):
     if a == 0.0 and b == 0.0:
         return 0.0
     elif a == 0 or b == 0.0:
-        return float('inf')
+        return float("inf")
 
     return abs(a - b) / min(aa, ba)
 
@@ -112,14 +112,14 @@ def _compare_matrix(mat1, mat2, rel_tol):
 
 
 def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Compare two electron shells for approximate equality
     (exponents/coefficients are within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
-    if shell1['angular_momentum'] != shell2['angular_momentum']:
+    if shell1["angular_momentum"] != shell2["angular_momentum"]:
         return False
 
     # Sort into some canonical order
@@ -129,15 +129,15 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
     # Zip together exponents and coeffs
     # This basically creates the typical matrix with exponents
     # being in the first column
-    tmp1 = list(zip(shell1['exponents'], *shell1['coefficients']))
-    tmp2 = list(zip(shell2['exponents'], *shell2['coefficients']))
+    tmp1 = list(zip(shell1["exponents"], *shell1["coefficients"]))
+    tmp2 = list(zip(shell2["exponents"], *shell2["coefficients"]))
 
     if not _compare_matrix(tmp1, tmp2, rel_tol):
         return False
     if compare_meta:
-        if shell1['region'] != shell2['region']:
+        if shell1["region"] != shell2["region"]:
             return False
-        if shell1['function_type'] != shell2['function_type']:
+        if shell1["function_type"] != shell2["function_type"]:
             return False
         return True
     else:
@@ -145,7 +145,7 @@ def compare_electron_shells(shell1, shell2, compare_meta=False, rel_tol=0.0):
 
 
 def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Determine if a list of electron shells is a subset of another
 
     If 'subset' is a subset of the 'superset', True is returned.
@@ -154,7 +154,7 @@ def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0
     within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
     for item1 in subset:
         for item2 in superset:
@@ -167,41 +167,42 @@ def electron_shells_are_subset(subset, superset, compare_meta=False, rel_tol=0.0
 
 
 def electron_shells_are_equal(shells1, shells2, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Determine if a list of electron shells is the same as another
 
     The shells are compared approximately (exponents/coefficients are
     within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
     if len(shells1) != len(shells2):
         return False
 
     # Lists are equal if each is a subset of the other
     # Slow but effective
-    return electron_shells_are_subset(shells1, shells2, compare_meta, rel_tol) and electron_shells_are_subset(
-        shells2, shells1, compare_meta, rel_tol)
+    return electron_shells_are_subset(
+        shells1, shells2, compare_meta, rel_tol
+    ) and electron_shells_are_subset(shells2, shells1, compare_meta, rel_tol)
 
 
 def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Compare two ecp potentials for approximate equality
     (exponents/coefficients are within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
-    if potential1['angular_momentum'] != potential2['angular_momentum']:
+    if potential1["angular_momentum"] != potential2["angular_momentum"]:
         return False
 
-    rexponents1 = potential1['r_exponents']
-    rexponents2 = potential2['r_exponents']
-    gexponents1 = potential1['gaussian_exponents']
-    gexponents2 = potential2['gaussian_exponents']
-    coefficients1 = potential1['coefficients']
-    coefficients2 = potential2['coefficients']
+    rexponents1 = potential1["r_exponents"]
+    rexponents2 = potential2["r_exponents"]
+    gexponents1 = potential1["gaussian_exponents"]
+    gexponents2 = potential2["gaussian_exponents"]
+    coefficients1 = potential1["coefficients"]
+    coefficients2 = potential2["coefficients"]
 
     # integer comparison
     if rexponents1 != rexponents2:
@@ -211,7 +212,7 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
     if not _compare_matrix(coefficients1, coefficients2, rel_tol):
         return False
     if compare_meta:
-        if potential1['ecp_type'] != potential2['ecp_type']:
+        if potential1["ecp_type"] != potential2["ecp_type"]:
             return False
         return True
     else:
@@ -219,7 +220,7 @@ def compare_ecp_pots(potential1, potential2, compare_meta=False, rel_tol=0.0):
 
 
 def ecp_pots_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Determine if a list of ecp potentials is a subset of another
 
     If 'subset' is a subset of the 'superset', True is returned.
@@ -228,7 +229,7 @@ def ecp_pots_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
     within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
     for item1 in subset:
         for item2 in superset:
@@ -241,27 +242,31 @@ def ecp_pots_are_subset(subset, superset, compare_meta=False, rel_tol=0.0):
 
 
 def ecp_pots_are_equal(pots1, pots2, compare_meta=False, rel_tol=0.0):
-    '''
+    """
     Determine if a list of electron shells is the same as another
 
     The potentials are compared approximately (exponents/coefficients are
     within a tolerance)
 
     If compare_meta is True, the metadata is also compared for exact equality.
-    '''
+    """
 
     # Lists are equal if each is a subset of the other
     # Slow but effective
-    return ecp_pots_are_subset(pots1, pots2, compare_meta) and ecp_pots_are_subset(pots2, pots1, compare_meta)
+    return ecp_pots_are_subset(pots1, pots2, compare_meta) and ecp_pots_are_subset(
+        pots2, pots1, compare_meta
+    )
 
 
-def compare_elements(element1,
-                     element2,
-                     compare_electron_shells_meta=False,
-                     compare_ecp_pots_meta=False,
-                     compare_meta=False,
-                     rel_tol=0.0):
-    '''
+def compare_elements(
+    element1,
+    element2,
+    compare_electron_shells_meta=False,
+    compare_ecp_pots_meta=False,
+    compare_meta=False,
+    rel_tol=0.0,
+):
+    """
     Determine if the basis information for two elements is the same as another
 
     Exponents/coefficients are compared using a tolerance.
@@ -280,33 +285,48 @@ def compare_elements(element1,
         Compare the overall element metadata
     rel_tol : float
         Maximum relative error that is considered equal
-    '''
+    """
 
-    if not _compare_keys(element1, element2, 'electron_shells', electron_shells_are_equal,
-                         compare_electron_shells_meta, rel_tol):
+    if not _compare_keys(
+        element1,
+        element2,
+        "electron_shells",
+        electron_shells_are_equal,
+        compare_electron_shells_meta,
+        rel_tol,
+    ):
         return False
 
-    if not _compare_keys(element1, element2, 'ecp_potentials', ecp_pots_are_equal, compare_ecp_pots_meta, rel_tol):
+    if not _compare_keys(
+        element1,
+        element2,
+        "ecp_potentials",
+        ecp_pots_are_equal,
+        compare_ecp_pots_meta,
+        rel_tol,
+    ):
         return False
 
-    if not _compare_keys(element1, element2, 'ecp_electrons', operator.eq):
+    if not _compare_keys(element1, element2, "ecp_electrons", operator.eq):
         return False
 
     if compare_meta:
-        if not _compare_keys(element1, element2, 'references', operator.eq):
+        if not _compare_keys(element1, element2, "references", operator.eq):
             return False
 
     return True
 
 
-def compare_basis(bs1,
-                  bs2,
-                  compare_electron_shells_meta=False,
-                  compare_ecp_pots_meta=False,
-                  compare_elements_meta=False,
-                  compare_meta=False,
-                  rel_tol=0.0):
-    '''
+def compare_basis(
+    bs1,
+    bs2,
+    compare_electron_shells_meta=False,
+    compare_ecp_pots_meta=False,
+    compare_elements_meta=False,
+    compare_meta=False,
+    rel_tol=0.0,
+):
+    """
     Determine if two basis set dictionaries are the same
 
     bs1 : dict
@@ -323,24 +343,33 @@ def compare_basis(bs1,
         Compare the metadata for the basis set (name, description, etc)
     rel_tol : float
         Maximum relative error that is considered equal
-    '''
+    """
 
-    els1 = sorted(bs1['elements'].keys())
-    els2 = sorted(bs2['elements'].keys())
+    els1 = sorted(bs1["elements"].keys())
+    els2 = sorted(bs2["elements"].keys())
     if not els1 == els2:
         return False
 
     for el in els1:
-        if not compare_elements(bs1['elements'][el],
-                                bs2['elements'][el],
-                                compare_electron_shells_meta=compare_electron_shells_meta,
-                                compare_ecp_pots_meta=compare_ecp_pots_meta,
-                                compare_meta=compare_elements_meta,
-                                rel_tol=rel_tol):
+        if not compare_elements(
+            bs1["elements"][el],
+            bs2["elements"][el],
+            compare_electron_shells_meta=compare_electron_shells_meta,
+            compare_ecp_pots_meta=compare_ecp_pots_meta,
+            compare_meta=compare_elements_meta,
+            rel_tol=rel_tol,
+        ):
             print("Element failed:", el)
             return False
     if compare_meta:
-        for k in ['name', 'family', 'description', 'revision_description', 'role', 'auxiliaries']:
+        for k in [
+            "name",
+            "family",
+            "description",
+            "revision_description",
+            "role",
+            "auxiliaries",
+        ]:
             if not _compare_keys(bs1, bs2, k, operator.eq):
                 return False
     return True

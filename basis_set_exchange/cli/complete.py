@@ -1,6 +1,6 @@
-'''
+"""
 Completers & validators for argcomplete
-'''
+"""
 
 import os
 from .. import api, curate, writers, readers
@@ -23,13 +23,13 @@ def cli_case_insensitive_validator(s1, s2):
 
 def cli_bsname_completer(**kwargs):
     # Get the data dir if it has been specified already
-    data_dir = _fix_datadir(kwargs['parsed_args'].data_dir)
+    data_dir = _fix_datadir(kwargs["parsed_args"].data_dir)
     return api.get_all_basis_names(data_dir)
 
 
 def cli_family_completer(**kwargs):
     # Get the data dir if it has been specified already
-    data_dir = _fix_datadir(kwargs['parsed_args'].data_dir)
+    data_dir = _fix_datadir(kwargs["parsed_args"].data_dir)
     return api.get_families(data_dir)
 
 

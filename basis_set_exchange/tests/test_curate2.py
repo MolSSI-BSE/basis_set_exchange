@@ -36,21 +36,32 @@ def test_add_basis(tmp_path):
     for sf, refs in _source_data.items():
         sf_path = os.path.join(auth_data_dir, sf)
 
-        name = sf.split('.')[0]
-        curate.add_basis(sf_path, tmp_path, 'test_subdir', 'test_' + name, 'test_basis_' + name, 'test_family',
-                         'orbital', 'Test Basis Description: ' + name, '1', 'Test Basis Revision Description',
-                         'Test Source', refs)
+        name = sf.split(".")[0]
+        curate.add_basis(
+            sf_path,
+            tmp_path,
+            "test_subdir",
+            "test_" + name,
+            "test_basis_" + name,
+            "test_family",
+            "orbital",
+            "Test Basis Description: " + name,
+            "1",
+            "Test Basis Revision Description",
+            "Test Source",
+            refs,
+        )
 
     md = api.get_metadata(tmp_path)
     assert len(md) == len(_source_data)
 
     # Re-read
     for sf in _source_data.keys():
-        name = name = sf.split('.')[0]
-        name = 'test_basis_' + name
+        name = name = sf.split(".")[0]
+        name = "test_basis_" + name
         bse_dict = api.get_basis(name, data_dir=tmp_path)
 
-        assert bse_dict['family'] == 'test_family'
+        assert bse_dict["family"] == "test_family"
 
         # Compare against the file we created from
         sf_path = os.path.join(auth_data_dir, sf)
@@ -63,7 +74,7 @@ def test_add_basis(tmp_path):
 
             fdata = fileio.read_json_basis(fpath)
             expect_elements = set(misc.expand_elements(elements, True))
-            assert set(fdata['elements'].keys()) == expect_elements
+            assert set(fdata["elements"].keys()) == expect_elements
 
     # Validate the new data dir
     validator.validate_data_dir(tmp_path)

@@ -2,7 +2,12 @@ import pytest
 
 
 def pytest_addoption(parser):
-    parser.addoption("--runslow", action="store_true", default=False, help="Run thorough, but much slower, tests")
+    parser.addoption(
+        "--runslow",
+        action="store_true",
+        default=False,
+        help="Run thorough, but much slower, tests",
+    )
 
 
 def pytest_collection_modifyitems(config, items):
@@ -19,4 +24,4 @@ def pytest_ignore_collect(path, config):
     if config.getoption("--runslow"):
         return False
     else:
-        return str(path).endswith('_slow.py')
+        return str(path).endswith("_slow.py")
