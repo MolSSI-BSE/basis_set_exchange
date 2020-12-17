@@ -205,7 +205,7 @@ def write_formatted_basis_str(basis_dict, fmt, header=None):
     #        so we have to add that before the header
     if fmt == 'psi4':
         types = basis_dict['function_types']
-        harm_type = 'spherical' if 'gto_spherical' in types else 'cartesian'
+        harm_type = 'cartesian' if 'gto_cartesian' in types else 'spherical'
         ret_str = harm_type + '\n\n' + ret_str
 
     return ret_str
