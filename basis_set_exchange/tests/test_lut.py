@@ -11,7 +11,7 @@ _all_elements.extend(_all_elements_str)
 _all_am = list(range(1, 13))
 
 
-@pytest.mark.parametrize('Z', _all_elements)
+@pytest.mark.parametrize("Z", _all_elements)
 def test_element_data(Z):
     # Cycle through the elements and check that
     # the info returned from the functions is consistent
@@ -34,7 +34,7 @@ def test_element_data(Z):
     assert nname[0] == data[2][0].upper()
 
 
-@pytest.mark.parametrize('am', _all_am)
+@pytest.mark.parametrize("am", _all_am)
 def test_amchar(am):
     # Check that converting am characters, etc, is consistent
     s = lut.amint_to_char([am])
@@ -47,27 +47,28 @@ def test_amchar(am):
 
 def test_amchar_special():
     s = lut.amint_to_char([5, 6, 7])
-    assert s == 'hik'
+    assert s == "hik"
     s = lut.amint_to_char([5, 6, 7], hij=True)
-    assert s == 'hij'
+    assert s == "hij"
     s = lut.amint_to_char([0, 1])
-    assert s == 'sp'
+    assert s == "sp"
     s = lut.amint_to_char([0, 1], use_L=True)
-    assert s == 'l'
+    assert s == "l"
 
 
-@pytest.mark.parametrize('Z', [150, '150'])
+@pytest.mark.parametrize("Z", [150, "150"])
 def test_element_data_fail(Z):
-    with pytest.raises(KeyError, match=r'No element data for Z'):
+    with pytest.raises(KeyError, match=r"No element data for Z"):
         lut.element_data_from_Z(Z)
 
 
-@pytest.mark.parametrize('am', [[1, -1], [1, 100]])
+@pytest.mark.parametrize("am", [[1, -1], [1, 100]])
 def test_amint_to_char_fail(am):
-    with pytest.raises(IndexError, match=r'Angular momentum.*(out of range|must be a positive)'):
+    with pytest.raises(IndexError, match=r"Angular momentum.*(out of range|must be a positive)"):
         lut.amint_to_char(am)
 
-#yapf: disable
+
+# yapf: disable
 @pytest.mark.parametrize('nelectrons,expected', [[0, [1,2,3,4]],
                                                  [2, [2,2,3,4]],
                                                  [12, [4,3,3,4]],
@@ -77,18 +78,18 @@ def test_amint_to_char_fail(am):
                                                  [88, [8,7,6,5]],
                                                  [118, [8,8,7,6]],
                                                 ])
-#yapf: enable
+# yapf: enable
 def test_electron_shells_start(nelectrons, expected):
     assert expected == lut.electron_shells_start(nelectrons, 3)
-    expected.extend([5,6,7,8,9])
+    expected.extend([5, 6, 7, 8, 9])
     assert expected == lut.electron_shells_start(nelectrons, 8)
 
 
-@pytest.mark.parametrize('nelectrons', [1, 13, 31, 34, 43, 75, 106])
+@pytest.mark.parametrize("nelectrons", [1, 13, 31, 34, 43, 75, 106])
 def test_electron_shells_start_fail(nelectrons):
-    with pytest.raises(RuntimeError, match=r'Electrons cover a partial shell'):
+    with pytest.raises(RuntimeError, match=r"Electrons cover a partial shell"):
         lut.electron_shells_start(nelectrons)
-    with pytest.raises(RuntimeError, match=r'negative number of electrons'):
+    with pytest.raises(RuntimeError, match=r"negative number of electrons"):
         lut.electron_shells_start(-nelectrons)
-    with pytest.raises(NotImplementedError, match=r'Too many electrons'):
-        lut.electron_shells_start(nelectrons+120)
+    with pytest.raises(NotImplementedError, match=r"Too many electrons"):
+        lut.electron_shells_start(nelectrons + 120)

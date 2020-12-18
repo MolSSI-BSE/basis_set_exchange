@@ -19,4 +19,4 @@ def pytest_ignore_collect(path, config):
     if config.getoption("--runslow"):
         return False
     else:
-        return str(path).endswith('_slow.py')
+        return str(path).endswith("_slow.py")

@@ -1,6 +1,6 @@
-'''
+"""
 Computing the difference between basis sets and files
-'''
+"""
 
 import copy
 from .compare import compare_electron_shells
@@ -26,7 +26,7 @@ def subtract_electron_shells(s1, s2, rel_tol=0.0):
 
 
 def diff_basis_dict(left_list, right_list):
-    '''
+    """
     Compute the difference between two sets of basis set dictionaries
 
     The result is a list of dictionaries that correspond to each dictionary in
@@ -49,32 +49,32 @@ def diff_basis_dict(left_list, right_list):
     ----------
     list
         Each object in `left_list` containing data that does not appear in `right_list`
-    '''
+    """
 
     ret = []
     for bs1 in left_list:
         res = copy.deepcopy(bs1)
         for bs2 in right_list:
-            for el in res['elements'].keys():
-                if el not in bs2['elements']:
+            for el in res["elements"].keys():
+                if el not in bs2["elements"]:
                     continue  # Element only exist in left
 
-                eldata1 = res['elements'][el]
-                eldata2 = bs2['elements'][el]
+                eldata1 = res["elements"][el]
+                eldata2 = bs2["elements"][el]
 
-                s1 = eldata1['electron_shells']
-                s2 = eldata2['electron_shells']
-                eldata1['electron_shells'] = subtract_electron_shells(s1, s2)
+                s1 = eldata1["electron_shells"]
+                s2 = eldata2["electron_shells"]
+                eldata1["electron_shells"] = subtract_electron_shells(s1, s2)
 
         # Remove any empty elements
-        res['elements'] = {k: v for k, v in res['elements'].items() if v['electron_shells']}
+        res["elements"] = {k: v for k, v in res["elements"].items() if v["electron_shells"]}
         ret.append(res)
 
     return ret
 
 
 def diff_json_files(left_files, right_files):
-    '''
+    """
     Compute the difference between two sets of basis set JSON files
 
     The output is a set of files that correspond to each file in
@@ -98,7 +98,7 @@ def diff_json_files(left_files, right_files):
     Returns
     ----------
     None
-    '''
+    """
 
     left_data = [fileio.read_json_basis(x) for x in left_files]
     right_data = [fileio.read_json_basis(x) for x in right_files]
@@ -106,4 +106,4 @@ def diff_json_files(left_files, right_files):
 
     for idx, diff_bs in enumerate(d):
         fpath = left_files[idx]
-        fileio.write_json_basis(fpath + '.diff', diff_bs)
+        fileio.write_json_basis(fpath + ".diff", diff_bs)

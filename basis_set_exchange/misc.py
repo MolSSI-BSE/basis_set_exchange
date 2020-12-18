@@ -1,6 +1,6 @@
-'''
+"""
 Miscellaneous helper functions
-'''
+"""
 
 import re
 from . import lut
@@ -14,14 +14,14 @@ def _Z_from_str(s):
 
 
 def transpose_matrix(mat):
-    '''Transposes a matrix (list of lists) commonly done do coefficients'''
+    """Transposes a matrix (list of lists) commonly done do coefficients"""
 
     return list(map(list, zip(*mat)))
 
 
 def max_am(shells):
-    '''Determine the maximum angular momentum of a list of shells or potentials'''
-    all_am = [max(x['angular_momentum']) for x in shells]
+    """Determine the maximum angular momentum of a list of shells or potentials"""
+    all_am = [max(x["angular_momentum"]) for x in shells]
     return max(all_am)
 
 
@@ -33,18 +33,18 @@ def contraction_string(element):
     """
 
     # Does not have electron shells (ECP only?)
-    if 'electron_shells' not in element:
+    if "electron_shells" not in element:
         return ""
 
     cont_map = dict()
-    for sh in element['electron_shells']:
-        nprim = len(sh['exponents'])
-        ngeneral = len(sh['coefficients'])
+    for sh in element["electron_shells"]:
+        nprim = len(sh["exponents"])
+        ngeneral = len(sh["coefficients"])
 
         # is a combined general contraction (sp, spd, etc)
-        is_spdf = len(sh['angular_momentum']) > 1
+        is_spdf = len(sh["angular_momentum"]) > 1
 
-        for am in sh['angular_momentum']:
+        for am in sh["angular_momentum"]:
             # If this a general contraction (and not combined am), then use that
             ncont = ngeneral if not is_spdf else 1
 
@@ -59,8 +59,8 @@ def contraction_string(element):
         nprim, ncont = cont_map[am]
 
         if am != 0:
-            primstr += ','
-            contstr += ','
+            primstr += ","
+            contstr += ","
         primstr += str(nprim) + lut.amint_to_char([am])
         contstr += str(ncont) + lut.amint_to_char([am])
 
@@ -72,7 +72,7 @@ def compact_elements(elements):
     Create a string (with ranges) given a list of element numbers
 
     For example, [1, 2, 3, 6, 7, 8, 10] will return "H-Li,C-O,Ne"
-   """
+    """
 
     if not elements:
         return
@@ -152,16 +152,16 @@ def expand_elements(compact_el, as_str=False):
     if isinstance(compact_el, list):
         compact_el = [str(x) for x in compact_el]
         compact_el = [x for x in compact_el if x]
-        compact_el = ','.join(compact_el)
+        compact_el = ",".join(compact_el)
 
     # Find multiple - or ,
     # Also replace all whitespace with spaces
-    compact_el = re.sub(r',+', ',', compact_el)
-    compact_el = re.sub(r'-+', '-', compact_el)
-    compact_el = re.sub(r'\s+', '', compact_el)
+    compact_el = re.sub(r",+", ",", compact_el)
+    compact_el = re.sub(r"-+", "-", compact_el)
+    compact_el = re.sub(r"\s+", "", compact_el)
 
     # Find starting with or ending with comma and strip them
-    compact_el = compact_el.strip(',')
+    compact_el = compact_el.strip(",")
 
     # Check if I was passed an empty string or list
     if not compact_el:
@@ -169,29 +169,29 @@ def expand_elements(compact_el, as_str=False):
 
     # Find some erroneous patterns
     # -, and ,-
-    if '-,' in compact_el:
+    if "-," in compact_el:
         raise RuntimeError("Malformed element string")
-    if ',-' in compact_el:
+    if ",-" in compact_el:
         raise RuntimeError("Malformed element string")
 
     # Strings ends or begins with -
-    if compact_el.startswith('-') or compact_el.endswith('-'):
+    if compact_el.startswith("-") or compact_el.endswith("-"):
         raise RuntimeError("Malformed element string")
 
     # x-y-z
-    if re.search(r'\w+-\w+-\w+', compact_el):
+    if re.search(r"\w+-\w+-\w+", compact_el):
         raise RuntimeError("Malformed element string")
 
     # Split on commas
-    tmp_list = compact_el.split(',')
+    tmp_list = compact_el.split(",")
 
     # Now go over each one and replace elements with ints
     el_list = []
     for el in tmp_list:
-        if '-' not in el:
+        if "-" not in el:
             el_list.append(_Z_from_str(el))
         else:
-            begin, end = el.split('-')
+            begin, end = el.split("-")
             begin = _Z_from_str(begin)
             end = _Z_from_str(end)
             el_list.extend(list(range(begin, end + 1)))
@@ -211,31 +211,31 @@ def transform_basis_name(name):
     """
 
     name = name.lower()
-    name = name.replace('/', '_sl_')
-    name = name.replace('*', '_st_')
+    name = name.replace("/", "_sl_")
+    name = name.replace("*", "_st_")
     return name
 
 
 def basis_name_to_filename(name):
-    '''
+    """
     Given a basis set name, transform it into a valid filename
 
     This makes sure filenames don't contain invalid characters
-    '''
+    """
 
     return transform_basis_name(name)
 
 
 def basis_name_from_filename(filename):
-    '''
+    """
     Given a basis set name that was part of a filename, determine the basis set name
 
     This is opposite of :func:`transform_basis_name`
 
     Pass only the part of the filename that contains the basis set name
-    '''
+    """
 
     name = filename.lower()
-    name = name.replace('_sl_', '/')
-    name = name.replace('_st_', '*')
+    name = name.replace("_sl_", "/")
+    name = name.replace("_st_", "*")
     return name

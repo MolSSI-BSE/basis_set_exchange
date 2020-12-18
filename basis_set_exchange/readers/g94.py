@@ -2,25 +2,25 @@ import re
 from .. import lut
 from . import helpers
 
-element_re = re.compile(r'^-?([A-Za-z]{1,3})(?:\s+0)?$')
-ecp_shell_start_re = re.compile(r'^([A-Za-z]{1,3})\s+(\d+)\s+(\d+)$')
-ecp_am_nelec_re = re.compile(r'^\S+\s+(\d+)\s+(\d+)$')
+element_re = re.compile(r"^-?([A-Za-z]{1,3})(?:\s+0)?$")
+ecp_shell_start_re = re.compile(r"^([A-Za-z]{1,3})\s+(\d+)\s+(\d+)$")
+ecp_am_nelec_re = re.compile(r"^\S+\s+(\d+)\s+(\d+)$")
 
 # This beast of a regex captures all the scaling factors as a single group:
 #    '(?:{floating_re_str})+ ' is a non-capturing group of a number of floating point numbers.
 #    Then, we capture all of them.
-am_line_re = re.compile(r'^([A-Za-z]+)\s+(\d+)((?:\s+{})+)$'.format(helpers.floating_re_str))
+am_line_re = re.compile(r"^([A-Za-z]+)\s+(\d+)((?:\s+{})+)$".format(helpers.floating_re_str))
 
 
 def _parse_electron_lines(basis_lines, bs_data):
-    '''Parses lines representing all the electron shells for a single element
+    """Parses lines representing all the electron shells for a single element
 
     Resulting information is stored in bs_data
-    '''
+    """
 
     # Last line should be "****"
     last = basis_lines.pop()
-    if last != '****':
+    if last != "****":
         raise RuntimeError("Electron shell is missing terminating ****")
 
     # First line is "{element} 0"
@@ -29,10 +29,10 @@ def _parse_electron_lines(basis_lines, bs_data):
     # In the format, if the element symbol starts with a dash, then Gaussian does not crash
     # with an error in case this element does not exist in the molecule input
     # (this is what you need for system basis set libraries).
-    element_sym = element_sym.lstrip('-')
+    element_sym = element_sym.lstrip("-")
 
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-    element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+    element_data = helpers.create_element_data(bs_data, element_Z, "electron_shells")
 
     # After that come shells. We determine the start of a shell
     # by if the line starts with an angular momentum (a non-numeric character
@@ -40,10 +40,9 @@ def _parse_electron_lines(basis_lines, bs_data):
 
     for sh_lines in shell_blocks:
         # Shells start with AM nprim scaling
-        shell_am, nprim, scaling_factors = helpers.parse_line_regex(am_line_re, sh_lines[0],
-                                                                    "Shell AM, nprim, scaling")
+        shell_am, nprim, scaling_factors = helpers.parse_line_regex(am_line_re, sh_lines[0], "Shell AM, nprim, scaling")
         shell_am = lut.amchar_to_int(shell_am, hij=True)
-        func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+        func_type = helpers.function_type_from_am(shell_am, "gto", "spherical")
 
         # Handle gaussian scaling factors
         # The square of the scaling factor is applied to exponents.
@@ -62,7 +61,7 @@ def _parse_electron_lines(basis_lines, bs_data):
         if len(scaling_factors) > 1:
             raise NotImplementedError("Number of scaling factors > 1")
 
-        scaling_factor = float(scaling_factors[0])**2
+        scaling_factor = float(scaling_factors[0]) ** 2
         has_scaling = scaling_factor != 1.0
 
         # How many columns of coefficients do we have?
@@ -79,44 +78,44 @@ def _parse_electron_lines(basis_lines, bs_data):
             new_exponents = []
             for ex in exponents:
                 ex = float(ex) * scaling_factor
-                ex = '{:.16E}'.format(ex)
+                ex = "{:.16E}".format(ex)
 
                 # Trim useless zeroes
-                ex_splt = ex.split('E')
-                ex = ex_splt[0].rstrip('0')
-                if ex[-1] == '.':  # Stripped all the zeroes...
-                    ex += '0'
-                ex += 'E' + ex_splt[1]
+                ex_splt = ex.split("E")
+                ex = ex_splt[0].rstrip("0")
+                if ex[-1] == ".":  # Stripped all the zeroes...
+                    ex += "0"
+                ex += "E" + ex_splt[1]
                 new_exponents.append(ex)
 
             exponents = new_exponents
 
         shell = {
-            'function_type': func_type,
-            'region': '',
-            'angular_momentum': shell_am,
-            'exponents': exponents,
-            'coefficients': coefficients
+            "function_type": func_type,
+            "region": "",
+            "angular_momentum": shell_am,
+            "exponents": exponents,
+            "coefficients": coefficients,
         }
 
-        element_data['electron_shells'].append(shell)
+        element_data["electron_shells"].append(shell)
 
 
 def _parse_ecp_lines(basis_lines, bs_data):
-    '''Parses lines representing all the ECP potentials for a single element
+    """Parses lines representing all the ECP potentials for a single element
 
     Resulting information is stored in bs_data
-    '''
+    """
 
     # First line is "{element} 0", with the zero being optional
     element_sym = basis_lines[0].split()[0]
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+    element_data = helpers.create_element_data(bs_data, element_Z, "ecp_potentials")
 
     # Second line is information about the ECP
-    max_am, ecp_electrons = helpers.parse_line_regex(ecp_am_nelec_re, basis_lines[1], 'ECP max_am, nelec')
+    max_am, ecp_electrons = helpers.parse_line_regex(ecp_am_nelec_re, basis_lines[1], "ECP max_am, nelec")
 
-    element_data['ecp_electrons'] = ecp_electrons
+    element_data["ecp_electrons"] = ecp_electrons
 
     # Partition all the potentials
     # Look for lines containing only an integer, but include the line
@@ -141,38 +140,41 @@ def _parse_ecp_lines(basis_lines, bs_data):
         ecp_data = helpers.parse_ecp_table(pot_lines[2:])
 
         ecp_pot = {
-            'angular_momentum': None,
-            'ecp_type': 'scalar_ecp',
-            'r_exponents': ecp_data['r_exp'],
-            'gaussian_exponents': ecp_data['g_exp'],
-            'coefficients': ecp_data['coeff']
+            "angular_momentum": None,
+            "ecp_type": "scalar_ecp",
+            "r_exponents": ecp_data["r_exp"],
+            "gaussian_exponents": ecp_data["g_exp"],
+            "coefficients": ecp_data["coeff"],
         }
 
-        element_data['ecp_potentials'].append(ecp_pot)
+        element_data["ecp_potentials"].append(ecp_pot)
 
     # Determine the AM of the potentials
     # Highest AM first, then the rest in order
     all_pot_am = helpers.potential_am_list(max_am)
 
     # Were there as many potentials as we thought there should be?
-    if len(all_pot_am) != len(element_data['ecp_potentials']):
-        raise RuntimeError("Found incorrect number of potentials for {}: Expected {}, got {}".format(
-            element_sym, len(all_pot_am), len(element_data['ecp_potentials'])))
+    if len(all_pot_am) != len(element_data["ecp_potentials"]):
+        raise RuntimeError(
+            "Found incorrect number of potentials for {}: Expected {}, got {}".format(
+                element_sym, len(all_pot_am), len(element_data["ecp_potentials"])
+            )
+        )
 
-    for idx, pot in enumerate(element_data['ecp_potentials']):
-        pot['angular_momentum'] = [all_pot_am[idx]]
+    for idx, pot in enumerate(element_data["ecp_potentials"]):
+        pot["angular_momentum"] = [all_pot_am[idx]]
 
 
 def read_g94(basis_lines):
-    '''Reads G94-formatted file data and converts it to a dictionary with the
-       usual BSE fields
+    """Reads G94-formatted file data and converts it to a dictionary with the
+    usual BSE fields
 
-       Note that the gaussian format does not store all the fields we
-       have, so some fields are left blank
-    '''
+    Note that the gaussian format does not store all the fields we
+    have, so some fields are left blank
+    """
 
     # Removes comments
-    basis_lines = helpers.prune_lines(basis_lines, '!')
+    basis_lines = helpers.prune_lines(basis_lines, "!")
 
     bs_data = {}
 

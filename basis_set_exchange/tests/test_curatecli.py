@@ -1,6 +1,6 @@
-'''
+"""
 Testing of the BSE Curation CLI interface
-'''
+"""
 
 import os
 import sys
@@ -18,43 +18,44 @@ def _test_curatecli_cmd(cmd):
     # used (ie, windows)
 
     # Python to run
-    cmd = '{} {} '.format(sys.executable, os.path.join(cli_dir, 'bsecurate_cli.py')) + cmd
-    cmd = cmd.split(' ')
+    cmd = "{} {} ".format(sys.executable, os.path.join(cli_dir, "bsecurate_cli.py")) + cmd
+    cmd = cmd.split(" ")
     return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
-test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
+
+test_files1 = ["6-31G.0.table.json", "ahlrichs/def2-ECP.1.element.json", "dunning/cc-pV5+dZ-add.1.json"]
 test_files1 = [os.path.join(data_dir, x) for x in test_files1]
 
-test_files2 = [ 'dunning/cc-pV5+dZ-add.1.json', 'dunning/cc-pVDZ.1.json' ]
+test_files2 = ["dunning/cc-pV5+dZ-add.1.json", "dunning/cc-pVDZ.1.json"]
 test_files2 = [os.path.join(data_dir, x) for x in test_files2]
 
 
 bsecurate_cmds = [
-    '-V', '-h', '--help',
-    'elements-in-files ' + ' '.join(test_files1),
-    'component-file-refs ' + ' '.join(test_files2)
+    "-V",
+    "-h",
+    "--help",
+    "elements-in-files " + " ".join(test_files1),
+    "component-file-refs " + " ".join(test_files2),
 ]
 
-fakebsecurate_cmds = [
-    '-V', 'compare-basis-sets bppfakebasis bppfakebasis'
-]
+fakebsecurate_cmds = ["-V", "compare-basis-sets bppfakebasis bppfakebasis"]
 
 
-@pytest.mark.parametrize('bsecurate_cmd', bsecurate_cmds)
+@pytest.mark.parametrize("bsecurate_cmd", bsecurate_cmds)
 def test_curatecli(bsecurate_cmd):
     _test_curatecli_cmd(bsecurate_cmd)
 
 
-@pytest.mark.parametrize('bsecurate_cmd', fakebsecurate_cmds)
+@pytest.mark.parametrize("bsecurate_cmd", fakebsecurate_cmds)
 def test_curatecli_datadir(bsecurate_cmd):
-    _test_curatecli_cmd('-d ' + fake_data_dir + ' ' + bsecurate_cmd)
+    _test_curatecli_cmd("-d " + fake_data_dir + " " + bsecurate_cmd)
 
 
 def test_curatecli_makediff(tmp_path):
     tmp_path = str(tmp_path)  # Needed for python 3.5
 
-    filename1 = '6-31G_s_s-full.json.bz2'
-    filename2 = '6-31G-full.json.bz2'
+    filename1 = "6-31G_s_s-full.json.bz2"
+    filename2 = "6-31G-full.json.bz2"
 
     file1 = os.path.join(curate_test_data_dir, filename1)
     file2 = os.path.join(curate_test_data_dir, filename2)
@@ -65,16 +66,16 @@ def test_curatecli_makediff(tmp_path):
     shutil.copyfile(file1, tmpfile1)
     shutil.copyfile(file2, tmpfile2)
 
-    _test_curatecli_cmd('make-diff -l {} -r {}'.format(tmpfile1, tmpfile2))
-    _test_curatecli_cmd('make-diff -l {} -r {}'.format(tmpfile2, tmpfile1))
+    _test_curatecli_cmd("make-diff -l {} -r {}".format(tmpfile1, tmpfile2))
+    _test_curatecli_cmd("make-diff -l {} -r {}".format(tmpfile2, tmpfile1))
 
-    diff1 = fileio.read_json_basis(tmpfile1 + '.diff')
-    diff2 = fileio.read_json_basis(tmpfile2 + '.diff')
+    diff1 = fileio.read_json_basis(tmpfile1 + ".diff")
+    diff2 = fileio.read_json_basis(tmpfile2 + ".diff")
 
-    assert len(diff1['elements']) == 36
-    assert len(diff2['elements']) == 0
+    assert len(diff1["elements"]) == 36
+    assert len(diff2["elements"]) == 0
 
-    reffilename = '6-31G_s_s-polarization.json.bz2'
+    reffilename = "6-31G_s_s-polarization.json.bz2"
     reffile = os.path.join(curate_test_data_dir, reffilename)
     refdata = fileio.read_json_basis(reffile)
 
@@ -82,13 +83,13 @@ def test_curatecli_makediff(tmp_path):
 
 
 def test_curatecli_compare_1():
-    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 0')
+    output = _test_curatecli_cmd("compare-basis-sets 6-31g 6-31g --version1 0 --version2 0")
     assert b"No difference found" in output
 
-    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general')
+    output = _test_curatecli_cmd("compare-basis-sets 6-31g 6-31g --version1 0 --version2 0 --uncontract-general")
     assert b"No difference found" in output
 
-    output = _test_curatecli_cmd('compare-basis-sets 6-31g 6-31g --version1 0 --version2 1')
+    output = _test_curatecli_cmd("compare-basis-sets 6-31g 6-31g --version1 0 --version2 1")
     assert b"DIFFERENCES FOUND" in output
 
 
@@ -117,13 +118,13 @@ def test_curatecli_compare_files(filename1, filename2, expected):
     file1 = os.path.join(curate_test_data_dir, filename1)
     file2 = os.path.join(curate_test_data_dir, filename2)
 
-    output = _test_curatecli_cmd('compare-basis-files {} {} --uncontract-general'.format(file1, file2))
+    output = _test_curatecli_cmd("compare-basis-files {} {} --uncontract-general".format(file1, file2))
     if expected:
         assert b"No difference found" in output
     else:
         assert b"DIFFERENCES FOUND" in output
 
-    output = _test_curatecli_cmd('compare-basis-files {} {} --uncontract-general'.format(file2, file1))
+    output = _test_curatecli_cmd("compare-basis-files {} {} --uncontract-general".format(file2, file1))
     if expected:
         assert b"No difference found" in output
     else:

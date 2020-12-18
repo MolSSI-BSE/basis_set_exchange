@@ -2,20 +2,20 @@ import re
 from .. import lut
 from . import helpers
 
-section_re = re.compile(r'^\$(basis|ecp|cbas|jbas|jkbas)$')
-element_re = re.compile(r'^([a-zA-Z]{1,3})\s+(.*)$')
-shell_re = re.compile(r'^(\d+) +([a-zA-Z])$')
-ecp_info_re = re.compile(r'^ncore\s*=\s*(\d+)\s+lmax\s*=\s*(\d+)$', flags=re.IGNORECASE)
-ecp_pot_am_re = re.compile(r'^([a-z])(-[a-z])?$')
+section_re = re.compile(r"^\$(basis|ecp|cbas|jbas|jkbas)$")
+element_re = re.compile(r"^([a-zA-Z]{1,3})\s+(.*)$")
+shell_re = re.compile(r"^(\d+) +([a-zA-Z])$")
+ecp_info_re = re.compile(r"^ncore\s*=\s*(\d+)\s+lmax\s*=\s*(\d+)$", flags=re.IGNORECASE)
+ecp_pot_am_re = re.compile(r"^([a-z])(-[a-z])?$")
 
 
 def _parse_electron_lines(basis_lines, bs_data):
     # Strip all lines beginning with $
-    basis_lines = helpers.prune_lines(basis_lines, '$')
+    basis_lines = helpers.prune_lines(basis_lines, "$")
 
     # Last line should be *
     # We don't need it
-    if basis_lines[-1] != '*':
+    if basis_lines[-1] != "*":
         raise RuntimeError("Missing terminating * line")
     basis_lines.pop()
 
@@ -26,43 +26,43 @@ def _parse_electron_lines(basis_lines, bs_data):
     # Check all first. the partition_lines above will eat part of the previous
     # element if the * is missing
     for element_lines in element_blocks:
-        if element_lines[0] != '*':
+        if element_lines[0] != "*":
             raise RuntimeError("Element line not preceded by *")
-        if element_lines[2] != '*':
+        if element_lines[2] != "*":
             raise RuntimeError("Element line not followed by *")
 
         # Check for any other lines starting with *
         for line in element_lines[3:]:
-            if line.startswith('*'):
+            if line.startswith("*"):
                 raise RuntimeError("Found line starting with * that probably doesn't belong: " + line)
 
     # Now process them all
     for element_lines in element_blocks:
-        element_sym, _ = helpers.parse_line_regex(element_re, element_lines[1], 'Element line')
+        element_sym, _ = helpers.parse_line_regex(element_re, element_lines[1], "Element line")
 
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = helpers.create_element_data(bs_data, element_Z, "electron_shells")
 
         # Partition into shells
         shell_blocks = helpers.partition_lines(element_lines[3:], shell_re.match, min_size=2)
 
         for sh_lines in shell_blocks:
-            nprim, shell_am = helpers.parse_line_regex(shell_re, sh_lines[0], 'shell nprim, am')
+            nprim, shell_am = helpers.parse_line_regex(shell_re, sh_lines[0], "shell nprim, am")
             shell_am = lut.amchar_to_int(shell_am)
 
-            func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+            func_type = helpers.function_type_from_am(shell_am, "gto", "spherical")
 
             exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=1)
 
             shell = {
-                'function_type': func_type,
-                'region': '',
-                'angular_momentum': shell_am,
-                'exponents': exponents,
-                'coefficients': coefficients
+                "function_type": func_type,
+                "region": "",
+                "angular_momentum": shell_am,
+                "exponents": exponents,
+                "coefficients": coefficients,
             }
 
-            element_data['electron_shells'].append(shell)
+            element_data["electron_shells"].append(shell)
 
 
 def _parse_ecp_potential_lines(element_lines, bs_data):
@@ -70,18 +70,18 @@ def _parse_ecp_potential_lines(element_lines, bs_data):
     # This is split out because the turbomole ECP format is
     # almost identical to the genbas ECP format
     #########################################################
-    element_sym, _ = helpers.parse_line_regex(element_re, element_lines[0], 'Element line')
+    element_sym, _ = helpers.parse_line_regex(element_re, element_lines[0], "Element line")
 
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
 
     # We don't need the return value - we will use the one from creating ecp_electrons
-    helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+    helpers.create_element_data(bs_data, element_Z, "ecp_potentials")
 
     # 4th line should be ncore and lmax
-    n_elec, max_am = helpers.parse_line_regex(ecp_info_re, element_lines[1], 'ECP ncore, lmax')
+    n_elec, max_am = helpers.parse_line_regex(ecp_info_re, element_lines[1], "ECP ncore, lmax")
 
-    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_electrons', key_exist_ok=False, create=int)
-    element_data['ecp_electrons'] = n_elec
+    element_data = helpers.create_element_data(bs_data, element_Z, "ecp_electrons", key_exist_ok=False, create=int)
+    element_data["ecp_electrons"] = n_elec
 
     # split the remaining lines by lines starting with a character
     ecp_potentials = helpers.partition_lines(element_lines[2:], lambda x: x[0].isalpha(), min_size=2)
@@ -89,7 +89,7 @@ def _parse_ecp_potential_lines(element_lines, bs_data):
     # Keep track of what the max AM we actually found is
     found_max = False
     for pot_lines in ecp_potentials:
-        pot_am, pot_base_am = helpers.parse_line_regex(ecp_pot_am_re, pot_lines[0], 'ECP potential am')
+        pot_am, pot_base_am = helpers.parse_line_regex(ecp_pot_am_re, pot_lines[0], "ECP potential am")
 
         pot_am = lut.amchar_to_int(pot_am)
 
@@ -103,30 +103,29 @@ def _parse_ecp_potential_lines(element_lines, bs_data):
                 raise RuntimeError("Found multiple potentials with single AM")
 
             if pot_am[0] != max_am:
-                raise RuntimeError("Potential with single AM {} is not the same as lmax = {}".format(
-                    pot_am[0], max_am))
+                raise RuntimeError("Potential with single AM {} is not the same as lmax = {}".format(pot_am[0], max_am))
 
             found_max = True
 
-        ecp_data = helpers.parse_ecp_table(pot_lines[1:], order=['coeff', 'r_exp', 'g_exp'])
+        ecp_data = helpers.parse_ecp_table(pot_lines[1:], order=["coeff", "r_exp", "g_exp"])
         ecp_pot = {
-            'angular_momentum': pot_am,
-            'ecp_type': 'scalar_ecp',
-            'r_exponents': ecp_data['r_exp'],
-            'gaussian_exponents': ecp_data['g_exp'],
-            'coefficients': ecp_data['coeff']
+            "angular_momentum": pot_am,
+            "ecp_type": "scalar_ecp",
+            "r_exponents": ecp_data["r_exp"],
+            "gaussian_exponents": ecp_data["g_exp"],
+            "coefficients": ecp_data["coeff"],
         }
 
-        element_data['ecp_potentials'].append(ecp_pot)
+        element_data["ecp_potentials"].append(ecp_pot)
 
 
 def _parse_ecp_lines(basis_lines, bs_data):
     # Strip all lines beginning with $
-    basis_lines = helpers.prune_lines(basis_lines, '$')
+    basis_lines = helpers.prune_lines(basis_lines, "$")
 
     # Last line should be *
     # We don't need it
-    if basis_lines[-1] != '*':
+    if basis_lines[-1] != "*":
         raise RuntimeError("Missing terminating * line")
     basis_lines.pop()
 
@@ -137,14 +136,14 @@ def _parse_ecp_lines(basis_lines, bs_data):
     # Check all first. the partition_lines above will eat part of the previous
     # element if the * is missing
     for element_lines in element_blocks:
-        if element_lines[0] != '*':
+        if element_lines[0] != "*":
             raise RuntimeError("Element line not preceded by *")
-        if element_lines[2] != '*':
+        if element_lines[2] != "*":
             raise RuntimeError("Element line not followed by *")
 
         # Check for any other lines starting with *
         for line in element_lines[3:]:
-            if line.startswith('*'):
+            if line.startswith("*"):
                 raise RuntimeError("Found line starting with * that probably doesn't belong: " + line)
 
     # Now process all elements
@@ -155,38 +154,37 @@ def _parse_ecp_lines(basis_lines, bs_data):
 
 
 def read_turbomole(basis_lines):
-    '''Reads turbomole-formatted file data and converts it to a dictionary with the
-       usual BSE fields
+    """Reads turbomole-formatted file data and converts it to a dictionary with the
+    usual BSE fields
 
-       Note that the turbomole format does not store all the fields we
-       have, so some fields are left blank
-    '''
+    Note that the turbomole format does not store all the fields we
+    have, so some fields are left blank
+    """
 
-    basis_lines = helpers.prune_lines(basis_lines, '#')
+    basis_lines = helpers.prune_lines(basis_lines, "#")
 
     # first line must begin with $, last line must be $end
-    if basis_lines and not basis_lines[0][0].startswith('$'):
+    if basis_lines and not basis_lines[0][0].startswith("$"):
         raise RuntimeError("First line does not begin with $. Line: " + basis_lines[0])
-    if basis_lines and basis_lines[-1] != '$end':
+    if basis_lines and basis_lines[-1] != "$end":
         raise RuntimeError("Last line of basis is not $end. Line: " + basis_lines[-1])
 
     bs_data = {}
 
     # Split into basis and ecp
     # Just split based on lines beginning with $
-    basis_sections = helpers.partition_lines(basis_lines,
-                                             lambda x: x.startswith('$') and x != '$end',
-                                             min_blocks=1,
-                                             max_blocks=2)
+    basis_sections = helpers.partition_lines(
+        basis_lines, lambda x: x.startswith("$") and x != "$end", min_blocks=1, max_blocks=2
+    )
 
     for s in basis_sections:
         # Check if section is empty. If so, all lines start with $
-        if all(x.startswith('$') for x in s):
+        if all(x.startswith("$") for x in s):
             continue
 
         if len(s) == 0:  # Empty section
             continue
-        elif s[0].lower() == '$ecp':
+        elif s[0].lower() == "$ecp":
             _parse_ecp_lines(s, bs_data)
         elif section_re.match(s[0]):
             _parse_electron_lines(s, bs_data)

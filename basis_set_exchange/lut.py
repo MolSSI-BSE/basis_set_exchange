@@ -1,11 +1,11 @@
-'''
+"""
 Functions for looking up element names, numbers, and symbols
 and for converting between angular momentum conventions
 
 This module has functions for looking up element information by
 symbol, name, or number. It also has functions for converting
 angular momentum between integers (0, 1, 2) and letters (s, p, d).
-'''
+"""
 
 # Contains the symbols, names, and Z numbers for all known elements
 # NOTE: Some Z number have multiple entries. This is to allow for querying
@@ -76,67 +76,67 @@ _element_name_map = {x[2]: x for x in _data_table}
 # Maps AM characters to integers (the integer is the
 # index of the character in this string)
 # This is the 'hik' convention, where AM=7 is k
-_amchar_map_hik = 'spdfghiklmnoqrtuvwxyzabce'
+_amchar_map_hik = "spdfghiklmnoqrtuvwxyzabce"
 
 # This is the 'hij' convention, where AM=7 is j
-_amchar_map_hij = 'spdfghijklmnoqrtuvwxyzabce'
+_amchar_map_hij = "spdfghijklmnoqrtuvwxyzabce"
 
 
 def all_element_names():
-    '''Obtain a list of the names of all the elements'''
+    """Obtain a list of the names of all the elements"""
     return list(_element_name_map.keys())
 
 
 def element_data_from_Z(Z):
-    '''Obtain elemental data given a Z number
+    """Obtain elemental data given a Z number
 
     An exception is thrown if the Z number is not found
-    '''
+    """
 
     # Z may be a str
     if isinstance(Z, str) and Z.isdecimal():
         Z = int(Z)
 
     if Z not in _element_Z_map:
-        raise KeyError('No element data for Z = {}'.format(Z))
+        raise KeyError("No element data for Z = {}".format(Z))
     return _element_Z_map[Z]
 
 
 def element_data_from_sym(sym):
-    '''Obtain elemental data given an elemental symbol
+    """Obtain elemental data given an elemental symbol
 
     The given symbol is not case sensitive
 
     An exception is thrown if the symbol is not found
-    '''
+    """
 
     sym_lower = sym.lower()
     if sym_lower not in _element_sym_map:
-        raise KeyError('No element data for symbol \'{}\''.format(sym))
+        raise KeyError("No element data for symbol '{}'".format(sym))
     return _element_sym_map[sym_lower]
 
 
 def element_data_from_name(name):
-    '''Obtain elemental data given an elemental name
+    """Obtain elemental data given an elemental name
 
     The given name is not case sensitive
 
     An exception is thrown if the name is not found
-    '''
+    """
 
     name_lower = name.lower()
     if name_lower not in _element_name_map:
-        raise KeyError('No element data for name \'{}\''.format(name))
+        raise KeyError("No element data for name '{}'".format(name))
     return _element_name_map[name_lower]
 
 
 def element_name_from_Z(Z, normalize=False):
-    '''Obtain an element's name from its Z number
+    """Obtain an element's name from its Z number
 
     An exception is thrown if the Z number is not found
 
     If normalize is True, the first letter will be capitalized
-    '''
+    """
 
     r = element_data_from_Z(Z)[2]
     if normalize:
@@ -146,12 +146,12 @@ def element_name_from_Z(Z, normalize=False):
 
 
 def element_Z_from_name(name, as_str=False):
-    '''Obtain an element's Z number given its name
+    """Obtain an element's Z number given its name
 
     If as_str is True, then a string is returned (ie, '1' for Hydrogen)
 
     An exception is thrown if the name is not found
-    '''
+    """
 
     Z = element_data_from_name(name)[1]
     if as_str:
@@ -160,12 +160,12 @@ def element_Z_from_name(name, as_str=False):
 
 
 def element_sym_from_Z(Z, normalize=False):
-    '''Obtain an element's symbol from its Z number
+    """Obtain an element's symbol from its Z number
 
     An exception is thrown if the Z number is not found
 
     If normalize is True, the first letter will be capitalized
-    '''
+    """
 
     r = element_data_from_Z(Z)[0]
     if normalize:
@@ -175,12 +175,12 @@ def element_sym_from_Z(Z, normalize=False):
 
 
 def element_Z_from_sym(sym, as_str=False):
-    '''Obtain an element's Z-number given its symbol
+    """Obtain an element's Z-number given its symbol
 
     If as_str is True, then a string is returned (ie, '1' for Hydrogen)
 
     An exception is thrown if the symbol is not found
-    '''
+    """
 
     Z = element_data_from_sym(sym)[1]
     if as_str:
@@ -189,7 +189,7 @@ def element_Z_from_sym(sym, as_str=False):
 
 
 def amint_to_char(am, hij=False, use_L=False):
-    '''Convert an angular momentum integer to a character
+    """Convert an angular momentum integer to a character
 
     The input is a list (to handle sp, spd, ... orbitals). The return
     value is a string
@@ -200,10 +200,10 @@ def amint_to_char(am, hij=False, use_L=False):
     ordering will be spdfghikl (skipping j)
 
     If use_L is True, sp shells ([0,1]) will return l instead
-    '''
+    """
 
     if use_L and am == [0, 1]:
-        return 'l'
+        return "l"
     if hij:
         amchar_map = _amchar_map_hij
     else:
@@ -213,16 +213,16 @@ def amint_to_char(am, hij=False, use_L=False):
 
     for a in am:
         if a < 0:
-            raise IndexError('Angular momentum must be a positive integer (not {})'.format(a))
+            raise IndexError("Angular momentum must be a positive integer (not {})".format(a))
         if a >= len(amchar_map):
-            raise IndexError('Angular momentum {} out of range. Must be less than {}'.format(a, len(amchar_map)))
+            raise IndexError("Angular momentum {} out of range. Must be less than {}".format(a, len(amchar_map)))
         amchar.append(amchar_map[a])
 
-    return ''.join(amchar)
+    return "".join(amchar)
 
 
 def amchar_to_int(amchar, hij=False):
-    '''Convert an angular momentum integer to a character
+    """Convert an angular momentum integer to a character
 
     The return value is a list of integers (to handle sp, spd, ... orbitals)
 
@@ -230,7 +230,7 @@ def amchar_to_int(amchar, hij=False):
 
     If hij is True, the ordering spdfghijkl is used. Otherwise, the
     ordering will be spdfghikl (skipping j)
-    '''
+    """
 
     if hij:
         amchar_map = _amchar_map_hij
@@ -243,7 +243,7 @@ def amchar_to_int(amchar, hij=False):
 
     for c in amchar_lower:
         if c not in amchar_map:
-            raise KeyError('Angular momentum character {} is not valid'.format(c))
+            raise KeyError("Angular momentum character {} is not valid".format(c))
 
         amint.append(amchar_map.index(c))
 
@@ -251,7 +251,7 @@ def amchar_to_int(amchar, hij=False):
 
 
 def electron_shells_start(nelectrons, max_am=20):
-    '''Return the starting principle quantum numbers of electron shells
+    """Return the starting principle quantum numbers of electron shells
 
     For example, an ECP covering 10 electrons will covers 1s, 2s, 2p shells. The
     electrons shells will then start at 3s, 3p, 3d, and 4f (returned as [3, 3, 3, 4])
@@ -277,7 +277,7 @@ def electron_shells_start(nelectrons, max_am=20):
     -------
     list
         The starting principal quantum numbers of s, p, d, and f shells.
-    '''
+    """
 
     if nelectrons < 0:
         raise RuntimeError("Can't have a negative number of electrons")
@@ -323,12 +323,7 @@ def electron_shells_start(nelectrons, max_am=20):
         if nelectrons != 0:
             raise RuntimeError("Electrons cover a partial shell. {} electrons left".format(nelectrons))
 
-    start = [
-        contained_am.count(0) + 1,
-        contained_am.count(1) + 2,
-        contained_am.count(2) + 3,
-        contained_am.count(3) + 4
-    ]
+    start = [contained_am.count(0) + 1, contained_am.count(1) + 2, contained_am.count(2) + 3, contained_am.count(3) + 4]
     start.extend(range(5, max_am + 2))
 
     return start

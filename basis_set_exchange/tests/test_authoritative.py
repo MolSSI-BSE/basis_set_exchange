@@ -9,11 +9,11 @@ from basis_set_exchange import curate
 from .common_testvars import bs_metadata, bs_names, auth_src_map
 
 
-@pytest.mark.parametrize('basis_name_ver', list(auth_src_map.keys()))
+@pytest.mark.parametrize("basis_name_ver", list(auth_src_map.keys()))
 def test_authoritative(basis_name_ver):
-    '''
+    """
     Compare the stored basis sets with the stored authoritative sources
-    '''
+    """
 
     basis_name, ver = os.path.splitext(basis_name_ver)
     ver = ver[1:]  # remove starting '.'

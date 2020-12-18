@@ -6,19 +6,19 @@ import pytest
 from basis_set_exchange import lut, api
 from .common_testvars import bs_metadata
 
-ecp_basis_sets = [k for k,v in bs_metadata.items() if 'scalar_ecp' in v['function_types']]
+ecp_basis_sets = [k for k, v in bs_metadata.items() if "scalar_ecp" in v["function_types"]]
 
 
 @pytest.mark.slow
-@pytest.mark.parametrize('basis_name', ecp_basis_sets)
+@pytest.mark.parametrize("basis_name", ecp_basis_sets)
 def test_stored_nelec_start_slow(basis_name):
     bs_data = api.get_basis(basis_name)
 
-    for el in bs_data['elements'].values():
-        if 'ecp_electrons' not in el:
+    for el in bs_data["elements"].values():
+        if "ecp_electrons" not in el:
             continue
 
-        ecp_electrons = el['ecp_electrons']
+        ecp_electrons = el["ecp_electrons"]
         starting_shells = lut.electron_shells_start(ecp_electrons, 8)
 
         # Make sure the number of covered electrons matches
@@ -35,4 +35,3 @@ def test_stored_nelec_start_slow(basis_name):
             nelec_sum += (2 * am + 1) * 2 * covered
 
         assert nelec_sum == ecp_electrons
-

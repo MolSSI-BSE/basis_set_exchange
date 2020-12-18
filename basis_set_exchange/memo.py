@@ -1,6 +1,6 @@
-'''
+"""
 Class/decorator for memoizing BSE functionality
-'''
+"""
 
 import functools
 import pickle
@@ -13,7 +13,7 @@ memoize_enabled = True
 
 
 def _make_key(args_spec, *args, **kwargs):
-    left_args = args_spec.args[len(args):]
+    left_args = args_spec.args[len(args) :]
     num_defaults = len(args_spec.defaults or ())
     defaults_names = args_spec.args[-num_defaults:]
 

@@ -1,11 +1,11 @@
-'''
+"""
 Main interface to Basis Set Exchange internal basis sets
 
 This module contains the interface for getting basis set data
 and references from the internal data store of basis sets. As much
 as possible, this is being kept separate from the typical reading/writing
 functionality of the library.
-'''
+"""
 
 import os
 import textwrap
@@ -23,28 +23,28 @@ from . import misc
 from . import lut
 from ._version import get_versions
 
-__version__ = get_versions()['version']
+__version__ = get_versions()["version"]
 
 
 def version():
-    '''Obtain the version of the basis set exchange library (as a string)'''
+    """Obtain the version of the basis set exchange library (as a string)"""
     return __version__
 
 
 # Determine the path to the data directory that is part
 # of this installation
 _my_dir = os.path.dirname(os.path.abspath(__file__))
-_default_data_dir = os.path.join(_my_dir, 'data')
+_default_data_dir = os.path.join(_my_dir, "data")
 
 # Main URL of the project
-_main_url = 'https://www.basissetexchange.org'
+_main_url = "https://www.basissetexchange.org"
 
 
 def _get_basis_metadata(name, data_dir):
-    '''Get metadata for a single basis set
+    """Get metadata for a single basis set
 
     If the basis doesn't exist, an exception is raised
-    '''
+    """
 
     # Transform the name into an internal representation
     tr_name = misc.transform_basis_name(name)
@@ -59,52 +59,53 @@ def _get_basis_metadata(name, data_dir):
 
 
 def _header_string(basis_dict):
-    '''Creates a header with information about a basis set
+    """Creates a header with information about a basis set
 
     Information includes description, revision, etc, but not references
-    '''
+    """
 
-    tw = textwrap.TextWrapper(initial_indent='', subsequent_indent=' ' * 20)
+    tw = textwrap.TextWrapper(initial_indent="", subsequent_indent=" " * 20)
 
-    header = '-' * 70 + '\n'
-    header += ' Basis Set Exchange\n'
-    header += ' Version ' + version() + '\n'
-    header += ' ' + _main_url + '\n'
-    header += '-' * 70 + '\n'
-    header += '   Basis set: ' + basis_dict['name'] + '\n'
-    header += tw.fill(' Description: ' + basis_dict['description']) + '\n'
-    header += '        Role: ' + basis_dict['role'] + '\n'
-    header += tw.fill('     Version: {}  ({})'.format(basis_dict['version'],
-                                                      basis_dict['revision_description'])) + '\n'
-    header += '-' * 70 + '\n'
+    header = "-" * 70 + "\n"
+    header += " Basis Set Exchange\n"
+    header += " Version " + version() + "\n"
+    header += " " + _main_url + "\n"
+    header += "-" * 70 + "\n"
+    header += "   Basis set: " + basis_dict["name"] + "\n"
+    header += tw.fill(" Description: " + basis_dict["description"]) + "\n"
+    header += "        Role: " + basis_dict["role"] + "\n"
+    header += tw.fill("     Version: {}  ({})".format(basis_dict["version"], basis_dict["revision_description"])) + "\n"
+    header += "-" * 70 + "\n"
 
     return header
 
 
 def fix_data_dir(data_dir):
-    '''
+    """
     If data_dir is None, returns the default data_dir. Otherwise,
     returns the data_dir parameter unmodified
-    '''
+    """
 
     return _default_data_dir if data_dir is None else data_dir
 
 
-def get_basis(name,
-              elements=None,
-              version=None,
-              fmt=None,
-              uncontract_general=False,
-              uncontract_spdf=False,
-              uncontract_segmented=False,
-              remove_free_primitives=False,
-              make_general=False,
-              optimize_general=False,
-              augment_diffuse=0,
-              augment_steep=0,
-              data_dir=None,
-              header=True):
-    '''Obtain a basis set
+def get_basis(
+    name,
+    elements=None,
+    version=None,
+    fmt=None,
+    uncontract_general=False,
+    uncontract_spdf=False,
+    uncontract_segmented=False,
+    remove_free_primitives=False,
+    make_general=False,
+    optimize_general=False,
+    augment_diffuse=0,
+    augment_steep=0,
+    data_dir=None,
+    header=True,
+):
+    """Obtain a basis set
 
     This is the main function for getting basis set information.
     This function reads in all the basis data and returns it either
@@ -173,27 +174,27 @@ def get_basis(name,
     str or dict
         The basis set in the desired format. If `fmt` is **None**, this will be a python
         dictionary. Otherwise, it will be a string.
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(name, data_dir)
 
     # If version is not specified, use the latest
     if version is None:
-        version = bs_data['latest_version']
+        version = bs_data["latest_version"]
     else:
         version = str(version)  # Version may be an int
 
-    if version not in bs_data['versions']:
+    if version not in bs_data["versions"]:
         raise KeyError("Version {} does not exist for basis {}".format(version, name))
 
     # Compose the entire basis set (all elements)
-    file_relpath = bs_data['versions'][version]['file_relpath']
+    file_relpath = bs_data["versions"][version]["file_relpath"]
     basis_dict = compose.compose_table_basis(file_relpath, data_dir)
 
     # Set the name (from the global metadata)
     # Only the list of all names will be returned from compose_table_basis
-    basis_dict['name'] = bs_data['display_name']
+    basis_dict["name"] = bs_data["display_name"]
 
     # Handle optional arguments
     if elements is not None:
@@ -203,21 +204,22 @@ def get_basis(name,
         # Did the user pass an empty string or empty list? If so, include
         # all elements
         if elements:
-            bs_elements = basis_dict['elements']
+            bs_elements = basis_dict["elements"]
 
             # Are elements part of this basis set?
             for el in elements:
                 if el not in bs_elements:
                     elsym = lut.element_sym_from_Z(el)
-                    raise KeyError("Element {} (Z={}) not found in basis {} version {}".format(
-                        elsym, el, name, version))
+                    raise KeyError(
+                        "Element {} (Z={}) not found in basis {} version {}".format(elsym, el, name, version)
+                    )
 
             # Set to only the elements we want
-            basis_dict['elements'] = {k: v for k, v in bs_elements.items() if k in elements}
+            basis_dict["elements"] = {k: v for k, v in bs_elements.items() if k in elements}
 
             # Since we only grab some of the elements, we need to
             # update the function types used, too
-            basis_dict['function_types'] = compose._whole_basis_types(basis_dict)
+            basis_dict["function_types"] = compose._whole_basis_types(basis_dict)
 
     # Note that from now on, the pipleline is going to modify basis_dict. That is ok,
     # since we are returned a unique instance from compose_table_basis
@@ -255,9 +257,13 @@ def get_basis(name,
 
     # Augment
     if augment_diffuse > 0:
-        basis_dict = manip.geometric_augmentation(basis_dict, augment_diffuse, use_copy=False, as_component=False, steep=False)
+        basis_dict = manip.geometric_augmentation(
+            basis_dict, augment_diffuse, use_copy=False, as_component=False, steep=False
+        )
     if augment_steep > 0:
-        basis_dict = manip.geometric_augmentation(basis_dict, augment_steep, use_copy=False, as_component=False, steep=True)
+        basis_dict = manip.geometric_augmentation(
+            basis_dict, augment_steep, use_copy=False, as_component=False, steep=True
+        )
         # Need to sort to get added steep functions first
         basis_dict = sort.sort_basis(basis_dict)
     # Re-make general
@@ -277,7 +283,7 @@ def get_basis(name,
 
 
 def lookup_basis_by_role(primary_basis, role, data_dir=None):
-    '''Lookup the name of an auxiliary basis set given a primary basis set and role
+    """Lookup the name of an auxiliary basis set given a primary basis set and role
 
     Parameters
     ----------
@@ -309,7 +315,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     str
         The name of the auxiliary basis set for the given primary basis
         and role.
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
 
@@ -319,7 +325,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
         raise RuntimeError("Role {} is not a valid role".format(role))
 
     bs_data = _get_basis_metadata(primary_basis, data_dir)
-    auxdata = bs_data['auxiliaries']
+    auxdata = bs_data["auxiliaries"]
 
     if role not in auxdata:
         raise RuntimeError("Role {} doesn't exist for {}".format(role, primary_basis))
@@ -329,7 +335,7 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
 
 @memo.BSEMemoize
 def get_metadata(data_dir=None):
-    '''Obtain the metadata for all basis sets
+    """Obtain the metadata for all basis sets
 
     The metadata includes information such as the display name of the basis set,
     its versions, and what elements are included in the basis set
@@ -341,7 +347,7 @@ def get_metadata(data_dir=None):
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
     metadata_file = os.path.join(data_dir, "METADATA.json")
@@ -350,22 +356,22 @@ def get_metadata(data_dir=None):
 
 @memo.BSEMemoize
 def get_reference_data(data_dir=None):
-    '''Obtain information for all stored references
+    """Obtain information for all stored references
 
     This is a nested dictionary with all the data for all the references
 
     The reference data is read from the REFERENCES.json file in the given
     `data_dir` directory.
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
-    reffile_path = os.path.join(data_dir, 'REFERENCES.json')
+    reffile_path = os.path.join(data_dir, "REFERENCES.json")
 
     return fileio.read_references(reffile_path)
 
 
 def get_all_basis_names(data_dir=None):
-    '''Obtain a list of all basis set names
+    """Obtain a list of all basis set names
 
     The returned list is the internal representation of the basis set name.
 
@@ -376,15 +382,15 @@ def get_all_basis_names(data_dir=None):
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
-    '''
+    """
 
     md = get_metadata(data_dir)
-    names = list(v['display_name'] for v in md.values())
+    names = list(v["display_name"] for v in md.values())
     return sorted(names)
 
 
 def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=None):
-    '''Get the references/citations for a basis set
+    """Get the references/citations for a basis set
 
     Parameters
     ----------
@@ -417,7 +423,7 @@ def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=N
     str or dict
         The references for the given basis set in the desired format. If `fmt` is **None**, this will be a python
         dictionary. Otherwise, it will be a string.
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
     basis_dict = get_basis(basis_name, elements=elements, version=version, data_dir=data_dir)
@@ -432,29 +438,28 @@ def get_references(basis_name, elements=None, version=None, fmt=None, data_dir=N
 
 
 def get_basis_family(basis_name, data_dir=None):
-    '''Lookup a family by a basis set name
-    '''
+    """Lookup a family by a basis set name"""
 
     data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(basis_name, data_dir)
-    return bs_data['family']
+    return bs_data["family"]
 
 
 @memo.BSEMemoize
 def get_families(data_dir=None):
-    '''Return a list of all basis set families'''
+    """Return a list of all basis set families"""
     data_dir = fix_data_dir(data_dir)
     metadata = get_metadata(data_dir)
 
     families = set()
     for v in metadata.values():
-        families.add(v['family'])
+        families.add(v["family"])
 
     return sorted(families)
 
 
 def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_dir=None):
-    '''Filter basis sets by some criteria
+    """Filter basis sets by some criteria
 
     All parameters are ANDed together and are not case sensitive.
 
@@ -480,7 +485,7 @@ def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_d
     -------
     dict
         Basis set metadata that matches the search criteria
-    '''
+    """
 
     data_dir = fix_data_dir(data_dir)
     metadata = get_metadata(data_dir)
@@ -491,32 +496,32 @@ def filter_basis_sets(substr=None, family=None, role=None, elements=None, data_d
         family = family.lower()
         if family not in get_families(data_dir):
             raise RuntimeError("Family '{}' is not a valid family".format(family))
-        metadata = {k: v for k, v in metadata.items() if v['family'] == family}
+        metadata = {k: v for k, v in metadata.items() if v["family"] == family}
     if role is not None:
         role = role.lower()
         if role not in get_roles():
             raise RuntimeError("Role '{}' is not a valid role".format(role))
-        metadata = {k: v for k, v in metadata.items() if v['role'] == role}
+        metadata = {k: v for k, v in metadata.items() if v["role"] == role}
     if elements is not None:
         elements = misc.expand_elements(elements, True)
         elements = set(elements)
 
         for basis_name, basis_data in metadata.items():
-            ver_data = basis_data['versions']
-            basis_data['versions'] = {k: v for k, v in ver_data.items() if elements <= set(v['elements'])}
+            ver_data = basis_data["versions"]
+            basis_data["versions"] = {k: v for k, v in ver_data.items() if elements <= set(v["elements"])}
 
         # There will be basis sets with no versions. So clean that up
-        metadata = {k: v for k, v in metadata.items() if v['versions']}
+        metadata = {k: v for k, v in metadata.items() if v["versions"]}
     if substr:
         substr = substr.lower()
-        metadata = {k: v for k, v in metadata.items() if substr in k or substr in v['display_name']}
+        metadata = {k: v for k, v in metadata.items() if substr in k or substr in v["display_name"]}
 
     return metadata
 
 
 @memo.BSEMemoize
 def _family_notes_path(family, data_dir):
-    '''Form a path to the notes for a family'''
+    """Form a path to the notes for a family"""
 
     data_dir = fix_data_dir(data_dir)
 
@@ -524,30 +529,30 @@ def _family_notes_path(family, data_dir):
     if family not in get_families(data_dir):
         raise RuntimeError("Family '{}' does not exist".format(family))
 
-    file_name = 'NOTES.' + family.lower()
+    file_name = "NOTES." + family.lower()
     file_path = os.path.join(data_dir, file_name)
     return file_path
 
 
 @memo.BSEMemoize
 def _basis_notes_path(name, data_dir):
-    '''Form a path to the notes for a basis set'''
+    """Form a path to the notes for a basis set"""
 
     data_dir = fix_data_dir(data_dir)
     bs_data = _get_basis_metadata(name, data_dir)
 
     # the notes file is the same as the base file name, with a .notes extension
-    filebase = bs_data['basename']
-    file_path = os.path.join(data_dir, filebase + '.notes')
+    filebase = bs_data["basename"]
+    file_path = os.path.join(data_dir, filebase + ".notes")
     return file_path
 
 
 @memo.BSEMemoize
 def get_family_notes(family, data_dir=None):
-    '''Return a string representing the notes about a basis set family
+    """Return a string representing the notes about a basis set family
 
     If the notes are not found, an empty string is returned
-    '''
+    """
 
     file_path = _family_notes_path(family, data_dir)
     notes_str = fileio.read_notes_file(file_path)
@@ -561,10 +566,10 @@ def get_family_notes(family, data_dir=None):
 
 @memo.BSEMemoize
 def has_family_notes(family, data_dir=None):
-    '''Check if notes exist for a given family
+    """Check if notes exist for a given family
 
     Returns True if they exist, false otherwise
-    '''
+    """
 
     file_path = _family_notes_path(family, data_dir)
     return os.path.isfile(file_path)
@@ -572,10 +577,10 @@ def has_family_notes(family, data_dir=None):
 
 @memo.BSEMemoize
 def get_basis_notes(name, data_dir=None):
-    '''Return a string representing the notes about a specific basis set
+    """Return a string representing the notes about a specific basis set
 
     If the notes are not found, an empty string is returned
-    '''
+    """
 
     file_path = _basis_notes_path(name, data_dir)
     notes_str = fileio.read_notes_file(file_path)
@@ -589,24 +594,24 @@ def get_basis_notes(name, data_dir=None):
 
 @memo.BSEMemoize
 def has_basis_notes(family, data_dir=None):
-    '''Check if notes exist for a given basis set
+    """Check if notes exist for a given basis set
 
     Returns True if they exist, false otherwise
-    '''
+    """
 
     file_path = _basis_notes_path(family, data_dir)
     return os.path.isfile(file_path)
 
 
 def get_formats(function_types=None):
-    '''Return information about the basis set formats available
+    """Return information about the basis set formats available
 
     The returned data is a map of format to display name. The format
     can be passed as the fmt argument to :func:`get_basis()`
 
     If a list is specified for function_types, only those formats
     supporting the given function types will be returned.
-    '''
+    """
 
     #####################################################################################
     # This function is being kept for two reasons. One, for backwards compatibility.
@@ -618,20 +623,20 @@ def get_formats(function_types=None):
 
 
 def get_reference_formats():
-    '''Return information about the reference/citation formats available
+    """Return information about the reference/citation formats available
 
     The returned data is a map of format to display name. The format
     can be passed as the fmt argument to :func:`get_references`
-    '''
+    """
     return refconverters.get_reference_formats()
 
 
 def get_roles():
-    '''Return information about the available basis set roles available
+    """Return information about the available basis set roles available
 
     The returned data is a map of role to display name. The format
     can be passed as the role argument to fmt argument to :func:`lookup_basis_by_role`
-    '''
+    """
 
     # yapf: disable
     return { 'orbital': 'Orbital basis',
@@ -648,5 +653,5 @@ def get_roles():
 
 
 def get_data_dir():
-    '''Get the default data directory of this installation'''
+    """Get the default data directory of this installation"""
     return _default_data_dir

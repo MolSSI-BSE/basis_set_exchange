@@ -17,7 +17,7 @@ from .common_testvars import data_dir
                          ])
 # yapf: enable
 def test_print_element_data(basis, element):
-    eldata = api.get_basis(basis)['elements'][element]
+    eldata = api.get_basis(basis)["elements"][element]
     printing.element_data_str(element, eldata)
 
 

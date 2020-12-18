@@ -9,7 +9,7 @@ from .common_testvars import bs_names
 
 
 @pytest.mark.slow
-@pytest.mark.parametrize('basis', bs_names)
+@pytest.mark.parametrize("basis", bs_names)
 def test_manip_roundtrip_slow(basis):
     bse_dict = api.get_basis(basis)
     bse_dict_gen = manip.make_general(bse_dict)

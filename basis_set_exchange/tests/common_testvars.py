@@ -1,6 +1,6 @@
-'''
+"""
 Some data common to all tests
-'''
+"""
 
 import os
 import basis_set_exchange as bse
@@ -25,37 +25,37 @@ true_false = [True, False]
 # All basis names/versions combinations
 bs_names_vers = []
 for k, v in bs_metadata.items():
-    for ver in v['versions'].keys():
+    for ver in v["versions"].keys():
         bs_names_vers.append((k, ver))
 
 # Directory the CLI executables
 _parent_dir = os.path.abspath(os.path.join(_my_dir, os.pardir))
-cli_dir = os.path.join(_parent_dir, 'cli')
+cli_dir = os.path.join(_parent_dir, "cli")
 
 # Directory with some fake data
-fake_data_dir = os.path.join(_my_dir, 'fakedata')
+fake_data_dir = os.path.join(_my_dir, "fakedata")
 
 # Directory with authoritative sources
-auth_data_dir = os.path.join(_my_dir, 'sources')
+auth_data_dir = os.path.join(_my_dir, "sources")
 
 # Directory with files for testing curation functions
-curate_test_data_dir = os.path.join(_my_dir, 'curate_test_data')
+curate_test_data_dir = os.path.join(_my_dir, "curate_test_data")
 
 # Directory with files for testing readers
-reader_test_data_dir = os.path.join(_my_dir, 'reader_test_data')
+reader_test_data_dir = os.path.join(_my_dir, "reader_test_data")
 
 # Directory with files for testing the validator
-validator_test_data_dir = os.path.join(_my_dir, 'validator_test_data')
+validator_test_data_dir = os.path.join(_my_dir, "validator_test_data")
 
 # Directory with files for testing geometric augmentation
-diffuse_augmentation_test_data_dir = os.path.join(_my_dir, 'diffuse_augmentation')
-steep_augmentation_test_data_dir = os.path.join(_my_dir, 'steep_augmentation')
+diffuse_augmentation_test_data_dir = os.path.join(_my_dir, "diffuse_augmentation")
+steep_augmentation_test_data_dir = os.path.join(_my_dir, "steep_augmentation")
 
 # Directory with files for testing removal of free primitives
-rmfree_test_data_dir = os.path.join(_my_dir, 'rm_free')
+rmfree_test_data_dir = os.path.join(_my_dir, "rm_free")
 
 # Directory with files for testing truhlar calenderization
-truhlar_test_data_dir = os.path.join(_my_dir, 'truhlar')
+truhlar_test_data_dir = os.path.join(_my_dir, "truhlar")
 
 # All files in the data dir
 all_files = bse.fileio.get_all_filelist(data_dir)
@@ -72,13 +72,13 @@ all_element_paths = all_file_paths[2]
 all_component_paths = all_file_paths[3]
 
 # A representative sample of basis sets
-bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g', 'fano-qz']
+bs_names_sample = ["6-31g", "6-31+g*", "aug-cc-pvtz", "lanl2dz", "def2-tzvp", "jorge-tzp", "sto-3g", "fano-qz"]
 
 
 # Authoritative data in the sources dir
 auth_src_map = {}
 for x in os.listdir(auth_data_dir):
-    if not x.endswith('.bz2'):
+    if not x.endswith(".bz2"):
         continue
 
     # remove .fmt.bz2
@@ -92,8 +92,7 @@ for x in os.listdir(auth_data_dir):
 
 
 def bool_matrix(size):
-    '''Returns an identity matrix of a given size consisting of bool types
-    '''
+    """Returns an identity matrix of a given size consisting of bool types"""
     ret = [[False for i in range(size)] for j in range(size)]
     for x in range(size):
         ret[x][x] = True

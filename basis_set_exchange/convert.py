@@ -1,13 +1,13 @@
-'''
+"""
 Functions for basis set conversion
-'''
+"""
 
 from .readers import read_formatted_basis_file, read_formatted_basis_str
 from .writers import write_formatted_basis_file, write_formatted_basis_str
 
 
 def convert_formatted_basis_str(basis_in, in_fmt, out_fmt):
-    '''Convert a formatted basis set to another format
+    """Convert a formatted basis set to another format
 
     Parameters
     ----------
@@ -22,14 +22,14 @@ def convert_formatted_basis_str(basis_in, in_fmt, out_fmt):
     -------
     str
         The basis set as a str with the new format
-    '''
+    """
 
     basis_dict = read_formatted_basis_str(basis_in, in_fmt, validate=True, as_component=False)
     return write_formatted_basis_str(basis_dict, out_fmt)
 
 
-def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_fmt=None, encoding='utf-8-sig'):
-    '''Convert a formatted basis set file to another format
+def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_fmt=None, encoding="utf-8-sig"):
+    """Convert a formatted basis set file to another format
 
     Parameters
     ----------
@@ -48,12 +48,10 @@ def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_f
     -------
     str
         The basis set as a str with the new format
-    '''
+    """
 
-    basis_dict = read_formatted_basis_file(file_path_in,
-                                           basis_fmt=in_fmt,
-                                           encoding=encoding,
-                                           validate=True,
-                                           as_component=False)
+    basis_dict = read_formatted_basis_file(
+        file_path_in, basis_fmt=in_fmt, encoding=encoding, validate=True, as_component=False
+    )
 
     write_formatted_basis_file(basis_dict, file_path_out, basis_fmt=out_fmt)
