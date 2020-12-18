@@ -67,6 +67,7 @@ def test_amint_to_char_fail(am):
     with pytest.raises(IndexError, match=r'Angular momentum.*(out of range|must be a positive)'):
         lut.amint_to_char(am)
 
+
 #yapf: disable
 @pytest.mark.parametrize('nelectrons,expected', [[0, [1,2,3,4]],
                                                  [2, [2,2,3,4]],
@@ -80,7 +81,7 @@ def test_amint_to_char_fail(am):
 #yapf: enable
 def test_electron_shells_start(nelectrons, expected):
     assert expected == lut.electron_shells_start(nelectrons, 3)
-    expected.extend([5,6,7,8,9])
+    expected.extend([5, 6, 7, 8, 9])
     assert expected == lut.electron_shells_start(nelectrons, 8)
 
 
@@ -91,4 +92,4 @@ def test_electron_shells_start_fail(nelectrons):
     with pytest.raises(RuntimeError, match=r'negative number of electrons'):
         lut.electron_shells_start(-nelectrons)
     with pytest.raises(NotImplementedError, match=r'Too many electrons'):
-        lut.electron_shells_start(nelectrons+120)
+        lut.electron_shells_start(nelectrons + 120)

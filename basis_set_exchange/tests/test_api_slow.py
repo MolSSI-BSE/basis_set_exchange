@@ -26,26 +26,24 @@ def test_slow_get_basis_1(basis_name, fmt, unc_gen, unc_seg, unc_spdf, make_gen,
 
     this_metadata = bs_metadata[basis_name]
     for ver in this_metadata['versions'].keys():
-        bs1 = bse.get_basis(
-            basis_name,
-            fmt=fmt,
-            version=ver,
-            uncontract_general=unc_gen,
-            uncontract_segmented=unc_seg,
-            uncontract_spdf=unc_spdf,
-            make_general=make_gen,
-            optimize_general=opt_gen,
-            header=False)
+        bs1 = bse.get_basis(basis_name,
+                            fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_gen,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            make_general=make_gen,
+                            optimize_general=opt_gen,
+                            header=False)
 
-        bs2 = bse.get_basis(
-            basis_name,
-            fmt=fmt,
-            version=ver,
-            uncontract_general=unc_gen,
-            uncontract_segmented=unc_seg,
-            uncontract_spdf=unc_spdf,
-            make_general=make_gen,
-            optimize_general=opt_gen,
-            header=False)
+        bs2 = bse.get_basis(basis_name,
+                            fmt=fmt,
+                            version=ver,
+                            uncontract_general=unc_gen,
+                            uncontract_segmented=unc_seg,
+                            uncontract_spdf=unc_spdf,
+                            make_general=make_gen,
+                            optimize_general=opt_gen,
+                            header=False)
 
         assert bs1 == bs2

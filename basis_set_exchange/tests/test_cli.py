@@ -14,20 +14,21 @@ def _test_cli_cmd(cmd):
     # NOTE: We do not enforce any encoding here. What is returned will be a byte string
     # For our purposes here, that is ok. We don't know what encoding is going to be
     # used (ie, windows)
-    cmd = '{} {} '.format(sys.executable, os.path.join(cli_dir,'bse_cli.py')) + cmd
+    cmd = '{} {} '.format(sys.executable, os.path.join(cli_dir, 'bse_cli.py')) + cmd
     cmd = cmd.split(' ')
     return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
 
 bse_cmds = [
-    '-V', '-h', '--help', 'list-formats', 'list-reader-formats', 'list-ref-formats', 'list-roles', 'get-data-dir', 'list-basis-sets',
-    'list-basis-sets -s sto', 'list-basis-sets -f duNNing', 'list-basis-sets -r orbiTAL -f ahlrichs',
-    'list-basis-sets -e cn-OG', 'list-families', 'lookup-by-role def2-tzVp riFit', 'get-basis sto-3g nwchem',
-    'get-basis cc-pvtz psi4 --elements=1-10', 'get-basis def2-tzvp turbomole --elements=H-9,11-Ar,cO',
-    'get-basis cc-pvqz gaussian94 --version=1 --noheader', 'get-basis 6-31g nwchem --unc-gen --unc-spdf --unc-seg',
-    'get-basis 6-31g nwchem --opt-gen', 'get-basis 6-31g nwchem --make-gen', 'get-refs 6-31g txt',
-    'get-refs sto-3g bib --elements=6-Ne', 'get-refs ano-rcc txt --elements sc', 'get-info aug-cc-pv5z',
-    'get-info def2-tzvp', 'get-notes sto-3g', 'get-family crenbl', 'get-versions cc-pvqz', 'get-family-notes sto'
+    '-V', '-h', '--help', 'list-formats', 'list-reader-formats', 'list-ref-formats', 'list-roles', 'get-data-dir',
+    'list-basis-sets', 'list-basis-sets -s sto', 'list-basis-sets -f duNNing',
+    'list-basis-sets -r orbiTAL -f ahlrichs', 'list-basis-sets -e cn-OG', 'list-families',
+    'lookup-by-role def2-tzVp riFit', 'get-basis sto-3g nwchem', 'get-basis cc-pvtz psi4 --elements=1-10',
+    'get-basis def2-tzvp turbomole --elements=H-9,11-Ar,cO', 'get-basis cc-pvqz gaussian94 --version=1 --noheader',
+    'get-basis 6-31g nwchem --unc-gen --unc-spdf --unc-seg', 'get-basis 6-31g nwchem --opt-gen',
+    'get-basis 6-31g nwchem --make-gen', 'get-refs 6-31g txt', 'get-refs sto-3g bib --elements=6-Ne',
+    'get-refs ano-rcc txt --elements sc', 'get-info aug-cc-pv5z', 'get-info def2-tzvp', 'get-notes sto-3g',
+    'get-family crenbl', 'get-versions cc-pvqz', 'get-family-notes sto'
 ]
 
 fakebse_cmds = [

@@ -8,6 +8,7 @@ import pytest
 from basis_set_exchange import printing, fileio, api
 from .common_testvars import data_dir
 
+
 # yapf: disable
 @pytest.mark.parametrize('basis, element', [
                               ['6-31g', '8'],

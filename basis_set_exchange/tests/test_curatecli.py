@@ -22,22 +22,18 @@ def _test_curatecli_cmd(cmd):
     cmd = cmd.split(' ')
     return subprocess.check_output(cmd, stderr=subprocess.STDOUT)
 
-test_files1 = [ '6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
+
+test_files1 = ['6-31G.0.table.json', 'ahlrichs/def2-ECP.1.element.json', 'dunning/cc-pV5+dZ-add.1.json']
 test_files1 = [os.path.join(data_dir, x) for x in test_files1]
 
-test_files2 = [ 'dunning/cc-pV5+dZ-add.1.json', 'dunning/cc-pVDZ.1.json' ]
+test_files2 = ['dunning/cc-pV5+dZ-add.1.json', 'dunning/cc-pVDZ.1.json']
 test_files2 = [os.path.join(data_dir, x) for x in test_files2]
 
-
 bsecurate_cmds = [
-    '-V', '-h', '--help',
-    'elements-in-files ' + ' '.join(test_files1),
-    'component-file-refs ' + ' '.join(test_files2)
+    '-V', '-h', '--help', 'elements-in-files ' + ' '.join(test_files1), 'component-file-refs ' + ' '.join(test_files2)
 ]
 
-fakebsecurate_cmds = [
-    '-V', 'compare-basis-sets bppfakebasis bppfakebasis'
-]
+fakebsecurate_cmds = ['-V', 'compare-basis-sets bppfakebasis bppfakebasis']
 
 
 @pytest.mark.parametrize('bsecurate_cmd', bsecurate_cmds)

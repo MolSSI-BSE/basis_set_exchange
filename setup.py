@@ -25,7 +25,6 @@ for data_dir in data_dirs:
             filepath = os.path.join(path, filename)
             bse_package_data.append(os.path.relpath(filepath, 'basis_set_exchange'))
 
-
 if __name__ == "__main__":
     my_packages = setuptools.find_packages()
 
@@ -42,8 +41,8 @@ if __name__ == "__main__":
         license='BSD-3C',
         packages=my_packages,
         entry_points={
-            "console_scripts": ["bse=basis_set_exchange.cli:run_bse_cli",
-                                "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
+            "console_scripts":
+            ["bse=basis_set_exchange.cli:run_bse_cli", "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
         },
         install_requires=[
             'jsonschema',
@@ -52,36 +51,23 @@ if __name__ == "__main__":
         extras_require={
             ':python_version == "3.6"': ["importlib-metadata < 3"],
             ':python_version == "3.7"': ["importlib-metadata < 3"],
-            'docs': [
-                'sphinx',
-                'sphinxcontrib-programoutput',
-                'sphinx_rtd_theme',
-                'graphviz'
-            ],
+            'docs': ['sphinx', 'sphinxcontrib-programoutput', 'sphinx_rtd_theme', 'graphviz'],
             'tests': [
                 # List pytest-cov before pytest because of a dumb pip bug
                 'pytest-cov',
                 'pytest>=4.6'
             ],
-            'curate': [
-                'graphviz'
-            ]
+            'lint': ['yapf'],
+            'curate': ['graphviz']
         },
-
         python_requires='>=3',
         classifiers=[
-            'Development Status :: 4 - Beta',
-            'Intended Audience :: Science/Research',
-            'Programming Language :: Python :: 3',
-            'Programming Language :: Python :: 3.6',
-            'Programming Language :: Python :: 3.7',
-            'Programming Language :: Python :: 3.8',
+            'Development Status :: 4 - Beta', 'Intended Audience :: Science/Research',
+            'Programming Language :: Python :: 3', 'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7', 'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9'
         ],
-
         package_data={'basis_set_exchange': bse_package_data},
-
-        data_files = [("", ["LICENSE"])],
-
+        data_files=[("", ["LICENSE"])],
         zip_safe=True,
     )

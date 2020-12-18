@@ -98,7 +98,7 @@ def test_unused_notes():
             found_unused = True
 
     for fam_notes in all_family_notes:
-        fam = os.path.splitext(fam_notes)[1][1:] # Removes period
+        fam = os.path.splitext(fam_notes)[1][1:]  # Removes period
         if fam not in all_families:
             print("File {} does not have a corresponding family".format(fam_notes))
             found_unused = True

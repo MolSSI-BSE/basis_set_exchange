@@ -10,6 +10,7 @@ from .common_testvars import bs_write_formats, ref_formats, bs_names_sample
 
 my_formats = [x for x in bs_write_formats if x is not None]
 
+
 @pytest.mark.parametrize('fmt', bs_write_formats)
 def test_get_format_extensions(fmt):
     """For all basis set formats, get the extension

@@ -60,13 +60,12 @@ def test_get_basis_2(basis_name):
 def test_get_basis_3(basis_name, bool_opts):
     """For a sample of basis sets, test different options
     """
-    bse.get_basis(
-        basis_name,
-        uncontract_general=bool_opts[0],
-        uncontract_segmented=bool_opts[1],
-        uncontract_spdf=bool_opts[2],
-        make_general=bool_opts[3],
-        optimize_general=bool_opts[4])
+    bse.get_basis(basis_name,
+                  uncontract_general=bool_opts[0],
+                  uncontract_segmented=bool_opts[1],
+                  uncontract_spdf=bool_opts[2],
+                  make_general=bool_opts[3],
+                  optimize_general=bool_opts[4])
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)
@@ -147,6 +146,7 @@ def test_filter_0(substr, family, role):
     """Test filtering basis set (returning zero results)"""
     md = bse.filter_basis_sets(substr, family, role)
     assert len(md) == 0
+
 
 # yapf: disable
 @pytest.mark.parametrize('fmts', [None,

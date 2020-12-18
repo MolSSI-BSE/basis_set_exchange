@@ -37,8 +37,11 @@ def validate_bibtex(tmp_path, bib_str):
     res = subprocess.check_output(['latex', 'bse'], cwd=tmp_path)
 
     # Run bibtex. Then check return code and scan the output for "Warning"
-    res = subprocess.run(
-        ['bibtex', 'bse'], universal_newlines=True, cwd=tmp_path, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    res = subprocess.run(['bibtex', 'bse'],
+                         universal_newlines=True,
+                         cwd=tmp_path,
+                         stderr=subprocess.STDOUT,
+                         stdout=subprocess.PIPE)
 
     if "Warning" in res.stdout:
         raise RuntimeError("Warning found in output. Output is:\n" + res.stdout)

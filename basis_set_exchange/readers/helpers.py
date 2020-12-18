@@ -136,7 +136,14 @@ def parse_line_regex(rex, line, description=None, convert_int=True):
         return g
 
 
-def partition_lines(lines, condition, before=0, min_after=None, min_blocks=None, max_blocks=None, min_size=1, include_match=True):
+def partition_lines(lines,
+                    condition,
+                    before=0,
+                    min_after=None,
+                    min_blocks=None,
+                    max_blocks=None,
+                    min_size=1,
+                    include_match=True):
     '''Partition a list of lines based on some condition
 
     Parameters
@@ -182,7 +189,7 @@ def partition_lines(lines, condition, before=0, min_after=None, min_blocks=None,
             if include_match:
                 cur_block.append(line)
             if min_after:
-                cur_block.extend(lines[i+1:i+1+min_after])
+                cur_block.extend(lines[i + 1:i + 1 + min_after])
                 i += min_after
         else:
             cur_block.append(line)

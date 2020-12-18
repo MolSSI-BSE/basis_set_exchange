@@ -13,6 +13,7 @@ from .common_testvars import validator_test_data_dir
 test_files = os.listdir(validator_test_data_dir)
 test_files = [x for x in test_files if x.endswith('.bz2')]
 
+
 @pytest.mark.parametrize('file_rel_path', test_files)
 def test_validator(file_rel_path):
     file_path = os.path.join(validator_test_data_dir, file_rel_path)
@@ -21,7 +22,7 @@ def test_validator(file_rel_path):
 
     with bz2.open(file_path, 'rt', encoding='utf-8') as tf:
         file_data = tf.read()
-    
+
     if is_bad:
         # Read the first line of the file. This will contain the string
         # that should match the exception

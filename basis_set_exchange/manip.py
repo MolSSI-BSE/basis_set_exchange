@@ -383,16 +383,18 @@ def make_general(basis, skip_spdf=False, use_copy=True):
 
     return basis
 
+
 def _is_single_column(col):
     return sum(float(x) != 0.0 for x in col) == 1
+
 
 def _free_primitives(coeffs):
     # Find which columns represent free primitives
     single_columns = [c for c in coeffs if _is_single_column(c)]
-    if len(single_columns)==0:
+    if len(single_columns) == 0:
         return []
     # Now dig out the functions on those columns
-    csum=[0.0 for k in range(len(single_columns[0]))]
+    csum = [0.0 for k in range(len(single_columns[0]))]
     for c in single_columns:
         for k in range(len(csum)):
             csum[k] += abs(float(c[k]))
@@ -401,6 +403,7 @@ def _free_primitives(coeffs):
     # exponents.
     free_prims = [k for k, s in enumerate(csum) if s != 0.0]
     return free_prims
+
 
 def remove_free_primitives(basis, use_copy=True):
     """
@@ -435,6 +438,7 @@ def remove_free_primitives(basis, use_copy=True):
     # We can now have exponents that aren't contracted so we need to
     # prune. If use_copy is True, we already made our deep copy
     return prune_basis(basis, False)
+
 
 def optimize_general(basis, use_copy=True):
     """
@@ -574,14 +578,14 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
                 # If we're augmenting by steep functions, the
                 # references are the steepest and second-steepest
                 # function.
-                ref_idx=-1
-                next_idx=-2
+                ref_idx = -1
+                next_idx = -2
             else:
                 # If we're augmenting by diffuse functions, the
                 # references are the diffusemost and second-most
                 # diffuse function.
-                ref_idx=0
-                next_idx=1
+                ref_idx = 0
+                next_idx = 1
 
             ref_exp, ref_idx = sorted_exponents[ref_idx]
             next_exp, next_idx = sorted_exponents[next_idx]
@@ -590,21 +594,21 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
 
             if ref_exp == next_exp:
                 raise RuntimeError(
-                    "The two outermost exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}".
-                    format(ref_exp))
+                    "The two outermost exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}"
+                    .format(ref_exp))
 
             # Test that the primitives for the references are free.
             free_prims = _free_primitives(shell['coefficients'])
             if (ref_idx not in free_prims) or (next_idx not in free_prims):
-               # The shell does not have enough free primitives so
-               # skip the extrapolation. (The alternative would be to
-               # add in free primitives anyway, but then you'd have a
-               # problem with contraction errors.)
-               continue
+                # The shell does not have enough free primitives so
+                # skip the extrapolation. (The alternative would be to
+                # add in free primitives anyway, but then you'd have a
+                # problem with contraction errors.)
+                continue
 
             # Form new exponents
             new_exponents = []
-            for i in range(1, nadd+1):
+            for i in range(1, nadd + 1):
                 new_exponents.append(ref_exp * (beta**i))
 
             new_exponents = ['{:.6e}'.format(x) for x in new_exponents]

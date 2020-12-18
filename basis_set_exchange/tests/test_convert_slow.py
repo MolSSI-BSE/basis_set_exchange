@@ -16,6 +16,7 @@ my_read_formats = [x for x in bs_read_formats if x in my_write_formats]
 # TODO - molcas inline vs. separate file
 my_read_formats.remove('molcas')
 
+
 @pytest.mark.parametrize('basis_name', bs_names_sample)
 @pytest.mark.parametrize('fmt_from', my_read_formats)
 @pytest.mark.parametrize('fmt_to', my_write_formats)

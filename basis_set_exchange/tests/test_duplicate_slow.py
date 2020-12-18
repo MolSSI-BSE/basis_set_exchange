@@ -20,7 +20,8 @@ def test_duplicate_slow(bs_name, bs_ver, unc_gen, unc_seg, unc_spdf, opt_gen, ma
     Test for any duplicate data in a basis set
     '''
 
-    bs_dict = bse.get_basis(bs_name, version=bs_ver,
+    bs_dict = bse.get_basis(bs_name,
+                            version=bs_ver,
                             uncontract_general=unc_gen,
                             uncontract_segmented=unc_seg,
                             uncontract_spdf=unc_spdf,

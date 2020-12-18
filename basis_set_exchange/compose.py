@@ -126,6 +126,6 @@ def compose_table_basis(file_relpath, data_dir):
     table_bs.update(bs_meta)
 
     # Modify the molssi schema (is now 'complete' and not 'table')
-    table_bs['molssi_bse_schema'] = { "schema_type": "complete", "schema_version": "0.1" }
+    table_bs['molssi_bse_schema'] = {"schema_type": "complete", "schema_version": "0.1"}
 
     return table_bs
