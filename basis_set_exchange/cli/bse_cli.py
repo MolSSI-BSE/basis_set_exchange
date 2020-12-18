@@ -7,9 +7,9 @@ import argcomplete
 from basis_set_exchange import version
 from basis_set_exchange.cli.bse_handlers import bse_cli_handle_subcmd
 from basis_set_exchange.cli.check import cli_check_normalize_args
-from basis_set_exchange.cli.complete import (cli_case_insensitive_validator,
-                       cli_family_completer, cli_role_completer, cli_bsname_completer,
-                       cli_write_fmt_completer, cli_read_fmt_completer, cli_reffmt_completer)
+from basis_set_exchange.cli.complete import (cli_case_insensitive_validator, cli_family_completer, cli_role_completer,
+                                             cli_bsname_completer, cli_write_fmt_completer, cli_read_fmt_completer,
+                                             cli_reffmt_completer)
 
 
 def run_bse_cli():
@@ -28,17 +28,19 @@ def run_bse_cli():
     parser.add_argument('-o', '--output', metavar='PATH', help='Output to given file rather than stdout')
 
     subparsers = parser.add_subparsers(metavar='subcommand', dest='subcmd')
-    subparsers.required = True # https://bugs.python.org/issue9253#msg186387
+    subparsers.required = True  # https://bugs.python.org/issue9253#msg186387
 
     ########################################
     # Listing of data-independent info
     ########################################
     # list-formats subcommand
-    subp = subparsers.add_parser('list-formats', help='Output a list of basis set formats that can be used with obtaining a basis set')
+    subp = subparsers.add_parser('list-formats',
+                                 help='Output a list of basis set formats that can be used with obtaining a basis set')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
 
     # list-writer-formats subcommand
-    subp = subparsers.add_parser('list-writer-formats', help='Output a list available basis set formats that can be written')
+    subp = subparsers.add_parser('list-writer-formats',
+                                 help='Output a list available basis set formats that can be written')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
 
     # list-reader-formats
@@ -46,7 +48,8 @@ def run_bse_cli():
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the format names')
 
     # list-ref-formats subcommand
-    subp = subparsers.add_parser('list-ref-formats', help='Output a list all available reference formats and descriptions')
+    subp = subparsers.add_parser('list-ref-formats',
+                                 help='Output a list all available reference formats and descriptions')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the reference format names')
 
     # list-roles subcommand
@@ -62,17 +65,24 @@ def run_bse_cli():
     # list-basis-sets subcommand
     subp = subparsers.add_parser('list-basis-sets', help='Output a list all available basis sets and descriptions')
     subp.add_argument('-n', '--no-description', action='store_true', help='Print only the basis set names')
-    subp.add_argument('-f', '--family', help='Limit the basis set list to only the specified family').completer = cli_family_completer
-    subp.add_argument('-r', '--role', help='Limit the basis set list to only the specified role').completer = cli_role_completer
-    subp.add_argument('-s', '--substr', help='Limit the basis set list to only basis sets whose name contains the specified substring')
-    subp.add_argument('-e', '--elements', help='Limit the basis set list to only basis sets that contain all the given elements')
+    subp.add_argument('-f', '--family',
+                      help='Limit the basis set list to only the specified family').completer = cli_family_completer
+    subp.add_argument('-r', '--role',
+                      help='Limit the basis set list to only the specified role').completer = cli_role_completer
+    subp.add_argument('-s',
+                      '--substr',
+                      help='Limit the basis set list to only basis sets whose name contains the specified substring')
+    subp.add_argument('-e',
+                      '--elements',
+                      help='Limit the basis set list to only basis sets that contain all the given elements')
 
     # list-families subcommand
     subparsers.add_parser('list-families', help='Output a list all available basis set families')
 
     # lookup-by-role
     subp = subparsers.add_parser('lookup-by-role', help='Lookup a companion/auxiliary basis by primary basis and role')
-    subp.add_argument('basis', help='Name of the primary basis we want the auxiliary basis for').completer = cli_bsname_completer
+    subp.add_argument(
+        'basis', help='Name of the primary basis we want the auxiliary basis for').completer = cli_bsname_completer
     subp.add_argument('role', help='Role of the auxiliary basis to look for').completer = cli_role_completer
 
     #################################
@@ -82,7 +92,8 @@ def run_bse_cli():
     subp = subparsers.add_parser('get-basis', help='Output a formatted basis set')
     subp.add_argument('basis', help='Name of the basis set to output').completer = cli_bsname_completer
     subp.add_argument('fmt', help='Which format to output the basis set as').completer = cli_write_fmt_completer
-    subp.add_argument('--elements', help='Which elements of the basis set to output. Default is all defined in the given basis')
+    subp.add_argument('--elements',
+                      help='Which elements of the basis set to output. Default is all defined in the given basis')
     subp.add_argument('--version', help='Which version of the basis set to output. Default is the latest version')
     subp.add_argument('--noheader', action='store_true', help='Do not output the header at the top')
     subp.add_argument('--unc-gen', action='store_true', help='Remove general contractions')
@@ -96,9 +107,11 @@ def run_bse_cli():
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
-    subp.add_argument('basis', help='Name of the basis set to output the references for').completer = cli_bsname_completer
+    subp.add_argument('basis',
+                      help='Name of the basis set to output the references for').completer = cli_bsname_completer
     subp.add_argument('reffmt', help='Which format to output the references as').completer = cli_reffmt_completer
-    subp.add_argument('--elements', help='Which elements to output the references for. Default is all defined in the given basis.')
+    subp.add_argument('--elements',
+                      help='Which elements to output the references for. Default is all defined in the given basis.')
     subp.add_argument('--version', help='Which version of the basis set to get the references for')
 
     # get-info subcommand
@@ -120,7 +133,8 @@ def run_bse_cli():
 
     # get-family-notes subcommand
     subp = subparsers.add_parser('get-family-notes', help='Get the notes of a family of basis sets')
-    subp.add_argument('family', type=str.lower, help='The basis set family to the get the notes of').completer = cli_family_completer
+    subp.add_argument('family', type=str.lower,
+                      help='The basis set family to the get the notes of').completer = cli_family_completer
 
     #################################
     # Converting basis sets
@@ -128,8 +142,12 @@ def run_bse_cli():
     subp = subparsers.add_parser('convert-basis', help='Convert basis set files from one format to another')
     subp.add_argument('input_file', type=str, help='Basis set file to convert')
     subp.add_argument('output_file', type=str, help='Converted basis set file')
-    subp.add_argument('--in-fmt', type=str, default=None, help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
-    subp.add_argument('--out-fmt', type=str, default=None, help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
 
     #################################
     # Creating bundles
@@ -163,6 +181,7 @@ def run_bse_cli():
         print(output)
 
     return 0
+
 
 if __name__ == "__main__":
     run_bse_cli()

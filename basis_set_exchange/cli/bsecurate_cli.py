@@ -26,17 +26,20 @@ def run_bsecurate_cli():
     parser.add_argument('-o', '--output', metavar='PATH', help='Output to given file rather than stdout')
 
     subparsers = parser.add_subparsers(metavar='subcommand', dest='subcmd')
-    subparsers.required = True # https://bugs.python.org/issue9253#msg186387
+    subparsers.required = True  # https://bugs.python.org/issue9253#msg186387
 
     ########################################
     # Listing of general info and metadata
     ########################################
     # elements-in-files
-    subp = subparsers.add_parser('elements-in-files', help='For a list of JSON files, output what elements are in each file')
+    subp = subparsers.add_parser('elements-in-files',
+                                 help='For a list of JSON files, output what elements are in each file')
     subp.add_argument('files', nargs='+', help='List of files to inspect')
 
     # elements-in-files
-    subp = subparsers.add_parser('component-file-refs', help='For a list of component JSON files, output what elements/references are in each file')
+    subp = subparsers.add_parser(
+        'component-file-refs',
+        help='For a list of component JSON files, output what elements/references are in each file')
     subp.add_argument('files', nargs='+', help='List of files to inspect')
 
     ########################################
@@ -49,7 +52,8 @@ def run_bsecurate_cli():
     ########################################
     subp = subparsers.add_parser('print-component-file', help='(Pretty) print the contents of a component file')
     subp.add_argument('file', help='File to print')
-    subp.add_argument('--elements', help='Which elements of the basis set to output. Default is all defined in the given basis')
+    subp.add_argument('--elements',
+                      help='Which elements of the basis set to output. Default is all defined in the given basis')
 
     ########################################
     # Manipulating basis set data
@@ -57,7 +61,11 @@ def run_bsecurate_cli():
     # make-diff
     subp = subparsers.add_parser('make-diff', help='Find/Store the differences between two groups of files')
     subp.add_argument('-l', '--left', nargs='+', required=True, help='Base JSON files')
-    subp.add_argument('-r', '--right', nargs='+', required=True, help='JSON files with data to subtract from the base files')
+    subp.add_argument('-r',
+                      '--right',
+                      nargs='+',
+                      required=True,
+                      help='JSON files with data to subtract from the base files')
 
     ########################################
     # Comparing
@@ -117,6 +125,7 @@ def run_bsecurate_cli():
         print(output)
 
     return 0
+
 
 if __name__ == "__main__":
     run_bsecurate_cli()

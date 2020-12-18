@@ -29,7 +29,7 @@ def _list_has_nonpositives(lst):
 
     nonpos = []
     for x in lst:
-        if float(x)<=0.0:
+        if float(x) <= 0.0:
             nonpos.append(x)
     return nonpos
 
@@ -59,12 +59,14 @@ def _validate_electron_shells(shells, element_z):
         # If max(am) > 1, gto types must specify spherical or cartesian
         if max(s['angular_momentum']) > 1:
             if s['function_type'] not in ['gto_spherical', 'gto_cartesian']:
-                raise RuntimeError("Element {} Shell {}: Shell with max am > p, but spherical/cartesian not specified".format(element_z, idx))
+                raise RuntimeError(
+                    "Element {} Shell {}: Shell with max am > p, but spherical/cartesian not specified".format(
+                        element_z, idx))
         else:
             # If max(am) < 2, spherical/cartesian not allowed
             if 'spherical' in s['function_type'] or 'cartesian' in s['function_type']:
-                raise RuntimeError("Element {} Shell {}: AM = {} marked as spherical or cartesian: {}".format(element_z, idx, str(s['angular_momentum']), s['function_type']))
-
+                raise RuntimeError("Element {} Shell {}: AM = {} marked as spherical or cartesian: {}".format(
+                    element_z, idx, str(s['angular_momentum']), s['function_type']))
 
         # Duplicate exponents (when converted to float)?
         exponents_f = [float(x) for x in s['exponents']]

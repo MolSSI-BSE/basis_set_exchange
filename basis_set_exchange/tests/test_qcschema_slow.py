@@ -13,6 +13,7 @@ try:
 except ImportError:
     _has_qcschema = False
 
+
 # yapf: disable
 @pytest.mark.skipif(not _has_qcschema, reason="QCSchema not available to test qcschema output")
 @pytest.mark.parametrize('basis_name', bs_names)
@@ -35,10 +36,10 @@ def test_valid_qcschema_slow(basis_name):
         "schema_version": 1,
         "keywords": {},
         "molecule": {
-          "schema_name": "qcschema_molecule",
-          "schema_version": 2,
-          "geometry": coords,
-          "symbols": el_list
+            "schema_name": "qcschema_molecule",
+            "schema_version": 2,
+            "geometry": coords,
+            "symbols": el_list
         },
         'driver': 'energy',
         'model': {

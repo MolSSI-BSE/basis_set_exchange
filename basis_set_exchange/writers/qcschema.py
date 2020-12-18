@@ -18,12 +18,7 @@ def write_qcschema(basis):
 
     basis_name = basis.get('name', 'unknown_basis')
     basis_desc = basis.get('description', '<no description>')
-    new_basis = {
-        'schema_name': 'qcschema_basis',
-        'schema_version': 1,
-        'name': basis_name,
-        'description': basis_desc
-    }
+    new_basis = {'schema_name': 'qcschema_basis', 'schema_version': 1, 'name': basis_name, 'description': basis_desc}
 
     # For the 'center_data' key in the schema
     center_data = {}

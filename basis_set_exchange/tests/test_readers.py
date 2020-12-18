@@ -20,11 +20,12 @@ for subdir in subdirs:
     subfiles = [os.path.relpath(x, reader_test_data_dir) for x in subfiles]
     test_files.extend(subfiles)
 
+
 @pytest.mark.parametrize('file_rel_path', test_files)
 def test_reader(file_rel_path):
     file_path = os.path.join(reader_test_data_dir, file_rel_path)
     is_bad = ".bad." in os.path.basename(file_path)
-    
+
     if is_bad:
         # Read the first line of the file. This will contain the string
         # that should match the exception

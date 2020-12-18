@@ -144,17 +144,17 @@ def add_from_components(component_files, data_dir, subdir, file_base, name, fami
 
 
 def add_basis_from_dict(bs_data,
-              data_dir,
-              subdir,
-              file_base,
-              name,
-              family,
-              role,
-              description,
-              version,
-              revision_description,
-              data_source,
-              refs=None):
+                        data_dir,
+                        subdir,
+                        file_base,
+                        name,
+                        family,
+                        role,
+                        description,
+                        version,
+                        revision_description,
+                        data_source,
+                        refs=None):
     '''Add a basis set to this library
 
     This takes in a basis set dictionary, and create the component,
@@ -285,6 +285,7 @@ def add_basis_from_dict(bs_data,
     add_from_components([component_file_path], data_dir, subdir, file_base, name, family, role, description, version,
                         revision_description)
 
+
 def add_basis(bs_file,
               data_dir,
               subdir,
@@ -347,4 +348,5 @@ def add_basis(bs_file,
     # Read the basis set data into a component file, and add the description
     bs_data = read_formatted_basis_file(bs_file, file_fmt, validate=True, as_component=True)
     # The rest is done by the dict routine
-    add_basis_from_dict(bs_data, data_dir, subdir, file_base, name, family, role, description, version, revision_description, data_source, refs)
+    add_basis_from_dict(bs_data, data_dir, subdir, file_base, name, family, role, description, version,
+                        revision_description, data_source, refs)

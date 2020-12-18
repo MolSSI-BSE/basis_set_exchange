@@ -52,7 +52,7 @@ def _aces_coef(c):
 def _print_columns(data, ncol):
     s = ''
     for i in range(0, len(data), ncol):
-        s += ''.join(data[i:i+ncol]) + '\n'
+        s += ''.join(data[i:i + ncol]) + '\n'
     return s
 
 

@@ -255,9 +255,17 @@ def get_basis(name,
 
     # Augment
     if augment_diffuse > 0:
-        basis_dict = manip.geometric_augmentation(basis_dict, augment_diffuse, use_copy=False, as_component=False, steep=False)
+        basis_dict = manip.geometric_augmentation(basis_dict,
+                                                  augment_diffuse,
+                                                  use_copy=False,
+                                                  as_component=False,
+                                                  steep=False)
     if augment_steep > 0:
-        basis_dict = manip.geometric_augmentation(basis_dict, augment_steep, use_copy=False, as_component=False, steep=True)
+        basis_dict = manip.geometric_augmentation(basis_dict,
+                                                  augment_steep,
+                                                  use_copy=False,
+                                                  as_component=False,
+                                                  steep=True)
         # Need to sort to get added steep functions first
         basis_dict = sort.sort_basis(basis_dict)
     # Re-make general

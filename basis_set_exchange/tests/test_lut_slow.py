@@ -6,7 +6,7 @@ import pytest
 from basis_set_exchange import lut, api
 from .common_testvars import bs_metadata
 
-ecp_basis_sets = [k for k,v in bs_metadata.items() if 'scalar_ecp' in v['function_types']]
+ecp_basis_sets = [k for k, v in bs_metadata.items() if 'scalar_ecp' in v['function_types']]
 
 
 @pytest.mark.slow
@@ -35,4 +35,3 @@ def test_stored_nelec_start_slow(basis_name):
             nelec_sum += (2 * am + 1) * 2 * covered
 
         assert nelec_sum == ecp_electrons
-

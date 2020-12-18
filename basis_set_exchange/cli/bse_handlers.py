@@ -97,27 +97,29 @@ def _bse_cli_lookup_by_role(args):
 def _bse_cli_get_basis(args):
     '''Handles the get-basis subcommand'''
 
-    return api.get_basis(
-        name=args.basis,
-        elements=args.elements,
-        version=args.version,
-        fmt=args.fmt,
-        uncontract_general=args.unc_gen,
-        uncontract_spdf=args.unc_spdf,
-        uncontract_segmented=args.unc_seg,
-        remove_free_primitives=args.rm_free,
-        make_general=args.make_gen,
-        optimize_general=args.opt_gen,
-        augment_diffuse=args.aug_diffuse,
-        augment_steep=args.aug_steep,
-        data_dir=args.data_dir,
-        header=not args.noheader)
+    return api.get_basis(name=args.basis,
+                         elements=args.elements,
+                         version=args.version,
+                         fmt=args.fmt,
+                         uncontract_general=args.unc_gen,
+                         uncontract_spdf=args.unc_spdf,
+                         uncontract_segmented=args.unc_seg,
+                         remove_free_primitives=args.rm_free,
+                         make_general=args.make_gen,
+                         optimize_general=args.opt_gen,
+                         augment_diffuse=args.aug_diffuse,
+                         augment_steep=args.aug_steep,
+                         data_dir=args.data_dir,
+                         header=not args.noheader)
 
 
 def _bse_cli_get_refs(args):
     '''Handles the get-refs subcommand'''
-    return api.get_references(
-        basis_name=args.basis, elements=args.elements, version=args.version, fmt=args.reffmt, data_dir=args.data_dir)
+    return api.get_references(basis_name=args.basis,
+                              elements=args.elements,
+                              version=args.version,
+                              fmt=args.reffmt,
+                              data_dir=args.data_dir)
 
 
 def _bse_cli_get_info(args):
@@ -148,8 +150,8 @@ def _bse_cli_get_info(args):
     ret.append('Versions:')
 
     # Print 4 columns - version, date, elements, revision description
-    version_lines = format_columns([(k, v['revdate'], compact_elements(v['elements']), v['revdesc']) for k, v in ver.items()],
-                                    '    ')
+    version_lines = format_columns([(k, v['revdate'], compact_elements(v['elements']), v['revdesc'])
+                                    for k, v in ver.items()], '    ')
     ret.extend(version_lines)
 
     return '\n'.join(ret)

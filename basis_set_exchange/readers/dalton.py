@@ -101,7 +101,10 @@ def _parse_electron_lines(basis_lines, bs_data):
             if nprim > 0 and bas_lines:
                 num_line_splits = len(sh_lines[1:]) // nprim
                 if num_line_splits * nprim == len(sh_lines[1:]):
-                    bas_lines = [' '.join([sh_lines[1 + num_line_splits*i + offset] for offset in range(num_line_splits)]) for i in range(nprim)]
+                    bas_lines = [
+                        ' '.join([sh_lines[1 + num_line_splits * i + offset] for offset in range(num_line_splits)])
+                        for i in range(nprim)
+                    ]
             exponents, coefficients = helpers.parse_primitive_matrix(bas_lines, nprim=nprim, ngen=ngen)
 
             func_type = helpers.function_type_from_am([shell_am], 'gto', 'spherical')

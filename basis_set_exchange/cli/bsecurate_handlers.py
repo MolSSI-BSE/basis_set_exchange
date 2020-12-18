@@ -6,6 +6,7 @@ from .. import curate, printing, fileio, api
 from .common import format_columns
 import os
 
+
 def _bsecurate_cli_elements_in_files(args):
     '''Handles the elements-in-files subcommand'''
     data = curate.elements_in_files(args.files)
@@ -38,7 +39,7 @@ def _bsecurate_cli_print_component_file(args):
 def _bsecurate_cli_compare_basis_sets(args):
     '''Handles compare-basis-sets subcommand'''
     ret = curate.compare_basis_sets(args.basis1, args.basis2, args.version1, args.version2, args.uncontract_general,
-          args.data_dir, args.data_dir)
+                                    args.data_dir, args.data_dir)
     if ret:
         return "No difference found"
     else:
