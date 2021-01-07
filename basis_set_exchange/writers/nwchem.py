@@ -22,8 +22,12 @@ def write_nwchem(basis):
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
     if electron_elements:
+        # Angular momentum type
+        types = basis['function_types']
+        harm_type = 'cartesian' if 'gto_cartesian' in types else 'spherical'
+
         # basis set starts with a string
-        s += 'BASIS "ao basis" PRINT\n'
+        s += 'BASIS "ao basis" {} PRINT\n'.format(harm_type.upper())
 
         # Electron Basis
         for z in electron_elements:
