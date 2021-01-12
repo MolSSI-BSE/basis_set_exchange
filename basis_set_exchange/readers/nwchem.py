@@ -16,6 +16,13 @@ def _parse_electron_lines(basis_lines, bs_data):
     # They may exist when this is called from other readers
     basis_lines = [x for x in basis_lines if x.lower() != 'end']
 
+    # Basis entry needs to start with 'basis'
+    if not basis_lines[0].lower().startswith('basis'):
+        raise RuntimeError("Basis entry must start with 'basis'")
+
+    # Is the basis set spherical or cartesian?
+    am_type = 'cartesian' if basis_lines[0].lower().find('spherical') == -1 else 'spherical'
+
     # Start at index 1 in order to strip of the first line ('BASIS AO PRINT' or something)
     shell_blocks = helpers.partition_lines(basis_lines[1:], lambda x: x[0].isalpha(), min_size=2)
 
@@ -26,7 +33,7 @@ def _parse_electron_lines(basis_lines, bs_data):
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
         element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells', key_exist_ok=True)
 
-        func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+        func_type = helpers.function_type_from_am(shell_am, 'gto', am_type)
 
         # How many columns of coefficients do we have?
         # Only if this is a fused shell do we know
