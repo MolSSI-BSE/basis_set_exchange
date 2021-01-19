@@ -10,6 +10,7 @@ from .. import manip
 from ..readers import read_formatted_basis_file
 from .compare import _reldiff
 
+
 def _print_list(lst):
     '''
     Prints a list from a comparison
@@ -50,12 +51,13 @@ def shells_difference(s1, s2):
 
         nprim = len(sh1['exponents'])
         if len(sh2['exponents']) != nprim:
-            print("Different number of primitives for shell {}".format(n))
+            print("Different number of primitives for shell {}: {} vs {}".format(n, nprim, len(sh2['exponents'])))
             return float('inf')
 
         ngen = len(sh1['coefficients'])
         if len(sh2['coefficients']) != ngen:
-            print("Different number of general contractions for shell {}".format(n))
+            print("Different number of general contractions for shell {}: {} vs {}".format(
+                n, ngen, len(sh2['coefficients'])))
             return float('inf')
 
         for p in range(nprim):
