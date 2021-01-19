@@ -73,7 +73,7 @@ def shells_difference(s1, s2):
                 c2 = sh2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
-                    print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                    print("Coefficient ({:3},{:3}): {:20} {:20} -> {:16.8e}".format(g, p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
 
     print()
@@ -137,7 +137,7 @@ def potentials_difference(p1, p2):
                 c2 = pot2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
-                    print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                    print("         Coefficient ({:3},{:3}): {:20} {:20} -> {:16.8e}".format(g, p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
 
     print()
