@@ -5,10 +5,10 @@ Comparison of basis data against authoritative sources
 from ..api import get_basis
 from ..misc import compact_elements
 from ..sort import sort_shells, sort_potentials
+from ..lut import element_sym_from_Z
 from .. import manip
 from ..readers import read_formatted_basis_file
 from .compare import _reldiff
-
 
 def _print_list(lst):
     '''
@@ -167,7 +167,7 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
 
         print()
         print("-------------------------------------")
-        print(" Element ", k)
+        print(" Element {}: {}".format(k, element_sym_from_Z(k, True)))
         bs1_el = bs1['elements'][k]
 
         max_rdiff_el = 0.0
