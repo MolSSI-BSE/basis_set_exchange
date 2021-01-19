@@ -4,7 +4,7 @@ Validators for command line options
 
 import os
 import copy
-from .. import api, misc, curate
+from .. import api, misc, readers
 
 
 def _cli_check_data_dir(data_dir):
@@ -106,7 +106,7 @@ def _cli_check_readfmt(readfmt):
         return None
 
     readfmt = readfmt.lower()
-    if readfmt not in curate.get_reader_formats():
+    if readfmt not in readers.get_reader_formats():
         errstr = "Reader for file type '" + readfmt + "' does not exist.\n"
         errstr += "For a complete list of file types, use the 'bsecurate get-reader-formats' command"
         raise RuntimeError(errstr)

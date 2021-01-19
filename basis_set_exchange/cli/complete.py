@@ -3,7 +3,7 @@ Completers & validators for argcomplete
 '''
 
 import os
-from .. import api, curate, writers, readers
+from .. import api, writers, readers
 
 
 def _fix_datadir(data_dir):
@@ -50,4 +50,4 @@ def cli_role_completer(**kwargs):
 
 
 def cli_readerfmt_completer(**kwargs):
-    return curate.get_reader_formats()
+    return readers.get_reader_formats()
