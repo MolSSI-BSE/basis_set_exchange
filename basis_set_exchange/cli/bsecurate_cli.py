@@ -86,6 +86,14 @@ def run_bsecurate_cli():
     subp.add_argument('--readfmt2', help='Override the file format of file 2').completer = cli_readerfmt_completer
     subp.add_argument('--uncontract-general', action='store_true', help='Remove general contractions before comparing')
 
+    # compare-basis-to-file
+    subp = subparsers.add_parser('compare-basis-to-file', help='Compare basis set in data directory to file')
+    subp.add_argument('basis', help='Basis set to compare')
+    subp.add_argument('file', help='Basis set file to compare to')
+    subp.add_argument('--readfmt', help='Override the file format').completer = cli_readerfmt_completer
+    subp.add_argument('--version', help='Version of the basis set to compare with. Default is latest')
+    subp.add_argument('--uncontract-general', action='store_true', help='Remove general contractions before comparing')
+
     ########################################
     # Making graphs
     ########################################
