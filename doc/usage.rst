@@ -82,7 +82,7 @@ subset of elements instead by using the `elements` parameter
    >>> # Get only carbon and oxygen
    >>> bs_str = basis_set_exchange.get_basis('aug-cc-pvtz', elements=[6,8], fmt='nwchem', header=False)
    >>> print(bs_str)
-   BASIS "ao basis" PRINT
+   BASIS "ao basis" SPHERICAL PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
          8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00
@@ -92,7 +92,7 @@ subset of elements instead by using the `elements` parameter
    >>> # and integers as strings
    >>> bs_str = basis_set_exchange.get_basis('aug-cc-pvtz', elements=['C', 8, 'Ne', '16'], fmt='nwchem', header=False)
    >>> print(bs_str)
-   BASIS "ao basis" PRINT
+   BASIS "ao basis" SPHERICAL PRINT
    #BASIS SET: (11s,6p,3d,2f) -> [5s,4p,3d,2f]
    C    S
          8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00

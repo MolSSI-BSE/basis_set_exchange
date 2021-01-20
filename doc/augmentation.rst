@@ -30,7 +30,7 @@ This functionality is implemented in the :func:`basis_set_exchange.manip.geometr
 
 Take, for example, He/aug-cc-pVTZ::
 
-    BASIS "ao basis" PRINT
+    BASIS "ao basis" SPHERICAL PRINT
     #BASIS SET: (7s,3p,2d) -> [4s,3p,2d]
     He    S
           2.340000E+02           2.587000E-03           0.000000E+00           0.000000E+00           0.00000000
@@ -72,7 +72,7 @@ The parameters are generated as below:
 
 Therefore, He/q-aug-cc-pVTZ will be::
 
-    BASIS "ao basis" PRINT
+    BASIS "ao basis" SPHERICAL PRINT
     #BASIS SET: (7s,3p,2d) -> [4s,3p,2d]
     He    S
           2.340000E+02           2.587000E-03           0.000000E+00           0.000000E+00           0.00000000
