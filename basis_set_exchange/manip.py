@@ -381,6 +381,10 @@ def make_general(basis, skip_spdf=False, use_copy=True):
 
         el['electron_shells'] = newshells
 
+    # If the basis was read in from a segmented format, it will have
+    # duplicate primitives, and so a pruning is necessary
+    prune_basis(basis, False)
+
     return basis
 
 
