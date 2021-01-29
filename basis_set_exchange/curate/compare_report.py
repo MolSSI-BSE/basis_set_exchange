@@ -5,6 +5,7 @@ Comparison of basis data against authoritative sources
 from ..api import get_basis
 from ..misc import compact_elements
 from ..sort import sort_shells, sort_potentials
+from ..lut import element_sym_from_Z
 from .. import manip
 from ..readers import read_formatted_basis_file
 from .compare import _reldiff
@@ -50,12 +51,13 @@ def shells_difference(s1, s2):
 
         nprim = len(sh1['exponents'])
         if len(sh2['exponents']) != nprim:
-            print("Different number of primitives for shell {}".format(n))
+            print("Different number of primitives for shell {}: {} vs {}".format(n, nprim, len(sh2['exponents'])))
             return float('inf')
 
         ngen = len(sh1['coefficients'])
         if len(sh2['coefficients']) != ngen:
-            print("Different number of general contractions for shell {}".format(n))
+            print("Different number of general contractions for shell {}: {} vs {}".format(
+                n, ngen, len(sh2['coefficients'])))
             return float('inf')
 
         for p in range(nprim):
@@ -71,7 +73,7 @@ def shells_difference(s1, s2):
                 c2 = sh2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
-                    print("Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                    print("Coefficient ({:3},{:3}): {:20} {:20} -> {:16.8e}".format(g, p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
 
     print()
@@ -135,7 +137,7 @@ def potentials_difference(p1, p2):
                 c2 = pot2['coefficients'][g][p]
                 r = _reldiff(c1, c2)
                 if r > 0.0:
-                    print("         Coefficient {:3}: {:20} {:20} -> {:16.8e}".format(p, c1, c2, r))
+                    print("         Coefficient ({:3},{:3}): {:20} {:20} -> {:16.8e}".format(g, p, c1, c2, r))
                 max_rdiff = max(max_rdiff, r)
 
     print()
@@ -167,7 +169,7 @@ def basis_comparison_report(bs1, bs2, uncontract_general=False):
 
         print()
         print("-------------------------------------")
-        print(" Element ", k)
+        print(" Element {}: {}".format(k, element_sym_from_Z(k, True)))
         bs1_el = bs1['elements'][k]
 
         max_rdiff_el = 0.0
@@ -230,9 +232,9 @@ def compare_basis_against_file(basis_name,
                                data_dir=None):
     '''Compare a basis set in the BSE against a reference file'''
 
-    src_data = read_formatted_basis_file(src_filepath, file_type)
     bse_data = get_basis(basis_name, version=version, data_dir=data_dir)
-    return basis_comparison_report(src_data, bse_data, uncontract_general=uncontract_general)
+    src_data = read_formatted_basis_file(src_filepath, file_type)
+    return basis_comparison_report(bse_data, src_data, uncontract_general=uncontract_general)
 
 
 def compare_basis_files(file_path_1, file_path_2, file_type_1=None, file_type_2=None, uncontract_general=False):

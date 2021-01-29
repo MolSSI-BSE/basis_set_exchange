@@ -56,6 +56,16 @@ def _bsecurate_cli_compare_basis_files(args):
         return "DIFFERENCES FOUND. SEE ABOVE"
 
 
+def _bsecurate_cli_compare_basis_against_file(args):
+    '''Handles compare-basis-files subcommand'''
+    ret = curate.compare_basis_against_file(args.basis, args.file, args.readfmt, args.version, args.uncontract_general)
+
+    if ret:
+        return "No difference found"
+    else:
+        return "DIFFERENCES FOUND. SEE ABOVE"
+
+
 def _bsecurate_cli_make_diff(args):
     '''Handles the view-graph subcommand'''
 
@@ -93,6 +103,7 @@ def bsecurate_cli_handle_subcmd(args):
         'print-component-file': _bsecurate_cli_print_component_file,
         'compare-basis-sets': _bsecurate_cli_compare_basis_sets,
         'compare-basis-files': _bsecurate_cli_compare_basis_files,
+        'compare-basis-to-file': _bsecurate_cli_compare_basis_against_file,
         'make-diff': _bsecurate_cli_make_diff,
         'view-graph': _bsecurate_cli_view_graph,
         'make-graph-file': _bsecurate_cli_make_graph_file,
