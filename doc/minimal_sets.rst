@@ -19,7 +19,7 @@ calculation on the neon atom, where symmetry breaking is not an issue.
 We will consider the STO-3G and STO-6G basis sets, as well as minimal
 basis sets extracted from the Dunning cc-pVnZ sets, which can be
 compared to fully numerical reference values (Lehtola,
-http://doi.org/10.1103/PhysRevA.101.012516). ::
+https://doi.org/10.1103/PhysRevA.101.012516). ::
 
   Basis             Energy (Eh)  Error (Eh)
   STO-3G          -126.60452509     1.9e+00

@@ -5,7 +5,7 @@ Papajak/Truhlar 'Calendarization'
 
 Diffuse functions can be removed from the Dunning-style aug-cc basis
 sets. Doing so results in the Truhlar 'calendar' basis sets (Papajak &
-Truhlar, https://dx.doi.org/10.1021/ct1005533). The names derive from
+Truhlar, https://doi.org/10.1021/ct1005533). The names derive from
 the fact that 'aug' (for 'augmented') is also the abbreviation for the
 month of August. Removing diffuse functions moves you earlier into the
 year - 'jul', 'jun', etc, progressively have fewer diffuse functions.
@@ -21,7 +21,7 @@ To form the earlier months, the procedure is as follows
   3. 'may' - remove the diffuse function from the next highest AM from non-H,He elements
   4. Continue until finished or you hit 'jan'
 
-In Papajak & Truhlar (2011, https://dx.doi.org/10.1021/ct1005533), truncation
+In Papajak & Truhlar (2011, https://doi.org/10.1021/ct1005533), truncation
 of the diffuse functions stops when only s & p diffuse functions remain. This
 month is also denoted 'maug' (minimally-augmented).
 
