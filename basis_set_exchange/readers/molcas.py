@@ -75,7 +75,7 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
         exponents, shell_lines = helpers.read_n_floats(shell_lines[1:], nprim)
 
         # Read the coefficient matrix from the next block
-        # We may or may not know the dimentions of the matrix since &@*!# is optional
+        # We may or may not know the dimensions of the matrix since &@*!# is optional
         # in this format.
         coefficients = helpers.read_all_floats(shell_lines)
 

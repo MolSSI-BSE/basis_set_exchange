@@ -83,7 +83,7 @@ def _compare_vector(arr1, arr2, rel_tol):
             rel = _reldiff(element_1, element_2)
 
             # For a basis set, a relatively coarse comparison
-            # should be acceptible
+            # should be acceptable
             if rel > rel_tol:
                 return False
 

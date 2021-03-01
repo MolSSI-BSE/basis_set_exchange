@@ -33,7 +33,7 @@ def elements_in_files(filelist):
 
 
 def component_file_refs(filelist):
-    '''Get a list of what elements/refrences exist in component JSON files
+    '''Get a list of what elements/references exist in component JSON files
 
     Parameters
     ----------
