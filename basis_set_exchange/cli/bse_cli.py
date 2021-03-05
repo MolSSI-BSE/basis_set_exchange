@@ -105,6 +105,24 @@ def run_bse_cli():
     subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
     subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
 
+    # get-autoaux-basis subcommand
+    subp = subparsers.add_parser('get-autoaux-basis', help='Output an automatic auxiliary basis')
+    subp.add_argument('basis', help='Name of the basis set to output').completer = cli_bsname_completer
+    subp.add_argument('fmt',
+                      help='Which format to output the auxiliary basis set as').completer = cli_write_fmt_completer
+    subp.add_argument('--elements',
+                      help='Which elements of the basis set to output. Default is all defined in the given basis')
+    subp.add_argument('--version', help='Which version of the basis set to output. Default is the latest version')
+    subp.add_argument('--noheader', action='store_true', help='Do not output the header at the top')
+    subp.add_argument('--unc-gen', action='store_true', help='Remove general contractions')
+    subp.add_argument('--unc-spdf', action='store_true', help='Remove combined sp, spd, ... contractions')
+    subp.add_argument('--unc-seg', action='store_true', help='Remove general contractions')
+    subp.add_argument('--rm-free', action='store_true', help='Remove free primitives')
+    subp.add_argument('--opt-gen', action='store_true', help='Optimize general contractions')
+    subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
+    subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
+    subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
+
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
     subp.add_argument('basis',

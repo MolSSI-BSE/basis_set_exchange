@@ -2,7 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import api, bundle, readers, writers, refconverters, convert
+from .. import api, bundle, readers, writers, refconverters, convert, manip
 from ..misc import compact_elements
 from .common import format_columns
 
@@ -113,6 +113,31 @@ def _bse_cli_get_basis(args):
                          header=not args.noheader)
 
 
+def _bse_cli_get_autoaux_basis(args):
+    '''Handles the get-autoaux-basis subcommand'''
+
+    aux_basis = manip.autoaux_basis(
+        api.get_basis(name=args.basis,
+                      elements=args.elements,
+                      version=args.version,
+                      fmt=None,
+                      uncontract_general=args.unc_gen,
+                      uncontract_spdf=args.unc_spdf,
+                      uncontract_segmented=args.unc_seg,
+                      remove_free_primitives=args.rm_free,
+                      make_general=args.make_gen,
+                      optimize_general=args.opt_gen,
+                      augment_diffuse=args.aug_diffuse,
+                      augment_steep=args.aug_steep,
+                      data_dir=args.data_dir,
+                      header=not args.noheader))
+
+    if args.fmt is None:
+        return aux_basis
+
+    return writers.write_formatted_basis_str(aux_basis, args.fmt)
+
+
 def _bse_cli_get_refs(args):
     '''Handles the get-refs subcommand'''
     return api.get_references(basis_name=args.basis,
@@ -217,6 +242,7 @@ def bse_cli_handle_subcmd(args):
         'list-families': _bse_cli_list_families,
         'lookup-by-role': _bse_cli_lookup_by_role,
         'get-basis': _bse_cli_get_basis,
+        'get-autoaux-basis': _bse_cli_get_autoaux_basis,
         'get-refs': _bse_cli_get_refs,
         'get-info': _bse_cli_get_info,
         'get-notes': _bse_cli_get_notes,

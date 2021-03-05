@@ -7,6 +7,29 @@ data, as well as some other small functions.
 
 import copy
 from . import skel, misc
+from .ints import gto_R_contr
+from .lut import function_type_from_am
+from . import compose
+from math import gamma, pi
+
+
+def create_element_data(bs_data, element_Z, key, key_exist_ok=False, element_exist_ok=True, create=list):
+    '''Creates an element and a subkey of the element in bs_data
+
+    Note that bs_data is modified!
+    '''
+
+    if element_Z not in bs_data:
+        bs_data[element_Z] = {}
+    elif not element_exist_ok:
+        raise RuntimeError("Element {} already exists in basis data".format(element_Z))
+
+    if key not in bs_data[element_Z]:
+        bs_data[element_Z][key] = create()
+    elif not key_exist_ok:
+        raise RuntimeError("Key {} already exists in basis data for element {}".format(key, element_Z))
+
+    return bs_data[element_Z]
 
 
 def merge_element_data(dest, sources, use_copy=True):
@@ -763,3 +786,178 @@ def truhlar_calendarize(basis, month, use_copy=True):
 
     basis = prune_basis(basis, False)
     return basis
+
+
+def autoaux_basis(basis, use_copy=True):
+    '''Create an auxiliary basis set for the given orbital basis set for
+use with the resolution of the identity approximation. This is a
+simplified version of the routine where the electrons potentially
+contained in the ECP are disregarded, leading to slightly larger (but
+more accurate) auxiliary sets.
+
+    .. seealso :: | G. L. Stoychev, A. A. Auer, and F. Neese
+                  | 'Automatic Generation of Auxiliary Basis Sets'
+                  | J. Chem. Theory Comput. 13, 554 (2017)
+                  | http://doi.org/10.1021/acs.jctc.6b01041
+
+
+    Parameters
+    ----------
+    basis : dict
+        Orbital basis set dictionary for which to generate the auxiliary basis
+
+    '''
+
+    # We want the basis set as generally contracted
+    basis = make_general(basis, use_copy=use_copy)
+
+    auxbasis_data = {}
+
+    for element_Z, eldata in basis['elements'].items():
+
+        if 'electron_shells' not in eldata:
+            print('No electron shells for {}'.format(element_Z))
+            continue
+
+        elshells = eldata['electron_shells']
+
+        # What is maximal angular momentum?
+        lmax = max([sh['angular_momentum'][0] for sh in elshells])
+
+        def update_minimum_array(array, index, value):
+            '''Updates an array of minimal values'''
+            if array[index] is None:
+                array[index] = value
+            else:
+                array[index] = min(array[index], value)
+
+        def update_maximum_array(array, index, value):
+            '''Updates an array of maximal values'''
+            if array[index] is None:
+                array[index] = value
+            else:
+                array[index] = max(array[index], value)
+
+        # Form values of smallest and largest primitive exponent
+        amin = [None for _ in range(lmax + 1)]
+        amax_prim = [None for _ in range(lmax + 1)]
+        amax_eff = [None for _ in range(lmax + 1)]
+        for sh in elshells:
+            exponents = sh['exponents']
+            coefficients = sh['coefficients']
+            ncontr = len(coefficients)
+            shell_am = sh['angular_momentum']
+            assert len(shell_am) == 1
+            l = shell_am[0]
+
+            # Store values of smallest and largest exponent
+            expval = [float(x) for x in exponents]
+            expval.sort(reverse=True)
+            update_maximum_array(amax_prim, l, float(expval[0]))
+            update_minimum_array(amin, l, float(expval[-1]))
+
+            # Now we just compute the spatial extent <r> for functions (in contracted form), eq (8) in the paper
+            rmat = gto_R_contr(exponents, coefficients, shell_am[0])
+            # Extract the diagonal values
+            rvec = [rmat[i][i] for i in range(ncontr)]
+
+            # This gives us the "quasi-uncontracted" orbital basis with primitive exponents
+            # Prefactor defined in eq 10
+            k_value = 2**(2 * l + 1) * gamma(l + 2)**2 / gamma(2 * l + 3)
+
+            # Calculate effective exponent with eq 9, note that it
+            # must be proportional to the inverse square of the
+            # radius, not the inverse radius
+            effective_exponents = [2 * k_value**2 / (pi * rexp**2) for rexp in rvec]
+
+            # Sort list in decreasing order
+            effective_exponents.sort(reverse=True)
+            # Store largest effective exponent
+            update_maximum_array(amax_eff, l, effective_exponents[0])
+
+        # Collect the smallest and largest exponents
+        a_minaux = [None for _ in range(2 * lmax + 1)]
+        a_maxaux_prim = [None for _ in range(2 * lmax + 1)]
+        a_maxaux_eff = [None for _ in range(2 * lmax + 1)]
+        for l in range(lmax + 1):
+            for lp in range(l, lmax + 1):
+                # Calculate the values of the exponents
+                minaux = amin[l] + amin[lp]
+                maxauxp = amax_prim[l] + amax_prim[lp]
+                maxauxe = amax_eff[l] + amax_eff[lp]
+
+                # Loop over all possible coupled angular momenta
+                for laux in range(abs(l - lp), l + lp + 1):
+                    update_minimum_array(a_minaux, laux, minaux)
+                    update_maximum_array(a_maxaux_prim, laux, maxauxp)
+                    update_maximum_array(a_maxaux_eff, laux, maxauxe)
+
+        # Form lval: highest occupied momentum of occupied shells for
+        # atom. H and He have lval=0; Li, Be and everything after that
+        # have lval=1; 3d transition metals have lval=2 and
+        # lanthanoids have lval=3.
+        lval = 0
+        Z = int(element_Z)
+        if Z > 2:
+            lval = 1
+        if Z > 20:
+            lval = 2
+        if Z > 56:
+            lval = 3
+
+        # Form linc: 1 up to Ar, 2 for the rest
+        linc = 1
+        if Z > 18:
+            linc = 2
+
+        # Limit maximal angular momentum
+        lmax_aux = min(max(2 * lval, lmax + linc), 2 * lmax)
+
+        # Values from Table I
+        flaux = [20, 4.0, 4.0, 3.5, 2.5, 2.0, 2.0]
+        blaux_big = [1.8, 2.0, 2.2, 2.2, 2.2, 2.3, 3.0, 3.0]
+        b_small = 1.8
+
+        # Form actual upper limit for even-tempered expansion
+        amax_aux = [None for _ in range(lmax_aux + 1)]
+        for laux in range(lmax_aux + 1):
+            if laux <= 2 * lval:
+                amax_aux[laux] = max(flaux[laux] * a_maxaux_eff[laux], a_maxaux_prim[laux])
+            else:
+                amax_aux[laux] = a_maxaux_eff[laux]
+
+        # Create aux basis
+        aux_element_data = create_element_data(auxbasis_data, str(element_Z), 'electron_shells')
+
+        for laux in range(lmax_aux + 1):
+            # Generate the exponents
+            exponents = []
+            current_exponent = a_minaux[laux]
+            while True:
+                exponents.append('{:.6e}'.format(current_exponent))
+                if current_exponent >= amax_aux[laux]:
+                    break
+
+                if laux <= 2 * lval:
+                    current_exponent *= b_small
+                else:
+                    current_exponent *= blaux_big[min(laux, len(blaux_big) - 1)]
+
+            # Create shells
+            for z in exponents:
+                func_type = function_type_from_am([laux], 'gto', 'spherical')
+                shell = {
+                    'function_type': func_type,
+                    'region': '',
+                    'angular_momentum': [laux],
+                    'exponents': [z],
+                    'coefficients': [['1.0']]
+                }
+                aux_element_data['electron_shells'].append(shell)
+
+    # Finalize basis
+    auxbasis_bs = skel.create_skel('component')
+    auxbasis_bs['elements'] = auxbasis_data
+    auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
+
+    return auxbasis_bs
