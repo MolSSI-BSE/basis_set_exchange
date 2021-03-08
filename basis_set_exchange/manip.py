@@ -10,7 +10,7 @@ from . import skel, misc
 from .ints import gto_R_contr
 from .lut import function_type_from_am
 from . import compose
-from math import gamma, pi
+from math import gamma, pi, exp, log
 
 
 def create_element_data(bs_data, element_Z, key, key_exist_ok=False, element_exist_ok=True, create=list):
@@ -788,7 +788,7 @@ def truhlar_calendarize(basis, month, use_copy=True):
     return basis
 
 
-def autoaux_basis(basis, use_copy=True):
+def autoaux_basis(basis):
     '''Create an auxiliary basis set for the given orbital basis set for
 use with the resolution of the identity approximation. This is a
 simplified version of the routine where the electrons potentially
@@ -805,11 +805,11 @@ more accurate) auxiliary sets.
     ----------
     basis : dict
         Orbital basis set dictionary for which to generate the auxiliary basis
-
     '''
 
-    # We want the basis set as generally contracted
-    basis = make_general(basis, use_copy=use_copy)
+    # We want the basis set as generally contracted. Get a copy so
+    # that we don't change the input set
+    basis = make_general(basis, use_copy=True)
 
     auxbasis_data = {}
 
@@ -955,6 +955,125 @@ more accurate) auxiliary sets.
                     'coefficients': [['1.0']]
                 }
                 aux_element_data['electron_shells'].append(shell)
+
+    # Finalize basis
+    auxbasis_bs = skel.create_skel('component')
+    auxbasis_bs['elements'] = auxbasis_data
+    auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
+
+    return auxbasis_bs
+
+
+def autoabs_basis(basis, lmaxinc=1, fsam=1.5):
+    '''Create a Coulomb fitting basis set for the given orbital basis set.
+
+    .. seealso :: | R. Yang, A. P. Rendell, and M. J. Frisch
+                  | 'Automatically generated Coulomb fitting basis sets:
+                  | Design and accuracy for systems containing H to Kr'
+                  | J. Chem. Phys. 127, 074102 (2007)
+                  | http://doi.org/10.1063/1.2752807
+
+    Parameters
+    ----------
+    basis : dict
+        Orbital basis set dictionary for which to generate the auxiliary basis
+
+    '''
+
+    # We want the basis set as generally contracted. Get a copy so
+    # that we don't change the input set
+    basis = make_general(basis, use_copy=True)
+
+    auxbasis_data = {}
+
+    for element_Z, eldata in basis['elements'].items():
+
+        if 'electron_shells' not in eldata:
+            print('No electron shells for {}'.format(element_Z))
+            continue
+
+        elshells = eldata['electron_shells']
+
+        # Form the list of candidate functions
+        candidates = []
+        for sh in elshells:
+            exponents = sh['exponents']
+            shell_am = sh['angular_momentum']
+            assert len(shell_am) == 1
+            for x in exponents:
+                # We do the doubling here
+                candidates.append((2.0 * float(x), shell_am[0]))
+
+        # Form lval: highest occupied momentum of occupied shells for
+        # atom. H and He have lval=0; Li, Be and everything after that
+        # have lval=1; 3d transition metals have lval=2 and
+        # lanthanoids have lval=3.
+        lval = 0
+        Z = int(element_Z)
+        if Z > 2:
+            lval = 1
+        if Z > 18:
+            lval = 2
+        if Z > 54:
+            lval = 3
+
+        # Maximal candidate am
+        lmax = max([c[1] for c in candidates])
+
+        # Maximal allowed angular momentum
+        lmax_aux = min(max(2 * lval, lmax + lmaxinc), 2 * lmax)
+
+        # Fitting functions
+        fit_functions = []
+
+        while len(candidates) > 0:
+            # Sort candidates by exponent
+            candidates = sorted(candidates, key=lambda x: x[0])
+
+            # Move top candidate to to trial function set
+            trial_functions = [candidates.pop()]
+            while len(candidates):
+                # trial fitting functions for which the ratio of the
+                # exponent reference value divided by the value of
+                # their exponent is smaller than fsam are moved from
+                # the candidate basis set to the trail function set
+                if trial_functions[0][0] / candidates[-1][0] < fsam:
+                    trial_functions.append(candidates.pop())
+                else:
+                    break
+
+            # Calculate geometric average of functions in trial set
+            average_exponent = exp(sum([log(tr[0]) for tr in trial_functions]) / len(trial_functions))
+
+            # The angular moment of this function is set to the
+            # maximum angular moment of any primitive in the current
+            # trial set and the previous ABSs.
+            max_fit_am = 0
+            for f in fit_functions:
+                max_fit_am = max(max_fit_am, f[1])
+            for f in trial_functions:
+                max_fit_am = max(max_fit_am, f[1])
+            # Reset to lmax_aux
+            max_fit_am = min(max_fit_am, lmax_aux)
+
+            # Add functions
+            for fit_am in range(max_fit_am + 1):
+                fit_functions.append((average_exponent, fit_am))
+
+        # Create aux basis
+        aux_element_data = create_element_data(auxbasis_data, str(element_Z), 'electron_shells')
+
+        # Create shells
+        for f in fit_functions:
+            func_type = function_type_from_am([f[1]], 'gto', 'spherical')
+            shell = {
+                'function_type': func_type,
+                'region': '',
+                'angular_momentum': [f[1]],
+                'exponents': ['{:.6e}'.format(f[0])],
+                'coefficients': [['1.0']]
+            }
+            aux_element_data['electron_shells'].append(shell)
 
     # Finalize basis
     auxbasis_bs = skel.create_skel('component')
