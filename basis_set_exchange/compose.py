@@ -13,14 +13,12 @@ def _whole_basis_types(basis):
     '''
 
     all_types = set()
-
-    for v in basis['elements'].values():
-        if 'electron_shells' in v:
-            for sh in v['electron_shells']:
+    for key in basis['elements']:
+        if key == 'electron_shells':
+            for sh in basis['elements']['electron_shells']:
                 all_types.add(sh['function_type'])
-
-        if 'ecp_potentials' in v:
-            for pot in v['ecp_potentials']:
+        if key == 'ecp_potentials':
+            for pot in basis['elements']['ecp_potentials']:
                 all_types.add(pot['ecp_type'])
 
     return sorted(all_types)
