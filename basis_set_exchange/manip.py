@@ -961,6 +961,8 @@ more accurate) auxiliary sets.
     auxbasis_bs['elements'] = auxbasis_data
     auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
 
+    auxbasis_bs['name'] = basis['name'] + '_autoaux'
+
     return auxbasis_bs
 
 
@@ -1079,5 +1081,7 @@ def autoabs_basis(basis, lmaxinc=1, fsam=1.5):
     auxbasis_bs = skel.create_skel('component')
     auxbasis_bs['elements'] = auxbasis_data
     auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
+
+    auxbasis_bs['name'] = basis['name'] + '_autoabs'
 
     return auxbasis_bs
