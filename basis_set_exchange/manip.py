@@ -532,7 +532,7 @@ def optimize_general(basis, use_copy=True):
     return basis
 
 
-def P_orthogonalization(basis, use_copy=True, cutoff=1e-5, Cortho=1e-4):
+def P_orthogonalization(basis, cutoff=1e-5, Cortho=1e-4, use_copy=True):
     """Optimizes a general contraction using P-orthogonalization
 
     .. seealso :: | F. Jensen

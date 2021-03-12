@@ -266,7 +266,7 @@ def get_basis(name,
         basis_dict = manip.prune_basis(basis_dict, False)
 
     if optimize_segmented:
-        basis_dict = manip.P_orthogonalization(basis_dict, False)
+        basis_dict = manip.P_orthogonalization(basis_dict, use_copy=False)
 
     # Augment
     if augment_diffuse > 0:
