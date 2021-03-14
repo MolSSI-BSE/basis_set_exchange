@@ -922,7 +922,8 @@ more accurate) auxiliary sets.
         amax_aux = [None for _ in range(lmax_aux + 1)]
         for laux in range(lmax_aux + 1):
             if laux <= 2 * lval:
-                amax_aux[laux] = max(flaux[laux] * a_maxaux_eff[laux], a_maxaux_prim[laux])
+                # There's a typo in the paper, max instead of min
+                amax_aux[laux] = min(flaux[laux] * a_maxaux_eff[laux], a_maxaux_prim[laux])
             else:
                 amax_aux[laux] = a_maxaux_eff[laux]
 
