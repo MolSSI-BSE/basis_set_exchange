@@ -913,8 +913,8 @@ more accurate) auxiliary sets.
         # Limit maximal angular momentum
         lmax_aux = min(max(2 * lval, lmax + linc), 2 * lmax)
 
-        # Values from Table I
-        flaux = [20, 4.0, 4.0, 3.5, 2.5, 2.0, 2.0]
+        # Values from Table I; factor 7.0 for P functions is missing in the paper
+        flaux = [20, 7.0, 4.0, 4.0, 3.5, 2.5, 2.0, 2.0]
         blaux_big = [1.8, 2.0, 2.2, 2.2, 2.2, 2.3, 3.0, 3.0]
         b_small = 1.8
 
