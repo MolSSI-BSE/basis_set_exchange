@@ -961,7 +961,10 @@ more accurate) auxiliary sets.
     auxbasis_bs['elements'] = auxbasis_data
     auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
 
+    auxbasis_bs['revision_description'] = basis['revision_description']
+    auxbasis_bs['version'] = basis['version']
     auxbasis_bs['name'] = basis['name'] + '_autoaux'
+    auxbasis_bs['role'] = 'rifit'
 
     return auxbasis_bs
 
@@ -1082,6 +1085,9 @@ def autoabs_basis(basis, lmaxinc=1, fsam=1.5):
     auxbasis_bs['elements'] = auxbasis_data
     auxbasis_bs['function_types'] = compose._whole_basis_types(auxbasis_bs)
 
+    auxbasis_bs['revision_description'] = basis['revision_description']
+    auxbasis_bs['version'] = basis['version']
     auxbasis_bs['name'] = basis['name'] + '_autoabs'
+    auxbasis_bs['role'] = 'jfit'
 
     return auxbasis_bs
