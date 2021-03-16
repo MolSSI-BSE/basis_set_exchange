@@ -2,7 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import api, bundle, readers, writers, refconverters, convert, manip
+from .. import api, bundle, readers, writers, refconverters, convert
 from ..misc import compact_elements
 from .common import format_columns
 
