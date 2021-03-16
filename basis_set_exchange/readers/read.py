@@ -108,7 +108,7 @@ def read_formatted_basis_str(basis_str, basis_fmt, validate=False, as_component=
         # Create the function types
         data['function_types'] = _whole_basis_types(data)
 
-    # It's debateable if I want to do this
+    # It's debatable if I want to do this
     #return _fix_uncontracted(data)
 
     # Validate if desired

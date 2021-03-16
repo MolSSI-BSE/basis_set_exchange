@@ -21,7 +21,7 @@ def _test_memo_helper(func, *args, **kwargs):
     end = time.time()
 
     # Time should be shorter, but is a bit
-    # non-determinstic
+    # non-deterministic
     #print(end-mid, mid-start)
     #assert (end-mid) < (mid-start)
 

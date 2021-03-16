@@ -21,7 +21,7 @@ basis sets.
 
 Adding more diffuse functions to an already augmented basis set is
 generally known as multiple augmentation, as described by Woon &
-Dunning (https://dx.doi.org/10.1063/1.466439). Adding a single
+Dunning (https://doi.org/10.1063/1.466439). Adding a single
 function per angular momentum shell to an aug set leads to a doubly
 augmented (d-aug) set; adding two leads to a triply augmented (t-aug)
 set, and so on.
