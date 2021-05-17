@@ -9,7 +9,7 @@ from .. import lut, misc
 from . import helpers
 
 # Start for new basis entry
-basis_head_re = re.compile(r'^/([a-zA-Z]+).({})....(aCD|acCD)-aux-basis.\s*$'.format(helpers.basis_name_re_str))
+basis_head_re = re.compile(r'^/([a-zA-Z]+).({}|)....(aCD|acCD)-aux-basis.\s*$'.format(helpers.basis_name_re_str))
 # Elemental charge, lmax, number of basis set blocks
 charge_line_re = re.compile(r'^\s*({})\s+(\d+)\s+(\d+)\s*$'.format(helpers.floating_re_str))
 dummy_line_re = re.compile(r'^\s*Dummy reference line.\s*$')
@@ -26,8 +26,11 @@ def _parse_basis(basis_lines, bs_data):
                                                                       'Symbol.Basis....a(c)CD-aux-basis.')
 
     # Initialize BSE basis
-    element_Z = lut.element_Z_from_sym(element_symbol)
-    element_data = helpers.create_element_data(bs_data, str(element_Z), 'electron_shells')
+    element_Z = str(lut.element_Z_from_sym(element_symbol))
+    if element_Z not in bs_data or 'electron_shells' not in bs_data[element_Z]:
+        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+    else:
+        element_data = bs_data[element_Z]
 
     # Read charge line (we don't care about the number of basis sets
     # since we parse everything anyway)
