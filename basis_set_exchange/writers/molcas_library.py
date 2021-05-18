@@ -23,27 +23,33 @@ def write_molcas_library(basis):
 
         el_name = lut.element_name_from_Z(z).upper()
         el_sym = lut.element_sym_from_Z(z, normalize=True)
-        bs_name = basis['names'][0].replace(' ', '_')
+        if 'names' in basis:
+            bs_name = basis['names'][0]
+        else:
+            bs_name = basis['name']
+        bs_name = bs_name.replace(' ', '_')
         cont = misc.contraction_string(data, compact=True)
         try:
-            ref = data['references'][-1]['reference_keys'][0]
-        except IndexError:
+            ref = data['references'][-1]['reference_keys'][-1]
+        except (IndexError, KeyError):
             ref = None
         author = first_author(ref, ref_data)
-        s += '/{}.{}.{}.{}.\n'.format(el_sym, bs_name, author, cont)
+        ecp = ''
+
+        # number of electrons
+        # should be z - number of ecp electrons
+        nelectrons = int(z)
+        if has_ecp:
+            nelectrons -= data.get('ecp_electrons', 0)
+            ecp = 'ECP.{}el.'.format(nelectrons)
+        s += '/{}.{}.{}.{}.{}\n'.format(el_sym, bs_name, author, cont, ecp)
         s += '{}\n'.format(format_reference(ref, ref_data))
-        s += '{}  {}\n'.format(el_name, misc.contraction_string(data))
+        s += '{} {}\n'.format(el_name, misc.contraction_string(data))
 
         if has_electron:
             max_am = misc.max_am(data['electron_shells'])
 
-            # number of electrons
-            # should be z - number of ecp electrons
-            nelectrons = int(z)
-            if has_ecp:
-                nelectrons -= data['ecp_electrons']
-
-            s += '{:>7}.00   {}\n'.format(nelectrons, max_am)
+            s += '{:>7}.0   {}\n'.format(nelectrons, max_am)
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
@@ -146,15 +152,15 @@ def format_reference(ref, ref_data):
         text += ' ' + ref_data[ref]['volume']
         text += ' (' + ref_data[ref]['year'] + ')'
         text += ' ' + ref_data[ref]['pages']
-        if not text.endswith('.'):
-            text += '.'
-    elif 'booktitle' in refs[ref]:
-        text += ' In "' + refs[ref]['booktitle'] + '"'
-        text += ' (' + refs[ref]['year'] + ')'
-        text += ' ' + refs[ref]['pages']
+    elif 'booktitle' in ref_data[ref]:
+        text += ' In "' + ref_data[ref]['booktitle'] + '"'
+        text += ' (' + ref_data[ref]['year'] + ')'
+        text += ' ' + ref_data[ref]['pages']
     else:
         text += ' ' + ref_data[ref]['title']
+    if not text.endswith('.'):
+        text += '.'
     if 'doi' in ref_data[ref]:
-        text += ' doi:' + ref_data[ref]['doi']
+        text += ' doi:' + ref_data[ref]['doi'].lower()
     text = unidecode.unidecode(text)
     return text
