@@ -16,6 +16,7 @@ def write_ricdwrap(basis):
 &GATEWAY
   ricd
   accd
+  cdthreshold=1.0d-4
 '''
 
     for z, data in basis['elements'].items():
