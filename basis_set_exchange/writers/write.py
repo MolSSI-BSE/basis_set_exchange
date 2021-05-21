@@ -174,7 +174,7 @@ _writer_map = {
     'ricdwrap': {
         'display': 'Wrapper for generating acCD auxiliary basis sets with OpenMolcas',
         'extension': '.ricdwrap',
-        'comment': '',
+        'comment': '*',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_ricdwrap
     }
