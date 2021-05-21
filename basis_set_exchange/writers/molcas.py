@@ -16,8 +16,18 @@ def write_molcas(basis):
 
     for z, data in basis['elements'].items():
         s += 'Basis set\n'
+
         has_electron = 'electron_shells' in data
         has_ecp = 'ecp_potentials' in data
+        if has_electron:
+            # Are there cartesian shells?
+            cartesian_shells = set()
+            for shell in data['electron_shells']:
+                if shell['function_type'] == 'gto_cartesian':
+                    for am in shell['angular_momentum']:
+                        cartesian_shells.add(lut.amint_to_char([am]))
+            if len(cartesian_shells):
+                s += 'Cartesian {}\n'.format(' '.join(cartesian_shells))
 
         el_name = lut.element_name_from_Z(z).upper()
         el_sym = lut.element_sym_from_Z(z, normalize=True)
