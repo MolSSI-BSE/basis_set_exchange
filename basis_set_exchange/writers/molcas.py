@@ -39,15 +39,6 @@ def write_molcas(basis):
 
             s += '{:>7}.00   {}\n'.format(nelectrons, max_am)
 
-            # Are there cartesian shells?
-            cartesian_shells = set()
-            for shell in data['electron_shells']:
-                if shell['function_type'] == 'gto_cartesian':
-                    for am in shell['angular_momentum']:
-                        cartesian_shells.add(lut.amint_to_char([am]))
-            if len(cartesian_shells):
-                s += 'cartesian {}\n'.format(' '.join(cartesian_shells))
-
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
                 coefficients = shell['coefficients']
@@ -92,6 +83,16 @@ def write_molcas(basis):
             s += 'Spectral\n'
             s += 'End of Spectral\n'
             s += '*\n'
+
+        if has_electron:
+            # Are there cartesian shells?
+            cartesian_shells = set()
+            for shell in data['electron_shells']:
+                if shell['function_type'] == 'gto_cartesian':
+                    for am in shell['angular_momentum']:
+                        cartesian_shells.add(lut.amint_to_char([am]))
+            if len(cartesian_shells):
+                s += 'cartesian {}\n'.format(' '.join(cartesian_shells))
 
         s += 'End of basis set\n\n'
 
