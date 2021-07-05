@@ -22,6 +22,7 @@ from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
 from .bdf import write_bdf
 from .ricdwrap import write_ricdwrap
+from .fhiaims import write_fhiaims
 
 _writer_map = {
     'nwchem': {
@@ -184,6 +185,13 @@ _writer_map = {
         'comment': '*',
         'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
         'function': write_ricdwrap
+    },
+    'fhiaims': {
+        'display': 'FHI-aims',
+        'extension': '.fhiaims',
+        'comment': '#',
+        'valid': set(['gto', 'gto_cartesian', 'gto_spherical']),
+        'function': write_fhiaims
     }
 }
 
