@@ -89,7 +89,8 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
 
         # If we do actually have the number of general contractions, does it match?
         if ngen is not None and ngen != n_coefs // nprim:
-            raise RuntimeError("Expected {} general contractions, but found {}".format(ngen, n_coefs // nprim))
+            raise RuntimeError("Expected {} general contractions, but found {} for am {} of element {}".format(
+                ngen, n_coefs // nprim, shell_am, element_Z))
         else:
             ngen = n_coefs // nprim
 
