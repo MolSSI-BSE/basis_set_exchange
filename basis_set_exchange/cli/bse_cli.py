@@ -104,6 +104,10 @@ def run_bse_cli():
     subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
     subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
     subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
+    subp.add_argument('--get-aux',
+                      type=int,
+                      default=0,
+                      help='Instead of the orbital basis, get an automatically formed auxiliary basis')
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
@@ -142,6 +146,29 @@ def run_bse_cli():
     subp = subparsers.add_parser('convert-basis', help='Convert basis set files from one format to another')
     subp.add_argument('input_file', type=str, help='Basis set file to convert')
     subp.add_argument('output_file', type=str, help='Converted basis set file')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+
+    #################################
+    # Auxiliary basis sets
+    #################################
+    subp = subparsers.add_parser('autoaux-basis', help='Form AutoAux auxiliary basis')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='AutoAux basis to write')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+
+    subp = subparsers.add_parser('autoabs-basis', help='Form AutoABS auxiliary basis')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='AutoABS basis to write')
     subp.add_argument(
         '--in-fmt', type=str, default=None,
         help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer

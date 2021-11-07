@@ -2,7 +2,7 @@
 Handlers for command line subcommands
 '''
 
-from .. import api, bundle, readers, writers, refconverters, convert
+from .. import api, bundle, readers, writers, refconverters, convert, manip
 from ..misc import compact_elements
 from .common import format_columns
 
@@ -109,6 +109,7 @@ def _bse_cli_get_basis(args):
                          optimize_general=args.opt_gen,
                          augment_diffuse=args.aug_diffuse,
                          augment_steep=args.aug_steep,
+                         get_aux=args.get_aux,
                          data_dir=args.data_dir,
                          header=not args.noheader)
 
@@ -205,6 +206,43 @@ def _bse_cli_create_bundle(args):
     return "Created " + args.bundle_file
 
 
+def _bse_cli_convert_basis(args):
+    '''Handles the convert-basis subcommand'''
+
+    # We convert file -> file
+    convert.convert_formatted_basis_file(args.input_file, args.output_file, args.in_fmt, args.out_fmt)
+    return "Converted {} -> {}".format(args.input_file, args.output_file)
+
+
+def _bse_cli_autoaux_basis(args):
+    '''Handles the autoaux-basis subcommand'''
+
+    orbital_basis_dict = readers.read_formatted_basis_file(args.input_file, args.in_fmt)
+    # Initialize some fields that aren't initialized by the BSE reader
+    orbital_basis_dict['revision_description'] = ''
+    orbital_basis_dict['version'] = ''
+
+    # Generate the autoaux basis
+    autoaux_basis_dict = manip.autoaux_basis(orbital_basis_dict)
+    # Save it to the wanted file
+    writers.write_formatted_basis_file(autoaux_basis_dict, args.output_file, args.out_fmt)
+    return "Orbital basis {} -> AutoAux basis {}".format(args.input_file, args.output_file)
+
+
+def _bse_cli_autoabs_basis(args):
+    '''Handles the autoabs-basis subcommand'''
+
+    orbital_basis_dict = readers.read_formatted_basis_file(args.input_file, args.in_fmt)
+    # Initialize some fields that aren't initialized by the BSE reader
+    orbital_basis_dict['revision_description'] = ''
+    orbital_basis_dict['version'] = ''
+
+    # Generate the autoabs basis
+    autoabs_basis_dict = manip.autoabs_basis(orbital_basis_dict)
+    # Save it to the wanted file
+    writers.write_formatted_basis_file(autoabs_basis_dict, args.output_file, args.out_fmt)
+    return "Orbital basis {} -> AutoABS basis {}".format(args.input_file, args.output_file)
+
 def bse_cli_handle_subcmd(args):
     handler_map = {
         'list-formats': _bse_cli_list_writer_formats,
@@ -224,7 +262,9 @@ def bse_cli_handle_subcmd(args):
         'get-versions': _bse_cli_get_versions,
         'get-family-notes': _bse_cli_get_family_notes,
         'convert-basis': _bse_cli_convert_basis,
-        'create-bundle': _bse_cli_create_bundle
+        'create-bundle': _bse_cli_create_bundle,
+        'autoaux-basis': _bse_cli_autoaux_basis,
+        'autoabs-basis': _bse_cli_autoabs_basis
     }
 
     return handler_map[args.subcmd](args)
