@@ -243,6 +243,7 @@ def _bse_cli_autoabs_basis(args):
     writers.write_formatted_basis_file(autoabs_basis_dict, args.output_file, args.out_fmt)
     return "Orbital basis {} -> AutoABS basis {}".format(args.input_file, args.output_file)
 
+
 def bse_cli_handle_subcmd(args):
     handler_map = {
         'list-formats': _bse_cli_list_writer_formats,

@@ -12,6 +12,7 @@ ecp_am_nelec_re = re.compile(r'^\S+\s+(\d+)\s+(\d+)$')
 am_line_re = re.compile(r'^([A-Za-z]+)\s+(\d+)((?:\s+{})+)$'.format(helpers.floating_re_str))
 explicit_am_line_re = re.compile(r'^\s*L=(\d+)\s+(\d+)((?:\s+{})+)$'.format(helpers.floating_re_str))
 
+
 def _parse_electron_lines(basis_lines, bs_data):
     '''Parses lines representing all the electron shells for a single element
 

@@ -56,7 +56,8 @@ if __name__ == "__main__":
             'tests': [
                 # List pytest-cov before pytest because of a dumb pip bug
                 'pytest-cov',
-                'pytest>=4.6'
+                'pytest>=4.6',
+                'codecov',
             ],
             'lint': ['yapf'],
             'curate': ['graphviz']

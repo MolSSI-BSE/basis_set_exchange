@@ -4,6 +4,7 @@ Conversion of basis sets to FHI-aims format
 
 from .. import lut, manip, sort, printing
 
+
 def write_fhiaims(basis):
     '''Converts a basis set to FHI-aims format
     '''
@@ -34,7 +35,7 @@ def write_fhiaims(basis):
             # Use spherical functions?
             pure_gauss {}
             '''.format('.true.' if pure else '.false.')
-            
+
             sym = lut.element_sym_from_Z(z, True)
             s += '# {} {}\n'.format(sym, basis['name'])
 
@@ -45,7 +46,7 @@ def write_fhiaims(basis):
                 nprim = len(exponents)
                 am = shell['angular_momentum']
                 assert len(am) == 1
-                
+
                 if nprim == 1:
                     s += 'gaussian {} {} {}\n'.format(am[0], nprim, exponents[0])
                 else:
