@@ -13,6 +13,8 @@ from .nwchem import read_nwchem
 from .gbasis import read_gbasis
 from .dalton import read_dalton
 from .molcas import read_molcas
+from .molpro import read_molpro
+from .libmol import read_libmol
 from .genbas import read_genbas
 from .demon2k import read_demon2k
 from .ricdlib import read_ricdlib
@@ -42,6 +44,16 @@ _reader_map = {
         'display': 'MolCAS',
         'extension': '.molcas',
         'reader': read_molcas
+    },
+    'molpro': {
+        'display': 'Molpro',
+        'extension': '.mpro',
+        'reader': read_molpro
+    },
+    'libmol': {
+        'display': 'Molpro system library',
+        'extension': '.libmol',
+        'reader': read_libmol
     },
     'cfour': {
         'display': 'CFOUR',
