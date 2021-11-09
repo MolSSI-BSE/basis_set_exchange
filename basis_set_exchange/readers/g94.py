@@ -10,7 +10,7 @@ ecp_am_nelec_re = re.compile(r'^\S+\s+(\d+)\s+(\d+)$')
 #    '(?:{floating_re_str})+ ' is a non-capturing group of a number of floating point numbers.
 #    Then, we capture all of them.
 am_line_re = re.compile(r'^([A-Za-z]+)\s+(\d+)((?:\s+{})+)$'.format(helpers.floating_re_str))
-
+explicit_am_line_re = re.compile(r'^\s*L=(\d+)\s+(\d+)((?:\s+{})+)$'.format(helpers.floating_re_str))
 
 def _parse_electron_lines(basis_lines, bs_data):
     '''Parses lines representing all the electron shells for a single element
@@ -40,9 +40,18 @@ def _parse_electron_lines(basis_lines, bs_data):
 
     for sh_lines in shell_blocks:
         # Shells start with AM nprim scaling
-        shell_am, nprim, scaling_factors = helpers.parse_line_regex(am_line_re, sh_lines[0],
-                                                                    "Shell AM, nprim, scaling")
-        shell_am = lut.amchar_to_int(shell_am, hij=True)
+        if am_line_re.match(sh_lines[0]):
+            shell_am, nprim, scaling_factors = helpers.parse_line_regex(am_line_re, sh_lines[0],
+                                                                        "Shell AM, nprim, scaling")
+            shell_am = lut.amchar_to_int(shell_am, hij=True)
+        elif explicit_am_line_re.match(sh_lines[0]):
+            shell_am, nprim, scaling_factors = helpers.parse_line_regex(explicit_am_line_re, sh_lines[0],
+                                                                        "Shell AM, nprim, scaling")
+            shell_am = [shell_am]
+        else:
+            raise RuntimeError("Failed to parse shell block starting on line: {}".format(sh_lines[0]))
+
+        # Determine shell type
         func_type = lut.function_type_from_am(shell_am, 'gto', 'spherical')
 
         # Handle gaussian scaling factors
