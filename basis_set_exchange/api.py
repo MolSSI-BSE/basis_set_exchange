@@ -100,8 +100,8 @@ def get_basis(name,
               remove_free_primitives=False,
               make_general=False,
               optimize_general=False,
-              augment_diffuse=0,
-              augment_steep=0,
+              augment_diffuse=-1,
+              augment_steep=-1,
               get_aux=0,
               data_dir=None,
               header=True):
@@ -260,13 +260,13 @@ def get_basis(name,
         basis_dict = manip.prune_basis(basis_dict, False)
 
     # Augment
-    if augment_diffuse > 0:
+    if augment_diffuse >= 0:
         basis_dict = manip.geometric_augmentation(basis_dict,
                                                   augment_diffuse,
                                                   use_copy=False,
                                                   as_component=False,
                                                   steep=False)
-    if augment_steep > 0:
+    if augment_steep >= 0:
         basis_dict = manip.geometric_augmentation(basis_dict,
                                                   augment_steep,
                                                   use_copy=False,
@@ -275,7 +275,7 @@ def get_basis(name,
         # Need to sort to get added steep functions first
         basis_dict = sort.sort_basis(basis_dict)
     # Re-make general
-    if (augment_diffuse > 0 or augment_steep > 0) and make_general:
+    if (augment_diffuse >= 0 or augment_steep >= 0) and make_general:
         basis_dict = manip.make_general(basis_dict, False, False)
 
     # Did we actually want an auxiliary basis set?
