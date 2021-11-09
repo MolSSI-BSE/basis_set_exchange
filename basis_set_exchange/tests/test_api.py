@@ -69,11 +69,26 @@ def test_get_basis_3(basis_name, bool_opts):
 
 
 @pytest.mark.parametrize('basis_name', bs_names_sample)
-@pytest.mark.parametrize('fmt', bs_write_formats)
+@pytest.mark.parametrize('fmt', bs_write_formats_ecp)
 def test_get_basis_4(basis_name, fmt):
     """For a sample of basis sets, test getting different formats
        of the latest version
+
+       Tests writers that are capable of ECP
     """
+
+    bse.get_basis(basis_name, fmt=fmt)
+
+
+@pytest.mark.parametrize('basis_name', bs_names_sample_noecp)
+@pytest.mark.parametrize('fmt', bs_write_formats_noecp)
+def test_get_basis_4_noecp(basis_name, fmt):
+    """For a sample of basis sets, test getting different formats
+       of the latest version
+
+       Tests writers that are NOT capable of ECP
+    """
+
     bse.get_basis(basis_name, fmt=fmt)
 
 

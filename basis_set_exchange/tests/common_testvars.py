@@ -16,7 +16,9 @@ data_dir = bse.api._default_data_dir
 bs_metadata = bse.get_metadata()
 bs_names = list(bs_metadata.keys())
 bs_read_formats = list(bse.get_reader_formats().keys())
-bs_write_formats = list(bse.get_writer_formats().keys()) + [None]
+bs_write_formats = list(bse.get_writer_formats()) + [None]
+bs_write_formats_ecp = list(bse.get_writer_formats(['scalar_ecp']).keys()) + [None]
+bs_write_formats_noecp = list(set(bs_write_formats) - set(bs_write_formats_ecp))
 ref_formats = list(bse.get_reference_formats().keys()) + [None]
 all_families = bse.get_families()
 all_roles = bse.get_roles()
@@ -73,6 +75,7 @@ all_component_paths = all_file_paths[3]
 
 # A representative sample of basis sets
 bs_names_sample = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'lanl2dz', 'def2-tzvp', 'jorge-tzp', 'sto-3g', 'fano-qz']
+bs_names_sample_noecp = ['6-31g', '6-31+g*', 'aug-cc-pvtz', 'jorge-tzp', 'sto-3g', 'fano-qz']
 
 # Authoritative data in the sources dir
 auth_src_map = {}

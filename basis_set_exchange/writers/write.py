@@ -276,11 +276,11 @@ def get_writer_formats(function_types=None):
 
     ftypes = [x.lower() for x in function_types]
     ftypes = set(ftypes)
-    ret = []
+    ret = {}
 
     for fmt, v in _writer_map.items():
         if v['valid'] is None or ftypes <= v['valid']:
-            ret.append(fmt)
+            ret[fmt] = v['display']
     return ret
 
 
