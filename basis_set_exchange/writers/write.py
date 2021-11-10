@@ -30,140 +30,140 @@ _writer_map = {
         'display': 'NWChem',
         'extension': '.nw',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_nwchem
     },
     'gaussian94': {
         'display': 'Gaussian',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_g94
     },
     'gaussian94lib': {
         'display': 'Gaussian, system library',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_g94lib
     },
     'psi4': {
         'display': 'Psi4',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_psi4
     },
     'molcas': {
         'display': 'Molcas',
         'extension': '.molcas',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molcas
     },
     'qchem': {
         'display': 'Q-Chem',
         'extension': '.qchem',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_qchem
     },
     'orca': {
         'display': 'ORCA',
         'extension': '.orca',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_orca
     },
     'dalton': {
         'display': 'Dalton',
         'extension': '.dalton',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_dalton
     },
     'qcschema': {
         'display': 'QCSchema',
         'extension': '.json',
         'comment': None,
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_qcschema
     },
     'cp2k': {
         'display': 'CP2K',
         'extension': '.cp2k',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_cp2k
     },
     'pqs': {
         'display': 'PQS',
         'extension': '.pqs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_pqs
     },
     'demon2k': {
         'display': 'deMon2K',
         'extension': '.d2k',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_demon2k
     },
     'gamess_us': {
         'display': 'GAMESS US',
         'extension': '.bas',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_gamess_us
     },
     'turbomole': {
         'display': 'Turbomole',
         'extension': '.tm',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_turbomole
     },
     'gamess_uk': {
         'display': 'GAMESS UK',
         'extension': '.bas',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_gamess_uk
     },
     'molpro': {
         'display': 'Molpro',
         'extension': '.mpro',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molpro
     },
     'libmol': {
         'display': 'Molpro system library',
         'extension': '.libmol',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_libmol
     },
     'cfour': {
         'display': 'CFOUR',
         'extension': '.c4bas',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_cfour
     },
     'acesii': {
         'display': 'ACES II',
         'extension': '.acesii',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_aces2
     },
     'xtron': {
         'display': 'xTron',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_xtron
     },
     'bsedebug': {
@@ -184,21 +184,21 @@ _writer_map = {
         'display': 'BDF',
         'extension': '.bdf',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_bdf
     },
     'ricdwrap': {
         'display': 'Wrapper for generating acCD auxiliary basis sets with OpenMolcas',
         'extension': '.ricdwrap',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_ricdwrap
     },
     'fhiaims': {
         'display': 'FHI-aims',
         'extension': '.fhiaims',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical'},
         'function': write_fhiaims
     }
 }

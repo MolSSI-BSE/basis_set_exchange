@@ -9,6 +9,7 @@ import tarfile
 import io
 import datetime
 from . import api, writers, refconverters, misc
+from .writers.write import _writer_map
 
 _readme_str = '''Basis set exchange: Basis set bundle
 ==========================================
@@ -62,9 +63,16 @@ def _basis_data_iter(fmt, reffmt, data_dir):
     '''Iterate over all basis set names, and return a tuple of
        (name, data) where data is the basis set in the given format
     '''
+
+    ref_function_types = _writer_map[fmt]['valid']
+
     md = api.get_metadata(data_dir)
     for bs, bs_md in md.items():
         versions = bs_md['versions'].keys()
+
+        if not set(bs_md['function_types']) <= ref_function_types:
+            print("Skipping {}/{} because not all function types are supported".format(bs, fmt))
+            continue
 
         data = {}
         for v in versions:
