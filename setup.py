@@ -44,11 +44,7 @@ if __name__ == "__main__":
             "console_scripts":
             ["bse=basis_set_exchange.cli:run_bse_cli", "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
         },
-        install_requires=[
-            'jsonschema',
-            'argcomplete',
-            'regex'
-        ],
+        install_requires=['jsonschema', 'argcomplete', 'regex'],
         extras_require={
             ':python_version == "3.6"': ["importlib-metadata < 3"],
             ':python_version == "3.7"': ["importlib-metadata < 3"],
@@ -56,7 +52,8 @@ if __name__ == "__main__":
             'tests': [
                 # List pytest-cov before pytest because of a dumb pip bug
                 'pytest-cov',
-                'pytest>=4.6'
+                'pytest>=4.6',
+                'codecov',
             ],
             'lint': ['yapf'],
             'curate': ['graphviz']
