@@ -1,3 +1,20 @@
+v0.9
+--------------------
+  * AutoAux (ability to dynamically generate auxiliary basis set)
+  * Formats
+    * FHI-aims
+    * MolCAS RICDLib format (reader & writer)
+    * Gaussian system library format
+    * MolPro
+  * Added basis sets
+    * 6-31G* and 6-311G** RIFIT
+    * More HGBS
+    * Jensen ccX
+    * (A)TZP-ZORA
+    * demon2k dzvp-gga
+    * Koga unpolarized basis sets
+
+
 v0.8.13
 --------------------
   * Fix for molcas writer (issue #104)
