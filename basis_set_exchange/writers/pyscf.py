@@ -4,7 +4,7 @@ Conversion of basis sets to PySCF format
 17 Nov 2021 Susi Lehtola
 '''
 
-from .. import lut, manip, sort, printing
+from .. import lut, manip, sort
 
 
 def write_pyscf(basis):
