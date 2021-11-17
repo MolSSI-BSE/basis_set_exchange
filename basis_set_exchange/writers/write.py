@@ -24,6 +24,7 @@ from .bsedebug import write_bsedebug
 from .bdf import write_bdf
 from .ricdwrap import write_ricdwrap
 from .fhiaims import write_fhiaims
+from .pyscf import write_pyscf
 
 _writer_map = {
     'nwchem': {
@@ -200,6 +201,13 @@ _writer_map = {
         'comment': '#',
         'valid': {'gto', 'gto_cartesian', 'gto_spherical'},
         'function': write_fhiaims
+    },
+    'pyscf': {
+        'display': 'PySCF',
+        'extension': '.pyscf',
+        'comment': None,
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical'},
+        'function': write_pyscf
     }
 }
 
