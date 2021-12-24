@@ -46,8 +46,8 @@ if __name__ == "__main__":
         },
         install_requires=['jsonschema', 'argcomplete', 'regex'],
         extras_require={
-            ':python_version == "3.6"': ["importlib-metadata < 3"],
-            ':python_version == "3.7"': ["importlib-metadata < 3"],
+            ':python_version == "3.6"': ["importlib-metadata"],
+            ':python_version == "3.7"': ["importlib-metadata"],
             'docs': ['sphinx', 'sphinxcontrib-programoutput', 'sphinx_rtd_theme', 'graphviz'],
             'tests': [
                 # List pytest-cov before pytest because of a dumb pip bug
