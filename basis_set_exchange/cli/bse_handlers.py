@@ -196,7 +196,7 @@ def _bse_cli_convert_basis(args):
     '''Handles the convert-basis subcommand'''
 
     # We convert file -> file
-    convert.convert_formatted_basis_file(args.input_file, args.output_file, args.in_fmt, args.out_fmt)
+    convert.convert_formatted_basis_file(args.input_file, args.output_file, args.in_fmt, args.out_fmt, make_gen=args.make_gen)
     return "Converted {} -> {}".format(args.input_file, args.output_file)
 
 
@@ -204,14 +204,6 @@ def _bse_cli_create_bundle(args):
     '''Handles the create-bundle subcommand'''
     bundle.create_bundle(args.bundle_file, args.fmt, args.reffmt, args.archive_type, args.data_dir)
     return "Created " + args.bundle_file
-
-
-def _bse_cli_convert_basis(args):
-    '''Handles the convert-basis subcommand'''
-
-    # We convert file -> file
-    convert.convert_formatted_basis_file(args.input_file, args.output_file, args.in_fmt, args.out_fmt)
-    return "Converted {} -> {}".format(args.input_file, args.output_file)
 
 
 def _bse_cli_autoaux_basis(args):

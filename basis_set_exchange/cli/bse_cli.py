@@ -152,6 +152,7 @@ def run_bse_cli():
     subp.add_argument(
         '--out-fmt', type=str, default=None,
         help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+    subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
 
     #################################
     # Auxiliary basis sets

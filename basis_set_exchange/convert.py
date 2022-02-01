@@ -4,6 +4,7 @@ Functions for basis set conversion
 
 from .readers import read_formatted_basis_file, read_formatted_basis_str
 from .writers import write_formatted_basis_file, write_formatted_basis_str
+from .manip import make_general
 
 
 def convert_formatted_basis_str(basis_in, in_fmt, out_fmt):
@@ -28,7 +29,7 @@ def convert_formatted_basis_str(basis_in, in_fmt, out_fmt):
     return write_formatted_basis_str(basis_dict, out_fmt)
 
 
-def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_fmt=None, encoding='utf-8-sig'):
+def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_fmt=None, encoding='utf-8-sig', make_gen=False):
     '''Convert a formatted basis set file to another format
 
     Parameters
@@ -55,5 +56,7 @@ def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_f
                                            encoding=encoding,
                                            validate=True,
                                            as_component=False)
+    if make_gen:
+        basis_dict = make_general(basis_dict, use_copy=False)
 
     write_formatted_basis_file(basis_dict, file_path_out, basis_fmt=out_fmt)
