@@ -24,6 +24,7 @@ from .bsedebug import write_bsedebug
 from .bdf import write_bdf
 from .ricdwrap import write_ricdwrap
 from .fhiaims import write_fhiaims
+from .jaguar import write_jaguar
 
 _writer_map = {
     'nwchem': {
@@ -200,6 +201,13 @@ _writer_map = {
         'comment': '#',
         'valid': {'gto', 'gto_cartesian', 'gto_spherical'},
         'function': write_fhiaims
+    },
+    'jaguar': {
+        'display': 'Jaguar',
+        'extension': '.jaguar',
+        'comment': '#',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_jaguar
     }
 }
 
