@@ -42,6 +42,7 @@ def _make_key(args_spec, *args, **kwargs):
 
 
 class BSEMemoize:
+
     def __init__(self, f):
         self.__f = f
         self.args_spec = inspect.getfullargspec(f)

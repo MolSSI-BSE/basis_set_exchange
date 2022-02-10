@@ -29,7 +29,12 @@ def convert_formatted_basis_str(basis_in, in_fmt, out_fmt):
     return write_formatted_basis_str(basis_dict, out_fmt)
 
 
-def convert_formatted_basis_file(file_path_in, file_path_out, in_fmt=None, out_fmt=None, encoding='utf-8-sig', make_gen=False):
+def convert_formatted_basis_file(file_path_in,
+                                 file_path_out,
+                                 in_fmt=None,
+                                 out_fmt=None,
+                                 encoding='utf-8-sig',
+                                 make_gen=False):
     '''Convert a formatted basis set file to another format
 
     Parameters
