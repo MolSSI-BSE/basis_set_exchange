@@ -18,6 +18,7 @@ from .libmol import read_libmol
 from .genbas import read_genbas
 from .demon2k import read_demon2k
 from .ricdlib import read_ricdlib
+from .gamess_us import read_gamess_us
 
 _reader_map = {
     'turbomole': {
@@ -79,6 +80,11 @@ _reader_map = {
         'display': 'MolCAS RICDlib',
         'extension': '.RICDLib',
         'reader': read_ricdlib
+    },
+    'gamess_us': {
+        'display': 'GAMESS US',
+        'extension': '.bas',
+        'reader': read_gamess_us
     }
 }
 
