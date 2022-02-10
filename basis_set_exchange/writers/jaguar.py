@@ -6,6 +6,7 @@ Conversion of basis sets to Jaguar format
 
 from .. import lut, manip, sort, printing
 
+
 def write_jaguar(basis):
     '''Converts a basis set to Jaguar format
     '''
@@ -23,7 +24,7 @@ def write_jaguar(basis):
     types = basis['function_types']
     harm_type = '6D' if 'gto_cartesian' in types else '5D'
     ecp_type = ' ECP' if ecp_elements else ''
-    
+
     s = 'BASIS {} {}{}\n'.format(basis['name'], harm_type, ecp_type)
 
     # Electron Basis
@@ -50,7 +51,7 @@ def write_jaguar(basis):
 
             if ecp_elements and z in ecp_elements:
                 s += '**\n'
-                
+
                 max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
                 max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=False)
 
@@ -75,8 +76,7 @@ def write_jaguar(basis):
 
                     point_places = [0, 9, 32]
                     s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=True)
-                    
-            s += '****\n'
 
+            s += '****\n'
 
     return s
