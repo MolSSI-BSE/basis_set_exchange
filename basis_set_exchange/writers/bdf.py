@@ -45,6 +45,7 @@ def write_bdf(basis):
 
                 point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen + 1)]
                 s += printing.write_matrix(coefficients, point_places)
+        s += '****\n'
 
     # Write out ECP
     if ecp_elements:
