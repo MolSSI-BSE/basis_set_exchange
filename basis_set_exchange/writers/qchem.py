@@ -46,19 +46,21 @@ def write_qchem(basis):
     # Elements for which we have ECP
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
-    purecart = _determine_pure(basis)
-    if purecart != '':
-        s += "$rem\n"
+    s += "$rem\n"
+    if basis['role'] == 'orbital':
+        purecart = _determine_pure(basis)
         if electron_elements:
             s += "    BASIS GEN\n"
         if ecp_elements:
             s += "    ECP GEN\n"
         s += "    PURECART " + _determine_pure(basis) + "\n"
-        s += "$end\n\n"
+    else:
+        s += "AUX_BASIS GEN\n"
+    s += "$end\n\n"
 
     # Electron Basis
     if electron_elements:
-        s += "$basis\n"
+        s += "${}\n".format('basis' if basis['role'] == 'orbital' else 'aux_basis')
         for z in electron_elements:
             data = basis['elements'][z]
 
