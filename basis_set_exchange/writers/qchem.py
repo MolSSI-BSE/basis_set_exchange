@@ -48,7 +48,6 @@ def write_qchem(basis):
 
     s += "$rem\n"
     if basis['role'] == 'orbital':
-        purecart = _determine_pure(basis)
         if electron_elements:
             s += "    BASIS GEN\n"
         if ecp_elements:
