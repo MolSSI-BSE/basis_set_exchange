@@ -70,8 +70,7 @@ jobs:
 
       - name: Code coverage
         uses: codecov/codecov-action@v2
-        if: matrix.os == 'ubuntu-latest'
-        if: matrix.python-version == '3.10'
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
         with:
           file: ./test_wdir/coverage.xml
           fail_ci_if_error: true
