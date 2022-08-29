@@ -12,37 +12,42 @@ on:
 
 jobs:
   test:
-    name: "CI Test"
+    name: "Core Tests"
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
     steps:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Checkout/Clone the repository
-        uses: actions/checkout@v2
+      - name: Clone the repository
+        uses: actions/checkout@v3
 
       - name: Install package
         run: |
           pip install .[docs,tests,curate]
-          mkdir deps # For QCSchems
+          mkdir deps # For QCSchema
           mkdir test_wdir # Working directory to run tests from
                           # (testing installed BSE, not the source tree)
 
+      - name: Clone QCSchema HEAD
+        uses: actions/checkout@v3
+        with:
+          repository: molssi/QCSchema
+          path: deps/QCSchema
+
       - name: Install QCSchema HEAD
-        working-directory: ./test_wdir
         run: |
-          git clone https://github.com/molssi/QCSchema.git
-          pip install -e ./QCSchema
+          pip install deps/QCSchema/
 
       - name: Run tests
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
+        shell: bash -l {0}
         run: |
           pytest --pyargs --cov=basis_set_exchange --cov-report=xml basis_set_exchange 
           bse -V # Quick test of the cli
