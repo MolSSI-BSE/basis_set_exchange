@@ -69,7 +69,7 @@ jobs:
           make doctest && make html
 
       - name: Code coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
         with:
           file: ./test_wdir/coverage.xml
