@@ -1,0 +1,37 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy_docs:
+    runs-on: ubuntu-latest
+        
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # needed for tag/version
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      - name: Install package
+        shell: bash -l {0}
+        run: |
+          python -m pip install .[docs]
+
+      - name: Build Documentation
+        run: |
+          cd doc
+          make html
+
+      - name: Deploy on gh-pages 
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: doc/build/html 
