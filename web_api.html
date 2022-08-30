@@ -126,7 +126,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 <section id="api-metadata">
 <h2><code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code><a class="headerlink" href="#api-metadata" title="Permalink to this heading"></a></h2>
 <p>Returns JSON representing the metadata about the basis sets contained in the BSE.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/metadata&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/metadata&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 <span class="go">{&#39;3-21g&#39;: ...</span>
 </pre></div>
@@ -135,7 +135,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 <section id="api-formats">
 <h2><code class="docutils literal notranslate"><span class="pre">/api/formats</span></code><a class="headerlink" href="#api-formats" title="Permalink to this heading"></a></h2>
 <p>Returns JSON representing which basis set formats are available, along with a description</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/formats&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/formats&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 <span class="go">{&#39;bsedebug&#39;: &#39;BSE Debug&#39;, &#39;cfour&#39;: &#39;CFOUR&#39;,...</span>
 </pre></div>
@@ -144,7 +144,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 <section id="api-reference-formats">
 <h2><code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code><a class="headerlink" href="#api-reference-formats" title="Permalink to this heading"></a></h2>
 <p>Similar to <code class="docutils literal notranslate"><span class="pre">/api/formats</span></code>, but has info about which reference formats are supported</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/reference_formats&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/reference_formats&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 <span class="go">{&#39;bib&#39;: &#39;BibTeX&#39;, &#39;json&#39;: &#39;JSON&#39;,...</span>
 </pre></div>
@@ -204,7 +204,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 </tr>
 </tbody>
 </table>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get STO-3G as json</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get STO-3G as json</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/basis/sto-3g/format/json&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 <span class="go">{&#39;name&#39;: &#39;STO-3G&#39;, &#39;names&#39;: [&#39;STO-3G&#39;], &#39;flags&#39;: [], &#39;family&#39;: &#39;sto&#39;, &#39;description&#39;: &#39;STO-3G Minimal Basis (3 functions/AO)&#39;,...</span>
@@ -224,7 +224,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">#----------------------------------------------------------------------</span>
 
 
-<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">BASIS &quot;ao basis&quot; SPHERICAL PRINT</span>
 <span class="go">#BASIS SET: (4s) -&gt; [2s]</span>
 <span class="go">H    S</span>
 <span class="go">      0.1873113696E+02       0.3349460434E-01</span>
@@ -233,13 +233,19 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">H    S</span>
 <span class="go">      0.1612777588E+00       1.0000000</span>
 <span class="go">#BASIS SET: (10s,4p) -&gt; [3s,2p]</span>
-<span class="go">C    SP</span>
-<span class="go">      0.1687144782E+00       0.1000000000E+01       0.1000000000E+01</span>
+<span class="go">C    S</span>
+<span class="go">      0.3047524880E+04       0.1834737132E-02</span>
+<span class="go">      0.4573695180E+03       0.1403732281E-01</span>
+<span class="go">      0.1039486850E+03       0.6884262226E-01</span>
+<span class="go">      0.2921015530E+02       0.2321844432E+00</span>
+<span class="go">      0.9286662960E+01       0.4679413484E+00</span>
+<span class="go">      0.3163926960E+01       0.3623119853E+00</span>
 <span class="go">C    SP</span>
 <span class="go">      0.7868272350E+01      -0.1193324198E+00       0.6899906659E-01</span>
 <span class="go">      0.1881288540E+01      -0.1608541517E+00       0.3164239610E+00</span>
 <span class="go">      0.5442492580E+00       0.1143456438E+01       0.7443082909E+00</span>
-<span class="gp">...</span>
+<span class="go">C    SP</span>
+<span class="go">      0.1687144782E+00       0.1000000000E+01       0.1000000000E+0</span>
 </pre></div>
 </div>
 </section>
@@ -273,7 +279,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 </tr>
 </tbody>
 </table>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get references for aug-cc-pvtz as json</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get references for aug-cc-pvtz as json</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/references/aug-cc-pvtz/format/json&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 <span class="go">[{&#39;reference_info&#39;: [{&#39;reference_description&#39;: &#39;The cc-pVTZ basis set&#39;, &#39;reference_data&#39;...</span>
@@ -288,7 +294,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">    title = {Systematically convergent basis sets for transition metals. I. All-electron correlation consistent basis sets for the 3d elements Sc-Zn},</span>
 <span class="go">    journal = {J. Chem. Phys.},</span>
 <span class="go">    volume = {123},</span>
-<span class="go">    page = {064107},</span>
+<span class="go">    pages = {064107},</span>
 <span class="go">    year = {2005},</span>
 <span class="go">    doi = {10.1063/1.1998907}</span>
 <span class="go">}</span>
@@ -298,7 +304,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">    title = {Gaussian basis sets for use in correlated molecular calculations. I. The atoms boron through neon and hydrogen},</span>
 <span class="go">    journal = {J. Chem. Phys.},</span>
 <span class="go">    volume = {90},</span>
-<span class="go">    page = {1007-1023},</span>
+<span class="go">    pages = {1007-1023},</span>
 <span class="go">    year = {1989},</span>
 <span class="go">    doi = {10.1063/1.456153}</span>
 <span class="go">}</span>
@@ -308,7 +314,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">    title = {Electron affinities of the first-row atoms revisited. Systematic basis sets and wave functions},</span>
 <span class="go">    journal = {J. Chem. Phys.},</span>
 <span class="go">    volume = {96},</span>
-<span class="go">    page = {6796-6806},</span>
+<span class="go">    pages = {6796-6806},</span>
 <span class="go">    year = {1992},</span>
 <span class="go">    doi = {10.1063/1.462569}</span>
 <span class="go">}</span>
@@ -322,6 +328,12 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get notes for 6-31g</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/notes/6-31g&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">--------------------------------------------------------------------------------</span>
+<span class="go">   Original BSE Contributor: Dr. David Feller</span>
+<span class="go">            Original BSE PI: (none)</span>
+<span class="go"> Original BSE Last Modified: Thu, 24 Apr 2008 00:05:19 GMT</span>
+<span class="go">--------------------------------------------------------------------------------</span>
+
 <span class="go">Notes from the original BSE</span>
 <span class="go">===========================</span>
 
@@ -340,11 +352,16 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 <span class="go">Notes about the Jensen basis sets</span>
 <span class="go">=================================</span>
 
-<span class="go">Notes from Frank Jensen</span>
-<span class="go">-----------------------</span>
+<span class="go">admm basis sets</span>
+<span class="go">------------------------</span>
+<span class="go">The most widely used approach to approximate the Coulomb and exchange integrals is density fitting, also known as the resolution-of-the-identity (RI) approximation.</span>
+<span class="go">In this, the products of two one-electron basis functions are expanded in one-center auxiliary functions. RI significantly improves performance with a limited impact on</span>
+<span class="go">the accuracy and has therefore been applied to HF/KS theory as well as correlated methods. ADMM has been developed specifically for the exchange contribution. The exchange</span>
+<span class="go">energy is split into two parts. On consisting of the exact HF exchange and the second is a first-order correction term, evaluated as the difference between the generalized</span>
+<span class="go">gradient approximation exchange in the full and auxiliary basis sets.</span>
 
-<span class="go">pcseg:  the most recent (2014) segmented contracted version of the pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4</span>
-<span class="go">apcseg: the most recent (2014) segmented contracted version of the aug-pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4</span>
+
+<span class="go">aug-pc-n and  pc-n basis sets (where n indicates the level of polarization beyond the atomic system)</span>
 <span class="gp">...</span>
 </pre></div>
 </div>
