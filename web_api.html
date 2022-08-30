@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REST API Reference &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The bsecurate command line interface" href="bsecurate_cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#note-about-headers">Note about headers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-elements">Specifying Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-metadata"><code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-formats"><code class="docutils literal notranslate"><span class="pre">/api/formats</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-reference-formats"><code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-basis-basis-name-format-fmt"><code class="docutils literal notranslate"><span class="pre">/api/basis/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-references-basis-name-format-fmt"><code class="docutils literal notranslate"><span class="pre">/api/references/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-notes-basis-name"><code class="docutils literal notranslate"><span class="pre">/api/notes/&lt;basis_name&gt;</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-family-notes-family"><code class="docutils literal notranslate"><span class="pre">/api/family_notes/&lt;family&gt;</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>REST API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/web_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rest-api-reference">
+<h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Permalink to this heading"></a></h1>
+<p>Below is a list of all public API endpoints. Examples shown are in python
+(using the <a class="reference external" href="http://docs.python-requests.org/en/master/">requests</a> module).
+However, any software or command-line tool that can access APIs like this (curl, wget, etc) can also be used.</p>
+<p>Basis set names, formats, and reference formats are case insensitive.</p>
+<p>Note that the API is read-only, and does not allow for uploading or modifying data.</p>
+<section id="note-about-headers">
+<h2>Note about headers<a class="headerlink" href="#note-about-headers" title="Permalink to this heading"></a></h2>
+<p>Additional header information (user agent, email) are optional. However,
+if you would like to share who you are or what you are doing, feel free to
+add these fields. We will not use the email for any purpose other than to
+notify you if your scripts are broken and causing us problems.</p>
+<p>Any data collected from user agent or email will not be shared outside of
+MolSSI, other than in aggregate form.</p>
+</section>
+<section id="specifying-elements">
+<h2>Specifying Elements<a class="headerlink" href="#specifying-elements" title="Permalink to this heading"></a></h2>
+<p>Some endpoints take a string specifying which elements data should be obtained for.
+string is a comma-separated list of element symbols and/or Z numbers. Ranges can also be used.</p>
+<p>Symbols are not case sensitive and can be mixed with Z-numbers.</p>
+<dl class="simple">
+<dt>Examples:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">H-Ne</span></code> - for hydrogen through neon (inclusive)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1-10</span></code> - same as above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C,8,p-17</span></code> - carbon, oxygen, phosphorus through chlorine</p></li>
+</ul>
+</dd>
+</dl>
+<p>Elements can also be passed as multiple <code class="docutils literal notranslate"><span class="pre">element</span></code> parameters</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">?elements=1&amp;elements=6&amp;elements=n</span></code> - hydrogen, carbon, nitrogen</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="api-metadata">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code><a class="headerlink" href="#api-metadata" title="Permalink to this heading"></a></h2>
+<p>Returns JSON representing the metadata about the basis sets contained in the BSE.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/metadata&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="go">{&#39;3-21g&#39;: ...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-formats">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/formats</span></code><a class="headerlink" href="#api-formats" title="Permalink to this heading"></a></h2>
+<p>Returns JSON representing which basis set formats are available, along with a description</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/formats&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="go">{&#39;bsedebug&#39;: &#39;BSE Debug&#39;, &#39;cfour&#39;: &#39;CFOUR&#39;,...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-reference-formats">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code><a class="headerlink" href="#api-reference-formats" title="Permalink to this heading"></a></h2>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">/api/formats</span></code>, but has info about which reference formats are supported</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/reference_formats&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="go">{&#39;bib&#39;: &#39;BibTeX&#39;, &#39;json&#39;: &#39;JSON&#39;,...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-basis-basis-name-format-fmt">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/basis/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-basis-basis-name-format-fmt" title="Permalink to this heading"></a></h2>
+<p>Obtain basis set data. This is the main function of the basis set exchange.</p>
+<p>The output is a string, except when <code class="docutils literal notranslate"><span class="pre">&lt;fmt&gt;</span></code> is json. Basis names are not case sensitive.
+See <code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code> for getting a list of basis sets. Formats can be obtained with <code class="docutils literal notranslate"><span class="pre">/api/formats</span></code>.</p>
+<p>For how to pass elements, see <a class="reference internal" href="#specifying-elements">Specifying Elements</a></p>
+<p>Several options are available. These are specified as GET paramters</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 9%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Arguments</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>elements</p></td>
+<td><p>String</p></td>
+<td><p>Restrict the output to only certain elements (see <a class="reference internal" href="#specifying-elements">Specifying Elements</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>version</p></td>
+<td><p>Integer</p></td>
+<td><p>Obtain a specific version of the basis set. Default is latest version</p></td>
+</tr>
+<tr class="row-even"><td><p>uncontract_general</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>Remove general contractions</p></td>
+</tr>
+<tr class="row-odd"><td><p>uncontract_segmented</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>Remove general and segmented contractions</p></td>
+</tr>
+<tr class="row-even"><td><p>uncontract_spdf</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>Split apart combined sp, spd, etc, shells</p></td>
+</tr>
+<tr class="row-odd"><td><p>optimize_general</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>Optimize general contractions. See the <a class="reference external" href="https://molssi-bse.github.io/basis_set_exchange/developer_api.html#basis_set_exchange.manip.optimize_general">library documentation</a></p></td>
+</tr>
+<tr class="row-even"><td><p>make_general</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>Make the basis set as generally-contracted as possible</p></td>
+</tr>
+<tr class="row-odd"><td><p>header</p></td>
+<td><p>1,0 or true,false</p></td>
+<td><p>If false, do not print the BSE information header in the output</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get STO-3G as json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/basis/sto-3g/format/json&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="go">{&#39;name&#39;: &#39;STO-3G&#39;, &#39;names&#39;: [&#39;STO-3G&#39;], &#39;flags&#39;: [], &#39;family&#39;: &#39;sto&#39;, &#39;description&#39;: &#39;STO-3G Minimal Basis (3 functions/AO)&#39;,...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get 6-31G in nwchem format, getting only hydrogen, carbon, nitrogen, and oxygen</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/basis/6-31g/format/nwchem/?elements=1,6-8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">#----------------------------------------------------------------------</span>
+<span class="go"># Basis Set Exchange</span>
+<span class="go"># Version ...</span>
+<span class="go"># https://www.basissetexchange.org</span>
+<span class="go">#----------------------------------------------------------------------</span>
+<span class="go">#   Basis set: 6-31G</span>
+<span class="go"># Description: 6-31G valence double-zeta</span>
+<span class="go">#        Role: orbital</span>
+<span class="go">#     Version: 1  (Data from Gaussian 09/GAMESS)</span>
+<span class="go">#----------------------------------------------------------------------</span>
+
+
+<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">#BASIS SET: (4s) -&gt; [2s]</span>
+<span class="go">H    S</span>
+<span class="go">      0.1873113696E+02       0.3349460434E-01</span>
+<span class="go">      0.2825394365E+01       0.2347269535E+00</span>
+<span class="go">      0.6401216923E+00       0.8137573261E+00</span>
+<span class="go">H    S</span>
+<span class="go">      0.1612777588E+00       1.0000000</span>
+<span class="go">#BASIS SET: (10s,4p) -&gt; [3s,2p]</span>
+<span class="go">C    SP</span>
+<span class="go">      0.1687144782E+00       0.1000000000E+01       0.1000000000E+01</span>
+<span class="go">C    SP</span>
+<span class="go">      0.7868272350E+01      -0.1193324198E+00       0.6899906659E-01</span>
+<span class="go">      0.1881288540E+01      -0.1608541517E+00       0.3164239610E+00</span>
+<span class="go">      0.5442492580E+00       0.1143456438E+01       0.7443082909E+00</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-references-basis-name-format-fmt">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/references/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-references-basis-name-format-fmt" title="Permalink to this heading"></a></h2>
+<p>Obtain basis set data. This is the main function of the basis set exchange.</p>
+<p>The output is a string, except when <code class="docutils literal notranslate"><span class="pre">&lt;fmt&gt;</span></code> is json. Basis names are not case sensitive.
+See <code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code> for getting a list of basis sets. Formats can be obtained with <code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code>.</p>
+<p>For how to pass elements, see <a class="reference internal" href="#specifying-elements">Specifying Elements</a></p>
+<p>Several options are available. These are specified as GET paramters</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 16%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Arguments</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>elements</p></td>
+<td><p>String</p></td>
+<td><p>Restrict the output to only certain elements (see <a class="reference internal" href="#specifying-elements">Specifying Elements</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>version</p></td>
+<td><p>Integer</p></td>
+<td><p>Obtain a specific version of the basis set. Default is latest version</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get references for aug-cc-pvtz as json</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/references/aug-cc-pvtz/format/json&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+<span class="go">[{&#39;reference_info&#39;: [{&#39;reference_description&#39;: &#39;The cc-pVTZ basis set&#39;, &#39;reference_data&#39;...</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, but in bibtex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/references/aug-cc-pvtz/format/bib&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="gp">...</span>
+<span class="go">@article{balabanov2005a,</span>
+<span class="go">    author = {Balabanov, Nikolai B. and Peterson, Kirk A.},</span>
+<span class="go">    title = {Systematically convergent basis sets for transition metals. I. All-electron correlation consistent basis sets for the 3d elements Sc-Zn},</span>
+<span class="go">    journal = {J. Chem. Phys.},</span>
+<span class="go">    volume = {123},</span>
+<span class="go">    page = {064107},</span>
+<span class="go">    year = {2005},</span>
+<span class="go">    doi = {10.1063/1.1998907}</span>
+<span class="go">}</span>
+
+<span class="go">@article{dunning1989a,</span>
+<span class="go">    author = {Dunning, Thom H.},</span>
+<span class="go">    title = {Gaussian basis sets for use in correlated molecular calculations. I. The atoms boron through neon and hydrogen},</span>
+<span class="go">    journal = {J. Chem. Phys.},</span>
+<span class="go">    volume = {90},</span>
+<span class="go">    page = {1007-1023},</span>
+<span class="go">    year = {1989},</span>
+<span class="go">    doi = {10.1063/1.456153}</span>
+<span class="go">}</span>
+
+<span class="go">@article{kendall1992a,</span>
+<span class="go">    author = {Kendall, Rick A. and Dunning, Thom H. and Harrison, Robert J.},</span>
+<span class="go">    title = {Electron affinities of the first-row atoms revisited. Systematic basis sets and wave functions},</span>
+<span class="go">    journal = {J. Chem. Phys.},</span>
+<span class="go">    volume = {96},</span>
+<span class="go">    page = {6796-6806},</span>
+<span class="go">    year = {1992},</span>
+<span class="go">    doi = {10.1063/1.462569}</span>
+<span class="go">}</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-notes-basis-name">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/notes/&lt;basis_name&gt;</span></code><a class="headerlink" href="#api-notes-basis-name" title="Permalink to this heading"></a></h2>
+<p>Obtain notes about a basis set. Output is plain text.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get notes for 6-31g</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/notes/6-31g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">Notes from the original BSE</span>
+<span class="go">===========================</span>
+
+<span class="go">The 6-31G basis set uses 6 Gaussian primitives to expand the 1s core of second</span>
+<span class="go">period elements.</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</section>
+<section id="api-family-notes-family">
+<h2><code class="docutils literal notranslate"><span class="pre">/api/family_notes/&lt;family&gt;</span></code><a class="headerlink" href="#api-family-notes-family" title="Permalink to this heading"></a></h2>
+<p>Obtain notes about a family of basis sets. Output is plain text.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get notes for the jensen family</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/family_notes/jensen&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">Notes about the Jensen basis sets</span>
+<span class="go">=================================</span>
+
+<span class="go">Notes from Frank Jensen</span>
+<span class="go">-----------------------</span>
+
+<span class="go">pcseg:  the most recent (2014) segmented contracted version of the pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4</span>
+<span class="go">apcseg: the most recent (2014) segmented contracted version of the aug-pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bsecurate_cli.html" class="btn btn-neutral float-left" title="The bsecurate command line interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
