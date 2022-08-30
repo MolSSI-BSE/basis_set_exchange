@@ -48,7 +48,7 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
    user_api
    developer
    bsecurate_cli
-   project_doc
+   web_api
 
 
 License

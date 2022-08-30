@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   deploy_docs:
@@ -27,11 +24,11 @@ jobs:
           python -m pip install .[docs]
 
       - name: Build Documentation
+        working-directory: ./docs
         run: |
-          cd doc
           make html
 
       - name: Deploy on gh-pages 
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: doc/build/html 
+          folder: docs/build/html 

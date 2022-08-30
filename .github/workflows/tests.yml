@@ -58,15 +58,12 @@ jobs:
         run: |
           bse get-basis 6-31g nwchem
 
-
       - name: Run documentation tests
         if: matrix.os == 'ubuntu-latest'
-        working-directory: ./doc
+        working-directory: ./docs
         run: |
           ln -s ../basis_set_exchange/tests/fakedata ${HOME}/my_data_dir
-          mkdir _static
-          make doctest
-          make html
+          make doctest && make html
 
       - name: Code coverage
         uses: codecov/codecov-action@v2
