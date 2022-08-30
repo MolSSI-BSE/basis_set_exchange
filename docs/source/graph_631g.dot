@@ -1,0 +1,9 @@
+// Basis Set Graph: 6-31g
+digraph {
+	"6-31g" -> "pople/31G.1.element.json" [label="H,He"]
+	"6-31g" -> "pople/6-31G.1.element.json" [label="Li-Kr"]
+	"pople/31G.1.element.json" -> "pople/31G/31G.1.json" [label="H,He"]
+	"pople/6-31G.1.element.json" -> "pople/6-31G/6-31G.1.json" [label="Li-Ne,K-Kr"]
+	"pople/6-31G.1.element.json" -> "pople/21G/6-21G-core.1.json
+pople/6-31G/6-31G-valence.1.json" [label="Na-Ar"]
+}
