@@ -1,67 +1,35 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quickstart and Basic Usage &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The bse command line interface" href="bse_cli.html" />
     <link rel="prev" title="Basis Set Exchange - Library" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Basis Set Exchange
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,18 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart and Basic Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
@@ -98,7 +56,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -106,87 +66,49 @@
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Basis Set Exchange</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Quickstart and Basic Usage</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="quickstart-and-basic-usage">
-<h1>Quickstart and Basic Usage<a class="headerlink" href="#quickstart-and-basic-usage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+             
+  <section id="quickstart-and-basic-usage">
+<h1>Quickstart and Basic Usage<a class="headerlink" href="#quickstart-and-basic-usage" title="Permalink to this heading"></a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p>The BSE can be installed with <cite>pip</cite>.</p>
 <p>To install from PyPI: <cite>pip install basis_set_exchange</cite></p>
 <p>To install from the local directory, you can use <cite>pip install -e .</cite> inside
 the cloned git repository.</p>
-</div>
-<div class="section" id="importing">
-<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="importing">
+<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this heading"></a></h2>
 <p>All end-user functionality is available by importing the <cite>basis_set_exchange</cite> module.</p>
-</div>
-<div class="section" id="determining-the-library-version">
-<h2>Determining the library version<a class="headerlink" href="#determining-the-library-version" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="determining-the-library-version">
+<h2>Determining the library version<a class="headerlink" href="#determining-the-library-version" title="Permalink to this heading"></a></h2>
 <p>The library version can be determined with <a class="reference internal" href="user_api.html#basis_set_exchange.version" title="basis_set_exchange.version"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.version()</span></code></a></p>
-</div>
-<div class="section" id="getting-a-basis-set-from-the-library">
-<h2>Getting a basis set from the library<a class="headerlink" href="#getting-a-basis-set-from-the-library" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="getting-a-basis-set-from-the-library">
+<h2>Getting a basis set from the library<a class="headerlink" href="#getting-a-basis-set-from-the-library" title="Permalink to this heading"></a></h2>
 <p>The main function for getting a basis set is <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.
 Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
@@ -219,7 +141,7 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available formats are available via get_formats</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_formats</span><span class="p">()</span>
-<span class="go">{&#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian&#39;, &#39;psi4&#39;: &#39;Psi4&#39;,...</span>
+<span class="go">{&#39;nwchem&#39;: &#39;NWChem&#39;, &#39;gaussian94&#39;: &#39;Gaussian&#39;, ...</span>
 </pre></div>
 </div>
 <p>By default, all elements for which the basis set is defined are included. You can specify a
@@ -227,26 +149,26 @@ subset of elements instead by using the <cite>elements</cite> parameter</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get only carbon and oxygen</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
-<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">BASIS &quot;ao basis&quot; SPHERICAL PRINT</span>
 <span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
 <span class="go">C    S</span>
-<span class="go">      8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00</span>
+<span class="go">      8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00</span>
 <span class="gp">...</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can also use strings with the element symbols (and be mixed with integers)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># and integers as strings</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bs_str</span> <span class="o">=</span> <span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;aug-cc-pvtz&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;Ne&#39;</span><span class="p">,</span> <span class="s1">&#39;16&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;nwchem&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bs_str</span><span class="p">)</span>
-<span class="go">BASIS &quot;ao basis&quot; PRINT</span>
+<span class="go">BASIS &quot;ao basis&quot; SPHERICAL PRINT</span>
 <span class="go">#BASIS SET: (11s,6p,3d,2f) -&gt; [5s,4p,3d,2f]</span>
 <span class="go">C    S</span>
-<span class="go">      8.236000E+03           5.310000E-04          -1.130000E-04           0.000000E+00           0.000000E+00</span>
+<span class="go">      8.236000E+03           5.310000E-04           0.000000E+00          -1.130000E-04           0.000000E+00</span>
 <span class="gp">...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="getting-references">
-<h2>Getting references<a class="headerlink" href="#getting-references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="getting-references">
+<h2>Getting references<a class="headerlink" href="#getting-references" title="Permalink to this heading"></a></h2>
 <p>Reference/citations can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_references" title="basis_set_exchange.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_references()</span></code></a>. The <cite>elements</cite>
 parameter is similar to that in <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.</p>
 <p>The <cite>fmt</cite> parameter controls the output format. By default, the output
@@ -296,9 +218,9 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 <span class="go">{&#39;txt&#39;: &#39;Plain Text&#39;, &#39;bib&#39;: &#39;BibTeX&#39;, &#39;ris&#39;: &#39;RIS&#39;, &#39;endnote&#39;: &#39;EndNote&#39;, &#39;json&#39;: &#39;JSON&#39;}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="versioning">
-<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this heading"></a></h2>
 <p>Basis sets within this package are versioned. This allows for changes to be made to a
 basis set, while keeping the old data accessible for historical purposes.
 Versions are specified by integers. By default,
@@ -320,9 +242,9 @@ which is a string. If <cite>version</cite> is not specified, the latest version 
 <span class="go">&#39;H     0\nS    3   1.00\n     18.7311370              0.03349460\n      2.8253937...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="listing-basis-sets-and-getting-basis-set-metadata">
-<h2>Listing Basis Sets and Getting Basis Set Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-basis-set-metadata" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="listing-basis-sets-and-getting-basis-set-metadata">
+<h2>Listing Basis Sets and Getting Basis Set Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-basis-set-metadata" title="Permalink to this heading"></a></h2>
 <p>This package contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_metadata()</span></code> function</p>
 <div class="admonition note">
@@ -356,9 +278,9 @@ A simple list of families can be obtained with <code class="xref py py-func docu
 <span class="go">[&#39;acvxz-j&#39;, &#39;ahlrichs&#39;, &#39;ahlrichs_dhf&#39;, &#39;ahlrichs_fit&#39;, ...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="lookup-a-basis-by-role">
-<h2>Lookup a basis by Role<a class="headerlink" href="#lookup-a-basis-by-role" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="lookup-a-basis-by-role">
+<h2>Lookup a basis by Role<a class="headerlink" href="#lookup-a-basis-by-role" title="Permalink to this heading"></a></h2>
 <p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
 for example). These auxiliary basis sets can be queried in the BSE
 using the <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>. This function takes the
@@ -380,9 +302,9 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 <span class="go">{&#39;orbital&#39;: &#39;Orbital basis&#39;, &#39;jfit&#39;: &#39;J-fitting&#39;, &#39;jkfit&#39;: &#39;JK-fitting&#39;, &#39;rifit&#39;: &#39;RI-fitting&#39;,...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="filtering-basis-sets">
-<h2>Filtering basis sets<a class="headerlink" href="#filtering-basis-sets" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="filtering-basis-sets">
+<h2>Filtering basis sets<a class="headerlink" href="#filtering-basis-sets" title="Permalink to this heading"></a></h2>
 <p>Basis sets can be searched for via simple filtering with <a class="reference internal" href="user_api.html#basis_set_exchange.filter_basis_sets" title="basis_set_exchange.filter_basis_sets"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.filter_basis_sets()</span></code></a>. All
 search parameters are case insensitive. Basis sets match if all criteria are true.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;31g&#39; in the name</span>
@@ -401,9 +323,9 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 <span class="go">dict_keys([&#39;aug-cc-pcv5z&#39;, &#39;aug-cc-pv5z&#39;, &#39;aug-cc-pwcv5z&#39;, &#39;cc-pcv5z&#39;, &#39;cc-pv5z&#39;, &#39;cc-pwcv5z&#39;...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="basis-set-and-family-notes">
-<h2>Basis set and family notes<a class="headerlink" href="#basis-set-and-family-notes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="basis-set-and-family-notes">
+<h2>Basis set and family notes<a class="headerlink" href="#basis-set-and-family-notes" title="Permalink to this heading"></a></h2>
 <p>Notes about a basis set or a basis set family can be obtained, also.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notes from a basis (name is case insensitive)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_notes</span><span class="p">(</span><span class="s1">&#39;6-31g&#39;</span><span class="p">)</span>
@@ -419,76 +341,58 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 <span class="go">&#39;Notes about Pople basis sets...</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="memoization">
-<h2>Memoization<a class="headerlink" href="#memoization" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="memoization">
+<h2>Memoization<a class="headerlink" href="#memoization" title="Permalink to this heading"></a></h2>
 <p>By default, the library will memoize/cache some internal data. This has a big effect when,
 for example, running <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a> with the same basis set name (even if choosing
 different elements and options).</p>
 <p>For most uses, this can be left enabled - memory usage will still be very low, even if reading
 many basis sets. If you wish, it can be disabled by setting <code class="xref py py-attr docutils literal notranslate"><span class="pre">basis_set_exchange.memo.memoize_enabled</span></code> to <cite>False</cite>.
 Note that this does not clear any existing cache.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default is enabled</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default is enabled</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span>
 <span class="go">True</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Manually disable it</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Manually disable it</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">memo</span><span class="o">.</span><span class="n">memoize_enabled</span>
 <span class="go">False</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="bse_cli.html" class="btn btn-neutral float-right" title="The bse command line interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Basis Set Exchange - Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Basis Set Exchange - Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bse_cli.html" class="btn btn-neutral float-right" title="The bse command line interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Benjamin Pritchard
-
-    </p>
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

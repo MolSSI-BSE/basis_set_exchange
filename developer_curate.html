@@ -1,67 +1,35 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Developer Curation API &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The bsecurate command line interface" href="bsecurate_cli.html" />
     <link rel="prev" title="Basis set reference writers" href="developer_refconverters.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Basis Set Exchange
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,23 +37,15 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="developer.html">Developer Documentation</a><ul class="current">
@@ -104,78 +64,39 @@
 <li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Basis Set Exchange</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
-        
       <li>Developer Curation API</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/developer_curate.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="developer-curation-api">
-<h1>Developer Curation API<a class="headerlink" href="#developer-curation-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-basis_set_exchange.curate">
-<span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this headline">¶</a></h2>
+             
+  <section id="developer-curation-api">
+<h1>Developer Curation API<a class="headerlink" href="#developer-curation-api" title="Permalink to this heading"></a></h1>
+<section id="module-basis_set_exchange.curate">
+<span id="curate-functions-for-helping-to-curate-data"></span><h2>curate - Functions for helping to curate data<a class="headerlink" href="#module-basis_set_exchange.curate" title="Permalink to this heading"></a></h2>
 <p>Functions for helping curate BSE basis set data</p>
-<dl class="function">
-<dt id="basis_set_exchange.curate.add_basis">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">add_basis</code><span class="sig-paren">(</span><em class="sig-param">bs_file</em>, <em class="sig-param">data_dir</em>, <em class="sig-param">subdir</em>, <em class="sig-param">file_base</em>, <em class="sig-param">name</em>, <em class="sig-param">family</em>, <em class="sig-param">role</em>, <em class="sig-param">description</em>, <em class="sig-param">version</em>, <em class="sig-param">revision_description</em>, <em class="sig-param">data_source</em>, <em class="sig-param">refs=None</em>, <em class="sig-param">file_fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.add_basis">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">add_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">family</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision_description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis" title="Permalink to this definition"></a></dt>
 <dd><p>Add a basis set to this library</p>
 <p>This takes in a single file containing the basis set is some format, parses it, and
 create the component, element, and table basis set files in the given data_dir (and subdir).
@@ -209,9 +130,45 @@ usual ‘noref’ extension and the references entry is empty.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.add_from_components">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">add_from_components</code><span class="sig-paren">(</span><em class="sig-param">component_files</em>, <em class="sig-param">data_dir</em>, <em class="sig-param">subdir</em>, <em class="sig-param">file_base</em>, <em class="sig-param">name</em>, <em class="sig-param">family</em>, <em class="sig-param">role</em>, <em class="sig-param">description</em>, <em class="sig-param">version</em>, <em class="sig-param">revision_description</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_from_components" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.add_basis_from_dict">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">add_basis_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">family</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision_description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_basis_from_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Add a basis set to this library</p>
+<p>This takes in a basis set dictionary, and create the component,
+element, and table basis set files in the given data_dir (and
+subdir).  The metadata file for the basis is created if it doesn’t
+exist, and the main metadata file is also updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bs_data</strong> (<em>dict</em>) – Basis set dictionary</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – Subdirectory of the data directory to add the basis set to</p></li>
+<li><p><strong>file_base</strong> (<em>str</em>) – Base name for new files</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the basis set</p></li>
+<li><p><strong>family</strong> (<em>str</em>) – Family to which this basis set belongs</p></li>
+<li><p><strong>role</strong> (<em>str</em>) – Role of the basis set (orbital, etc)</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Description of the basis set</p></li>
+<li><p><strong>version</strong> (<em>str</em>) – Version of the basis set</p></li>
+<li><p><strong>revision_description</strong> (<em>str</em>) – Description of this version of the basis set</p></li>
+<li><p><strong>data_source</strong> (<em>str</em>) – Description of where this data came from</p></li>
+<li><p><strong>refs</strong> (<em>dict</em><em> or </em><em>str</em>) – <p>Mapping of references to elements. This can be a dictionary with a compressed
+string of elements as keys and a list of reference strings as values.
+For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
+<p>If a list or string is passed, then those reference(s) will be used for
+all elements.</p>
+<p>Elements that exist in the file but do not have a reference are given the
+usual ‘noref’ extension and the references entry is empty.</p>
+</p></li>
+<li><p><strong>file_fmt</strong> (<em>str</em>) – Format of the input basis data (None = autodetect)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.add_from_components">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">add_from_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">family</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">revision_description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_from_components" title="Permalink to this definition"></a></dt>
 <dd><p>Add a basis set to this library that is a combination of component files</p>
 <p>This takes in a list of component basis files and creates a new basis set for the intersection
 of all the elements contained in those files.  This creates the element, and table basis set
@@ -235,15 +192,15 @@ doesn’t exist, and the main metadata file is also updated.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.basis_comparison_report">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">basis_comparison_report</code><span class="sig-paren">(</span><em class="sig-param">bs1</em>, <em class="sig-param">bs2</em>, <em class="sig-param">uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.basis_comparison_report" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.basis_comparison_report">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">basis_comparison_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bs2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncontract_general</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.basis_comparison_report" title="Permalink to this definition"></a></dt>
 <dd><p>Compares two basis set dictionaries and prints a report about their differences</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_basis">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis</code><span class="sig-paren">(</span><em class="sig-param">bs1</em>, <em class="sig-param">bs2</em>, <em class="sig-param">compare_electron_shells_meta=False</em>, <em class="sig-param">compare_ecp_pots_meta=False</em>, <em class="sig-param">compare_elements_meta=False</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_basis">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bs2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_electron_shells_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_ecp_pots_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_elements_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if two basis set dictionaries are the same</p>
 <dl class="simple">
 <dt>bs1<span class="classifier">dict</span></dt><dd><p>Full basis information</p>
@@ -263,43 +220,43 @@ doesn’t exist, and the main metadata file is also updated.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_basis_against_file">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_against_file</code><span class="sig-paren">(</span><em class="sig-param">basis_name</em>, <em class="sig-param">src_filepath</em>, <em class="sig-param">file_type=None</em>, <em class="sig-param">version=None</em>, <em class="sig-param">uncontract_general=False</em>, <em class="sig-param">data_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_basis_against_file">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_basis_against_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncontract_general</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_against_file" title="Permalink to this definition"></a></dt>
 <dd><p>Compare a basis set in the BSE against a reference file</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_basis_files">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_files</code><span class="sig-paren">(</span><em class="sig-param">file_path_1</em>, <em class="sig-param">file_path_2</em>, <em class="sig-param">file_type_1=None</em>, <em class="sig-param">file_type_2=None</em>, <em class="sig-param">uncontract_general=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_files" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_basis_files">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_basis_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncontract_general</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_files" title="Permalink to this definition"></a></dt>
 <dd><p>Compare two files containing formatted basis sets</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_basis_sets">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_basis_sets</code><span class="sig-paren">(</span><em class="sig-param">basis_name_1</em>, <em class="sig-param">basis_name_2</em>, <em class="sig-param">version_1=None</em>, <em class="sig-param">version_2=None</em>, <em class="sig-param">uncontract_general=False</em>, <em class="sig-param">data_dir_1=None</em>, <em class="sig-param">data_dir_2=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_sets" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_basis_sets">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_basis_sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_name_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_name_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncontract_general</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_basis_sets" title="Permalink to this definition"></a></dt>
 <dd><p>Compare two files containing formatted basis sets</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_ecp_pots">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_ecp_pots</code><span class="sig-paren">(</span><em class="sig-param">potential1</em>, <em class="sig-param">potential2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_ecp_pots">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_ecp_pots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">potential1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">potential2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_ecp_pots" title="Permalink to this definition"></a></dt>
 <dd><p>Compare two ecp potentials for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_electron_shells">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_electron_shells</code><span class="sig-paren">(</span><em class="sig-param">shell1</em>, <em class="sig-param">shell2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_electron_shells">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_electron_shells</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shell1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shell2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_electron_shells" title="Permalink to this definition"></a></dt>
 <dd><p>Compare two electron shells for approximate equality
 (exponents/coefficients are within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.compare_elements">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">compare_elements</code><span class="sig-paren">(</span><em class="sig-param">element1</em>, <em class="sig-param">element2</em>, <em class="sig-param">compare_electron_shells_meta=False</em>, <em class="sig-param">compare_ecp_pots_meta=False</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.compare_elements">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">compare_elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_electron_shells_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_ecp_pots_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.compare_elements" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if the basis information for two elements is the same as another</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
 <dl class="field-list simple">
@@ -316,10 +273,10 @@ doesn’t exist, and the main metadata file is also updated.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.component_file_refs">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">component_file_refs</code><span class="sig-paren">(</span><em class="sig-param">filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a list of what elements/refrences exist in component JSON files</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.component_file_refs">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">component_file_refs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filelist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition"></a></dt>
+<dd><p>Get a list of what elements/references exist in component JSON files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filelist</strong> (<em>list</em>) – A list of paths to json files</p>
@@ -333,16 +290,16 @@ doesn’t exist, and the main metadata file is also updated.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.create_metadata_file">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">create_metadata_file</code><span class="sig-paren">(</span><em class="sig-param">output_path</em>, <em class="sig-param">data_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.create_metadata_file">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">create_metadata_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.create_metadata_file" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a METADATA.json file from a data directory</p>
 <p>The file is written to output_path</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.diff_basis_dict">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">diff_basis_dict</code><span class="sig-paren">(</span><em class="sig-param">left_list</em>, <em class="sig-param">right_list</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.diff_basis_dict">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">diff_basis_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_basis_dict" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the difference between two sets of basis set dictionaries</p>
 <p>The result is a list of dictionaries that correspond to each dictionary in
 <cite>left_list</cite>. Each resulting dictionary will contain only the elements/shells
@@ -366,9 +323,9 @@ that are identical. ECP potentials are not affected.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.diff_json_files">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">diff_json_files</code><span class="sig-paren">(</span><em class="sig-param">left_files</em>, <em class="sig-param">right_files</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_json_files" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.diff_json_files">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">diff_json_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.diff_json_files" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the difference between two sets of basis set JSON files</p>
 <p>The output is a set of files that correspond to each file in
 <cite>left_files</cite>. Each resulting dictionary will contain only the elements/shells
@@ -385,27 +342,24 @@ but with <cite>.diff</cite> added to the end. If those files exist, they are ove
 <li><p><strong>right_files</strong> (<em>list of str</em>) – Paths to JSON files to subtract from each file of <cite>left_files</cite></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.ecp_pots_are_equal">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">ecp_pots_are_equal</code><span class="sig-paren">(</span><em class="sig-param">pots1</em>, <em class="sig-param">pots2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.ecp_pots_are_equal">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">ecp_pots_are_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pots1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pots2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_equal" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The potentials are compared approximately (exponents/coefficients are
 within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.ecp_pots_are_subset">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">ecp_pots_are_subset</code><span class="sig-paren">(</span><em class="sig-param">subset</em>, <em class="sig-param">superset</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.ecp_pots_are_subset">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">ecp_pots_are_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">superset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.ecp_pots_are_subset" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if a list of ecp potentials is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The potentials are compared approximately (exponents/coefficients are
@@ -413,18 +367,18 @@ within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.electron_shells_are_equal">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">electron_shells_are_equal</code><span class="sig-paren">(</span><em class="sig-param">shells1</em>, <em class="sig-param">shells2</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.electron_shells_are_equal">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">electron_shells_are_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shells1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shells2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_equal" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if a list of electron shells is the same as another</p>
 <p>The shells are compared approximately (exponents/coefficients are
 within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.electron_shells_are_subset">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">electron_shells_are_subset</code><span class="sig-paren">(</span><em class="sig-param">subset</em>, <em class="sig-param">superset</em>, <em class="sig-param">compare_meta=False</em>, <em class="sig-param">rel_tol=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.electron_shells_are_subset">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">electron_shells_are_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">superset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.electron_shells_are_subset" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if a list of electron shells is a subset of another</p>
 <p>If ‘subset’ is a subset of the ‘superset’, True is returned.</p>
 <p>The shells are compared approximately (exponents/coefficients are
@@ -432,9 +386,9 @@ within a tolerance)</p>
 <p>If compare_meta is True, the metadata is also compared for exact equality.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.elements_in_files">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">elements_in_files</code><span class="sig-paren">(</span><em class="sig-param">filelist</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.elements_in_files" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.elements_in_files">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">elements_in_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filelist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.elements_in_files" title="Permalink to this definition"></a></dt>
 <dd><p>Get a list of what elements exist in JSON files</p>
 <p>This works on table, element, and component data files</p>
 <dl class="field-list simple">
@@ -451,74 +405,56 @@ what elements are in that file</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.potentials_difference">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">potentials_difference</code><span class="sig-paren">(</span><em class="sig-param">p1</em>, <em class="sig-param">p2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.potentials_difference">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">potentials_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.potentials_difference" title="Permalink to this definition"></a></dt>
 <dd><p>Computes and prints the differences between two lists of potentials</p>
 <p>If the shells contain a different number primitives,
 or the lists are of different length, inf is returned.
 Otherwise, the maximum relative difference is returned.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="basis_set_exchange.curate.shells_difference">
-<code class="sig-prename descclassname">basis_set_exchange.curate.</code><code class="sig-name descname">shells_difference</code><span class="sig-paren">(</span><em class="sig-param">s1</em>, <em class="sig-param">s2</em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.shells_difference" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.shells_difference">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">shells_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.shells_difference" title="Permalink to this definition"></a></dt>
 <dd><p>Computes and prints the differences between two lists of shells</p>
 <p>If the shells contain a different number primitives,
 or the lists are of different length, inf is returned.
 Otherwise, the maximum relative difference is returned.</p>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="bsecurate_cli.html" class="btn btn-neutral float-right" title="The bsecurate command line interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="developer_refconverters.html" class="btn btn-neutral float-left" title="Basis set reference writers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="developer_refconverters.html" class="btn btn-neutral float-left" title="Basis set reference writers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bsecurate_cli.html" class="btn btn-neutral float-right" title="The bsecurate command line interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Benjamin Pritchard
-
-    </p>
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,66 +1,34 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Planning and Documents &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="The bsecurate command line interface" href="bsecurate_cli.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Basis Set Exchange
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -68,23 +36,15 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dunning_mod.html">Modifications to Dunning-style basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
@@ -109,87 +69,49 @@
 </li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Basis Set Exchange</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Project Planning and Documents</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/project_doc.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="project-planning-and-documents">
-<h1>Project Planning and Documents<a class="headerlink" href="#project-planning-and-documents" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="project-planning-and-documents">
+<h1>Project Planning and Documents<a class="headerlink" href="#project-planning-and-documents" title="Permalink to this heading"></a></h1>
 <p>This page contains the plans and outlines the new Basis Set Exchange
 project.</p>
-<div class="section" id="goal">
-<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
 <p>A rewrite of the current EMSL Basis Set Exchange database and website (<a class="reference external" href="https://www.basissetexchange.org">https://www.basissetexchange.org</a>)</p>
-</div>
-<div class="section" id="public-code-repository">
-<h2>Public Code Repository<a class="headerlink" href="#public-code-repository" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="public-code-repository">
+<h2>Public Code Repository<a class="headerlink" href="#public-code-repository" title="Permalink to this heading"></a></h2>
 <p>The main code for this project is located on GitHub at
 <a class="reference external" href="https://github.com/MolSSI-BSE/basis_set_exchange">https://github.com/MolSSI-BSE/basis_set_exchange</a>.  Comments and
 bugs/issues should be reported there.</p>
 <p>The main documentation is located at <a class="reference external" href="https://molssi-bse.github.io/basis_set_exchange">https://molssi-bse.github.io/basis_set_exchange</a></p>
 <p>Additional related projects are located under the MolSSI-BSE GitHub
 organization at <a class="reference external" href="https://github.com/MolSSI-BSE">https://github.com/MolSSI-BSE</a></p>
-</div>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading"></a></h2>
 <p>The Basis Set Exchange has served the community well since its inception
 around 2004. However, the current code stack is considered outdated and
 in need of a rewrite.</p>
@@ -204,9 +126,9 @@ and repurposed for the BSE</p></li>
 community. Nevertheless, there are errors and inconsistencies. While most
 errors are believed to be fixed, some may remain due to some inflexibility
 of the current code stack.</p>
-</div>
-<div class="section" id="proposed-components">
-<h2>Proposed Components<a class="headerlink" href="#proposed-components" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="proposed-components">
+<h2>Proposed Components<a class="headerlink" href="#proposed-components" title="Permalink to this heading"></a></h2>
 <p>The new BSE is proposed to have 4 separate components</p>
 <ol class="arabic simple">
 <li><p>A store or database of basis set data, in some form</p></li>
@@ -215,8 +137,8 @@ set information</p></li>
 <li><p>An web API for programmatically querying and obtaining basis set data</p></li>
 <li><p>A web frontend</p></li>
 </ol>
-<div class="section" id="backend-data-store">
-<h3>Backend Data Store<a class="headerlink" href="#backend-data-store" title="Permalink to this headline">¶</a></h3>
+<section id="backend-data-store">
+<h3>Backend Data Store<a class="headerlink" href="#backend-data-store" title="Permalink to this heading"></a></h3>
 <p>This component contains the actual basis set data in a common format. The
 old BSE stored basis set data in XML files, while the new BSE will
 use JSON files, making it more lightweight.  This data will be stored
@@ -228,9 +150,9 @@ modifications and conflict resolution (GitHub issues and pull requests,
 for example). Many people working with basis sets will be familiar with
 such procedures, and additional help and perhaps web interfaces should
 be available to those that are not familiar.</p>
-</div>
-<div class="section" id="backend-library">
-<h3>Backend Library<a class="headerlink" href="#backend-library" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="backend-library">
+<h3>Backend Library<a class="headerlink" href="#backend-library" title="Permalink to this heading"></a></h3>
 <p>This library is responsible for consuming the raw basis set data and
 producing some useful output. Some aspects of this include:</p>
 <ul class="simple">
@@ -247,26 +169,26 @@ control repository) with the raw basis set data. While this is likely
 the best path forward, discussion of separation of the data and the
 library may happen at a later date.</p>
 <p>In addition, a command-line interface will also be included as part of this library.</p>
-</div>
-<div class="section" id="public-api-rest-api">
-<h3>Public API (REST API)<a class="headerlink" href="#public-api-rest-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="public-api-rest-api">
+<h3>Public API (REST API)<a class="headerlink" href="#public-api-rest-api" title="Permalink to this heading"></a></h3>
 <p>This component is responsible for allowing users to programmatically
 obtain basis set information via a REST interface.</p>
 <p>This interface will mostly mirror the main API of the backend library.</p>
 <p>It should be noted that this interface will be read-only, as the curation
 of the basis set raw data is done elsewhere.</p>
-</div>
-<div class="section" id="web-frontend">
-<h3>Web Frontend<a class="headerlink" href="#web-frontend" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="web-frontend">
+<h3>Web Frontend<a class="headerlink" href="#web-frontend" title="Permalink to this heading"></a></h3>
 <p>Many people currently use the web frontend to download and explore
 basis sets. In general, people approve of the current interface and
 functionality, with only small improvements desired.</p>
 <p>The web fronted should be as separate as possible from the other
 components, allowing for future changes and possible rewrites.</p>
-</div>
-</div>
-<div class="section" id="data-curation-and-identifiers">
-<h2>Data Curation and Identifiers<a class="headerlink" href="#data-curation-and-identifiers" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="data-curation-and-identifiers">
+<h2>Data Curation and Identifiers<a class="headerlink" href="#data-curation-and-identifiers" title="Permalink to this heading"></a></h2>
 <p>As part of this project, basis sets will be verified, when possible,
 against other databases, literature, and what is implemented in various
 codes. An effort will be made to identify canonical, standard values
@@ -274,21 +196,22 @@ based on these sources. When differences are found, they will be recorded
 within the basis set data notes.</p>
 <p>This work will support the community in running well-defined, reproducible
 computations.</p>
-</div>
-<div class="section" id="education">
-<h2>Education<a class="headerlink" href="#education" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="education">
+<h2>Education<a class="headerlink" href="#education" title="Permalink to this heading"></a></h2>
 <p>A section of the website will be devoted to education about basis sets,
 including common nomenclature and the best basis sets for different
 calculations.</p>
-</div>
-<div class="section" id="project-members">
-<h2>Project Members<a class="headerlink" href="#project-members" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="project-members">
+<h2>Project Members<a class="headerlink" href="#project-members" title="Permalink to this heading"></a></h2>
 <p>The project is a collaboration between MolSSI and EMSL/PNNL. The members
 and major responsibilities are:</p>
 <ul class="simple">
 <li><p>MolSSI</p>
 <ul>
-<li><p>Benjamin Pritchard - Project lead, development of backend library</p></li>
+<li><p>Benjamin Pritchard - Original project lead, development of backend library</p></li>
+<li><p>Susi Lehtola - Maintainer of backend library, basis set curator</p></li>
 <li><p>Doaa Altaraway - Development of the web frontend</p></li>
 <li><p>Daniel Smith - Programming support</p></li>
 </ul>
@@ -307,9 +230,9 @@ and major responsibilities are:</p>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="community-engagement">
-<h2>Community Engagement<a class="headerlink" href="#community-engagement" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="community-engagement">
+<h2>Community Engagement<a class="headerlink" href="#community-engagement" title="Permalink to this heading"></a></h2>
 <p>Help from the community will likely be required for some parts of
 the project. In particular, curation and validation of the basis data
 itself will likely be a community-wide effort, as well as opinions on
@@ -318,59 +241,42 @@ website design.</p>
 from basis set authors and the developers of computational chemistry code.</p>
 <p>If you would like to help with this project, contact Benjamin Pritchard
 at <a class="reference external" href="mailto:bpp4&#37;&#52;&#48;vt&#46;edu">bpp4<span>&#64;</span>vt<span>&#46;</span>edu</a></p>
-</div>
-<div class="section" id="timelines-and-milestones">
-<h2>Timelines and Milestones<a class="headerlink" href="#timelines-and-milestones" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="timelines-and-milestones">
+<h2>Timelines and Milestones<a class="headerlink" href="#timelines-and-milestones" title="Permalink to this heading"></a></h2>
 <p>Current short-to-medium term milestones can be viewed at
 <a class="reference external" href="https://github.com/MolSSI-BSE/basis_set_exchange/milestones">https://github.com/MolSSI-BSE/basis_set_exchange/milestones</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="bsecurate_cli.html" class="btn btn-neutral float-left" title="The bsecurate command line interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bsecurate_cli.html" class="btn btn-neutral float-left" title="The bsecurate command line interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2020, Benjamin Pritchard
-
-    </p>
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Augmenting basis sets by extra functions &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Papajak/Truhlar ‘Calendarization’" href="calendarization.html" />
+    <link rel="prev" title="Truncation into minimal basis sets" href="minimal_sets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Augmenting basis sets by extra functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/augmentation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="augmenting-basis-sets-by-extra-functions">
+<h1>Augmenting basis sets by extra functions<a class="headerlink" href="#augmenting-basis-sets-by-extra-functions" title="Permalink to this heading"></a></h1>
+<p>In many cases, one may want to add more basis function to a given
+basis set in order to make it more suitable for properties it was not
+designed to reproduce. Common examples are the improved description of
+excited states or of very weakly bound electrons by adding more
+diffuse functions into augmented basis sets, or the improved
+description of the wave function close to the nucleus by adding more
+steep functions into a basis set.</p>
+<p>The extrapolation works by taking the two outermost primitives in the
+basis, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. We assume <span class="math notranslate nohighlight">\(X\)</span> to be the steepest
+or most diffuse, and <span class="math notranslate nohighlight">\(Y\)</span> is the second-steepest or second-most
+diffuse. (If you want to do steep augmentation, you should also fully
+decontract your basis set.)  Now, we can just add more primitives as
+<span class="math notranslate nohighlight">\(X(X/Y)\)</span>, <span class="math notranslate nohighlight">\(X(X/Y)^2\)</span>, … The procedure is the best
+justified for even-tempered basis sets, where all exponents follow the
+same pattern, but the procedure is used often also for fully optimized
+basis sets.</p>
+<p>Adding more diffuse functions to an already augmented basis set is
+generally known as multiple augmentation, as described by Woon &amp;
+Dunning (<a class="reference external" href="https://doi.org/10.1063/1.466439">https://doi.org/10.1063/1.466439</a>). Adding a single
+function per angular momentum shell to an aug set leads to a doubly
+augmented (d-aug) set; adding two leads to a triply augmented (t-aug)
+set, and so on.</p>
+<p>This functionality is implemented in the <a class="reference internal" href="developer_api.html#basis_set_exchange.manip.geometric_augmentation" title="basis_set_exchange.manip.geometric_augmentation"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.manip.geometric_augmentation()</span></code></a> function.</p>
+<p>Take, for example, He/aug-cc-pVTZ:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BASIS</span> <span class="s2">&quot;ao basis&quot;</span> <span class="n">SPHERICAL</span> <span class="n">PRINT</span>
+<span class="c1">#BASIS SET: (7s,3p,2d) -&gt; [4s,3p,2d]</span>
+<span class="n">He</span>    <span class="n">S</span>
+      <span class="mf">2.340000E+02</span>           <span class="mf">2.587000E-03</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">3.516000E+01</span>           <span class="mf">1.953300E-02</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">7.989000E+00</span>           <span class="mf">9.099800E-02</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">2.212000E+00</span>           <span class="mf">2.720500E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">6.669000E-01</span>           <span class="mf">4.780650E-01</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">2.089000E-01</span>           <span class="mf">3.077370E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">0.0513800</span>              <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">He</span>    <span class="n">P</span>
+      <span class="mf">3.044000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">7.580000E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">0.1993000</span>              <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">He</span>    <span class="n">D</span>
+      <span class="mf">1.965000E+00</span>           <span class="mf">1.0000000</span>              <span class="mf">0.00000000</span>
+      <span class="mf">0.4592000</span>              <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">END</span>
+</pre></div>
+</div>
+<p>The parameters are generated as below:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p><strong>S</strong></p></td>
+<td><p><strong>P</strong></p></td>
+<td><p><strong>D</strong></p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>Smallest
+Exponents</p></td>
+<td><p>2.089000E-01</p></td>
+<td><p>7.580000E-01</p></td>
+<td><p>1.965000E+00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.0513800</p></td>
+<td><p>0.1993000</p></td>
+<td><p>0.4592000</p></td>
+</tr>
+<tr class="row-even"><td><p>X</p></td>
+<td><p>5.1380E-02</p></td>
+<td><p>1.9930E-01</p></td>
+<td><p>4.5920E-01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Y</p></td>
+<td><p>2.089E-01</p></td>
+<td><p>7.58E-01</p></td>
+<td><p>1.965E+00</p></td>
+</tr>
+<tr class="row-even"><td><p>d-aug exponent</p></td>
+<td><p>1.2637E-02</p></td>
+<td><p>5.2402E-02</p></td>
+<td><p>1.0731E-01</p></td>
+</tr>
+<tr class="row-odd"><td><p>t-aug exponent</p></td>
+<td><p>3.1082E-03</p></td>
+<td><p>1.3778E-02</p></td>
+<td><p>2.5077E-02</p></td>
+</tr>
+<tr class="row-even"><td><p>q-aug exponent</p></td>
+<td><p>7.6447E-04</p></td>
+<td><p>3.6226E-03</p></td>
+<td><p>5.8603E-03</p></td>
+</tr>
+</tbody>
+</table>
+<p>Therefore, He/q-aug-cc-pVTZ will be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BASIS</span> <span class="s2">&quot;ao basis&quot;</span> <span class="n">SPHERICAL</span> <span class="n">PRINT</span>
+<span class="c1">#BASIS SET: (7s,3p,2d) -&gt; [4s,3p,2d]</span>
+<span class="n">He</span>    <span class="n">S</span>
+      <span class="mf">2.340000E+02</span>           <span class="mf">2.587000E-03</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">3.516000E+01</span>           <span class="mf">1.953300E-02</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">7.989000E+00</span>           <span class="mf">9.099800E-02</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">2.212000E+00</span>           <span class="mf">2.720500E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">6.669000E-01</span>           <span class="mf">4.780650E-01</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">2.089000E-01</span>           <span class="mf">3.077370E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">0.0513800</span>              <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">He</span>    <span class="n">S</span>
+      <span class="mf">1.264E-02</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">S</span>
+      <span class="mf">3.108E-03</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">S</span>
+      <span class="mf">7.645E-04</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">P</span>
+      <span class="mf">3.044000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">7.580000E-01</span>           <span class="mf">0.000000E+00</span>           <span class="mf">1.000000E+00</span>           <span class="mf">0.00000000</span>
+      <span class="mf">0.1993000</span>              <span class="mf">0.00000000</span>             <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">He</span>    <span class="n">P</span>
+      <span class="mf">5.240E-02</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">P</span>
+      <span class="mf">1.378E-02</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">P</span>
+      <span class="mf">3.623E-03</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">D</span>
+      <span class="mf">1.965000E+00</span>           <span class="mf">1.0000000</span>              <span class="mf">0.00000000</span>
+      <span class="mf">0.4592000</span>              <span class="mf">0.00000000</span>             <span class="mf">1.0000000</span>
+<span class="n">He</span>    <span class="n">D</span>
+      <span class="mf">1.073E-01</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">D</span>
+      <span class="mf">2.508E-02</span>              <span class="mf">1.0</span>
+<span class="n">He</span>    <span class="n">D</span>
+      <span class="mf">5.860E-03</span>              <span class="mf">1.</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="minimal_sets.html" class="btn btn-neutral float-left" title="Truncation into minimal basis sets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="calendarization.html" class="btn btn-neutral float-right" title="Papajak/Truhlar ‘Calendarization’" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

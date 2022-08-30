@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truncation into minimal basis sets &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Augmenting basis sets by extra functions" href="augmentation.html" />
+    <link rel="prev" title="Converting basis sets" href="conversion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Truncation into minimal basis sets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/minimal_sets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="truncation-into-minimal-basis-sets">
+<span id="minimal-sets"></span><h1>Truncation into minimal basis sets<a class="headerlink" href="#truncation-into-minimal-basis-sets" title="Permalink to this heading"></a></h1>
+<p>Minimal basis sets of atomic orbitals are useful for many purposes,
+such as to formulate atomic population analyses, obtain decent initial
+guesses for hard self-consistent field calculations, or reducing the
+orbital space in a multiconfigurational calculation.</p>
+<p>However, there is no one true “minimal basis set”, even though STO-3G
+or STO-6G are often used for this purpose. The minimality of the basis
+only refers to the number of basis functions - for instance, for
+oxygen the minimal basis is 2s1p - but it does not specify how well
+these orbitals are themselves described.</p>
+<p>For simplicity, we will demonstrate this for a Hartree-Fock
+calculation on the neon atom, where symmetry breaking is not an issue.
+We will consider the STO-3G and STO-6G basis sets, as well as minimal
+basis sets extracted from the Dunning cc-pVnZ sets, which can be
+compared to fully numerical reference values (Lehtola,
+<a class="reference external" href="https://doi.org/10.1103/PhysRevA.101.012516">https://doi.org/10.1103/PhysRevA.101.012516</a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Basis</span>             <span class="n">Energy</span> <span class="p">(</span><span class="n">Eh</span><span class="p">)</span>  <span class="n">Error</span> <span class="p">(</span><span class="n">Eh</span><span class="p">)</span>
+<span class="n">STO</span><span class="o">-</span><span class="mi">3</span><span class="n">G</span>          <span class="o">-</span><span class="mf">126.60452509</span>     <span class="mf">1.9e+00</span>
+<span class="n">STO</span><span class="o">-</span><span class="mi">6</span><span class="n">G</span>          <span class="o">-</span><span class="mf">127.77673830</span>     <span class="mf">7.7e-01</span>
+<span class="n">cc</span><span class="o">-</span><span class="n">pVDZ</span>         <span class="o">-</span><span class="mf">128.48877555</span>     <span class="mf">5.8e-02</span>
+<span class="n">cc</span><span class="o">-</span><span class="n">pVTZ</span>         <span class="o">-</span><span class="mf">128.53186164</span>     <span class="mf">1.5e-02</span>
+<span class="n">cc</span><span class="o">-</span><span class="n">pVQZ</span>         <span class="o">-</span><span class="mf">128.54346966</span>     <span class="mf">3.6e-03</span>
+<span class="n">cc</span><span class="o">-</span><span class="n">pV5Z</span>         <span class="o">-</span><span class="mf">128.54677013</span>     <span class="mf">3.3e-04</span>
+<span class="n">cc</span><span class="o">-</span><span class="n">pV6Z</span>         <span class="o">-</span><span class="mf">128.54706110</span>     <span class="mf">3.7e-05</span>
+
+<span class="n">fully</span> <span class="n">numerical</span> <span class="o">-</span><span class="mf">128.54709811</span>
+</pre></div>
+</div>
+<p>As is immediately clear from the table, STO-3G and STO-6G are quite
+inaccurate by modern standards, with errors in the absolute energy of
+around a hartree, but the error for the gas-phase atom goes down when
+a larger primitive expansion is used.</p>
+<p>It is especially important to note that the minimal basis set depends
+on the Hamiltonian: if you employ a relativistic approximation or an
+effective core potential and you intend to use a minimal basis set to
+initialize a larger calculation, make sure first that the two
+approaches correspond to the same Hamiltonian.</p>
+<p>Minimal basis sets can be generated by the removal of the free
+primitives in the basis set; this is implemented in the
+<a class="reference internal" href="developer_api.html#basis_set_exchange.manip.remove_free_primitives" title="basis_set_exchange.manip.remove_free_primitives"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.manip.remove_free_primitives()</span></code></a> function.
+Note that contracted polarization functions (e.g. in the atomic
+natural orbital, ANO, basis sets, or the correlation consistent sets
+for transition metals) will not be removed by the function, so be sure
+to check whether the result is what you want.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="conversion.html" class="btn btn-neutral float-left" title="Converting basis sets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="augmentation.html" class="btn btn-neutral float-right" title="Augmenting basis sets by extra functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

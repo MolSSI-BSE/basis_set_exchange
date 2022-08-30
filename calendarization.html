@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papajak/Truhlar ‘Calendarization’ &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating Basis Set Bundles" href="bundling.html" />
+    <link rel="prev" title="Augmenting basis sets by extra functions" href="augmentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Papajak/Truhlar ‘Calendarization’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_doc.html">Project Planning and Documents</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Papajak/Truhlar ‘Calendarization’</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/calendarization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="papajak-truhlar-calendarization">
+<span id="calendarization"></span><h1>Papajak/Truhlar ‘Calendarization’<a class="headerlink" href="#papajak-truhlar-calendarization" title="Permalink to this heading"></a></h1>
+<p>Diffuse functions can be removed from the Dunning-style aug-cc basis
+sets. Doing so results in the Truhlar ‘calendar’ basis sets (Papajak &amp;
+Truhlar, <a class="reference external" href="https://doi.org/10.1021/ct1005533">https://doi.org/10.1021/ct1005533</a>). The names derive from
+the fact that ‘aug’ (for ‘augmented’) is also the abbreviation for the
+month of August. Removing diffuse functions moves you earlier into the
+year - ‘jul’, ‘jun’, etc, progressively have fewer diffuse functions.
+‘jul’ basis sets are sometimes referred to as ‘heavy-aug’.</p>
+<p>This procedure can apply to all sorts of aug-cc basis sets (aug-cc-pVTZ,
+aug-cc-pV(T+d)Z, aug-cc-pCVTZ, etc).</p>
+<p>To form the earlier months, the procedure is as follows</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>‘jul’ - remove all diffuse functions on H and He</p></li>
+<li><p>‘jun’ - remove the diffuse function from the highest AM from non-H,He elements</p></li>
+<li><p>‘may’ - remove the diffuse function from the next highest AM from non-H,He elements</p></li>
+<li><p>Continue until finished or you hit ‘jan’</p></li>
+</ol>
+</div></blockquote>
+<p>In Papajak &amp; Truhlar (2011, <a class="reference external" href="https://doi.org/10.1021/ct1005533">https://doi.org/10.1021/ct1005533</a>), truncation
+of the diffuse functions stops when only s &amp; p diffuse functions remain. This
+month is also denoted ‘maug’ (minimally-augmented).</p>
+<p>Also in that paper, Papajak &amp; Truhlar developed their method for basis sets
+that did not apply past Ar. However, according to Truhlar (via personal
+communication), this method can be applied to all elements, including
+transition metals. In that case, the ‘maug’ basis sets will contain s, p,
+and d diffuse functions on transition metals, and s and p diffuse functions
+on all other non-H,He elements.</p>
+<p>However, you may remove those diffuse functions as well. In Gaussian, these
+are denoted as ‘t(month)’ basis sets (tjul, tjun, etc). These basis sets are
+equivalent to the regular ‘(month)’ basis sets until you reach maug (spd on
+transition metals, sp on other elements except H,He). In the BSE, we adopt
+the nomenclature whereby you can move earlier into the year, without the
+‘t’ prefix.</p>
+<p>This functionality is implemented in the
+<a class="reference internal" href="developer_api.html#basis_set_exchange.manip.truhlar_calendarize" title="basis_set_exchange.manip.truhlar_calendarize"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.manip.truhlar_calendarize()</span></code></a> function.</p>
+<p>Below is a table for aug-cc-pV{D,T,Q}Z that can be taken as representative
+(although, as noted above, this procedure applies to many more basis sets)</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 20%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td rowspan="2"><p><strong>Base</strong></p></td>
+<td rowspan="2"><p><strong>Month</strong></p></td>
+<td colspan="3"><p><strong>month-cc-pVXZ</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>H,He</p></td>
+<td><p>Li-Ar,Ga-Kr</p></td>
+<td><p>Sc-Zn</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="5"><p>aug-cc-pVDZ</p></td>
+<td><p>aug</p></td>
+<td><p><em>sp</em></p></td>
+<td><p><em>spd</em></p></td>
+<td><p><em>spdf</em></p></td>
+</tr>
+<tr class="row-even"><td><p>jul</p></td>
+<td></td>
+<td><p><em>spd</em></p></td>
+<td><p><em>spdf</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>jun (maug)</p></td>
+<td></td>
+<td><p><em>sp</em></p></td>
+<td><p><em>spd</em></p></td>
+</tr>
+<tr class="row-even"><td><p>may</p></td>
+<td></td>
+<td><p><em>s</em></p></td>
+<td><p><em>sp</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>apr</p></td>
+<td></td>
+<td></td>
+<td><p><em>s</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>aug-cc-pVTZ</p></td>
+<td><p>aug</p></td>
+<td><p><em>spd</em></p></td>
+<td><p><em>spdf</em></p></td>
+<td><p><em>spdfg</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>jul</p></td>
+<td></td>
+<td><p><em>spdf</em></p></td>
+<td><p><em>spdfg</em></p></td>
+</tr>
+<tr class="row-even"><td><p>jun</p></td>
+<td></td>
+<td><p><em>spd</em></p></td>
+<td><p><em>spdf</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>may (maug)</p></td>
+<td></td>
+<td><p><em>sp</em></p></td>
+<td><p><em>spd</em></p></td>
+</tr>
+<tr class="row-even"><td><p>apr</p></td>
+<td></td>
+<td><p><em>s</em></p></td>
+<td><p><em>sp</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>mar</p></td>
+<td></td>
+<td></td>
+<td><p><em>s</em></p></td>
+</tr>
+<tr class="row-even"><td rowspan="7"><p>aug-cc-pVQZ</p></td>
+<td><p>aug</p></td>
+<td><p><em>spdf</em></p></td>
+<td><p><em>spdfg</em></p></td>
+<td><p><em>spdfgh</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>jul</p></td>
+<td></td>
+<td><p><em>spdfg</em></p></td>
+<td><p><em>spdfgh</em></p></td>
+</tr>
+<tr class="row-even"><td><p>jun</p></td>
+<td></td>
+<td><p><em>spdf</em></p></td>
+<td><p><em>spdfg</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>may</p></td>
+<td></td>
+<td><p><em>spd</em></p></td>
+<td><p><em>spdf</em></p></td>
+</tr>
+<tr class="row-even"><td><p>apr (maug)</p></td>
+<td></td>
+<td><p><em>sp</em></p></td>
+<td><p><em>spd</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>mar</p></td>
+<td></td>
+<td><p><em>s</em></p></td>
+<td><p><em>sp</em></p></td>
+</tr>
+<tr class="row-even"><td><p>feb</p></td>
+<td></td>
+<td></td>
+<td><p><em>s</em></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="augmentation.html" class="btn btn-neutral float-left" title="Augmenting basis sets by extra functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bundling.html" class="btn btn-neutral float-right" title="Creating Basis Set Bundles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

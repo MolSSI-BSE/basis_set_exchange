@@ -145,7 +145,8 @@ and major responsibilities are:
 
 * MolSSI
 
-  * Benjamin Pritchard - Project lead, development of backend library
+  * Benjamin Pritchard - Original project lead, development of backend library
+  * Susi Lehtola - Maintainer of backend library, basis set curator
   * Doaa Altaraway - Development of the web frontend
   * Daniel Smith - Programming support
 
