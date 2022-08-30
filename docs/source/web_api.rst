@@ -52,7 +52,7 @@ Elements can also be passed as multiple ``element`` parameters
 
 Returns JSON representing the metadata about the basis sets contained in the BSE.
 
-.. doctest::
+.. code-block:: python
 
    >>> r = requests.get(BASE_URL + '/api/metadata')
    >>> print(r.json())
@@ -65,7 +65,7 @@ Returns JSON representing the metadata about the basis sets contained in the BSE
 
 Returns JSON representing which basis set formats are available, along with a description
 
-.. doctest::
+.. code-block:: python
 
    >>> r = requests.get(BASE_URL + '/api/formats')
    >>> print(r.json())
@@ -78,7 +78,7 @@ Returns JSON representing which basis set formats are available, along with a de
 
 Similar to ``/api/formats``, but has info about which reference formats are supported
 
-.. doctest::
+.. code-block:: python
 
    >>> r = requests.get(BASE_URL + '/api/reference_formats')
    >>> print(r.json())
@@ -118,7 +118,7 @@ Several options are available. These are specified as GET paramters
 | header                   | 1,0 or true,false | If false, do not print the BSE information header in the output                                                                                                                |
 +--------------------------+-------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. doctest::
+.. code-block:: python
 
    >>> # Get STO-3G as json
    >>> r = requests.get(BASE_URL + '/api/basis/sto-3g/format/json')
@@ -140,7 +140,7 @@ Several options are available. These are specified as GET paramters
    #----------------------------------------------------------------------
    <BLANKLINE>
    <BLANKLINE>
-   BASIS "ao basis" PRINT
+   BASIS "ao basis" SPHERICAL PRINT
    #BASIS SET: (4s) -> [2s]
    H    S
          0.1873113696E+02       0.3349460434E-01
@@ -149,14 +149,19 @@ Several options are available. These are specified as GET paramters
    H    S
          0.1612777588E+00       1.0000000
    #BASIS SET: (10s,4p) -> [3s,2p]
-   C    SP
-         0.1687144782E+00       0.1000000000E+01       0.1000000000E+01
+   C    S
+         0.3047524880E+04       0.1834737132E-02
+         0.4573695180E+03       0.1403732281E-01
+         0.1039486850E+03       0.6884262226E-01
+         0.2921015530E+02       0.2321844432E+00
+         0.9286662960E+01       0.4679413484E+00
+         0.3163926960E+01       0.3623119853E+00
    C    SP
          0.7868272350E+01      -0.1193324198E+00       0.6899906659E-01
          0.1881288540E+01      -0.1608541517E+00       0.3164239610E+00
          0.5442492580E+00       0.1143456438E+01       0.7443082909E+00
-   ...
-
+   C    SP
+         0.1687144782E+00       0.1000000000E+01       0.1000000000E+0
 
 
 ``/api/references/<basis_name>/format/<fmt>``
@@ -179,7 +184,7 @@ Several options are available. These are specified as GET paramters
 | version                  | Integer           | Obtain a specific version of the basis set. Default is latest version       |
 +--------------------------+-------------------+-----------------------------------------------------------------------------+
 
-.. doctest::
+.. code-block:: python
 
    >>> # Get references for aug-cc-pvtz as json
    >>> r = requests.get(BASE_URL + '/api/references/aug-cc-pvtz/format/json')
@@ -196,7 +201,7 @@ Several options are available. These are specified as GET paramters
        title = {Systematically convergent basis sets for transition metals. I. All-electron correlation consistent basis sets for the 3d elements Sc-Zn},
        journal = {J. Chem. Phys.},
        volume = {123},
-       page = {064107},
+       pages = {064107},
        year = {2005},
        doi = {10.1063/1.1998907}
    }
@@ -206,7 +211,7 @@ Several options are available. These are specified as GET paramters
        title = {Gaussian basis sets for use in correlated molecular calculations. I. The atoms boron through neon and hydrogen},
        journal = {J. Chem. Phys.},
        volume = {90},
-       page = {1007-1023},
+       pages = {1007-1023},
        year = {1989},
        doi = {10.1063/1.456153}
    }
@@ -216,11 +221,11 @@ Several options are available. These are specified as GET paramters
        title = {Electron affinities of the first-row atoms revisited. Systematic basis sets and wave functions},
        journal = {J. Chem. Phys.},
        volume = {96},
-       page = {6796-6806},
+       pages = {6796-6806},
        year = {1992},
        doi = {10.1063/1.462569}
    }
-   ... 
+   ...
    
 
 
@@ -232,6 +237,12 @@ Obtain notes about a basis set. Output is plain text.
    >>> # Get notes for 6-31g
    >>> r = requests.get(BASE_URL + '/api/notes/6-31g')
    >>> print(r.text)
+   --------------------------------------------------------------------------------
+      Original BSE Contributor: Dr. David Feller
+               Original BSE PI: (none)
+    Original BSE Last Modified: Thu, 24 Apr 2008 00:05:19 GMT
+   --------------------------------------------------------------------------------
+   <BLANKLINE>
    Notes from the original BSE
    ===========================
    <BLANKLINE>
@@ -252,10 +263,14 @@ Obtain notes about a family of basis sets. Output is plain text.
    Notes about the Jensen basis sets
    =================================
    <BLANKLINE>
-   Notes from Frank Jensen
-   -----------------------
+   admm basis sets
+   ------------------------
+   The most widely used approach to approximate the Coulomb and exchange integrals is density fitting, also known as the resolution-of-the-identity (RI) approximation.
+   In this, the products of two one-electron basis functions are expanded in one-center auxiliary functions. RI significantly improves performance with a limited impact on
+   the accuracy and has therefore been applied to HF/KS theory as well as correlated methods. ADMM has been developed specifically for the exchange contribution. The exchange
+   energy is split into two parts. On consisting of the exact HF exchange and the second is a first-order correction term, evaluated as the difference between the generalized
+   gradient approximation exchange in the full and auxiliary basis sets.
    <BLANKLINE>
-   pcseg:  the most recent (2014) segmented contracted version of the pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4
-   apcseg: the most recent (2014) segmented contracted version of the aug-pc-n basis sets, defined for H-Kr, for n=0,1,2,3,4
+   <BLANKLINE>
+   aug-pc-n and  pc-n basis sets (where n indicates the level of polarization beyond the atomic system)
    ...
-

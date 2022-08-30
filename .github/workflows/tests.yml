@@ -10,6 +10,9 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+env:
+  BSE_API_URL: "http://basissetexchange.org"
+
 jobs:
   test:
     name: "Core Tests"
