@@ -213,6 +213,7 @@ def read_molcas(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '*#$')
 
     bs_data = {}
+    other_data = {}
 
     # Split into elements. Every start of an element is /
     element_blocks = helpers.partition_lines(basis_lines, lambda x: x.startswith('/'), min_size=4)
@@ -249,4 +250,6 @@ def read_molcas(basis_lines):
     if len(basis_names_found) > 1:
         raise RuntimeError("Multiple basis sets found in file: " + ','.join(basis_names_found))
 
-    return bs_data, next(iter(basis_names_found))
+    other_data['name'] = next(iter(basis_names_found))
+
+    return bs_data, other_data

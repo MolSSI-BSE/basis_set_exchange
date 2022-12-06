@@ -53,6 +53,7 @@ def read_gbasis(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '!#')
 
     bs_data = {}
+    other_data = {}
 
     # The file just contains sections separated headed by
     # a line looking like "Al:aug-cc-pV5+dZ:(21s13p6d4f3g2h) -> [8s7p6d4f3g2h]"
@@ -118,4 +119,4 @@ def read_gbasis(basis_lines):
     if len(found_basis) > 1:
         raise RuntimeError("Multiple basis sets in a single file: " + str(found_basis))
 
-    return bs_data
+    return bs_data, other_data

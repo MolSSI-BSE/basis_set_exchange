@@ -205,6 +205,7 @@ def read_turbomole(basis_lines):
         raise RuntimeError("Last line of basis is not $end. Line: " + basis_lines[-1])
 
     bs_data = {}
+    other_data = {}
 
     # Split into basis and ecp
     # Just split based on lines beginning with $
@@ -227,4 +228,4 @@ def read_turbomole(basis_lines):
         else:
             raise RuntimeError("Unknown section " + s[0])
 
-    return bs_data
+    return bs_data, other_data

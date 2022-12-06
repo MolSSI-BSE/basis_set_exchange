@@ -170,6 +170,7 @@ def read_dalton(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines)
 
     bs_data = {}
+    other_data = {}
 
     # Skip forward until either:
     # 1. Line begins with 'a'
@@ -193,4 +194,4 @@ def read_dalton(basis_lines):
         else:
             _parse_electron_lines(s, bs_data)
 
-    return bs_data
+    return bs_data, other_data

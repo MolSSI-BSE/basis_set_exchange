@@ -117,6 +117,7 @@ def read_cp2k(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '!')
 
     bs_data = {}
+    other_data = {}
 
     # Empty file?
     if not basis_lines:
@@ -127,4 +128,4 @@ def read_cp2k(basis_lines):
     for es in element_sections:
         _read_shell(es, bs_data)
 
-    return bs_data
+    return bs_data, other_data

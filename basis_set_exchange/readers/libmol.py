@@ -293,6 +293,7 @@ def read_libmol(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '!')
 
     bs_data = {}
+    other_data = {}
 
     # Empty file?
     if not basis_lines:
@@ -300,4 +301,4 @@ def read_libmol(basis_lines):
 
     _parse_lines(basis_lines, bs_data)
 
-    return bs_data
+    return bs_data, other_data

@@ -114,6 +114,7 @@ def read_ricdlib(basis_lines):
     '''
 
     bs_data = {}
+    other_data = {}
 
     # Split into elements
     element_blocks = helpers.partition_lines(basis_lines, basis_head_re.match)
@@ -131,4 +132,4 @@ def read_ricdlib(basis_lines):
     if len(basis_names_found) > 1:
         raise RuntimeError("Multiple basis sets found in file: " + ','.join(basis_names_found))
 
-    return bs_data
+    return bs_data, other_data
