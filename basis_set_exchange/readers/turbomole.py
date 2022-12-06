@@ -1,5 +1,39 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+'''
+Reader for the TURBOMOLE format
+'''
+
 import re
-from .. import lut
+from .. import lut, manip
 from . import helpers
 
 section_re = re.compile(r'^\$(basis|ecp|cbas|jbas|jkbas)$')
@@ -41,7 +75,7 @@ def _parse_electron_lines(basis_lines, bs_data):
         element_sym, _ = helpers.parse_line_regex(element_re, element_lines[1], 'Element line')
 
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
 
         # Partition into shells
         shell_blocks = helpers.partition_lines(element_lines[3:], shell_re.match, min_size=2)
@@ -50,7 +84,7 @@ def _parse_electron_lines(basis_lines, bs_data):
             nprim, shell_am = helpers.parse_line_regex(shell_re, sh_lines[0], 'shell nprim, am')
             shell_am = lut.amchar_to_int(shell_am)
 
-            func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+            func_type = lut.function_type_from_am(shell_am, 'gto', 'spherical')
 
             exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=1)
 
@@ -75,12 +109,12 @@ def _parse_ecp_potential_lines(element_lines, bs_data):
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
 
     # We don't need the return value - we will use the one from creating ecp_electrons
-    helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+    manip.create_element_data(bs_data, element_Z, 'ecp_potentials')
 
     # 4th line should be ncore and lmax
     n_elec, max_am = helpers.parse_line_regex(ecp_info_re, element_lines[1], 'ECP ncore, lmax')
 
-    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_electrons', key_exist_ok=False, create=int)
+    element_data = manip.create_element_data(bs_data, element_Z, 'ecp_electrons', key_exist_ok=False, create=int)
     element_data['ecp_electrons'] = n_elec
 
     # split the remaining lines by lines starting with a character

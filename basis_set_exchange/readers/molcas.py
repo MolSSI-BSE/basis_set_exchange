@@ -1,5 +1,39 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+'''
+Reader for the Molcas format
+'''
+
 import re
-from .. import lut, misc
+from .. import lut, manip, misc
 from . import helpers
 
 element_head_re = re.compile(r'^/([a-zA-Z]{1,3})\.(?:ECP\.)?([^.]+)\..*$')
@@ -14,7 +48,7 @@ ecp_pot_begin_re = re.compile(r'^(\d+)\s*;.*$')  # Sometime comments are after t
 
 
 def _parse_electron_lines(basis_lines, bs_data, element_Z):
-    element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+    element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
 
     # Handle the options block
     # This specifies the kind of data that might be found at the end of the element block
@@ -89,7 +123,8 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
 
         # If we do actually have the number of general contractions, does it match?
         if ngen is not None and ngen != n_coefs // nprim:
-            raise RuntimeError("Expected {} general contractions, but found {}".format(ngen, n_coefs // nprim))
+            raise RuntimeError("Expected {} general contractions, but found {} for am {} of element {}".format(
+                ngen, n_coefs // nprim, shell_am, element_Z))
         else:
             ngen = n_coefs // nprim
 
@@ -98,7 +133,7 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
         coefficients = misc.transpose_matrix(coefficients)
 
         # Now add to the bs_data
-        func_type = helpers.function_type_from_am([shell_am], 'gto', 'spherical')
+        func_type = lut.function_type_from_am([shell_am], 'gto', 'spherical')
 
         shell = {
             'function_type': func_type,
@@ -125,7 +160,7 @@ def _parse_ecp_lines(basis_lines, bs_data, element_Z):
     if element_Z_ecp != element_Z:
         raise RuntimeError("ECP element Z={} found in block for element Z={}".format(element_Z, element_Z_ecp))
 
-    element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+    element_data = manip.create_element_data(bs_data, element_Z, 'ecp_potentials')
 
     # Does the ecp_electrons key exist? This may have been determined when reading the
     # electron shells above

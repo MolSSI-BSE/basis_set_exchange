@@ -32,11 +32,11 @@ if __name__ == "__main__":
         name='basis_set_exchange',
         version=versioneer.get_version(),
         cmdclass=versioneer.get_cmdclass(),
-        description='The Quantum Chemistry Basis Set Exchange',
+        description='The Basis Set Exchange',
         long_description=long_description,
         long_description_content_type='text/markdown',
         author='The Molecular Sciences Software Institute',
-        author_email='bpp4@vt.edu',
+        author_email='bpp4@vt.edu, slehtola@vt.edu',
         url="https://github.com/MolSSI-BSE/basis_set_exchange",
         license='BSD-3C',
         packages=my_packages,
@@ -44,19 +44,16 @@ if __name__ == "__main__":
             "console_scripts":
             ["bse=basis_set_exchange.cli:run_bse_cli", "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
         },
-        install_requires=[
-            'jsonschema',
-            'argcomplete',
-            'unidecode',
-        ],
+        install_requires=['jsonschema', 'argcomplete', 'regex', 'unidecode'],
         extras_require={
-            ':python_version == "3.6"': ["importlib-metadata < 3"],
-            ':python_version == "3.7"': ["importlib-metadata < 3"],
+            ':python_version == "3.6"': ["importlib-metadata"],
+            ':python_version == "3.7"': ["importlib-metadata"],
             'docs': ['sphinx', 'sphinxcontrib-programoutput', 'sphinx_rtd_theme', 'graphviz'],
             'tests': [
                 # List pytest-cov before pytest because of a dumb pip bug
                 'pytest-cov',
-                'pytest>=4.6'
+                'pytest>=4.6',
+                'codecov',
             ],
             'lint': ['yapf'],
             'curate': ['graphviz']

@@ -1,8 +1,39 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
 Some helper functions for parsing basis set files
 '''
 
 import re
+import regex
 from ..misc import transpose_matrix
 
 floating_re_str = r'[-+]?\d*\.\d*(?:[dDeE][-+]?\d+)?'
@@ -49,13 +80,6 @@ def replace_d(s):
     return s
 
 
-def function_type_from_am(shell_am, base_type, spherical_type):
-    if max(shell_am) <= 1:
-        return base_type
-    else:
-        return base_type + '_' + spherical_type
-
-
 def potential_am_list(max_am):
     '''Creates a canonical list of AM for use with ECP potentials
 
@@ -98,25 +122,6 @@ def remove_expected_line(lines, expected='', position=0):
     return new_lines
 
 
-def create_element_data(bs_data, element_Z, key, key_exist_ok=False, element_exist_ok=True, create=list):
-    '''Creates an element and a subkey of the element in bs_data
-
-    Note that bs_data is modified!
-    '''
-
-    if element_Z not in bs_data:
-        bs_data[element_Z] = {}
-    elif not element_exist_ok:
-        raise RuntimeError("Element {} already exists in basis data".format(element_Z))
-
-    if key not in bs_data[element_Z]:
-        bs_data[element_Z][key] = create()
-    elif not key_exist_ok:
-        raise RuntimeError("Key {} already exists in basis data for element {}".format(key, element_Z))
-
-    return bs_data[element_Z]
-
-
 def parse_line_regex(rex, line, description=None, convert_int=True):
     if isinstance(rex, str):
         rex = re.compile(rex)
@@ -137,6 +142,25 @@ def parse_line_regex(rex, line, description=None, convert_int=True):
         return g[0]
     else:
         return g
+
+
+def parse_line_regex_dict(rex, line, description=None, convert_int=True):
+    if isinstance(rex, str):
+        rex = regex.compile(rex)
+
+    r = rex.match(line)
+    if not r:
+        if description:
+            raise RuntimeError("Regex '{}' does not match line: '{}'. Regex is '{}'".format(
+                description, line, rex.pattern))
+        else:
+            raise RuntimeError("Regex '{}' does not match line: '{}'".format(rex.pattern, line))
+
+    g = r.capturesdict()
+    if convert_int:
+        g = {k: [_convert_str_int(x) for x in g[k]] for k in g}
+
+    return g
 
 
 def partition_lines(lines,

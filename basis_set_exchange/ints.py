@@ -1,3 +1,33 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
 One-center integrals for Gaussian-type and Slater-type orbitals
 
@@ -144,6 +174,49 @@ def gto_overlap_contr(exps0, contr0, l):
     # Get primitive integrals
     ovl = _gto_overlap(exps, l)
     return _transform(contr, ovl)
+
+
+def _gto_R(exps, l):
+    '''Computes the <r> matrix for the given exponents, assuming the basis
+    functions are of the normalized spherical form r^l exp(-z r^2).
+
+    '''
+    assert (isinstance(l, int) and l >= 0)
+
+    def rval(a, b, l):
+        ab = 0.5 * (a + b)
+        sqrtab = sqrt(a * b)
+        return 1.0 / sqrt(sqrtab) * (sqrtab / ab)**(l + 2)
+
+    # Initialize memory
+    rmat = _zero_matrix(len(exps))
+    prefactor = gamma(l + 2) / (sqrt(2) * gamma(l + 3 / 2))
+    for i in range(len(exps)):
+        for j in range(i + 1):
+            rmat[i][j] = prefactor * rval(exps[i], exps[j], l)
+            rmat[j][i] = rmat[i][j]
+    return rmat
+
+
+def gto_R_contr(exps0, contr0, l):
+    '''Computes the r matrix in the contracted basis, assuming the basis
+    functions are of the spherical form r^l \sum_i c_i exp(-z_i r^2).
+    The function also takes care of proper normalization.
+
+    '''
+
+    # Convert exponents and contractions to floating point
+    exps = _to_float(exps0)
+    contr = _to_float(contr0)
+
+    # Get primitive integrals
+    rmat = _gto_R(exps, l)
+    ovl = _gto_overlap(exps, l)
+
+    # Normalize the contraction
+    contr = _normalize_contraction(contr, ovl)
+    # Transform to normalized contracted form
+    return _transform(contr, rmat)
 
 
 def _gto_Rsq(exps, l):

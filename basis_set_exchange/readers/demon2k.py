@@ -1,7 +1,41 @@
-# Written by Susi Lehtola, 2021
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+'''
+Reader for the DeMon2K format
+
+Written by Susi Lehtola, 2021
+'''
 
 import re
-from .. import lut
+from .. import lut, manip
 from . import helpers
 
 # Orbital entry: O-ELEMENT [possible repetition(s) of element symbol] (name)
@@ -34,7 +68,7 @@ def _parse_electron_lines(basis_lines, bs_data):
 
     # Create basis
     element_Z = lut.element_Z_from_name(element_name, as_str=True)
-    element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+    element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
 
     # Second line is number of shells
     n_shells = int(basis_lines[1].split()[0])
@@ -58,7 +92,7 @@ def _parse_electron_lines(basis_lines, bs_data):
         exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:1 + nprim], nprim, ngen)
 
         # Function type (assuming always spherical)
-        func_type = helpers.function_type_from_am(shell_am, 'gto', 'spherical')
+        func_type = lut.function_type_from_am(shell_am, 'gto', 'spherical')
         shell = {
             'function_type': func_type,
             'region': '',
@@ -91,7 +125,7 @@ def _parse_ecp_lines(ecp_lines, bs_data):
 
         # Initialize basis
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-        element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+        element_data = manip.create_element_data(bs_data, element_Z, 'ecp_potentials')
         element_data['ecp_electrons'] = ecp_electrons
 
         # Read angular momentum blocks

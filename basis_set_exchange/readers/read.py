@@ -1,3 +1,33 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
 Read a basis set file in a given format
 '''
@@ -13,8 +43,13 @@ from .nwchem import read_nwchem
 from .gbasis import read_gbasis
 from .dalton import read_dalton
 from .molcas import read_molcas
+from .molpro import read_molpro
+from .libmol import read_libmol
 from .genbas import read_genbas
 from .demon2k import read_demon2k
+from .ricdlib import read_ricdlib
+from .gamess_us import read_gamess_us
+from .cp2k import read_cp2k
 
 _reader_map = {
     'turbomole': {
@@ -42,6 +77,16 @@ _reader_map = {
         'extension': '.molcas',
         'reader': read_molcas
     },
+    'molpro': {
+        'display': 'Molpro',
+        'extension': '.mpro',
+        'reader': read_molpro
+    },
+    'libmol': {
+        'display': 'Molpro system library',
+        'extension': '.libmol',
+        'reader': read_libmol
+    },
     'cfour': {
         'display': 'CFOUR',
         'extension': '.c4bas',
@@ -61,6 +106,21 @@ _reader_map = {
         'display': 'deMon2k',
         'extension': '.d2k',
         'reader': read_demon2k
+    },
+    'ricdlib': {
+        'display': 'MolCAS RICDlib',
+        'extension': '.RICDLib',
+        'reader': read_ricdlib
+    },
+    'gamess_us': {
+        'display': 'GAMESS US',
+        'extension': '.bas',
+        'reader': read_gamess_us
+    },
+    'cp2k': {
+        'display': 'CP2K',
+        'extension': '.cp2k',
+        'reader': read_cp2k
     }
 }
 

@@ -1,3 +1,33 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
 Command line interface for the basis set exchange
 '''
@@ -104,6 +134,10 @@ def run_bse_cli():
     subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
     subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
     subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
+    subp.add_argument('--get-aux',
+                      type=int,
+                      default=0,
+                      help='Instead of the orbital basis, get an automatically formed auxiliary basis')
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
@@ -142,6 +176,30 @@ def run_bse_cli():
     subp = subparsers.add_parser('convert-basis', help='Convert basis set files from one format to another')
     subp.add_argument('input_file', type=str, help='Basis set file to convert')
     subp.add_argument('output_file', type=str, help='Converted basis set file')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+    subp.add_argument('--make-gen', action='store_true', help='Make the basis set as generally-contracted as possible')
+
+    #################################
+    # Auxiliary basis sets
+    #################################
+    subp = subparsers.add_parser('autoaux-basis', help='Form AutoAux auxiliary basis')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='AutoAux basis to write')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+
+    subp = subparsers.add_parser('autoabs-basis', help='Form AutoABS auxiliary basis')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='AutoABS basis to write')
     subp.add_argument(
         '--in-fmt', type=str, default=None,
         help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer

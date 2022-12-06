@@ -1,3 +1,33 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
 Main interface to Basis Set Exchange internal basis sets
 
@@ -102,6 +132,7 @@ def get_basis(name,
               optimize_general=False,
               augment_diffuse=0,
               augment_steep=0,
+              get_aux=0,
               data_dir=None,
               header=True):
     '''Obtain a basis set
@@ -164,6 +195,10 @@ def get_basis(name,
         Add n diffuse functions by even-tempered extrapolation
     augment_steep : int
         Add n steep functions by even-tempered extrapolation
+    get_aux : int
+        Instead of the orbital basis, get an auxiliary basis
+        set. Options 0 (return orbital basis), 1 (return AutoAux
+        basis), 2 (return Auto-ABS Coulomb fitting basis)
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -173,6 +208,7 @@ def get_basis(name,
     str or dict
         The basis set in the desired format. If `fmt` is **None**, this will be a python
         dictionary. Otherwise, it will be a string.
+
     '''
 
     data_dir = fix_data_dir(data_dir)
@@ -271,6 +307,12 @@ def get_basis(name,
     # Re-make general
     if (augment_diffuse > 0 or augment_steep > 0) and make_general:
         basis_dict = manip.make_general(basis_dict, False, False)
+
+    # Did we actually want an auxiliary basis set?
+    if get_aux == 1:
+        basis_dict = manip.autoaux_basis(basis_dict)
+    elif get_aux == 2:
+        basis_dict = manip.autoabs_basis(basis_dict)
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

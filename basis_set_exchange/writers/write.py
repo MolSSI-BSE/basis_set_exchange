@@ -1,17 +1,48 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 '''
-Converts basis set data to a specified output format
+Driver for converting basis set data to a specified output format
 '''
 
 import bz2
 from .bsejson import write_json
 from .nwchem import write_nwchem
-from .g94 import write_g94, write_xtron, write_psi4
+from .g94 import write_g94, write_g94lib, write_xtron, write_psi4
 from .gamess_us import write_gamess_us
 from .gamess_uk import write_gamess_uk
 from .qchem import write_qchem
 from .orca import write_orca
 from .turbomole import write_turbomole
 from .molpro import write_molpro
+from .libmol import write_libmol
 from .molcas import write_molcas
 from .molcas_library import write_molcas_library
 from .genbas import write_cfour, write_aces2
@@ -22,139 +53,156 @@ from .pqs import write_pqs
 from .cp2k import write_cp2k
 from .bsedebug import write_bsedebug
 from .bdf import write_bdf
+from .ricdwrap import write_ricdwrap
+from .fhiaims import write_fhiaims
+from .jaguar import write_jaguar
 
 _writer_map = {
     'nwchem': {
         'display': 'NWChem',
         'extension': '.nw',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_nwchem
     },
     'gaussian94': {
         'display': 'Gaussian',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_g94
+    },
+    'gaussian94lib': {
+        'display': 'Gaussian, system library',
+        'extension': '.gbs',
+        'comment': '!',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_g94lib
     },
     'psi4': {
         'display': 'Psi4',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_psi4
     },
     'molcas': {
         'display': 'Molcas',
         'extension': '.molcas',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molcas
     },
     'molcas_library': {
         'display': 'Molcas basis_library',
         'extension': '.molcas',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molcas_library
     },
     'qchem': {
         'display': 'Q-Chem',
         'extension': '.qchem',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_qchem
     },
     'orca': {
         'display': 'ORCA',
         'extension': '.orca',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_orca
     },
     'dalton': {
         'display': 'Dalton',
         'extension': '.dalton',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_dalton
     },
     'qcschema': {
         'display': 'QCSchema',
         'extension': '.json',
         'comment': None,
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_qcschema
     },
     'cp2k': {
         'display': 'CP2K',
         'extension': '.cp2k',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_cp2k
     },
     'pqs': {
         'display': 'PQS',
         'extension': '.pqs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_pqs
     },
     'demon2k': {
         'display': 'deMon2K',
         'extension': '.d2k',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_demon2k
     },
     'gamess_us': {
         'display': 'GAMESS US',
         'extension': '.bas',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_gamess_us
     },
     'turbomole': {
         'display': 'Turbomole',
         'extension': '.tm',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_turbomole
     },
     'gamess_uk': {
         'display': 'GAMESS UK',
         'extension': '.bas',
         'comment': '#',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_gamess_uk
     },
     'molpro': {
         'display': 'Molpro',
         'extension': '.mpro',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molpro
+    },
+    'libmol': {
+        'display': 'Molpro system library',
+        'extension': '.libmol',
+        'comment': '!',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_libmol
     },
     'cfour': {
         'display': 'CFOUR',
         'extension': '.c4bas',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_cfour
     },
     'acesii': {
         'display': 'ACES II',
         'extension': '.acesii',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_aces2
     },
     'xtron': {
         'display': 'xTron',
         'extension': '.gbs',
         'comment': '!',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_xtron
     },
     'bsedebug': {
@@ -175,8 +223,29 @@ _writer_map = {
         'display': 'BDF',
         'extension': '.bdf',
         'comment': '*',
-        'valid': set(['gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp']),
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_bdf
+    },
+    'ricdwrap': {
+        'display': 'Wrapper for generating acCD auxiliary basis sets with OpenMolcas',
+        'extension': '.ricdwrap',
+        'comment': '*',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_ricdwrap
+    },
+    'fhiaims': {
+        'display': 'FHI-aims',
+        'extension': '.fhiaims',
+        'comment': '#',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical'},
+        'function': write_fhiaims
+    },
+    'jaguar': {
+        'display': 'Jaguar',
+        'extension': '.jaguar',
+        'comment': '#',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_jaguar
     }
 }
 
@@ -261,11 +330,11 @@ def get_writer_formats(function_types=None):
 
     ftypes = [x.lower() for x in function_types]
     ftypes = set(ftypes)
-    ret = []
+    ret = {}
 
     for fmt, v in _writer_map.items():
         if v['valid'] is None or ftypes <= v['valid']:
-            ret.append(fmt)
+            ret[fmt] = v['display']
     return ret
 
 

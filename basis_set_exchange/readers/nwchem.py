@@ -1,5 +1,39 @@
+# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+'''
+Reader for the NWChem format
+'''
+
 import re
-from .. import lut
+from .. import lut, manip
 from . import helpers
 
 am_line_re = re.compile(r'^([A-Za-z]+)\s+([A-Za-z]+)$')
@@ -31,9 +65,9 @@ def _parse_electron_lines(basis_lines, bs_data):
         shell_am = lut.amchar_to_int(shell_am)
 
         element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells', key_exist_ok=True)
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells', key_exist_ok=True)
 
-        func_type = helpers.function_type_from_am(shell_am, 'gto', am_type)
+        func_type = lut.function_type_from_am(shell_am, 'gto', am_type)
 
         # How many columns of coefficients do we have?
         # Only if this is a fused shell do we know
@@ -78,13 +112,13 @@ def _parse_ecp_lines(basis_lines, bs_data):
             element_sym, n_elec = helpers.parse_line_regex(nelec_re, pot_lines[0].lower(), "ECP: Element sym, nelec")
 
             element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-            element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_electrons', create=int)
+            element_data = manip.create_element_data(bs_data, element_Z, 'ecp_electrons', create=int)
             element_data['ecp_electrons'] = n_elec
         else:
             element_sym, pot_am = helpers.parse_line_regex(am_line_re, pot_lines[0], "ECP: Element sym, pot AM")
 
             element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
-            element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials', key_exist_ok=True)
+            element_data = manip.create_element_data(bs_data, element_Z, 'ecp_potentials', key_exist_ok=True)
 
             # See if this is the 'ul' angular momentum
             if pot_am.lower() == 'ul':
