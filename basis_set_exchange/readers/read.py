@@ -77,6 +77,12 @@ _reader_map = {
         'extension': '.molcas',
         'reader': read_molcas
     },
+    # for now this is just an alias for molcas, as it seems to work fine
+    'molcas_library': {
+        'display': 'Molcas basis_library',
+        'extension': '.molcas',
+        'reader': read_molcas
+    },
     'molpro': {
         'display': 'Molpro',
         'extension': '.mpro',
