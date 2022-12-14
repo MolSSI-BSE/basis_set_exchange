@@ -43,10 +43,12 @@ def write_veloxchem(basis):
     s = f'@BASIS_SET {basis["name"]}\n'
 
     basis = manip.optimize_general(basis, False)
+
     basis = manip.uncontract_general(basis, False)
+
     basis = manip.uncontract_spdf(basis, 0, False)
+
     basis = manip.prune_basis(basis, False)
-    basis = sort.sort_basis(basis, False)
 
     # Elements for which we have electron basis
     electron_elements = [k for k, v in basis['elements'].items() if 'electron_shells' in v]
