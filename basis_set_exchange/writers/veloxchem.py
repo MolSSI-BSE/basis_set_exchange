@@ -33,7 +33,7 @@ Conversion of basis sets to VeloxChem format
 
 from hashlib import md5
 
-from .. import lut, manip, sort, misc, printing
+from .. import lut, manip, misc, printing, sort
 
 
 def write_veloxchem(basis):
@@ -61,8 +61,8 @@ def write_veloxchem(basis):
             elname = lut.element_name_from_Z(z).upper()
             cont_string = misc.contraction_string(data)
 
-            s += f'\n@ATOMBASIS {sym:s}\n'
-            s += f'! {elname:s}       {cont_string:s}\n'
+            s += f'\n! {elname:s}       {cont_string:s}\n'
+            s += f'@ATOMBASIS {sym:s}\n'
 
             for shell in data['electron_shells']:
                 exponents = shell['exponents']
@@ -72,6 +72,7 @@ def write_veloxchem(basis):
                 ngen = len(coefficients)
 
                 am = shell['angular_momentum']
+                # use 'hij' convention, where AM=7 is j
                 amchar = lut.amint_to_char(am, hij=True)
 
                 s += f'{amchar.upper()}    {nprim:d}    {ngen:d}\n'
