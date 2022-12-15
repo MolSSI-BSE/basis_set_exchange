@@ -35,7 +35,7 @@ Written by Susi Lehtola, 2021
 '''
 
 import regex
-from .. import lut
+from .. import lut, manip
 from . import helpers
 
 # Shell entry: 'element names'
@@ -60,7 +60,7 @@ def _read_shell(basis_lines, bs_data):
     element_sym = element_shell['sym'][0]
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
     if element_Z not in bs_data or 'electron_shells' not in bs_data[element_Z]:
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
     else:
         element_data = bs_data[element_Z]
 
@@ -93,7 +93,7 @@ def _read_shell(basis_lines, bs_data):
             col_offset = sum(nshell[:l - lmin])
             ncontr_l = nshell[l - lmin]
             l_coeff = coeffs[:][col_offset:col_offset + ncontr_l]
-            func_type = helpers.function_type_from_am([l], 'gto', 'spherical')
+            func_type = lut.function_type_from_am([l], 'gto', 'spherical')
             shell = {
                 'function_type': func_type,
                 'region': '',
@@ -115,6 +115,7 @@ def read_cp2k(basis_lines):
 
     # Removes comments
     basis_lines = helpers.prune_lines(basis_lines, '!')
+    basis_lines = helpers.prune_lines(basis_lines, '#')
 
     bs_data = {}
 
