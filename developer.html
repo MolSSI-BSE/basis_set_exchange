@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -74,8 +75,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Developer Documentation</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Developer Documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developer.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,37 +93,180 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer_api.html">Developer API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.api">api - The main API Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.bundle">bundle - Creation of bundles/archives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.compose">compose - Composition of basis set information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.convert">convert - Conversion of formatted basis set data/files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.fileio">fileio - Input/Output of files (including json)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.lut">lut - Lookup tables element information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.api">api - The main API Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.filter_basis_sets"><code class="docutils literal notranslate"><span class="pre">filter_basis_sets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.fix_data_dir"><code class="docutils literal notranslate"><span class="pre">fix_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_all_basis_names"><code class="docutils literal notranslate"><span class="pre">get_all_basis_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_basis"><code class="docutils literal notranslate"><span class="pre">get_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_basis_family"><code class="docutils literal notranslate"><span class="pre">get_basis_family()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_data_dir"><code class="docutils literal notranslate"><span class="pre">get_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_formats"><code class="docutils literal notranslate"><span class="pre">get_formats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_reference_formats"><code class="docutils literal notranslate"><span class="pre">get_reference_formats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_references"><code class="docutils literal notranslate"><span class="pre">get_references()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.get_roles"><code class="docutils literal notranslate"><span class="pre">get_roles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.lookup_basis_by_role"><code class="docutils literal notranslate"><span class="pre">lookup_basis_by_role()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.api.version"><code class="docutils literal notranslate"><span class="pre">version()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.bundle">bundle - Creation of bundles/archives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.bundle.create_bundle"><code class="docutils literal notranslate"><span class="pre">create_bundle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.bundle.get_archive_types"><code class="docutils literal notranslate"><span class="pre">get_archive_types()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.compose">compose - Composition of basis set information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.compose.compose_elemental_basis"><code class="docutils literal notranslate"><span class="pre">compose_elemental_basis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.convert">convert - Conversion of formatted basis set data/files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.convert.convert_formatted_basis_file"><code class="docutils literal notranslate"><span class="pre">convert_formatted_basis_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.convert.convert_formatted_basis_str"><code class="docutils literal notranslate"><span class="pre">convert_formatted_basis_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.fileio">fileio - Input/Output of files (including json)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.get_all_filelist"><code class="docutils literal notranslate"><span class="pre">get_all_filelist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.read_json_basis"><code class="docutils literal notranslate"><span class="pre">read_json_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.read_metadata"><code class="docutils literal notranslate"><span class="pre">read_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.read_notes_file"><code class="docutils literal notranslate"><span class="pre">read_notes_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.read_references"><code class="docutils literal notranslate"><span class="pre">read_references()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.read_schema"><code class="docutils literal notranslate"><span class="pre">read_schema()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.write_json_basis"><code class="docutils literal notranslate"><span class="pre">write_json_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.write_metadata"><code class="docutils literal notranslate"><span class="pre">write_metadata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.fileio.write_references"><code class="docutils literal notranslate"><span class="pre">write_references()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.lut">lut - Lookup tables element information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.all_element_names"><code class="docutils literal notranslate"><span class="pre">all_element_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.amchar_to_int"><code class="docutils literal notranslate"><span class="pre">amchar_to_int()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.amint_to_char"><code class="docutils literal notranslate"><span class="pre">amint_to_char()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.electron_shells_start"><code class="docutils literal notranslate"><span class="pre">electron_shells_start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_Z_from_name"><code class="docutils literal notranslate"><span class="pre">element_Z_from_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_Z_from_sym"><code class="docutils literal notranslate"><span class="pre">element_Z_from_sym()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_data_from_Z"><code class="docutils literal notranslate"><span class="pre">element_data_from_Z()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_data_from_name"><code class="docutils literal notranslate"><span class="pre">element_data_from_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_data_from_sym"><code class="docutils literal notranslate"><span class="pre">element_data_from_sym()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_name_from_Z"><code class="docutils literal notranslate"><span class="pre">element_name_from_Z()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.lut.element_sym_from_Z"><code class="docutils literal notranslate"><span class="pre">element_sym_from_Z()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.manip">manip - Manipulation of basis sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.autoabs_basis"><code class="docutils literal notranslate"><span class="pre">autoabs_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.autoaux_basis"><code class="docutils literal notranslate"><span class="pre">autoaux_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.create_element_data"><code class="docutils literal notranslate"><span class="pre">create_element_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.geometric_augmentation"><code class="docutils literal notranslate"><span class="pre">geometric_augmentation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.make_general"><code class="docutils literal notranslate"><span class="pre">make_general()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.merge_element_data"><code class="docutils literal notranslate"><span class="pre">merge_element_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.optimize_general"><code class="docutils literal notranslate"><span class="pre">optimize_general()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.prune_basis"><code class="docutils literal notranslate"><span class="pre">prune_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.prune_shell"><code class="docutils literal notranslate"><span class="pre">prune_shell()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.remove_free_primitives"><code class="docutils literal notranslate"><span class="pre">remove_free_primitives()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.remove_primitive"><code class="docutils literal notranslate"><span class="pre">remove_primitive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.truhlar_calendarize"><code class="docutils literal notranslate"><span class="pre">truhlar_calendarize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.uncontract_general"><code class="docutils literal notranslate"><span class="pre">uncontract_general()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.uncontract_segmented"><code class="docutils literal notranslate"><span class="pre">uncontract_segmented()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.manip.uncontract_spdf"><code class="docutils literal notranslate"><span class="pre">uncontract_spdf()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.memo">memo - Custom memoization decorator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.misc">misc - Miscellaneous helper functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.notes">notes - Handling of notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.printing">printing - Functions for printing/outputting pieces of basis sets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.references">references - Handling of reference data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.skel">skel - Creating of python object skeletons of basis set data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.sort">sort - Sorting of basis set data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.validator">validator - Validation of basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.misc">misc - Miscellaneous helper functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.basis_name_from_filename"><code class="docutils literal notranslate"><span class="pre">basis_name_from_filename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.basis_name_to_filename"><code class="docutils literal notranslate"><span class="pre">basis_name_to_filename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.compact_elements"><code class="docutils literal notranslate"><span class="pre">compact_elements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.contraction_string"><code class="docutils literal notranslate"><span class="pre">contraction_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.expand_elements"><code class="docutils literal notranslate"><span class="pre">expand_elements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.max_am"><code class="docutils literal notranslate"><span class="pre">max_am()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.transform_basis_name"><code class="docutils literal notranslate"><span class="pre">transform_basis_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.misc.transpose_matrix"><code class="docutils literal notranslate"><span class="pre">transpose_matrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.notes">notes - Handling of notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.notes.process_notes"><code class="docutils literal notranslate"><span class="pre">process_notes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.printing">printing - Functions for printing/outputting pieces of basis sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.printing.component_basis_str"><code class="docutils literal notranslate"><span class="pre">component_basis_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.printing.ecp_pot_str"><code class="docutils literal notranslate"><span class="pre">ecp_pot_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.printing.electron_shell_str"><code class="docutils literal notranslate"><span class="pre">electron_shell_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.printing.element_data_str"><code class="docutils literal notranslate"><span class="pre">element_data_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.references">references - Handling of reference data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.references.compact_references"><code class="docutils literal notranslate"><span class="pre">compact_references()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.references.reference_text"><code class="docutils literal notranslate"><span class="pre">reference_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.skel">skel - Creating of python object skeletons of basis set data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.skel.create_skel"><code class="docutils literal notranslate"><span class="pre">create_skel()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.sort">sort - Sorting of basis set data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_basis"><code class="docutils literal notranslate"><span class="pre">sort_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_basis_dict"><code class="docutils literal notranslate"><span class="pre">sort_basis_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_potentials"><code class="docutils literal notranslate"><span class="pre">sort_potentials()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_references_dict"><code class="docutils literal notranslate"><span class="pre">sort_references_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_shell"><code class="docutils literal notranslate"><span class="pre">sort_shell()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_shells"><code class="docutils literal notranslate"><span class="pre">sort_shells()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.sort.sort_single_reference"><code class="docutils literal notranslate"><span class="pre">sort_single_reference()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api.html#module-basis_set_exchange.validator">validator - Validation of basis sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.validator.validate_data"><code class="docutils literal notranslate"><span class="pre">validate_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.validator.validate_data_dir"><code class="docutils literal notranslate"><span class="pre">validate_data_dir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api.html#basis_set_exchange.validator.validate_file"><code class="docutils literal notranslate"><span class="pre">validate_file()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developer_writers.html">Output converters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_writers.html#module-basis_set_exchange.writers">writers - Formatting of basis set output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_writers.html#module-basis_set_exchange.writers">writers - Formatting of basis set output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_writers.html#basis_set_exchange.writers.get_format_extension"><code class="docutils literal notranslate"><span class="pre">get_format_extension()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_writers.html#basis_set_exchange.writers.get_writer_formats"><code class="docutils literal notranslate"><span class="pre">get_writer_formats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_writers.html#basis_set_exchange.writers.write_formatted_basis_str"><code class="docutils literal notranslate"><span class="pre">write_formatted_basis_str()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developer_readers.html">Basis set readers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_readers.html#module-basis_set_exchange.readers">readers - Reading formatted basis sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_readers.html#module-basis_set_exchange.readers">readers - Reading formatted basis sets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_readers.html#basis_set_exchange.readers.get_reader_formats"><code class="docutils literal notranslate"><span class="pre">get_reader_formats()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developer_refconverters.html">Basis set reference writers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_refconverters.html#module-basis_set_exchange.refconverters">refconverters - Formatting of reference data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_refconverters.html#module-basis_set_exchange.refconverters">refconverters - Formatting of reference data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_refconverters.html#basis_set_exchange.refconverters.convert_references"><code class="docutils literal notranslate"><span class="pre">convert_references()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_refconverters.html#basis_set_exchange.refconverters.get_format_extension"><code class="docutils literal notranslate"><span class="pre">get_format_extension()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_refconverters.html#basis_set_exchange.refconverters.get_reference_formats"><code class="docutils literal notranslate"><span class="pre">get_reference_formats()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developer_curate.html">Developer Curation API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_curate.html#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_curate.html#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.add_basis"><code class="docutils literal notranslate"><span class="pre">add_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.add_basis_from_dict"><code class="docutils literal notranslate"><span class="pre">add_basis_from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.add_from_components"><code class="docutils literal notranslate"><span class="pre">add_from_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.basis_comparison_report"><code class="docutils literal notranslate"><span class="pre">basis_comparison_report()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_basis"><code class="docutils literal notranslate"><span class="pre">compare_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_basis_against_file"><code class="docutils literal notranslate"><span class="pre">compare_basis_against_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_basis_files"><code class="docutils literal notranslate"><span class="pre">compare_basis_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_basis_sets"><code class="docutils literal notranslate"><span class="pre">compare_basis_sets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_ecp_pots"><code class="docutils literal notranslate"><span class="pre">compare_ecp_pots()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_electron_shells"><code class="docutils literal notranslate"><span class="pre">compare_electron_shells()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.compare_elements"><code class="docutils literal notranslate"><span class="pre">compare_elements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.component_file_refs"><code class="docutils literal notranslate"><span class="pre">component_file_refs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.create_metadata_file"><code class="docutils literal notranslate"><span class="pre">create_metadata_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.diff_basis_dict"><code class="docutils literal notranslate"><span class="pre">diff_basis_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.diff_json_files"><code class="docutils literal notranslate"><span class="pre">diff_json_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.ecp_pots_are_equal"><code class="docutils literal notranslate"><span class="pre">ecp_pots_are_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.ecp_pots_are_subset"><code class="docutils literal notranslate"><span class="pre">ecp_pots_are_subset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.electron_shells_are_equal"><code class="docutils literal notranslate"><span class="pre">electron_shells_are_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.electron_shells_are_subset"><code class="docutils literal notranslate"><span class="pre">electron_shells_are_subset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.elements_in_files"><code class="docutils literal notranslate"><span class="pre">elements_in_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.potentials_difference"><code class="docutils literal notranslate"><span class="pre">potentials_difference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_curate.html#basis_set_exchange.curate.shells_difference"><code class="docutils literal notranslate"><span class="pre">shells_difference()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

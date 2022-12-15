@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,7 +53,12 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_faq.html">Developer FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_api.html">Developer API</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Output converters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.writers">writers - Formatting of basis set output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.writers">writers - Formatting of basis set output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.writers.get_format_extension"><code class="docutils literal notranslate"><span class="pre">get_format_extension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.writers.get_writer_formats"><code class="docutils literal notranslate"><span class="pre">get_writer_formats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.writers.write_formatted_basis_str"><code class="docutils literal notranslate"><span class="pre">write_formatted_basis_str()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="developer_readers.html">Basis set readers</a></li>
@@ -77,9 +83,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
-      <li>Output converters</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="developer.html">Developer Documentation</a></li>
+      <li class="breadcrumb-item active">Output converters</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developer_writers.rst.txt" rel="nofollow"> View page source</a>
       </li>

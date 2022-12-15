@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -55,7 +56,31 @@
 <li class="toctree-l2"><a class="reference internal" href="developer_readers.html">Basis set readers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer_refconverters.html">Basis set reference writers</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Developer Curation API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_basis"><code class="docutils literal notranslate"><span class="pre">add_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_basis_from_dict"><code class="docutils literal notranslate"><span class="pre">add_basis_from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_from_components"><code class="docutils literal notranslate"><span class="pre">add_from_components()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.basis_comparison_report"><code class="docutils literal notranslate"><span class="pre">basis_comparison_report()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_basis"><code class="docutils literal notranslate"><span class="pre">compare_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_basis_against_file"><code class="docutils literal notranslate"><span class="pre">compare_basis_against_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_basis_files"><code class="docutils literal notranslate"><span class="pre">compare_basis_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_basis_sets"><code class="docutils literal notranslate"><span class="pre">compare_basis_sets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_ecp_pots"><code class="docutils literal notranslate"><span class="pre">compare_ecp_pots()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_electron_shells"><code class="docutils literal notranslate"><span class="pre">compare_electron_shells()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_elements"><code class="docutils literal notranslate"><span class="pre">compare_elements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.component_file_refs"><code class="docutils literal notranslate"><span class="pre">component_file_refs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.create_metadata_file"><code class="docutils literal notranslate"><span class="pre">create_metadata_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.diff_basis_dict"><code class="docutils literal notranslate"><span class="pre">diff_basis_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.diff_json_files"><code class="docutils literal notranslate"><span class="pre">diff_json_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.ecp_pots_are_equal"><code class="docutils literal notranslate"><span class="pre">ecp_pots_are_equal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.ecp_pots_are_subset"><code class="docutils literal notranslate"><span class="pre">ecp_pots_are_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.electron_shells_are_equal"><code class="docutils literal notranslate"><span class="pre">electron_shells_are_equal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.electron_shells_are_subset"><code class="docutils literal notranslate"><span class="pre">electron_shells_are_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.elements_in_files"><code class="docutils literal notranslate"><span class="pre">elements_in_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.potentials_difference"><code class="docutils literal notranslate"><span class="pre">potentials_difference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.shells_difference"><code class="docutils literal notranslate"><span class="pre">shells_difference()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -77,9 +102,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="developer.html">Developer Documentation</a> &raquo;</li>
-      <li>Developer Curation API</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="developer.html">Developer Documentation</a></li>
+      <li class="breadcrumb-item active">Developer Curation API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developer_curate.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -310,8 +335,8 @@ that are identical. ECP potentials are not affected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>left_list</strong> (<em>list of dict</em>) – Dictionaries to use as the base</p></li>
-<li><p><strong>right_list</strong> (<em>list of dict</em>) – Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p></li>
+<li><p><strong>left_list</strong> (<em>list</em><em> of </em><em>dict</em>) – Dictionaries to use as the base</p></li>
+<li><p><strong>right_list</strong> (<em>list</em><em> of </em><em>dict</em>) – Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -338,8 +363,8 @@ but with <cite>.diff</cite> added to the end. If those files exist, they are ove
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>left_files</strong> (<em>list of str</em>) – Paths to JSON files to use as the base</p></li>
-<li><p><strong>right_files</strong> (<em>list of str</em>) – Paths to JSON files to subtract from each file of <cite>left_files</cite></p></li>
+<li><p><strong>left_files</strong> (<em>list</em><em> of </em><em>str</em>) – Paths to JSON files to use as the base</p></li>
+<li><p><strong>right_files</strong> (<em>list</em><em> of </em><em>str</em>) – Paths to JSON files to subtract from each file of <cite>left_files</cite></p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
