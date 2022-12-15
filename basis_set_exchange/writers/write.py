@@ -260,7 +260,7 @@ _writer_map = {
         'display': 'VeloxChem',
         'extension': '.vlx',
         'comment': '!',
-        'valid': {'gto', 'gto_cartesian', 'gto_spherical',},
+        'valid': {'gto', 'gto_spherical'},
         'function': write_veloxchem
     }
 }
