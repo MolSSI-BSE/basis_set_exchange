@@ -432,7 +432,7 @@ def parse_primitive_matrix(lines, nprim=None, ngen=None, split=r'\s+'):
 
     The lines parameter must specify a list of strings containing the entire matrix.
 
-    If nprim and/or ngen are specified, and the found number of primitives/contractions 
+    If nprim and/or ngen are specified, and the found number of primitives/contractions
     match, an exception is raised.
     '''
     exponents = []
@@ -573,7 +573,7 @@ def prune_lines(lines, skipchars='', prune_blank=True, strip_end_blanks=True):
 
 def remove_block(lines, start_re, end_re):
     '''Removes a block of data from the lines of text
-    
+
        For example, there may be an optional block of options (like in molcas)
 
        This will only remove a single block
