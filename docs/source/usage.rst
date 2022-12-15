@@ -280,7 +280,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
    >>> # All basis sets of the dunning family that have '5z' in the name
    >>> md = basis_set_exchange.filter_basis_sets('5z', family='dunning')
    >>> md.keys()
-   dict_keys(['aug-cc-pcv5z', 'aug-cc-pv5z', 'aug-cc-pwcv5z', 'cc-pcv5z', 'cc-pv5z', 'cc-pwcv5z'...
+   dict_keys(['aug-cc-pcv5z', 'aug-cc-pv5z', 'aug-cc-pwcv5z', 'aug-seg-cc-pv5z-pp', ...
 
 
 Basis set and family notes
