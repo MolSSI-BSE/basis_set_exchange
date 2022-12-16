@@ -207,7 +207,7 @@ data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
 Traceback (most recent call last):
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/bin/bse&quot;, line 33, in &lt;module&gt;
-    sys.exit(load_entry_point(&#39;basis-set-exchange==0.9+52.g8e009393&#39;, &#39;console_scripts&#39;, &#39;bse&#39;)())
+    sys.exit(load_entry_point(&#39;basis-set-exchange==0.9+60.g5295dffb&#39;, &#39;console_scripts&#39;, &#39;bse&#39;)())
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bse_cli.py&quot;, line 230, in run_bse_cli
     args = cli_check_normalize_args(args)
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 159, in cli_check_normalize_args
@@ -264,33 +264,34 @@ positional arguments:
 <p>Lists the available output formats of basis sets.
 With <code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-description</span></code>, the command will hide the description of the formats.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats
-acesii         ACES II
-bdf            BDF
-bsedebug       BSE Debug
-cfour          CFOUR
-cp2k           CP2K
-crystal        Crystal
-dalton         Dalton
-demon2k        deMon2K
-fhiaims        FHI-aims
-gamess_uk      GAMESS UK
-gamess_us      GAMESS US
-gaussian94     Gaussian
-gaussian94lib  Gaussian, system library
-jaguar         Jaguar
-json           JSON
-libmol         Molpro system library
-molcas         Molcas
-molpro         Molpro
-nwchem         NWChem
-orca           ORCA
-pqs            PQS
-psi4           Psi4
-qchem          Q-Chem
-qcschema       QCSchema
-ricdwrap       Wrapper for generating acCD auxiliary basis sets with OpenMolcas
-turbomole      Turbomole
-xtron          xTron
+acesii          ACES II
+bdf             BDF
+bsedebug        BSE Debug
+cfour           CFOUR
+cp2k            CP2K
+crystal         Crystal
+dalton          Dalton
+demon2k         deMon2K
+fhiaims         FHI-aims
+gamess_uk       GAMESS UK
+gamess_us       GAMESS US
+gaussian94      Gaussian
+gaussian94lib   Gaussian, system library
+jaguar          Jaguar
+json            JSON
+libmol          Molpro system library
+molcas          Molcas
+molcas_library  Molcas basis_library
+molpro          Molpro
+nwchem          NWChem
+orca            ORCA
+pqs             PQS
+psi4            Psi4
+qchem           Q-Chem
+qcschema        QCSchema
+ricdwrap        Wrapper for generating acCD auxiliary basis sets with OpenMolcas
+turbomole       Turbomole
+xtron           xTron
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-formats -n
@@ -311,6 +312,7 @@ jaguar
 json
 libmol
 molcas
+molcas_library
 molpro
 nwchem
 orca
@@ -349,33 +351,34 @@ json
 <h3>list-writer-formats<a class="headerlink" href="#list-writer-formats" title="Permalink to this heading"></a></h3>
 <p>Print a list of the formats that can be written to by the library</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-writer-formats
-acesii         ACES II
-bdf            BDF
-bsedebug       BSE Debug
-cfour          CFOUR
-cp2k           CP2K
-crystal        Crystal
-dalton         Dalton
-demon2k        deMon2K
-fhiaims        FHI-aims
-gamess_uk      GAMESS UK
-gamess_us      GAMESS US
-gaussian94     Gaussian
-gaussian94lib  Gaussian, system library
-jaguar         Jaguar
-json           JSON
-libmol         Molpro system library
-molcas         Molcas
-molpro         Molpro
-nwchem         NWChem
-orca           ORCA
-pqs            PQS
-psi4           Psi4
-qchem          Q-Chem
-qcschema       QCSchema
-ricdwrap       Wrapper for generating acCD auxiliary basis sets with OpenMolcas
-turbomole      Turbomole
-xtron          xTron
+acesii          ACES II
+bdf             BDF
+bsedebug        BSE Debug
+cfour           CFOUR
+cp2k            CP2K
+crystal         Crystal
+dalton          Dalton
+demon2k         deMon2K
+fhiaims         FHI-aims
+gamess_uk       GAMESS UK
+gamess_us       GAMESS US
+gaussian94      Gaussian
+gaussian94lib   Gaussian, system library
+jaguar          Jaguar
+json            JSON
+libmol          Molpro system library
+molcas          Molcas
+molcas_library  Molcas basis_library
+molpro          Molpro
+nwchem          NWChem
+orca            ORCA
+pqs             PQS
+psi4            Psi4
+qchem           Q-Chem
+qcschema        QCSchema
+ricdwrap        Wrapper for generating acCD auxiliary basis sets with OpenMolcas
+turbomole       Turbomole
+xtron           xTron
 </pre></div>
 </div>
 </section>
@@ -383,21 +386,22 @@ xtron          xTron
 <h3>list-reader-formats<a class="headerlink" href="#list-reader-formats" title="Permalink to this heading"></a></h3>
 <p>Print a list of the formats that can be read by the library</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse list-reader-formats
-turbomole   Turbomole
-gaussian94  Gaussian94
-nwchem      NWChem
-dalton      Dalton
-molcas      MolCAS
-molpro      Molpro
-libmol      Molpro system library
-cfour       CFOUR
-genbas      Genbas
-gbasis      GBasis
-demon2k     deMon2k
-ricdlib     MolCAS RICDlib
-gamess_us   GAMESS US
-cp2k        CP2K
-crystal     Crystal
+turbomole       Turbomole
+gaussian94      Gaussian94
+nwchem          NWChem
+dalton          Dalton
+molcas          Molcas
+molcas_library  Molcas basis_library
+molpro          Molpro
+libmol          Molpro system library
+cfour           CFOUR
+genbas          Genbas
+gbasis          GBasis
+demon2k         deMon2k
+ricdlib         MolCAS RICDlib
+gamess_us       GAMESS US
+cp2k            CP2K
+crystal         Crystal
 </pre></div>
 </div>
 </section>
@@ -491,7 +495,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.9+52.g8e009393
+# Version v0.9+60.g5295dffb
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
