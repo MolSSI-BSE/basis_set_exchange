@@ -209,6 +209,9 @@ def read_molpro(basis_lines):
     # Removes comments
     basis_lines = helpers.prune_lines(basis_lines, '!*')
 
+    bs_data = {}
+    other_data = {}
+
     # Go through input and check basis type
     for line in basis_lines:
         if line.strip().lower() == 'spherical':
@@ -216,12 +219,10 @@ def read_molpro(basis_lines):
         elif line.strip().lower() == 'cartesian':
             _func_type = 'gto_cartesian'
 
-    bs_data = {}
-
     # Empty file?
     if not basis_lines:
         return bs_data
 
     _parse_lines(basis_lines, bs_data)
 
-    return bs_data
+    return bs_data, other_data

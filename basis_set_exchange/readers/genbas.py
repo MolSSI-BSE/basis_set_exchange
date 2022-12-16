@@ -147,6 +147,7 @@ def read_genbas(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '!#', prune_blank=False)
 
     bs_data = {}
+    other_data = {}
 
     # split into element blocks
     # each block may be electron shells or ECP
@@ -158,4 +159,4 @@ def read_genbas(basis_lines):
         else:
             _parse_electron_lines(element_lines, bs_data)
 
-    return bs_data
+    return bs_data, other_data

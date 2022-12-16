@@ -74,7 +74,13 @@ _reader_map = {
         'reader': read_dalton
     },
     'molcas': {
-        'display': 'MolCAS',
+        'display': 'Molcas',
+        'extension': '.molcas',
+        'reader': read_molcas
+    },
+    # for now this is just an alias for molcas, as it seems to work fine
+    'molcas_library': {
+        'display': 'Molcas basis_library',
         'extension': '.molcas',
         'reader': read_molcas
     },
@@ -154,7 +160,8 @@ def _fix_uncontracted(basis):
 def read_formatted_basis_str(basis_str, basis_fmt, validate=False, as_component=False):
     basis_lines = [x.strip() for x in basis_str.splitlines()]
 
-    element_data = _reader_map[basis_fmt]['reader'](basis_lines)
+    return_values = _reader_map[basis_fmt]['reader'](basis_lines)
+    element_data, other_data = return_values
 
     # the readers give the 'elements' member of a basis set json
     # We need to do a little fixing up
@@ -167,8 +174,8 @@ def read_formatted_basis_str(basis_str, basis_fmt, validate=False, as_component=
     else:
         data = create_skel('minimal')
         data['elements'] = element_data
-        data['name'] = 'unknown_basis'
-        data['description'] = 'no_description'
+        data['name'] = other_data.get('name', 'unknown_basis')
+        data['description'] = other_data.get('description', 'no_description')
         bs_type = 'minimal'
 
         # Create the function types

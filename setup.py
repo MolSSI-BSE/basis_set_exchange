@@ -44,7 +44,7 @@ if __name__ == "__main__":
             "console_scripts":
             ["bse=basis_set_exchange.cli:run_bse_cli", "bsecurate=basis_set_exchange.cli:run_bsecurate_cli"]
         },
-        install_requires=['jsonschema', 'argcomplete', 'regex'],
+        install_requires=['jsonschema', 'argcomplete', 'regex', 'unidecode'],
         extras_require={
             ':python_version == "3.6"': ["importlib-metadata"],
             ':python_version == "3.7"': ["importlib-metadata"],

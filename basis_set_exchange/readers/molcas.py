@@ -46,6 +46,8 @@ shell_nprim_ngen_re = re.compile(r'^(\d+)(?:\s+(\d+))?$')
 ecp_info_re = re.compile(r'^[Pp]{2}\s*,\s*([a-zA-Z]+)\s*,\s*(\d+)\s*,\s*(\d+)\s*;$')
 ecp_pot_begin_re = re.compile(r'^(\d+)\s*;.*$')  # Sometime comments are after the semicolon
 
+block_option = re.compile(r'OrbitalEnergies|FockOperator', flags=re.IGNORECASE)
+
 
 def _parse_electron_lines(basis_lines, bs_data, element_Z):
     element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
@@ -55,9 +57,8 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
     # We ignore that data, but we need to know it is there
     options_lines, basis_lines = helpers.remove_block(basis_lines, 'Options', 'EndOptions')
 
-    # Every option adds another block after each shell.
-    # I don't care about the contents, just how many options there are
-    n_option_blocks = len(options_lines)
+    # Some options add another block after each shell.
+    n_option_blocks = [bool(block_option.match(i)) for i in options_lines].count(True)
 
     # Next is the nuclear charge and the max_am
     # max_am may be missing
@@ -116,7 +117,12 @@ def _parse_electron_lines(basis_lines, bs_data, element_Z):
         # Now we can check if this makes sense
         n_coefs = len(coefficients)
         if n_coefs == 0:
-            raise RuntimeError("Have zero coefficients?")
+            # Assume uncontracted format (unit coefficient matrix)
+            coefficients = []
+            for i in range(nprim):
+                row = ['1.0' if j == i else '0.0' for j in range(nprim)]
+                coefficients.extend(row)
+            n_coefs = len(coefficients)
         if n_coefs % nprim != 0:
             raise RuntimeError("Number of coefficients is not a multiple of nprim: {} % {} = {}".format(
                 n_coefs, nprim, n_coefs % nprim))
@@ -213,6 +219,7 @@ def read_molcas(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '*#$')
 
     bs_data = {}
+    other_data = {}
 
     # Split into elements. Every start of an element is /
     element_blocks = helpers.partition_lines(basis_lines, lambda x: x.startswith('/'), min_size=4)
@@ -235,13 +242,15 @@ def read_molcas(basis_lines):
 
         # Split based on PP (pseudopotential)
         element_split = helpers.partition_lines(element_lines,
-                                                lambda x: x.lower().startswith('pp,'),
+                                                lambda x: x.lower().startswith('pp,') or x.lower().startswith('m1'),
                                                 min_blocks=1,
                                                 max_blocks=2)
 
         for block_lines in element_split:
             if block_lines[0].lower().startswith('pp'):
                 _parse_ecp_lines(block_lines, bs_data, element_Z)
+            elif block_lines[0].lower().startswith('m1'):
+                raise RuntimeError("Implicit ECP format not supported")
             else:
                 _parse_electron_lines(block_lines, bs_data, element_Z)
 
@@ -249,4 +258,6 @@ def read_molcas(basis_lines):
     if len(basis_names_found) > 1:
         raise RuntimeError("Multiple basis sets found in file: " + ','.join(basis_names_found))
 
-    return bs_data
+    other_data['name'] = next(iter(basis_names_found))
+
+    return bs_data, other_data

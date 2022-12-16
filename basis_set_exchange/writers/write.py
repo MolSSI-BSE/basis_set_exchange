@@ -44,6 +44,7 @@ from .turbomole import write_turbomole
 from .molpro import write_molpro
 from .libmol import write_libmol
 from .molcas import write_molcas
+from .molcas_library import write_molcas_library
 from .genbas import write_cfour, write_aces2
 from .dalton import write_dalton
 from .qcschema import write_qcschema
@@ -92,6 +93,13 @@ _writer_map = {
         'comment': '*',
         'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
         'function': write_molcas
+    },
+    'molcas_library': {
+        'display': 'Molcas basis_library',
+        'extension': '.molcas',
+        'comment': '*',
+        'valid': {'gto', 'gto_cartesian', 'gto_spherical', 'scalar_ecp'},
+        'function': write_molcas_library
     },
     'qchem': {
         'display': 'Q-Chem',

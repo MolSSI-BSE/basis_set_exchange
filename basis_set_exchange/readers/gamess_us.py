@@ -125,7 +125,9 @@ def read_gamess_us(basis_lines):
     '''
 
     basis_lines = helpers.prune_lines(basis_lines, '!#$', prune_blank=True)
+
     bs_data = {}
+    other_data = {}
 
     # split into element blocks
     # each block may be electron shells or ECP
@@ -137,4 +139,4 @@ def read_gamess_us(basis_lines):
     for ecp_lines in ecp_blocks:
         _parse_ecp_lines(ecp_lines, bs_data)
 
-    return bs_data
+    return bs_data, other_data

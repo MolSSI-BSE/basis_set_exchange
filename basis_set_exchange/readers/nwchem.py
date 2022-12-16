@@ -170,6 +170,7 @@ def read_nwchem(basis_lines):
     basis_lines = helpers.prune_lines(basis_lines, '#')
 
     bs_data = {}
+    other_data = {}
 
     # split into basis and ecp
     basis_sections = helpers.partition_lines(basis_lines,
@@ -186,4 +187,4 @@ def read_nwchem(basis_lines):
         else:
             raise RuntimeError("Unknown section: " + s[0])
 
-    return bs_data
+    return bs_data, other_data
