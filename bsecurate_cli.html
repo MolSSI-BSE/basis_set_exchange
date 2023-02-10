@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The bsecurate command line interface &mdash; Basis Set Exchange  documentation</title>
@@ -11,10 +11,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Basis Set Exchange
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -82,7 +84,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">The bsecurate command line interface</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/bsecurate_cli.rst.txt" rel="nofollow"> View page source</a>
@@ -213,7 +215,7 @@ This works on table, element, and component data files.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
 Traceback (most recent call last):
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/bin/bsecurate&quot;, line 33, in &lt;module&gt;
-    sys.exit(load_entry_point(&#39;basis-set-exchange==0.9+60.g5295dffb&#39;, &#39;console_scripts&#39;, &#39;bsecurate&#39;)())
+    sys.exit(load_entry_point(&#39;basis-set-exchange==0.9+62.g9c3abc5f&#39;, &#39;console_scripts&#39;, &#39;bsecurate&#39;)())
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_cli.py&quot;, line 156, in run_bsecurate_cli
     output = bsecurate_cli_handle_subcmd(args)
   File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 143, in bsecurate_cli_handle_subcmd

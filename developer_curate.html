@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Developer Curation API &mdash; Basis Set Exchange  documentation</title>
@@ -11,10 +11,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Basis Set Exchange
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -102,7 +104,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="developer.html">Developer Documentation</a></li>
       <li class="breadcrumb-item active">Developer Curation API</li>
       <li class="wy-breadcrumbs-aside">
@@ -128,7 +130,7 @@ create the component, element, and table basis set files in the given data_dir (
 The metadata file for the basis is created if it doesn’t exist, and the main metadata file is
 also updated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bs_file</strong> (<em>str</em>) – Path to the file with formatted basis set information</p></li>
 <li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
@@ -164,7 +166,7 @@ element, and table basis set files in the given data_dir (and
 subdir).  The metadata file for the basis is created if it doesn’t
 exist, and the main metadata file is also updated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>bs_data</strong> (<em>dict</em>) – Basis set dictionary</p></li>
 <li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
@@ -200,7 +202,7 @@ of all the elements contained in those files.  This creates the element, and tab
 files in the given data_dir (and subdir). The metadata file for the basis is created if it
 doesn’t exist, and the main metadata file is also updated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>component_files</strong> (<em>str</em>) – Path to component json files (in BSE format already)</p></li>
 <li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
@@ -285,7 +287,7 @@ doesn’t exist, and the main metadata file is also updated.</p>
 <dd><p>Determine if the basis information for two elements is the same as another</p>
 <p>Exponents/coefficients are compared using a tolerance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>element1</strong> (<em>dict</em>) – Basis information for an element</p></li>
 <li><p><strong>element2</strong> (<em>dict</em>) – Basis information for another element</p></li>
@@ -303,13 +305,13 @@ doesn’t exist, and the main metadata file is also updated.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">component_file_refs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filelist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.component_file_refs" title="Permalink to this definition"></a></dt>
 <dd><p>Get a list of what elements/references exist in component JSON files</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filelist</strong> (<em>list</em>) – A list of paths to json files</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Keys are the file path, value is a list of tuples (compacted element string, refs tuple)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
@@ -333,16 +335,16 @@ that exist in that entry and not in any of the dictionaries in <cite>right_list<
 that are identical. ECP potentials are not affected.</p>
 <p>The return value contains deep copies of the input data</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>left_list</strong> (<em>list</em><em> of </em><em>dict</em>) – Dictionaries to use as the base</p></li>
 <li><p><strong>right_list</strong> (<em>list</em><em> of </em><em>dict</em>) – Dictionaries of basis data to subtract from each dictionary of <cite>left_list</cite></p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Each object in <cite>left_list</cite> containing data that does not appear in <cite>right_list</cite></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
@@ -361,13 +363,13 @@ that are identical. ECP potentials are not affected.</p>
 is written to files with the same names as those in <cite>left_files</cite>,
 but with <cite>.diff</cite> added to the end. If those files exist, they are overwritten.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>left_files</strong> (<em>list</em><em> of </em><em>str</em>) – Paths to JSON files to use as the base</p></li>
 <li><p><strong>right_files</strong> (<em>list</em><em> of </em><em>str</em>) – Paths to JSON files to subtract from each file of <cite>left_files</cite></p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -417,14 +419,14 @@ within a tolerance)</p>
 <dd><p>Get a list of what elements exist in JSON files</p>
 <p>This works on table, element, and component data files</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filelist</strong> (<em>list</em>) – A list of paths to json files</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Keys are the file path, value is a compacted element string of
 what elements are in that file</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>

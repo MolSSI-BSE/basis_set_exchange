@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Developer API &mdash; Basis Set Exchange  documentation</title>
@@ -11,10 +11,8 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -29,11 +27,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Basis Set Exchange
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Basis Set Exchange
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -198,7 +200,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="developer.html">Developer Documentation</a></li>
       <li class="breadcrumb-item active">Developer API</li>
       <li class="wy-breadcrumbs-aside">
@@ -225,7 +227,7 @@ functionality of the library.</p>
 <dd><p>Filter basis sets by some criteria</p>
 <p>All parameters are ANDed together and are not case sensitive.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>substr</strong> (<em>str</em>) – Substring to search for in the basis set name</p></li>
 <li><p><strong>family</strong> (<em>str</em>) – Family the basis set belongs to</p></li>
@@ -239,10 +241,10 @@ Z numbers and symbols (case insensitive) can be used interchangeably
 it is in the ‘data’ subdirectory of this project.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Basis set metadata that matches the search criteria</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
@@ -262,7 +264,7 @@ returns the data_dir parameter unmodified</p>
 <p>The returned list is the internal representation of the basis set name.</p>
 <p>The data is read from the METADATA.json file in the data directory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data_dir</strong> (<em>str</em>) – Data directory with all the basis set information. By default,
 it is in the ‘data’ subdirectory of this project.</p>
 </dd>
@@ -277,7 +279,7 @@ it is in the ‘data’ subdirectory of this project.</p>
 This function reads in all the basis data and returns it either
 as a string or as a python dictionary.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – Name of the basis set. This is not case sensitive.</p></li>
 <li><p><strong>elements</strong> (<em>str</em><em> or </em><em>list</em>) – <p>List of elements that you want the basis set for.
@@ -329,11 +331,11 @@ basis), 2 (return Auto-ABS Coulomb fitting basis)</p></li>
 it is in the ‘data’ subdirectory of this project.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str or dict</p>
 </dd>
 </dl>
@@ -374,7 +376,7 @@ can be passed as the fmt argument to <a class="reference internal" href="#basis_
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.api.</span></span><span class="sig-name descname"><span class="pre">get_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.get_references" title="Permalink to this definition"></a></dt>
 <dd><p>Get the references/citations for a basis set</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis_name</strong> (<em>str</em>) – Name of the basis set. This is not case sensitive.</p></li>
 <li><p><strong>elements</strong> (<em>list</em>) – List of element numbers that you want the basis set for. By default,
@@ -398,11 +400,11 @@ The <cite>fmt</cite> argument is not case sensitive.</p>
 it is in the ‘data’ subdirectory of this project.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The references for the given basis set in the desired format. If <cite>fmt</cite> is <strong>None</strong>, this will be a python
 dictionary. Otherwise, it will be a string.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str or dict</p>
 </dd>
 </dl>
@@ -421,7 +423,7 @@ can be passed as the role argument to fmt argument to <a class="reference intern
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.api.</span></span><span class="sig-name descname"><span class="pre">lookup_basis_by_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary_basis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">role</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.api.lookup_basis_by_role" title="Permalink to this definition"></a></dt>
 <dd><p>Lookup the name of an auxiliary basis set given a primary basis set and role</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>primary_basis</strong> (<em>str</em>) – The primary (orbital) basis set that we want the auxiliary
 basis set for. This is not case sensitive.</p></li>
@@ -446,11 +448,11 @@ roles.  The <cite>role</cite> argument is not case sensitive.</p>
 it is in the ‘data’ subdirectory of this project.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The name of the auxiliary basis set for the given primary basis
 and role.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -472,7 +474,7 @@ and role.</p>
 <dd><p>Create a single archive file containing all basis
 sets in a given format</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>outfile</strong> (<em>str</em>) – Path to the file to create. Existing files will be overwritten</p></li>
 <li><p><strong>fmt</strong> (<em>str</em>) – Format of the basis set to archive (nwchem, turbomole, …)</p></li>
@@ -483,7 +485,7 @@ None, which will autodetect based on the outfile name</p></li>
 it is in the ‘data’ subdirectory of this project.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -517,7 +519,7 @@ information together into one ‘elemental’ basis dictionary</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.convert.</span></span><span class="sig-name descname"><span class="pre">convert_formatted_basis_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8-sig'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_gen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.convert.convert_formatted_basis_file" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a formatted basis set file to another format</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_path_in</strong> (<em>str</em>) – Path to the file to be read</p></li>
 <li><p><strong>file_path_out</strong> (<em>str</em>) – Path to the file to be written.</p></li>
@@ -526,10 +528,10 @@ information together into one ‘elemental’ basis dictionary</p>
 <li><p><strong>encoding</strong> (<em>str</em>) – The encoding of the input file</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The basis set as a str with the new format</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -540,17 +542,17 @@ information together into one ‘elemental’ basis dictionary</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.convert.</span></span><span class="sig-name descname"><span class="pre">convert_formatted_basis_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_fmt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.convert.convert_formatted_basis_str" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a formatted basis set to another format</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis_in</strong> (<em>str</em>) – String representing the formatted input basis set input</p></li>
 <li><p><strong>in_fmt</strong> (<em>str</em>) – The format of the basis set stored in basis_in</p></li>
 <li><p><strong>out_fmt</strong> (<em>str</em>) – The desired output format</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The basis set as a str with the new format</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -582,7 +584,7 @@ basis set format</p>
 found, an exception is raised.</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
@@ -593,7 +595,7 @@ found, an exception is raised.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.fileio.</span></span><span class="sig-name descname"><span class="pre">read_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
@@ -611,7 +613,7 @@ found, an exception is raised.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.fileio.</span></span><span class="sig-name descname"><span class="pre">read_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_references" title="Permalink to this definition"></a></dt>
 <dd><p>Read a JSON file containing info for all references</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
@@ -622,7 +624,7 @@ found, an exception is raised.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.fileio.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.read_schema" title="Permalink to this definition"></a></dt>
 <dd><p>Reads a JSON schema file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to read</p>
 </dd>
 </dl>
@@ -634,7 +636,7 @@ found, an exception is raised.</p>
 <dd><p>Write basis set information to a JSON file</p>
 <p>This function works with basis set metadata, table, element, and json files.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
 <li><p><strong>bs</strong> (<em>dict</em>) – Basis set information to write</p></li>
@@ -648,7 +650,7 @@ found, an exception is raised.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.fileio.</span></span><span class="sig-name descname"><span class="pre">write_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Reads a file containing the metadata for all the basis sets</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
 <li><p><strong>metadata</strong> (<em>dict</em>) – Metadata information for all basis sets</p></li>
@@ -662,7 +664,7 @@ found, an exception is raised.</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.fileio.</span></span><span class="sig-name descname"><span class="pre">write_references</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.fileio.write_references" title="Permalink to this definition"></a></dt>
 <dd><p>Write a dict containing info for all references to a JSON file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_path</strong> (<em>str</em>) – Full path to the file to write to. It will be overwritten if it exists</p></li>
 <li><p><strong>refs</strong> (<em>dict</em>) – Reference information to write</p></li>
@@ -720,16 +722,16 @@ is raised.</p>
 <p>Note: Since the main use of this is for ECPs, we only cover what can really be found
 on the periodic table. No excited states!</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>nelectrons</strong> (<em>int</em>) – Number of electrons covered by an ECP</p></li>
 <li><p><strong>max_am</strong> (<em>int</em>) – Fill out the starting principal quantum numbers up to this am</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The starting principal quantum numbers of s, p, d, and f shells.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
 </dd>
 </dl>
@@ -811,7 +813,7 @@ data, as well as some other small functions.</p>
 </div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>basis</strong> (<em>dict</em>) – Orbital basis set dictionary for which to generate the auxiliary basis</p>
 </dd>
 </dl>
@@ -858,7 +860,7 @@ corresponds to multiple augmentation (aug -&gt; daug, taug, …).</p>
 <p>In order for the augmentation to make sense, the two outermost
 primitives have to be free i.e. uncontracted.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>dict</em>) – Basis set dictionary to work with</p></li>
 <li><p><strong>nadd</strong> (<em>int</em>) – Number of functions to add (must be &gt;=1). For diffuse augmentation on an augmented set: 1 -&gt; daug, 2 -&gt; taug, etc</p></li>
@@ -955,7 +957,7 @@ metals, and s, p on other elements).</p>
 t(month) nomenclature. Instead, you can just go further backwards through the months
 until you run out of diffuse functions or run out of months.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis</strong> (<em>dict</em>) – Basis set dictionary to work with</p></li>
 <li><p><strong>month</strong> (<em>str</em>) – Month to create (‘apr’, ‘jul’, etc). Not case sensitive</p></li>
@@ -1120,7 +1122,7 @@ converting the name to all lower case.</p>
 <dd><p>Return a string with all data for an element</p>
 <p>This includes shell and ECP potential data</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>z</strong> (<em>int</em><em> or </em><em>str</em>) – Element Z-number</p></li>
 <li><p><strong>eldata</strong> (<em>dict</em>) – Data for the element to be printed</p></li>
@@ -1142,7 +1144,7 @@ with entries ‘reference_info’ containing data for (possibly) multiple refere
 and ‘elements’ which is a list of element Z numbers
 that those references apply to</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>basis_dict</strong> (<em>dict</em>) – Dictionary containing basis set information</p></li>
 <li><p><strong>ref_data</strong> (<em>dict</em>) – Dictionary containing all reference information</p></li>
@@ -1156,7 +1158,7 @@ that those references apply to</p>
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.references.</span></span><span class="sig-name descname"><span class="pre">reference_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.references.reference_text" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a single reference to plain text format</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>str</em>) – Reference key (authorname2009a, etc)</p></li>
 <li><p><strong>ref</strong> (<em>dict</em>) – Information about a single reference</p></li>
@@ -1249,13 +1251,13 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.validator.</span></span><span class="sig-name descname"><span class="pre">validate_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bs_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_data" title="Permalink to this definition"></a></dt>
 <dd><p>Validates json basis set data against a schema</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_type</strong> (<em>str</em>) – Type of the data to validate. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p></li>
 <li><p><strong>bs_data</strong> – Data to be validated</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>RuntimeError</strong> – If the file_type is not valid (and/or a schema doesn’t exist)</p></li>
 <li><p><strong>ValidationError</strong> – If the given file does not pass validation</p></li>
@@ -1276,13 +1278,13 @@ by decreasing number of primitives, then decreasing value of the largest exponen
 <span class="sig-prename descclassname"><span class="pre">basis_set_exchange.validator.</span></span><span class="sig-name descname"><span class="pre">validate_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.validator.validate_file" title="Permalink to this definition"></a></dt>
 <dd><p>Validates a file against a schema</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file_type</strong> (<em>str</em>) – Type of file to read. May be ‘component’, ‘element’, ‘table’, ‘complete’, ‘minimal’, or ‘references’</p></li>
 <li><p><strong>file_path</strong> – Full path to the file to be validated</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>RuntimeError</strong> – If the file_type is not valid (and/or a schema doesn’t exist)</p></li>
 <li><p><strong>ValidationError</strong> – If the given file does not pass validation</p></li>
