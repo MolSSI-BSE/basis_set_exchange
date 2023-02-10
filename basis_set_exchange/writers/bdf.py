@@ -50,64 +50,63 @@ def write_bdf(basis):
     # Elements for which we have ECP
     ecp_elements = [k for k, v in basis['elements'].items() if 'ecp_potentials' in v]
 
-    if electron_elements:
-        # Electron Basis
-        for z in electron_elements:
-            s += '****\n'
-            data = basis['elements'][z]
+     # Elements for which we have electron basis or ECP
+    all_elements = list(set(electron_elements + ecp_elements))
+    all_elements.sort(key=int)
+
+    if electron_elements or ecp_elements:
+        for z in all_elements:
+            s += "****\n"
+            
             #Get element symbol
-            s += lut.element_sym_from_Z(z, True)
-
-            max_am = misc.max_am(data['electron_shells'])
-            s += '{:>7}   {}\n'.format(z, max_am)
-
-            for shell in data['electron_shells']:
-                exponents = shell['exponents']
-                coefficients = shell['coefficients']
-                nprim = len(exponents)
-                ngen = len(coefficients)
-
-                amchar = lut.amint_to_char(shell['angular_momentum']).upper()
-                s += '{}    '.format(amchar)
-                s += '{:>3}    {}\n'.format(nprim, ngen)
-
-                s += printing.write_matrix([exponents], [17])
-
-                point_places = [8 * i + 15 * (i - 1) for i in range(1, ngen + 1)]
-                s += printing.write_matrix(coefficients, point_places)
-        s += '****\n'
-
-    # Write out ECP
-    if ecp_elements:
-        s += '\n\nECP\n'
-
-        for z in ecp_elements:
+            symbol = lut.element_sym_from_Z(z, True)
             data = basis['elements'][z]
-            sym = lut.element_sym_from_Z(z, True)
-            max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
 
-            # Sort lowest->highest, then put the highest at the beginning
-            ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
-            ecp_list.insert(0, ecp_list.pop())
+            if electron_elements and z in electron_elements:
+                s += symbol
 
-            s += '{} nelec {}\n'.format(sym, data['ecp_electrons'])
+                max_am = misc.max_am(data['electron_shells'])
+                s += '{:>7}   {}\n'.format(z, max_am)
 
-            for pot in ecp_list:
-                rexponents = pot['r_exponents']
-                gexponents = pot['gaussian_exponents']
-                coefficients = pot['coefficients']
+                for shell in data['electron_shells']:
+                    exponents = shell['exponents']
+                    coefficients = shell['coefficients']
+                    nprim = len(exponents)
+                    ngen = len(coefficients)
 
-                am = pot['angular_momentum']
-                amchar = lut.amint_to_char(am).upper()
+                    amchar = lut.amint_to_char(shell['angular_momentum']).upper()
+                    s += '{}    '.format(amchar)
+                    s += '{:>3}    {}\n'.format(nprim, ngen)
 
-                if am[0] == max_ecp_am:
-                    s += '{} ul\n'.format(sym)
-                else:
-                    s += '{} {}\n'.format(sym, amchar)
+                    s += printing.write_matrix([exponents], [14])
 
-                point_places = [0, 10, 33]
-                s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places)
+                    point_places = [7 + 20 * (i - 1) for i in range(1, ngen + 1)]
+                    s += printing.write_matrix(coefficients, point_places)
 
-        s += 'END\n'
+            if ecp_elements and z in ecp_elements:
+                s += 'ECP\n'
+
+                data = basis['elements'][z]
+                max_ecp_angular_momentum = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
+                s += '{}     {}     {}\n'.format(symbol, data['ecp_electrons'], max_ecp_angular_momentum)
+
+                # Sort lowest->highest, then put the highest at the beginning
+                ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
+                ecp_list.insert(0, ecp_list.pop())
+
+                for pot in ecp_list:
+                    rexponents = pot['r_exponents']
+                    gexponents = pot['gaussian_exponents']
+                    coefficients = pot['coefficients']
+                    nprim = len(rexponents)
+
+                    am = pot['angular_momentum']
+                    amchar = lut.amint_to_char(am, hij=True).upper()
+                    s += '{} potential  {}\n'.format(amchar, str(nprim))
+
+                    point_places = [4, 12, 34]
+                    s += printing.write_matrix([rexponents, gexponents, *coefficients], point_places, convert_exp=True)
+
+    s += '****\n'
 
     return s
