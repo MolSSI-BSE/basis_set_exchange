@@ -53,7 +53,6 @@ jobs:
         shell: bash -l {0}
         run: |
           pytest --pyargs --cov=basis_set_exchange --cov-report=xml basis_set_exchange 
-          bse -V # Quick test of the cli
 
       - name: Test CLI
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
