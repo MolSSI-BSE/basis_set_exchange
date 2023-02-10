@@ -36,6 +36,7 @@ Written by Susi Lehtola, 2020
 
 import regex
 from .. import lut
+from .. import manip
 from . import helpers
 
 # Shell entry: 'element am (aliases) : nprim ncontr start1.end1 start2.end2 ... startn.endn' allowing whitespace
@@ -93,7 +94,7 @@ def _read_shell(basis_lines, bs_data, iline):
     # Create entry
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
     if element_Z not in bs_data or 'electron_shells' not in bs_data[element_Z]:
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
     else:
         element_data = bs_data[element_Z]
 
@@ -237,7 +238,7 @@ def _read_ecp(basis_lines, bs_data, iline):
     # Create entry
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
     if element_Z not in bs_data or 'ecp_potentials' not in bs_data[element_Z]:
-        element_data = helpers.create_element_data(bs_data, element_Z, 'ecp_potentials')
+        element_data = manip.create_element_data(bs_data, element_Z, 'ecp_potentials')
     else:
         element_data = bs_data[element_Z]
 
