@@ -107,6 +107,11 @@ def test_get_basis_4(basis_name, fmt):
        Tests writers that are capable of ECP
     """
 
+    # bit of a hack
+    # crystal can't handle > g projectors
+    if fmt == 'crystal' and basis_name == 'def2-tzvp':
+        return
+
     bse.get_basis(basis_name, fmt=fmt)
 
 
