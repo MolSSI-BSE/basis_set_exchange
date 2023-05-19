@@ -100,15 +100,20 @@ def _basis_data_iter(fmt, reffmt, data_dir):
     for bs, bs_md in md.items():
         versions = bs_md['versions'].keys()
 
-        if not set(bs_md['function_types']) <= ref_function_types:
+        if ref_function_types is not None and not set(bs_md['function_types']) <= ref_function_types:
             print("Skipping {}/{} because not all function types are supported".format(bs, fmt))
             continue
 
         data = {}
         for v in versions:
-            bsdata = api.get_basis(bs, fmt=fmt, version=v, data_dir=data_dir)
-            refdata = api.get_references(bs, fmt=reffmt, version=v, data_dir=data_dir)
-            data[v] = (bsdata, refdata)
+            try:
+                bsdata = api.get_basis(bs, fmt=fmt, version=v, data_dir=data_dir)
+
+                refdata = api.get_references(bs, fmt=reffmt, version=v, data_dir=data_dir)
+                data[v] = (bsdata, refdata)
+            except Exception as e:
+                print("    **Skipping {}/{} because of error: {}".format(bs, fmt, e))
+                continue
 
         notes = api.get_basis_notes(bs, data_dir)
         yield (bs, data, notes)
