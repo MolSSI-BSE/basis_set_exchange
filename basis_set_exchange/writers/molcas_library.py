@@ -46,18 +46,18 @@ def write_molcas_library(basis):
         s += '{}\n'.format(format_reference(ref, ref_data))
         s += '{} {}\n'.format(el_name, misc.contraction_string(data))
 
-        # Are there cartesian shells?
-        cartesian_shells = set()
-        for shell in data['electron_shells']:
-            if shell['function_type'] == 'gto_cartesian':
-                for am in shell['angular_momentum']:
-                    cartesian_shells.add(lut.amint_to_char([am]))
-        if len(cartesian_shells):
-            s += 'Options\n'
-            s += 'Cartesian {}\n'.format(' '.join(cartesian_shells))
-            s += 'EndOptions\n'
-
         if has_electron:
+            # Are there cartesian shells?
+            cartesian_shells = set()
+            for shell in data['electron_shells']:
+                if shell['function_type'] == 'gto_cartesian':
+                    for am in shell['angular_momentum']:
+                        cartesian_shells.add(lut.amint_to_char([am]))
+            if len(cartesian_shells):
+                s += 'Options\n'
+                s += 'Cartesian {}\n'.format(' '.join(cartesian_shells))
+                s += 'EndOptions\n'
+
             max_am = misc.max_am(data['electron_shells'])
 
             s += '{:>7}.0   {}\n'.format(nelectrons, max_am)
