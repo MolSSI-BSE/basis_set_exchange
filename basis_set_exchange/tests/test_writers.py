@@ -72,6 +72,11 @@ def test_write_basis_file_ecp(bs_name, bs_fmt, as_bz2, tmp_path):
         out_file += '.bz2'
 
     outfile_path = os.path.join(tmp_path, out_file)
+
+    # Bit of a hack - crystal does not support > g projectors
+    if bs_fmt == 'crystal' and bs_name == 'def2-tzvp':
+        return
+
     bse.writers.write_formatted_basis_file(bs_data, outfile_path, bs_fmt)
 
 
