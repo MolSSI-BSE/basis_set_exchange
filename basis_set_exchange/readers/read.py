@@ -51,6 +51,7 @@ from .ricdlib import read_ricdlib
 from .gamess_us import read_gamess_us
 from .cp2k import read_cp2k
 from .crystal import read_crystal
+from .veloxchem import read_veloxchem
 
 _reader_map = {
     'turbomole': {
@@ -133,6 +134,11 @@ _reader_map = {
         'display': 'Crystal',
         'extension': '.crystal',
         'reader': read_crystal
+    },
+    'veloxchem': {
+        'display': 'VeloxChem',
+        'extension': '.vlx',
+        'reader': read_veloxchem
     }
 }
 
