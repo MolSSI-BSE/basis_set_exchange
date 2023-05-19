@@ -11,7 +11,6 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
@@ -208,13 +207,13 @@ data directory can be specified with <code class="docutils literal notranslate">
 data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
 Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/bin/bse&quot;, line 33, in &lt;module&gt;
-    sys.exit(load_entry_point(&#39;basis-set-exchange==0.9+64.gf37c40cc&#39;, &#39;console_scripts&#39;, &#39;bse&#39;)())
-  File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bse_cli.py&quot;, line 230, in run_bse_cli
+  File &quot;/opt/hostedtoolcache/Python/3.10.11/x64/bin/bse&quot;, line 8, in &lt;module&gt;
+    sys.exit(run_bse_cli())
+  File &quot;/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bse_cli.py&quot;, line 230, in run_bse_cli
     args = cli_check_normalize_args(args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 159, in cli_check_normalize_args
+  File &quot;/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 159, in cli_check_normalize_args
     args_copy.data_dir = _cli_check_data_dir(args.data_dir)
-  File &quot;/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 49, in _cli_check_data_dir
+  File &quot;/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 49, in _cli_check_data_dir
     raise RuntimeError(&quot;Data directory &#39;{}&#39; does not exist or is not a directory&quot;.format(data_dir))
 RuntimeError: Data directory &#39;/home/runner/my_data_dir&#39; does not exist or is not a directory
 </pre></div>
@@ -427,7 +426,7 @@ guess    Initial guess
 <h3>get-data-dir<a class="headerlink" href="#get-data-dir" title="Permalink to this heading"></a></h3>
 <p>Print the default data directory (built into the BSE package)</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-data-dir
-/opt/hostedtoolcache/Python/3.10.9/x64/lib/python3.10/site-packages/basis_set_exchange/data
+/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/basis_set_exchange/data
 </pre></div>
 </div>
 </section>
@@ -497,7 +496,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version v0.9+64.gf37c40cc
+# Version v0.9.1+2.g670e7e67
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
