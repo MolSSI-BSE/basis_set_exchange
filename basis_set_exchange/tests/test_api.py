@@ -124,6 +124,10 @@ def test_get_basis_4_noecp(basis_name, fmt):
        Tests writers that are NOT capable of ECP
     """
 
+    # bit of a hack - velox doesn't support cartesian
+    if fmt == 'veloxchem' and basis_name.startswith("6-31"):
+        return
+
     bse.get_basis(basis_name, fmt=fmt)
 
 
