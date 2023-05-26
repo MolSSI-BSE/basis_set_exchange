@@ -35,7 +35,7 @@ Written by Susi Lehtola, 2021
 '''
 
 import re
-from .. import lut, misc
+from .. import lut, misc, manip
 from . import helpers
 
 # Start for new basis entry
@@ -58,7 +58,7 @@ def _parse_basis(basis_lines, bs_data):
     # Initialize BSE basis
     element_Z = str(lut.element_Z_from_sym(element_symbol))
     if element_Z not in bs_data or 'electron_shells' not in bs_data[element_Z]:
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
     else:
         element_data = bs_data[element_Z]
 
@@ -94,7 +94,7 @@ def _parse_basis(basis_lines, bs_data):
         # Store the shell. It is cartesian, unless the amtype flag is
         # 3 which means spherical transform and removal of the
         # lower-angular-momentum contaminants.
-        func_type = helpers.function_type_from_am([l], 'gto', 'spherical' if amtype == 3 else 'cartesian')
+        func_type = lut.function_type_from_am([l], 'gto', 'spherical' if amtype == 3 else 'cartesian')
         shell = {
             'function_type': func_type,
             'region': '',
