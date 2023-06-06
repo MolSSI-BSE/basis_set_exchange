@@ -86,7 +86,18 @@ def _parse_electron_lines(basis_lines, bs_data):
 
             func_type = lut.function_type_from_am(shell_am, 'gto', 'spherical')
 
-            exponents, coefficients = helpers.parse_primitive_matrix(sh_lines[1:], nprim=nprim, ngen=1)
+            # Check the syntax. There might be an extra ordinal specification
+            exponents_and_coefficients = sh_lines[1:]
+            for iline, line in enumerate(exponents_and_coefficients):
+                entries = line.split()
+                if len(entries) == 3:
+                    if int(entries[0]) != iline+1:
+                        raise ValueError('Error: expected entry iexpn expn coeff\n')
+                    exponents_and_coefficients[iline] = ' '.join(entries[1:])
+                elif len(entries) != 2:
+                    raise ValueError('Error: expected contractions in format (iexpn expn coeff) or (expn coeff)\n')
+
+            exponents, coefficients = helpers.parse_primitive_matrix(exponents_and_coefficients, nprim=nprim, ngen=1)
 
             shell = {
                 'function_type': func_type,
