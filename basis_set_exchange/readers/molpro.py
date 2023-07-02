@@ -45,10 +45,10 @@ basis_start_re = re.compile(r'^\s*?basis\s*?=\s*?{\s*?$')
 basis_end_re = re.compile(r'^\s*?}\s*?$')
 # Shell entry: 'am,element,expn1,expn2,...' allowing whitespace
 element_shell_re = regex.compile(
-    r'^\s*?(?P<am>[spdfghikSPDFGHIK])\s*?,\s*?(?P<sym>\w+)\s*?(?:,\s*(?P<exp>{})\s*)+\s*?$'.format(
+    r'^\s*?(?P<am>[spdfghikSPDFGHIK])\s*?,?\s*?(?P<sym>\w+)\s*?(?:,?\s*(?P<exp>{})\s*)+\s*?$'.format(
         helpers.floating_re_str))
 # Contraction entry: 'am,element,expn1,expn2,...' allowing whitespace
-contraction_re = regex.compile(r'^\s*?c\s*?,\s*?(?P<start>\d+).(?P<end>\d+)\s*?(?:,\s*(?P<coeff>{})\s*)+\s*?$'.format(
+contraction_re = regex.compile(r'^\s*?c\s*?,?\s*?(?P<start>\d+).(?P<end>\d+)\s*?(?:,?\s*(?P<coeff>{})\s*)+\s*?$'.format(
     helpers.floating_re_str))
 
 # ECP entry: ECP, symbol, number of electrons in ECP, lmax
