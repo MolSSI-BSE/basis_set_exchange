@@ -36,7 +36,7 @@ Written by Susi Lehtola, 2020
 
 import re
 import regex
-from .. import lut
+from .. import lut, manip
 from . import helpers
 
 # Basis entry start: 'basis={' allowing whitespace
@@ -84,7 +84,7 @@ def _read_shell(basis_lines, bs_data, iline):
     # Create entry
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
     if element_Z not in bs_data:
-        element_data = helpers.create_element_data(bs_data, element_Z, 'electron_shells')
+        element_data = manip.create_element_data(bs_data, element_Z, 'electron_shells')
     else:
         element_data = bs_data[element_Z]
 
