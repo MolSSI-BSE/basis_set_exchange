@@ -213,6 +213,7 @@ def read_molpro(basis_lines):
     other_data = {}
 
     # Go through input and check basis type
+    _func_type = 'gto_spherical'
     for line in basis_lines:
         if line.strip().lower() == 'spherical':
             _func_type = 'gto_spherical'
