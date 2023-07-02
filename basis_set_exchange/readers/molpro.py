@@ -75,7 +75,7 @@ def _read_shell(basis_lines, bs_data, iline):
     assert (len(shell['sym']) == 1)
     element_sym = shell['sym'][0]
     # Exponents
-    exponents = shell['exp']
+    exponents = [expn.replace('D','E') for expn in shell['exp']]
 
     # Number of primitives
     nprim = len(exponents)
@@ -101,7 +101,7 @@ def _read_shell(basis_lines, bs_data, iline):
             start = contr['start'][0]
             end = contr['end'][0]
             # Contraction coefficients
-            cc = contr['coeff']
+            cc = [coeff.replace('D','E') for coeff in contr['coeff']]
 
             # Check number of primitives in contraction
             ncontr = end - start + 1
@@ -166,9 +166,9 @@ def _read_ecp(basis_lines, bs_data, iline):
     element_data['ecp_electrons'] = ncore
     for il in range(len(ecp_blocks)):
         ecp_l = lmax if il == 0 else il - 1
-        r_exp = [entry[0] for entry in ecp_blocks[il]]
-        g_exp = [entry[1] for entry in ecp_blocks[il]]
-        coeff = [entry[2] for entry in ecp_blocks[il]]
+        r_exp = [entry[0].replace('D','E') for entry in ecp_blocks[il]]
+        g_exp = [entry[1].replace('D','E') for entry in ecp_blocks[il]]
+        coeff = [entry[2].replace('D','E') for entry in ecp_blocks[il]]
         ecp_pot = {
             'angular_momentum': [ecp_l],
             'ecp_type': 'scalar_ecp',
