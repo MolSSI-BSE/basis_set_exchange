@@ -41,7 +41,7 @@ element_re = re.compile(r'^([a-zA-Z]{1,3})\s+(.*)$')
 shell_re = re.compile(r'^(\d+) +([a-zA-Z])$')
 ecp_info_re = re.compile(r'^ncore\s*=\s*(\d+)\s+lmax\s*=\s*(\d+)$', flags=re.IGNORECASE)
 ecp_pot_am_re = re.compile(r'^([a-z])(-[a-z])?$')
-
+exp_coef_re = re.compile(r'^(\d+\s+)?({0})\s+({0})$'.format(helpers.floating_re_str))
 
 def _parse_electron_lines(basis_lines, bs_data):
     # Strip all lines beginning with $
@@ -87,15 +87,18 @@ def _parse_electron_lines(basis_lines, bs_data):
             func_type = lut.function_type_from_am(shell_am, 'gto', 'spherical')
 
             # Check the syntax. There might be an extra ordinal specification
-            exponents_and_coefficients = sh_lines[1:]
-            for iline, line in enumerate(exponents_and_coefficients):
-                entries = line.split()
-                if len(entries) == 3:
-                    if int(entries[0]) != iline+1:
-                        raise ValueError('Error: expected entry iexpn expn coeff\n')
-                    exponents_and_coefficients[iline] = ' '.join(entries[1:])
-                elif len(entries) != 2:
-                    raise ValueError('Error: expected contractions in format (iexpn expn coeff) or (expn coeff)\n')
+            exponents_and_coefficients = []
+
+            for line in sh_lines[1:]:
+                # Check for (expn, coeff) or (iexpn, expn, coeff) format
+                m = exp_coef_re.match(line)
+                if m is None:
+                    raise ValueError("Line does not match format (expn, coeff) or (iexpn, expn, coeff): " + line)
+
+                # Trim off the optional integer exponent number
+                groups = m.groups()
+                line = "{0} {1}".format(groups[-2], groups[-1])
+                exponents_and_coefficients.append(line)
 
             exponents, coefficients = helpers.parse_primitive_matrix(exponents_and_coefficients, nprim=nprim, ngen=1)
 
