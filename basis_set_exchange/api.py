@@ -374,7 +374,11 @@ def lookup_basis_by_role(primary_basis, role, data_dir=None):
     if role not in auxdata:
         raise RuntimeError("Role {} doesn't exist for {}".format(role, primary_basis))
 
-    return auxdata[role]
+    if isinstance(auxdata[role], str):
+        return [auxdata[role]]
+    else:
+        # Also handles other sequence types
+        return list(auxdata[role])
 
 
 @memo.BSEMemoize

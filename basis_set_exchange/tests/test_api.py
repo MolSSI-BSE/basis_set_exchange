@@ -153,7 +153,7 @@ def test_lookup_by_role(primary_basis, role, expected):
     """Test looking up data by role
     """
     bs = bse.lookup_basis_by_role(primary_basis, role)
-    assert bs.lower() == expected.lower()
+    assert bs[0].lower() == expected.lower()
 
 
 @pytest.mark.parametrize('basis_name', bs_names)

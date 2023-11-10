@@ -169,15 +169,20 @@
     "auxiliaries": {
         "description": "Auxiliary basis sets (fitting, etc) and how their role with this basis",
         "type": "object",
+        "propertyNames": { "enum":  ["jfit", "jkfit", "rifit", "optri", "admmfit", "dftxfit", "dftjfit"] },
         "additionalProperties": false,
-        "properties": {
-            "jfit" : { "type": "string" },
-            "jkfit" : { "type": "string" },
-            "rifit" : { "type": "string" },
-            "optri" : { "type": "string" },
-            "admmfit" : { "type": "string" },
-            "dftxfit": { "type": "string" },
-            "dftjfit": { "type": "string" }
+        "patternProperties": {
+            ".*": {
+                "anyOf": [
+                    { "type": "string" },
+                    {
+                        "type":  "array",
+                        "items": { "type": "string" },
+                        "minItems": 1,
+                        "uniqueItems": true
+                    }
+                ]
+            }
         }
     },
     "revision_date": {

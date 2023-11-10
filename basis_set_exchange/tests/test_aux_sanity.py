@@ -49,11 +49,12 @@ def test_aux_sanity(basis_name):
 
     this_metadata = bs_metadata[basis_name]
 
-    for role, aux in this_metadata['auxiliaries'].items():
-        assert aux in bs_metadata
-        aux_metadata = bs_metadata[aux]
+    for role, auxs in this_metadata['auxiliaries'].items():
+        for aux in auxs:
+            assert aux in bs_metadata
+            aux_metadata = bs_metadata[aux]
 
-        assert role == aux_metadata['role']
+            assert role == aux_metadata['role']
 
 
 @pytest.mark.parametrize('basis_name', bs_names)
@@ -75,9 +76,13 @@ def test_aux_reverse(basis_name):
     found = False
     for k, v in bs_metadata.items():
         aux = v['auxiliaries']
-        for aux_role, aux_name in aux.items():
-            if aux_name in all_aux_names:
-                assert aux_role == role
-                found = True
+        for aux_role, aux_names in aux.items():
+            if isinstance(aux_names, str):
+                aux_names = [aux_names]
+
+            for aux_name in aux_names:
+                if aux_name in all_aux_names:
+                    assert aux_role == role
+                    found = True
 
     assert found
