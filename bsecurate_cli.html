@@ -11,11 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -97,19 +97,19 @@
            <div itemprop="articleBody">
              
   <section id="the-bsecurate-command-line-interface">
-<h1>The bsecurate command line interface<a class="headerlink" href="#the-bsecurate-command-line-interface" title="Permalink to this heading"></a></h1>
+<h1>The bsecurate command line interface<a class="headerlink" href="#the-bsecurate-command-line-interface" title="Link to this heading"></a></h1>
 <p>In addition to the user-oriented command-line interface, the BSE also
 contains a command-line interface for curation functions <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code>.
 This can be used to query, add, or modify basis set data.</p>
 <section id="installation-and-tab-completion">
-<h2>Installation and TAB completion<a class="headerlink" href="#installation-and-tab-completion" title="Permalink to this heading"></a></h2>
+<h2>Installation and TAB completion<a class="headerlink" href="#installation-and-tab-completion" title="Link to this heading"></a></h2>
 <p>See <a class="reference internal" href="bse_cli.html#cliinstall"><span class="std std-ref">Installation</span></a></p>
 <p>Note that some functionality will require installing the <code class="docutils literal notranslate"><span class="pre">curate</span></code> section
 (ie, <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">basis_set_exchange[docs,tests,curate]</span></code>).</p>
 <p>Rendering/Viewing graphs will require graphviz.</p>
 </section>
 <section id="general-usage">
-<h2>General usage<a class="headerlink" href="#general-usage" title="Permalink to this heading"></a></h2>
+<h2>General usage<a class="headerlink" href="#general-usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">bsecurate</span></code> command is generally followed by a subcommand (see below). <code class="docutils literal notranslate"><span class="pre">bsecurate</span> <span class="pre">-h</span></code> will display help
 and <code class="docutils literal notranslate"><span class="pre">bsecurate</span> <span class="pre">-V</span></code> will display the version and exit.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate -h
@@ -154,7 +154,7 @@ Also, output can be written to a file rather than to the terminal with <code cla
 This is similar to the <code class="docutils literal notranslate"><span class="pre">bse</span></code> command line program.</p>
 </section>
 <section id="subcommands">
-<h2>Subcommands<a class="headerlink" href="#subcommands" title="Permalink to this heading"></a></h2>
+<h2>Subcommands<a class="headerlink" href="#subcommands" title="Link to this heading"></a></h2>
 <p>Below is a list of the available subcommands. All subcommands
 can take the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to display help for that subcommand.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate elements-in-files -h
@@ -169,72 +169,72 @@ options:
 </pre></div>
 </div>
 <section id="elements-in-files">
-<h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Permalink to this heading"></a></h3>
+<h3>elements-in-files<a class="headerlink" href="#elements-in-files" title="Link to this heading"></a></h3>
 <p>For a list of BSE JSON files, determine what elements the file contains data for.
 This works on table, element, and component data files.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate elements-in-files ${DATADIR}/6-31G.0.table.json ${DATADIR}/dunning/*element*json
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/6-31G.0.table.json                           H-Zn
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json         Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json           H-Ar,Sc-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json           H,He,B-Ne,Al-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVD+dZ.1.element.json         Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVDZ.1.element.json           H-Ar,Sc-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVQ+dZ.1.element.json         Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVQZ.1.element.json           H-Ar,Sc-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVT+dZ.1.element.json         Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVTZ.1.element.json           H-Ar,Sc-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pV5Z-PP.1.element.json    Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVDZ-PP.1.element.json    Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVQZ-PP.1.element.json    Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVTZ-PP.1.element.json    Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCV5Z-PP.1.element.json  Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVDZ-PP.1.element.json  Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVQZ-PP.1.element.json  Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVTZ-PP.1.element.json  Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV5+dZ.1.element.json             Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV5Z.1.element.json               H-Ar,Ca-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV6Z.1.element.json               H,He,Be-Ne,Al-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVD+dZ.1.element.json             Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVDZ.1.element.json               H-Ar,Ca-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVQ+dZ.1.element.json             Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVQZ.1.element.json               H-Ar,Ca-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVT+dZ.1.element.json             Na-Ar
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVTZ.1.element.json               H-Ar,Ca-Kr
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pV5Z-PP.1.element.json        Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVDZ-PP.1.element.json        Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVQZ-PP.1.element.json        Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVTZ-PP.1.element.json        Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCV5Z-PP.1.element.json      Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVDZ-PP.1.element.json      Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVQZ-PP.1.element.json      Y-Cd,Hf-Hg
-/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVTZ-PP.1.element.json      Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/6-31G.0.table.json                           H-Zn
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV5+dZ.1.element.json         Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV5Z.1.element.json           H-Ar,Sc-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pV6Z.1.element.json           H,He,B-Ne,Al-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVD+dZ.1.element.json         Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVDZ.1.element.json           H-Ar,Sc-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVQ+dZ.1.element.json         Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVQZ.1.element.json           H-Ar,Sc-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVT+dZ.1.element.json         Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-cc-pVTZ.1.element.json           H-Ar,Sc-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pV5Z-PP.1.element.json    Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVDZ-PP.1.element.json    Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVQZ-PP.1.element.json    Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pVTZ-PP.1.element.json    Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCV5Z-PP.1.element.json  Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVDZ-PP.1.element.json  Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVQZ-PP.1.element.json  Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/aug-seg-cc-pwCVTZ-PP.1.element.json  Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV5+dZ.1.element.json             Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV5Z.1.element.json               H-Ar,Ca-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV6Z.1.element.json               H,He,Be-Ne,Al-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVD+dZ.1.element.json             Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVDZ.1.element.json               H-Ar,Ca-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVQ+dZ.1.element.json             Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVQZ.1.element.json               H-Ar,Ca-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVT+dZ.1.element.json             Na-Ar
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVTZ.1.element.json               H-Ar,Ca-Kr
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pV5Z-PP.1.element.json        Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVDZ-PP.1.element.json        Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVQZ-PP.1.element.json        Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pVTZ-PP.1.element.json        Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCV5Z-PP.1.element.json      Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVDZ-PP.1.element.json      Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVQZ-PP.1.element.json      Y-Cd,Hf-Hg
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/seg-cc-pwCVTZ-PP.1.element.json      Y-Cd,Hf-Hg
 </pre></div>
 </div>
 </section>
 <section id="component-file-refs">
-<h3>component-file-refs<a class="headerlink" href="#component-file-refs" title="Permalink to this heading"></a></h3>
+<h3>component-file-refs<a class="headerlink" href="#component-file-refs" title="Link to this heading"></a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
 Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/bin/bsecurate&quot;, line 8, in &lt;module&gt;
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/bin/bsecurate&quot;, line 8, in &lt;module&gt;
     sys.exit(run_bsecurate_cli())
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_cli.py&quot;, line 157, in run_bsecurate_cli
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_cli.py&quot;, line 157, in run_bsecurate_cli
     output = bsecurate_cli_handle_subcmd(args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 143, in bsecurate_cli_handle_subcmd
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 143, in bsecurate_cli_handle_subcmd
     return handler_map[args.subcmd](args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 48, in _bsecurate_cli_component_file_refs
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 48, in _bsecurate_cli_component_file_refs
     data = curate.component_file_refs(args.files)
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/curate/misc.py&quot;, line 81, in component_file_refs
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/curate/misc.py&quot;, line 81, in component_file_refs
     filedata = fileio.read_json_basis(fpath)
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 131, in read_json_basis
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 131, in read_json_basis
     return _read_plain_json(file_path, True)
-  File &quot;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 70, in _read_plain_json
+  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 70, in _read_plain_json
     raise FileNotFoundError(&#39;JSON file \&#39;{}\&#39; does not exist, is not &#39;
-FileNotFoundError: JSON file &#39;/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV{D,T}Z.1.json&#39; does not exist, is not readable, or is not a file
+FileNotFoundError: JSON file &#39;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV{D,T}Z.1.json&#39; does not exist, is not readable, or is not a file
 </pre></div>
 </div>
 </section>
 <section id="print-component-file">
-<h3>print-component-file<a class="headerlink" href="#print-component-file" title="Permalink to this heading"></a></h3>
+<h3>print-component-file<a class="headerlink" href="#print-component-file" title="Link to this heading"></a></h3>
 <p>Pretty prints data from a component file.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate print-component-file ${DATADIR}/dunning/cc-pVDZ.1.json
 Description: The cc-pVDZ basis set
@@ -252,7 +252,7 @@ Function: gto
 </div>
 </section>
 <section id="make-diff">
-<h3>make-diff<a class="headerlink" href="#make-diff" title="Permalink to this heading"></a></h3>
+<h3>make-diff<a class="headerlink" href="#make-diff" title="Link to this heading"></a></h3>
 <p>Compute the difference between two groups of JSON files and store them in ‘.diff’ files.</p>
 <p>For each file specified with the <code class="docutils literal notranslate"><span class="pre">-l</span></code>, subtract all the common shells in files specified
 with <code class="docutils literal notranslate"><span class="pre">-r</span></code>.</p>
@@ -260,7 +260,7 @@ with <code class="docutils literal notranslate"><span class="pre">-r</span></cod
 <p>For each file specified with <code class="docutils literal notranslate"><span class="pre">-l</span></code>, an output file is created with the same name but with <cite>.diff</cite> appended to the filename.</p>
 </section>
 <section id="compare-basis-sets">
-<h3>compare-basis-sets<a class="headerlink" href="#compare-basis-sets" title="Permalink to this heading"></a></h3>
+<h3>compare-basis-sets<a class="headerlink" href="#compare-basis-sets" title="Link to this heading"></a></h3>
 <p>Compare two basis sets and print a report.
 These are read/composed from a data directory. Versions can be specified</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bsecurate compare-basis-sets 6-31G 6-31G --version1 1 --version2 0
@@ -285,17 +285,17 @@ DIFFERENCES FOUND. SEE ABOVE
 </div>
 </section>
 <section id="compare-basis-files">
-<h3>compare-basis-files<a class="headerlink" href="#compare-basis-files" title="Permalink to this heading"></a></h3>
+<h3>compare-basis-files<a class="headerlink" href="#compare-basis-files" title="Link to this heading"></a></h3>
 <p>Compare two formatted basis sets files and print a report. For valid formats, use <code class="docutils literal notranslate"><span class="pre">get-reader-formats</span></code></p>
 </section>
 <section id="view-graph-file">
-<h3>view-graph-file<a class="headerlink" href="#view-graph-file" title="Permalink to this heading"></a></h3>
+<h3>view-graph-file<a class="headerlink" href="#view-graph-file" title="Link to this heading"></a></h3>
 <p>Similar to <code class="docutils literal notranslate"><span class="pre">make-graph-file</span></code>, but will instead create a temporary file,
 render the PNG, and then call the default viewer.</p>
 <p>Requires graphviz and a graphical viewer to be installed.</p>
 </section>
 <section id="make-graph-file">
-<h3>make-graph-file<a class="headerlink" href="#make-graph-file" title="Permalink to this heading"></a></h3>
+<h3>make-graph-file<a class="headerlink" href="#make-graph-file" title="Link to this heading"></a></h3>
 <p>Make a graphviz DOT file (<a class="reference external" href="https://graphviz.org/documentation/">https://graphviz.org/documentation/</a>) containing a graph
 that describes what files go into a basis set. Optionally takes a version of the basis
 set.</p>

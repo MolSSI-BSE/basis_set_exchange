@@ -11,11 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -95,24 +95,24 @@
            <div itemprop="articleBody">
              
   <section id="quickstart-and-basic-usage">
-<h1>Quickstart and Basic Usage<a class="headerlink" href="#quickstart-and-basic-usage" title="Permalink to this heading"></a></h1>
+<h1>Quickstart and Basic Usage<a class="headerlink" href="#quickstart-and-basic-usage" title="Link to this heading"></a></h1>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>The BSE can be installed with <cite>pip</cite>.</p>
 <p>To install from PyPI: <cite>pip install basis_set_exchange</cite></p>
 <p>To install from the local directory, you can use <cite>pip install -e .</cite> inside
 the cloned git repository.</p>
 </section>
 <section id="importing">
-<h2>Importing<a class="headerlink" href="#importing" title="Permalink to this heading"></a></h2>
+<h2>Importing<a class="headerlink" href="#importing" title="Link to this heading"></a></h2>
 <p>All end-user functionality is available by importing the <cite>basis_set_exchange</cite> module.</p>
 </section>
 <section id="determining-the-library-version">
-<h2>Determining the library version<a class="headerlink" href="#determining-the-library-version" title="Permalink to this heading"></a></h2>
+<h2>Determining the library version<a class="headerlink" href="#determining-the-library-version" title="Link to this heading"></a></h2>
 <p>The library version can be determined with <a class="reference internal" href="user_api.html#basis_set_exchange.version" title="basis_set_exchange.version"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.version()</span></code></a></p>
 </section>
 <section id="getting-a-basis-set-from-the-library">
-<h2>Getting a basis set from the library<a class="headerlink" href="#getting-a-basis-set-from-the-library" title="Permalink to this heading"></a></h2>
+<h2>Getting a basis set from the library<a class="headerlink" href="#getting-a-basis-set-from-the-library" title="Link to this heading"></a></h2>
 <p>The main function for getting a basis set is <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.
 Output format is controlled by the <cite>fmt</cite> parameter. By default, a python
 dictionary is returned. If a format is specified, a string is returned
@@ -172,7 +172,7 @@ subset of elements instead by using the <cite>elements</cite> parameter</p>
 </div>
 </section>
 <section id="getting-references">
-<h2>Getting references<a class="headerlink" href="#getting-references" title="Permalink to this heading"></a></h2>
+<h2>Getting references<a class="headerlink" href="#getting-references" title="Link to this heading"></a></h2>
 <p>Reference/citations can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_references" title="basis_set_exchange.get_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_references()</span></code></a>. The <cite>elements</cite>
 parameter is similar to that in <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a>.</p>
 <p>The <cite>fmt</cite> parameter controls the output format. By default, the output
@@ -224,7 +224,7 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 </div>
 </section>
 <section id="versioning">
-<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this heading"></a></h2>
+<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading"></a></h2>
 <p>Basis sets within this package are versioned. This allows for changes to be made to a
 basis set, while keeping the old data accessible for historical purposes.
 Versions are specified by integers. By default,
@@ -248,7 +248,7 @@ which is a string. If <cite>version</cite> is not specified, the latest version 
 </div>
 </section>
 <section id="listing-basis-sets-and-getting-basis-set-metadata">
-<h2>Listing Basis Sets and Getting Basis Set Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-basis-set-metadata" title="Permalink to this heading"></a></h2>
+<h2>Listing Basis Sets and Getting Basis Set Metadata<a class="headerlink" href="#listing-basis-sets-and-getting-basis-set-metadata" title="Link to this heading"></a></h2>
 <p>This package contains metadata for all the basis sets that is in its data directory.
 This information can be accessed by the <code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_metadata()</span></code> function</p>
 <div class="admonition note">
@@ -284,7 +284,7 @@ A simple list of families can be obtained with <code class="xref py py-func docu
 </div>
 </section>
 <section id="lookup-a-basis-by-role">
-<h2>Lookup a basis by Role<a class="headerlink" href="#lookup-a-basis-by-role" title="Permalink to this heading"></a></h2>
+<h2>Lookup a basis by Role<a class="headerlink" href="#lookup-a-basis-by-role" title="Link to this heading"></a></h2>
 <p>Many basis sets have auxiliary basis sets for different purposes (density fitting,
 for example). These auxiliary basis sets can be queried in the BSE
 using the <a class="reference internal" href="user_api.html#basis_set_exchange.lookup_basis_by_role" title="basis_set_exchange.lookup_basis_by_role"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.lookup_basis_by_role()</span></code></a>. This function takes the
@@ -308,7 +308,7 @@ and can be obtained via <a class="reference internal" href="user_api.html#basis_
 </div>
 </section>
 <section id="filtering-basis-sets">
-<h2>Filtering basis sets<a class="headerlink" href="#filtering-basis-sets" title="Permalink to this heading"></a></h2>
+<h2>Filtering basis sets<a class="headerlink" href="#filtering-basis-sets" title="Link to this heading"></a></h2>
 <p>Basis sets can be searched for via simple filtering with <a class="reference internal" href="user_api.html#basis_set_exchange.filter_basis_sets" title="basis_set_exchange.filter_basis_sets"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.filter_basis_sets()</span></code></a>. All
 search parameters are case insensitive. Basis sets match if all criteria are true.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find all basis sets with &#39;31g&#39; in the name</span>
@@ -329,7 +329,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 </div>
 </section>
 <section id="basis-set-and-family-notes">
-<h2>Basis set and family notes<a class="headerlink" href="#basis-set-and-family-notes" title="Permalink to this heading"></a></h2>
+<h2>Basis set and family notes<a class="headerlink" href="#basis-set-and-family-notes" title="Link to this heading"></a></h2>
 <p>Notes about a basis set or a basis set family can be obtained, also.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Notes from a basis (name is case insensitive)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_basis_notes</span><span class="p">(</span><span class="s1">&#39;6-31g&#39;</span><span class="p">)</span>
@@ -347,7 +347,7 @@ search parameters are case insensitive. Basis sets match if all criteria are tru
 </div>
 </section>
 <section id="memoization">
-<h2>Memoization<a class="headerlink" href="#memoization" title="Permalink to this heading"></a></h2>
+<h2>Memoization<a class="headerlink" href="#memoization" title="Link to this heading"></a></h2>
 <p>By default, the library will memoize/cache some internal data. This has a big effect when,
 for example, running <a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a> with the same basis set name (even if choosing
 different elements and options).</p>

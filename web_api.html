@@ -11,11 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -92,14 +92,14 @@
            <div itemprop="articleBody">
              
   <section id="rest-api-reference">
-<h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Permalink to this heading"></a></h1>
+<h1>REST API Reference<a class="headerlink" href="#rest-api-reference" title="Link to this heading"></a></h1>
 <p>Below is a list of all public API endpoints. Examples shown are in python
 (using the <a class="reference external" href="http://docs.python-requests.org/en/master/">requests</a> module).
 However, any software or command-line tool that can access APIs like this (curl, wget, etc) can also be used.</p>
 <p>Basis set names, formats, and reference formats are case insensitive.</p>
 <p>Note that the API is read-only, and does not allow for uploading or modifying data.</p>
 <section id="note-about-headers">
-<h2>Note about headers<a class="headerlink" href="#note-about-headers" title="Permalink to this heading"></a></h2>
+<h2>Note about headers<a class="headerlink" href="#note-about-headers" title="Link to this heading"></a></h2>
 <p>Additional header information (user agent, email) are optional. However,
 if you would like to share who you are or what you are doing, feel free to
 add these fields. We will not use the email for any purpose other than to
@@ -108,7 +108,7 @@ notify you if your scripts are broken and causing us problems.</p>
 MolSSI, other than in aggregate form.</p>
 </section>
 <section id="specifying-elements">
-<h2>Specifying Elements<a class="headerlink" href="#specifying-elements" title="Permalink to this heading"></a></h2>
+<h2>Specifying Elements<a class="headerlink" href="#specifying-elements" title="Link to this heading"></a></h2>
 <p>Some endpoints take a string specifying which elements data should be obtained for.
 string is a comma-separated list of element symbols and/or Z numbers. Ranges can also be used.</p>
 <p>Symbols are not case sensitive and can be mixed with Z-numbers.</p>
@@ -128,7 +128,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 </div></blockquote>
 </section>
 <section id="api-metadata">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code><a class="headerlink" href="#api-metadata" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code><a class="headerlink" href="#api-metadata" title="Link to this heading"></a></h2>
 <p>Returns JSON representing the metadata about the basis sets contained in the BSE.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/metadata&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
@@ -137,7 +137,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 </div>
 </section>
 <section id="api-formats">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/formats</span></code><a class="headerlink" href="#api-formats" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/formats</span></code><a class="headerlink" href="#api-formats" title="Link to this heading"></a></h2>
 <p>Returns JSON representing which basis set formats are available, along with a description</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/formats&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
@@ -146,7 +146,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 </div>
 </section>
 <section id="api-reference-formats">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code><a class="headerlink" href="#api-reference-formats" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code><a class="headerlink" href="#api-reference-formats" title="Link to this heading"></a></h2>
 <p>Similar to <code class="docutils literal notranslate"><span class="pre">/api/formats</span></code>, but has info about which reference formats are supported</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/reference_formats&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
@@ -155,7 +155,7 @@ string is a comma-separated list of element symbols and/or Z numbers. Ranges can
 </div>
 </section>
 <section id="api-basis-basis-name-format-fmt">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/basis/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-basis-basis-name-format-fmt" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/basis/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-basis-basis-name-format-fmt" title="Link to this heading"></a></h2>
 <p>Obtain basis set data. This is the main function of the basis set exchange.</p>
 <p>The output is a string, except when <code class="docutils literal notranslate"><span class="pre">&lt;fmt&gt;</span></code> is json. Basis names are not case sensitive.
 See <code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code> for getting a list of basis sets. Formats can be obtained with <code class="docutils literal notranslate"><span class="pre">/api/formats</span></code>.</p>
@@ -249,7 +249,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 </div>
 </section>
 <section id="api-references-basis-name-format-fmt">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/references/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-references-basis-name-format-fmt" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/references/&lt;basis_name&gt;/format/&lt;fmt&gt;</span></code><a class="headerlink" href="#api-references-basis-name-format-fmt" title="Link to this heading"></a></h2>
 <p>Obtain basis set data. This is the main function of the basis set exchange.</p>
 <p>The output is a string, except when <code class="docutils literal notranslate"><span class="pre">&lt;fmt&gt;</span></code> is json. Basis names are not case sensitive.
 See <code class="docutils literal notranslate"><span class="pre">/api/metadata</span></code> for getting a list of basis sets. Formats can be obtained with <code class="docutils literal notranslate"><span class="pre">/api/reference_formats</span></code>.</p>
@@ -317,7 +317,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 </div>
 </section>
 <section id="api-notes-basis-name">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/notes/&lt;basis_name&gt;</span></code><a class="headerlink" href="#api-notes-basis-name" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/notes/&lt;basis_name&gt;</span></code><a class="headerlink" href="#api-notes-basis-name" title="Link to this heading"></a></h2>
 <p>Obtain notes about a basis set. Output is plain text.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get notes for 6-31g</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/notes/6-31g&#39;</span><span class="p">)</span>
@@ -338,7 +338,7 @@ See <code class="docutils literal notranslate"><span class="pre">/api/metadata</
 </div>
 </section>
 <section id="api-family-notes-family">
-<h2><code class="docutils literal notranslate"><span class="pre">/api/family_notes/&lt;family&gt;</span></code><a class="headerlink" href="#api-family-notes-family" title="Permalink to this heading"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">/api/family_notes/&lt;family&gt;</span></code><a class="headerlink" href="#api-family-notes-family" title="Link to this heading"></a></h2>
 <p>Obtain notes about a family of basis sets. Output is plain text.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get notes for the jensen family</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/api/family_notes/jensen&#39;</span><span class="p">)</span>
