@@ -121,7 +121,9 @@ def _bse_cli_get_data_dir(args):
 
 def _bse_cli_lookup_by_role(args):
     '''Handles the lookup-by-role subcommand'''
-    return api.lookup_basis_by_role(args.basis, args.role, args.data_dir)
+
+    bs_names = api.lookup_basis_by_role(args.basis, args.role, args.data_dir)
+    return '\n'.join(bs_names)
 
 
 def _bse_cli_get_basis(args):
