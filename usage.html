@@ -295,11 +295,11 @@ returns the name of the basis set.</p>
 and can be obtained via <a class="reference internal" href="user_api.html#basis_set_exchange.get_roles" title="basis_set_exchange.get_roles"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_roles()</span></code></a></p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the MP2-fit basis set for cc-pvtz</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;cc-pvtz&#39;</span><span class="p">,</span> <span class="s1">&#39;rifit&#39;</span><span class="p">)</span>
-<span class="go">&#39;cc-pvtz-rifit&#39;</span>
+<span class="go">[&#39;cc-pvtz-rifit&#39;]</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find the J-fit basis set for def2-TZVP</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">lookup_basis_by_role</span><span class="p">(</span><span class="s1">&#39;def2-tzvp&#39;</span><span class="p">,</span> <span class="s1">&#39;jfit&#39;</span><span class="p">)</span>
-<span class="go">&#39;def2-universal-jfit&#39;</span>
+<span class="go">[&#39;def2-universal-jfit&#39;]</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Available roles are available via get_roles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">basis_set_exchange</span><span class="o">.</span><span class="n">get_roles</span><span class="p">()</span>

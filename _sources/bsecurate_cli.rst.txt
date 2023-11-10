@@ -58,7 +58,7 @@ This works on table, element, and component data files.
 component-file-refs
 *******************
 
-.. command-output:: DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
+.. command-output:: DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pVDZ.1.json
    :shell:
 
 

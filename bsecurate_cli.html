@@ -213,23 +213,13 @@ This works on table, element, and component data files.</p>
 </section>
 <section id="component-file-refs">
 <h3>component-file-refs<a class="headerlink" href="#component-file-refs" title="Link to this heading"></a></h3>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pV{D,T}Z.1.json
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/bin/bsecurate&quot;, line 8, in &lt;module&gt;
-    sys.exit(run_bsecurate_cli())
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_cli.py&quot;, line 157, in run_bsecurate_cli
-    output = bsecurate_cli_handle_subcmd(args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 143, in bsecurate_cli_handle_subcmd
-    return handler_map[args.subcmd](args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bsecurate_handlers.py&quot;, line 48, in _bsecurate_cli_component_file_refs
-    data = curate.component_file_refs(args.files)
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/curate/misc.py&quot;, line 81, in component_file_refs
-    filedata = fileio.read_json_basis(fpath)
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 131, in read_json_basis
-    return _read_plain_json(file_path, True)
-  File &quot;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/fileio.py&quot;, line 70, in _read_plain_json
-    raise FileNotFoundError(&#39;JSON file \&#39;{}\&#39; does not exist, is not &#39;
-FileNotFoundError: JSON file &#39;/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pV{D,T}Z.1.json&#39; does not exist, is not readable, or is not a file
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ DATADIR=`bse get-data-dir`; bsecurate component-file-refs ${DATADIR}/dunning/cc-pVDZ.1.json
+/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/basis_set_exchange/data/dunning/cc-pVDZ.1.json
+    H,B-Ne  dunning1989a
+    He      woon1994a
+    Ca      koput2002a
+    Sc-Zn   balabanov2005a balabanov2006a
+    Ga-Kr   wilson1999a
 </pre></div>
 </div>
 </section>
