@@ -50,6 +50,9 @@ def test_aux_sanity(basis_name):
     this_metadata = bs_metadata[basis_name]
 
     for role, auxs in this_metadata['auxiliaries'].items():
+        if isinstance(auxs, str):
+            auxs = [auxs]
+
         for aux in auxs:
             assert aux in bs_metadata
             aux_metadata = bs_metadata[aux]
