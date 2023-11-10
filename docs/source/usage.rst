@@ -246,11 +246,11 @@ and can be obtained via :func:`basis_set_exchange.get_roles`
 
    >>> # Find the MP2-fit basis set for cc-pvtz
    >>> basis_set_exchange.lookup_basis_by_role('cc-pvtz', 'rifit')
-   'cc-pvtz-rifit'
+   ['cc-pvtz-rifit']
 
    >>> # Find the J-fit basis set for def2-TZVP
    >>> basis_set_exchange.lookup_basis_by_role('def2-tzvp', 'jfit')
-   'def2-universal-jfit'
+   ['def2-universal-jfit']
 
    >>> # Available roles are available via get_roles
    >>> basis_set_exchange.get_roles()
