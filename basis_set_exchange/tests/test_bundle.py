@@ -33,6 +33,7 @@ Tests for creating bundles/archives of formatted data
 """
 
 import os
+import sys
 import zipfile
 import tarfile
 import pytest
@@ -50,7 +51,10 @@ def _extract_all(filepath, extract_dir):
             zf.extractall(extract_dir)
     elif filepath.endswith('.tar.bz2'):
         with tarfile.open(filepath, 'r:bz2') as tf:
-            tf.extractall(extract_dir)
+            if sys.version_info >= (3, 11):
+                tf.extractall(extract_dir, filter='fully_trusted')
+            else:
+                tf.extractall(extract_dir)
     else:
         raise RuntimeError("Unexpected file extension")
 

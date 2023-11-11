@@ -77,8 +77,8 @@ def _create_readme(fmt, reffmt):
     Returns a str representing the readme file
     '''
 
-    now = datetime.datetime.utcnow()
-    timestamp = now.strftime('%Y-%m-%d %H:%M:%S UTC')
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S %Z')
 
     # yapf: disable
     outstr = _readme_str.format(timestamp=timestamp,
