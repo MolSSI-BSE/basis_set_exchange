@@ -24,12 +24,12 @@ jobs:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Clone the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install package
         run: |
@@ -39,7 +39,7 @@ jobs:
                           # (testing installed BSE, not the source tree)
 
       - name: Clone QCSchema HEAD
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: molssi/QCSchema
           path: deps/QCSchema
