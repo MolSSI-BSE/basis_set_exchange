@@ -1,5 +1,4 @@
 [![Continuous Integration](https://github.com/MolSSI-BSE/basis_set_exchange/workflows/Continuous%20Integration/badge.svg)](https://github.com/MolSSI-BSE/basis_set_exchange/actions?query=workflow%3A%22Continuous+Integration%22)
-[![codecov](https://codecov.io/gh/MolSSI-BSE/basis_set_exchange/branch/master/graph/badge.svg)](https://codecov.io/gh/MolSSI-BSE/basis_set_exchange)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/MolSSI-BSE/basis_set_exchange.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MolSSI-BSE/basis_set_exchange/context:python)
 [![PyPI version](https://img.shields.io/pypi/v/basis_set_exchange.svg)](https://pypi.org/project/basis_set_exchange/)
 

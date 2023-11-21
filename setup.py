@@ -50,10 +50,7 @@ if __name__ == "__main__":
             ':python_version == "3.7"': ["importlib-metadata"],
             'docs': ['sphinx', 'sphinxcontrib-programoutput', 'sphinx_rtd_theme', 'graphviz'],
             'tests': [
-                # List pytest-cov before pytest because of a dumb pip bug
-                'pytest-cov',
-                'pytest>=4.6',
-                'codecov',
+                'pytest',
             ],
             'lint': ['yapf'],
             'curate': ['graphviz']

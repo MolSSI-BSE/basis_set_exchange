@@ -66,10 +66,3 @@ jobs:
         run: |
           ln -s ../basis_set_exchange/tests/fakedata ${HOME}/my_data_dir
           make doctest && make html
-
-      - name: Code coverage
-        uses: codecov/codecov-action@v3
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
-        with:
-          file: ./test_wdir/coverage.xml
-          fail_ci_if_error: true
