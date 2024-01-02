@@ -28,11 +28,11 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-'''
+"""
 One-center integrals for Gaussian-type and Slater-type orbitals
 
 Written by Susi Lehtola, 2020
-'''
+"""
 
 from math import gamma, sqrt
 
@@ -44,7 +44,7 @@ except ImportError:
 
 
 def _transform_numpy(C0, P0):
-    '''Transforms the primitive integrals P into the contracted basis C using NumPy'''
+    """Transforms the primitive integrals P into the contracted basis C using NumPy"""
     C = numpy.asarray(C0)
     P = numpy.asarray(P0)
     np_result = numpy.dot(numpy.dot(C, P), C.T)
@@ -52,7 +52,7 @@ def _transform_numpy(C0, P0):
 
 
 def _matmul(A, B):
-    '''Matrix multiply'''
+    """Matrix multiply"""
     assert (len(A[0]) == len(B))
     result = [[0.0 for i in range(len(B[0]))] for j in range(len(A))]
     for i in range(len(A)):
@@ -63,7 +63,7 @@ def _matmul(A, B):
 
 
 def _transform_python(C, P):
-    '''Transforms the primitive integrals P into the contracted basis C in pure Python'''
+    """Transforms the primitive integrals P into the contracted basis C in pure Python"""
 
     # C transpose
     nrows = len(C)
@@ -74,7 +74,7 @@ def _transform_python(C, P):
 
 
 def _to_float(M):
-    '''Transforms a vector or matrix from string representation to floating point representation'''
+    """Transforms a vector or matrix from string representation to floating point representation"""
 
     nrows = len(M)
     if isinstance(M[0], list):
@@ -93,7 +93,7 @@ def _to_float(M):
 
 
 def _to_int(M):
-    '''Transforms a vector from string representation to int representation'''
+    """Transforms a vector from string representation to int representation"""
     nrows = len(M)
     if isinstance(M[0], str):
         return [int(M[i]) for i in range(nrows)]
@@ -102,7 +102,7 @@ def _to_int(M):
 
 
 def _transform(C, P):
-    '''Transforms the primitive integrals P into the contracted basis C in numpy if it's available'''
+    """Transforms the primitive integrals P into the contracted basis C in numpy if it's available"""
 
     if _use_numpy:
         return _transform_numpy(C, P)
@@ -111,12 +111,12 @@ def _transform(C, P):
 
 
 def _zero_matrix(N):
-    '''Allocates a zero matrix of size N x N'''
+    """Allocates a zero matrix of size N x N"""
     return [[0.0 for _ in range(N)] for _ in range(N)]
 
 
 def _normalize_contraction(contr, ovl):
-    '''Returns a normalized contraction matrix given the overlap matrix'''
+    """Returns a normalized contraction matrix given the overlap matrix"""
 
     # Number of contractions
     nprim = len(contr[0])
@@ -140,11 +140,11 @@ def _normalize_contraction(contr, ovl):
 
 
 def _gto_overlap(exps, l):
-    '''Computes the primitive overlap matrix for the given exponents,
+    """Computes the primitive overlap matrix for the given exponents,
     assuming the basis functions are of the spherical form r^l exp(-z
     r^2).
 
-    '''
+    """
     assert (isinstance(l, int) and l >= 0)
 
     def ovl(a, b, l):
@@ -162,11 +162,11 @@ def _gto_overlap(exps, l):
 
 
 def gto_overlap_contr(exps0, contr0, l):
-    '''Computes the overlap matrix in the contracted basis, assuming the
-    basis functions are of the spherical form r^l \sum_i c_i exp(-z_i
+    """Computes the overlap matrix in the contracted basis, assuming the
+    basis functions are of the spherical form r^l \\sum_i c_i exp(-z_i
     r^2).
 
-    '''
+    """
 
     # Convert exponents and contractions to floating point
     exps = _to_float(exps0)
@@ -177,10 +177,10 @@ def gto_overlap_contr(exps0, contr0, l):
 
 
 def _gto_R(exps, l):
-    '''Computes the <r> matrix for the given exponents, assuming the basis
+    """Computes the <r> matrix for the given exponents, assuming the basis
     functions are of the normalized spherical form r^l exp(-z r^2).
 
-    '''
+    """
     assert (isinstance(l, int) and l >= 0)
 
     def rval(a, b, l):
@@ -199,11 +199,11 @@ def _gto_R(exps, l):
 
 
 def gto_R_contr(exps0, contr0, l):
-    '''Computes the r matrix in the contracted basis, assuming the basis
-    functions are of the spherical form r^l \sum_i c_i exp(-z_i r^2).
+    """Computes the r matrix in the contracted basis, assuming the basis
+    functions are of the spherical form r^l \\sum_i c_i exp(-z_i r^2).
     The function also takes care of proper normalization.
 
-    '''
+    """
 
     # Convert exponents and contractions to floating point
     exps = _to_float(exps0)
@@ -220,10 +220,10 @@ def gto_R_contr(exps0, contr0, l):
 
 
 def _gto_Rsq(exps, l):
-    '''Computes the r^2 matrix for the given exponents, assuming the basis
+    """Computes the r^2 matrix for the given exponents, assuming the basis
     functions are of the normalized spherical form r^l exp(-z r^2).
 
-    '''
+    """
     assert (isinstance(l, int) and l >= 0)
 
     def rsq(a, b, l):
@@ -242,11 +242,11 @@ def _gto_Rsq(exps, l):
 
 
 def gto_Rsq_contr(exps0, contr0, l):
-    '''Computes the r^2 matrix in the contracted basis, assuming the basis
-    functions are of the spherical form r^l \sum_i c_i exp(-z_i r^2).
+    """Computes the r^2 matrix in the contracted basis, assuming the basis
+    functions are of the spherical form r^l \\sum_i c_i exp(-z_i r^2).
     The function also takes care of proper normalization.
 
-    '''
+    """
 
     # Convert exponents and contractions to floating point
     exps = _to_float(exps0)
@@ -263,11 +263,11 @@ def gto_Rsq_contr(exps0, contr0, l):
 
 
 def _sto_overlap(exps, ns):
-    '''Computes the primitive overlap matrix for the given exponents and
+    """Computes the primitive overlap matrix for the given exponents and
     primary quantum numbers, assuming the basis functions are of the
     spherical form r^(n-1) exp(-z r).
 
-    '''
+    """
     assert (len(exps) == len(ns))
 
     def ovl(za, zb, na, nb):
@@ -285,10 +285,10 @@ def _sto_overlap(exps, ns):
 
 
 def sto_overlap_contr(exps0, contr0, ns0):
-    '''Computes the overlap matrix in the contracted basis, assuming the
+    """Computes the overlap matrix in the contracted basis, assuming the
     basis functions are of the spherical form r^(n-1) exp(-z r).
 
-    '''
+    """
     # Convert exponents and contractions to floating point
     exps = _to_float(exps0)
     contr = _to_float(contr0)
@@ -300,11 +300,11 @@ def sto_overlap_contr(exps0, contr0, ns0):
 
 
 def _sto_Rsq(exps, ns):
-    '''Computes the primitive r^2 matrix for the given exponents and
+    """Computes the primitive r^2 matrix for the given exponents and
     primary quantum numbers, assuming the basis functions are of the
     spherical form r^(n-1) exp(-z r).
 
-    '''
+    """
     assert (len(exps) == len(ns))
 
     def rsq(za, zb, na, nb):
@@ -322,10 +322,10 @@ def _sto_Rsq(exps, ns):
 
 
 def sto_Rsq_contr(exps0, contr0, ns0):
-    '''Computes the r^2 matrix in the contracted basis, assuming the basis
+    """Computes the r^2 matrix in the contracted basis, assuming the basis
     functions are of the spherical form r^(n-1) exp(-z r).
 
-    '''
+    """
     # Convert exponents and contractions to floating point
     exps = _to_float(exps0)
     contr = _to_float(contr0)
