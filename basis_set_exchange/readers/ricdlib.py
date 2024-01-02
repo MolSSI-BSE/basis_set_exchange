@@ -44,7 +44,7 @@ basis_head_re = re.compile(r'^/([a-zA-Z]+).({}|)....(aCD|acCD)-aux-basis.\s*$'.f
 charge_line_re = re.compile(r'^\s*({})\s+(\d+)\s+(\d+)\s*$'.format(helpers.floating_re_str))
 dummy_line_re = re.compile(r'^\s*Dummy reference line.\s*$')
 # nprim, ncontr, functype
-shell_start_re = re.compile('^\s*(\d+)\s+(\d+)\s+(\d+)\s*$')
+shell_start_re = re.compile(r'^\s*(\d+)\s+(\d+)\s+(\d+)\s*$')
 
 # Floating point data
 array_data_re = re.compile(r'^\s*(?:\s({}))+\s*$'.format(helpers.floating_re_str))
