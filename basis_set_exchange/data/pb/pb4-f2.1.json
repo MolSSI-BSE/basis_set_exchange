@@ -1,0 +1,182 @@
+{
+  "molssi_bse_schema": {
+    "schema_type": "component",
+    "schema_version": "0.1"
+  },
+  "description": "PB4-F2 protonic basis",
+  "data_source": "Data from Table I",
+  "elements": {
+    "1": {
+      "references": [
+        "yu2020a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "5.973"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "10.645"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "17.943"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "28.950"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "7.604"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "14.701"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "23.308"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "9.011"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "19.787"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "10.914"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "20.985"
+          ],
+          "coefficients": [
+            [
+              "1.0"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
