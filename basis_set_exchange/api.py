@@ -51,13 +51,10 @@ from . import references
 from . import sort
 from . import misc
 from . import lut
-from ._version import get_versions
-
-__version__ = get_versions()['version']
-
 
 def version():
     '''Obtain the version of the basis set exchange library (as a string)'''
+    from . import __version__
     return __version__
 
 

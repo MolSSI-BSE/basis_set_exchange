@@ -55,5 +55,7 @@ from .validator import validate_file, validate_data
 from .bundle import create_bundle, get_archive_types
 
 from importlib.metadata import version
-
 __version__ = version("basis_set_exchange")
+
+def get_version():
+    return __version__
