@@ -54,10 +54,8 @@ from .validator import validate_file, validate_data
 
 from .bundle import create_bundle, get_archive_types
 
-# Handle versioneer
-from ._version import get_versions
+from importlib.metadata import version
+__version__ = version("basis_set_exchange")
 
-versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
-del get_versions, versions
+def get_version():
+    return __version__

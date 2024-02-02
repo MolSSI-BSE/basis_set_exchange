@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "basis_set_exchange"
+dynamic = ["version"]
+authors = [
+  { name="Benjamin Pritchard", email="bse@molssi.org" },
+  { name="Susi Lehtola", email="slehtola@vt.edu" },
+]
+description='The Basis Set Exchange'
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+]
+dependencies = [
+    "jsonschema",
+    "argcomplete",
+    "regex",
+    "unidecode",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-programoutput",
+    "graphviz"
+]
+tests = [
+    "pytest",
+]
+lint = [
+    "yapf",
+]
+curate = [
+    "graphviz",
+]
+
+
+[project.scripts]
+bse = "basis_set_exchange.cli:run_bse_cli"
+bsecurate = "basis_set_exchange.cli:run_bsecurate_cli"
+
+[tool.setuptools.package-data]
+
+
+
+[project.urls]
+"Homepage" = "https://www.basissetexchange.org"
+"Bug Tracker" = "https://github.com/MolSSI-BSE/basis_set_exchange/issues"
+
+
+[tool.black]
+line-length = 120
+
+
+[tool.setuptools_scm]
+
+
+[tool.versioningit.vcs]
+default-tag = "0.0.99" # useful for CI/shallow clones
