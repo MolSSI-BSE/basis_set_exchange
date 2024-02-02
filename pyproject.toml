@@ -13,7 +13,7 @@ authors = [
 description='The Basis Set Exchange'
 readme = "README.md"
 license = { file="LICENSE" }
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Intended Audience :: Science/Research",
@@ -25,7 +25,6 @@ dependencies = [
     "argcomplete",
     "regex",
     "unidecode",
-    "importlib-metadata; python_version<'3.8'"
 ]
 
 [project.optional-dependencies]
