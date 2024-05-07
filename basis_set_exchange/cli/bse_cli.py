@@ -34,7 +34,7 @@ Command line interface for the basis set exchange
 
 import argparse
 import argcomplete
-from basis_set_exchange import version
+from basis_set_exchange import get_version
 from basis_set_exchange.cli.bse_handlers import bse_cli_handle_subcmd
 from basis_set_exchange.cli.check import cli_check_normalize_args
 from basis_set_exchange.cli.complete import (cli_case_insensitive_validator, cli_family_completer, cli_role_completer,
@@ -53,7 +53,7 @@ def run_bse_cli():
     # Main global options
     ########################################
     parser = argparse.ArgumentParser(description='Description of your program')
-    parser.add_argument('-V', action='version', version='basis_set_exchange ' + version())
+    parser.add_argument('-V', action='version', version='basis_set_exchange ' + get_version())
     parser.add_argument('-d', '--data-dir', metavar='PATH', help='Override which data directory to use')
     parser.add_argument('-o', '--output', metavar='PATH', help='Output to given file rather than stdout',
                         default='-', type=argparse.FileType('w', encoding='utf-8'))
