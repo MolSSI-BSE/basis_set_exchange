@@ -16,7 +16,7 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -475,8 +475,17 @@ and role.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="basis_set_exchange.version">
-<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.</span></span><span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.version" title="Link to this definition"></a></dt>
-<dd><p>Obtain the version of the basis set exchange library (as a string)</p>
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.</span></span><span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.version" title="Link to this definition"></a></dt>
+<dd><p>Get the version string for the named package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distribution_name</strong> – The name of the distribution package to query.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The version string for the package as defined in the package’s
+“Version” metadata key.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
