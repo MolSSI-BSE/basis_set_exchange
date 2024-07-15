@@ -220,7 +220,7 @@ A simple list of families can be obtained with :func:`basis_set_exchange.get_fam
 
    >>> # Print all the basis sets known to the BSE
    >>> basis_set_exchange.get_all_basis_names()
-   ['2ZaPa-NR', '2ZaPa-NR-CV', '3-21G', '3ZaPa-NR', '3ZaPa-NR-CV',...
+   ['2ZaP', '2ZaPa-NR', '2ZaPa-NR-CV', '3-21G', '3ZaP', '3ZaPa-NR', ...
 
    >>> # A list of all families
    >>> basis_set_exchange.get_families()
