@@ -292,7 +292,12 @@ def write_formatted_basis_str(basis_dict, fmt, header=None):
     if header is not None and _writer_map[fmt]['comment'] is not None:
         comment_str = _writer_map[fmt]['comment']
         header_str = comment_str + comment_str.join(header.splitlines(True))
-        ret_str = header_str + '\n\n' + ret_str
+
+        # HACK - Gaussian94Lib doesn't tolerate blank lines after the header
+        if fmt == 'gaussian94lib':
+            ret_str = header_str + ret_str
+        else:
+            ret_str = header_str + '\n\n' + ret_str
 
     # HACK - Psi4 requires the first non-comment line be spherical/cartesian
     #        so we have to add that before the header
