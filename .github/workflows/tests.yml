@@ -24,7 +24,7 @@ jobs:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -50,13 +50,11 @@ jobs:
 
       - name: Run tests
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
-        shell: bash -l {0}
         run: |
           pytest --pyargs basis_set_exchange 
 
       - name: Test CLI
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
-        shell: bash -l {0}
         run: |
           bse get-basis 6-31g nwchem
 
