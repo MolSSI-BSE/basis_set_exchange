@@ -50,13 +50,11 @@ jobs:
 
       - name: Run tests
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
-        shell: bash -l {0}
         run: |
           pytest --pyargs basis_set_exchange 
 
       - name: Test CLI
         working-directory: ./test_wdir # Move to an unrelated dir and test the installed package
-        shell: bash -l {0}
         run: |
           bse get-basis 6-31g nwchem
 
