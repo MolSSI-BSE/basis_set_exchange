@@ -116,6 +116,32 @@ def all_element_names():
     '''Obtain a list of the names of all the elements'''
     return list(_element_name_map.keys())
 
+def all_element_blocks():
+    '''Obtain a list of the blocks the elements belong to'''
+
+    # Order of shells in periodic table
+    shell_order = [0, 0, 1, 0, 1, 0, 2, 1, 0, 2, 1, 0, 3, 2, 1, 0, 3, 2, 1, 0]
+    # Count quantum number
+    quantum_number = [1, 2, 3, 4]
+
+    # Loop over shells
+    Z = 0
+    ishell = 0
+    num_filled = 0
+
+    blocks = {}
+    while Z < _data_table[-1][1]:
+        # Increment count and number of filled electrons
+        Z += 1
+        num_filled += 1
+        shell_am = shell_order[ishell]
+        blocks[Z] = f'{quantum_number[shell_am]}{_amchar_map_hik[shell_am]}'
+        if num_filled == 2*(2*shell_order[ishell]+1):
+            # Shell is full, move on to next shell
+            quantum_number[shell_am] += 1
+            ishell += 1
+            num_filled = 0
+    return blocks
 
 def element_data_from_Z(Z):
     '''Obtain elemental data given a Z number
