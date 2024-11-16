@@ -260,7 +260,7 @@ def add_basis_from_dict(bs_data,
             # and that there are no duplicates
             for el in elements:
                 if el not in orig_elements:
-                    raise RuntimeError("Element {} not found in file {}".format(el, bs_file))
+                    raise RuntimeError("Element {} not found in given dictionary".format(el))
                 if el in done_elements:
                     raise RuntimeError("Duplicate element {} in reference string {}".format(el, k))
 
