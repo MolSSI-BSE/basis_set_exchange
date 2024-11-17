@@ -141,6 +141,12 @@ def reference_text(key, ref):
             s += '\n' + ref['year']
         if 'doi' in ref:
             s += '\n' + ref['doi']
+    elif ref['_entry_type'] == 'dataset':
+        s += ref_wrap.fill(', '.join(ref['authors'])) + '\n'
+        s += ref_wrap.fill(ref['title']) + '\n'
+        s += '{} ({})'.format(ref['publisher'], ref['year'])
+        if 'doi' in ref:
+            s += '\n' + ref['doi']
     else:
         raise RuntimeError('Cannot handle reference type {}'.format(ref['_entry_type']))
     if 'note' in ref:

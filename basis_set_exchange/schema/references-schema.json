@@ -41,7 +41,7 @@
             "properties": {
                 "_entry_type" : {
                     "type" : "string",
-                    "enum": [ "article", "techreport", "misc", "unpublished", "phdthesis", "book", "incollection" ]
+                    "enum": [ "article", "techreport", "misc", "unpublished", "phdthesis", "book", "incollection", "dataset" ]
                 },
                 "title" : { "type": "string" },
                 "doi" : { "type": "string" },

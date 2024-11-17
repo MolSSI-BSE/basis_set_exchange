@@ -49,6 +49,8 @@ def write_ris(key, ref):
         s += "TY Book \n"
     elif ref['_entry_type'] == 'phdthesis':
         s += "TY Thesis \n"
+    elif ref['_entry_type'] == 'dataset':
+        s += "TY Dataset \n"
     elif ref['_entry_type'] == 'techreport':
         s += "TY Report \n"
     else:
