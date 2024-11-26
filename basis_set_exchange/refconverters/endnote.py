@@ -51,6 +51,8 @@ def write_endnote(key, ref):
         s += "%0 Thesis \n"
     elif ref['_entry_type'] == 'techreport':
         s += "%0 Report \n"
+    elif ref['_entry_type'] == 'dataset':
+        s += "%0 Data Set \n"
     else:
         s += "%0 Generic\n"
 
