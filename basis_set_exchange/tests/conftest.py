@@ -45,8 +45,8 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(skip_slow)
 
 
-def pytest_ignore_collect(path, config):
+def pytest_ignore_collect(collection_path, config):
     if config.getoption("--runslow"):
         return False
     else:
-        return str(path).endswith('_slow.py')
+        return str(collection_path).endswith('_slow.py')
