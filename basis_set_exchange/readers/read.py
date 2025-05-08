@@ -52,6 +52,7 @@ from .gamess_us import read_gamess_us
 from .cp2k import read_cp2k
 from .crystal import read_crystal
 from .veloxchem import read_veloxchem
+from .bsejson import read_json
 
 _reader_map = {
     'turbomole': {
@@ -139,6 +140,11 @@ _reader_map = {
         'display': 'VeloxChem',
         'extension': '.vlx',
         'reader': read_veloxchem
+    },
+    'json': {
+        'display': 'json',
+        'extension': '.json',
+        'reader': read_json
     }
 }
 
