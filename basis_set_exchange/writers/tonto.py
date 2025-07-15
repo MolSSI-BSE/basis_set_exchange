@@ -1,4 +1,5 @@
-# Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+# Copyright (c) 2025 Lucas Militão - LaMuCrEs - São Carlos Institute for Physics - University of São Paulo
+# Thanks to the The Molecular Sciences Software Institute, Virginia Tech for serving as a basis for this writer
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
