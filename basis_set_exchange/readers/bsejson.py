@@ -40,5 +40,4 @@ def read_json(basis):
     '''
 
     data = json.loads('\n'.join(basis))
-    print(data)
     return data['elements'], data
