@@ -180,33 +180,73 @@ def _parse_ecp_lines(basis_lines, bs_data):
 
         M_arr = [M, M0, M1, M2, M3, M4]
         offset = 0
+
+        # Read in the data
+        ecpdata = [None for _ in M_arr]
         for idx, mdata in enumerate(M_arr):
             if mdata > 0:
                 # We have an entry, extract it from the read-in records
-                r_exp, g_exp, coeff = get_data(ecp_records[offset:offset + mdata])
+                ecpdata[idx] = get_data(ecp_records[offset:offset + mdata])
                 # increment offset
                 offset += mdata
 
-                if idx == 0:
-                    # this is the maximum angular momentum projector in the BSE syntax
-                    M_am = M_arr[1:]
-                    assert len(M_am) == 5
-                    am_val = len(M_am)-1
-                    while M_am[am_val] == 0:
-                        am_val -= 1
-                    ecp_am = [am_val + 1]
-                else:
-                    # These terms come with a projection operator with am
-                    ecp_am = [idx - 1]
+        # Find the maximum angular moment of the projectors
+        M_am = M_arr[1:]
+        assert len(M_am) == 5
+        Lmax = len(M_am)-1
+        while M_am[Lmax] == 0:
+            Lmax -= 1
+        # Get rid of arrays we no longer need
+        del M_am
+        del M_arr
 
-                ecp_pot = {
-                    'angular_momentum': ecp_am,
-                    'ecp_type': 'scalar_ecp',
-                    'r_exponents': r_exp,
-                    'gaussian_exponents': g_exp,
-                    'coefficients': [coeff]  # BSE expects coefficients in a double array
-                }
-                element_data['ecp_potentials'].append(ecp_pot)
+        def flip_sign(coeff):
+            '''Flips the sign of the coefficient'''
+            if float(coeff) > 0.0:
+                return f'-{coeff}'
+            elif float(coeff) < 0.0:
+                assert coeff[0] == '-'
+                return coeff[1:]
+            else:
+                return coeff
+
+        # If no local term was given in the input; one needs to manipulate the entries.
+        if M == 0:
+            # The local term is given by the maximum angular momentum projector
+            ecpdata[0] = ecpdata[Lmax+1]
+
+            # which then needs to be substracted from the other terms
+            L_rexp, L_gexp, L_coeff = ecpdata[Lmax+1]
+            L_coeff = [flip_sign(coeff) for coeff in L_coeff]
+
+            for i in range(1,Lmax+1):
+                r_exp, g_exp, coeff = ecpdata[i]
+                r_exp += L_rexp
+                g_exp += L_gexp
+                coeff += L_coeff
+                ecpdata[i] = r_exp, g_exp, coeff
+
+        # Concatenate the list
+        ecpdata = ecpdata[:Lmax+1]
+
+        # Store the angular momentum of the entries
+        ecp_am = [None for _ in ecpdata]
+        for idx, _ in enumerate(ecpdata):
+            if idx == 0:
+                ecp_am[idx] = [Lmax]
+            else:
+                ecp_am[idx] = [idx-1]
+
+        for idx, entry in enumerate(ecpdata):
+            r_exp, g_exp, coeff = entry
+            ecp_pot = {
+                'angular_momentum': ecp_am[idx],
+                'ecp_type': 'scalar_ecp',
+                'r_exponents': r_exp,
+                'gaussian_exponents': g_exp,
+                'coefficients': [coeff]  # BSE expects coefficients in a double array
+            }
+            element_data['ecp_potentials'].append(ecp_pot)
 
 
 def read_crystal(basis_lines):
