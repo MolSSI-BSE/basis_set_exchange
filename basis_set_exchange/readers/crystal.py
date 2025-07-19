@@ -47,7 +47,7 @@ shell_re = re.compile(r'^([\d]+)\s+([\d]+)\s+([\d]+)\s+({0}|[\d]+)\s+({0}|[\d]+)
 ecp_re = re.compile(r'^({0}|[\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)$'.format(
     helpers.floating_re_str))
 # ECP entry: expn coeff rexp
-ecp_entry_re = re.compile(r'^({0})\s+({0})\s+(\d)$'.format(helpers.floating_re_str))
+ecp_entry_re = re.compile(r'^({0})\s+({0})\s+(-?\d)$'.format(helpers.floating_re_str))
 # Terminator
 terminator_re = re.compile(r'^99\s+0$')
 
