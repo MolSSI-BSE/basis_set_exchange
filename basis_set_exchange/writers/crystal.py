@@ -1,4 +1,5 @@
 # Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#                    2025 Susi Lehtola
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -31,7 +32,7 @@
 '''
 Conversion of basis sets to Crystal format
 
-Written by Susi Lehtola, 2020
+Written by Susi Lehtola, 2020-2025
 '''
 
 from .. import manip, sort, printing
@@ -82,25 +83,39 @@ def write_crystal(basis):
             # Form the ecp entry block
             ecp_entries = ''
             num_terms = []
-            for am in range(5):
+            def add_term(am):
                 # Grab the ECP terms with this am
                 am_ecp = [k for k in data['ecp_potentials'] if k['angular_momentum'] == [am]]
                 n_terms = 0
+                ecp_entry = ''
                 for term in am_ecp:
                     exps = term['gaussian_exponents']
                     coefs = term['coefficients'][0]
                     rexp = term['r_exponents']
                     for i in range(len(exps)):
-                        ecp_entries += '{} {} {}\n'.format(exps[i], coefs[i], rexp[i])
+                        # r exponent in CRYSTAL format is the full one: it does NOT have the r^{-2} prefactor as in other formats
+                        ecp_entry += '{} {} {}\n'.format(exps[i], coefs[i], rexp[i]-2)
                         n_terms += 1
+                return ecp_entry, n_terms
                 num_terms.append(n_terms)
 
-            # Number of scalar terms is 0: Hay-Wadt is not supported
-            M = 0
-
+            # The highest-am projector comes first
+            ecp_entry, n_terms = add_term(max_ecp_am)
+            ecp_entries += ecp_entry
+            num_terms.append(n_terms)
+            for am in range(max_ecp_am):
+                ecp_entry, n_terms = add_term(am)
+                ecp_entries += ecp_entry
+                num_terms.append(n_terms)
+            for am in range(max_ecp_am, 5):
+                num_terms.append(0)
+                
             # Print out the ECP header
             s += 'INPUT\n'
-            s += '{:.0f} {} {} {} {} {} {}\n'.format(Zeff, M, *num_terms)
+            s += '{:.0f}'.format(Zeff)
+            for term in num_terms:
+                s += f' {term}'
+            s += '\n'
             # and the ECP data
             s += ecp_entries
 
