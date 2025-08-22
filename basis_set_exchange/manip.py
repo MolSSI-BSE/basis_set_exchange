@@ -585,7 +585,7 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
 
     '''
 
-    if nadd < 1:
+    if nadd < 0:
         raise RuntimeError("Adding {} functions makes no sense for geometric_augmentation".format(nadd))
 
     # We need to combine shells by AM
@@ -654,14 +654,23 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
                     "The two outermost exponents are the same. Duplicate exponents are not a good thing here. Exponent: {}"
                     .format(ref_exp))
 
-            # Test that the primitives for the references are free.
+            # Check if the primitives for the references are free.
+            def add_if_contracted(idx, expn):
+                if idx not in free_prims:
+                    # The primitive is contracted; we need to add it as a
+                    # free primitive to make sure we don't get extra
+                    # contraction error
+                    print('expn={} idx={} not in free prims, adding'.format(expn,idx))
+                    new_shells.append({
+                        'function_type': shell['function_type'],
+                        'region': shell['region'],
+                        'angular_momentum': shell['angular_momentum'],
+                        'exponents': [expn],
+                        'coefficients': [['1.00000000']]
+                    })
             free_prims = _free_primitives(shell['coefficients'])
-            if (ref_idx not in free_prims) or (next_idx not in free_prims):
-                # The shell does not have enough free primitives so
-                # skip the extrapolation. (The alternative would be to
-                # add in free primitives anyway, but then you'd have a
-                # problem with contraction errors.)
-                continue
+            add_if_contracted(ref_idx, ref_exp)
+            add_if_contracted(next_idx, next_exp)
 
             # Form new exponents
             new_exponents = []
@@ -669,7 +678,6 @@ def geometric_augmentation(basis, nadd, use_copy=True, as_component=False, steep
                 new_exponents.append(ref_exp * (beta**i))
 
             new_exponents = ['{:.6e}'.format(x) for x in new_exponents]
-
             # add the new exponents as new uncontracted shells
             for ex in new_exponents:
                 new_shells.append({
