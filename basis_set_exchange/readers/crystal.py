@@ -1,4 +1,5 @@
 # Copyright (c) 2017-2022 The Molecular Sciences Software Institute, Virginia Tech
+#                    2025 Susi Lehtola
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -31,7 +32,7 @@
 '''
 Crystal format parser
 
-Written by Susi Lehtola, 2020
+Written by Susi Lehtola, 2020-2025
 '''
 
 import re
@@ -42,12 +43,13 @@ from . import helpers
 element_re = re.compile(r'^([\d]{1,3})\s+([\d]+)$')
 # The shell definition has three integers and two (potentially floating point, maybe integer) numbers
 shell_re = re.compile(r'^([\d]+)\s+([\d]+)\s+([\d]+)\s+({0}|[\d]+)\s+({0}|[\d]+)$'.format(helpers.floating_re_str))
-# ECP definition: ZNUC and six integers for number of terms
-ecp_re = re.compile(r'^({})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)$'.format(
+# ECP definition: ZNUC and six integers for number of terms.
+ecp_re = re.compile(r'^({0}|[\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)$'.format(
     helpers.floating_re_str))
 # ECP entry: expn coeff rexp
-ecp_entry_re = re.compile(r'^({0})\s+({0})\s+(\d)$'.format(helpers.floating_re_str))
-
+ecp_entry_re = re.compile(r'^({0})\s+({0})\s+(-?\d)$'.format(helpers.floating_re_str))
+# Terminator
+terminator_re = re.compile(r'^99\s+0$')
 
 def _get_element_ecp(basis_lines):
     '''Determines the element and if an ECP is used'''
@@ -170,7 +172,7 @@ def _parse_ecp_lines(basis_lines, bs_data):
         # Collect the results
         def get_data(records):
             '''Extracts the data from the ecp record'''
-            r_exp = [r[2] for r in records]
+            r_exp = [r[2]+2 for r in records] # CRYSTAL has the bare exponent but BSE appears to store the exponents assuming a r^{-2} prefactor
             g_exp = [r[0] for r in records]
             coeff = [r[1] for r in records]
 
@@ -178,30 +180,73 @@ def _parse_ecp_lines(basis_lines, bs_data):
 
         M_arr = [M, M0, M1, M2, M3, M4]
         offset = 0
+
+        # Read in the data
+        ecpdata = [None for _ in M_arr]
         for idx, mdata in enumerate(M_arr):
             if mdata > 0:
                 # We have an entry, extract it from the read-in records
-                r_exp, g_exp, coeff = get_data(ecp_records[offset:offset + mdata])
+                ecpdata[idx] = get_data(ecp_records[offset:offset + mdata])
                 # increment offset
                 offset += mdata
 
-                if idx == 0:
-                    # We have an entry with M, i.e. a scalar potential as
-                    # in a Hay-Wadt ECP; this does not appear to be
-                    # supported by the BSE at the moment
-                    raise RuntimeError('Hay-Wadt ECPs are not supported at the moment')
-                else:
-                    # These terms come with a projection operator with am
-                    ecp_am = [idx - 1]
+        # Find the maximum angular moment of the projectors
+        M_am = M_arr[1:]
+        assert len(M_am) == 5
+        Lmax = len(M_am)-1
+        while M_am[Lmax] == 0:
+            Lmax -= 1
+        # Get rid of arrays we no longer need
+        del M_am
+        del M_arr
 
-                ecp_pot = {
-                    'angular_momentum': ecp_am,
-                    'ecp_type': 'scalar_ecp',
-                    'r_exponents': r_exp,
-                    'gaussian_exponents': g_exp,
-                    'coefficients': [coeff]  # BSE expects coefficients in a double array
-                }
-                element_data['ecp_potentials'].append(ecp_pot)
+        def flip_sign(coeff):
+            '''Flips the sign of the coefficient'''
+            if float(coeff) > 0.0:
+                return f'-{coeff}'
+            elif float(coeff) < 0.0:
+                assert coeff[0] == '-'
+                return coeff[1:]
+            else:
+                return coeff
+
+        # If no local term was given in the input; one needs to manipulate the entries.
+        if M == 0:
+            # The local term is given by the maximum angular momentum projector
+            ecpdata[0] = ecpdata[Lmax+1]
+
+            # which then needs to be substracted from the other terms
+            L_rexp, L_gexp, L_coeff = ecpdata[Lmax+1]
+            L_coeff = [flip_sign(coeff) for coeff in L_coeff]
+
+            for i in range(1,Lmax+1):
+                r_exp, g_exp, coeff = ecpdata[i]
+                r_exp += L_rexp
+                g_exp += L_gexp
+                coeff += L_coeff
+                ecpdata[i] = r_exp, g_exp, coeff
+
+        # Concatenate the list
+        ecpdata = ecpdata[:Lmax+1]
+
+        # Store the angular momentum of the entries
+        ecp_am = [None for _ in ecpdata]
+        for idx, _ in enumerate(ecpdata):
+            if idx == 0:
+                ecp_am[idx] = [Lmax]
+            else:
+                ecp_am[idx] = [idx-1]
+
+        for idx, entry in enumerate(ecpdata):
+            r_exp, g_exp, coeff = entry
+            ecp_pot = {
+                'angular_momentum': ecp_am[idx],
+                'ecp_type': 'scalar_ecp',
+                'r_exponents': r_exp,
+                'gaussian_exponents': g_exp,
+                'coefficients': [coeff]  # BSE expects coefficients in a double array
+            }
+            element_data['ecp_potentials'].append(ecp_pot)
 
 
 def read_crystal(basis_lines):
@@ -223,8 +268,12 @@ def read_crystal(basis_lines):
         return bs_data
 
     # split into element sections (may be electronic or ecp)
-    element_sections = helpers.partition_lines(basis_lines, element_re.match, min_size=3)
+    element_sections = helpers.partition_lines(basis_lines, element_re.match)
     for es in element_sections:
+        # Check for termination
+        if terminator_re.match(es[0]):
+            break
+
         element_Z, ecp = _get_element_ecp(es)
         _parse_electron_lines(es, bs_data)
         if ecp:
