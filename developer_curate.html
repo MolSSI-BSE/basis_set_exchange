@@ -62,6 +62,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-basis_set_exchange.curate">curate - Functions for helping to curate data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_basis"><code class="docutils literal notranslate"><span class="pre">add_basis()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_basis_from_dict"><code class="docutils literal notranslate"><span class="pre">add_basis_from_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_elements"><code class="docutils literal notranslate"><span class="pre">add_elements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_elements_from_dict"><code class="docutils literal notranslate"><span class="pre">add_elements_from_dict()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.add_from_components"><code class="docutils literal notranslate"><span class="pre">add_from_components()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.basis_comparison_report"><code class="docutils literal notranslate"><span class="pre">basis_comparison_report()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#basis_set_exchange.curate.compare_basis"><code class="docutils literal notranslate"><span class="pre">compare_basis()</span></code></a></li>
@@ -189,6 +191,69 @@ all elements.</p>
 usual ‘noref’ extension and the references entry is empty.</p>
 </p></li>
 <li><p><strong>file_fmt</strong> (<em>str</em>) – Format of the input basis data (None = autodetect)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.add_elements">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">add_elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing_basis_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing_basis_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_elements" title="Link to this definition"></a></dt>
+<dd><p>Adds data from a file to an existing basis set</p>
+<p>This takes in a single file containing the basis set is some format, parses it, and
+creates the component data. It will then either update the component &amp; element files if they exist,
+or create if necessary.</p>
+<p>The main metadata file is also updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bs_file</strong> (<em>str</em>) – Path to the file with formatted basis set information</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – Subdirectory of the data directory to add the basis set to</p></li>
+<li><p><strong>file_base</strong> (<em>str</em>) – Base name for new files</p></li>
+<li><p><strong>existing_basis_name</strong> (<em>str</em>) – Name of the basis set</p></li>
+<li><p><strong>existing_basis_version</strong> (<em>str</em>) – Version of the basis set</p></li>
+<li><p><strong>data_source</strong> (<em>str</em>) – Description of where this data came from</p></li>
+<li><p><strong>refs</strong> (<em>dict</em><em> or </em><em>str</em>) – <p>Mapping of references to elements. This can be a dictionary with a compressed
+string of elements as keys and a list of reference strings as values.
+For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
+<p>If a list or string is passed, then those reference(s) will be used for
+all elements.</p>
+<p>Elements that exist in the file but do not have a reference are given the
+usual ‘noref’ extension and the references entry is empty.</p>
+</p></li>
+<li><p><strong>file_fmt</strong> (<em>str</em>) – Format of the input basis data (None = autodetect)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="basis_set_exchange.curate.add_elements_from_dict">
+<span class="sig-prename descclassname"><span class="pre">basis_set_exchange.curate.</span></span><span class="sig-name descname"><span class="pre">add_elements_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bs_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing_basis_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing_basis_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#basis_set_exchange.curate.add_elements_from_dict" title="Link to this definition"></a></dt>
+<dd><p>Adds element data to an existing basis set</p>
+<p>This takes in basis set info in a dictionary creates the component data.
+It will then either update the component &amp; element files if they exist,
+or create if necessary.</p>
+<p>The main metadata file is also updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bs_data</strong> (<em>dict</em>) – Path to the file with formatted basis set information</p></li>
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the data directory to add the data to</p></li>
+<li><p><strong>subdir</strong> (<em>str</em>) – Subdirectory of the data directory to add the basis set to</p></li>
+<li><p><strong>file_base</strong> (<em>str</em>) – Base name for new files</p></li>
+<li><p><strong>existing_basis_name</strong> (<em>str</em>) – Name of the basis set</p></li>
+<li><p><strong>existing_basis_version</strong> (<em>str</em>) – Version of the basis set</p></li>
+<li><p><strong>data_source</strong> (<em>str</em>) – Description of where this data came from</p></li>
+<li><p><strong>refs</strong> (<em>dict</em><em> or </em><em>str</em>) – <p>Mapping of references to elements. This can be a dictionary with a compressed
+string of elements as keys and a list of reference strings as values.
+For example, {‘H,Li-B,Kr’: [‘kumar2018a’]}</p>
+<p>If a list or string is passed, then those reference(s) will be used for
+all elements.</p>
+<p>Elements that exist in the file but do not have a reference are given the
+usual ‘noref’ extension and the references entry is empty.</p>
+</p></li>
 </ul>
 </dd>
 </dl>
