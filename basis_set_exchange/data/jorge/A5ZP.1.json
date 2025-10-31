@@ -3,7 +3,7 @@
     "schema_type": "component",
     "schema_version": "0.1"
   },
-  "description": "TODO",
+  "description": "A5ZP: All-electron augmented 5-zeta valence quality plus polarization functions",
   "data_source": "Data from F. E. Jorge",
   "elements": {
     "1": {
@@ -308,6 +308,317 @@
           ],
           "exponents": [
             "0.41870000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        }
+      ]
+    },
+    "2": {
+      "references": [
+        "ferreira2020a"
+      ],
+      "electron_shells": [
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "502.89795760",
+            "76.98966010",
+            "17.98108986"
+          ],
+          "coefficients": [
+            [
+              "0.0241033",
+              "0.1788896",
+              "0.8602233"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "5.16664750"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "1.65375887"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.55222753"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.18687559"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            0
+          ],
+          "exponents": [
+            "0.00710000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "9.43098000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "3.08423100"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "1.19286900"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "0.43338300"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto",
+          "region": "",
+          "angular_momentum": [
+            1
+          ],
+          "exponents": [
+            "0.25500000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "7.24859000"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "2.45147200"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.83860600"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            2
+          ],
+          "exponents": [
+            "0.32499940"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "4.95548999"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "1.52246499"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            3
+          ],
+          "exponents": [
+            "0.14999997"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            4
+          ],
+          "exponents": [
+            "3.01831999"
+          ],
+          "coefficients": [
+            [
+              "1.0000000"
+            ]
+          ]
+        },
+        {
+          "function_type": "gto_spherical",
+          "region": "",
+          "angular_momentum": [
+            4
+          ],
+          "exponents": [
+            "0.59999970"
           ],
           "coefficients": [
             [
