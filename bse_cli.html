@@ -196,10 +196,8 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   -V                    show program&#39;s version number and exit
-  -d PATH, --data-dir PATH
-                        Override which data directory to use
-  -o PATH, --output PATH
-                        Output to given file rather than stdout
+  -d, --data-dir PATH   Override which data directory to use
+  -o, --output PATH     Output to given file rather than stdout
 </pre></div>
 </div>
 <p>In general, values provided to options (such as basis set names, formats, and elements) are
@@ -209,13 +207,15 @@ data directory can be specified with <code class="docutils literal notranslate">
 data directory will be used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse -d ${HOME}/my_data_dir list-basis-sets
 Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.10.19/x64/bin/bse&quot;, line 7, in &lt;module&gt;
+  File &quot;/opt/hostedtoolcache/Python/3.13.9/x64/bin/bse&quot;, line 7, in &lt;module&gt;
     sys.exit(run_bse_cli())
-  File &quot;/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/basis_set_exchange/cli/bse_cli.py&quot;, line 231, in run_bse_cli
+             ~~~~~~~~~~~^^
+  File &quot;/opt/hostedtoolcache/Python/3.13.9/x64/lib/python3.13/site-packages/basis_set_exchange/cli/bse_cli.py&quot;, line 231, in run_bse_cli
     args = cli_check_normalize_args(args)
-  File &quot;/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 159, in cli_check_normalize_args
+  File &quot;/opt/hostedtoolcache/Python/3.13.9/x64/lib/python3.13/site-packages/basis_set_exchange/cli/check.py&quot;, line 159, in cli_check_normalize_args
     args_copy.data_dir = _cli_check_data_dir(args.data_dir)
-  File &quot;/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/basis_set_exchange/cli/check.py&quot;, line 49, in _cli_check_data_dir
+                         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File &quot;/opt/hostedtoolcache/Python/3.13.9/x64/lib/python3.13/site-packages/basis_set_exchange/cli/check.py&quot;, line 49, in _cli_check_data_dir
     raise RuntimeError(&quot;Data directory &#39;{}&#39; does not exist or is not a directory&quot;.format(data_dir))
 RuntimeError: Data directory &#39;/home/runner/my_data_dir&#39; does not exist or is not a directory
 </pre></div>
@@ -433,7 +433,7 @@ guess    Initial guess
 <h3>get-data-dir<a class="headerlink" href="#get-data-dir" title="Link to this heading"></a></h3>
 <p>Print the default data directory (built into the BSE package)</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-data-dir
-/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/basis_set_exchange/data
+/opt/hostedtoolcache/Python/3.13.9/x64/lib/python3.13/site-packages/basis_set_exchange/data
 </pre></div>
 </div>
 </section>
@@ -503,7 +503,7 @@ See <a class="reference internal" href="#get-versions">get-versions</a> for how 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ bse get-basis sto-3g nwchem
 #----------------------------------------------------------------------
 # Basis Set Exchange
-# Version 0.12.dev22+gc9a5c12f6
+# Version 0.12.dev24+g5e6f8d714
 # https://www.basissetexchange.org
 #----------------------------------------------------------------------
 #   Basis set: STO-3G
