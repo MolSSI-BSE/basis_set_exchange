@@ -2333,7 +2333,7 @@
     "display_name": "6-31G(2df,p)",
     "other_names": [],
     "description": "6-31G(2df,p)",
-    "latest_version": "0",
+    "latest_version": "1",
     "tags": [],
     "basename": "6-31G(2df,p)",
     "relpath": "",
@@ -2341,6 +2341,7 @@
     "role": "orbital",
     "function_types": [
       "gto",
+      "gto_cartesian",
       "gto_spherical"
     ],
     "auxiliaries": {},
@@ -2349,6 +2350,31 @@
         "file_relpath": "6-31G(2df,p).0.table.json",
         "revdesc": "Data from the original Basis Set Exchange",
         "revdate": "2016-07-11",
+        "elements": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      },
+      "1": {
+        "file_relpath": "6-31G(2df,p).1.table.json",
+        "revdesc": "Fix of the original Basis Set Exchange data",
+        "revdate": "2025-04-28",
         "elements": [
           "1",
           "2",
