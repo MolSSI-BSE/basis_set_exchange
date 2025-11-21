@@ -52,10 +52,11 @@ from . import sort
 from . import misc
 from . import lut
 
+# for backwards compatibility
 def version():
     '''Obtain the version of the basis set exchange library (as a string)'''
-    from . import __version__
-    return __version__
+    from . import version
+    return version()
 
 
 # Determine the path to the data directory that is part
