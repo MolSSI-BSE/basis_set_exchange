@@ -233,6 +233,11 @@ def run_bse_cli():
                            'shuffles)')
     subp.add_argument('--seed', type=int, default=0,
                       help='Random seed for the shuffles (default 0)')
+    subp.add_argument('--size', choices=('small', 'large', 'verylarge'), default=None,
+                      help='Standard accuracy preset of the JCTC 2023 paper. Overrides '
+                           '--contract-threshold and --linc and forces contraction and '
+                           'lmax pruning on: verylarge=(1e-6,1), large=(1e-5,1), '
+                           'small=(1e-4,0).')
     subp.add_argument('--contract', action=argparse.BooleanOptionalAction, default=True,
                       help='Apply the JCTC 2023 SVD-based general contraction (default: on; '
                            'use --no-contract for primitive output)')

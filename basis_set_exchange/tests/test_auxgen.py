@@ -449,3 +449,89 @@ def test_end_to_end_lmax_pruning():
     # l_keep = max(2*1, 1+2+1) = 4.  No shell should exceed L = 4.
     for s in shells:
         assert s['angular_momentum'][0] <= 4
+
+
+# ---------------------------------------------------------------------------
+# Contraction: normalization and accuracy
+# ---------------------------------------------------------------------------
+
+def test_contracted_functions_coulomb_normalized():
+    """Every contracted auxiliary function must be normalized to
+    (A|A) = 1 in the Coulomb metric (not the overlap metric), with the
+    output coefficients in the overlap-normalized primitive convention."""
+    from basis_set_exchange.auxgen.twoel import primitive_aux_metric
+
+    b = bse.get_basis('cc-pVTZ', elements=[8])
+    aux = generate_auxiliary_basis(b, elements=[8], threshold=1e-7,
+                                   contract=True, contract_threshold=1e-5,
+                                   prune_lmax=False)
+    for s in aux['elements']['8']['electron_shells']:
+        L = s['angular_momentum'][0]
+        exps = [float(e) for e in s['exponents']]
+        V = primitive_aux_metric(L, exps)
+        for coeff in s['coefficients']:
+            c = numpy.array([float(x) for x in coeff])
+            aa = c @ V @ c
+            assert abs(aa - 1.0) < 1e-8, f"L={L}: (A|A)={aa}, expected 1"
+
+
+@pytest.mark.parametrize('size,eps,linc', [
+    ('verylarge', 1e-6, 1),
+    ('large', 1e-5, 1),
+    ('small', 1e-4, 0),
+])
+def test_size_presets_match_paper(size, eps, linc):
+    """The size presets must reproduce the (epsilon, l_inc) pairs of the
+    2023 paper and force contraction + lmax pruning on."""
+    b = bse.get_basis('cc-pVTZ', elements=[8])
+    aux_preset = generate_auxiliary_basis(b, elements=[8], size=size)
+    aux_manual = generate_auxiliary_basis(b, elements=[8], contract=True,
+                                          contract_threshold=eps,
+                                          prune_lmax=True, linc=linc)
+    sp = aux_preset['elements']['8']['electron_shells']
+    sm = aux_manual['elements']['8']['electron_shells']
+    assert len(sp) == len(sm)
+    for a, c in zip(sp, sm):
+        assert a['angular_momentum'] == c['angular_momentum']
+        assert a['exponents'] == c['exponents']
+        assert a['coefficients'] == c['coefficients']
+
+
+def test_size_presets_ordering():
+    """small (linc=0) is no larger than large/verylarge (linc=1)."""
+    b = bse.get_basis('cc-pVTZ', elements=[8])
+    n = {}
+    for size in ('small', 'large', 'verylarge'):
+        aux = generate_auxiliary_basis(b, elements=[8], size=size)
+        sh = aux['elements']['8']['electron_shells']
+        n[size] = sum(2 * s['angular_momentum'][0] + 1 for s in sh)
+    assert n['small'] <= n['large'] <= n['verylarge']
+
+
+def test_df_energy_contracted_matches_primitive():
+    """A density-fitted atomic SCF with the contracted auxiliary basis
+    must reproduce the energy of the tight-threshold *primitive*
+    auxiliary basis to high accuracy (validates that the contraction is
+    norm-correct and information-preserving)."""
+    pyscf = pytest.importorskip('pyscf')
+    from pyscf import gto, scf
+    from basis_set_exchange import writers
+
+    elem = 'Ne'
+    b = bse.get_basis('cc-pVDZ', elements=[elem])
+    aux_prim = generate_auxiliary_basis(b, threshold=1e-8, contract=False,
+                                        prune_lmax=False)
+    aux_contr = generate_auxiliary_basis(b, threshold=1e-8, contract=True,
+                                         contract_threshold=1e-5, prune_lmax=False)
+
+    def to_pyscf(aux):
+        aux = dict(aux)
+        aux.setdefault('function_types', ['gto_spherical'])
+        aux.setdefault('names', ['auxgen'])
+        return gto.basis.parse(writers.write_formatted_basis_str(aux, 'nwchem'))
+
+    mol = gto.M(atom=f'{elem} 0 0 0', basis='cc-pvdz', spin=0, verbose=0)
+    e_prim = scf.RHF(mol).density_fit(auxbasis={elem: to_pyscf(aux_prim)}).kernel()
+    e_contr = scf.RHF(mol).density_fit(auxbasis={elem: to_pyscf(aux_contr)}).kernel()
+    assert abs(e_prim - e_contr) < 1e-5, \
+        f"DF-HF energy differs by {abs(e_prim - e_contr):.3e} Hartree"

@@ -44,12 +44,27 @@ Per angular momentum l of the auxiliary basis:
      (the spherical symmetry of the atomic sum makes the full W block
      diagonal in (l, m) and independent of m, so the m=0 slice carries
      all the information).
-  3. Solve the generalized eigenproblem W u = lambda V u and keep
-     eigenvectors with lambda >= epsilon.  This is equivalent to
-     diagonalizing V^{-1/2} W V^{-1/2}; the eigenvectors u returned by
-     ``scipy.linalg.eigh(W, V)`` are V-orthonormal (u^T V u = 1) and
-     correspond directly to BSE-convention contractions of the
-     overlap-normalized primitives.
+  3. Coulomb-normalize the primitives -- i.e. work in the unit-diagonal
+     metric S = D^{-1} V D^{-1} (D = sqrt(diag V)) rather than the
+     ill-conditioned raw metric V -- symmetrically orthogonalize S
+     (dropping near-linearly-dependent directions), and diagonalize W
+     in that orthonormal basis.  The eigenvalues lambda are the squared
+     singular values of the orthogonalized three-index tensor; keep the
+     eigenvectors with lambda >= epsilon.
+
+  4. Convert the resulting contraction coefficients -- which are
+     expressed in the Coulomb-normalized primitive basis, (a|a) = 1 --
+     back to the overlap-normalized primitive convention used by basis
+     set libraries, by dividing each coefficient by the Coulomb norm
+     ``D_i = sqrt((i|i))``.  This is the exact analogue of the
+     ``c <- c * sqrt(z)`` rescaling in ERKALE's ``basistool contractaux``
+     (1/D is proportional to sqrt(z)); it guarantees the contracted
+     functions satisfy (A|A) = 1 in the Coulomb metric.
+
+This mirrors ERKALE's ``basistool contractaux`` reference implementation,
+with the methodological improvement that atomic spherical symmetry is
+used to reduce the W matrix to its m = 0 slice (Section 2.1 of the 2023
+paper), which is not exploited in ERKALE.
 """
 
 import numpy as np
@@ -130,34 +145,46 @@ def _W_block(primitives, L, alphas_P):
     return W
 
 
-def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4):
+def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4,
+                 lindep_threshold=1.0e-7):
     """Build SVD-based general contractions per L per Lehtola, J. Chem.
     Theory Comput. 19, 6242 (2023)
-    [https://doi.org/10.1021/acs.jctc.3c00670], eq 8.
+    [https://doi.org/10.1021/acs.jctc.3c00670], eq 8, following ERKALE's
+    ``basistool contractaux`` reference implementation.
+
+    For each L the two-index Coulomb metric ``V = (P|Q)`` and the
+    atomic-symmetry-reduced ``W`` block are formed over the selected
+    primitives, then the primitives are Coulomb-normalized
+    (``D = sqrt(diag V)``) so the work is done in the well-conditioned
+    unit-diagonal metric ``S = D^{-1} V D^{-1}`` rather than the
+    ill-conditioned raw metric.  ``S`` is symmetrically orthogonalized
+    (dropping eigenvalues below ``lindep_threshold``), ``W`` is
+    diagonalized in that orthonormal basis, and the eigenvectors with
+    eigenvalue ``>= contract_threshold`` are kept and converted back to
+    the overlap-normalized primitive convention.
 
     Parameters
     ----------
-    primitives : list of (l, alpha)
+    primitives : list of (l, n, alpha)
         Orbital primitives (used to build the three-index ERIs).
     per_L_alphas : dict
         ``{L: [alpha, ...]}`` of selected aux exponents.
     contract_threshold : float
         Eigenvalue cutoff epsilon: contractions with eigenvalue
         ``lambda_i < epsilon`` are dropped.
+    lindep_threshold : float
+        Eigenvalue cutoff for the symmetric orthogonalization of the
+        normalized Coulomb metric; directions below this are treated as
+        linearly dependent and removed (ERKALE uses 1e-7).
 
     Returns
     -------
     dict
         ``{L: (exps, [gen1_coeffs, gen2_coeffs, ...])}``.  The
         coefficients are BSE-convention contraction coefficients of
-        overlap-normalized primitives.
+        overlap-normalized primitives; each contracted function is
+        normalized to ``(A|A) = 1`` in the Coulomb metric.
     """
-    try:
-        from scipy.linalg import eigh as scipy_eigh
-        _have_scipy = True
-    except ImportError:
-        _have_scipy = False
-
     out = {}
     for L, alphas in per_L_alphas.items():
         if not alphas:
@@ -165,22 +192,30 @@ def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4):
         V = primitive_aux_metric(L, alphas)
         W = _W_block(primitives, L, alphas)
 
-        if _have_scipy:
-            # Generalized eigenproblem: W u = lambda V u
-            lams, U = scipy_eigh(W, V)
-        else:
-            # Fall back: Loewdin orthogonalize, then solve standard EVP.
-            evV, UV = np.linalg.eigh(V)
-            evV = np.clip(evV, 1.0e-30, None)
-            Vinvhalf = UV @ np.diag(evV**-0.5) @ UV.T
-            Wprime = Vinvhalf @ W @ Vinvhalf
-            lams, Uprime = np.linalg.eigh(Wprime)
-            U = Vinvhalf @ Uprime
+        # Coulomb-normalize the primitives: switch to the unit-diagonal
+        # metric S = D^{-1} V D^{-1} (D_i = sqrt((i|i))) and the
+        # correspondingly normalized W.  This is the well-conditioned
+        # basis the diagonalization must be carried out in.
+        D = np.sqrt(np.diag(V))
+        S = V / np.outer(D, D)
+        Wn = W / np.outer(D, D)
 
-        # eigh returns ascending; reverse for descending eigenvalues
+        # Symmetric orthogonalization of the normalized metric, dropping
+        # near-linearly-dependent directions.
+        sval, svec = np.linalg.eigh(S)
+        indep = sval >= lindep_threshold
+        if not indep.any():
+            indep[-1] = True
+        X = svec[:, indep] * (sval[indep] ** -0.5)   # (nprim, nindep)
+
+        # Diagonalize W in the orthonormal basis.
+        Wsub = X.T @ Wn @ X
+        lams, Y = np.linalg.eigh(Wsub)
         order = np.argsort(-lams)
         lams = lams[order]
-        U = U[:, order]
+        # Coefficients in the Coulomb-normalized primitive basis; these
+        # are S-orthonormal, so each gives (A|A) = 1.
+        Cnorm = X @ Y[:, order]
 
         # Per the paper, keep eigenvectors with lambda_i >= epsilon.
         # If everything is below threshold, keep the leading one so the
@@ -190,7 +225,10 @@ def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4):
             keep_mask[0] = True
         keep = int(keep_mask.sum())
 
-        gens = [list(U[:, k]) for k in range(keep)]
+        # Convert Coulomb-normalized coefficients to the overlap-normalized
+        # primitive convention used by basis libraries: c <- c / D
+        # (== c * sqrt(z) up to a per-L constant, cf. ERKALE basistool).
+        gens = [list(Cnorm[:, k] / D) for k in range(keep)]
         out[L] = (list(alphas), gens)
 
     return out

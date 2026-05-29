@@ -267,11 +267,22 @@ def _select_per_L(pool, threshold, n_random=100, seed=0):
     return out
 
 
+# Standard accuracy presets of Lehtola, J. Chem. Theory Comput. 19, 6242
+# (2023) [https://doi.org/10.1021/acs.jctc.3c00670]: the (epsilon, l_inc)
+# pairs defining the verylarge, large, and small auxiliary basis sets.
+_SIZE_PRESETS = {
+    'verylarge': {'contract_threshold': 1.0e-6, 'linc': 1},
+    'large':     {'contract_threshold': 1.0e-5, 'linc': 1},
+    'small':     {'contract_threshold': 1.0e-4, 'linc': 0},
+}
+
+
 def generate_auxiliary_basis_for_element(element_basis,
                                          threshold=1.0e-7,
                                          scheme='reduced',
                                          n_random=100,
                                          seed=0,
+                                         size=None,
                                          contract=True,
                                          contract_threshold=1.0e-5,
                                          prune_lmax=True,
@@ -298,6 +309,14 @@ def generate_auxiliary_basis_for_element(element_basis,
         off-diagonal-norm orderings.
     seed : int
         Seed for the random shuffles, for reproducibility.
+    size : {'small', 'large', 'verylarge'}, optional
+        Standard accuracy preset of the 2023 paper.  When given, it
+        forces ``contract=True`` and ``prune_lmax=True`` and overrides
+        ``contract_threshold`` and ``linc`` with the published
+        (epsilon, l_inc) pair: ``verylarge`` = (1e-6, 1),
+        ``large`` = (1e-5, 1), ``small`` = (1e-4, 0).  ``None`` (the
+        default) uses the individual parameters below, whose defaults
+        coincide with ``large``.
     contract : bool
         Apply the SVD-based contraction of Lehtola, J. Chem. Theory
         Comput. 19, 6242 (2023),
@@ -320,6 +339,14 @@ def generate_auxiliary_basis_for_element(element_basis,
     dict
         ``{'electron_shells': [...]}`` (no element-level metadata).
     """
+    if size is not None:
+        if size not in _SIZE_PRESETS:
+            raise ValueError("size must be one of %s" % sorted(_SIZE_PRESETS))
+        contract = True
+        prune_lmax = True
+        contract_threshold = _SIZE_PRESETS[size]['contract_threshold']
+        linc = _SIZE_PRESETS[size]['linc']
+
     primitives = decontract_primitives(element_basis)
     if not primitives:
         return {'electron_shells': []}
@@ -373,6 +400,7 @@ def generate_auxiliary_basis(orbital_basis,
                              scheme='reduced',
                              n_random=100,
                              seed=0,
+                             size=None,
                              contract=True,
                              contract_threshold=1.0e-5,
                              prune_lmax=True,
@@ -406,17 +434,21 @@ def generate_auxiliary_basis(orbital_basis,
         if key not in src_elements:
             continue
         eb = src_elements[key]
+        # A size preset forces prune_lmax on, so lmax_occ must be supplied
+        # whenever a preset is selected as well.
+        needs_lmax_occ = prune_lmax or size is not None
         out = generate_auxiliary_basis_for_element(
             eb,
             threshold=threshold,
             scheme=scheme,
             n_random=n_random,
             seed=seed,
+            size=size,
             contract=contract,
             contract_threshold=contract_threshold,
             prune_lmax=prune_lmax,
             linc=linc,
-            lmax_occ=_default_lmax_occ(z) if prune_lmax else None,
+            lmax_occ=_default_lmax_occ(z) if needs_lmax_occ else None,
         )
         component['elements'][key] = out
 

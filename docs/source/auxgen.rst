@@ -77,21 +77,33 @@ under three ordering families and keeps the shortest pivot set:
 The drop tolerance ``τ`` is applied directly to the residual diagonal
 of the Cholesky factorisation (absolute threshold).
 
-Two optional refinements from the 2023 paper are available:
+Two optional refinements from the 2023 paper are available (both on by
+default):
 
 * ``contract=True`` applies the SVD-based general contraction
-  (Section 2.1 of the 2023 paper).  Per :math:`l`, the
-  ``W = J^T J = V^{-1/2} I^T I V^{-1/2}`` matrix is formed from the
-  three-index integrals :math:`I_{\mu\nu, A} = (\mu\nu | A)` and the
-  two-index Coulomb metric :math:`V_{AB} = (A|B)`; its eigenvectors
-  with eigenvalues above the threshold ``ε`` define general
-  contractions of the primitive auxiliary basis.
+  (Section 2.1 of the 2023 paper).  Per :math:`l`, the three-index
+  integrals :math:`I_{\mu\nu, A} = (\mu\nu | A)` and the two-index
+  Coulomb metric :math:`V_{AB} = (A|B)` are formed; the primitives are
+  Coulomb-normalized (so the work is done in the well-conditioned
+  unit-diagonal metric :math:`S = D^{-1} V D^{-1}` rather than the
+  ill-conditioned raw metric), :math:`S` is symmetrically
+  orthogonalized, and :math:`W = I^T I` is diagonalized in that basis.
+  Eigenvectors with eigenvalue above the threshold ``ε`` define general
+  contractions, which are converted back to the overlap-normalized
+  primitive convention (dividing by the Coulomb norm :math:`D_i`, the
+  exact analogue of ERKALE's :math:`\sqrt{z}` rescaling) so that each
+  contracted function satisfies :math:`(A|A) = 1`.
 * ``prune_lmax=True`` drops shells above the
   :math:`l_{\rm keep} = \max(2 l_{\rm occ}^{\max},
   l_{\rm occ}^{\max} + l_{\rm OBS}^{\max} + l_{\rm inc})` cap of the
   2023 paper, eq 9.  The default :math:`l_{\rm occ}^{\max}` follows
   the row-based table of the paper (0 for H/He, 1 for
   :math:`Z \le 18`, 2 for :math:`Z \le 54`, 3 otherwise).
+
+The ``size`` argument selects the standard accuracy presets of the 2023
+paper, overriding ``contract_threshold`` (``ε``) and ``linc``:
+``verylarge`` = :math:`(\epsilon, l_{\rm inc}) = (10^{-6}, 1)`,
+``large`` = :math:`(10^{-5}, 1)`, ``small`` = :math:`(10^{-4}, 0)`.
 
 
 Command-line interface
@@ -105,8 +117,9 @@ and writes the generated auxiliary basis to a file::
         [--threshold 1e-7]
         [--scheme {basic,reduced}]
         [--n-random 100] [--seed 0]
-        [--contract] [--contract-threshold 1e-4]
-        [--prune-lmax] [--linc 1]
+        [--size {small,large,verylarge}]
+        [--contract | --no-contract] [--contract-threshold 1e-5]
+        [--prune-lmax | --no-prune-lmax] [--linc 1]
 
 Input and output formats are auto-detected from the file extension
 unless overridden.  All standard BSE writers (NWChem, Molcas, Psi4,
@@ -118,10 +131,15 @@ from cc-pVDZ at a tight :math:`\tau = 10^{-7}` tolerance::
     bse get-basis cc-pVDZ nwchem --elements H,C,O > /tmp/ccpvdz.nw
     bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux.nw --threshold 1e-7
 
-Add the SVD contraction and high-angular-momentum prune::
+Contraction and lmax pruning are applied by default; build the
+``small`` standard preset instead::
 
-    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux_contracted.nw \
-        --threshold 1e-7 --contract --prune-lmax
+    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux_small.nw --size small
+
+or generate the uncontracted primitive auxiliary basis::
+
+    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux_prim.nw \
+        --no-contract --no-prune-lmax
 
 
 Python API
