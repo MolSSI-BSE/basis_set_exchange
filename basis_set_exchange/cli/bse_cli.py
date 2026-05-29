@@ -233,6 +233,11 @@ def run_bse_cli():
                            'shuffles)')
     subp.add_argument('--seed', type=int, default=0,
                       help='Random seed for the shuffles (default 0)')
+    subp.add_argument('--mapping', choices=('moment', 'selfrepulsion'), default='moment',
+                      help='How orbital-product candidates are mapped to standard auxiliary '
+                           'primitives: "moment" (default) matches the radial moment <r> '
+                           '(2021 paper Appendix II); "selfrepulsion" matches the Coulomb '
+                           'self-energy (i|i).')
     subp.add_argument('--size', choices=('small', 'large', 'verylarge'), default=None,
                       help='Standard accuracy preset of the JCTC 2023 paper. Overrides '
                            '--contract-threshold and --linc and forces contraction and '

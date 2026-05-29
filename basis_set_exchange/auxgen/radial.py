@@ -191,21 +191,46 @@ def gto_norm_array(n, alphas):
     return _np.sqrt(2.0 * (2.0 * a)**(n + 1.5) / gamma(n + 1.5))
 
 
-def alpha_eff(L, n_rad, alpha_rad):
+@lru_cache(maxsize=4096)
+def _self_repulsion_coeff(n, L):
+    """Proportionality constant ``C(n, L)`` in the Coulomb self-energy of
+    an overlap-normalized ``r^n Y_{L M} e^{-alpha r^2}`` primitive,
+
+        (i|i)_normalized = C(n, L) / alpha
+
+    (the self-energy has dimensions of length^2 ~ 1/alpha), with the
+    angular ``4 pi / (2 L + 1)`` factor omitted -- it cancels in the
+    ratios that use this.  Evaluated at ``alpha = 1``.
+    """
+    return gto_norm(n, 1.0) ** 2 * radial_integral(L, n, n, 1.0, 1.0)
+
+
+def alpha_eff(L, n_rad, alpha_rad, mapping='moment'):
     """Effective exponent for converting an ``(n_rad, alpha_rad)``
     candidate at angular momentum L to a standard r^L e^{-alpha_eff r^2}
-    primitive, matching the radial expectation value <r> (Lehtola,
-    J. Chem. Theory Comput. 17, 6886 (2021)
+    primitive.  Both supported mappings reduce to
+    ``alpha_eff = alpha_rad`` when ``n_rad = L``.
+
+    ``mapping='moment'`` (default) matches the radial expectation value
+    ``<r>`` (Lehtola, J. Chem. Theory Comput. 17, 6886 (2021)
     [https://doi.org/10.1021/acs.jctc.1c00607], Appendix II eq 16):
 
-        alpha_eff = [ Gamma(L+2) Gamma(n_rad + 3/2)
-                      / ( Gamma(L + 3/2) Gamma(n_rad + 2) ) ]**2
-                    * alpha_rad.
+        alpha_eff = s**2 * alpha_rad,
+        s = Gamma(L+2) Gamma(n_rad + 3/2)
+            / ( Gamma(L + 3/2) Gamma(n_rad + 2) ).
 
-    For ``n_rad = L`` the scale factor is unity and
-    ``alpha_eff = alpha_rad``.  For ``n_rad > L`` the scale factor is
-    < 1 and the candidate is more diffuse, in line with the more
-    diffuse r^{n_rad} radial product.
+    ``mapping='selfrepulsion'`` instead matches the Coulomb self-energy
+    ``(i|i)`` of the (overlap-normalized) candidate and the standard
+    primitive.  Since ``(i|i)_normalized ~ 1/alpha``, equality fixes
+
+        alpha_eff = alpha_rad * C(L, L) / C(n_rad, L),
+
+    with ``C(n, L)`` from :func:`_self_repulsion_coeff`.
     """
-    s = (gamma(L + 2) * gamma(n_rad + 1.5)) / (gamma(L + 1.5) * gamma(n_rad + 2))
-    return float(s * s * alpha_rad)
+    if mapping == 'moment':
+        s = (gamma(L + 2) * gamma(n_rad + 1.5)) / (gamma(L + 1.5) * gamma(n_rad + 2))
+        return float(s * s * alpha_rad)
+    elif mapping == 'selfrepulsion':
+        factor = _self_repulsion_coeff(L, L) / _self_repulsion_coeff(n_rad, L)
+        return float(factor * alpha_rad)
+    raise ValueError("mapping must be 'moment' or 'selfrepulsion'")

@@ -282,6 +282,7 @@ def generate_auxiliary_basis_for_element(element_basis,
                                          scheme='reduced',
                                          n_random=100,
                                          seed=0,
+                                         mapping='moment',
                                          size=None,
                                          contract=True,
                                          contract_threshold=1.0e-5,
@@ -309,6 +310,12 @@ def generate_auxiliary_basis_for_element(element_basis,
         off-diagonal-norm orderings.
     seed : int
         Seed for the random shuffles, for reproducibility.
+    mapping : {'moment', 'selfrepulsion'}
+        How each orbital-product candidate ``(n_rad, alpha_rad)`` is
+        mapped to a standard ``r^L e^{-alpha_eff r^2}`` auxiliary
+        primitive.  ``'moment'`` (default) matches the radial moment
+        ``<r>`` (2021 paper Appendix II); ``'selfrepulsion'`` matches the
+        Coulomb self-energy ``(i|i)``.  See :func:`radial.alpha_eff`.
     size : {'small', 'large', 'verylarge'}, optional
         Standard accuracy preset of the 2023 paper.  When given, it
         forces ``contract=True`` and ``prune_lmax=True`` and overrides
@@ -353,9 +360,9 @@ def generate_auxiliary_basis_for_element(element_basis,
 
     if scheme == 'reduced':
         sel = _reduced_pair_screen(primitives, threshold)
-        pool = candidate_pool_from_pairs(sel)
+        pool = candidate_pool_from_pairs(sel, mapping=mapping)
     elif scheme == 'basic':
-        pool = candidate_pool_from_primitives(primitives)
+        pool = candidate_pool_from_primitives(primitives, mapping=mapping)
     else:
         raise ValueError("scheme must be 'basic' or 'reduced'")
 
@@ -402,6 +409,7 @@ def generate_auxiliary_basis(orbital_basis,
                              scheme='reduced',
                              n_random=100,
                              seed=0,
+                             mapping='moment',
                              size=None,
                              contract=True,
                              contract_threshold=1.0e-5,
@@ -445,6 +453,7 @@ def generate_auxiliary_basis(orbital_basis,
             scheme=scheme,
             n_random=n_random,
             seed=seed,
+            mapping=mapping,
             size=size,
             contract=contract,
             contract_threshold=contract_threshold,

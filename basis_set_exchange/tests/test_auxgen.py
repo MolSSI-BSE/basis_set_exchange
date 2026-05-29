@@ -535,3 +535,41 @@ def test_df_energy_contracted_matches_primitive():
     e_contr = scf.RHF(mol).density_fit(auxbasis={elem: to_pyscf(aux_contr)}).kernel()
     assert abs(e_prim - e_contr) < 1e-5, \
         f"DF-HF energy differs by {abs(e_prim - e_contr):.3e} Hartree"
+
+
+# ---------------------------------------------------------------------------
+# Orbital-product -> auxiliary-primitive mapping
+# ---------------------------------------------------------------------------
+
+def test_alpha_eff_mappings_identity_at_nrad_equals_L():
+    """Both mappings leave a standard primitive (n_rad == L) unchanged."""
+    from basis_set_exchange.auxgen.radial import alpha_eff
+    for L in range(4):
+        for m in ('moment', 'selfrepulsion'):
+            assert abs(alpha_eff(L, L, 2.5, m) - 2.5) < 1e-12
+
+
+def test_alpha_eff_selfrepulsion_matches_self_energy():
+    """The 'selfrepulsion' mapping must give a standard r^L primitive with
+    the same Coulomb self-energy (i|i) as the (n_rad, alpha_rad)
+    candidate."""
+    from math import pi
+    from basis_set_exchange.auxgen.radial import alpha_eff, gto_norm, radial_integral
+
+    def self_energy(L, n, a):
+        return gto_norm(n, a)**2 * (4 * pi / (2 * L + 1)) * radial_integral(L, n, n, a, a)
+
+    for L, n_rad, a_rad in [(0, 2, 1.3), (1, 3, 0.7), (2, 4, 2.1), (0, 4, 0.5)]:
+        ae = alpha_eff(L, n_rad, a_rad, 'selfrepulsion')
+        assert abs(self_energy(L, n_rad, a_rad) - self_energy(L, L, ae)) < 1e-10 * self_energy(L, n_rad, a_rad)
+
+
+def test_mapping_default_is_moment():
+    """The default mapping is 'moment'; selecting it explicitly is a no-op."""
+    b = bse.get_basis('cc-pVDZ', elements=[8])
+    a_default = generate_auxiliary_basis(b, elements=[8])
+    a_moment = generate_auxiliary_basis(b, elements=[8], mapping='moment')
+    assert a_default == a_moment
+    # 'selfrepulsion' is accepted and produces a valid basis
+    a_sr = generate_auxiliary_basis(b, elements=[8], mapping='selfrepulsion')
+    assert len(a_sr['elements']['8']['electron_shells']) > 0

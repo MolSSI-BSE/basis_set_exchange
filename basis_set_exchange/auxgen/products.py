@@ -124,7 +124,7 @@ def _shellpair_L_range(li, lj):
     return range(abs(li - lj), li + lj + 1, 2)
 
 
-def candidate_pool_from_primitives(primitives):
+def candidate_pool_from_primitives(primitives, mapping='moment'):
     """Build the per-L candidate pool from orbital primitives, per the
     ERKALE implementation of Lehtola 2021.
 
@@ -157,7 +157,7 @@ def candidate_pool_from_primitives(primitives):
             n_rad = n_i + n_j
             a_rad = float(a_i + a_j)
             for L in _shellpair_L_range(l_i, l_j):
-                pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad))
+                pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad, mapping))
     out = {}
     for L, alphas in pool.items():
         # Deduplicate at floating-point tolerance.
@@ -169,7 +169,7 @@ def candidate_pool_from_primitives(primitives):
     return out
 
 
-def candidate_pool_from_pairs(selected_pairs):
+def candidate_pool_from_pairs(selected_pairs, mapping='moment'):
     """Build the per-L candidate pool from m-resolved primitive pairs
     selected by the reduced-scheme 4-index pre-screening.  The same
     Appendix II transformation is applied as in
@@ -183,7 +183,7 @@ def candidate_pool_from_pairs(selected_pairs):
         n_rad = na + nb
         a_rad = float(aa + ab)
         for L in _shellpair_L_range(la, lb):
-            pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad))
+            pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad, mapping))
     out = {}
     for L, alphas in pool.items():
         seen = {}
