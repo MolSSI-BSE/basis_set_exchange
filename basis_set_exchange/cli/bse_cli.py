@@ -208,6 +208,46 @@ def run_bse_cli():
         '--out-fmt', type=str, default=None,
         help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
 
+    subp = subparsers.add_parser(
+        'autogen-aux',
+        help='Form an auxiliary basis via the Lehtola pivoted-Cholesky procedure '
+             '(JCTC 17, 6886 (2021); JCTC 19, 6242 (2023))')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='Auxiliary basis to write')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+    subp.add_argument('--threshold', type=float, default=1.0e-7,
+                      help='Pivoted Cholesky drop tolerance tau (default 1e-7)')
+    subp.add_argument('--scheme', choices=('basic', 'reduced'), default='reduced',
+                      help='Use the basic scheme (all products) or the reduced scheme '
+                           '(4-index Cholesky pre-screening). Default: reduced.')
+    subp.add_argument('--selector', choices=('greedy', 'cholesky'), default='greedy',
+                      help='Per-L selector. "greedy" (default) is backward-greedy drop '
+                           'in the diagonal-RI-error metric. "cholesky" is the original '
+                           'pivoted Cholesky on the unit-diagonal candidate metric '
+                           '(uses --n-random).')
+    subp.add_argument('--n-random', type=int, default=100,
+                      help='Number of random candidate orderings per L to try in the '
+                           'pivoted Cholesky (in addition to the linear order and the '
+                           'off-diagonal-norm presort); the most compact pivot set across '
+                           'all orderings is kept (default 100; 0 disables the random '
+                           'shuffles)')
+    subp.add_argument('--seed', type=int, default=0,
+                      help='Random seed for the shuffles (default 0)')
+    subp.add_argument('--contract', action='store_true',
+                      help='Apply the JCTC 2023 SVD-based general contraction')
+    subp.add_argument('--contract-threshold', type=float, default=1.0e-4,
+                      help='Eigenvalue cutoff epsilon for contraction (default 1e-4)')
+    subp.add_argument('--prune-lmax', action='store_true',
+                      help='Drop high-angular-momentum shells beyond the limit of eq 9 of '
+                           'the JCTC 2023 paper')
+    subp.add_argument('--linc', type=int, default=1,
+                      help='Increment parameter l_inc in the pruning rule (default 1)')
+
     #################################
     # Creating bundles
     #################################
