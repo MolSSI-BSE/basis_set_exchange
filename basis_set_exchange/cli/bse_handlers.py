@@ -288,6 +288,7 @@ def _bse_cli_autogen_aux(args):
         n_random=args.n_random,
         seed=args.seed,
         mapping=args.mapping,
+        collapse_contractions=args.collapse_contractions,
         size=args.size,
         contract=args.contract,
         contract_threshold=args.contract_threshold,

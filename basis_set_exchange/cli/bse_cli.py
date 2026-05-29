@@ -238,6 +238,10 @@ def run_bse_cli():
                            'primitives: "moment" (default) matches the radial moment <r> '
                            '(2021 paper Appendix II); "selfrepulsion" matches the Coulomb '
                            'self-energy (i|i).')
+    subp.add_argument('--collapse-contractions', action='store_true',
+                      help='Replace each contracted orbital function with a single primitive '
+                           '(overlap-matched exponent) when building the selection candidate '
+                           'pool; the contraction step still uses the true contracted AOs.')
     subp.add_argument('--size', choices=('small', 'large', 'verylarge'), default=None,
                       help='Standard accuracy preset of the JCTC 2023 paper. Overrides '
                            '--contract-threshold and --linc and forces contraction and '

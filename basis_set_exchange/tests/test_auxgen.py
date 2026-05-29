@@ -573,3 +573,48 @@ def test_mapping_default_is_moment():
     # 'selfrepulsion' is accepted and produces a valid basis
     a_sr = generate_auxiliary_basis(b, elements=[8], mapping='selfrepulsion')
     assert len(a_sr['elements']['8']['electron_shells']) > 0
+
+
+# ---------------------------------------------------------------------------
+# Single-primitive replacement of contracted orbital functions (selection)
+# ---------------------------------------------------------------------------
+
+def test_match_single_primitive_within_range_and_identity():
+    from basis_set_exchange.auxgen.products import _match_single_primitive
+    # A single-term "contraction" recovers its own exponent.
+    assert abs(_match_single_primitive(0, [2.5], [1.0]) - 2.5) < 1e-6
+    # A two-term contraction maps to an exponent strictly between them.
+    beta = _match_single_primitive(0, [1.0, 16.0], [0.6, 0.6])
+    assert 1.0 < beta < 16.0
+
+
+def test_collapse_contractions_one_primitive_per_contracted_function():
+    from basis_set_exchange.auxgen.products import (
+        decontract_primitives, decontract_primitives_single,
+    )
+    b = bse.get_basis('cc-pVDZ', elements=[6])  # (9s,4p,1d) -> [3s,2p,1d]
+    eb = b['elements']['6']
+    single = decontract_primitives_single(eb)
+    from collections import Counter
+    lc = Counter(l for l, _n, _a in single)
+    # One effective primitive per contracted AO: 3s, 2p, 1d.
+    assert lc[0] == 3 and lc[1] == 2 and lc[2] == 1
+    # Strictly fewer than full decontraction.
+    assert len(single) < len(decontract_primitives(eb))
+    # Every matched exponent lies within the parent shell's exponent span.
+    span = {}
+    for sh in eb['electron_shells']:
+        L = sh['angular_momentum'][0]
+        es = [float(e) for e in sh['exponents']]
+        span.setdefault(L, []).extend(es)
+    for l, _n, a in single:
+        assert min(span[l]) <= a <= max(span[l])
+
+
+def test_collapse_contractions_default_off():
+    b = bse.get_basis('cc-pVDZ', elements=[6])
+    a_default = generate_auxiliary_basis(b, elements=[6])
+    a_off = generate_auxiliary_basis(b, elements=[6], collapse_contractions=False)
+    assert a_default == a_off
+    a_on = generate_auxiliary_basis(b, elements=[6], collapse_contractions=True)
+    assert len(a_on['elements']['6']['electron_shells']) > 0

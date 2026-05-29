@@ -56,6 +56,8 @@ the candidate pool we therefore index by ``(L, n_rad = n_mu + n_nu,
 alpha_rad = alpha_mu + alpha_nu)``.
 """
 
+import math
+
 from .gaunt import coupling_lvals
 from .radial import alpha_eff
 
@@ -108,6 +110,94 @@ def decontract_primitives(element_basis):
             for l_ang in _angular_components(int(L), cart):
                 for a in exps:
                     seen[(int(l_ang), int(L), float(a))] = True
+    items = list(seen.keys())
+    items.sort(key=lambda x: (x[0], x[1], -x[2]))
+    return items
+
+
+def _match_single_primitive(L, exps, coeffs):
+    """Exponent ``beta`` of the single primitive ``r^L e^{-beta r^2}``
+    that maximizes the (normalized) overlap with the contracted function
+    ``sum_k coeffs[k] * (normalized r^L e^{-exps[k] r^2})``.
+
+    The normalized overlap of two primitives at radial power ``L`` is
+    ``[2 sqrt(a b) / (a + b)]^{L + 3/2}``, so the objective is
+
+        f(beta) = | sum_k coeffs[k] [2 sqrt(exps[k] beta)
+                                     / (exps[k] + beta)]^{L + 3/2} |,
+
+    maximized by a log-space grid scan followed by golden-section
+    refinement (no SciPy dependency).
+    """
+    p = L + 1.5
+    a = [float(x) for x in exps]
+    c = [float(x) for x in coeffs]
+
+    def overlap(beta):
+        s = 0.0
+        for ak, ck in zip(a, c):
+            t = 2.0 * math.sqrt(ak * beta) / (ak + beta)
+            s += ck * t ** p
+        return abs(s)
+
+    lo = math.log(min(a)) - 2.0
+    hi = math.log(max(a)) + 2.0
+    npts = 200
+    best_x, best = lo, -1.0
+    for i in range(npts + 1):
+        x = lo + (hi - lo) * i / npts
+        v = overlap(math.exp(x))
+        if v > best:
+            best, best_x = v, x
+
+    # Golden-section refine within one grid step of the scan maximum.
+    h = (hi - lo) / npts
+    aL, bR = best_x - h, best_x + h
+    gr = (math.sqrt(5.0) - 1.0) / 2.0
+    cL = bR - gr * (bR - aL)
+    dR = aL + gr * (bR - aL)
+    fcL, fdR = overlap(math.exp(cL)), overlap(math.exp(dR))
+    for _ in range(60):
+        if fcL < fdR:
+            aL, cL, fcL = cL, dR, fdR
+            dR = aL + gr * (bR - aL)
+            fdR = overlap(math.exp(dR))
+        else:
+            bR, dR, fdR = dR, cL, fcL
+            cL = bR - gr * (bR - aL)
+            fcL = overlap(math.exp(cL))
+    return math.exp(0.5 * (aL + bR))
+
+
+def decontract_primitives_single(element_basis):
+    """Like :func:`decontract_primitives`, but each *contracted* orbital
+    function is replaced by a single primitive whose exponent is matched
+    by the overlap criterion (:func:`_match_single_primitive`).  Free
+    (single-primitive) functions are kept unchanged.
+
+    Combined ``sp``/``spd`` shells are split first; cartesian shells
+    still expand into their lower-l contamination at the matched
+    exponent.  Returns the same ``(l_angular, n_radial, alpha)`` triple
+    list as :func:`decontract_primitives`.
+    """
+    from .. import manip
+    split = manip.uncontract_spdf({'elements': {'1': element_basis}},
+                                  max_am=0, use_copy=True)['elements']['1']
+    seen = {}
+    for shell in split.get('electron_shells', []):
+        if not _shell_function_types_ok(shell):
+            raise ValueError("auxgen: unsupported function_type %r" % shell.get('function_type'))
+        cart = _is_cartesian(shell)
+        exps = [float(e) for e in shell['exponents']]
+        L = int(shell['angular_momentum'][0])
+        for col in shell['coefficients']:
+            c = [float(x) for x in col]
+            nz = [i for i, x in enumerate(c) if x != 0.0]
+            if not nz:
+                continue
+            beta = exps[nz[0]] if len(nz) == 1 else _match_single_primitive(L, exps, c)
+            for l_ang in _angular_components(L, cart):
+                seen[(int(l_ang), L, float(beta))] = True
     items = list(seen.keys())
     items.sort(key=lambda x: (x[0], x[1], -x[2]))
     return items
