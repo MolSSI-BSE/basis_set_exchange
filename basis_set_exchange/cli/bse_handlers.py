@@ -285,7 +285,6 @@ def _bse_cli_autogen_aux(args):
         orbital_basis_dict,
         threshold=args.threshold,
         scheme=args.scheme,
-        selector=args.selector,
         n_random=args.n_random,
         seed=args.seed,
         contract=args.contract,

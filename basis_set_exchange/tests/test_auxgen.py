@@ -378,9 +378,9 @@ def test_random_shuffles_no_worse_than_presort():
     # presort, for any element / scheme combination.
     b = bse.get_basis('cc-pVDZ', elements=[6])
     det = generate_auxiliary_basis(b, threshold=1e-7, scheme='basic',
-                                    selector='cholesky', n_random=0)
+                                    n_random=0)
     rnd = generate_auxiliary_basis(b, threshold=1e-7, scheme='basic',
-                                    selector='cholesky', n_random=32, seed=0)
+                                    n_random=32, seed=0)
     nd = len(det['elements']['6']['electron_shells'])
     nr = len(rnd['elements']['6']['electron_shells'])
     assert nr <= nd
@@ -389,9 +389,9 @@ def test_random_shuffles_no_worse_than_presort():
 def test_random_seed_reproducibility():
     b = bse.get_basis('cc-pVDZ', elements=[6])
     a1 = generate_auxiliary_basis(b, threshold=1e-7, scheme='basic',
-                                   selector='cholesky', n_random=8, seed=42)
+                                   n_random=8, seed=42)
     a2 = generate_auxiliary_basis(b, threshold=1e-7, scheme='basic',
-                                   selector='cholesky', n_random=8, seed=42)
+                                   n_random=8, seed=42)
     e1 = a1['elements']['6']['electron_shells']
     e2 = a2['elements']['6']['electron_shells']
     assert len(e1) == len(e2)
@@ -401,45 +401,13 @@ def test_random_seed_reproducibility():
 
 
 # ---------------------------------------------------------------------------
-# Greedy-drop selector
+# Cholesky selector properties
 # ---------------------------------------------------------------------------
 
-def test_greedy_kept_primitives_above_threshold():
-    """Every primitive retained by the greedy selector must contribute
-    at least the threshold to the diagonal RI error metric."""
-    from basis_set_exchange.auxgen.products import (
-        decontract_primitives, candidate_pool_from_primitives,
-    )
-    from basis_set_exchange.auxgen.twoel import orbital_aux_projection
-
-    b = bse.get_basis('cc-pVDZ', elements=[6])
-    eb = b['elements']['6']
-    primitives = decontract_primitives(eb)
-    pool = candidate_pool_from_primitives(primitives)
-
-    tau = 1.0e-4   # loose enough to actually drop functions
-    aux = generate_auxiliary_basis(
-        b, elements=[6], threshold=tau, scheme='basic', selector='greedy'
-    )
-    survivors = {}
-    for s in aux['elements']['6']['electron_shells']:
-        survivors.setdefault(s['angular_momentum'][0], []).append(float(s['exponents'][0]))
-
-    # For each L that ended up populated, the leave-one-out drop value
-    # of every survivor must exceed tau.
-    for L, alphas in survivors.items():
-        V, J = orbital_aux_projection(L, primitives, alphas)
-        if J.shape[0] == 0:
-            continue
-        R = numpy.linalg.inv(V)
-        Z = J @ R
-        dE = numpy.einsum('rj,rj->j', Z, Z) / numpy.diag(R)
-        assert (dE > tau).all(), f"L={L}: min dE = {dE.min()} <= tau = {tau}"
-
-
-def test_greedy_subset_of_candidate_pool():
-    """Greedy drop returns a subset of the original pool (no new
-    exponents are invented); never empty for a non-empty input."""
+def test_cholesky_subset_of_candidate_pool():
+    """The pivoted-Cholesky selection returns a subset of the original
+    pool (no new exponents are invented); never empty for a non-empty
+    input."""
     from basis_set_exchange.auxgen.products import (
         decontract_primitives, candidate_pool_from_primitives,
     )
@@ -449,7 +417,7 @@ def test_greedy_subset_of_candidate_pool():
     pool = candidate_pool_from_primitives(primitives)
 
     aux = generate_auxiliary_basis(b, elements=[6], threshold=1.0e-7,
-                                    scheme='basic', selector='greedy')
+                                    scheme='basic', n_random=0)
     by_L = {}
     for s in aux['elements']['6']['electron_shells']:
         by_L.setdefault(s['angular_momentum'][0], []).append(float(s['exponents'][0]))
@@ -459,13 +427,13 @@ def test_greedy_subset_of_candidate_pool():
         assert all(round(a, 10) in pool_set for a in kept)
 
 
-def test_greedy_tighter_threshold_keeps_more():
+def test_tighter_threshold_keeps_more():
     """Lowering the drop threshold can only retain more primitives."""
     b = bse.get_basis('cc-pVDZ', elements=[6])
     a_loose = generate_auxiliary_basis(b, threshold=1.0e-3,
-                                        scheme='basic', selector='greedy')
+                                        scheme='basic', n_random=0)
     a_tight = generate_auxiliary_basis(b, threshold=1.0e-8,
-                                        scheme='basic', selector='greedy')
+                                        scheme='basic', n_random=0)
     nl = len(a_loose['elements']['6']['electron_shells'])
     nt = len(a_tight['elements']['6']['electron_shells'])
     assert nt >= nl

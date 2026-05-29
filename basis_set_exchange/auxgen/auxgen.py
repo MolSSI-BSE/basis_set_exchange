@@ -71,7 +71,7 @@ from .products import (
     candidate_pool_from_pairs,
     primitive_product_pairs,
 )
-from .twoel import normalized_metric, orbital_aux_projection, product_metric
+from .twoel import normalized_metric, product_metric
 
 
 # ---------------------------------------------------------------------------
@@ -237,72 +237,6 @@ def _contracted_shells(per_L_contractions):
 # Main driver
 # ---------------------------------------------------------------------------
 
-def _select_per_L_greedy(primitives, pool, threshold):
-    """Per-L backward-greedy selector based on the diagonal RI error.
-
-    For each L block, build the projection ``J[(rs, M), P] = (rs|P)``
-    and metric ``V[P, Q] = (P|Q)`` over the candidate aux primitives,
-    then iteratively drop the primitive whose removal contributes the
-    *smallest* increase to ``sum_{rs} (rs|rs)_RI`` -- a non-negative
-    quantity that is itself an upper bound on the diagonal RI error.
-
-    The contribution of primitive ``i`` is
-
-        DeltaE_i = || Z[:, i] ||^2 / R[i, i],
-
-    where ``R = V^{-1}`` and ``Z = J @ R``; this is the Schur-complement
-    expression for the loss of trace(``J^T V^{-1} J``) when row/column
-    ``i`` is removed from ``V`` and column ``i`` from ``J``.
-
-    Looping stops when the minimum surviving ``DeltaE_i`` exceeds the
-    threshold ``tau`` (every remaining primitive then carries more
-    than ``tau`` to the diagonal error).
-
-    Returns ``{L: [alpha, ...]}`` sorted decreasing.
-    """
-    out = {}
-    for L, alphas in pool.items():
-        if not alphas:
-            continue
-        alphas_cur = list(alphas)
-        V, J = orbital_aux_projection(L, primitives, alphas_cur)
-        if J.shape[0] == 0:
-            # No orbital products couple to this L -- nothing to fit; keep
-            # the pool as-is (the metric Cholesky would do the same).
-            out[L] = sorted(alphas_cur, reverse=True)
-            continue
-
-        # Solve once; we maintain V and J explicitly and recompute
-        # R = V^{-1} and Z = J @ R after each drop.  The block size shrinks
-        # by one each iteration, so total cost is O(N^4) at worst, dominated
-        # by the inverse; for N <~ a few hundred this is still milliseconds.
-        while True:
-            n = V.shape[0]
-            if n == 0:
-                break
-            R = np.linalg.inv(V)
-            Z = J @ R
-            # DeltaE_i = ||Z[:, i]||^2 / R[i, i].  R[i,i] > 0 since V is SPD.
-            col_sq = np.einsum('rj,rj->j', Z, Z)
-            diag_R = np.diag(R)
-            dE = col_sq / diag_R
-            i_drop = int(np.argmin(dE))
-            if dE[i_drop] > threshold:
-                break
-            # Drop column/row i_drop from V and column from J.
-            keep = np.ones(n, dtype=bool)
-            keep[i_drop] = False
-            V = V[np.ix_(keep, keep)]
-            J = J[:, keep]
-            del alphas_cur[i_drop]
-            if n == 1:
-                break
-
-        if alphas_cur:
-            out[L] = sorted(alphas_cur, reverse=True)
-    return out
-
-
 def _select_per_L(pool, threshold, n_random=100, seed=0):
     """Per-L pivoted Cholesky on the standard primitive Coulomb-overlap
     metric (ERKALE convention).
@@ -336,7 +270,6 @@ def _select_per_L(pool, threshold, n_random=100, seed=0):
 def generate_auxiliary_basis_for_element(element_basis,
                                          threshold=1.0e-7,
                                          scheme='reduced',
-                                         selector='greedy',
                                          n_random=100,
                                          seed=0,
                                          contract=False,
@@ -357,13 +290,6 @@ def generate_auxiliary_basis_for_element(element_basis,
         ``'basic'`` enumerates all orbital products; ``'reduced'``
         pre-screens products with a 4-index Cholesky.  The 2021 paper
         recommends ``'reduced'``.
-    selector : {'greedy', 'cholesky'}
-        Per-L selector.  ``'greedy'`` (default) does a
-        backward-greedy drop in the diagonal-RI-error metric
-        ``Sum_{rs} (rs|rs)_RI`` -- physically motivated upper bound on
-        the RI error.  ``'cholesky'`` is the original Lehtola-2021
-        pivoted Cholesky on the normalized candidate metric (with
-        ``n_random`` random orderings + off-diagonal-norm presort).
     n_random : int
         Number of random candidate orderings to try per L when running
         the (unit-diagonal) basic-step pivoted Cholesky; the most
@@ -406,12 +332,7 @@ def generate_auxiliary_basis_for_element(element_basis,
     else:
         raise ValueError("scheme must be 'basic' or 'reduced'")
 
-    if selector == 'greedy':
-        per_L_alphas = _select_per_L_greedy(primitives, pool, threshold)
-    elif selector == 'cholesky':
-        per_L_alphas = _select_per_L(pool, threshold, n_random=n_random, seed=seed)
-    else:
-        raise ValueError("selector must be 'greedy' or 'cholesky'")
+    per_L_alphas = _select_per_L(pool, threshold, n_random=n_random, seed=seed)
 
     if prune_lmax:
         if lmax_occ is None:
@@ -450,7 +371,6 @@ def generate_auxiliary_basis(orbital_basis,
                              elements=None,
                              threshold=1.0e-7,
                              scheme='reduced',
-                             selector='greedy',
                              n_random=100,
                              seed=0,
                              contract=False,
@@ -490,7 +410,6 @@ def generate_auxiliary_basis(orbital_basis,
             eb,
             threshold=threshold,
             scheme=scheme,
-            selector=selector,
             n_random=n_random,
             seed=seed,
             contract=contract,

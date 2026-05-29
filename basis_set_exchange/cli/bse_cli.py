@@ -225,11 +225,6 @@ def run_bse_cli():
     subp.add_argument('--scheme', choices=('basic', 'reduced'), default='reduced',
                       help='Use the basic scheme (all products) or the reduced scheme '
                            '(4-index Cholesky pre-screening). Default: reduced.')
-    subp.add_argument('--selector', choices=('greedy', 'cholesky'), default='greedy',
-                      help='Per-L selector. "greedy" (default) is backward-greedy drop '
-                           'in the diagonal-RI-error metric. "cholesky" is the original '
-                           'pivoted Cholesky on the unit-diagonal candidate metric '
-                           '(uses --n-random).')
     subp.add_argument('--n-random', type=int, default=100,
                       help='Number of random candidate orderings per L to try in the '
                            'pivoted Cholesky (in addition to the linear order and the '
