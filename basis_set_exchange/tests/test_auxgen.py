@@ -349,7 +349,8 @@ def test_pivoted_cholesky_psd_perturbation():
 @pytest.mark.parametrize('scheme', ['basic', 'reduced'])
 def test_end_to_end_H_cc_pvdz(scheme):
     b = bse.get_basis('cc-pVDZ', elements=[1])
-    aux = generate_auxiliary_basis(b, threshold=1e-7, scheme=scheme)
+    aux = generate_auxiliary_basis(b, threshold=1e-7, scheme=scheme,
+                                   contract=False, prune_lmax=False)
     shells = aux['elements']['1']['electron_shells']
     assert len(shells) >= 5
     # All shells are spherical Gaussians with one primitive each

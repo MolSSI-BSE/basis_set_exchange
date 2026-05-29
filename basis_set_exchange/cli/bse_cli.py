@@ -233,13 +233,14 @@ def run_bse_cli():
                            'shuffles)')
     subp.add_argument('--seed', type=int, default=0,
                       help='Random seed for the shuffles (default 0)')
-    subp.add_argument('--contract', action='store_true',
-                      help='Apply the JCTC 2023 SVD-based general contraction')
-    subp.add_argument('--contract-threshold', type=float, default=1.0e-4,
-                      help='Eigenvalue cutoff epsilon for contraction (default 1e-4)')
-    subp.add_argument('--prune-lmax', action='store_true',
+    subp.add_argument('--contract', action=argparse.BooleanOptionalAction, default=True,
+                      help='Apply the JCTC 2023 SVD-based general contraction (default: on; '
+                           'use --no-contract for primitive output)')
+    subp.add_argument('--contract-threshold', type=float, default=1.0e-5,
+                      help='Eigenvalue cutoff epsilon for contraction (default 1e-5)')
+    subp.add_argument('--prune-lmax', action=argparse.BooleanOptionalAction, default=True,
                       help='Drop high-angular-momentum shells beyond the limit of eq 9 of '
-                           'the JCTC 2023 paper')
+                           'the JCTC 2023 paper (default: on; use --no-prune-lmax to keep them)')
     subp.add_argument('--linc', type=int, default=1,
                       help='Increment parameter l_inc in the pruning rule (default 1)')
 
