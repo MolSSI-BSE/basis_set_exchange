@@ -68,7 +68,7 @@ paper), which is not exploited in ERKALE.
 """
 
 import numpy as np
-from math import pi
+from math import pi, gamma
 
 from .. import manip
 from .gaunt import coupling_lvals, gaunt_table
@@ -92,6 +92,15 @@ def orbital_aos(element_basis):
     primitives -- matching ERKALE's ``basistool contractaux``.  Building
     the W matrix from the decontracted primitives would inflate the
     orbital-product space and retain far too many auxiliary functions.
+
+    Each AO is renormalized to ``<A|A> = 1`` (the standard convention
+    chemistry programs apply on basis-set read).  This is the identity
+    on contractions already stored as overlap-normalized in BSE, but it
+    correctly handles bases whose stored coefficients do not satisfy
+    ``<A|A> = 1`` (e.g. 3ZaPa-NR/He has an s shell with coefficient
+    ``9.36e-4`` rather than ``1.0``); without this, the contracted AO
+    contributes a vanishing weight to the W matrix and the SVD spectrum
+    drifts noticeably from the ERKALE reference.
     """
     split = manip.uncontract_spdf({'elements': {'1': element_basis}},
                                   max_am=0, use_copy=True)['elements']['1']
@@ -100,11 +109,18 @@ def orbital_aos(element_basis):
         l = sh['angular_momentum'][0]
         exps = np.array([float(e) for e in sh['exponents']], dtype=float)
         norms = gto_norm_array(l, exps)
+        # Overlap metric of overlap-normalized primitives at this l.
+        A, B = np.meshgrid(exps, exps, indexing='ij')
+        Sov = norms[:, None] * norms[None, :] * 0.5 * gamma(l + 1.5) / (A + B)**(l + 1.5)
         for col in sh['coefficients']:
             c = np.array([float(x) for x in col], dtype=float)
             if not np.any(c):
                 continue
-            aos.append((l, exps, c * norms))
+            aa = float(c @ Sov @ c)
+            if aa <= 0.0:
+                continue
+            scale = 1.0 / np.sqrt(aa)
+            aos.append((l, exps, c * norms * scale))
     return aos
 
 
