@@ -70,28 +70,61 @@ paper), which is not exploited in ERKALE.
 import numpy as np
 from math import pi
 
+from .. import manip
 from .gaunt import coupling_lvals, gaunt_table
-from .radial import radial_integral, gto_norm, gto_norm_array
+from .radial import radial_integral, gto_norm_array
 from .twoel import primitive_aux_metric
 
 
-def _W_block(primitives, L, alphas_P):
+def orbital_aos(element_basis):
+    """Enumerate the *contracted* spherical orbital basis functions of an
+    element as ``[(l, alphas, weights), ...]``.
+
+    Each entry is one contracted atomic orbital at angular momentum
+    ``l``: ``alphas`` are its primitive exponents and ``weights`` are the
+    contraction coefficients folded with the primitive normalization
+    constants (so the radial density is ``sum_k weights[k] r^l
+    e^{-alphas[k] r^2}``).  Combined ``sp``/``spd`` shells are split into
+    single-``l`` shells first.
+
+    The contraction step fits products of the *orbital basis functions*
+    (the contracted AOs actually used in the SCF), not the decontracted
+    primitives -- matching ERKALE's ``basistool contractaux``.  Building
+    the W matrix from the decontracted primitives would inflate the
+    orbital-product space and retain far too many auxiliary functions.
+    """
+    split = manip.uncontract_spdf({'elements': {'1': element_basis}},
+                                  max_am=0, use_copy=True)['elements']['1']
+    aos = []
+    for sh in split['electron_shells']:
+        l = sh['angular_momentum'][0]
+        exps = np.array([float(e) for e in sh['exponents']], dtype=float)
+        norms = gto_norm_array(l, exps)
+        for col in sh['coefficients']:
+            c = np.array([float(x) for x in col], dtype=float)
+            if not np.any(c):
+                continue
+            aos.append((l, exps, c * norms))
+    return aos
+
+
+def _W_block(aos, L, alphas_P):
     """Build the m=0 subblock of W at angular momentum L,
 
-        W_PQ = sum_{mu nu m_mu m_nu} (mu nu | P)_{L 0} (mu nu | Q)_{L 0}.
+        W_PQ = sum_{mu nu m_mu m_nu} (mu nu | P)_{L 0} (mu nu | Q)_{L 0},
 
-    ``primitives`` is the list of orbital primitives
-    ``[(l_ang, n_rad, alpha), ...]``; ``alphas_P`` are the aux exponents
-    at this L (all standard primitives r^L e^{-alpha_P r^2}).
+    where ``mu, nu`` run over the *contracted* orbital AOs ``aos`` (as
+    returned by :func:`orbital_aos`) and ``alphas_P`` are the aux
+    exponents at this L (standard primitives r^L e^{-alpha_P r^2}).
 
-    Internally we factorise
+    For an orbital AO pair the radial factor is the contraction-weighted
+    sum over their primitive pairs,
 
-        (mu nu | P)_{L, 0} = G(l_mu m_mu, l_nu m_nu, L, 0)
-                            * (4 pi / (2 L + 1))
-                            * N_mu N_nu N_P
-                            * R_L(n_mu + n_nu, alpha_mu + alpha_nu; L, alpha_P)
+        R_P = sum_{i in mu, j in nu} w_i w_j
+                  R_L(l_mu + l_nu, alpha_i + alpha_j; L, alpha_P),
 
-    and sum over each orbital shell-pair as a single ``einsum``.
+    (``w`` already folds in the primitive norms), and the angular factor
+    is the M = 0 Gaunt slice.
     """
     nP = len(alphas_P)
     if nP == 0:
@@ -99,53 +132,39 @@ def _W_block(primitives, L, alphas_P):
     aP = np.asarray(alphas_P, dtype=float)
     NP = gto_norm_array(L, aP)
 
-    # Pre-compute, per orbital shell-pair (l_a, n_a, alpha_a, l_b, n_b, alpha_b),
-    # the (mu nu | P)_{L, 0} column as a function of P at this L:
-    #
-    #   col_{P,(ma,mb)} = sum_{(ma,mb)} G_{ma,mb,M=0} * R_L(..., alpha_P) * N's
-    #
-    # then accumulate ``col @ col.T`` into W.
     W = np.zeros((nP, nP), dtype=float)
-    seen = set()  # (la, na, aa, lb, nb, ab) shell-pair keys
-
-    for ia, (la, n_a, aa) in enumerate(primitives):
-        Na = gto_norm(n_a, aa)
-        for ib, (lb, n_b, ab) in enumerate(primitives):
+    for (la, ea, wa) in aos:
+        for (lb, eb, wb) in aos:
             if L not in coupling_lvals(la, lb):
                 continue
-            # The orbital loops iterate every ordered (mu, nu) pair, which
-            # is what eq 7 of the 2023 paper prescribes; no double-counting.
-            Nb = gto_norm(n_b, ab)
-            base = Na * Nb * (4.0 * pi / (2 * L + 1))
-
-            # Gaunt vector at M = 0, indexed by (ma + la, mb + lb).
-            g_mab = gaunt_table(la, lb, L)[:, :, L]  # the M = 0 slice
-            if not g_mab.any():
+            # The M = 0 Gaunt slice; the radial/aux factor kern_P is the
+            # same for every (ma, mb) cell, so the sum over (ma, mb) of the
+            # rank-1 updates g^2 (kern kern^T) collapses to a single update
+            # weighted by the sum of squared Gaunt coefficients.
+            g_mab = gaunt_table(la, lb, L)[:, :, L]
+            gsq = float(np.sum(g_mab * g_mab))
+            if gsq == 0.0:
                 continue
 
-            # Radial vector over P (depends on alpha_ab and alpha_P; cached).
-            alpha_ab = aa + ab
-            n_ab = n_a + n_b
-            rad_P = np.fromiter(
-                (radial_integral(L, n_ab, L, alpha_ab, float(p)) for p in aP),
-                dtype=float, count=nP,
-            )
-            kern_P = base * NP * rad_P    # shape (nP,)
+            # Contraction-weighted radial column over P.
+            n_ab = la + lb
+            rad = np.zeros(nP, dtype=float)
+            for ai, wi in zip(ea, wa):
+                for aj, wj in zip(eb, wb):
+                    alpha_ab = ai + aj
+                    rj = np.fromiter(
+                        (radial_integral(L, n_ab, L, alpha_ab, float(p)) for p in aP),
+                        dtype=float, count=nP,
+                    )
+                    rad += (wi * wj) * rj
+            kern_P = (4.0 * pi / (2 * L + 1)) * NP * rad
 
-            # Sum over (ma, mb): contribute one rank-1 update per nonzero
-            # Gaunt coefficient.  In atomic spherical symmetry the M=0 slice
-            # has at most 2 l_min + 1 nonzero (ma, mb) cells, so this stays
-            # cheap even without further vectorisation.
-            for (ima, imb), g in np.ndenumerate(g_mab):
-                if g == 0.0:
-                    continue
-                v = (g * kern_P)
-                W += np.outer(v, v)
+            W += gsq * np.outer(kern_P, kern_P)
 
     return W
 
 
-def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4,
+def contract_aux(aos, per_L_alphas, contract_threshold=1.0e-4,
                  lindep_threshold=1.0e-7):
     """Build SVD-based general contractions per L per Lehtola, J. Chem.
     Theory Comput. 19, 6242 (2023)
@@ -165,8 +184,9 @@ def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4,
 
     Parameters
     ----------
-    primitives : list of (l, n, alpha)
-        Orbital primitives (used to build the three-index ERIs).
+    aos : list of (l, alphas, weights)
+        Contracted orbital AOs (from :func:`orbital_aos`) whose products
+        define the three-index integrals to be fit.
     per_L_alphas : dict
         ``{L: [alpha, ...]}`` of selected aux exponents.
     contract_threshold : float
@@ -190,7 +210,7 @@ def contract_aux(primitives, per_L_alphas, contract_threshold=1.0e-4,
         if not alphas:
             continue
         V = primitive_aux_metric(L, alphas)
-        W = _W_block(primitives, L, alphas)
+        W = _W_block(aos, L, alphas)
 
         # Coulomb-normalize the primitives: switch to the unit-diagonal
         # metric S = D^{-1} V D^{-1} (D_i = sqrt((i|i))) and the

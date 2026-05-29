@@ -372,8 +372,10 @@ def generate_auxiliary_basis_for_element(element_basis,
         per_L_alphas = {L: a for L, a in per_L_alphas.items() if L <= l_keep}
 
     if contract:
-        from .contract import contract_aux
-        contractions = contract_aux(primitives, per_L_alphas,
+        from .contract import contract_aux, orbital_aos
+        # The contraction fits products of the contracted orbital basis
+        # functions, not the decontracted primitives used for selection.
+        contractions = contract_aux(orbital_aos(element_basis), per_L_alphas,
                                     contract_threshold=contract_threshold)
         shells = _contracted_shells(contractions)
     else:
