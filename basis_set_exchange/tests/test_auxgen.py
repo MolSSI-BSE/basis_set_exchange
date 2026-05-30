@@ -669,3 +669,93 @@ def test_collapse_contractions_default_off():
     for mode in ('moment', 'selfrepulsion'):
         a_on = generate_auxiliary_basis(b, elements=[6], collapse_contractions=mode)
         assert len(a_on['elements']['6']['electron_shells']) > 0
+
+
+# ---------------------------------------------------------------------------
+# Generated aux basis quality (diagonal RI error)
+# ---------------------------------------------------------------------------
+
+def _diag_ri_error_primitive_aux(orbital_elem, aux_elem):
+    """For a *primitive* aux basis (one primitive per kept candidate, no
+    SVD contraction), compute the diagonal RI error
+
+        sum_{rs} [(rs|rs)_exact - (rs|rs)_RI]
+
+    summed over m-resolved orbital primitive product pairs ``(r, s)``.
+
+    Uses :func:`twoel.orbital_aux_projection` block-per-L to assemble
+    the three-index J matrix, the two-index V metric, and the
+    per-row exact value ``(rs|rs)_L,M``; the RI fit is
+    ``diag(J V^{-1} J^T)``.
+    """
+    from basis_set_exchange.auxgen.products import decontract_primitives
+    from basis_set_exchange.auxgen.twoel import orbital_aux_projection
+    from basis_set_exchange.auxgen.gaunt import coupling_lvals, gaunt_table
+    from basis_set_exchange.auxgen.radial import radial_integral, gto_norm
+    from math import pi
+
+    primitives = decontract_primitives(orbital_elem)
+
+    # Aux primitives per L (each electron_shell is a single-primitive
+    # shell when the aux basis was generated with contract=False).
+    per_L = {}
+    for s in aux_elem['electron_shells']:
+        L = s['angular_momentum'][0]
+        assert len(s['coefficients']) == 1, \
+            "diagonal RI helper expects a primitive (uncontracted) aux basis"
+        for e in s['exponents']:
+            per_L.setdefault(L, []).append(float(e))
+
+    err = 0.0
+    for L, alphas in per_L.items():
+        V, J = orbital_aux_projection(L, primitives, alphas)
+        if J.size == 0:
+            continue
+        Vinv_JT = numpy.linalg.solve(V, J.T)
+        ri_diag = numpy.einsum('rj,jr->r', J, Vinv_JT)
+        # Exact (rs|rs)_L,M for each row of J -- reproduce the same row
+        # ordering used by orbital_aux_projection.
+        exact = []
+        fourpi_2Lp1 = 4.0 * pi / (2 * L + 1)
+        for la, n_a, aa in primitives:
+            Na = gto_norm(n_a, aa)
+            for lb, n_b, ab in primitives:
+                if L not in coupling_lvals(la, lb):
+                    continue
+                Nb = gto_norm(n_b, ab)
+                n_ab = n_a + n_b
+                a_ab = aa + ab
+                R_diag = radial_integral(L, n_ab, n_ab, a_ab, a_ab)
+                G = gaunt_table(la, lb, L)
+                for ima in range(2*la + 1):
+                    for imb in range(2*lb + 1):
+                        for iM in range(2*L + 1):
+                            g = G[ima, imb, iM]
+                            if g == 0.0:
+                                continue
+                            exact.append(fourpi_2Lp1 * (g*g) * (Na*Nb)**2 * R_diag)
+        exact = numpy.asarray(exact)
+        err += float(numpy.sum(exact - ri_diag))
+    return err
+
+
+def test_generated_aux_diagonal_ri_error_bounded():
+    """The pivoted-Cholesky selection guarantees that, for the primitive
+    auxiliary basis generated with drop tolerance ``tau``, the diagonal
+    RI error of every orbital-product channel is bounded -- so the sum
+    over all orbital primitive products is bounded by ``tau`` times the
+    number of orbital products.
+    """
+    tau = 1.0e-5
+    b = bse.get_basis('cc-pVDZ', elements=[6])
+    aux = generate_auxiliary_basis(b, elements=[6], threshold=tau,
+                                   contract=False, prune_lmax=False,
+                                   n_random=0)
+    err = _diag_ri_error_primitive_aux(b['elements']['6'], aux['elements']['6'])
+    assert err >= -1e-12, f"diagonal RI error must be non-negative, got {err}"
+    # Loose-but-meaningful bound: error per orbital-primitive-product
+    # times number of products, with some headroom.
+    from basis_set_exchange.auxgen.products import decontract_primitives
+    n_prims_m = sum(2*l + 1 for l, _n, _a in decontract_primitives(b['elements']['6']))
+    bound = tau * n_prims_m**2
+    assert err < bound, f"diagonal RI error {err} >= bound {bound}"

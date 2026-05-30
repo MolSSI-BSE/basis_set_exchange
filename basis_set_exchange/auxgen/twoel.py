@@ -56,6 +56,11 @@ Three integral families are provided:
   * :func:`product_metric` -- shell-pair-vectorised four-index metric
     over m-resolved product pairs, used by the reduced-scheme
     pre-screening.
+
+  * :func:`orbital_aux_projection` -- the three-index projection
+    ``J[(rs, M), P] = (rs | P)_{L, M}`` over m-resolved orbital product
+    densities and aux primitives at the same ``L``.  Used by the test
+    suite to compute the diagonal RI error of a generated aux basis.
 """
 
 import numpy as np
@@ -150,6 +155,94 @@ def normalized_metric(L, alphas):
         return M
     d = np.sqrt(np.diag(M))
     return M / np.outer(d, d)
+
+
+# ---------------------------------------------------------------------------
+# Three-index orbital-product / aux projection (test-suite use).
+# ---------------------------------------------------------------------------
+
+def orbital_aux_projection(L, primitives, alphas):
+    """Three-index projection of orbital product densities onto a set
+    of aux primitives at angular momentum ``L``.
+
+    Builds
+
+        J[k, P] = (r_a s_b | P)_{L, M}
+                = G(l_a m_a, l_b m_b, L, M) * (4 pi / (2 L + 1))
+                  * N_a N_b N_P
+                  * R_L(n_a + n_b, alpha_a + alpha_b; L, alpha_P)
+
+    where the row index ``k`` enumerates all
+    ``(l_a, m_a, n_a, alpha_a, l_b, m_b, n_b, alpha_b, M)`` combinations
+    with ``L`` in the angular coupling range of ``(l_a, l_b)``, and
+    columns enumerate the aux exponents in ``alphas``.  The companion
+    ``V[P, Q] = (P|Q)`` metric on the same aux primitives is also
+    returned (it is :func:`primitive_aux_metric`).
+
+    Used by the test suite to compute the diagonal RI error of a
+    generated aux basis -- i.e. ``sum_{rs} [(rs|rs)_exact -
+    (rs|rs)_RI]``.
+
+    Parameters
+    ----------
+    L : int
+        Angular momentum of the aux block.
+    primitives : list of ``(l, n, alpha)``
+        Orbital primitives (cartesian contamination handled by ``n``).
+    alphas : array_like of float
+        Aux primitive exponents (all at angular momentum ``L``).
+
+    Returns
+    -------
+    V : numpy.ndarray, shape (n_aux, n_aux)
+        Two-index aux metric ``(P|Q)``.
+    J : numpy.ndarray, shape (n_rows, n_aux)
+        Three-index projection ``(rs|P)`` over m-resolved orbital
+        products that couple to ``L``.  Rows with all-zero Gaunt
+        coefficients are dropped at construction time.
+    """
+    n_aux = len(alphas)
+    V = primitive_aux_metric(L, alphas)
+    if n_aux == 0:
+        return V, np.zeros((0, 0), dtype=float)
+    a_aux = np.asarray(alphas, dtype=float)
+    N_aux = gto_norm_array(L, a_aux)
+
+    rows = []
+    fourpi_2Lp1 = 4.0 * pi / (2 * L + 1)
+
+    for la, n_a, aa in primitives:
+        Na = gto_norm(n_a, aa)
+        for lb, n_b, ab in primitives:
+            if L not in coupling_lvals(la, lb):
+                continue
+            Nb = gto_norm(n_b, ab)
+            base = Na * Nb * fourpi_2Lp1
+
+            # Radial vector over aux: depends on (n_a+n_b, alpha_a+alpha_b, alpha_P).
+            n_ab = n_a + n_b
+            a_ab = aa + ab
+            rad_P = np.fromiter(
+                (radial_integral(L, n_ab, L, a_ab, float(p)) for p in a_aux),
+                dtype=float, count=n_aux,
+            )
+            kern_P = base * N_aux * rad_P  # shape (n_aux,)
+
+            # Gaunt slab for this shell-pair at this L: (2la+1, 2lb+1, 2L+1).
+            G = gaunt_table(la, lb, L)
+            for ima in range(2*la + 1):
+                for imb in range(2*lb + 1):
+                    for iM in range(2*L + 1):
+                        g = G[ima, imb, iM]
+                        if g == 0.0:
+                            continue
+                        rows.append(g * kern_P)
+
+    if rows:
+        J = np.vstack(rows)
+    else:
+        J = np.zeros((0, n_aux), dtype=float)
+    return V, J
 
 
 # ---------------------------------------------------------------------------
