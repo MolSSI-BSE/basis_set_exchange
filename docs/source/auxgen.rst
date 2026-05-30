@@ -89,10 +89,9 @@ default):
   ill-conditioned raw metric), :math:`S` is symmetrically
   orthogonalized, and :math:`W = I^T I` is diagonalized in that basis.
   Eigenvectors with eigenvalue above the threshold ``ε`` define general
-  contractions, which are converted back to the overlap-normalized
-  primitive convention (dividing by the Coulomb norm :math:`D_i`, the
-  exact analogue of ERKALE's :math:`\sqrt{z}` rescaling) so that each
-  contracted function satisfies :math:`(A|A) = 1`.
+  contractions, written in the overlap-normalized primitive convention
+  used by basis-set libraries via ERKALE's
+  :math:`c = \mathrm{Wvec} \cdot \sqrt{z}` rescaling.
 * ``prune_lmax=True`` drops shells above the
   :math:`l_{\rm keep} = \max(2 l_{\rm occ}^{\max},
   l_{\rm occ}^{\max} + l_{\rm OBS}^{\max} + l_{\rm inc})` cap of the
@@ -104,6 +103,28 @@ The ``size`` argument selects the standard accuracy presets of the 2023
 paper, overriding ``contract_threshold`` (``ε``) and ``linc``:
 ``verylarge`` = :math:`(\epsilon, l_{\rm inc}) = (10^{-6}, 1)`,
 ``large`` = :math:`(10^{-5}, 1)`, ``small`` = :math:`(10^{-4}, 0)`.
+
+Two further options control how each candidate orbital product is mapped
+to a standard auxiliary primitive, and how the orbital basis itself is
+fed into the selection candidate pool:
+
+* ``mapping`` selects the criterion for the
+  :math:`(n_{\rm rad}, \alpha_{\rm rad}) \to \alpha_{\rm eff}`
+  transformation in the candidate pool: ``'moment'`` *(default)*
+  preserves the radial expectation value :math:`\langle r \rangle`
+  (the 2021 paper, Appendix II); ``'selfrepulsion'`` preserves the
+  Coulomb self-energy :math:`(i|i)` of the (overlap-normalized) candidate
+  and standard primitive.  Both reduce to :math:`\alpha_{\rm eff} =
+  \alpha_{\rm rad}` when :math:`n_{\rm rad} = L`.
+
+* ``collapse_contractions`` *(opt-in, default ``False``)* replaces each
+  contracted orbital function by a single primitive before building the
+  candidate pool (free primitives are kept; the contraction step still
+  uses the true contracted AOs).  Values: ``'moment'`` matches the
+  radial expectation value of the contracted function;
+  ``'selfrepulsion'`` matches its orbital Coulomb self-energy
+  :math:`(\chi\chi|\chi\chi)`.  Both have closed-form solutions and
+  reduce to :math:`\beta = \alpha` for a single-primitive contraction.
 
 
 Command-line interface
@@ -117,6 +138,8 @@ and writes the generated auxiliary basis to a file::
         [--threshold 1e-7]
         [--scheme {basic,reduced}]
         [--n-random 100] [--seed 0]
+        [--mapping {moment,selfrepulsion}]
+        [--collapse-contractions {moment,selfrepulsion}]
         [--size {small,large,verylarge}]
         [--contract | --no-contract] [--contract-threshold 1e-5]
         [--prune-lmax | --no-prune-lmax] [--linc 1]

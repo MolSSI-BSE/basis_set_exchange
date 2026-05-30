@@ -76,8 +76,8 @@ from math import pi
 from .. import ints
 from .gaunt import coupling_lvals, gaunt_table
 from .products import _split_sp
-from .radial import radial_integral, gto_norm_array
-from .twoel import primitive_aux_metric
+from .radial import gto_norm_array
+from .twoel import _aux_radial_vector, primitive_aux_metric
 
 
 def orbital_aos(element_basis):
@@ -170,12 +170,7 @@ def _W_block(aos, L, alphas_P):
             rad = np.zeros(nP, dtype=float)
             for ai, wi in zip(ea, wa):
                 for aj, wj in zip(eb, wb):
-                    alpha_ab = ai + aj
-                    rj = np.fromiter(
-                        (radial_integral(L, n_ab, L, alpha_ab, float(p)) for p in aP),
-                        dtype=float, count=nP,
-                    )
-                    rad += (wi * wj) * rj
+                    rad += (wi * wj) * _aux_radial_vector(L, n_ab, ai + aj, aP)
             kern_P = (4.0 * pi / (2 * L + 1)) * NP * rad
 
             W += gsq * np.outer(kern_P, kern_P)

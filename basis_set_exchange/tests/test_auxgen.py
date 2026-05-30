@@ -759,3 +759,48 @@ def test_generated_aux_diagonal_ri_error_bounded():
     n_prims_m = sum(2*l + 1 for l, _n, _a in decontract_primitives(b['elements']['6']))
     bound = tau * n_prims_m**2
     assert err < bound, f"diagonal RI error {err} >= bound {bound}"
+
+
+# ---------------------------------------------------------------------------
+# CLI handler smoke test
+# ---------------------------------------------------------------------------
+
+def test_cli_autogen_aux_smoke(tmp_path):
+    """End-to-end through the CLI: get-basis -> autogen-aux -> readback.
+    Exercises argument parsing, file I/O, and the handler glue.  The
+    algorithmic content is covered by the other tests; this catches CLI
+    regressions in flag wiring."""
+    import argparse
+    from basis_set_exchange.cli.bse_handlers import _bse_cli_autogen_aux
+    from basis_set_exchange import readers, writers
+
+    # Write a small orbital basis to a Gaussian94 file via BSE.
+    b = bse.get_basis('cc-pVDZ', elements=[1])
+    b.setdefault('function_types', ['gto_spherical'])
+    in_path = tmp_path / 'in.gbs'
+    in_path.write_text(writers.write_formatted_basis_str(b, 'gaussian94'))
+    out_path = tmp_path / 'out.gbs'
+
+    args = argparse.Namespace(
+        input_file=str(in_path),
+        output_file=str(out_path),
+        in_fmt=None,
+        out_fmt=None,
+        threshold=1.0e-5,
+        scheme='reduced',
+        n_random=0,
+        seed=0,
+        mapping='moment',
+        collapse_contractions=None,
+        size=None,
+        contract=True,
+        contract_threshold=1.0e-5,
+        prune_lmax=True,
+        linc=1,
+    )
+    msg = _bse_cli_autogen_aux(args)
+    assert 'auxgen' in msg.lower()
+    assert out_path.exists() and out_path.stat().st_size > 0
+    out = readers.read_formatted_basis_file(str(out_path), 'gaussian94')
+    assert '1' in out['elements']
+    assert len(out['elements']['1']['electron_shells']) > 0

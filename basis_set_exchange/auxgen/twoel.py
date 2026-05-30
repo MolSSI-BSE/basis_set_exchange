@@ -161,6 +161,18 @@ def normalized_metric(L, alphas):
 # Three-index orbital-product / aux projection (test-suite use).
 # ---------------------------------------------------------------------------
 
+def _aux_radial_vector(L, n_ab, alpha_ab, aux_alphas):
+    """One-center Coulomb radial integrals ``R_L(n_ab, L; alpha_ab,
+    alpha_P)`` for every ``alpha_P`` in ``aux_alphas`` (the orbital-pair
+    radial power ``n_ab`` and combined exponent ``alpha_ab`` fixed).
+    Shared helper used by :func:`_W_block` and :func:`orbital_aux_projection`.
+    """
+    return np.fromiter(
+        (radial_integral(L, n_ab, L, alpha_ab, float(p)) for p in aux_alphas),
+        dtype=float, count=len(aux_alphas),
+    )
+
+
 def orbital_aux_projection(L, primitives, alphas):
     """Three-index projection of orbital product densities onto a set
     of aux primitives at angular momentum ``L``.
@@ -220,13 +232,7 @@ def orbital_aux_projection(L, primitives, alphas):
             base = Na * Nb * fourpi_2Lp1
 
             # Radial vector over aux: depends on (n_a+n_b, alpha_a+alpha_b, alpha_P).
-            n_ab = n_a + n_b
-            a_ab = aa + ab
-            rad_P = np.fromiter(
-                (radial_integral(L, n_ab, L, a_ab, float(p)) for p in a_aux),
-                dtype=float, count=n_aux,
-            )
-            kern_P = base * N_aux * rad_P  # shape (n_aux,)
+            kern_P = base * N_aux * _aux_radial_vector(L, n_a + n_b, aa + ab, a_aux)
 
             # Gaunt slab for this shell-pair at this L: (2la+1, 2lb+1, 2L+1).
             G = gaunt_table(la, lb, L)
