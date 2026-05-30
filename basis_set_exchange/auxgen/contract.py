@@ -52,14 +52,17 @@ Per angular momentum l of the auxiliary basis:
      singular values of the orthogonalized three-index tensor; keep the
      eigenvectors with lambda >= epsilon.
 
-  4. Convert the resulting contraction coefficients -- which are
-     expressed in the Coulomb-normalized primitive basis, (a|a) = 1 --
-     back to the overlap-normalized primitive convention used by basis
-     set libraries, by dividing each coefficient by the Coulomb norm
-     ``D_i = sqrt((i|i))``.  This is the exact analogue of the
-     ``c <- c * sqrt(z)`` rescaling in ERKALE's ``basistool contractaux``
-     (1/D is proportional to sqrt(z)); it guarantees the contracted
-     functions satisfy (A|A) = 1 in the Coulomb metric.
+  4. Convert the resulting contraction coefficients -- expressed in
+     the Coulomb-normalized primitive basis -- to the overlap-normalized
+     primitive convention printed by basis-set libraries, exactly as in
+     ERKALE's ``basistool contractaux``:
+
+         c = Wvec * sqrt(z)
+
+     so the output is byte-comparable to ERKALE's reference.  The
+     contracted functions are not separately renormalized to
+     ``(A|A) = 1``; their overall per-contraction scale follows ERKALE's
+     convention.
 
 This mirrors ERKALE's ``basistool contractaux`` reference implementation,
 with the methodological improvement that atomic spherical symmetry is
@@ -218,8 +221,8 @@ def contract_aux(aos, per_L_alphas, contract_threshold=1.0e-4,
     dict
         ``{L: (exps, [gen1_coeffs, gen2_coeffs, ...])}``.  The
         coefficients are BSE-convention contraction coefficients of
-        overlap-normalized primitives; each contracted function is
-        normalized to ``(A|A) = 1`` in the Coulomb metric.
+        overlap-normalized primitives, in ERKALE's printing convention
+        (``c = Wvec * sqrt(z)``).
     """
     out = {}
     for L, alphas in per_L_alphas.items():
@@ -261,10 +264,11 @@ def contract_aux(aos, per_L_alphas, contract_threshold=1.0e-4,
             keep_mask[0] = True
         keep = int(keep_mask.sum())
 
-        # Convert Coulomb-normalized coefficients to the overlap-normalized
-        # primitive convention used by basis libraries: c <- c / D
-        # (== c * sqrt(z) up to a per-L constant, cf. ERKALE basistool).
-        gens = [list(Cnorm[:, k] / D) for k in range(keep)]
+        # Convert Coulomb-normalized eigenvectors to the overlap-normalized
+        # primitive convention printed by basis-set libraries, matching
+        # ERKALE's basistool contractaux exactly: c = Wvec * sqrt(z).
+        sqrt_z = np.sqrt(np.asarray(alphas, dtype=float))
+        gens = [list(Cnorm[:, k] * sqrt_z) for k in range(keep)]
         out[L] = (list(alphas), gens)
 
     return out

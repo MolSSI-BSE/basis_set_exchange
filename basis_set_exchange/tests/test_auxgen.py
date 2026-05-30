@@ -455,10 +455,11 @@ def test_end_to_end_lmax_pruning():
 # Contraction: normalization and accuracy
 # ---------------------------------------------------------------------------
 
-def test_contracted_functions_coulomb_normalized():
-    """Every contracted auxiliary function must be normalized to
-    (A|A) = 1 in the Coulomb metric (not the overlap metric), with the
-    output coefficients in the overlap-normalized primitive convention."""
+def test_contracted_coefficients_match_erkale_convention():
+    """The output coefficient convention is ERKALE's ``c = Wvec * sqrt(z)``.
+    All contractions at a given L share the per-L Coulomb norm scale
+    ``(A|A) = k_L^2`` where ``k_L^2 = z_i * V_ii`` is constant in z (since
+    (i|i) ~ 1/z for an overlap-normalized primitive)."""
     from basis_set_exchange.auxgen.twoel import primitive_aux_metric
 
     b = bse.get_basis('cc-pVTZ', elements=[8])
@@ -469,10 +470,12 @@ def test_contracted_functions_coulomb_normalized():
         L = s['angular_momentum'][0]
         exps = [float(e) for e in s['exponents']]
         V = primitive_aux_metric(L, exps)
+        k2 = float(exps[0] * V[0, 0])
         for coeff in s['coefficients']:
             c = numpy.array([float(x) for x in coeff])
             aa = c @ V @ c
-            assert abs(aa - 1.0) < 1e-8, f"L={L}: (A|A)={aa}, expected 1"
+            assert abs(aa - k2) / k2 < 1e-6, \
+                f"L={L}: (A|A)={aa}, expected k_L^2={k2}"
 
 
 @pytest.mark.parametrize('size,eps,linc', [
