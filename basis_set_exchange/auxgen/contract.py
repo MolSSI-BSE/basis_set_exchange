@@ -71,9 +71,9 @@ paper), which is not exploited in ERKALE.
 """
 
 import numpy as np
-from math import pi, gamma
+from math import pi
 
-from .. import manip
+from .. import ints, manip
 from .gaunt import coupling_lvals, gaunt_table
 from .radial import radial_integral, gto_norm_array
 from .twoel import primitive_aux_metric
@@ -110,20 +110,21 @@ def orbital_aos(element_basis):
     aos = []
     for sh in split['electron_shells']:
         l = sh['angular_momentum'][0]
-        exps = np.array([float(e) for e in sh['exponents']], dtype=float)
+        exps_list = [float(e) for e in sh['exponents']]
+        exps = np.asarray(exps_list, dtype=float)
         norms = gto_norm_array(l, exps)
-        # Overlap metric of overlap-normalized primitives at this l.
-        A, B = np.meshgrid(exps, exps, indexing='ij')
-        Sov = norms[:, None] * norms[None, :] * 0.5 * gamma(l + 1.5) / (A + B)**(l + 1.5)
-        for col in sh['coefficients']:
-            c = np.array([float(x) for x in col], dtype=float)
-            if not np.any(c):
-                continue
-            aa = float(c @ Sov @ c)
-            if aa <= 0.0:
-                continue
-            scale = 1.0 / np.sqrt(aa)
-            aos.append((l, exps, c * norms * scale))
+        # Normalized primitive overlap matrix and contraction renormalization
+        # come from BSE core (ints._gto_overlap returns the [2 sqrt(ab)/(a+b)]^(l+3/2)
+        # matrix with unit diagonal; ints._normalize_contraction rescales each
+        # contraction to <A|A>=1).
+        nonzero_cols = [[float(x) for x in col] for col in sh['coefficients']
+                        if any(float(x) != 0.0 for x in col)]
+        if not nonzero_cols:
+            continue
+        ovl = ints._gto_overlap(exps_list, l)
+        contr_norm = ints._normalize_contraction(nonzero_cols, ovl)
+        for c_n in contr_norm:
+            aos.append((l, exps, np.asarray(c_n, dtype=float) * norms))
     return aos
 
 

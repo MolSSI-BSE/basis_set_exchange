@@ -214,6 +214,30 @@ def _shellpair_L_range(li, lj):
     return range(abs(li - lj), li + lj + 1, 2)
 
 
+def _pairs_to_pool(pair_iter, mapping):
+    """Common tail of :func:`candidate_pool_from_primitives` and
+    :func:`candidate_pool_from_pairs`: for each ``(la, n_a, alpha_a,
+    lb, n_b, alpha_b)`` orbital primitive-pair tuple yielded by
+    ``pair_iter``, accumulate ``alpha_eff(L, n_rad, alpha_rad, mapping)``
+    over every parity-allowed coupling angular momentum ``L``, then
+    deduplicate at floating-point tolerance and return
+    ``{L: [alpha_eff, ...]}`` sorted decreasing.
+    """
+    pool = {}
+    for la, n_a, a_a, lb, n_b, a_b in pair_iter:
+        n_rad = n_a + n_b
+        a_rad = float(a_a + a_b)
+        for L in _shellpair_L_range(la, lb):
+            pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad, mapping))
+    out = {}
+    for L, alphas in pool.items():
+        seen = {}
+        for a in alphas:
+            seen[round(a, 10)] = a
+        out[L] = sorted(seen.values(), reverse=True)
+    return out
+
+
 def candidate_pool_from_primitives(primitives, mapping='moment'):
     """Build the per-L candidate pool from orbital primitives, per the
     ERKALE implementation of Lehtola 2021.
@@ -238,25 +262,14 @@ def candidate_pool_from_primitives(primitives, mapping='moment'):
 
     Returns ``{L: [alpha_eff, ...]}`` sorted decreasing.
     """
-    pool = {}
-    n = len(primitives)
-    for i in range(n):
-        l_i, n_i, a_i = primitives[i]
-        for j in range(i, n):
-            l_j, n_j, a_j = primitives[j]
-            n_rad = n_i + n_j
-            a_rad = float(a_i + a_j)
-            for L in _shellpair_L_range(l_i, l_j):
-                pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad, mapping))
-    out = {}
-    for L, alphas in pool.items():
-        # Deduplicate at floating-point tolerance.
-        seen = {}
-        for a in alphas:
-            key = round(a, 10)
-            seen[key] = a
-        out[L] = sorted(seen.values(), reverse=True)
-    return out
+    def pairs():
+        n = len(primitives)
+        for i in range(n):
+            li, ni, ai = primitives[i]
+            for j in range(i, n):
+                lj, nj, aj = primitives[j]
+                yield li, ni, ai, lj, nj, aj
+    return _pairs_to_pool(pairs(), mapping)
 
 
 def candidate_pool_from_pairs(selected_pairs, mapping='moment'):
@@ -268,19 +281,10 @@ def candidate_pool_from_pairs(selected_pairs, mapping='moment'):
     Each entry in ``selected_pairs`` is
     ``((l_a, n_a, m_a, alpha_a), (l_b, n_b, m_b, alpha_b))``.
     """
-    pool = {}
-    for (la, na, _ma, aa), (lb, nb, _mb, ab) in selected_pairs:
-        n_rad = na + nb
-        a_rad = float(aa + ab)
-        for L in _shellpair_L_range(la, lb):
-            pool.setdefault(L, []).append(alpha_eff(L, n_rad, a_rad, mapping))
-    out = {}
-    for L, alphas in pool.items():
-        seen = {}
-        for a in alphas:
-            seen[round(a, 10)] = a
-        out[L] = sorted(seen.values(), reverse=True)
-    return out
+    def pairs():
+        for (la, na, _ma, aa), (lb, nb, _mb, ab) in selected_pairs:
+            yield la, na, aa, lb, nb, ab
+    return _pairs_to_pool(pairs(), mapping)
 
 
 def primitive_product_pairs(primitives):
