@@ -58,8 +58,40 @@ alpha_rad = alpha_mu + alpha_nu)``.
 
 import math
 
+from .. import manip
 from .gaunt import coupling_lvals
 from .radial import alpha_eff
+
+
+def _split_sp(element_basis):
+    """Split combined ``sp``/``spd``/``spdf`` shells of one element into
+    separate single-angular-momentum shells (a no-op for already-single
+    shells).  Returns the modified element-basis dict.
+    """
+    return manip.uncontract_spdf({'elements': {'1': element_basis}},
+                                 max_am=0, use_copy=True)['elements']['1']
+
+
+def _iter_shells(element_basis):
+    """Yield ``(L, l_angs, exps, coefficients)`` per sp-split shell of
+    ``element_basis``:
+
+    - ``L`` is the shell's radial power (= its original am).
+    - ``l_angs`` lists the angular momenta the shell contributes (just
+      ``[L]`` for spherical shells; ``[L, L-2, ...]`` for cartesian
+      ``contamination``).
+    - ``exps`` is the shell's primitive exponents as floats.
+    - ``coefficients`` is the shell's untouched list of contraction
+      columns.
+    """
+    for shell in _split_sp(element_basis).get('electron_shells', []):
+        if not _shell_function_types_ok(shell):
+            raise ValueError("auxgen: unsupported function_type %r" % shell.get('function_type'))
+        cart = _is_cartesian(shell)
+        L = int(shell['angular_momentum'][0])
+        exps = [float(e) for e in shell['exponents']]
+        l_angs = [int(l) for l in _angular_components(L, cart)]
+        yield L, l_angs, exps, shell['coefficients']
 
 
 _ALLOWED_FT = ('gto', 'gto_spherical', 'gto_cartesian')
@@ -101,18 +133,11 @@ def decontract_primitives(element_basis):
     Returns a list of triples sorted by ``(l, n, -alpha)``.
     """
     seen = {}
-    for shell in element_basis.get('electron_shells', []):
-        if not _shell_function_types_ok(shell):
-            raise ValueError("auxgen: unsupported function_type %r" % shell.get('function_type'))
-        cart = _is_cartesian(shell)
-        exps = [float(e) for e in shell['exponents']]
-        for L in shell['angular_momentum']:
-            for l_ang in _angular_components(int(L), cart):
-                for a in exps:
-                    seen[(int(l_ang), int(L), float(a))] = True
-    items = list(seen.keys())
-    items.sort(key=lambda x: (x[0], x[1], -x[2]))
-    return items
+    for L, l_angs, exps, _coeffs in _iter_shells(element_basis):
+        for l_ang in l_angs:
+            for a in exps:
+                seen[(l_ang, L, a)] = True
+    return sorted(seen.keys(), key=lambda x: (x[0], x[1], -x[2]))
 
 
 def _match_single_primitive(L, exps, coeffs):
@@ -180,27 +205,17 @@ def decontract_primitives_single(element_basis):
     exponent.  Returns the same ``(l_angular, n_radial, alpha)`` triple
     list as :func:`decontract_primitives`.
     """
-    from .. import manip
-    split = manip.uncontract_spdf({'elements': {'1': element_basis}},
-                                  max_am=0, use_copy=True)['elements']['1']
     seen = {}
-    for shell in split.get('electron_shells', []):
-        if not _shell_function_types_ok(shell):
-            raise ValueError("auxgen: unsupported function_type %r" % shell.get('function_type'))
-        cart = _is_cartesian(shell)
-        exps = [float(e) for e in shell['exponents']]
-        L = int(shell['angular_momentum'][0])
-        for col in shell['coefficients']:
+    for L, l_angs, exps, coeffs in _iter_shells(element_basis):
+        for col in coeffs:
             c = [float(x) for x in col]
             nz = [i for i, x in enumerate(c) if x != 0.0]
             if not nz:
                 continue
             beta = exps[nz[0]] if len(nz) == 1 else _match_single_primitive(L, exps, c)
-            for l_ang in _angular_components(L, cart):
-                seen[(int(l_ang), L, float(beta))] = True
-    items = list(seen.keys())
-    items.sort(key=lambda x: (x[0], x[1], -x[2]))
-    return items
+            for l_ang in l_angs:
+                seen[(l_ang, L, float(beta))] = True
+    return sorted(seen.keys(), key=lambda x: (x[0], x[1], -x[2]))
 
 
 def _shellpair_L_range(li, lj):

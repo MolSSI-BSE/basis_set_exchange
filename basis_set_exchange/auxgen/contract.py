@@ -73,8 +73,9 @@ paper), which is not exploited in ERKALE.
 import numpy as np
 from math import pi
 
-from .. import ints, manip
+from .. import ints
 from .gaunt import coupling_lvals, gaunt_table
+from .products import _split_sp
 from .radial import radial_integral, gto_norm_array
 from .twoel import primitive_aux_metric
 
@@ -105,10 +106,8 @@ def orbital_aos(element_basis):
     contributes a vanishing weight to the W matrix and the SVD spectrum
     drifts noticeably from the ERKALE reference.
     """
-    split = manip.uncontract_spdf({'elements': {'1': element_basis}},
-                                  max_am=0, use_copy=True)['elements']['1']
     aos = []
-    for sh in split['electron_shells']:
+    for sh in _split_sp(element_basis).get('electron_shells', []):
         l = sh['angular_momentum'][0]
         exps_list = [float(e) for e in sh['exponents']]
         exps = np.asarray(exps_list, dtype=float)
