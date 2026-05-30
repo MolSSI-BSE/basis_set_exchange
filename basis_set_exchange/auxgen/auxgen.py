@@ -318,11 +318,13 @@ def generate_auxiliary_basis_for_element(element_basis,
         primitive.  ``'moment'`` (default) matches the radial moment
         ``<r>`` (2021 paper Appendix II); ``'selfrepulsion'`` matches the
         Coulomb self-energy ``(i|i)``.  See :func:`radial.alpha_eff`.
-    collapse_contractions : bool
-        When ``True``, each contracted orbital function is replaced by a
-        single primitive whose exponent matches it by the overlap
-        criterion before building the *selection* candidate pool (free
-        primitives are kept).  The contraction step still uses the true
+    collapse_contractions : ``False`` or ``{'moment', 'selfrepulsion'}``
+        When set, each contracted orbital function is replaced by a
+        single primitive whose exponent is matched analytically to the
+        contraction before building the *selection* candidate pool (free
+        primitives are kept).  ``'moment'`` matches the radial moment
+        ``<r>``; ``'selfrepulsion'`` matches the Coulomb self-energy
+        ``(chi|chi)``.  The contraction step still uses the true
         contracted orbital AOs.  Default ``False`` (full decontraction).
     size : {'small', 'large', 'verylarge'}, optional
         Standard accuracy preset of the 2023 paper.  When given, it
@@ -363,7 +365,8 @@ def generate_auxiliary_basis_for_element(element_basis,
         linc = _SIZE_PRESETS[size]['linc']
 
     if collapse_contractions:
-        primitives = decontract_primitives_single(element_basis)
+        primitives = decontract_primitives_single(element_basis,
+                                                  mapping=collapse_contractions)
     else:
         primitives = decontract_primitives(element_basis)
     if not primitives:

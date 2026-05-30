@@ -582,22 +582,69 @@ def test_mapping_default_is_moment():
 # Single-primitive replacement of contracted orbital functions (selection)
 # ---------------------------------------------------------------------------
 
-def test_match_single_primitive_within_range_and_identity():
-    from basis_set_exchange.auxgen.products import _match_single_primitive
-    # A single-term "contraction" recovers its own exponent.
-    assert abs(_match_single_primitive(0, [2.5], [1.0]) - 2.5) < 1e-6
+@pytest.mark.parametrize('mapping', ['moment', 'selfrepulsion'])
+def test_match_single_primitive_identity_and_within_range(mapping):
+    from basis_set_exchange.auxgen.products import _COLLAPSE_MATCHERS
+    matcher = _COLLAPSE_MATCHERS[mapping]
+    # A single-term "contraction" must recover its own exponent.
+    assert abs(matcher(0, [2.5], [1.0]) - 2.5) < 1e-10
+    assert abs(matcher(2, [1.7], [1.0]) - 1.7) < 1e-10
     # A two-term contraction maps to an exponent strictly between them.
-    beta = _match_single_primitive(0, [1.0, 16.0], [0.6, 0.6])
+    beta = matcher(0, [1.0, 16.0], [0.6, 0.6])
     assert 1.0 < beta < 16.0
 
 
-def test_collapse_contractions_one_primitive_per_contracted_function():
+def test_match_single_primitive_moment_preserves_r_expectation():
+    """The 'moment' matcher must give a single primitive whose radial
+    expectation value <r> equals that of the contraction."""
+    from math import gamma
+    from basis_set_exchange.auxgen.products import _match_single_primitive_moment
+    from basis_set_exchange.auxgen.radial import gto_norm_array
+    L = 2
+    exps = [4.0, 1.5, 0.5]; c = [0.3, 0.5, 0.4]
+    # Renormalize c so that the contraction is overlap-normalized.
+    a = numpy.asarray(exps); cc = numpy.asarray(c); N = gto_norm_array(L, a)
+    Sab = a[:, None] + a[None, :]
+    ovl_chi = float(0.5 * gamma(L + 1.5) *
+                    numpy.sum(cc[:, None]*cc[None, :] * N[:, None]*N[None, :] / Sab**(L + 1.5)))
+    cc /= numpy.sqrt(ovl_chi)
+    beta = _match_single_primitive_moment(L, exps, cc.tolist())
+    r_chi = 0.5 * gamma(L + 2) * float(numpy.sum(
+        cc[:, None]*cc[None, :] * N[:, None]*N[None, :] / Sab**(L + 2)))
+    r_g = gamma(L + 2) / (gamma(L + 1.5) * numpy.sqrt(2 * beta))
+    assert abs(r_chi - r_g) / abs(r_chi) < 1e-10
+
+
+def test_match_single_primitive_selfrepulsion_preserves_coulomb_self_energy():
+    """The 'selfrepulsion' matcher must give a single primitive whose
+    orbital Coulomb self-energy (chi chi | chi chi) equals that of the
+    contraction (four-index ERI of the electron density)."""
+    from basis_set_exchange.auxgen.products import _match_single_primitive_selfrepulsion
+    from basis_set_exchange.auxgen.twoel import primitive_eri
+    L = 1
+    exps = [3.0, 1.0, 0.4]; c = [0.4, 0.5, 0.2]
+    n = len(exps)
+    chichi = 0.0
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                for m in range(n):
+                    chichi += c[i]*c[j]*c[k]*c[m] * primitive_eri(
+                        L,L,0,exps[i], L,L,0,exps[j],
+                        L,L,0,exps[k], L,L,0,exps[m])
+    beta = _match_single_primitive_selfrepulsion(L, exps, c)
+    gg = primitive_eri(L,L,0,beta, L,L,0,beta, L,L,0,beta, L,L,0,beta)
+    assert abs(chichi - gg) / abs(chichi) < 1e-10
+
+
+@pytest.mark.parametrize('mapping', ['moment', 'selfrepulsion'])
+def test_collapse_contractions_one_primitive_per_contracted_function(mapping):
     from basis_set_exchange.auxgen.products import (
         decontract_primitives, decontract_primitives_single,
     )
     b = bse.get_basis('cc-pVDZ', elements=[6])  # (9s,4p,1d) -> [3s,2p,1d]
     eb = b['elements']['6']
-    single = decontract_primitives_single(eb)
+    single = decontract_primitives_single(eb, mapping=mapping)
     from collections import Counter
     lc = Counter(l for l, _n, _a in single)
     # One effective primitive per contracted AO: 3s, 2p, 1d.
@@ -619,5 +666,6 @@ def test_collapse_contractions_default_off():
     a_default = generate_auxiliary_basis(b, elements=[6])
     a_off = generate_auxiliary_basis(b, elements=[6], collapse_contractions=False)
     assert a_default == a_off
-    a_on = generate_auxiliary_basis(b, elements=[6], collapse_contractions=True)
-    assert len(a_on['elements']['6']['electron_shells']) > 0
+    for mode in ('moment', 'selfrepulsion'):
+        a_on = generate_auxiliary_basis(b, elements=[6], collapse_contractions=mode)
+        assert len(a_on['elements']['6']['electron_shells']) > 0

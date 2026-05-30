@@ -58,9 +58,12 @@ alpha_rad = alpha_mu + alpha_nu)``.
 
 import math
 
+import numpy as np
+
 from .. import manip
 from .gaunt import coupling_lvals
-from .radial import alpha_eff
+from .radial import alpha_eff, gto_norm_array
+from .twoel import primitive_eri
 
 
 def _split_sp(element_basis):
@@ -140,71 +143,91 @@ def decontract_primitives(element_basis):
     return sorted(seen.keys(), key=lambda x: (x[0], x[1], -x[2]))
 
 
-def _match_single_primitive(L, exps, coeffs):
+def _match_single_primitive_moment(L, exps, coeffs):
     """Exponent ``beta`` of the single primitive ``r^L e^{-beta r^2}``
-    that maximizes the (normalized) overlap with the contracted function
-    ``sum_k coeffs[k] * (normalized r^L e^{-exps[k] r^2})``.
+    that has the same radial expectation value ``<r>`` as the contracted
+    function ``chi = sum_k coeffs[k] * (overlap-normalized
+    r^L e^{-exps[k] r^2})``.
 
-    The normalized overlap of two primitives at radial power ``L`` is
-    ``[2 sqrt(a b) / (a + b)]^{L + 3/2}``, so the objective is
-
-        f(beta) = | sum_k coeffs[k] [2 sqrt(exps[k] beta)
-                                     / (exps[k] + beta)]^{L + 3/2} |,
-
-    maximized by a log-space grid scan followed by golden-section
-    refinement (no SciPy dependency).
+    Closed form: ``<r>_chi = (1/2) Gamma(L+2) sum_{ij} c_i c_j N_i N_j /
+    (alpha_i + alpha_j)^{L+2}`` (with ``N_k`` the primitive overlap
+    norm) and ``<r>_g_beta = Gamma(L+2) / [Gamma(L+3/2) sqrt(2 beta)]``,
+    giving ``beta = (1/2) [Gamma(L+2) / (Gamma(L+3/2) <r>_chi)]^2``.
     """
-    p = L + 1.5
-    a = [float(x) for x in exps]
+    a = np.asarray(exps, dtype=float)
+    c = np.asarray(coeffs, dtype=float)
+    N = gto_norm_array(L, a)
+    Sab = a[:, None] + a[None, :]
+    M = (c[:, None] * c[None, :]) * (N[:, None] * N[None, :]) / Sab**(L + 2)
+    r_chi = 0.5 * math.gamma(L + 2) * float(M.sum())
+    ratio = math.gamma(L + 2) / (math.gamma(L + 1.5) * r_chi)
+    return 0.5 * ratio * ratio
+
+
+def _match_single_primitive_selfrepulsion(L, exps, coeffs):
+    """Exponent ``beta`` of the single primitive ``r^L e^{-beta r^2}``
+    that has the same orbital Coulomb self-energy ``(chi chi | chi chi)``
+    as the contracted function ``chi = sum_k coeffs[k] * (overlap-
+    normalized r^L Y_{L 0} e^{-exps[k] r^2})``.
+
+    The orbital self-energy is the four-index ERI ``(chi chi | chi chi)``
+    of the electron density ``|chi|^2``, not the two-index ``(chi|chi)``
+    that treats ``chi`` itself as a charge.
+
+    Closed form: ``(chi chi | chi chi) = sum_{ijkl} c_i c_j c_k c_l (phi_i
+    phi_j | phi_k phi_l)`` (computed via :func:`twoel.primitive_eri` at
+    ``m = 0``), and ``(g_beta g_beta | g_beta g_beta) = K_L * sqrt(beta)``
+    since the ERI carries units of ``1/length ~ sqrt(alpha)``.  ``K_L``
+    is the ERI at ``beta = 1``.  Equating gives ``beta = [(chi chi | chi
+    chi) / K_L]^2``.
+    """
+    a = list(np.asarray(exps, dtype=float))
     c = [float(x) for x in coeffs]
-
-    def overlap(beta):
-        s = 0.0
-        for ak, ck in zip(a, c):
-            t = 2.0 * math.sqrt(ak * beta) / (ak + beta)
-            s += ck * t ** p
-        return abs(s)
-
-    lo = math.log(min(a)) - 2.0
-    hi = math.log(max(a)) + 2.0
-    npts = 200
-    best_x, best = lo, -1.0
-    for i in range(npts + 1):
-        x = lo + (hi - lo) * i / npts
-        v = overlap(math.exp(x))
-        if v > best:
-            best, best_x = v, x
-
-    # Golden-section refine within one grid step of the scan maximum.
-    h = (hi - lo) / npts
-    aL, bR = best_x - h, best_x + h
-    gr = (math.sqrt(5.0) - 1.0) / 2.0
-    cL = bR - gr * (bR - aL)
-    dR = aL + gr * (bR - aL)
-    fcL, fdR = overlap(math.exp(cL)), overlap(math.exp(dR))
-    for _ in range(60):
-        if fcL < fdR:
-            aL, cL, fcL = cL, dR, fdR
-            dR = aL + gr * (bR - aL)
-            fdR = overlap(math.exp(dR))
-        else:
-            bR, dR, fdR = dR, cL, fcL
-            cL = bR - gr * (bR - aL)
-            fcL = overlap(math.exp(cL))
-    return math.exp(0.5 * (aL + bR))
+    n = len(a)
+    chichi = 0.0
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                for m in range(n):
+                    chichi += c[i] * c[j] * c[k] * c[m] * primitive_eri(
+                        L, L, 0, a[i], L, L, 0, a[j],
+                        L, L, 0, a[k], L, L, 0, a[m],
+                    )
+    K_L = primitive_eri(L, L, 0, 1.0, L, L, 0, 1.0,
+                        L, L, 0, 1.0, L, L, 0, 1.0)
+    ratio = chichi / K_L
+    return ratio * ratio
 
 
-def decontract_primitives_single(element_basis):
+_COLLAPSE_MATCHERS = {
+    'moment': _match_single_primitive_moment,
+    'selfrepulsion': _match_single_primitive_selfrepulsion,
+}
+
+
+def decontract_primitives_single(element_basis, mapping='moment'):
     """Like :func:`decontract_primitives`, but each *contracted* orbital
-    function is replaced by a single primitive whose exponent is matched
-    by the overlap criterion (:func:`_match_single_primitive`).  Free
-    (single-primitive) functions are kept unchanged.
+    function is replaced by a single primitive whose exponent matches it
+    analytically:
 
+    * ``mapping='moment'`` (default) matches the radial expectation
+      value ``<r>`` of the contracted function (closed form, see
+      :func:`_match_single_primitive_moment`).
+    * ``mapping='selfrepulsion'`` matches the Coulomb self-energy
+      ``(chi|chi)`` of the contracted function (closed form, see
+      :func:`_match_single_primitive_selfrepulsion`).
+
+    Free (single-primitive) functions are kept unchanged (both modes
+    reduce to ``beta = alpha`` for a single-primitive "contraction").
     Combined ``sp``/``spd`` shells are split first; cartesian shells
     still expand into their lower-l contamination at the matched
     exponent.  Returns the same ``(l_angular, n_radial, alpha)`` triple
     list as :func:`decontract_primitives`.
     """
+    try:
+        matcher = _COLLAPSE_MATCHERS[mapping]
+    except KeyError:
+        raise ValueError("mapping must be one of %s" % sorted(_COLLAPSE_MATCHERS))
     seen = {}
     for L, l_angs, exps, coeffs in _iter_shells(element_basis):
         for col in coeffs:
@@ -212,7 +235,7 @@ def decontract_primitives_single(element_basis):
             nz = [i for i, x in enumerate(c) if x != 0.0]
             if not nz:
                 continue
-            beta = exps[nz[0]] if len(nz) == 1 else _match_single_primitive(L, exps, c)
+            beta = exps[nz[0]] if len(nz) == 1 else matcher(L, exps, c)
             for l_ang in l_angs:
                 seen[(l_ang, L, float(beta))] = True
     return sorted(seen.keys(), key=lambda x: (x[0], x[1], -x[2]))
