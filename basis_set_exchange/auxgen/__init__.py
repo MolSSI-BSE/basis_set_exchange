@@ -39,12 +39,15 @@ contracted auxiliary basis.  Drivers for both GTOs (default) and STOs are
 provided -- the STO variant lives in
 :mod:`basis_set_exchange.auxgen.sto`.
 
-The implementation is single-center / per-element.  Radial integrals are
-evaluated with closed forms (no sympy at runtime); sympy is imported
-lazily and only by :mod:`basis_set_exchange.auxgen.gaunt` for the real-
-spherical Gaunt coefficients.  The whole subpackage additionally
-requires ``numpy`` and ``wignernj``; neither is a runtime dependency of
-the base ``basis_set_exchange`` package.
+The implementation is single-center / per-element.  Radial integrals
+use closed forms in pure Python; the only optional dependency outside
+``numpy`` is the real-spherical Gaunt evaluator in
+:mod:`basis_set_exchange.auxgen.gaunt`, which prefers ``wignernj``
+(exact integer arithmetic) but falls back to ``sympy.physics.wigner``
+when ``wignernj`` is unavailable.  Both are lazy-imported on first
+call.  ``numpy`` is required everywhere in the subpackage; none of
+these are runtime dependencies of the base ``basis_set_exchange``
+package.
 """
 
 def generate_auxiliary_basis(*args, **kwargs):

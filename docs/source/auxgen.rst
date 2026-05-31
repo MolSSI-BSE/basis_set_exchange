@@ -199,8 +199,9 @@ which goes through the same code path:
     aux_verylarge = bse.get_basis('cc-pVDZ', elements=[6], get_aux=5)
 
 (``get_aux=1`` and ``2`` remain the legacy AutoAux / Auto-ABS variants.)
-Mode ``3-5`` require ``numpy`` and ``wignernj`` at runtime; the rest of
-the package has no optional-import requirements.
+Modes ``3-5`` require ``numpy`` at runtime, plus ``wignernj`` (preferred)
+or ``sympy`` for the Gaunt evaluator; the rest of the package has no
+optional-import requirements.
 
 A per-element entry point is also exported for use cases that already
 have an element dict to hand:
@@ -341,6 +342,6 @@ Notes
   cross-checks every one-center primitive ``(ab|cd)`` integral over
   an s/p/d basis against ``libcint`` to machine precision.
 * The base package has no runtime dependencies.  Using
-  :mod:`~basis_set_exchange.auxgen` requires ``numpy`` and
-  ``wignernj`` (and ``sympy`` only on first use of the Gaunt module);
-  install via the ``[tests]`` extra or directly.
+  :mod:`~basis_set_exchange.auxgen` requires ``numpy``, plus either
+  ``wignernj`` (preferred, exact integer arithmetic) or ``sympy`` for
+  the Gaunt evaluator -- both are lazy-imported on first call.

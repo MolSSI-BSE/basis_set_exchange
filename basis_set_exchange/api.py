@@ -209,7 +209,8 @@ def get_basis(name,
             * 4 — Cholesky auxiliary basis, ``large`` preset
             * 5 — Cholesky auxiliary basis, ``verylarge`` preset
 
-        Modes 3–5 require ``numpy`` and ``wignernj`` at runtime.
+        Modes 3–5 require ``numpy`` at runtime, plus either ``wignernj``
+        (preferred) or ``sympy`` for the Gaunt evaluator.
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -325,7 +326,8 @@ def get_basis(name,
     elif get_aux == 2:
         basis_dict = manip.autoabs_basis(basis_dict)
     elif get_aux in _CHOLESKY_AUX_SIZES:
-        # Lazy import: auxgen pulls in numpy/wignernj which are not core deps
+        # Lazy import: auxgen pulls in numpy (plus wignernj or sympy for
+        # the Gaunt evaluator) -- none are core runtime deps.
         from .auxgen.auxgen import cholesky_aux_basis
         basis_dict = cholesky_aux_basis(basis_dict, _CHOLESKY_AUX_SIZES[get_aux])
 

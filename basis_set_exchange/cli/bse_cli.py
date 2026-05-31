@@ -142,7 +142,7 @@ def run_bse_cli():
                       help='Instead of the orbital basis, return an automatically formed auxiliary basis. '
                            '0=orbital basis (default), 1=AutoAux, 2=Auto-ABS, '
                            '3=Cholesky small, 4=Cholesky large, 5=Cholesky verylarge '
-                           '(modes 3-5 require numpy and wignernj at runtime)')
+                           '(modes 3-5 need numpy plus wignernj or sympy)')
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
