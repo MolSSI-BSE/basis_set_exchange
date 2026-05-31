@@ -61,7 +61,6 @@ import math
 import numpy as np
 
 from .. import manip
-from .gaunt import coupling_lvals
 from .radial import alpha_eff, gto_norm_array
 from .twoel import primitive_eri
 

@@ -182,12 +182,25 @@ The high-level entry point produces a BSE component-format basis dict:
         threshold=1.0e-7,
         scheme='reduced',
         n_random=100,
-        contract=False,
-        prune_lmax=False,
+        # contract and prune_lmax default to True; pass False to disable.
     )
 
     # `aux` is a dict in the BSE component schema; emit any format:
     print(bse.write_formatted_basis_str(aux, 'nwchem'))
+
+The size presets can also be reached straight from
+:func:`basis_set_exchange.get_basis` via the ``get_aux`` integer code,
+which goes through the same code path:
+
+.. code-block:: python
+
+    aux_small     = bse.get_basis('cc-pVDZ', elements=[6], get_aux=3)
+    aux_large     = bse.get_basis('cc-pVDZ', elements=[6], get_aux=4)
+    aux_verylarge = bse.get_basis('cc-pVDZ', elements=[6], get_aux=5)
+
+(``get_aux=1`` and ``2`` remain the legacy AutoAux / Auto-ABS variants.)
+Mode ``3-5`` require ``numpy`` and ``wignernj`` at runtime; the rest of
+the package has no optional-import requirements.
 
 A per-element entry point is also exported for use cases that already
 have an element dict to hand:
@@ -238,18 +251,78 @@ Parameters
      - ``0``
      - Seed for the random orderings, for reproducibility.
    * - ``contract``
-     - ``False``
+     - ``True``
      - Apply the SVD-based general contraction of the 2023 paper.
    * - ``contract_threshold``
-     - ``1e-4``
-     - Eigenvalue cutoff :math:`\epsilon` for keeping contractions.
+     - ``1e-5``
+     - Eigenvalue cutoff :math:`\epsilon` for keeping contractions
+       (matches the ``large`` size preset).
    * - ``prune_lmax``
-     - ``False``
+     - ``True``
      - Drop shells with :math:`L > l_{\rm keep}` per the 2023 paper
        eq 9.
    * - ``linc``
      - ``1``
      - Increment :math:`l_{\rm inc}` in the pruning rule.
+
+
+STO (Slater-type-orbital) driver
+--------------------------------
+
+The companion module :mod:`basis_set_exchange.auxgen.sto` runs the same
+pivoted-Cholesky procedure for STO orbital bases, using Pitzer's
+closed-form one-centre Slater two-electron radial integral instead of
+the Gaussian one.  Primitives are
+:math:`\chi_{n L M}(r) = r^{n - 1} e^{-\zeta r}\,Y_{L M}(\hat r)` with
+integer ``n >= L + 1``; the I/O format mirrors what ADF ships in
+``atomicdata/ZORA/``.
+
+Python:
+
+.. code-block:: python
+
+    from basis_set_exchange.auxgen.sto import (
+        generate_sto_auxiliary_basis, sto_diagonal_ri_error,
+    )
+
+    # Per-element STO orbital basis: {L: [(n, zeta), ...]}.
+    orbital = {0: [(1, 0.76), (1, 1.28)]}            # Hydrogen DZ
+    aux = generate_sto_auxiliary_basis(orbital, threshold=1.0e-7)
+
+    err = sto_diagonal_ri_error(orbital, aux)
+    print('total diagonal RI error =', err)
+
+By default each candidate keeps its natural radial power
+``n_aux = n_a + n_b - 1`` from the orbital product (so a Cholesky
+selection on a typical orbital basis emits 1S/2S/3S/..., 2P/3P/...,
+3D/4D/... at every L, like standard STO aux sets).  Pass
+``compact=True`` to collapse every candidate onto the minimum-power
+form ``n_aux = L + 1`` via the ``<r>``-matching map
+:func:`~basis_set_exchange.auxgen.sto.sto_zeta_eff`.  Pass
+``prune_lmax=True`` together with ``lmax_occ=<int>`` to apply the same
+:math:`l_{\rm keep}` cap as the GTO driver.
+
+The module also includes a small ADF basis-file reader/writer and a
+``main()`` entry point:
+
+.. code-block:: bash
+
+    # Run as a script (`-m` invocation also works):
+    python -m basis_set_exchange.auxgen.sto Fe Fe_new.adf --threshold 1e-7
+
+    # Available flags
+    #   --threshold TAU            Cholesky drop tolerance (default 1e-7)
+    #   --scheme {basic,reduced}   default reduced
+    #   --n-random N --seed S      randomised pivot orderings
+    #   --prune-lmax [--linc N] [--lmax-occ N]
+    #   --compact                  collapse to n = L+1 via <r>-matching
+    #   --no-benchmark             skip the diagonal-RI-error reports
+
+The driver reports the diagonal RI error of both the old (incoming)
+and the new (regenerated) FIT block for direct comparison.  The output
+file preserves the BASIS, CORE and DESCRIPTION sections from the
+source; the FITCOEFFICIENTS block is *dropped* because it refers to
+the old FIT exponents.
 
 
 Notes
@@ -267,3 +340,7 @@ Notes
   ``basis_set_exchange/tests/test_auxgen.py::test_eri_full_tensor_vs_pyscf_spd``
   cross-checks every one-center primitive ``(ab|cd)`` integral over
   an s/p/d basis against ``libcint`` to machine precision.
+* The base package has no runtime dependencies.  Using
+  :mod:`~basis_set_exchange.auxgen` requires ``numpy`` and
+  ``wignernj`` (and ``sympy`` only on first use of the Gaunt module);
+  install via the ``[tests]`` extra or directly.

@@ -109,6 +109,10 @@ def _header_string(basis_dict):
     return header
 
 
+# get_aux integer code -> Cholesky size preset (Lehtola JCTC 19, 6242 (2023))
+_CHOLESKY_AUX_SIZES = {3: 'small', 4: 'large', 5: 'verylarge'}
+
+
 def fix_data_dir(data_dir):
     '''
     If data_dir is None, returns the default data_dir. Otherwise,
@@ -195,8 +199,17 @@ def get_basis(name,
         Add n steep functions by even-tempered extrapolation
     get_aux : int
         Instead of the orbital basis, get an auxiliary basis
-        set. Options 0 (return orbital basis), 1 (return AutoAux
-        basis), 2 (return Auto-ABS Coulomb fitting basis)
+        set.  Supported values:
+
+            * 0 — return the orbital basis (default)
+            * 1 — AutoAux basis (Stoychev/Auer/Neese 2017)
+            * 2 — Auto-ABS Coulomb-fitting basis
+            * 3 — Cholesky auxiliary basis, ``small`` preset
+              (Lehtola JCTC 17, 6886 (2021); 19, 6242 (2023))
+            * 4 — Cholesky auxiliary basis, ``large`` preset
+            * 5 — Cholesky auxiliary basis, ``verylarge`` preset
+
+        Modes 3–5 require ``numpy`` and ``wignernj`` at runtime.
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -311,6 +324,10 @@ def get_basis(name,
         basis_dict = manip.autoaux_basis(basis_dict)
     elif get_aux == 2:
         basis_dict = manip.autoabs_basis(basis_dict)
+    elif get_aux in _CHOLESKY_AUX_SIZES:
+        # Lazy import: auxgen pulls in numpy/wignernj which are not core deps
+        from .auxgen.auxgen import cholesky_aux_basis
+        basis_dict = cholesky_aux_basis(basis_dict, _CHOLESKY_AUX_SIZES[get_aux])
 
     # If fmt is not specified, return as a python dict
     if fmt is None:

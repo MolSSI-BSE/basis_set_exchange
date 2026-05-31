@@ -32,14 +32,19 @@
 Automatic auxiliary basis set generator.
 
 Implements the procedure of Lehtola, J. Chem. Theory Comput. 17, 6886 (2021)
-https://doi.org/10.1021/acs.jctc.1c00607 for selecting primitive auxiliary Gaussian
+https://doi.org/10.1021/acs.jctc.1c00607 for selecting primitive auxiliary
 functions, and the contraction scheme of Lehtola, J. Chem. Theory Comput. 19,
-6242 (2023) https://doi.org/10.1021/acs.jctc.3c00670 for forming a general-contracted
-auxiliary basis.
+6242 (2023) https://doi.org/10.1021/acs.jctc.3c00670 for forming a general-
+contracted auxiliary basis.  Drivers for both GTOs (default) and STOs are
+provided -- the STO variant lives in
+:mod:`basis_set_exchange.auxgen.sto`.
 
-The implementation is single-center / per-element and uses sympy for
-analytic angular (Gaunt) and radial integrals.  Sympy is imported lazily;
-only callers of :func:`generate_auxiliary_basis` require it.
+The implementation is single-center / per-element.  Radial integrals are
+evaluated with closed forms (no sympy at runtime); sympy is imported
+lazily and only by :mod:`basis_set_exchange.auxgen.gaunt` for the real-
+spherical Gaunt coefficients.  The whole subpackage additionally
+requires ``numpy`` and ``wignernj``; neither is a runtime dependency of
+the base ``basis_set_exchange`` package.
 """
 
 def generate_auxiliary_basis(*args, **kwargs):
@@ -52,7 +57,13 @@ def generate_auxiliary_basis_for_element(*args, **kwargs):
     return _impl(*args, **kwargs)
 
 
+def generate_sto_auxiliary_basis(*args, **kwargs):
+    from .sto import generate_sto_auxiliary_basis as _impl
+    return _impl(*args, **kwargs)
+
+
 __all__ = [
     "generate_auxiliary_basis",
     "generate_auxiliary_basis_for_element",
+    "generate_sto_auxiliary_basis",
 ]

@@ -63,7 +63,7 @@ eq 9).
 
 import numpy as np
 
-from .. import skel, lut
+from .. import skel, lut, compose
 from .pivchol import pivoted_cholesky, block_pivoted_cholesky
 from .products import (
     decontract_primitives,
@@ -480,3 +480,27 @@ def generate_auxiliary_basis(orbital_basis,
         component['elements'][key] = out
 
     return component
+
+
+def cholesky_aux_basis(basis, size):
+    """Drive :func:`generate_auxiliary_basis` from an orbital basis dict and
+    return a component-format basis with name/version metadata copied over.
+
+    ``size`` must be one of the 2023-paper presets (``'small'``, ``'large'``,
+    ``'verylarge'``).  This is the helper used by :func:`api.get_basis`'s
+    ``get_aux=3/4/5`` modes.
+    """
+    aux = generate_auxiliary_basis(
+        basis,
+        size=size,
+        description='Cholesky auxiliary basis (Lehtola JCTC 17, 6886 (2021); '
+                    '19, 6242 (2023)), size=' + size,
+    )
+    aux['function_types'] = compose._whole_basis_types(aux)
+    if 'revision_description' in basis:
+        aux['revision_description'] = basis['revision_description']
+    if 'version' in basis:
+        aux['version'] = basis['version']
+    aux['name'] = basis.get('name', '') + '_aux_cholesky_' + size
+    aux['role'] = 'rifit'
+    return aux
