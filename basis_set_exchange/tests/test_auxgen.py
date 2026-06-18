@@ -827,13 +827,17 @@ def test_cli_autogen_aux_smoke(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# api.get_basis(..., get_aux={3,4,5}) integration
+# api.get_basis(..., get_aux=...) integration
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize('mode,size', [(3, 'small'), (4, 'large'), (5, 'verylarge')])
+@pytest.mark.parametrize('mode,size', [
+    ('cholesky-small', 'small'),
+    ('cholesky-large', 'large'),
+    ('cholesky-verylarge', 'verylarge'),
+])
 def test_get_basis_cholesky_aux(mode, size):
-    """``get_aux=3/4/5`` dispatches to the auxgen Cholesky driver with the
-    matching size preset, attaches the right metadata, and yields a basis
+    """``get_aux='cholesky-*'`` dispatches to the auxgen Cholesky driver with
+    the matching size preset, attaches the right metadata, and yields a basis
     that round-trips through a writer."""
     aux = get_basis('cc-pVDZ', elements=[1, 6], get_aux=mode)
     assert aux['name'].endswith('_aux_cholesky_' + size)
@@ -854,11 +858,48 @@ def test_get_basis_cholesky_aux(mode, size):
 def test_get_basis_cholesky_sizes_ordered():
     """small <= large <= verylarge in total primitive count (paper Table 1)."""
     counts = []
-    for mode in (3, 4, 5):
+    for mode in ('cholesky-small', 'cholesky-large', 'cholesky-verylarge'):
         aux = get_basis('cc-pVDZ', elements=[6], get_aux=mode)
         n = sum(len(sh['exponents']) for sh in aux['elements']['6']['electron_shells'])
         counts.append(n)
     assert counts[0] <= counts[1] <= counts[2]
+
+
+@pytest.mark.parametrize('alias,mode', [
+    (0, None),
+    (1, 'autoaux'),
+    (2, 'autoabs'),
+    (3, 'cholesky-small'),
+    (4, 'cholesky-large'),
+    (5, 'cholesky-verylarge'),
+])
+def test_get_aux_legacy_int_alias(alias, mode):
+    """Legacy ``get_aux=<int>`` must produce the same output as the canonical
+    string form."""
+    from basis_set_exchange.api import _normalize_get_aux
+    assert _normalize_get_aux(alias) == mode
+
+
+@pytest.mark.parametrize('value', [None, 'NONE', 'none', '', 0])
+def test_get_aux_none_aliases(value):
+    """None/'', 'none' (any case), and the integer 0 all mean "orbital basis"."""
+    from basis_set_exchange.api import _normalize_get_aux
+    assert _normalize_get_aux(value) is None
+
+
+@pytest.mark.parametrize('value', [True, False, 6, -1, 'cholesky-medium', 'autoaux2', 1.5])
+def test_get_aux_rejects_garbage(value):
+    """Bad input is rejected with ValueError or TypeError, not silently coerced."""
+    from basis_set_exchange.api import _normalize_get_aux
+    with pytest.raises((TypeError, ValueError)):
+        _normalize_get_aux(value)
+
+
+def test_get_aux_case_insensitive():
+    """String input is folded to lower-case."""
+    aux_lower = get_basis('cc-pVDZ', elements=[1], get_aux='autoaux')
+    aux_upper = get_basis('cc-pVDZ', elements=[1], get_aux='AutoAux')
+    assert aux_lower['name'] == aux_upper['name']
 
 
 # ---------------------------------------------------------------------------

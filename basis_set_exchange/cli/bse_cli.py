@@ -35,11 +35,29 @@ Command line interface for the basis set exchange
 import argparse
 import argcomplete
 from basis_set_exchange import get_version
+from basis_set_exchange.api import _normalize_get_aux
 from basis_set_exchange.cli.bse_handlers import bse_cli_handle_subcmd
 from basis_set_exchange.cli.check import cli_check_normalize_args
 from basis_set_exchange.cli.complete import (cli_case_insensitive_validator, cli_family_completer, cli_role_completer,
                                              cli_bsname_completer, cli_write_fmt_completer, cli_read_fmt_completer,
                                              cli_reffmt_completer)
+
+
+def _get_aux_cli_arg(raw):
+    '''argparse type for ``--get-aux``: accept the canonical strings, the
+    legacy integer aliases, or ``"none"``.  Delegates to
+    :func:`basis_set_exchange.api._normalize_get_aux` so the CLI shares
+    one source of truth with the Python API.'''
+    if raw is None:
+        return None
+    try:
+        return _normalize_get_aux(int(raw))
+    except (TypeError, ValueError):
+        pass
+    try:
+        return _normalize_get_aux(raw)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError(str(exc))
 
 
 def run_bse_cli():
@@ -136,13 +154,14 @@ def run_bse_cli():
     subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
     subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
     subp.add_argument('--get-aux',
-                      type=int,
-                      default=0,
-                      choices=[0, 1, 2, 3, 4, 5],
+                      type=_get_aux_cli_arg,
+                      default=None,
+                      metavar='MODE',
                       help='Instead of the orbital basis, return an automatically formed auxiliary basis. '
-                           '0=orbital basis (default), 1=AutoAux, 2=Auto-ABS, '
-                           '3=Cholesky small, 4=Cholesky large, 5=Cholesky verylarge '
-                           '(modes 3-5 need numpy plus wignernj or sympy)')
+                           'MODE is one of: none (default), autoaux, autoabs, cholesky-small, '
+                           'cholesky-large, cholesky-verylarge. The legacy integer aliases '
+                           '0-5 are still accepted. The cholesky-* modes need numpy plus '
+                           'wignernj or sympy.')
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')

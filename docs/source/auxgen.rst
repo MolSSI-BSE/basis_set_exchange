@@ -149,20 +149,34 @@ unless overridden.  All standard BSE writers (NWChem, Molcas, Psi4,
 Turbomole, JSON, ...) are accepted on the output side.
 
 Example: build an auxiliary basis for hydrogen, carbon, and oxygen
-from cc-pVDZ at a tight :math:`\tau = 10^{-7}` tolerance::
+from cc-pVTZ at a tight :math:`\tau = 10^{-7}` tolerance::
 
-    bse get-basis cc-pVDZ nwchem --elements H,C,O > /tmp/ccpvdz.nw
-    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux.nw --threshold 1e-7
+    bse get-basis cc-pVTZ nwchem --elements H,C,O > /tmp/ccpvtz.nw
+    bse autogen-aux /tmp/ccpvtz.nw /tmp/ccpvtz_aux.nw --threshold 1e-7
 
 Contraction and lmax pruning are applied by default; build the
 ``small`` standard preset instead::
 
-    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux_small.nw --size small
+    bse autogen-aux /tmp/ccpvtz.nw /tmp/ccpvtz_aux_small.nw --size small
 
 or generate the uncontracted primitive auxiliary basis::
 
-    bse autogen-aux /tmp/ccpvdz.nw /tmp/ccpvdz_aux_prim.nw \
+    bse autogen-aux /tmp/ccpvtz.nw /tmp/ccpvtz_aux_prim.nw \
         --no-contract --no-prune-lmax
+
+.. note::
+
+   The procedure derives the auxiliary set from the *radial richness* of
+   the input orbital basis: minimal and contracted double-zeta sets only
+   carry one or two distinct exponents per occupied angular momentum,
+   which is too little information for the pivoted-Cholesky selection
+   to produce a useful aux basis.  Minimal-basis and double-zeta input
+   (e.g. STO-3G, MINI, 6-31G, cc-pVDZ, def2-SVP) is therefore *not*
+   recommended: the resulting auxiliary set will under-cover the radial
+   space, leaving residual fitting errors that dwarf the orbital basis
+   error itself.  Use at least a triple-zeta orbital basis (e.g.
+   cc-pVTZ, def2-TZVP, ANO-RCC-VTZP) -- quadruple-zeta and larger
+   parents give correspondingly better-conditioned auxiliary sets.
 
 
 Python API
@@ -175,7 +189,7 @@ The high-level entry point produces a BSE component-format basis dict:
     import basis_set_exchange as bse
     from basis_set_exchange.auxgen import generate_auxiliary_basis
 
-    orbital = bse.get_basis('cc-pVDZ', elements=[1, 6, 8])
+    orbital = bse.get_basis('cc-pVTZ', elements=[1, 6, 8])
 
     aux = generate_auxiliary_basis(
         orbital,
@@ -189,19 +203,29 @@ The high-level entry point produces a BSE component-format basis dict:
     print(bse.write_formatted_basis_str(aux, 'nwchem'))
 
 The size presets can also be reached straight from
-:func:`basis_set_exchange.get_basis` via the ``get_aux`` integer code,
-which goes through the same code path:
+:func:`basis_set_exchange.get_basis` via the ``get_aux`` argument, which
+goes through the same code path:
 
 .. code-block:: python
 
-    aux_small     = bse.get_basis('cc-pVDZ', elements=[6], get_aux=3)
-    aux_large     = bse.get_basis('cc-pVDZ', elements=[6], get_aux=4)
-    aux_verylarge = bse.get_basis('cc-pVDZ', elements=[6], get_aux=5)
+    aux_small     = bse.get_basis('cc-pVTZ', elements=[6], get_aux='cholesky-small')
+    aux_large     = bse.get_basis('cc-pVTZ', elements=[6], get_aux='cholesky-large')
+    aux_verylarge = bse.get_basis('cc-pVTZ', elements=[6], get_aux='cholesky-verylarge')
 
-(``get_aux=1`` and ``2`` remain the legacy AutoAux / Auto-ABS variants.)
-Modes ``3-5`` require ``numpy`` at runtime, plus ``wignernj`` (preferred)
-or ``sympy`` for the Gaunt evaluator; the rest of the package has no
-optional-import requirements.
+``get_aux=None`` (the default) returns the orbital basis; the strings
+``'autoaux'`` and ``'autoabs'`` reach the legacy non-Cholesky generators.
+For back-compatibility the integer aliases ``0``..``5`` are also accepted
+(``0`` = orbital, ``1`` = autoaux, ``2`` = autoabs, ``3``..``5`` =
+cholesky-small/large/verylarge).  The ``cholesky-*`` modes require
+``numpy`` at runtime, plus ``wignernj`` (preferred) or ``sympy`` for the
+Gaunt evaluator; the rest of the package has no optional-import
+requirements.
+
+The CLI mirrors this:
+
+.. code-block:: bash
+
+    bse get-basis cc-pVTZ nwchem --elements C --get-aux cholesky-large
 
 A per-element entry point is also exported for use cases that already
 have an element dict to hand:
@@ -213,7 +237,7 @@ have an element dict to hand:
     )
 
     aux_c = generate_auxiliary_basis_for_element(
-        orbital['elements']['6'],
+        orbital['elements']['6'],     # cc-pVTZ or larger
         threshold=1.0e-7,
         scheme='reduced',
     )
@@ -286,8 +310,13 @@ Python:
         generate_sto_auxiliary_basis, sto_diagonal_ri_error,
     )
 
-    # Per-element STO orbital basis: {L: [(n, zeta), ...]}.
-    orbital = {0: [(1, 0.76), (1, 1.28)]}            # Hydrogen DZ
+    # Per-element STO orbital basis: {L: [(n, zeta), ...]}.  As with the
+    # GTO driver, triple-zeta or larger parent sets are recommended; the
+    # ADF TZ2P hydrogen set is used here for illustration.
+    orbital = {
+        0: [(1, 0.76), (1, 1.28), (2, 1.97)],        # H TZ2P S shells
+        1: [(2, 1.25), (2, 2.50)],                   # H TZ2P P shells
+    }
     aux = generate_sto_auxiliary_basis(orbital, threshold=1.0e-7)
 
     err = sto_diagonal_ri_error(orbital, aux)
