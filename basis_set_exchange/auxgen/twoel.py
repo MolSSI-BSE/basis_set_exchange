@@ -70,6 +70,20 @@ from .gaunt import real_gaunt, coupling_lvals, gaunt_table
 from .radial import radial_integral, gto_norm, gto_norm_array
 
 
+def _iter_nonzero_gaunt(G, la, lb, L):
+    """Yield ``(g, ima, imb, iM)`` for every non-zero entry of the
+    real-Gaunt slab ``G = gaunt_table(la, lb, L)`` (shape
+    ``(2 la + 1, 2 lb + 1, 2 L + 1)``).  Hot-path enumerator shared by
+    the GTO and STO projections so they walk the same m-resolved row
+    order."""
+    for ima in range(2 * la + 1):
+        for imb in range(2 * lb + 1):
+            for iM in range(2 * L + 1):
+                g = G[ima, imb, iM]
+                if g != 0.0:
+                    yield g, ima, imb, iM
+
+
 # ---------------------------------------------------------------------------
 # Reference 4-index ERI (used by tests; not in the hot path).
 # ---------------------------------------------------------------------------
@@ -236,13 +250,8 @@ def orbital_aux_projection(L, primitives, alphas):
 
             # Gaunt slab for this shell-pair at this L: (2la+1, 2lb+1, 2L+1).
             G = gaunt_table(la, lb, L)
-            for ima in range(2*la + 1):
-                for imb in range(2*lb + 1):
-                    for iM in range(2*L + 1):
-                        g = G[ima, imb, iM]
-                        if g == 0.0:
-                            continue
-                        rows.append(g * kern_P)
+            for g, _ima, _imb, _iM in _iter_nonzero_gaunt(G, la, lb, L):
+                rows.append(g * kern_P)
 
     if rows:
         J = np.vstack(rows)
@@ -256,7 +265,7 @@ def orbital_aux_projection(L, primitives, alphas):
 # ---------------------------------------------------------------------------
 
 
-def product_metric(pairs):
+def product_metric(pairs, norm_fn=None, radial_fn=None):
     """Build the four-index Coulomb metric ``M[mu, nu] = (mu nu | rho sigma)``
     over m-resolved orbital primitive product pairs.
 
@@ -273,7 +282,19 @@ def product_metric(pairs):
     metric.  Compared to the naive m-resolved loop, this moves the
     work from O(N_m_pair^2) Python iterations down to O(N_shell_pair^2)
     vectorised contractions.
+
+    ``norm_fn(n, exponent) -> N`` and
+    ``radial_fn(L, n_ab, n_cd, exp_ab, exp_cd) -> R_L`` parameterise the
+    radial primitive family: the defaults
+    (:func:`~basis_set_exchange.auxgen.radial.gto_norm` and
+    :func:`~basis_set_exchange.auxgen.radial.radial_integral`) reproduce
+    the GTO metric; the STO driver passes its own closures so the entire
+    shell-pair-vectorised body is shared.
     """
+    if norm_fn is None:
+        norm_fn = gto_norm
+    if radial_fn is None:
+        radial_fn = radial_integral
     n = len(pairs)
     M = np.zeros((n, n), dtype=float)
     if n == 0:
@@ -296,7 +317,7 @@ def product_metric(pairs):
 
     for ip, kp in enumerate(sp_keys):
         la, na, aa, lb, nb, ab_ = kp
-        norm_p = gto_norm(na, aa) * gto_norm(nb, ab_)
+        norm_p = norm_fn(na, aa) * norm_fn(nb, ab_)
         n_ab = na + nb
         a_ab = aa + ab_
         L_left = coupling_lvals(la, lb)
@@ -305,7 +326,7 @@ def product_metric(pairs):
         for iq in range(ip, len(sp_keys)):
             kq = sp_keys[iq]
             lc, nc, ac, ld, nd, ad = kq
-            norm_q = gto_norm(nc, ac) * gto_norm(nd, ad)
+            norm_q = norm_fn(nc, ac) * norm_fn(nd, ad)
             n_cd = nc + nd
             a_cd = ac + ad
 
@@ -315,7 +336,7 @@ def product_metric(pairs):
 
             block = None
             for L in Lset:
-                rad = radial_integral(L, n_ab, n_cd, a_ab, a_cd)
+                rad = radial_fn(L, n_ab, n_cd, a_ab, a_cd)
                 if rad == 0.0:
                     continue
                 kernel = (4.0 * pi / (2 * L + 1)) * rad

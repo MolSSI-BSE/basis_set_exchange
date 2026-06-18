@@ -88,6 +88,8 @@ from .. import lut
 from .gaunt import coupling_lvals, gaunt_table
 from .radial import _Enk
 from .pivchol import block_pivoted_cholesky
+from .products import _shellpair_L_range
+from .twoel import _iter_nonzero_gaunt, product_metric
 
 
 # ---------------------------------------------------------------------------
@@ -317,12 +319,6 @@ def sto_zeta_eff(L, n_rad, zeta_rad):
 # via :func:`sto_zeta_eff` for users who want a single-radial-power
 # aux basis.
 
-def _shellpair_L_range(li, lj):
-    """Real-Gaunt-allowed total angular momenta when coupling two real
-    spherical harmonics: ``|li - lj|, |li - lj| + 2, ..., li + lj``."""
-    return range(abs(li - lj), li + lj + 1, 2)
-
-
 def sto_decontract(sto_basis):
     """Validate and flatten an STO-basis dict to a list of unique
     ``(l, n, zeta)`` triples sorted by ``(l, n, -zeta)``.
@@ -429,86 +425,20 @@ def _sto_product_pairs(primitives):
 def sto_product_metric(pairs):
     """Shell-pair-vectorised four-index STO Coulomb metric
     ``M[mn, kl] = (chi_m chi_n | chi_k chi_l)`` over m-resolved STO
-    orbital-product pairs, analogous to :func:`twoel.product_metric` for
-    GTOs.
+    orbital-product pairs.  Thin adapter around the GTO/STO-agnostic
+    :func:`twoel.product_metric`: only the radial primitive family
+    differs (``sto_norm`` and ``sto_radial_coulomb`` instead of
+    ``gto_norm``/``radial_integral``).
     """
-    n = len(pairs)
-    M = np.zeros((n, n), dtype=float)
-    if n == 0:
-        return M
-
-    sp_of = {}
-    for idx, ((la, na, _ma, za), (lb, nb, _mb, zb)) in enumerate(pairs):
-        sp_of.setdefault((la, na, za, lb, nb, zb), []).append((idx, _ma, _mb))
-
-    sp_keys = list(sp_of.keys())
-    sp_idx_grid = {}
-    for key in sp_keys:
-        la, _na, _za, lb, _nb, _zb = key
-        grid = -np.ones((2 * la + 1, 2 * lb + 1), dtype=np.int64)
-        for (idx, ma, mb) in sp_of[key]:
-            grid[ma + la, mb + lb] = idx
-        sp_idx_grid[key] = grid
-
-    for ip, kp in enumerate(sp_keys):
-        la, na, za, lb, nb, zb = kp
-        norm_p = sto_norm(na, za) * sto_norm(nb, zb)
-        n_ab = na + nb
-        z_ab = za + zb
-        L_left = coupling_lvals(la, lb)
-        idx_p = sp_idx_grid[kp]
-
-        for iq in range(ip, len(sp_keys)):
-            kq = sp_keys[iq]
-            lc, nc, zc, ld, nd, zd = kq
-            norm_q = sto_norm(nc, zc) * sto_norm(nd, zd)
-            n_cd = nc + nd
-            z_cd = zc + zd
-
-            Lset = tuple(L for L in L_left if L in coupling_lvals(lc, ld))
-            if not Lset:
-                continue
-
-            block = None
-            for L in Lset:
-                rad = sto_radial_coulomb(n_ab, n_cd, L, z_ab, z_cd)
-                if rad == 0.0:
-                    continue
-                kernel = (4.0 * pi / (2 * L + 1)) * rad
-                contrib = kernel * np.einsum(
-                    'abM,cdM->abcd',
-                    gaunt_table(la, lb, L),
-                    gaunt_table(lc, ld, L),
-                )
-                block = contrib if block is None else block + contrib
-
-            if block is None:
-                continue
-            block *= norm_p * norm_q
-
-            idx_q = sp_idx_grid[kq]
-            Na, Nb, Nc, Nd = block.shape
-            row_idx = idx_p.reshape(-1)
-            col_idx = idx_q.reshape(-1)
-            block_flat = block.reshape(Na * Nb, Nc * Nd)
-            M[np.ix_(row_idx, col_idx)] += block_flat
-            if ip != iq:
-                M[np.ix_(col_idx, row_idx)] += block_flat.T
-    return M
-
-
-def _iter_nonzero_gaunt(G, la, lb, L):
-    """Yield ``(g, ima, imb, iM)`` for every non-zero entry of the real-
-    Gaunt slab ``G = gaunt_table(la, lb, L)``.  Shared by the projection
-    and per-row-exact builders so they enumerate channels in identical
-    order.
-    """
-    for ima in range(2 * la + 1):
-        for imb in range(2 * lb + 1):
-            for iM in range(2 * L + 1):
-                g = G[ima, imb, iM]
-                if g != 0.0:
-                    yield g, ima, imb, iM
+    return product_metric(
+        pairs,
+        norm_fn=sto_norm,
+        # twoel.product_metric calls radial_fn(L, n_ab, n_cd, exp_ab, exp_cd)
+        # but the STO closed form is sto_radial_coulomb(m, n, v, x, y) with
+        # v=L last; reorder via a lambda.
+        radial_fn=lambda L, n_ab, n_cd, z_ab, z_cd:
+            sto_radial_coulomb(n_ab, n_cd, L, z_ab, z_cd),
+    )
 
 
 def sto_orbital_aux_projection(L, primitives, items):
