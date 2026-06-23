@@ -272,6 +272,40 @@ def _bse_cli_autoabs_basis(args):
     return "Orbital basis {} -> AutoABS basis {}".format(args.input_file, args.output_file)
 
 
+def _bse_cli_autogen_aux(args):
+    '''Handles the autogen-aux subcommand (Lehtola JCTC 2021/2023 procedure).'''
+
+    from basis_set_exchange.auxgen import generate_auxiliary_basis
+
+    orbital_basis_dict = readers.read_formatted_basis_file(args.input_file, args.in_fmt)
+    orbital_basis_dict.setdefault('revision_description', '')
+    orbital_basis_dict.setdefault('version', '')
+
+    aux = generate_auxiliary_basis(
+        orbital_basis_dict,
+        threshold=args.threshold,
+        scheme=args.scheme,
+        n_random=args.n_random,
+        seed=args.seed,
+        mapping=args.mapping,
+        collapse_contractions=args.collapse_contractions,
+        size=args.size,
+        contract=args.contract,
+        contract_threshold=args.contract_threshold,
+        prune_lmax=args.prune_lmax,
+        linc=args.linc,
+    )
+    # The writer requires the same metadata fields the reader leaves behind.
+    aux.setdefault('revision_description', '')
+    aux.setdefault('version', '')
+    aux.setdefault('name', orbital_basis_dict.get('name', 'auxgen'))
+    aux.setdefault('function_types', ['gto_spherical'])
+
+    writers.write_formatted_basis_file(aux, args.output_file, args.out_fmt)
+    return "Orbital basis {} -> auxgen basis {} (scheme={}, tau={})".format(
+        args.input_file, args.output_file, args.scheme, args.threshold)
+
+
 def bse_cli_handle_subcmd(args):
     handler_map = {
         'list-formats': _bse_cli_list_writer_formats,
@@ -293,7 +327,8 @@ def bse_cli_handle_subcmd(args):
         'convert-basis': _bse_cli_convert_basis,
         'create-bundle': _bse_cli_create_bundle,
         'autoaux-basis': _bse_cli_autoaux_basis,
-        'autoabs-basis': _bse_cli_autoabs_basis
+        'autoabs-basis': _bse_cli_autoabs_basis,
+        'autogen-aux': _bse_cli_autogen_aux,
     }
 
     return handler_map[args.subcmd](args)

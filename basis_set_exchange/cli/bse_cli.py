@@ -35,11 +35,29 @@ Command line interface for the basis set exchange
 import argparse
 import argcomplete
 from basis_set_exchange import get_version
+from basis_set_exchange.api import _normalize_get_aux
 from basis_set_exchange.cli.bse_handlers import bse_cli_handle_subcmd
 from basis_set_exchange.cli.check import cli_check_normalize_args
 from basis_set_exchange.cli.complete import (cli_case_insensitive_validator, cli_family_completer, cli_role_completer,
                                              cli_bsname_completer, cli_write_fmt_completer, cli_read_fmt_completer,
                                              cli_reffmt_completer)
+
+
+def _get_aux_cli_arg(raw):
+    '''argparse type for ``--get-aux``: accept the canonical strings, the
+    legacy integer aliases, or ``"none"``.  Delegates to
+    :func:`basis_set_exchange.api._normalize_get_aux` so the CLI shares
+    one source of truth with the Python API.'''
+    if raw is None:
+        return None
+    try:
+        return _normalize_get_aux(int(raw))
+    except (TypeError, ValueError):
+        pass
+    try:
+        return _normalize_get_aux(raw)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError(str(exc))
 
 
 def run_bse_cli():
@@ -136,9 +154,14 @@ def run_bse_cli():
     subp.add_argument('--aug-steep', type=int, default=0, help='Augment with n steep functions')
     subp.add_argument('--aug-diffuse', type=int, default=0, help='Augment with n diffuse functions')
     subp.add_argument('--get-aux',
-                      type=int,
-                      default=0,
-                      help='Instead of the orbital basis, get an automatically formed auxiliary basis')
+                      type=_get_aux_cli_arg,
+                      default=None,
+                      metavar='MODE',
+                      help='Instead of the orbital basis, return an automatically formed auxiliary basis. '
+                           'MODE is one of: none (default), autoaux, autoabs, cholesky-small, '
+                           'cholesky-large, cholesky-verylarge. The legacy integer aliases '
+                           '0-5 are still accepted. The cholesky-* modes need numpy plus '
+                           'wignernj or sympy.')
 
     # get-refs subcommand
     subp = subparsers.add_parser('get-refs', help='Output references for a basis set')
@@ -207,6 +230,60 @@ def run_bse_cli():
     subp.add_argument(
         '--out-fmt', type=str, default=None,
         help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+
+    subp = subparsers.add_parser(
+        'autogen-aux',
+        help='Form an auxiliary basis via the Lehtola pivoted-Cholesky procedure '
+             '(JCTC 17, 6886 (2021); JCTC 19, 6242 (2023))')
+    subp.add_argument('input_file', type=str, help='Orbital basis to load')
+    subp.add_argument('output_file', type=str, help='Auxiliary basis to write')
+    subp.add_argument(
+        '--in-fmt', type=str, default=None,
+        help='Input format (default: autodetected from input filename').completer = cli_read_fmt_completer
+    subp.add_argument(
+        '--out-fmt', type=str, default=None,
+        help='Output format (default: autodetected from output filename').completer = cli_write_fmt_completer
+    subp.add_argument('--threshold', type=float, default=1.0e-7,
+                      help='Pivoted Cholesky drop tolerance tau (default 1e-7)')
+    subp.add_argument('--scheme', choices=('basic', 'reduced'), default='reduced',
+                      help='Use the basic scheme (all products) or the reduced scheme '
+                           '(4-index Cholesky pre-screening). Default: reduced.')
+    subp.add_argument('--n-random', type=int, default=100,
+                      help='Number of random candidate orderings per L to try in the '
+                           'pivoted Cholesky (in addition to the linear order and the '
+                           'off-diagonal-norm presort); the most compact pivot set across '
+                           'all orderings is kept (default 100; 0 disables the random '
+                           'shuffles)')
+    subp.add_argument('--seed', type=int, default=0,
+                      help='Random seed for the shuffles (default 0)')
+    subp.add_argument('--mapping', choices=('moment', 'selfrepulsion'), default='moment',
+                      help='How orbital-product candidates are mapped to standard auxiliary '
+                           'primitives: "moment" (default) matches the radial moment <r> '
+                           '(2021 paper Appendix II); "selfrepulsion" matches the Coulomb '
+                           'self-energy (i|i).')
+    subp.add_argument('--collapse-contractions', choices=('moment', 'selfrepulsion'),
+                      default=None,
+                      help='Replace each contracted orbital function with a single primitive '
+                           'when building the selection candidate pool, with the matching '
+                           'criterion: "moment" preserves the radial moment <r>; "selfrepulsion" '
+                           'preserves the orbital Coulomb self-energy (chi chi | chi chi).  The '
+                           'contraction step still uses the true contracted AOs.  '
+                           'Omitted = full decontraction.')
+    subp.add_argument('--size', choices=('small', 'large', 'verylarge'), default=None,
+                      help='Standard accuracy preset of the JCTC 2023 paper. Overrides '
+                           '--contract-threshold and --linc and forces contraction and '
+                           'lmax pruning on: verylarge=(1e-6,1), large=(1e-5,1), '
+                           'small=(1e-4,0).')
+    subp.add_argument('--contract', action=argparse.BooleanOptionalAction, default=True,
+                      help='Apply the JCTC 2023 SVD-based general contraction (default: on; '
+                           'use --no-contract for primitive output)')
+    subp.add_argument('--contract-threshold', type=float, default=1.0e-5,
+                      help='Eigenvalue cutoff epsilon for contraction (default 1e-5)')
+    subp.add_argument('--prune-lmax', action=argparse.BooleanOptionalAction, default=True,
+                      help='Drop high-angular-momentum shells beyond the limit of eq 9 of '
+                           'the JCTC 2023 paper (default: on; use --no-prune-lmax to keep them)')
+    subp.add_argument('--linc', type=int, default=1,
+                      help='Increment parameter l_inc in the pruning rule (default 1)')
 
     #################################
     # Creating bundles

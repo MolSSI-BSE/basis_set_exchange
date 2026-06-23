@@ -109,6 +109,52 @@ def _header_string(basis_dict):
     return header
 
 
+# Canonical names for the ``get_aux`` modes of :func:`get_basis`, in the
+# order matching the legacy integer aliases: ``0`` -> ``None`` (orbital
+# basis), then 1..5 index into this tuple.  The ``cholesky-*`` entries pass
+# the suffix straight through to :func:`auxgen.cholesky_aux_basis` and
+# require the optional ``auxgen`` runtime stack (numpy + wignernj/sympy).
+_GET_AUX_MODES = (
+    'autoaux',             # Stoychev/Auer/Neese 2017
+    'autoabs',             # Auto-ABS Coulomb-fitting
+    'cholesky-small',      # Lehtola JCTC 17, 6886 (2021); 19, 6242 (2023)
+    'cholesky-large',
+    'cholesky-verylarge',
+)
+
+_CHOLESKY_PREFIX = 'cholesky-'
+
+
+def _normalize_get_aux(get_aux):
+    '''Coerce a ``get_aux`` argument to a canonical mode string (or ``None``).
+
+    Accepts ``None``, the canonical strings in ``_GET_AUX_MODES``
+    (case-insensitive), or the legacy integer aliases 0..len(_GET_AUX_MODES).
+    '''
+    if get_aux is None:
+        return None
+    if isinstance(get_aux, bool):
+        # ``bool`` is a subclass of ``int``; reject it explicitly so
+        # ``True`` doesn't silently coerce to 'autoaux'.
+        raise TypeError("get_aux must be None, a string, or an int (0-{}); got bool".format(
+            len(_GET_AUX_MODES)))
+    if isinstance(get_aux, int):
+        if not 0 <= get_aux <= len(_GET_AUX_MODES):
+            raise ValueError("get_aux integer alias must be in 0..{}; got {}".format(
+                len(_GET_AUX_MODES), get_aux))
+        return None if get_aux == 0 else _GET_AUX_MODES[get_aux - 1]
+    if isinstance(get_aux, str):
+        key = get_aux.strip().lower()
+        if key in ('', 'none'):
+            return None
+        if key not in _GET_AUX_MODES:
+            raise ValueError("Unknown get_aux mode '{}'; expected one of {} or None".format(
+                get_aux, list(_GET_AUX_MODES)))
+        return key
+    raise TypeError("get_aux must be None, a string, or an int alias; got {}".format(
+        type(get_aux).__name__))
+
+
 def fix_data_dir(data_dir):
     '''
     If data_dir is None, returns the default data_dir. Otherwise,
@@ -130,7 +176,7 @@ def get_basis(name,
               optimize_general=False,
               augment_diffuse=0,
               augment_steep=0,
-              get_aux=0,
+              get_aux=None,
               data_dir=None,
               header=True):
     '''Obtain a basis set
@@ -193,10 +239,26 @@ def get_basis(name,
         Add n diffuse functions by even-tempered extrapolation
     augment_steep : int
         Add n steep functions by even-tempered extrapolation
-    get_aux : int
-        Instead of the orbital basis, get an auxiliary basis
-        set. Options 0 (return orbital basis), 1 (return AutoAux
-        basis), 2 (return Auto-ABS Coulomb fitting basis)
+    get_aux : str or None
+        Instead of the orbital basis, get an auxiliary basis set.
+        Supported values (case-insensitive):
+
+            * ``None`` — return the orbital basis (default)
+            * ``'autoaux'`` — AutoAux basis (Stoychev/Auer/Neese 2017)
+            * ``'autoabs'`` — Auto-ABS Coulomb-fitting basis
+            * ``'cholesky-small'`` — Cholesky auxiliary basis, ``small``
+              preset (Lehtola JCTC 17, 6886 (2021); 19, 6242 (2023))
+            * ``'cholesky-large'`` — Cholesky auxiliary basis, ``large``
+              preset
+            * ``'cholesky-verylarge'`` — Cholesky auxiliary basis,
+              ``verylarge`` preset
+
+        For back-compatibility the legacy integer aliases ``0`` (none),
+        ``1`` (autoaux), ``2`` (autoabs), ``3`` (cholesky-small), ``4``
+        (cholesky-large), ``5`` (cholesky-verylarge) are also accepted.
+
+        The Cholesky modes require ``numpy`` at runtime, plus either
+        ``wignernj`` (preferred) or ``sympy`` for the Gaunt evaluator.
     data_dir : str
         Data directory with all the basis set information. By default,
         it is in the 'data' subdirectory of this project.
@@ -307,10 +369,16 @@ def get_basis(name,
         basis_dict = manip.make_general(basis_dict, False, False)
 
     # Did we actually want an auxiliary basis set?
-    if get_aux == 1:
+    aux_mode = _normalize_get_aux(get_aux)
+    if aux_mode == 'autoaux':
         basis_dict = manip.autoaux_basis(basis_dict)
-    elif get_aux == 2:
+    elif aux_mode == 'autoabs':
         basis_dict = manip.autoabs_basis(basis_dict)
+    elif aux_mode is not None and aux_mode.startswith(_CHOLESKY_PREFIX):
+        # Lazy import: auxgen pulls in numpy (plus wignernj or sympy for
+        # the Gaunt evaluator) -- none are core runtime deps.
+        from .auxgen.auxgen import cholesky_aux_basis
+        basis_dict = cholesky_aux_basis(basis_dict, aux_mode[len(_CHOLESKY_PREFIX):])
 
     # If fmt is not specified, return as a python dict
     if fmt is None:
