@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatic auxiliary basis set generation &mdash; Basis Set Exchange  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Papajak/Truhlar ‘Calendarization’" href="calendarization.html" />
+    <link rel="prev" title="Augmenting basis sets by extra functions" href="augmentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Basis Set Exchange
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Quickstart and Basic Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bse_cli.html">The bse command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html">Converting basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="minimal_sets.html">Truncation into minimal basis sets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="augmentation.html">Augmenting basis sets by extra functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Automatic auxiliary basis set generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm-overview">Algorithm overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-interface">Command-line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-api">Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sto-slater-type-orbital-driver">STO (Slater-type-orbital) driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calendarization.html">Papajak/Truhlar ‘Calendarization’</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundling.html">Creating Basis Set Bundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_api.html">Main User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsecurate_cli.html">The bsecurate command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="web_api.html">REST API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basis Set Exchange</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Automatic auxiliary basis set generation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/auxgen.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="automatic-auxiliary-basis-set-generation">
+<span id="auxgen"></span><h1>Automatic auxiliary basis set generation<a class="headerlink" href="#automatic-auxiliary-basis-set-generation" title="Link to this heading"></a></h1>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">basis_set_exchange.auxgen</span></code> subpackage implements the
+pivoted-Cholesky procedure for automatically generating a primitive
+auxiliary (density-fitting / resolution-of-the-identity) basis set
+from a given orbital basis, following</p>
+<ul class="simple">
+<li><p>S. Lehtola, <em>Straightforward and accurate automatic auxiliary basis
+set generation for molecular calculations with atomic orbital basis
+sets</em>, J. Chem. Theory Comput. <strong>17</strong>, 6886 (2021),
+<a class="reference external" href="https://doi.org/10.1021/acs.jctc.1c00607">https://doi.org/10.1021/acs.jctc.1c00607</a>.</p></li>
+<li><p>S. Lehtola, <em>Automatic generation of accurate and cost-efficient
+auxiliary basis sets</em>, J. Chem. Theory Comput. <strong>19</strong>, 6242 (2023),
+<a class="reference external" href="https://doi.org/10.1021/acs.jctc.3c00670">https://doi.org/10.1021/acs.jctc.3c00670</a>.</p></li>
+</ul>
+<p>The closed-form one-center Coulomb integrals are taken from R. M. Pitzer,
+<em>Atomic self-consistent-field program by the basis set expansion
+method: Columbus version</em>, Comput. Phys. Commun. <strong>170</strong>, 239 (2005),
+<a class="reference external" href="https://doi.org/10.1016/j.cpc.2005.04.003">https://doi.org/10.1016/j.cpc.2005.04.003</a>.</p>
+<p>The generated basis is written in the standard BSE component-format
+schema; any of the format writers available in the rest of the library
+can therefore be used to emit the result.</p>
+<section id="algorithm-overview">
+<h2>Algorithm overview<a class="headerlink" href="#algorithm-overview" title="Link to this heading"></a></h2>
+<p>For each element the orbital basis is decontracted to primitives
+<span class="math notranslate nohighlight">\(\chi_\mu(r) = r^{n_\mu} Y_{l_\mu m_\mu}(\hat r)\,e^{-\alpha_\mu r^2}\)</span>.
+Spherical and Cartesian shells are both accepted: a Cartesian shell of
+nominal angular momentum <span class="math notranslate nohighlight">\(L\)</span> contributes spherical components at
+<span class="math notranslate nohighlight">\(l = L, L-2, \ldots,\)</span> all sharing the same radial power
+<span class="math notranslate nohighlight">\(n = L\)</span>.  ECP entries on the element are ignored.</p>
+<p>For every unordered pair of primitives <span class="math notranslate nohighlight">\((\mu, \nu)\)</span> (with the
+diagonal <span class="math notranslate nohighlight">\(\mu = \nu\)</span> included) and every
+angular momentum <span class="math notranslate nohighlight">\(L \in \{|l_\mu - l_\nu|, |l_\mu - l_\nu| + 2,
+\ldots, l_\mu + l_\nu\}\)</span> (real-Gaunt parity), a candidate auxiliary
+function is generated.  The product radial form
+<span class="math notranslate nohighlight">\(r^{n_\mu + n_\nu} e^{-(\alpha_\mu + \alpha_\nu) r^2}\)</span> is mapped
+to a standard primitive <span class="math notranslate nohighlight">\(r^L e^{-\alpha_{\rm eff} r^2}\)</span> using the
+<code class="docutils literal notranslate"><span class="pre">&lt;r&gt;</span></code>-matching transformation of the 2021 paper (Appendix II eq 16),</p>
+<div class="math notranslate nohighlight">
+\[\alpha_{\rm eff} = \left[
+  \frac{\Gamma(L+2)\,\Gamma(n_{\rm rad}+\tfrac{3}{2})}
+       {\Gamma(L+\tfrac{3}{2})\,\Gamma(n_{\rm rad}+2)}
+\right]^2 (\alpha_\mu + \alpha_\nu),\]</div>
+<p>with <span class="math notranslate nohighlight">\(n_{\rm rad} = n_\mu + n_\nu\)</span>.  The candidates are then
+gathered per <span class="math notranslate nohighlight">\(L\)</span> into a Coulomb-overlap metric (paper eq 7),
+normalized to unit diagonal, and thinned by pivoted Cholesky.</p>
+<p>Two variants of the four-index pre-screening are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scheme='basic'</span></code>: every primitive pair is taken as a candidate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scheme='reduced'</span></code> <em>(default)</em>: shell-pair-driven pivoted Cholesky
+of the four-index <code class="docutils literal notranslate"><span class="pre">(μν|ρσ)</span></code> tensor is performed first to thin the
+list of contributing orbital shell-pairs.  Within a chosen
+shell-pair, all m-resolved components are added together as in the
+ERKALE implementation.</p></li>
+</ul>
+<p>To make the most of the unit-diagonal candidate metric (where the
+first pivot is degenerate), each <span class="math notranslate nohighlight">\(L\)</span> block runs pivoted Cholesky
+under three ordering families and keeps the shortest pivot set:</p>
+<ol class="arabic simple">
+<li><p>linear order (insertion order of the candidates),</p></li>
+<li><p>increasing off-diagonal-norm presort (paper Sect. 3),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_random</span></code> independent random permutations (the Note Added in
+Proof of the 2021 paper).</p></li>
+</ol>
+<p>The drop tolerance <code class="docutils literal notranslate"><span class="pre">τ</span></code> is applied directly to the residual diagonal
+of the Cholesky factorisation (absolute threshold).</p>
+<p>Two optional refinements from the 2023 paper are available (both on by
+default):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">contract=True</span></code> applies the SVD-based general contraction
+(Section 2.1 of the 2023 paper).  Per <span class="math notranslate nohighlight">\(l\)</span>, the three-index
+integrals <span class="math notranslate nohighlight">\(I_{\mu\nu, A} = (\mu\nu | A)\)</span> and the two-index
+Coulomb metric <span class="math notranslate nohighlight">\(V_{AB} = (A|B)\)</span> are formed; the primitives are
+Coulomb-normalized (so the work is done in the well-conditioned
+unit-diagonal metric <span class="math notranslate nohighlight">\(S = D^{-1} V D^{-1}\)</span> rather than the
+ill-conditioned raw metric), <span class="math notranslate nohighlight">\(S\)</span> is symmetrically
+orthogonalized, and <span class="math notranslate nohighlight">\(W = I^T I\)</span> is diagonalized in that basis.
+Eigenvectors with eigenvalue above the threshold <code class="docutils literal notranslate"><span class="pre">ε</span></code> define general
+contractions, written in the overlap-normalized primitive convention
+used by basis-set libraries via ERKALE’s
+<span class="math notranslate nohighlight">\(c = \mathrm{Wvec} \cdot \sqrt{z}\)</span> rescaling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prune_lmax=True</span></code> drops shells above the
+<span class="math notranslate nohighlight">\(l_{\rm keep} = \max(2 l_{\rm occ}^{\max},
+l_{\rm occ}^{\max} + l_{\rm OBS}^{\max} + l_{\rm inc})\)</span> cap of the
+2023 paper, eq 9.  The default <span class="math notranslate nohighlight">\(l_{\rm occ}^{\max}\)</span> follows
+the row-based table of the paper (0 for H/He, 1 for
+<span class="math notranslate nohighlight">\(Z \le 18\)</span>, 2 for <span class="math notranslate nohighlight">\(Z \le 54\)</span>, 3 otherwise).</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> argument selects the standard accuracy presets of the 2023
+paper, overriding <code class="docutils literal notranslate"><span class="pre">contract_threshold</span></code> (<code class="docutils literal notranslate"><span class="pre">ε</span></code>) and <code class="docutils literal notranslate"><span class="pre">linc</span></code>:
+<code class="docutils literal notranslate"><span class="pre">verylarge</span></code> = <span class="math notranslate nohighlight">\((\epsilon, l_{\rm inc}) = (10^{-6}, 1)\)</span>,
+<code class="docutils literal notranslate"><span class="pre">large</span></code> = <span class="math notranslate nohighlight">\((10^{-5}, 1)\)</span>, <code class="docutils literal notranslate"><span class="pre">small</span></code> = <span class="math notranslate nohighlight">\((10^{-4}, 0)\)</span>.</p>
+<p>Two further options control how each candidate orbital product is mapped
+to a standard auxiliary primitive, and how the orbital basis itself is
+fed into the selection candidate pool:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mapping</span></code> selects the criterion for the
+<span class="math notranslate nohighlight">\((n_{\rm rad}, \alpha_{\rm rad}) \to \alpha_{\rm eff}\)</span>
+transformation in the candidate pool: <code class="docutils literal notranslate"><span class="pre">'moment'</span></code> <em>(default)</em>
+preserves the radial expectation value <span class="math notranslate nohighlight">\(\langle r \rangle\)</span>
+(the 2021 paper, Appendix II); <code class="docutils literal notranslate"><span class="pre">'selfrepulsion'</span></code> preserves the
+Coulomb self-energy <span class="math notranslate nohighlight">\((i|i)\)</span> of the (overlap-normalized) candidate
+and standard primitive.  Both reduce to <span class="math notranslate nohighlight">\(\alpha_{\rm eff} =
+\alpha_{\rm rad}\)</span> when <span class="math notranslate nohighlight">\(n_{\rm rad} = L\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collapse_contractions</span></code> <em>(opt-in, default ``False``)</em> replaces each
+contracted orbital function by a single primitive before building the
+candidate pool (free primitives are kept; the contraction step still
+uses the true contracted AOs).  Values: <code class="docutils literal notranslate"><span class="pre">'moment'</span></code> matches the
+radial expectation value of the contracted function;
+<code class="docutils literal notranslate"><span class="pre">'selfrepulsion'</span></code> matches its orbital Coulomb self-energy
+<span class="math notranslate nohighlight">\((\chi\chi|\chi\chi)\)</span>.  Both have closed-form solutions and
+reduce to <span class="math notranslate nohighlight">\(\beta = \alpha\)</span> for a single-primitive contraction.</p></li>
+</ul>
+</section>
+<section id="command-line-interface">
+<h2>Command-line interface<a class="headerlink" href="#command-line-interface" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">bse</span> <span class="pre">autogen-aux</span></code> subcommand reads an orbital basis from a file
+and writes the generated auxiliary basis to a file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bse</span> <span class="n">autogen</span><span class="o">-</span><span class="n">aux</span> <span class="o">&lt;</span><span class="n">input_file</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">output_file</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="o">--</span><span class="ow">in</span><span class="o">-</span><span class="n">fmt</span> <span class="n">FMT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">out</span><span class="o">-</span><span class="n">fmt</span> <span class="n">FMT</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">threshold</span> <span class="mf">1e-7</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">scheme</span> <span class="p">{</span><span class="n">basic</span><span class="p">,</span><span class="n">reduced</span><span class="p">}]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">n</span><span class="o">-</span><span class="n">random</span> <span class="mi">100</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">seed</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">mapping</span> <span class="p">{</span><span class="n">moment</span><span class="p">,</span><span class="n">selfrepulsion</span><span class="p">}]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">collapse</span><span class="o">-</span><span class="n">contractions</span> <span class="p">{</span><span class="n">moment</span><span class="p">,</span><span class="n">selfrepulsion</span><span class="p">}]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">size</span> <span class="p">{</span><span class="n">small</span><span class="p">,</span><span class="n">large</span><span class="p">,</span><span class="n">verylarge</span><span class="p">}]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">contract</span> <span class="o">|</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">contract</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">contract</span><span class="o">-</span><span class="n">threshold</span> <span class="mf">1e-5</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">--</span><span class="n">prune</span><span class="o">-</span><span class="n">lmax</span> <span class="o">|</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">prune</span><span class="o">-</span><span class="n">lmax</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">linc</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Input and output formats are auto-detected from the file extension
+unless overridden.  All standard BSE writers (NWChem, Molcas, Psi4,
+Turbomole, JSON, …) are accepted on the output side.</p>
+<p>Example: build an auxiliary basis for hydrogen, carbon, and oxygen
+from cc-pVTZ at a tight <span class="math notranslate nohighlight">\(\tau = 10^{-7}\)</span> tolerance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bse</span> <span class="n">get</span><span class="o">-</span><span class="n">basis</span> <span class="n">cc</span><span class="o">-</span><span class="n">pVTZ</span> <span class="n">nwchem</span> <span class="o">--</span><span class="n">elements</span> <span class="n">H</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz</span><span class="o">.</span><span class="n">nw</span>
+<span class="n">bse</span> <span class="n">autogen</span><span class="o">-</span><span class="n">aux</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz</span><span class="o">.</span><span class="n">nw</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz_aux</span><span class="o">.</span><span class="n">nw</span> <span class="o">--</span><span class="n">threshold</span> <span class="mf">1e-7</span>
+</pre></div>
+</div>
+<p>Contraction and lmax pruning are applied by default; build the
+<code class="docutils literal notranslate"><span class="pre">small</span></code> standard preset instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bse</span> <span class="n">autogen</span><span class="o">-</span><span class="n">aux</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz</span><span class="o">.</span><span class="n">nw</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz_aux_small</span><span class="o">.</span><span class="n">nw</span> <span class="o">--</span><span class="n">size</span> <span class="n">small</span>
+</pre></div>
+</div>
+<p>or generate the uncontracted primitive auxiliary basis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bse</span> <span class="n">autogen</span><span class="o">-</span><span class="n">aux</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz</span><span class="o">.</span><span class="n">nw</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccpvtz_aux_prim</span><span class="o">.</span><span class="n">nw</span> \
+    <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">contract</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">prune</span><span class="o">-</span><span class="n">lmax</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The procedure derives the auxiliary set from the <em>radial richness</em> of
+the input orbital basis: minimal and contracted double-zeta sets only
+carry one or two distinct exponents per occupied angular momentum,
+which is too little information for the pivoted-Cholesky selection
+to produce a useful aux basis.  Minimal-basis and double-zeta input
+(e.g. STO-3G, MINI, 6-31G, cc-pVDZ, def2-SVP) is therefore <em>not</em>
+recommended: the resulting auxiliary set will under-cover the radial
+space, leaving residual fitting errors that dwarf the orbital basis
+error itself.  Use at least a triple-zeta orbital basis (e.g.
+cc-pVTZ, def2-TZVP, ANO-RCC-VTZP) – quadruple-zeta and larger
+parents give correspondingly better-conditioned auxiliary sets.</p>
+</div>
+</section>
+<section id="python-api">
+<h2>Python API<a class="headerlink" href="#python-api" title="Link to this heading"></a></h2>
+<p>The high-level entry point produces a BSE component-format basis dict:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">basis_set_exchange</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basis_set_exchange.auxgen</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_auxiliary_basis</span>
+
+<span class="n">orbital</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;cc-pVTZ&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="n">aux</span> <span class="o">=</span> <span class="n">generate_auxiliary_basis</span><span class="p">(</span>
+    <span class="n">orbital</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0e-7</span><span class="p">,</span>
+    <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;reduced&#39;</span><span class="p">,</span>
+    <span class="n">n_random</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="c1"># contract and prune_lmax default to True; pass False to disable.</span>
+<span class="p">)</span>
+
+<span class="c1"># `aux` is a dict in the BSE component schema; emit any format:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bse</span><span class="o">.</span><span class="n">write_formatted_basis_str</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="s1">&#39;nwchem&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The size presets can also be reached straight from
+<a class="reference internal" href="user_api.html#basis_set_exchange.get_basis" title="basis_set_exchange.get_basis"><code class="xref py py-func docutils literal notranslate"><span class="pre">basis_set_exchange.get_basis()</span></code></a> via the <code class="docutils literal notranslate"><span class="pre">get_aux</span></code> argument, which
+goes through the same code path:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aux_small</span>     <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;cc-pVTZ&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">get_aux</span><span class="o">=</span><span class="s1">&#39;cholesky-small&#39;</span><span class="p">)</span>
+<span class="n">aux_large</span>     <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;cc-pVTZ&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">get_aux</span><span class="o">=</span><span class="s1">&#39;cholesky-large&#39;</span><span class="p">)</span>
+<span class="n">aux_verylarge</span> <span class="o">=</span> <span class="n">bse</span><span class="o">.</span><span class="n">get_basis</span><span class="p">(</span><span class="s1">&#39;cc-pVTZ&#39;</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">get_aux</span><span class="o">=</span><span class="s1">&#39;cholesky-verylarge&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">get_aux=None</span></code> (the default) returns the orbital basis; the strings
+<code class="docutils literal notranslate"><span class="pre">'autoaux'</span></code> and <code class="docutils literal notranslate"><span class="pre">'autoabs'</span></code> reach the legacy non-Cholesky generators.
+For back-compatibility the integer aliases <code class="docutils literal notranslate"><span class="pre">0</span></code>..``5`` are also accepted
+(<code class="docutils literal notranslate"><span class="pre">0</span></code> = orbital, <code class="docutils literal notranslate"><span class="pre">1</span></code> = autoaux, <code class="docutils literal notranslate"><span class="pre">2</span></code> = autoabs, <code class="docutils literal notranslate"><span class="pre">3</span></code>..``5`` =
+cholesky-small/large/verylarge).  The <code class="docutils literal notranslate"><span class="pre">cholesky-*</span></code> modes require
+<code class="docutils literal notranslate"><span class="pre">numpy</span></code> at runtime, plus <code class="docutils literal notranslate"><span class="pre">wignernj</span></code> (preferred) or <code class="docutils literal notranslate"><span class="pre">sympy</span></code> for the
+Gaunt evaluator; the rest of the package has no optional-import
+requirements.</p>
+<p>The CLI mirrors this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bse<span class="w"> </span>get-basis<span class="w"> </span>cc-pVTZ<span class="w"> </span>nwchem<span class="w"> </span>--elements<span class="w"> </span>C<span class="w"> </span>--get-aux<span class="w"> </span>cholesky-large
+</pre></div>
+</div>
+<p>A per-element entry point is also exported for use cases that already
+have an element dict to hand:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basis_set_exchange.auxgen.auxgen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">generate_auxiliary_basis_for_element</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">aux_c</span> <span class="o">=</span> <span class="n">generate_auxiliary_basis_for_element</span><span class="p">(</span>
+    <span class="n">orbital</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">][</span><span class="s1">&#39;6&#39;</span><span class="p">],</span>     <span class="c1"># cc-pVTZ or larger</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0e-7</span><span class="p">,</span>
+    <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;reduced&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22.0%" />
+<col style="width: 12.0%" />
+<col style="width: 66.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">threshold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1e-7</span></code></p></td>
+<td><p>Pivoted-Cholesky drop tolerance <span class="math notranslate nohighlight">\(\tau\)</span> (absolute, applied
+to the residual diagonal).  The same tolerance is used for the
+four-index pre-screening (reduced scheme) and the per-L
+candidate Cholesky.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scheme</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'reduced'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'basic'</span></code> enumerates all orbital primitive pairs as
+candidates; <code class="docutils literal notranslate"><span class="pre">'reduced'</span></code> first thins them with a shell-pair-
+driven pivoted Cholesky of the four-index ERI tensor.  The
+2023 paper recommends <code class="docutils literal notranslate"><span class="pre">'reduced'</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_random</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">100</span></code></p></td>
+<td><p>Number of random orderings tried in the per-L candidate
+Cholesky.  In addition the linear order and the off-diagonal-
+norm presort are always tried; the smallest pivot set across
+all attempts is kept.  Setting <code class="docutils literal notranslate"><span class="pre">n_random</span> <span class="pre">=</span> <span class="pre">0</span></code> reproduces the
+paper’s deterministic baseline.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>Seed for the random orderings, for reproducibility.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">contract</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Apply the SVD-based general contraction of the 2023 paper.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">contract_threshold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1e-5</span></code></p></td>
+<td><p>Eigenvalue cutoff <span class="math notranslate nohighlight">\(\epsilon\)</span> for keeping contractions
+(matches the <code class="docutils literal notranslate"><span class="pre">large</span></code> size preset).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prune_lmax</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Drop shells with <span class="math notranslate nohighlight">\(L &gt; l_{\rm keep}\)</span> per the 2023 paper
+eq 9.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">linc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>Increment <span class="math notranslate nohighlight">\(l_{\rm inc}\)</span> in the pruning rule.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sto-slater-type-orbital-driver">
+<h2>STO (Slater-type-orbital) driver<a class="headerlink" href="#sto-slater-type-orbital-driver" title="Link to this heading"></a></h2>
+<p>The companion module <code class="xref py py-mod docutils literal notranslate"><span class="pre">basis_set_exchange.auxgen.sto</span></code> runs the same
+pivoted-Cholesky procedure for STO orbital bases, using Pitzer’s
+closed-form one-centre Slater two-electron radial integral instead of
+the Gaussian one.  Primitives are
+<span class="math notranslate nohighlight">\(\chi_{n L M}(r) = r^{n - 1} e^{-\zeta r}\,Y_{L M}(\hat r)\)</span> with
+integer <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">L</span> <span class="pre">+</span> <span class="pre">1</span></code>; the I/O format mirrors what ADF ships in
+<code class="docutils literal notranslate"><span class="pre">atomicdata/ZORA/</span></code>.</p>
+<p>Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basis_set_exchange.auxgen.sto</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">generate_sto_auxiliary_basis</span><span class="p">,</span> <span class="n">sto_diagonal_ri_error</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Per-element STO orbital basis: {L: [(n, zeta), ...]}.  As with the</span>
+<span class="c1"># GTO driver, triple-zeta or larger parent sets are recommended; the</span>
+<span class="c1"># ADF TZ2P hydrogen set is used here for illustration.</span>
+<span class="n">orbital</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.97</span><span class="p">)],</span>        <span class="c1"># H TZ2P S shells</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.50</span><span class="p">)],</span>                   <span class="c1"># H TZ2P P shells</span>
+<span class="p">}</span>
+<span class="n">aux</span> <span class="o">=</span> <span class="n">generate_sto_auxiliary_basis</span><span class="p">(</span><span class="n">orbital</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0e-7</span><span class="p">)</span>
+
+<span class="n">err</span> <span class="o">=</span> <span class="n">sto_diagonal_ri_error</span><span class="p">(</span><span class="n">orbital</span><span class="p">,</span> <span class="n">aux</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total diagonal RI error =&#39;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default each candidate keeps its natural radial power
+<code class="docutils literal notranslate"><span class="pre">n_aux</span> <span class="pre">=</span> <span class="pre">n_a</span> <span class="pre">+</span> <span class="pre">n_b</span> <span class="pre">-</span> <span class="pre">1</span></code> from the orbital product (so a Cholesky
+selection on a typical orbital basis emits 1S/2S/3S/…, 2P/3P/…,
+3D/4D/… at every L, like standard STO aux sets).  Pass
+<code class="docutils literal notranslate"><span class="pre">compact=True</span></code> to collapse every candidate onto the minimum-power
+form <code class="docutils literal notranslate"><span class="pre">n_aux</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">+</span> <span class="pre">1</span></code> via the <code class="docutils literal notranslate"><span class="pre">&lt;r&gt;</span></code>-matching map
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sto_zeta_eff()</span></code>.  Pass
+<code class="docutils literal notranslate"><span class="pre">prune_lmax=True</span></code> together with <code class="docutils literal notranslate"><span class="pre">lmax_occ=&lt;int&gt;</span></code> to apply the same
+<span class="math notranslate nohighlight">\(l_{\rm keep}\)</span> cap as the GTO driver.</p>
+<p>The module also includes a small ADF basis-file reader/writer and a
+<code class="docutils literal notranslate"><span class="pre">main()</span></code> entry point:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run as a script (`-m` invocation also works):</span>
+python<span class="w"> </span>-m<span class="w"> </span>basis_set_exchange.auxgen.sto<span class="w"> </span>Fe<span class="w"> </span>Fe_new.adf<span class="w"> </span>--threshold<span class="w"> </span>1e-7
+
+<span class="c1"># Available flags</span>
+<span class="c1">#   --threshold TAU            Cholesky drop tolerance (default 1e-7)</span>
+<span class="c1">#   --scheme {basic,reduced}   default reduced</span>
+<span class="c1">#   --n-random N --seed S      randomised pivot orderings</span>
+<span class="c1">#   --prune-lmax [--linc N] [--lmax-occ N]</span>
+<span class="c1">#   --compact                  collapse to n = L+1 via &lt;r&gt;-matching</span>
+<span class="c1">#   --no-benchmark             skip the diagonal-RI-error reports</span>
+</pre></div>
+</div>
+<p>The driver reports the diagonal RI error of both the old (incoming)
+and the new (regenerated) FIT block for direct comparison.  The output
+file preserves the BASIS, CORE and DESCRIPTION sections from the
+source; the FITCOEFFICIENTS block is <em>dropped</em> because it refers to
+the old FIT exponents.</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The generated auxiliary basis is always spherical; this matches the
+convention adopted by the 2021 paper and by most quantum chemistry
+programs.  Cartesian input shells are supported (with their radial
+contamination correctly tracked) but produce spherical output.</p></li>
+<li><p>Sympy is used only for the real-spherical Gaunt coefficients in
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">basis_set_exchange.auxgen.gaunt</span></code>, and is lazy-imported.  The
+radial integrals are evaluated with a pure closed form (no sympy at
+runtime).</p></li>
+<li><p>The PySCF-based test
+<code class="docutils literal notranslate"><span class="pre">basis_set_exchange/tests/test_auxgen.py::test_eri_full_tensor_vs_pyscf_spd</span></code>
+cross-checks every one-center primitive <code class="docutils literal notranslate"><span class="pre">(ab|cd)</span></code> integral over
+an s/p/d basis against <code class="docutils literal notranslate"><span class="pre">libcint</span></code> to machine precision.</p></li>
+<li><p>The base package has no runtime dependencies.  Using
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">auxgen</span></code> requires <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, plus either
+<code class="docutils literal notranslate"><span class="pre">wignernj</span></code> (preferred, exact integer arithmetic) or <code class="docutils literal notranslate"><span class="pre">sympy</span></code> for
+the Gaunt evaluator – both are lazy-imported on first call.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="augmentation.html" class="btn btn-neutral float-left" title="Augmenting basis sets by extra functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="calendarization.html" class="btn btn-neutral float-right" title="Papajak/Truhlar ‘Calendarization’" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Benjamin Pritchard and Susi Lehtola.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

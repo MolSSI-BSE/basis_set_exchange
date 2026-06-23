@@ -43,6 +43,7 @@ For citing the previous EMSL/PNNL Basis Set Exchange, please cite the following 
    conversion
    minimal_sets
    augmentation
+   auxgen
    calendarization
    bundling
    user_api
