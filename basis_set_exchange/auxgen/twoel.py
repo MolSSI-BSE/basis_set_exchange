@@ -53,9 +53,14 @@ Three integral families are provided:
     the per-L Cholesky), and :func:`normalized_metric` which rescales
     it to unit diagonal.
 
+  * :func:`coupled_L_metric` -- per-L Coulomb metric on radial
+    shell-pair candidates in the coupled ``(L, M)`` basis; used by the
+    production reduced-scheme pre-screen.
+
   * :func:`product_metric` -- shell-pair-vectorised four-index metric
-    over m-resolved product pairs, used by the reduced-scheme
-    pre-screening.
+    over m-resolved product pairs.  Kept as the dense reference against
+    which :func:`coupled_L_metric` is validated in the test suite; not
+    used in the production pipeline (dense ``O(N_m_pair^2)`` memory).
 
   * :func:`orbital_aux_projection` -- the three-index projection
     ``J[(rs, M), P] = (rs | P)_{L, M}`` over m-resolved orbital product
@@ -98,8 +103,6 @@ def primitive_eri(la, na, ma, alpha_a,
     Reference implementation: explicit sum over the multipole index L
     and projection M, no shell-level vectorisation.  Used by the test
     suite (cross-checked against PySCF/libcint to machine precision).
-    The production pipeline uses :func:`product_metric` instead, which
-    vectorises this same sum at the shell-pair level.
     """
     L_left = coupling_lvals(la, lb)
     L_right = coupling_lvals(lc, ld)
@@ -261,7 +264,95 @@ def orbital_aux_projection(L, primitives, alphas):
 
 
 # ---------------------------------------------------------------------------
-# Shell-pair-vectorised four-index Coulomb metric (reduced-scheme).
+# Coupled-basis Coulomb metric on radial shell-pair candidates (reduced-scheme).
+# ---------------------------------------------------------------------------
+
+
+def coupled_L_metric(L, shell_pairs, norm_fn=None, radial_fn=None):
+    """One-per-shell-pair Coulomb metric at coupled channel ``L``.
+
+    The four-index Coulomb metric ``(mu nu | rho sigma)`` on orbital
+    product densities decomposes, via the multipole expansion of ``1/r_12``,
+    into blocks that are diagonal in the coupled channel ``(L, M)`` and
+    M-independent (Wigner-Eckart).  Rather than materialise the dense
+    m-resolved matrix (``O(N_m_pair^2)`` memory) and then run a
+    shell-pair-driven block Cholesky over it, the reduced-scheme screen
+    can work directly in the coupled basis: one radial "coupled candidate"
+    per orbital shell-pair ``(l_a, n_a, alpha_a, l_b, n_b, alpha_b)`` at
+    each ``L`` in the shell-pair's coupling range, with metric
+
+        M_L[i, j] = (4 pi / (2 L + 1))
+                    * N(n_a_i, alpha_a_i) N(n_b_i, alpha_b_i)
+                    * N(n_a_j, alpha_a_j) N(n_b_j, alpha_b_j)
+                    * R_L(n_ab_i, n_ab_j, alpha_ab_i, alpha_ab_j).
+
+    Angular multiplicity (Gaunt-squared, summed over M) is folded away --
+    the residual is pure radial linear-independence at ``L``, which is
+    what the pivoted-Cholesky screen actually needs.  Compared to the
+    dense m-resolved formulation, this drops peak memory from
+    ``O(N_m_pair^2) = O(sum_shell (2 l_a + 1)(2 l_b + 1))^2`` down to
+    ``O(N_shell_pair^2)`` per L block, typically two orders of magnitude
+    smaller for high-l orbital bases.
+
+    The caller is responsible for filtering ``shell_pairs`` to those with
+    ``L in coupling_lvals(l_a, l_b)``.
+
+    ``norm_fn(n, exponent) -> N`` and
+    ``radial_fn(L, n_ab, n_cd, exp_ab, exp_cd) -> R_L`` parameterise the
+    radial primitive family (defaults reproduce GTOs; the STO driver
+    passes its own closures).
+    """
+    if norm_fn is None:
+        norm_fn = gto_norm
+    if radial_fn is None:
+        radial_fn = radial_integral
+    n = len(shell_pairs)
+    M = np.zeros((n, n), dtype=float)
+    if n == 0:
+        return M
+    pref = 4.0 * pi / (2 * L + 1)
+    norms = np.fromiter(
+        (norm_fn(na, aa) * norm_fn(nb, ab_)
+         for (_la, na, aa, _lb, nb, ab_) in shell_pairs),
+        dtype=float, count=n,
+    )
+    n_abs = np.fromiter(
+        (na + nb for (_la, na, _aa, _lb, nb, _ab) in shell_pairs),
+        dtype=int, count=n,
+    )
+    a_abs = np.fromiter(
+        (aa + ab_ for (_la, _na, aa, _lb, _nb, ab_) in shell_pairs),
+        dtype=float, count=n,
+    )
+    # ``radial_fn(L, n_ab, n_cd, ...)`` takes the two radial-power
+    # arguments as scalars (they steer selection rules and the closed-form
+    # kn / km evaluation), but broadcasts naturally over its exponent
+    # arguments.  Group shell-pairs by radial power and vectorise the
+    # ``(alpha_ab, alpha_cd)`` grid inside each ``(n_ab, n_cd)`` block --
+    # unique radial powers are ``O(l_max^2)`` at most, so a small number
+    # of grouped calls replaces the ``O(n^2)`` scalar loop.
+    unique_n = sorted(set(int(x) for x in n_abs))
+    pos_by_n = {u: np.flatnonzero(n_abs == u) for u in unique_n}
+    for u in unique_n:
+        idx_u = pos_by_n[u]
+        if idx_u.size == 0:
+            continue
+        a_u = a_abs[idx_u]
+        norm_u = norms[idx_u]
+        for v in unique_n:
+            idx_v = pos_by_n[v]
+            if idx_v.size == 0:
+                continue
+            a_v = a_abs[idx_v]
+            norm_v = norms[idx_v]
+            R = radial_fn(L, u, v, a_u[:, None], a_v[None, :])
+            block = pref * (norm_u[:, None] * norm_v[None, :]) * R
+            M[np.ix_(idx_u, idx_v)] = block
+    return M
+
+
+# ---------------------------------------------------------------------------
+# Shell-pair-vectorised four-index Coulomb metric (dense; reference).
 # ---------------------------------------------------------------------------
 
 

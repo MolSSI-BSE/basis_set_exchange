@@ -226,6 +226,63 @@ def test_eri_tensor_psd():
 
 
 # ---------------------------------------------------------------------------
+# Reduced-scheme coupled-basis screen: equivalence with dense reference
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize('elem,basis', [
+    (1, 'cc-pVDZ'),
+    (1, 'cc-pVTZ'),
+    (6, 'cc-pVDZ'),
+])
+def test_reduced_screen_pool_matches_dense_reference(elem, basis):
+    """The per-L coupled-basis screen and the (legacy) dense
+    m-resolved shell-pair-blocked screen must produce candidate pools
+    that agree on the set of ``L`` channels populated and, at every L,
+    that the coupled-basis pool is a superset of the dense pool
+    (independent per-L channels can only keep more shell-pairs, never
+    fewer -- see :func:`~basis_set_exchange.auxgen.auxgen._reduced_pair_screen`
+    docstring).  Same set of exponents is required for the high-L blocks
+    where the two selections coincide (only s/p shell-pairs contribute
+    to ``L = l_a + l_b`` at the shell-pair perimeter).
+    """
+    from basis_set_exchange.auxgen.products import (
+        decontract_primitives, primitive_product_pairs,
+        candidate_pool_from_shell_pairs,
+    )
+    from basis_set_exchange.auxgen.twoel import product_metric
+    from basis_set_exchange.auxgen.pivchol import block_pivoted_cholesky
+    from basis_set_exchange.auxgen.auxgen import _reduced_pair_screen
+
+    b = get_basis(basis, elements=[elem])
+    primitives = decontract_primitives(b['elements'][str(elem)])
+    tau = 1.0e-7
+
+    # New (coupled-basis, per-L) screen.
+    new_pool = candidate_pool_from_shell_pairs(
+        _reduced_pair_screen(primitives, tau))
+
+    # Legacy dense m-resolved screen (kept in-tree as a reference).
+    pairs = primitive_product_pairs(primitives)
+    M = product_metric(pairs)
+    block_of = [(int(la), int(na), float(aa), int(lb), int(nb), float(ab))
+                for ((la, na, _ma, aa), (lb, nb, _mb, ab)) in pairs]
+    pivots, _ = block_pivoted_cholesky(M, block_of, tol=tau)
+    seen = {}
+    for i in pivots:
+        seen[block_of[i]] = True
+    dense_pool = candidate_pool_from_shell_pairs(list(seen.keys()))
+
+    # Same populated L set.
+    assert set(new_pool.keys()) == set(dense_pool.keys())
+    # Coupled-basis pool is a superset of the dense pool at every L.
+    for L, dense_alphas in dense_pool.items():
+        rd = {round(a, 8) for a in dense_alphas}
+        rn = {round(a, 8) for a in new_pool[L]}
+        missing = rd - rn
+        assert not missing, f"L={L}: dense pool has {len(missing)} exps missing from coupled pool"
+
+
+# ---------------------------------------------------------------------------
 # Cartesian / spherical equivalence and contamination handling
 # ---------------------------------------------------------------------------
 

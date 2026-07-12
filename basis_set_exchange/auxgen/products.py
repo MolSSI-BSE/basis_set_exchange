@@ -253,7 +253,7 @@ def _shellpair_L_range(li, lj):
 
 def _pairs_to_pool(pair_iter, mapping):
     """Common tail of :func:`candidate_pool_from_primitives` and
-    :func:`candidate_pool_from_pairs`: for each ``(la, n_a, alpha_a,
+    :func:`candidate_pool_from_shell_pairs`: for each ``(la, n_a, alpha_a,
     lb, n_b, alpha_b)`` orbital primitive-pair tuple yielded by
     ``pair_iter``, accumulate ``alpha_eff(L, n_rad, alpha_rad, mapping)``
     over every parity-allowed coupling angular momentum ``L``, then
@@ -309,17 +309,34 @@ def candidate_pool_from_primitives(primitives, mapping='moment'):
     return _pairs_to_pool(pairs(), mapping)
 
 
-def candidate_pool_from_pairs(selected_pairs, mapping='moment'):
-    """Build the per-L candidate pool from m-resolved primitive pairs
-    selected by the reduced-scheme 4-index pre-screening.  The same
-    Appendix II transformation is applied as in
-    :func:`candidate_pool_from_primitives`.
+def orbital_shell_pairs(primitives):
+    """Unique unordered (i <= j) orbital-primitive shell-pairs as tuples
+    ``(l_a, n_a, alpha_a, l_b, n_b, alpha_b)``.  ``primitives`` is a list
+    of ``(l, n, alpha)`` triples (typically the output of
+    :func:`decontract_primitives`).  The diagonal ``i == j`` self-pair is
+    included.  This is the shell-pair candidate list consumed by the
+    coupled-basis reduced-scheme screen in
+    :func:`auxgen._reduced_pair_screen`.
+    """
+    pairs = []
+    n = len(primitives)
+    for i in range(n):
+        la, na, aa = primitives[i]
+        for j in range(i, n):
+            lb, nb, ab = primitives[j]
+            pairs.append((int(la), int(na), float(aa),
+                          int(lb), int(nb), float(ab)))
+    return pairs
 
-    Each entry in ``selected_pairs`` is
-    ``((l_a, n_a, m_a, alpha_a), (l_b, n_b, m_b, alpha_b))``.
+
+def candidate_pool_from_shell_pairs(selected_shell_pairs, mapping='moment'):
+    """Build the per-L candidate pool from orbital shell-pair tuples
+    ``(l_a, n_a, alpha_a, l_b, n_b, alpha_b)`` selected by the
+    reduced-scheme pre-screen.  The same Appendix II transformation is
+    applied as in :func:`candidate_pool_from_primitives`.
     """
     def pairs():
-        for (la, na, _ma, aa), (lb, nb, _mb, ab) in selected_pairs:
+        for (la, na, aa, lb, nb, ab) in selected_shell_pairs:
             yield la, na, aa, lb, nb, ab
     return _pairs_to_pool(pairs(), mapping)
 
@@ -328,10 +345,18 @@ def primitive_product_pairs(primitives):
     """Build all unordered (i <= j) primitive product pairs with m
     components expanded.  Each entry is
 
-        ((l_a, n_a, m_a, alpha_a), (l_b, n_b, m_b, alpha_b)),
+        ((l_a, n_a, m_a, alpha_a), (l_b, n_b, m_b, alpha_b)).
 
-    consumed by :func:`twoel.product_metric` for the reduced-scheme
-    4-index Cholesky.
+    This is the m-resolved enumeration consumed by the legacy dense
+    formulation of the 4-index Cholesky (:func:`twoel.product_metric`
+    + :func:`~basis_set_exchange.auxgen.pivchol.block_pivoted_cholesky`).
+    The production pipeline uses the coupled-basis per-L formulation
+    (:func:`orbital_shell_pairs` +
+    :func:`~basis_set_exchange.auxgen.twoel.coupled_L_metric`) which has
+    the same shell-pair-set output but ``O(N_shell_pair^2)`` per-L peak
+    memory rather than the dense ``O(N_m_pair^2)``.  The m-resolved
+    enumeration remains available as the reference against which the
+    coupled formulation is validated in the test suite.
     """
     expanded = []
     for l, n, a in primitives:

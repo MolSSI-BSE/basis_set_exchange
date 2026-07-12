@@ -87,9 +87,9 @@ import numpy as np
 from .. import lut
 from .gaunt import coupling_lvals, gaunt_table
 from .radial import _Enk
-from .pivchol import block_pivoted_cholesky
-from .products import _shellpair_L_range
-from .twoel import _iter_nonzero_gaunt, product_metric
+from .pivchol import pivoted_cholesky
+from .products import _shellpair_L_range, orbital_shell_pairs
+from .twoel import _iter_nonzero_gaunt, coupled_L_metric
 
 
 # ---------------------------------------------------------------------------
@@ -110,8 +110,10 @@ def sto_norm_array(n, zetas):
 
 
 def sto_radial_coulomb(m, n, v, x, y):
-    """Pitzer/openorbital one-centre two-electron STO radial integral
-    (integer ``m``, ``n``, ``v``; positive scalar ``x``, ``y``).
+    """Pitzer/openorbital one-centre two-electron STO radial integral.
+
+    ``m``, ``n``, ``v`` are integers; ``x``, ``y`` are positive scalars
+    or broadcast-compatible numpy arrays.
 
     For an aux-metric integral ``(a|b)_L`` over two single STO functions
     of principal quantum numbers ``N_a, N_b`` and exponents
@@ -124,7 +126,7 @@ def sto_radial_coulomb(m, n, v, x, y):
     The full Coulomb matrix element is obtained by multiplying with the
     ``4 pi / (2 L + 1)`` angular factor and the real-Gaunt coefficient(s).
     """
-    if x <= 0.0 or y <= 0.0:
+    if np.isscalar(x) and np.isscalar(y) and (x <= 0.0 or y <= 0.0):
         return 0.0
     half = m + n - 1                # always a positive integer for STOs
     return (gamma(m + n) / (x * y * (x + y) ** half) *
@@ -402,43 +404,16 @@ def _compact_pool(pool):
 
 
 # ---------------------------------------------------------------------------
-# Reduced-scheme 4-index Cholesky pre-screening
+# Reduced-scheme coupled-basis Cholesky pre-screening
 # ---------------------------------------------------------------------------
 
-def _sto_product_pairs(primitives):
-    """All m-resolved STO primitive product pairs ``(i <= j)``.
 
-    Each entry is ``((la, na, ma, za), (lb, nb, mb, zb))``.
+def _sto_radial_fn(L, n_ab, n_cd, z_ab, z_cd):
+    """Adapter matching the ``(L, n_ab, n_cd, exp_ab, exp_cd)`` convention
+    expected by :func:`twoel.coupled_L_metric` -- the STO closed form
+    :func:`sto_radial_coulomb` orders its arguments as ``(m, n, v, x, y)``.
     """
-    expanded = []
-    for l, n, z in primitives:
-        for m in range(-l, l + 1):
-            expanded.append((int(l), int(n), int(m), float(z)))
-    pairs = []
-    npts = len(expanded)
-    for i in range(npts):
-        for j in range(i, npts):
-            pairs.append((expanded[i], expanded[j]))
-    return pairs
-
-
-def sto_product_metric(pairs):
-    """Shell-pair-vectorised four-index STO Coulomb metric
-    ``M[mn, kl] = (chi_m chi_n | chi_k chi_l)`` over m-resolved STO
-    orbital-product pairs.  Thin adapter around the GTO/STO-agnostic
-    :func:`twoel.product_metric`: only the radial primitive family
-    differs (``sto_norm`` and ``sto_radial_coulomb`` instead of
-    ``gto_norm``/``radial_integral``).
-    """
-    return product_metric(
-        pairs,
-        norm_fn=sto_norm,
-        # twoel.product_metric calls radial_fn(L, n_ab, n_cd, exp_ab, exp_cd)
-        # but the STO closed form is sto_radial_coulomb(m, n, v, x, y) with
-        # v=L last; reorder via a lambda.
-        radial_fn=lambda L, n_ab, n_cd, z_ab, z_cd:
-            sto_radial_coulomb(n_ab, n_cd, L, z_ab, z_cd),
-    )
+    return sto_radial_coulomb(n_ab, n_cd, L, z_ab, z_cd)
 
 
 def sto_orbital_aux_projection(L, primitives, items):
@@ -578,25 +553,39 @@ def sto_diagonal_ri_error(sto_orbital_basis, sto_aux_basis):
 
 
 def _sto_reduced_pair_screen(primitives, threshold):
-    """Shell-pair-driven pivoted Cholesky on the 4-index STO Coulomb
-    metric.  Returns the list of surviving m-resolved orbital-pair
-    indices (analogous to :func:`auxgen._reduced_pair_screen` for GTOs).
+    """Coupled-basis pivoted-Cholesky pre-screen of STO shell-pairs.
+
+    STO analogue of :func:`auxgen._reduced_pair_screen`: works per
+    coupled channel L on ``coupled_L_metric`` over shell-pair candidates
+    ``(l_a, n_a, zeta_a, l_b, n_b, zeta_b)``, and returns the union of
+    the shell-pairs selected in any L block.
     """
-    pairs = _sto_product_pairs(primitives)
-    if not pairs:
+    shell_pairs = orbital_shell_pairs(primitives)
+    if not shell_pairs:
         return []
-    M = sto_product_metric(pairs)
-    block_of = []
-    for (la, na, _ma, za), (lb, nb, _mb, zb) in pairs:
-        block_of.append((int(la), int(na), float(za),
-                         int(lb), int(nb), float(zb)))
-    pivots, _ = block_pivoted_cholesky(M, block_of, tol=threshold)
-    return [pairs[i] for i in pivots]
+
+    all_Ls = sorted({L for (la, _na, _za, lb, _nb, _zb) in shell_pairs
+                       for L in coupling_lvals(la, lb)})
+
+    selected = set()
+    for L in all_Ls:
+        idx = [i for i, sp in enumerate(shell_pairs)
+               if L in coupling_lvals(sp[0], sp[3])]
+        if not idx:
+            continue
+        L_pairs = [shell_pairs[i] for i in idx]
+        M_L = coupled_L_metric(L, L_pairs, norm_fn=sto_norm,
+                               radial_fn=_sto_radial_fn)
+        pivots, _ = pivoted_cholesky(M_L, tol=threshold)
+        for p in pivots:
+            selected.add(idx[p])
+
+    return [shell_pairs[i] for i in sorted(selected)]
 
 
-def _sto_candidate_pool_from_pairs(selected_pairs):
+def _sto_candidate_pool_from_shell_pairs(selected_shell_pairs):
     pool = {}
-    for (la, na, _ma, za), (lb, nb, _mb, zb) in selected_pairs:
+    for (la, na, za, lb, nb, zb) in selected_shell_pairs:
         n_aux = na + nb - 1
         z_aux = float(za + zb)
         for L in _shellpair_L_range(la, lb):
@@ -673,7 +662,7 @@ def generate_sto_auxiliary_basis(sto_basis, threshold=1.0e-7,
 
     if scheme == 'reduced':
         sel = _sto_reduced_pair_screen(primitives, threshold)
-        pool = _sto_candidate_pool_from_pairs(sel)
+        pool = _sto_candidate_pool_from_shell_pairs(sel)
     elif scheme == 'basic':
         pool = sto_candidate_pool_from_primitives(primitives)
     else:
