@@ -64,7 +64,6 @@ eq 9).
 import numpy as np
 
 from .. import skel, lut, compose
-from .gaunt import coupling_lvals
 from .pivchol import pivoted_cholesky
 from .products import (
     decontract_primitives,
@@ -73,7 +72,7 @@ from .products import (
     candidate_pool_from_shell_pairs,
     orbital_shell_pairs,
 )
-from .twoel import coupled_L_metric, normalized_metric
+from .twoel import coupled_shell_pair_screen, normalized_metric
 
 
 # ---------------------------------------------------------------------------
@@ -177,50 +176,15 @@ def _most_compact_pivot(S, tol, n_random=100, seed=0):
 def _reduced_pair_screen(primitives, threshold):
     """Coupled-basis pivoted-Cholesky pre-screen of orbital shell-pairs
     (Lehtola, J. Chem. Theory Comput. 17, 6886 (2021),
-    https://doi.org/10.1021/acs.jctc.1c00607).
-
-    The four-index ``(mu nu | rho sigma)`` Coulomb metric on orbital
-    product densities decomposes into blocks that are diagonal in the
-    coupled channel ``(L, M)`` and M-independent, so screening the
-    shell-pair candidate set factors naturally through per-L pivoted
-    Cholesky decompositions on ``coupled_L_metric``: for each L in the
-    union of shell-pair coupling ranges, run a standard greedy pivoted
-    Cholesky on the small ``N_shell_pair x N_shell_pair`` L-block, and
-    keep the union of the selected shell-pairs.  A shell-pair enters
-    the downstream candidate pool if it is selected by *any* of its
-    allowed L channels.
-
-    Compared to the dense m-resolved formulation (Cholesky on a full
-    ``N_m_pair x N_m_pair`` matrix with a shell-pair block picker), this
-    is the same in spirit but avoids materialising the redundant
-    ``(2 l_a + 1)(2 l_b + 1)`` expansion.  Pivot ordering can diverge
-    from the dense version because the L-channels are searched
-    independently, but the downstream ``candidate_pool_from_shell_pairs``
-    then handles the union: every selected shell-pair contributes its
-    full L coupling range (paper convention) to the pool, and the
-    per-L candidate Cholesky in :func:`_select_per_L` makes the final
-    aux basis independent of the pre-screen ordering.
+    https://doi.org/10.1021/acs.jctc.1c00607).  Thin adapter around
+    :func:`~basis_set_exchange.auxgen.twoel.coupled_shell_pair_screen`
+    (defaults to the GTO norm/radial closures).
     """
     shell_pairs = orbital_shell_pairs(primitives)
     if not shell_pairs:
         return []
-
-    all_Ls = sorted({L for (la, _na, _aa, lb, _nb, _ab) in shell_pairs
-                       for L in coupling_lvals(la, lb)})
-
-    selected = set()
-    for L in all_Ls:
-        idx = [i for i, sp in enumerate(shell_pairs)
-               if L in coupling_lvals(sp[0], sp[3])]
-        if not idx:
-            continue
-        L_pairs = [shell_pairs[i] for i in idx]
-        M_L = coupled_L_metric(L, L_pairs)
-        pivots, _ = pivoted_cholesky(M_L, tol=threshold)
-        for p in pivots:
-            selected.add(idx[p])
-
-    return [shell_pairs[i] for i in sorted(selected)]
+    keep = coupled_shell_pair_screen(shell_pairs, threshold)
+    return [shell_pairs[i] for i in keep]
 
 
 # ---------------------------------------------------------------------------

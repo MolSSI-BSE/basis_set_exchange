@@ -87,9 +87,8 @@ import numpy as np
 from .. import lut
 from .gaunt import coupling_lvals, gaunt_table
 from .radial import _Enk
-from .pivchol import pivoted_cholesky
 from .products import _shellpair_L_range, orbital_shell_pairs
-from .twoel import _iter_nonzero_gaunt, coupled_L_metric
+from .twoel import _iter_nonzero_gaunt, coupled_shell_pair_screen
 
 
 # ---------------------------------------------------------------------------
@@ -553,34 +552,17 @@ def sto_diagonal_ri_error(sto_orbital_basis, sto_aux_basis):
 
 
 def _sto_reduced_pair_screen(primitives, threshold):
-    """Coupled-basis pivoted-Cholesky pre-screen of STO shell-pairs.
-
-    STO analogue of :func:`auxgen._reduced_pair_screen`: works per
-    coupled channel L on ``coupled_L_metric`` over shell-pair candidates
-    ``(l_a, n_a, zeta_a, l_b, n_b, zeta_b)``, and returns the union of
-    the shell-pairs selected in any L block.
+    """STO analogue of :func:`auxgen._reduced_pair_screen`.  Delegates to
+    :func:`~basis_set_exchange.auxgen.twoel.coupled_shell_pair_screen`
+    with the STO norm/radial closures.
     """
     shell_pairs = orbital_shell_pairs(primitives)
     if not shell_pairs:
         return []
-
-    all_Ls = sorted({L for (la, _na, _za, lb, _nb, _zb) in shell_pairs
-                       for L in coupling_lvals(la, lb)})
-
-    selected = set()
-    for L in all_Ls:
-        idx = [i for i, sp in enumerate(shell_pairs)
-               if L in coupling_lvals(sp[0], sp[3])]
-        if not idx:
-            continue
-        L_pairs = [shell_pairs[i] for i in idx]
-        M_L = coupled_L_metric(L, L_pairs, norm_fn=sto_norm,
-                               radial_fn=_sto_radial_fn)
-        pivots, _ = pivoted_cholesky(M_L, tol=threshold)
-        for p in pivots:
-            selected.add(idx[p])
-
-    return [shell_pairs[i] for i in sorted(selected)]
+    keep = coupled_shell_pair_screen(shell_pairs, threshold,
+                                     norm_fn=sto_norm,
+                                     radial_fn=_sto_radial_fn)
+    return [shell_pairs[i] for i in keep]
 
 
 def _sto_candidate_pool_from_shell_pairs(selected_shell_pairs):
