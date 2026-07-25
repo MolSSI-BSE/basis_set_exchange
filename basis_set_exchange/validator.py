@@ -283,7 +283,7 @@ def _get_schema(file_type):
     schema = fileio.read_schema(file_path)
 
     # Build a registry of all schemas for cross-reference resolution
-    # (replaces deprecated RefResolver API, see issue #359)
+    # (replaces deprecated jsonschema resolver, see issue #359)
     schemas = {}
     for fname in os.listdir(_default_schema_dir):
         if fname.endswith('.json'):
