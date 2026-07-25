@@ -34,6 +34,7 @@ Functions related to validating JSON files (including against schema)
 
 import os
 import jsonschema
+from referencing import Registry, Resource
 import datetime
 
 from . import fileio, misc
@@ -281,11 +282,21 @@ def _get_schema(file_type):
 
     schema = fileio.read_schema(file_path)
 
-    # Set up the resolver for links
-    base_uri = 'file:///{}/'.format(_default_schema_dir)
-    resolver = jsonschema.RefResolver(base_uri=base_uri, referrer=schema)
+    # Build a registry of all schemas for cross-reference resolution
+    # (replaces deprecated RefResolver API, see issue #359)
+    schemas = {}
+    for fname in os.listdir(_default_schema_dir):
+        if fname.endswith('.json'):
+            fpath = os.path.join(_default_schema_dir, fname)
+            uri = 'file:///{}/{}'.format(_default_schema_dir.replace(os.sep, '/'), fname)
+            schemas[uri] = fileio.read_schema(fpath)
 
-    return schema, resolver
+    def _retrieve(uri):
+        return Resource.from_contents(schemas.get(uri, {}))
+
+    registry = Registry(retrieve=_retrieve)
+
+    return schema, registry
 
 
 def validate_data(file_type, bs_data):
@@ -313,7 +324,7 @@ def validate_data(file_type, bs_data):
         raise RuntimeError("{} is not a valid file_type".format(file_type))
 
     schema, resolver = _get_schema(file_type)
-    jsonschema.validate(bs_data, schema, resolver=resolver)
+    jsonschema.Draft7Validator(schema, registry=registry).validate(bs_data)
     _validate_map[file_type](bs_data)
 
 
