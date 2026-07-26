@@ -43,7 +43,7 @@ def write_orca_ecp_basis(basis, ecp_elements):
         data = basis['elements'][z]
         sym = lut.element_sym_from_Z(z).upper()
         max_ecp_am = max([x['angular_momentum'][0] for x in data['ecp_potentials']])
-        max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=True)
+        max_ecp_amchar = lut.amint_to_char([max_ecp_am], hij=False)  # ORCA 6.1+ rejects j-functions
 
         # Sort lowest->highest
         ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
