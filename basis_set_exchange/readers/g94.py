@@ -154,6 +154,8 @@ def _parse_ecp_lines(basis_lines, bs_data):
 
     # First line is "{element} 0", with the zero being optional
     element_sym = basis_lines[0].split()[0]
+    # Strip leading '-' used by Gaussian94 system-library format (fixes #363)
+    element_sym = element_sym.lstrip('-')
     element_Z = lut.element_Z_from_sym(element_sym, as_str=True)
     element_data = manip.create_element_data(bs_data, element_Z, 'ecp_potentials')
 
