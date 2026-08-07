@@ -126,7 +126,7 @@ def run_bse_cli():
     subp.add_argument('--elements',
                       help='Which elements of the basis set to output. Default is all defined in the given basis')
     subp.add_argument('--version', help='Which version of the basis set to output. Default is the latest version')
-    subp.add_argument('--noheader', action='store_true', help='Do not output the header at the top')
+    subp.add_argument('--noheader', '--no-header', action='store_true', help='Do not output the header at the top')
     subp.add_argument('--unc-gen', action='store_true', help='Remove general contractions')
     subp.add_argument('--unc-spdf', action='store_true', help='Remove combined sp, spd, ... contractions')
     subp.add_argument('--unc-seg', action='store_true', help='Remove general contractions')
