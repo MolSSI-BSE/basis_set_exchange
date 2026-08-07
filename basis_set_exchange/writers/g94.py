@@ -95,7 +95,7 @@ def _write_g94_common(basis, add_harm_type, psi4_am, system_library):
             ecp_list = sorted(data['ecp_potentials'], key=lambda x: x['angular_momentum'])
             ecp_list.insert(0, ecp_list.pop())
 
-            s += '{}     0\n'.format(sym)
+            s += '{}{}     0\n'.format('-' if system_library else '', sym)
             s += '{}-ECP     {}     {}\n'.format(sym, max_ecp_am, data['ecp_electrons'])
 
             for pot in ecp_list:
