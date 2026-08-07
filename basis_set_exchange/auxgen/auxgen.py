@@ -64,15 +64,15 @@ eq 9).
 import numpy as np
 
 from .. import skel, lut, compose
-from .pivchol import pivoted_cholesky, block_pivoted_cholesky
+from .pivchol import pivoted_cholesky
 from .products import (
     decontract_primitives,
     decontract_primitives_single,
     candidate_pool_from_primitives,
-    candidate_pool_from_pairs,
-    primitive_product_pairs,
+    candidate_pool_from_shell_pairs,
+    orbital_shell_pairs,
 )
-from .twoel import normalized_metric, product_metric
+from .twoel import coupled_shell_pair_screen, normalized_metric
 
 
 # ---------------------------------------------------------------------------
@@ -174,30 +174,17 @@ def _most_compact_pivot(S, tol, n_random=100, seed=0):
 # ---------------------------------------------------------------------------
 
 def _reduced_pair_screen(primitives, threshold):
-    """Shell-pair-driven pivoted Cholesky on the 4-index
-    ``(mu nu | rho sigma)`` metric (Lehtola, J. Chem. Theory Comput. 17,
-    6886 (2021), https://doi.org/10.1021/acs.jctc.1c00607).
-
-    The metric is built over the full set of m-resolved primitive pairs,
-    but pivot selection is shell-pair-driven (ERKALE convention): when
-    the largest residual diagonal belongs to some m-pair, every other
-    m-pair of the same orbital shell-pair is added as a pivot before
-    the next greedy selection.  This guarantees that a chosen
-    ``(l_a, n_a, alpha_a, l_b, n_b, alpha_b)`` shell-pair contributes
-    *all* of its (2 l_a + 1)(2 l_b + 1) m-resolved products to the
-    downstream candidate pool, as the algorithm intends.
+    """Coupled-basis pivoted-Cholesky pre-screen of orbital shell-pairs
+    (Lehtola, J. Chem. Theory Comput. 17, 6886 (2021),
+    https://doi.org/10.1021/acs.jctc.1c00607).  Thin adapter around
+    :func:`~basis_set_exchange.auxgen.twoel.coupled_shell_pair_screen`
+    (defaults to the GTO norm/radial closures).
     """
-    pairs = primitive_product_pairs(primitives)
-    if not pairs:
+    shell_pairs = orbital_shell_pairs(primitives)
+    if not shell_pairs:
         return []
-    M = product_metric(pairs)
-    # Block identifier per pair index: the orbital shell-pair, ignoring m.
-    block_of = []
-    for (la, na, _ma, aa), (lb, nb, _mb, ab) in pairs:
-        block_of.append((int(la), int(na), float(aa),
-                         int(lb), int(nb), float(ab)))
-    pivots, _ = block_pivoted_cholesky(M, block_of, tol=threshold)
-    return [pairs[i] for i in pivots]
+    keep = coupled_shell_pair_screen(shell_pairs, threshold)
+    return [shell_pairs[i] for i in keep]
 
 
 # ---------------------------------------------------------------------------
@@ -374,7 +361,7 @@ def generate_auxiliary_basis_for_element(element_basis,
 
     if scheme == 'reduced':
         sel = _reduced_pair_screen(primitives, threshold)
-        pool = candidate_pool_from_pairs(sel, mapping=mapping)
+        pool = candidate_pool_from_shell_pairs(sel, mapping=mapping)
     elif scheme == 'basic':
         pool = candidate_pool_from_primitives(primitives, mapping=mapping)
     else:
