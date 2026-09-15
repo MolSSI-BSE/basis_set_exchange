@@ -2,8 +2,19 @@
 Conversion of basis sets to Molcas basis_library format
 '''
 
+import unicodedata
+
 from .. import lut, manip, printing, misc, sort, api
-import unidecode
+
+try:
+    from anyascii import anyascii as _to_ascii
+except ImportError:
+    def _to_ascii(text):
+        # Fallback: strip combining diacritics from Latin/Greek/etc.
+        # Non-Latin scripts (CJK, Cyrillic, ...) pass through unchanged and
+        # are dropped by the ``ascii`` encode; install ``anyascii`` for a
+        # full transliteration.
+        return unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
 
 
 def write_molcas_library(basis):
@@ -119,7 +130,7 @@ def first_author(ref, ref_data):
     else:
         author = ref_data[ref].get('authors', [''])[0]
     author = author.split(',')[0]
-    author = unidecode.unidecode(author)
+    author = _to_ascii(author)
     author = author.replace(' ', '_')
     return author
 
@@ -173,5 +184,5 @@ def format_reference(ref, ref_data):
         text += '.'
     if 'doi' in ref_data[ref]:
         text += ' doi:' + ref_data[ref]['doi'].lower()
-    text = unidecode.unidecode(text)
+    text = _to_ascii(text)
     return text

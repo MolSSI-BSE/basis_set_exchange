@@ -24,7 +24,6 @@ dependencies = [
     "jsonschema",
     "argcomplete",
     "regex",
-    "unidecode",
 ]
 
 [project.optional-dependencies]
@@ -44,6 +43,9 @@ lint = [
 ]
 curate = [
     "graphviz",
+]
+molcas = [
+    "anyascii",
 ]
 
 
