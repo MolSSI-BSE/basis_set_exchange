@@ -1,0 +1,28 @@
+UZH protocol molecularly optimized orbital bases
+================================================
+
+Published parameter set: mirhosseini2026a.
+
+This family contains the orbital Gaussian bases from BASIS_MOLOPT_UZH,
+not the original 2007 MOLOPT family. Names include UZH to distinguish
+the published UZH parameter set; native CP2K names are retained as aliases.
+Exponents and contraction coefficients are preserved at source precision.
+The functions use spherical harmonics.
+
+The -ae entries are all-electron bases (SVP, TZVPP, QZVPP; H--Kr).
+They are distinct from the small-core GTH variants of those basis levels
+for heavier elements. The latter retain -GTH-qN in their names.
+SVP/TZVPP/QZVPP construction also follows weigend2005a.
+
+For a -GTH-qN entry, N is the number of explicitly treated electrons, not
+the atomic number or ionic charge. Select the same element, functional
+and q value in POTENTIAL_UZH. PBE/GGA, SCAN/MGGA and PBE0/HYB are aliases
+within this release, not claims of accuracy for arbitrary functionals.
+Even qN = atomic number denotes the corresponding GTH potential, not
+an all-electron Coulomb potential. All-electron entries instead use ALL.
+
+These BSE entries contain orbital bases only. BSE does not currently
+encode the separable GTH projector matrices. No semilocal ECP has been
+substituted. The original GTH file and verified basis/potential pairing
+are available at https://github.com/DCM-Uni-Paderborn/UZH-protocol
+under cp2k-data/ and contributions/basis-set-exchange/, respectively.
