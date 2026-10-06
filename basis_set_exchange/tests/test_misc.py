@@ -107,3 +107,18 @@ def test_basis_name_to_filename(name, expected):
     assert fname == expected
     name2 = misc.basis_name_from_filename(fname)
     assert name2 == name.lower()
+
+
+# yapf: disable
+@pytest.mark.parametrize("text,expected",
+                              [('Smith', 'Smith'),
+                               ('Müller', 'Muller'),
+                               ('Ståhl', 'Stahl'),
+                               ('Łukasz', 'Lukasz'),
+                               ('Großmann', 'Grossmann'),
+                               ('Høyvik', 'Hoyvik'),
+                               ('Hartree‐Fock – DFT', 'Hartree-Fock - DFT'),
+                               ('“ζ-type”', '"-type"')])
+# yapf: enable
+def test_to_ascii(text, expected):
+    assert misc.to_ascii(text) == expected
