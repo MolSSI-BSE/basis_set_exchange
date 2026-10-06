@@ -33,7 +33,38 @@ Miscellaneous helper functions
 '''
 
 import re
+import unicodedata
 from . import lut
+
+# Characters that do not decompose to ASCII with NFKD normalization
+_ascii_replacements = str.maketrans({
+    'ß': 'ss',
+    'æ': 'ae',
+    'Æ': 'AE',
+    'œ': 'oe',
+    'Œ': 'OE',
+    'ø': 'o',
+    'Ø': 'O',
+    'ł': 'l',
+    'Ł': 'L',
+    'đ': 'd',
+    'Đ': 'D',
+    'ð': 'd',
+    'Ð': 'D',
+    'þ': 'th',
+    'Þ': 'Th',
+    'ı': 'i',
+    '‐': '-',
+    '‑': '-',
+    '‒': '-',
+    '–': '-',
+    '—': '-',
+    '―': '-',
+    '‘': "'",
+    '’': "'",
+    '“': '"',
+    '”': '"',
+})
 
 
 def _Z_from_str(s):
@@ -273,3 +304,11 @@ def basis_name_from_filename(filename):
     name = name.replace('_sl_', '/')
     name = name.replace('_st_', '*')
     return name
+
+
+def to_ascii(text):
+    '''Converts text to ASCII, replacing characters with their nearest
+    latin equivalent where possible and dropping them otherwise
+    '''
+    text = unicodedata.normalize('NFKD', text.translate(_ascii_replacements))
+    return text.encode('ascii', 'ignore').decode('ascii')
